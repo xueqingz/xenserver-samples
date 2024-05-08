@@ -248,4 +248,3 @@ func (vBDMetrics) GetAllRecords(session *Session) (retval map[VBDMetricsRef]VBDM
 	retval, err = deserializeVBDMetricsRefToVBDMetricsRecordMap(method+" -> ", result)
 	return
 }
-

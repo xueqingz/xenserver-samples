@@ -266,4 +266,3 @@ func (pVSProxy) GetAllRecords(session *Session) (retval map[PVSProxyRef]PVSProxy
 	retval, err = deserializePVSProxyRefToPVSProxyRecordMap(method+" -> ", result)
 	return
 }
-

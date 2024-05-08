@@ -527,4 +527,3 @@ func (bond) GetAllRecords(session *Session) (retval map[BondRef]BondRecord, err 
 	retval, err = deserializeBondRefToBondRecordMap(method+" -> ", result)
 	return
 }
-

@@ -423,4 +423,3 @@ func (pVSSite) GetAllRecords(session *Session) (retval map[PVSSiteRef]PVSSiteRec
 	retval, err = deserializePVSSiteRefToPVSSiteRecordMap(method+" -> ", result)
 	return
 }
-

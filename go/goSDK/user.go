@@ -287,4 +287,3 @@ func (user) RemoveFromOtherConfig(session *Session, self UserRef, key string) (e
 	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
 	return
 }
-

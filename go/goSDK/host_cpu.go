@@ -415,4 +415,3 @@ func (hostCPU) GetAllRecords(session *Session) (retval map[HostCPURef]HostCPURec
 	retval, err = deserializeHostCPURefToHostCPURecordMap(method+" -> ", result)
 	return
 }
-

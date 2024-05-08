@@ -80,7 +80,7 @@ func (client *rpcClient) newRequest(ctx context.Context, req interface{}) (*http
 
 	request.Header.Set("Content-Type", "application/json; charset=utf-8")
 	request.Header.Set("Accept", "application/json")
-	request.Header.Set("User-Agent", "XenAPI/" + APIVersionLatest.String())
+	request.Header.Set("User-Agent", "XenAPI/"+APIVersionLatest.String())
 	for k, v := range client.headers {
 		request.Header.Set(k, v)
 	}

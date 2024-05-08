@@ -673,4 +673,3 @@ func (task) GetAllRecords(session *Session) (retval map[TaskRef]TaskRecord, err 
 	retval, err = deserializeTaskRefToTaskRecordMap(method+" -> ", result)
 	return
 }
-

@@ -481,4 +481,3 @@ func (repository) GetAllRecords(session *Session) (retval map[RepositoryRef]Repo
 	retval, err = deserializeRepositoryRefToRepositoryRecordMap(method+" -> ", result)
 	return
 }
-

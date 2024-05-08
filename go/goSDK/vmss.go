@@ -596,4 +596,3 @@ func (vMSS) GetAllRecords(session *Session) (retval map[VMSSRef]VMSSRecord, err 
 	retval, err = deserializeVMSSRefToVMSSRecordMap(method+" -> ", result)
 	return
 }
-

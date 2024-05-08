@@ -294,4 +294,3 @@ func (subject) GetAllRecords(session *Session) (retval map[SubjectRef]SubjectRec
 	retval, err = deserializeSubjectRefToSubjectRecordMap(method+" -> ", result)
 	return
 }
-

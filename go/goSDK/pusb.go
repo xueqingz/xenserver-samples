@@ -512,4 +512,3 @@ func (pUSB) GetAllRecords(session *Session) (retval map[PUSBRef]PUSBRecord, err 
 	retval, err = deserializePUSBRefToPUSBRecordMap(method+" -> ", result)
 	return
 }
-

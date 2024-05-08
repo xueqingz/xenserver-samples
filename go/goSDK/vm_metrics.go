@@ -479,4 +479,3 @@ func (vMMetrics) GetAllRecords(session *Session) (retval map[VMMetricsRef]VMMetr
 	retval, err = deserializeVMMetricsRefToVMMetricsRecordMap(method+" -> ", result)
 	return
 }
-

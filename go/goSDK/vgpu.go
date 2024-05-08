@@ -517,4 +517,3 @@ func (vGPU) GetAllRecords(session *Session) (retval map[VGPURef]VGPURecord, err 
 	retval, err = deserializeVGPURefToVGPURecordMap(method+" -> ", result)
 	return
 }
-

@@ -620,4 +620,3 @@ func (poolUpdate) GetAllRecords(session *Session) (retval map[PoolUpdateRef]Pool
 	retval, err = deserializePoolUpdateRefToPoolUpdateRecordMap(method+" -> ", result)
 	return
 }
-

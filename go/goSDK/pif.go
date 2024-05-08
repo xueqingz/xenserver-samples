@@ -1751,4 +1751,3 @@ func (pIF) GetAllRecords(session *Session) (retval map[PIFRef]PIFRecord, err err
 	retval, err = deserializePIFRefToPIFRecordMap(method+" -> ", result)
 	return
 }
-

@@ -335,4 +335,3 @@ func (vLAN) GetAllRecords(session *Session) (retval map[VLANRef]VLANRecord, err 
 	retval, err = deserializeVLANRefToVLANRecordMap(method+" -> ", result)
 	return
 }
-

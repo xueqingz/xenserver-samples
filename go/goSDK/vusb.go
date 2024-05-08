@@ -411,4 +411,3 @@ func (vUSB) GetAllRecords(session *Session) (retval map[VUSBRef]VUSBRecord, err 
 	retval, err = deserializeVUSBRefToVUSBRecordMap(method+" -> ", result)
 	return
 }
-

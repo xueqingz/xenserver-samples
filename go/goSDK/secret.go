@@ -296,4 +296,3 @@ func (secret) GetAllRecords(session *Session) (retval map[SecretRef]SecretRecord
 	retval, err = deserializeSecretRefToSecretRecordMap(method+" -> ", result)
 	return
 }
-

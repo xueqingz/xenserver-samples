@@ -6392,4 +6392,3 @@ func (vM) GetAllRecords(session *Session) (retval map[VMRef]VMRecord, err error)
 	retval, err = deserializeVMRefToVMRecordMap(method+" -> ", result)
 	return
 }
-

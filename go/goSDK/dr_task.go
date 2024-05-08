@@ -211,4 +211,3 @@ func (dRTask) GetAllRecords(session *Session) (retval map[DRTaskRef]DRTaskRecord
 	retval, err = deserializeDRTaskRefToDRTaskRecordMap(method+" -> ", result)
 	return
 }
-

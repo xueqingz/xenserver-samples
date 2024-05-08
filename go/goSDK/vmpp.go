@@ -1107,4 +1107,3 @@ func (vMPP) GetAllRecords(session *Session) (retval map[VMPPRef]VMPPRecord, err 
 	retval, err = deserializeVMPPRefToVMPPRecordMap(method+" -> ", result)
 	return
 }
-

@@ -446,4 +446,3 @@ func (tunnel) GetAllRecords(session *Session) (retval map[TunnelRef]TunnelRecord
 	retval, err = deserializeTunnelRefToTunnelRecordMap(method+" -> ", result)
 	return
 }
-

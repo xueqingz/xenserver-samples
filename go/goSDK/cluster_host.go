@@ -541,4 +541,3 @@ func (clusterHost) GetAllRecords(session *Session) (retval map[ClusterHostRef]Cl
 	retval, err = deserializeClusterHostRefToClusterHostRecordMap(method+" -> ", result)
 	return
 }
-

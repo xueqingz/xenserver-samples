@@ -417,4 +417,3 @@ func (vGPUType) GetAllRecords(session *Session) (retval map[VGPUTypeRef]VGPUType
 	retval, err = deserializeVGPUTypeRefToVGPUTypeRecordMap(method+" -> ", result)
 	return
 }
-

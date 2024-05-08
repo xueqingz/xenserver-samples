@@ -455,4 +455,3 @@ func (sM) GetAllRecords(session *Session) (retval map[SMRef]SMRecord, err error)
 	retval, err = deserializeSMRefToSMRecordMap(method+" -> ", result)
 	return
 }
-

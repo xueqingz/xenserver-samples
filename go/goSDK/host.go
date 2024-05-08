@@ -4417,4 +4417,3 @@ func (host) GetAllRecords(session *Session) (retval map[HostRef]HostRecord, err 
 	retval, err = deserializeHostRefToHostRecordMap(method+" -> ", result)
 	return
 }
-

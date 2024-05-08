@@ -304,4 +304,3 @@ func (networkSriov) GetAllRecords(session *Session) (retval map[NetworkSriovRef]
 	retval, err = deserializeNetworkSriovRefToNetworkSriovRecordMap(method+" -> ", result)
 	return
 }
-

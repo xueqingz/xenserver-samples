@@ -248,4 +248,3 @@ func (vIFMetrics) GetAllRecords(session *Session) (retval map[VIFMetricsRef]VIFM
 	retval, err = deserializeVIFMetricsRefToVIFMetricsRecordMap(method+" -> ", result)
 	return
 }
-

@@ -319,4 +319,3 @@ func (console) GetAllRecords(session *Session) (retval map[ConsoleRef]ConsoleRec
 	retval, err = deserializeConsoleRefToConsoleRecordMap(method+" -> ", result)
 	return
 }
-

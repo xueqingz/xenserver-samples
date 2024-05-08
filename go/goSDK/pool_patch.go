@@ -641,4 +641,3 @@ func (poolPatch) GetAllRecords(session *Session) (retval map[PoolPatchRef]PoolPa
 	retval, err = deserializePoolPatchRefToPoolPatchRecordMap(method+" -> ", result)
 	return
 }
-

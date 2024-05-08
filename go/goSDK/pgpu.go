@@ -684,4 +684,3 @@ func (pGPU) GetAllRecords(session *Session) (retval map[PGPURef]PGPURecord, err 
 	retval, err = deserializePGPURefToPGPURecordMap(method+" -> ", result)
 	return
 }
-

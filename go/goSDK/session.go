@@ -665,4 +665,3 @@ func (class *Session) AsyncLogoutSubjectIdentifier(subjectIdentifier string) (re
 	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
-

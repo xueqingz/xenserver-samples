@@ -269,4 +269,3 @@ func (hostMetrics) GetAllRecords(session *Session) (retval map[HostMetricsRef]Ho
 	retval, err = deserializeHostMetricsRefToHostMetricsRecordMap(method+" -> ", result)
 	return
 }
-

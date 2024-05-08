@@ -253,4 +253,3 @@ func (sDNController) GetAllRecords(session *Session) (retval map[SDNControllerRe
 	retval, err = deserializeSDNControllerRefToSDNControllerRecordMap(method+" -> ", result)
 	return
 }
-

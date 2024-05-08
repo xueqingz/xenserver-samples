@@ -134,4 +134,3 @@ func (lVHD) AsyncEnableThinProvisioning(session *Session, host HostRef, sR SRRef
 	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
-

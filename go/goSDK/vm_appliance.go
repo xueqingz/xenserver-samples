@@ -654,4 +654,3 @@ func (vMAppliance) GetAllRecords(session *Session) (retval map[VMApplianceRef]VM
 	retval, err = deserializeVMApplianceRefToVMApplianceRecordMap(method+" -> ", result)
 	return
 }
-

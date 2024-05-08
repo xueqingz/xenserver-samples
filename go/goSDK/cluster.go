@@ -799,4 +799,3 @@ func (cluster) GetAllRecords(session *Session) (retval map[ClusterRef]ClusterRec
 	retval, err = deserializeClusterRefToClusterRecordMap(method+" -> ", result)
 	return
 }
-

@@ -260,4 +260,3 @@ func (crashdump) GetAllRecords(session *Session) (retval map[CrashdumpRef]Crashd
 	retval, err = deserializeCrashdumpRefToCrashdumpRecordMap(method+" -> ", result)
 	return
 }
-

@@ -2165,4 +2165,3 @@ func (vDI) GetAllRecords(session *Session) (retval map[VDIRef]VDIRecord, err err
 	retval, err = deserializeVDIRefToVDIRecordMap(method+" -> ", result)
 	return
 }
-

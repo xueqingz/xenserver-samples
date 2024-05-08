@@ -247,4 +247,3 @@ func (feature) GetAllRecords(session *Session) (retval map[FeatureRef]FeatureRec
 	retval, err = deserializeFeatureRefToFeatureRecordMap(method+" -> ", result)
 	return
 }
-

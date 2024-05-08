@@ -456,4 +456,3 @@ func (pBD) GetAllRecords(session *Session) (retval map[PBDRef]PBDRecord, err err
 	retval, err = deserializePBDRefToPBDRecordMap(method+" -> ", result)
 	return
 }
-

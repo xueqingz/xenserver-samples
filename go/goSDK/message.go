@@ -245,4 +245,3 @@ func (message) GetAllRecordsWhere(session *Session, expr string) (retval map[Mes
 	retval, err = deserializeMessageRefToMessageRecordMap(method+" -> ", result)
 	return
 }
-

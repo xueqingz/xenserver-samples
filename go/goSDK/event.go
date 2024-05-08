@@ -192,4 +192,3 @@ func (event) Inject(session *Session, class string, ref string) (retval string, 
 	retval, err = deserializeString(method+" -> ", result)
 	return
 }
-

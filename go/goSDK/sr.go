@@ -1718,4 +1718,3 @@ func (sR) GetAllRecords(session *Session) (retval map[SRRef]SRRecord, err error)
 	retval, err = deserializeSRRefToSRRecordMap(method+" -> ", result)
 	return
 }
-

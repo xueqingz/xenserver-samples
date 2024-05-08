@@ -413,4 +413,3 @@ func (uSBGroup) GetAllRecords(session *Session) (retval map[USBGroupRef]USBGroup
 	retval, err = deserializeUSBGroupRefToUSBGroupRecordMap(method+" -> ", result)
 	return
 }
-

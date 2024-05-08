@@ -877,4 +877,3 @@ func (network) GetAllRecords(session *Session) (retval map[NetworkRef]NetworkRec
 	retval, err = deserializeNetworkRefToNetworkRecordMap(method+" -> ", result)
 	return
 }
-

@@ -343,4 +343,3 @@ func (blob) GetAllRecords(session *Session) (retval map[BlobRef]BlobRecord, err 
 	retval, err = deserializeBlobRefToBlobRecordMap(method+" -> ", result)
 	return
 }
-

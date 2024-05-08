@@ -444,4 +444,3 @@ func (hostPatch) GetAllRecords(session *Session) (retval map[HostPatchRef]HostPa
 	retval, err = deserializeHostPatchRefToHostPatchRecordMap(method+" -> ", result)
 	return
 }
-

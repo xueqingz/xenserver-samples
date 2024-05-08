@@ -329,4 +329,3 @@ func (vTPM) GetAllRecords(session *Session) (retval map[VTPMRef]VTPMRecord, err 
 	retval, err = deserializeVTPMRefToVTPMRecordMap(method+" -> ", result)
 	return
 }
-

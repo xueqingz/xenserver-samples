@@ -1415,4 +1415,3 @@ func (vIF) GetAllRecords(session *Session) (retval map[VIFRef]VIFRecord, err err
 	retval, err = deserializeVIFRefToVIFRecordMap(method+" -> ", result)
 	return
 }
-

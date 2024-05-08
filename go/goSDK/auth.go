@@ -70,4 +70,3 @@ func (auth) GetGroupMembership(session *Session, subjectIdentifier string) (retv
 	retval, err = deserializeStringSet(method+" -> ", result)
 	return
 }
-

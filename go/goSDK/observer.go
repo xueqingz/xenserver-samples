@@ -588,4 +588,3 @@ func (observer) GetAllRecords(session *Session) (retval map[ObserverRef]Observer
 	retval, err = deserializeObserverRefToObserverRecordMap(method+" -> ", result)
 	return
 }
-

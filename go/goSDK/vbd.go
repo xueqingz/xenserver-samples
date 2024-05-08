@@ -1110,4 +1110,3 @@ func (vBD) GetAllRecords(session *Session) (retval map[VBDRef]VBDRecord, err err
 	retval, err = deserializeVBDRefToVBDRecordMap(method+" -> ", result)
 	return
 }
-

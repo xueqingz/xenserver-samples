@@ -281,4 +281,3 @@ func (role) GetAllRecords(session *Session) (retval map[RoleRef]RoleRecord, err 
 	retval, err = deserializeRoleRefToRoleRecordMap(method+" -> ", result)
 	return
 }
-

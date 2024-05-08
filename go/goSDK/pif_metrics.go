@@ -416,4 +416,3 @@ func (pIFMetrics) GetAllRecords(session *Session) (retval map[PIFMetricsRef]PIFM
 	retval, err = deserializePIFMetricsRefToPIFMetricsRecordMap(method+" -> ", result)
 	return
 }
-

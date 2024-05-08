@@ -373,4 +373,3 @@ func (pCI) GetAllRecords(session *Session) (retval map[PCIRef]PCIRecord, err err
 	retval, err = deserializePCIRefToPCIRecordMap(method+" -> ", result)
 	return
 }
-

@@ -562,4 +562,3 @@ func (gPUGroup) GetAllRecords(session *Session) (retval map[GPUGroupRef]GPUGroup
 	retval, err = deserializeGPUGroupRefToGPUGroupRecordMap(method+" -> ", result)
 	return
 }
-

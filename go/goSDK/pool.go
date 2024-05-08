@@ -4368,4 +4368,3 @@ func (pool) GetAllRecords(session *Session) (retval map[PoolRef]PoolRecord, err 
 	retval, err = deserializePoolRefToPoolRecordMap(method+" -> ", result)
 	return
 }
-
