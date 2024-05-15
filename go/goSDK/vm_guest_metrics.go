@@ -43,9 +43,74 @@ type vMGuestMetrics struct{}
 
 var VMGuestMetrics vMGuestMetrics
 
-// GetRecord: Get a record containing the current state of the given VM_guest_metrics.
-func (vMGuestMetrics) GetRecord(session *Session, self VMGuestMetricsRef) (retval VMGuestMetricsRecord, err error) {
-	method := "VM_guest_metrics.get_record"
+// GetAllRecords: Return a map of VM_guest_metrics references to VM_guest_metrics records for all VM_guest_metrics instances known to the system.
+// Version: rio
+func (vMGuestMetrics) GetAllRecords(session *Session) (retval map[VMGuestMetricsRef]VMGuestMetricsRecord, err error) {
+	method := "VM_guest_metrics.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRefToVMGuestMetricsRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAllRecords1: Return a map of VM_guest_metrics references to VM_guest_metrics records for all VM_guest_metrics instances known to the system.
+// Version: rio
+func (vMGuestMetrics) GetAllRecords1(session *Session) (retval map[VMGuestMetricsRef]VMGuestMetricsRecord, err error) {
+	method := "VM_guest_metrics.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRefToVMGuestMetricsRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAll: Return a list of all the VM_guest_metrics instances known to the system.
+// Version: rio
+func (vMGuestMetrics) GetAll(session *Session) (retval []VMGuestMetricsRef, err error) {
+	method := "VM_guest_metrics.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRefSet(method+" -> ", result)
+	return
+}
+
+// GetAll1: Return a list of all the VM_guest_metrics instances known to the system.
+// Version: rio
+func (vMGuestMetrics) GetAll1(session *Session) (retval []VMGuestMetricsRef, err error) {
+	method := "VM_guest_metrics.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRefSet(method+" -> ", result)
+	return
+}
+
+// RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VM_guest_metrics.  If the key is not in that Map, then do nothing.
+// Version: orlando
+func (vMGuestMetrics) RemoveFromOtherConfig(session *Session, self VMGuestMetricsRef, key string) (err error) {
+	method := "VM_guest_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -54,36 +119,18 @@ func (vMGuestMetrics) GetRecord(session *Session, self VMGuestMetricsRef) (retva
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeVMGuestMetricsRecord(method+" -> ", result)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
 	return
 }
 
-// GetByUUID: Get a reference to the VM_guest_metrics instance with the specified UUID.
-func (vMGuestMetrics) GetByUUID(session *Session, uUID string) (retval VMGuestMetricsRef, err error) {
-	method := "VM_guest_metrics.get_by_uuid"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeVMGuestMetricsRef(method+" -> ", result)
-	return
-}
-
-// GetUUID: Get the uuid field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetUUID(session *Session, self VMGuestMetricsRef) (retval string, err error) {
-	method := "VM_guest_metrics.get_uuid"
+// RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VM_guest_metrics.  If the key is not in that Map, then do nothing.
+// Version: orlando
+func (vMGuestMetrics) RemoveFromOtherConfig3(session *Session, self VMGuestMetricsRef, key string) (err error) {
+	method := "VM_guest_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -92,17 +139,18 @@ func (vMGuestMetrics) GetUUID(session *Session, self VMGuestMetricsRef) (retval 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeString(method+" -> ", result)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
 	return
 }
 
-// GetOsVersion: Get the os_version field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetOsVersion(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
-	method := "VM_guest_metrics.get_os_version"
+// RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given VM_guest_metrics.  If the key is not in that Map, then do nothing.
+// Version: rio
+func (vMGuestMetrics) RemoveFromOtherConfig2(session *Session, self VMGuestMetricsRef) (err error) {
+	method := "VM_guest_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -111,262 +159,12 @@ func (vMGuestMetrics) GetOsVersion(session *Session, self VMGuestMetricsRef) (re
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetPVDriversVersion: Get the PV_drivers_version field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetPVDriversVersion(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
-	method := "VM_guest_metrics.get_PV_drivers_version"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetPVDriversUpToDate: Get the PV_drivers_up_to_date field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetPVDriversUpToDate(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
-	method := "VM_guest_metrics.get_PV_drivers_up_to_date"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeBool(method+" -> ", result)
-	return
-}
-
-// GetMemory: Get the memory field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetMemory(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
-	method := "VM_guest_metrics.get_memory"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetDisks: Get the disks field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetDisks(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
-	method := "VM_guest_metrics.get_disks"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetNetworks: Get the networks field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetNetworks(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
-	method := "VM_guest_metrics.get_networks"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetOther: Get the other field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetOther(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
-	method := "VM_guest_metrics.get_other"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetLastUpdated: Get the last_updated field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetLastUpdated(session *Session, self VMGuestMetricsRef) (retval time.Time, err error) {
-	method := "VM_guest_metrics.get_last_updated"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeTime(method+" -> ", result)
-	return
-}
-
-// GetOtherConfig: Get the other_config field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetOtherConfig(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
-	method := "VM_guest_metrics.get_other_config"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetLive: Get the live field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetLive(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
-	method := "VM_guest_metrics.get_live"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeBool(method+" -> ", result)
-	return
-}
-
-// GetCanUseHotplugVbd: Get the can_use_hotplug_vbd field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetCanUseHotplugVbd(session *Session, self VMGuestMetricsRef) (retval TristateType, err error) {
-	method := "VM_guest_metrics.get_can_use_hotplug_vbd"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeEnumTristateType(method+" -> ", result)
-	return
-}
-
-// GetCanUseHotplugVif: Get the can_use_hotplug_vif field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetCanUseHotplugVif(session *Session, self VMGuestMetricsRef) (retval TristateType, err error) {
-	method := "VM_guest_metrics.get_can_use_hotplug_vif"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeEnumTristateType(method+" -> ", result)
-	return
-}
-
-// GetPVDriversDetected: Get the PV_drivers_detected field of the given VM_guest_metrics.
-func (vMGuestMetrics) GetPVDriversDetected(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
-	method := "VM_guest_metrics.get_PV_drivers_detected"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeBool(method+" -> ", result)
-	return
-}
-
-// SetOtherConfig: Set the other_config field of the given VM_guest_metrics.
-func (vMGuestMetrics) SetOtherConfig(session *Session, self VMGuestMetricsRef, value map[string]string) (err error) {
-	method := "VM_guest_metrics.set_other_config"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
-	if err != nil {
-		return
-	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
 	return
 }
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VM_guest_metrics.
+// Version: orlando
 func (vMGuestMetrics) AddToOtherConfig(session *Session, self VMGuestMetricsRef, key string, value string) (err error) {
 	method := "VM_guest_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -389,9 +187,10 @@ func (vMGuestMetrics) AddToOtherConfig(session *Session, self VMGuestMetricsRef,
 	return
 }
 
-// RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VM_guest_metrics.  If the key is not in that Map, then do nothing.
-func (vMGuestMetrics) RemoveFromOtherConfig(session *Session, self VMGuestMetricsRef, key string) (err error) {
-	method := "VM_guest_metrics.remove_from_other_config"
+// AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VM_guest_metrics.
+// Version: orlando
+func (vMGuestMetrics) AddToOtherConfig4(session *Session, self VMGuestMetricsRef, key string, value string) (err error) {
+	method := "VM_guest_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -404,36 +203,722 @@ func (vMGuestMetrics) RemoveFromOtherConfig(session *Session, self VMGuestMetric
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
+	valueArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg, valueArg)
 	return
 }
 
-// GetAll: Return a list of all the VM_guest_metrics instances known to the system.
-func (vMGuestMetrics) GetAll(session *Session) (retval []VMGuestMetricsRef, err error) {
-	method := "VM_guest_metrics.get_all"
+// AddToOtherConfig2: Add the given key-value pair to the other_config field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) AddToOtherConfig2(session *Session, self VMGuestMetricsRef) (err error) {
+	method := "VM_guest_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeVMGuestMetricsRefSet(method+" -> ", result)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
 	return
 }
 
-// GetAllRecords: Return a map of VM_guest_metrics references to VM_guest_metrics records for all VM_guest_metrics instances known to the system.
-func (vMGuestMetrics) GetAllRecords(session *Session) (retval map[VMGuestMetricsRef]VMGuestMetricsRecord, err error) {
-	method := "VM_guest_metrics.get_all_records"
+// SetOtherConfig: Set the other_config field of the given VM_guest_metrics.
+// Version: orlando
+func (vMGuestMetrics) SetOtherConfig(session *Session, self VMGuestMetricsRef, value map[string]string) (err error) {
+	method := "VM_guest_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeVMGuestMetricsRefToVMGuestMetricsRecordMap(method+" -> ", result)
+	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetOtherConfig3: Set the other_config field of the given VM_guest_metrics.
+// Version: orlando
+func (vMGuestMetrics) SetOtherConfig3(session *Session, self VMGuestMetricsRef, value map[string]string) (err error) {
+	method := "VM_guest_metrics.set_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetOtherConfig2: Set the other_config field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) SetOtherConfig2(session *Session, self VMGuestMetricsRef) (err error) {
+	method := "VM_guest_metrics.set_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// GetPVDriversDetected: Get the PV_drivers_detected field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetPVDriversDetected(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
+	method := "VM_guest_metrics.get_PV_drivers_detected"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
+	return
+}
+
+// GetPVDriversDetected2: Get the PV_drivers_detected field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetPVDriversDetected2(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
+	method := "VM_guest_metrics.get_PV_drivers_detected"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
+	return
+}
+
+// GetCanUseHotplugVif: Get the can_use_hotplug_vif field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetCanUseHotplugVif(session *Session, self VMGuestMetricsRef) (retval TristateType, err error) {
+	method := "VM_guest_metrics.get_can_use_hotplug_vif"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTristateType(method+" -> ", result)
+	return
+}
+
+// GetCanUseHotplugVif2: Get the can_use_hotplug_vif field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetCanUseHotplugVif2(session *Session, self VMGuestMetricsRef) (retval TristateType, err error) {
+	method := "VM_guest_metrics.get_can_use_hotplug_vif"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTristateType(method+" -> ", result)
+	return
+}
+
+// GetCanUseHotplugVbd: Get the can_use_hotplug_vbd field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetCanUseHotplugVbd(session *Session, self VMGuestMetricsRef) (retval TristateType, err error) {
+	method := "VM_guest_metrics.get_can_use_hotplug_vbd"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTristateType(method+" -> ", result)
+	return
+}
+
+// GetCanUseHotplugVbd2: Get the can_use_hotplug_vbd field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetCanUseHotplugVbd2(session *Session, self VMGuestMetricsRef) (retval TristateType, err error) {
+	method := "VM_guest_metrics.get_can_use_hotplug_vbd"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTristateType(method+" -> ", result)
+	return
+}
+
+// GetLive: Get the live field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetLive(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
+	method := "VM_guest_metrics.get_live"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
+	return
+}
+
+// GetLive2: Get the live field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetLive2(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
+	method := "VM_guest_metrics.get_live"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
+	return
+}
+
+// GetOtherConfig: Get the other_config field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetOtherConfig(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetOtherConfig2: Get the other_config field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetOtherConfig2(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetLastUpdated: Get the last_updated field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetLastUpdated(session *Session, self VMGuestMetricsRef) (retval time.Time, err error) {
+	method := "VM_guest_metrics.get_last_updated"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTime(method+" -> ", result)
+	return
+}
+
+// GetLastUpdated2: Get the last_updated field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetLastUpdated2(session *Session, self VMGuestMetricsRef) (retval time.Time, err error) {
+	method := "VM_guest_metrics.get_last_updated"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTime(method+" -> ", result)
+	return
+}
+
+// GetOther: Get the other field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetOther(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_other"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetOther2: Get the other field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetOther2(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_other"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetNetworks: Get the networks field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetNetworks(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_networks"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetNetworks2: Get the networks field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetNetworks2(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_networks"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetDisks: Get the disks field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetDisks(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_disks"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetDisks2: Get the disks field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetDisks2(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_disks"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetMemory: Get the memory field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetMemory(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_memory"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetMemory2: Get the memory field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetMemory2(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_memory"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetPVDriversUpToDate: Get the PV_drivers_up_to_date field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetPVDriversUpToDate(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
+	method := "VM_guest_metrics.get_PV_drivers_up_to_date"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
+	return
+}
+
+// GetPVDriversUpToDate2: Get the PV_drivers_up_to_date field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetPVDriversUpToDate2(session *Session, self VMGuestMetricsRef) (retval bool, err error) {
+	method := "VM_guest_metrics.get_PV_drivers_up_to_date"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
+	return
+}
+
+// GetPVDriversVersion: Get the PV_drivers_version field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetPVDriversVersion(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_PV_drivers_version"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetPVDriversVersion2: Get the PV_drivers_version field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetPVDriversVersion2(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_PV_drivers_version"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetOsVersion: Get the os_version field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetOsVersion(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_os_version"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetOsVersion2: Get the os_version field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetOsVersion2(session *Session, self VMGuestMetricsRef) (retval map[string]string, err error) {
+	method := "VM_guest_metrics.get_os_version"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetUUID: Get the uuid field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetUUID(session *Session, self VMGuestMetricsRef) (retval string, err error) {
+	method := "VM_guest_metrics.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetUUID2: Get the uuid field of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetUUID2(session *Session, self VMGuestMetricsRef) (retval string, err error) {
+	method := "VM_guest_metrics.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetByUUID: Get a reference to the VM_guest_metrics instance with the specified UUID.
+// Version: rio
+func (vMGuestMetrics) GetByUUID(session *Session, uUID string) (retval VMGuestMetricsRef, err error) {
+	method := "VM_guest_metrics.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRef(method+" -> ", result)
+	return
+}
+
+// GetByUUID2: Get a reference to the VM_guest_metrics instance with the specified UUID.
+// Version: rio
+func (vMGuestMetrics) GetByUUID2(session *Session, uUID string) (retval VMGuestMetricsRef, err error) {
+	method := "VM_guest_metrics.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRef(method+" -> ", result)
+	return
+}
+
+// GetRecord: Get a record containing the current state of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetRecord(session *Session, self VMGuestMetricsRef) (retval VMGuestMetricsRecord, err error) {
+	method := "VM_guest_metrics.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRecord(method+" -> ", result)
+	return
+}
+
+// GetRecord2: Get a record containing the current state of the given VM_guest_metrics.
+// Version: rio
+func (vMGuestMetrics) GetRecord2(session *Session, self VMGuestMetricsRef) (retval VMGuestMetricsRecord, err error) {
+	method := "VM_guest_metrics.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeVMGuestMetricsRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMGuestMetricsRecord(method+" -> ", result)
 	return
 }

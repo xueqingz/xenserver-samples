@@ -22,9 +22,90 @@ type crashdump struct{}
 
 var Crashdump crashdump
 
-// GetRecord: Get a record containing the current state of the given crashdump.
-func (crashdump) GetRecord(session *Session, self CrashdumpRef) (retval CrashdumpRecord, err error) {
-	method := "crashdump.get_record"
+// GetAllRecords: Return a map of crashdump references to crashdump records for all crashdumps known to the system.
+// Version: rio
+func (crashdump) GetAllRecords(session *Session) (retval map[CrashdumpRef]CrashdumpRecord, err error) {
+	method := "crashdump.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRefToCrashdumpRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAllRecords1: Return a map of crashdump references to crashdump records for all crashdumps known to the system.
+// Version: rio
+func (crashdump) GetAllRecords1(session *Session) (retval map[CrashdumpRef]CrashdumpRecord, err error) {
+	method := "crashdump.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRefToCrashdumpRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAll: Return a list of all the crashdumps known to the system.
+// Version: rio
+func (crashdump) GetAll(session *Session) (retval []CrashdumpRef, err error) {
+	method := "crashdump.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRefSet(method+" -> ", result)
+	return
+}
+
+// GetAll1: Return a list of all the crashdumps known to the system.
+// Version: rio
+func (crashdump) GetAll1(session *Session) (retval []CrashdumpRef, err error) {
+	method := "crashdump.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRefSet(method+" -> ", result)
+	return
+}
+
+// Destroy: Destroy the specified crashdump
+// Version: rio
+func (crashdump) Destroy(session *Session, self CrashdumpRef) (err error) {
+	method := "crashdump.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// AsyncDestroy: Destroy the specified crashdump
+// Version: rio
+func (crashdump) AsyncDestroy(session *Session, self CrashdumpRef) (retval TaskRef, err error) {
+	method := "Async.crashdump.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -37,32 +118,30 @@ func (crashdump) GetRecord(session *Session, self CrashdumpRef) (retval Crashdum
 	if err != nil {
 		return
 	}
-	retval, err = deserializeCrashdumpRecord(method+" -> ", result)
+	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
 
-// GetByUUID: Get a reference to the crashdump instance with the specified UUID.
-func (crashdump) GetByUUID(session *Session, uUID string) (retval CrashdumpRef, err error) {
-	method := "crashdump.get_by_uuid"
+// Destroy2: Destroy the specified crashdump
+// Version: rio
+func (crashdump) Destroy2(session *Session, self CrashdumpRef) (err error) {
+	method := "crashdump.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeCrashdumpRef(method+" -> ", result)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
 	return
 }
 
-// GetUUID: Get the uuid field of the given crashdump.
-func (crashdump) GetUUID(session *Session, self CrashdumpRef) (retval string, err error) {
-	method := "crashdump.get_uuid"
+// AsyncDestroy2: Destroy the specified crashdump
+// Version: rio
+func (crashdump) AsyncDestroy2(session *Session, self CrashdumpRef) (retval TaskRef, err error) {
+	method := "Async.crashdump.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -75,13 +154,14 @@ func (crashdump) GetUUID(session *Session, self CrashdumpRef) (retval string, er
 	if err != nil {
 		return
 	}
-	retval, err = deserializeString(method+" -> ", result)
+	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
 
-// GetVM: Get the VM field of the given crashdump.
-func (crashdump) GetVM(session *Session, self CrashdumpRef) (retval VMRef, err error) {
-	method := "crashdump.get_VM"
+// RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given crashdump.  If the key is not in that Map, then do nothing.
+// Version: miami
+func (crashdump) RemoveFromOtherConfig(session *Session, self CrashdumpRef, key string) (err error) {
+	method := "crashdump.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -90,17 +170,18 @@ func (crashdump) GetVM(session *Session, self CrashdumpRef) (retval VMRef, err e
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeVMRef(method+" -> ", result)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
 	return
 }
 
-// GetVDI: Get the VDI field of the given crashdump.
-func (crashdump) GetVDI(session *Session, self CrashdumpRef) (retval VDIRef, err error) {
-	method := "crashdump.get_VDI"
+// RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given crashdump.  If the key is not in that Map, then do nothing.
+// Version: miami
+func (crashdump) RemoveFromOtherConfig3(session *Session, self CrashdumpRef, key string) (err error) {
+	method := "crashdump.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -109,17 +190,18 @@ func (crashdump) GetVDI(session *Session, self CrashdumpRef) (retval VDIRef, err
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeVDIRef(method+" -> ", result)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
 	return
 }
 
-// GetOtherConfig: Get the other_config field of the given crashdump.
-func (crashdump) GetOtherConfig(session *Session, self CrashdumpRef) (retval map[string]string, err error) {
-	method := "crashdump.get_other_config"
+// RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given crashdump.  If the key is not in that Map, then do nothing.
+// Version: rio
+func (crashdump) RemoveFromOtherConfig2(session *Session, self CrashdumpRef) (err error) {
+	method := "crashdump.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -128,34 +210,12 @@ func (crashdump) GetOtherConfig(session *Session, self CrashdumpRef) (retval map
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// SetOtherConfig: Set the other_config field of the given crashdump.
-func (crashdump) SetOtherConfig(session *Session, self CrashdumpRef, value map[string]string) (err error) {
-	method := "crashdump.set_other_config"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
-	if err != nil {
-		return
-	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
 	return
 }
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given crashdump.
+// Version: miami
 func (crashdump) AddToOtherConfig(session *Session, self CrashdumpRef, key string, value string) (err error) {
 	method := "crashdump.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -178,9 +238,10 @@ func (crashdump) AddToOtherConfig(session *Session, self CrashdumpRef, key strin
 	return
 }
 
-// RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given crashdump.  If the key is not in that Map, then do nothing.
-func (crashdump) RemoveFromOtherConfig(session *Session, self CrashdumpRef, key string) (err error) {
-	method := "crashdump.remove_from_other_config"
+// AddToOtherConfig4: Add the given key-value pair to the other_config field of the given crashdump.
+// Version: miami
+func (crashdump) AddToOtherConfig4(session *Session, self CrashdumpRef, key string, value string) (err error) {
+	method := "crashdump.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -193,13 +254,18 @@ func (crashdump) RemoveFromOtherConfig(session *Session, self CrashdumpRef, key 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
+	valueArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg, valueArg)
 	return
 }
 
-// Destroy: Destroy the specified crashdump
-func (crashdump) Destroy(session *Session, self CrashdumpRef) (err error) {
-	method := "crashdump.destroy"
+// AddToOtherConfig2: Add the given key-value pair to the other_config field of the given crashdump.
+// Version: rio
+func (crashdump) AddToOtherConfig2(session *Session, self CrashdumpRef) (err error) {
+	method := "crashdump.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -212,9 +278,66 @@ func (crashdump) Destroy(session *Session, self CrashdumpRef) (err error) {
 	return
 }
 
-// AsyncDestroy: Destroy the specified crashdump
-func (crashdump) AsyncDestroy(session *Session, self CrashdumpRef) (retval TaskRef, err error) {
-	method := "Async.crashdump.destroy"
+// SetOtherConfig: Set the other_config field of the given crashdump.
+// Version: miami
+func (crashdump) SetOtherConfig(session *Session, self CrashdumpRef, value map[string]string) (err error) {
+	method := "crashdump.set_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetOtherConfig3: Set the other_config field of the given crashdump.
+// Version: miami
+func (crashdump) SetOtherConfig3(session *Session, self CrashdumpRef, value map[string]string) (err error) {
+	method := "crashdump.set_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetOtherConfig2: Set the other_config field of the given crashdump.
+// Version: rio
+func (crashdump) SetOtherConfig2(session *Session, self CrashdumpRef) (err error) {
+	method := "crashdump.set_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// GetOtherConfig: Get the other_config field of the given crashdump.
+// Version: rio
+func (crashdump) GetOtherConfig(session *Session, self CrashdumpRef) (retval map[string]string, err error) {
+	method := "crashdump.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -227,36 +350,226 @@ func (crashdump) AsyncDestroy(session *Session, self CrashdumpRef) (retval TaskR
 	if err != nil {
 		return
 	}
-	retval, err = deserializeTaskRef(method+" -> ", result)
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
 	return
 }
 
-// GetAll: Return a list of all the crashdumps known to the system.
-func (crashdump) GetAll(session *Session) (retval []CrashdumpRef, err error) {
-	method := "crashdump.get_all"
+// GetOtherConfig2: Get the other_config field of the given crashdump.
+// Version: rio
+func (crashdump) GetOtherConfig2(session *Session, self CrashdumpRef) (retval map[string]string, err error) {
+	method := "crashdump.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeCrashdumpRefSet(method+" -> ", result)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
 	return
 }
 
-// GetAllRecords: Return a map of crashdump references to crashdump records for all crashdumps known to the system.
-func (crashdump) GetAllRecords(session *Session) (retval map[CrashdumpRef]CrashdumpRecord, err error) {
-	method := "crashdump.get_all_records"
+// GetVDI: Get the VDI field of the given crashdump.
+// Version: rio
+func (crashdump) GetVDI(session *Session, self CrashdumpRef) (retval VDIRef, err error) {
+	method := "crashdump.get_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeCrashdumpRefToCrashdumpRecordMap(method+" -> ", result)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVDIRef(method+" -> ", result)
+	return
+}
+
+// GetVDI2: Get the VDI field of the given crashdump.
+// Version: rio
+func (crashdump) GetVDI2(session *Session, self CrashdumpRef) (retval VDIRef, err error) {
+	method := "crashdump.get_VDI"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVDIRef(method+" -> ", result)
+	return
+}
+
+// GetVM: Get the VM field of the given crashdump.
+// Version: rio
+func (crashdump) GetVM(session *Session, self CrashdumpRef) (retval VMRef, err error) {
+	method := "crashdump.get_VM"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMRef(method+" -> ", result)
+	return
+}
+
+// GetVM2: Get the VM field of the given crashdump.
+// Version: rio
+func (crashdump) GetVM2(session *Session, self CrashdumpRef) (retval VMRef, err error) {
+	method := "crashdump.get_VM"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeVMRef(method+" -> ", result)
+	return
+}
+
+// GetUUID: Get the uuid field of the given crashdump.
+// Version: rio
+func (crashdump) GetUUID(session *Session, self CrashdumpRef) (retval string, err error) {
+	method := "crashdump.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetUUID2: Get the uuid field of the given crashdump.
+// Version: rio
+func (crashdump) GetUUID2(session *Session, self CrashdumpRef) (retval string, err error) {
+	method := "crashdump.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetByUUID: Get a reference to the crashdump instance with the specified UUID.
+// Version: rio
+func (crashdump) GetByUUID(session *Session, uUID string) (retval CrashdumpRef, err error) {
+	method := "crashdump.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRef(method+" -> ", result)
+	return
+}
+
+// GetByUUID2: Get a reference to the crashdump instance with the specified UUID.
+// Version: rio
+func (crashdump) GetByUUID2(session *Session, uUID string) (retval CrashdumpRef, err error) {
+	method := "crashdump.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRef(method+" -> ", result)
+	return
+}
+
+// GetRecord: Get a record containing the current state of the given crashdump.
+// Version: rio
+func (crashdump) GetRecord(session *Session, self CrashdumpRef) (retval CrashdumpRecord, err error) {
+	method := "crashdump.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRecord(method+" -> ", result)
+	return
+}
+
+// GetRecord2: Get a record containing the current state of the given crashdump.
+// Version: rio
+func (crashdump) GetRecord2(session *Session, self CrashdumpRef) (retval CrashdumpRecord, err error) {
+	method := "crashdump.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeCrashdumpRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeCrashdumpRecord(method+" -> ", result)
 	return
 }

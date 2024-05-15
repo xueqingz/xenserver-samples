@@ -8,1168 +8,23 @@ import (
 	"time"
 )
 
-func serializeString(context string, value string) (string, error) {
-	_ = context
-	return value, nil
-}
-
-func serializeBool(context string, value bool) (bool, error) {
-	_ = context
-	return value, nil
-}
-
-func deserializeString(context string, input interface{}) (value string, err error) {
-	if input == nil {
-		return
-	}
-	value, ok := input.(string)
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return
-}
-
-func deserializeBool(context string, input interface{}) (value bool, err error) {
-	if input == nil {
-		return
-	}
-	value, ok := input.(bool)
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "bool", context, reflect.TypeOf(input), input)
-	}
-	return
-}
-
-func serializeInt(context string, value int) (int, error) {
-	_ = context
-	return value, nil
-}
-
-func deserializeInt(context string, input interface{}) (value int, err error) {
-	_ = context
-	if input == nil {
-		return
-	}
-	strValue := fmt.Sprintf("%v", input)
-	value, err = strconv.Atoi(strValue)
+func serializeSubjectRecord(context string, record SubjectRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
 	if err != nil {
-		floatValue, err1 := strconv.ParseFloat(strValue, 64)
-		if err1 == nil {
-			return int(floatValue), nil
-		}
-	}
-	return
-}
-
-//nolint:unparam
-func serializeFloat(context string, value float64) (interface{}, error) {
-	_ = context
-	if math.IsInf(value, 0) {
-		if math.IsInf(value, 1) {
-			return "+Inf", nil
-		}
-		return "-Inf", nil
-	} else if math.IsNaN(value) {
-		return "NaN", nil
-	}
-	return value, nil
-}
-
-func deserializeFloat(context string, input interface{}) (value float64, err error) {
-	_ = context
-	if input == nil {
 		return
 	}
-	strValue := fmt.Sprintf("%v", input)
-	value, err = strconv.ParseFloat(strValue, 64)
+	rpcStruct["subject_identifier"], err = serializeString(fmt.Sprintf("%s.%s", context, "subject_identifier"), record.SubjectIdentifier)
 	if err != nil {
-		switch strValue {
-		case "+Inf":
-			return math.Inf(1), nil
-		case "-Inf":
-			return math.Inf(-1), nil
-		case "NaN":
-			return math.NaN(), nil
-		}
-	}
-	return
-}
-
-var timeForamts = []string{time.RFC3339, "20060102T15:04:05Z", "20060102T15:04:05"}
-
-//nolint:unparam
-func serializeTime(context string, value time.Time) (string, error) {
-	_ = context
-	return value.Format(time.RFC3339), nil
-}
-
-func deserializeTime(context string, input interface{}) (value time.Time, err error) {
-	_ = context
-	if input == nil {
 		return
 	}
-	strValue := fmt.Sprintf("%v", input)
-	floatValue, err := strconv.ParseFloat(strValue, 64)
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
 	if err != nil {
-		for _, timeFormat := range timeForamts {
-			value, err = time.Parse(timeFormat, strValue)
-			if err == nil {
-				return value, nil
-			}
-		}
 		return
 	}
-	unixTimestamp, err := strconv.ParseInt(strconv.Itoa(int(floatValue)), 10, 64)
-	value = time.Unix(unixTimestamp, 0)
-
-	return
-}
-
-func serializeBlobRef(context string, ref BlobRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeBondRef(context string, ref BondRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeCertificateRef(context string, ref CertificateRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeClusterHostRef(context string, ref ClusterHostRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeClusterRef(context string, ref ClusterRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeConsoleRef(context string, ref ConsoleRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeCrashdumpRef(context string, ref CrashdumpRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeDRTaskRef(context string, ref DRTaskRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeFeatureRef(context string, ref FeatureRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeGPUGroupRef(context string, ref GPUGroupRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeHostCPURef(context string, ref HostCPURef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeHostCrashdumpRef(context string, ref HostCrashdumpRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeHostMetricsRef(context string, ref HostMetricsRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeHostPatchRef(context string, ref HostPatchRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeHostRef(context string, ref HostRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeLVHDRef(context string, ref LVHDRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeMessageRef(context string, ref MessageRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeNetworkRef(context string, ref NetworkRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeNetworkSriovRef(context string, ref NetworkSriovRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeObserverRef(context string, ref ObserverRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePBDRef(context string, ref PBDRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePCIRef(context string, ref PCIRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePGPURef(context string, ref PGPURef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePIFMetricsRef(context string, ref PIFMetricsRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePIFRef(context string, ref PIFRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePUSBRef(context string, ref PUSBRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePVSCacheStorageRef(context string, ref PVSCacheStorageRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePVSProxyRef(context string, ref PVSProxyRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePVSServerRef(context string, ref PVSServerRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePVSSiteRef(context string, ref PVSSiteRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePoolPatchRef(context string, ref PoolPatchRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePoolRef(context string, ref PoolRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializePoolUpdateRef(context string, ref PoolUpdateRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeRepositoryRef(context string, ref RepositoryRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeRoleRef(context string, ref RoleRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeSDNControllerRef(context string, ref SDNControllerRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeSMRef(context string, ref SMRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeSRRef(context string, ref SRRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeSecretRef(context string, ref SecretRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeSessionRef(context string, ref SessionRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeSubjectRef(context string, ref SubjectRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeTaskRef(context string, ref TaskRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeTunnelRef(context string, ref TunnelRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeUSBGroupRef(context string, ref USBGroupRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeUserRef(context string, ref UserRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVBDMetricsRef(context string, ref VBDMetricsRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVBDRef(context string, ref VBDRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVDIRef(context string, ref VDIRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVGPURef(context string, ref VGPURef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVGPUTypeRef(context string, ref VGPUTypeRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVIFMetricsRef(context string, ref VIFMetricsRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVIFRef(context string, ref VIFRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVLANRef(context string, ref VLANRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVMApplianceRef(context string, ref VMApplianceRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVMGuestMetricsRef(context string, ref VMGuestMetricsRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVMMetricsRef(context string, ref VMMetricsRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVMPPRef(context string, ref VMPPRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVMRef(context string, ref VMRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVMSSRef(context string, ref VMSSRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVTPMRef(context string, ref VTPMRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func serializeVUSBRef(context string, ref VUSBRef) (string, error) {
-	_ = context
-	return string(ref), nil
-}
-
-func deserializeBlobRef(context string, input interface{}) (BlobRef, error) {
-	var ref BlobRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return BlobRef(value), nil
-}
-
-func deserializeBondRef(context string, input interface{}) (BondRef, error) {
-	var ref BondRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return BondRef(value), nil
-}
-
-func deserializeCertificateRef(context string, input interface{}) (CertificateRef, error) {
-	var ref CertificateRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return CertificateRef(value), nil
-}
-
-func deserializeClusterHostRef(context string, input interface{}) (ClusterHostRef, error) {
-	var ref ClusterHostRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return ClusterHostRef(value), nil
-}
-
-func deserializeClusterRef(context string, input interface{}) (ClusterRef, error) {
-	var ref ClusterRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return ClusterRef(value), nil
-}
-
-func deserializeConsoleRef(context string, input interface{}) (ConsoleRef, error) {
-	var ref ConsoleRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return ConsoleRef(value), nil
-}
-
-func deserializeCrashdumpRef(context string, input interface{}) (CrashdumpRef, error) {
-	var ref CrashdumpRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return CrashdumpRef(value), nil
-}
-
-func deserializeDRTaskRef(context string, input interface{}) (DRTaskRef, error) {
-	var ref DRTaskRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return DRTaskRef(value), nil
-}
-
-func deserializeFeatureRef(context string, input interface{}) (FeatureRef, error) {
-	var ref FeatureRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return FeatureRef(value), nil
-}
-
-func deserializeGPUGroupRef(context string, input interface{}) (GPUGroupRef, error) {
-	var ref GPUGroupRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return GPUGroupRef(value), nil
-}
-
-func deserializeHostCPURef(context string, input interface{}) (HostCPURef, error) {
-	var ref HostCPURef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return HostCPURef(value), nil
-}
-
-func deserializeHostCrashdumpRef(context string, input interface{}) (HostCrashdumpRef, error) {
-	var ref HostCrashdumpRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return HostCrashdumpRef(value), nil
-}
-
-func deserializeHostMetricsRef(context string, input interface{}) (HostMetricsRef, error) {
-	var ref HostMetricsRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return HostMetricsRef(value), nil
-}
-
-func deserializeHostPatchRef(context string, input interface{}) (HostPatchRef, error) {
-	var ref HostPatchRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return HostPatchRef(value), nil
-}
-
-func deserializeHostRef(context string, input interface{}) (HostRef, error) {
-	var ref HostRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return HostRef(value), nil
-}
-
-func deserializeLVHDRef(context string, input interface{}) (LVHDRef, error) {
-	var ref LVHDRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return LVHDRef(value), nil
-}
-
-func deserializeMessageRef(context string, input interface{}) (MessageRef, error) {
-	var ref MessageRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return MessageRef(value), nil
-}
-
-func deserializeNetworkRef(context string, input interface{}) (NetworkRef, error) {
-	var ref NetworkRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return NetworkRef(value), nil
-}
-
-func deserializeNetworkSriovRef(context string, input interface{}) (NetworkSriovRef, error) {
-	var ref NetworkSriovRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return NetworkSriovRef(value), nil
-}
-
-func deserializeObserverRef(context string, input interface{}) (ObserverRef, error) {
-	var ref ObserverRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return ObserverRef(value), nil
-}
-
-func deserializePBDRef(context string, input interface{}) (PBDRef, error) {
-	var ref PBDRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PBDRef(value), nil
-}
-
-func deserializePCIRef(context string, input interface{}) (PCIRef, error) {
-	var ref PCIRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PCIRef(value), nil
-}
-
-func deserializePGPURef(context string, input interface{}) (PGPURef, error) {
-	var ref PGPURef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PGPURef(value), nil
-}
-
-func deserializePIFMetricsRef(context string, input interface{}) (PIFMetricsRef, error) {
-	var ref PIFMetricsRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PIFMetricsRef(value), nil
-}
-
-func deserializePIFRef(context string, input interface{}) (PIFRef, error) {
-	var ref PIFRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PIFRef(value), nil
-}
-
-func deserializePUSBRef(context string, input interface{}) (PUSBRef, error) {
-	var ref PUSBRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PUSBRef(value), nil
-}
-
-func deserializePVSCacheStorageRef(context string, input interface{}) (PVSCacheStorageRef, error) {
-	var ref PVSCacheStorageRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PVSCacheStorageRef(value), nil
-}
-
-func deserializePVSProxyRef(context string, input interface{}) (PVSProxyRef, error) {
-	var ref PVSProxyRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PVSProxyRef(value), nil
-}
-
-func deserializePVSServerRef(context string, input interface{}) (PVSServerRef, error) {
-	var ref PVSServerRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PVSServerRef(value), nil
-}
-
-func deserializePVSSiteRef(context string, input interface{}) (PVSSiteRef, error) {
-	var ref PVSSiteRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PVSSiteRef(value), nil
-}
-
-func deserializePoolPatchRef(context string, input interface{}) (PoolPatchRef, error) {
-	var ref PoolPatchRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PoolPatchRef(value), nil
-}
-
-func deserializePoolRef(context string, input interface{}) (PoolRef, error) {
-	var ref PoolRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PoolRef(value), nil
-}
-
-func deserializePoolUpdateRef(context string, input interface{}) (PoolUpdateRef, error) {
-	var ref PoolUpdateRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return PoolUpdateRef(value), nil
-}
-
-func deserializeRepositoryRef(context string, input interface{}) (RepositoryRef, error) {
-	var ref RepositoryRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return RepositoryRef(value), nil
-}
-
-func deserializeRoleRef(context string, input interface{}) (RoleRef, error) {
-	var ref RoleRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return RoleRef(value), nil
-}
-
-func deserializeSDNControllerRef(context string, input interface{}) (SDNControllerRef, error) {
-	var ref SDNControllerRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return SDNControllerRef(value), nil
-}
-
-func deserializeSMRef(context string, input interface{}) (SMRef, error) {
-	var ref SMRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return SMRef(value), nil
-}
-
-func deserializeSRRef(context string, input interface{}) (SRRef, error) {
-	var ref SRRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return SRRef(value), nil
-}
-
-func deserializeSecretRef(context string, input interface{}) (SecretRef, error) {
-	var ref SecretRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return SecretRef(value), nil
-}
-
-func deserializeSessionRef(context string, input interface{}) (SessionRef, error) {
-	var ref SessionRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return SessionRef(value), nil
-}
-
-func deserializeSubjectRef(context string, input interface{}) (SubjectRef, error) {
-	var ref SubjectRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return SubjectRef(value), nil
-}
-
-func deserializeTaskRef(context string, input interface{}) (TaskRef, error) {
-	var ref TaskRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return TaskRef(value), nil
-}
-
-func deserializeTunnelRef(context string, input interface{}) (TunnelRef, error) {
-	var ref TunnelRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return TunnelRef(value), nil
-}
-
-func deserializeUSBGroupRef(context string, input interface{}) (USBGroupRef, error) {
-	var ref USBGroupRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return USBGroupRef(value), nil
-}
-
-func deserializeUserRef(context string, input interface{}) (UserRef, error) {
-	var ref UserRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return UserRef(value), nil
-}
-
-func deserializeVBDMetricsRef(context string, input interface{}) (VBDMetricsRef, error) {
-	var ref VBDMetricsRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VBDMetricsRef(value), nil
-}
-
-func deserializeVBDRef(context string, input interface{}) (VBDRef, error) {
-	var ref VBDRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VBDRef(value), nil
-}
-
-func deserializeVDIRef(context string, input interface{}) (VDIRef, error) {
-	var ref VDIRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VDIRef(value), nil
-}
-
-func deserializeVGPURef(context string, input interface{}) (VGPURef, error) {
-	var ref VGPURef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VGPURef(value), nil
-}
-
-func deserializeVGPUTypeRef(context string, input interface{}) (VGPUTypeRef, error) {
-	var ref VGPUTypeRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VGPUTypeRef(value), nil
-}
-
-func deserializeVIFMetricsRef(context string, input interface{}) (VIFMetricsRef, error) {
-	var ref VIFMetricsRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VIFMetricsRef(value), nil
-}
-
-func deserializeVIFRef(context string, input interface{}) (VIFRef, error) {
-	var ref VIFRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VIFRef(value), nil
-}
-
-func deserializeVLANRef(context string, input interface{}) (VLANRef, error) {
-	var ref VLANRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VLANRef(value), nil
-}
-
-func deserializeVMApplianceRef(context string, input interface{}) (VMApplianceRef, error) {
-	var ref VMApplianceRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VMApplianceRef(value), nil
-}
-
-func deserializeVMGuestMetricsRef(context string, input interface{}) (VMGuestMetricsRef, error) {
-	var ref VMGuestMetricsRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VMGuestMetricsRef(value), nil
-}
-
-func deserializeVMMetricsRef(context string, input interface{}) (VMMetricsRef, error) {
-	var ref VMMetricsRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VMMetricsRef(value), nil
-}
-
-func deserializeVMPPRef(context string, input interface{}) (VMPPRef, error) {
-	var ref VMPPRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VMPPRef(value), nil
-}
-
-func deserializeVMRef(context string, input interface{}) (VMRef, error) {
-	var ref VMRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VMRef(value), nil
-}
-
-func deserializeVMSSRef(context string, input interface{}) (VMSSRef, error) {
-	var ref VMSSRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VMSSRef(value), nil
-}
-
-func deserializeVTPMRef(context string, input interface{}) (VTPMRef, error) {
-	var ref VTPMRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VTPMRef(value), nil
-}
-
-func deserializeVUSBRef(context string, input interface{}) (VUSBRef, error) {
-	var ref VUSBRef
-	value, ok := input.(string)
-	if !ok {
-		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
-	}
-	return VUSBRef(value), nil
-}
-
-func serializeConsoleRefSet(context string, slice []ConsoleRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeConsoleRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeCrashdumpRefSet(context string, slice []CrashdumpRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeCrashdumpRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumNetworkOperationsSet(context string, slice []NetworkOperations) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumNetworkOperations(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumNetworkPurposeSet(context string, slice []NetworkPurpose) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumNetworkPurpose(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumUpdateGuidancesSet(context string, slice []UpdateGuidances) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumUpdateGuidances(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumVMApplianceOperationSet(context string, slice []VMApplianceOperation) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumVMApplianceOperation(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumVMOperationsSet(context string, slice []VMOperations) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumVMOperations(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumVbdOperationsSet(context string, slice []VbdOperations) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumVbdOperations(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumVdiOperationsSet(context string, slice []VdiOperations) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumVdiOperations(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeEnumVifOperationsSet(context string, slice []VifOperations) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeEnumVifOperations(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeHostRefSet(context string, slice []HostRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeHostRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeMessageRefSet(context string, slice []MessageRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeMessageRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializePCIRefSet(context string, slice []PCIRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializePCIRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializePIFRefSet(context string, slice []PIFRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializePIFRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeRepositoryRefSet(context string, slice []RepositoryRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeRepositoryRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
+	rpcStruct["roles"], err = serializeRoleRefSet(fmt.Sprintf("%s.%s", context, "roles"), record.Roles)
+	if err != nil {
+		return
 	}
 	return
 }
@@ -1187,6 +42,26 @@ func serializeRoleRefSet(context string, slice []RoleRef) (set []interface{}, er
 	return
 }
 
+func serializeSubjectRef(context string, ref SubjectRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeRoleRef(context string, ref RoleRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumTaskStatusType(context string, value TaskStatusType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeTaskRef(context string, ref TaskRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
 func serializeSRRefSet(context string, slice []SRRef) (set []interface{}, err error) {
 	set = make([]interface{}, len(slice))
 	for index, item := range slice {
@@ -1200,11 +75,28 @@ func serializeSRRefSet(context string, slice []SRRef) (set []interface{}, err er
 	return
 }
 
-func serializeStringSet(context string, slice []string) (set []interface{}, err error) {
+func serializeVMRefToStringMap(context string, goMap map[VMRef]string) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeVMRef(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeString(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeRepositoryRefSet(context string, slice []RepositoryRef) (set []interface{}, err error) {
 	set = make([]interface{}, len(slice))
 	for index, item := range slice {
 		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeString(itemContext, item)
+		itemValue, err := serializeRepositoryRef(itemContext, item)
 		if err != nil {
 			return set, err
 		}
@@ -1213,2327 +105,19 @@ func serializeStringSet(context string, slice []string) (set []interface{}, err 
 	return
 }
 
-func serializeVBDRefSet(context string, slice []VBDRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVBDRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
+func serializeEnumUpdateSyncFrequency(context string, value UpdateSyncFrequency) (string, error) {
+	_ = context
+	return string(value), nil
 }
 
-func serializeVDIRefSet(context string, slice []VDIRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVDIRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
+func serializePoolPatchRef(context string, ref PoolPatchRef) (string, error) {
+	_ = context
+	return string(ref), nil
 }
 
-func serializeVGPURefSet(context string, slice []VGPURef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVGPURef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeVGPUTypeRefSet(context string, slice []VGPUTypeRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVGPUTypeRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeVIFRefSet(context string, slice []VIFRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVIFRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeVMRefSet(context string, slice []VMRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVMRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeVTPMRefSet(context string, slice []VTPMRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVTPMRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func serializeVUSBRefSet(context string, slice []VUSBRef) (set []interface{}, err error) {
-	set = make([]interface{}, len(slice))
-	for index, item := range slice {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := serializeVUSBRef(itemContext, item)
-		if err != nil {
-			return set, err
-		}
-		set[index] = itemValue
-	}
-	return
-}
-
-func deserializeBlobRefSet(context string, input interface{}) (slice []BlobRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]BlobRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeBlobRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeBondRefSet(context string, input interface{}) (slice []BondRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]BondRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeBondRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeCertificateRefSet(context string, input interface{}) (slice []CertificateRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]CertificateRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeCertificateRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeClusterHostRefSet(context string, input interface{}) (slice []ClusterHostRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]ClusterHostRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeClusterHostRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeClusterRefSet(context string, input interface{}) (slice []ClusterRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]ClusterRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeClusterRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeConsoleRefSet(context string, input interface{}) (slice []ConsoleRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]ConsoleRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeConsoleRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeCrashdumpRefSet(context string, input interface{}) (slice []CrashdumpRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]CrashdumpRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeCrashdumpRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeDRTaskRefSet(context string, input interface{}) (slice []DRTaskRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]DRTaskRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeDRTaskRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeDataSourceRecordSet(context string, input interface{}) (slice []DataSourceRecord, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]DataSourceRecord, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeDataSourceRecord(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumAfterApplyGuidanceSet(context string, input interface{}) (slice []AfterApplyGuidance, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]AfterApplyGuidance, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumAfterApplyGuidance(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumClusterHostOperationSet(context string, input interface{}) (slice []ClusterHostOperation, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]ClusterHostOperation, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumClusterHostOperation(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumClusterOperationSet(context string, input interface{}) (slice []ClusterOperation, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]ClusterOperation, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumClusterOperation(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumHostAllowedOperationsSet(context string, input interface{}) (slice []HostAllowedOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]HostAllowedOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumHostAllowedOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumNetworkOperationsSet(context string, input interface{}) (slice []NetworkOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]NetworkOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumNetworkOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumNetworkPurposeSet(context string, input interface{}) (slice []NetworkPurpose, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]NetworkPurpose, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumNetworkPurpose(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumPoolAllowedOperationsSet(context string, input interface{}) (slice []PoolAllowedOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PoolAllowedOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumPoolAllowedOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumStorageOperationsSet(context string, input interface{}) (slice []StorageOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]StorageOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumStorageOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumTaskAllowedOperationsSet(context string, input interface{}) (slice []TaskAllowedOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]TaskAllowedOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumTaskAllowedOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumUpdateAfterApplyGuidanceSet(context string, input interface{}) (slice []UpdateAfterApplyGuidance, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]UpdateAfterApplyGuidance, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumUpdateAfterApplyGuidance(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumUpdateGuidancesSet(context string, input interface{}) (slice []UpdateGuidances, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]UpdateGuidances, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumUpdateGuidances(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumVMApplianceOperationSet(context string, input interface{}) (slice []VMApplianceOperation, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMApplianceOperation, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumVMApplianceOperation(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumVMOperationsSet(context string, input interface{}) (slice []VMOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumVMOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumVbdOperationsSet(context string, input interface{}) (slice []VbdOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VbdOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumVbdOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumVdiOperationsSet(context string, input interface{}) (slice []VdiOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VdiOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumVdiOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumVifOperationsSet(context string, input interface{}) (slice []VifOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VifOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumVifOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumVtpmOperationsSet(context string, input interface{}) (slice []VtpmOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VtpmOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumVtpmOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEnumVusbOperationsSet(context string, input interface{}) (slice []VusbOperations, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VusbOperations, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEnumVusbOperations(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeEventRecordSet(context string, input interface{}) (slice []EventRecord, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]EventRecord, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeEventRecord(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeFeatureRefSet(context string, input interface{}) (slice []FeatureRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]FeatureRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeFeatureRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeGPUGroupRefSet(context string, input interface{}) (slice []GPUGroupRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]GPUGroupRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeGPUGroupRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeHostCPURefSet(context string, input interface{}) (slice []HostCPURef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]HostCPURef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeHostCPURef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeHostCrashdumpRefSet(context string, input interface{}) (slice []HostCrashdumpRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]HostCrashdumpRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeHostCrashdumpRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeHostMetricsRefSet(context string, input interface{}) (slice []HostMetricsRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]HostMetricsRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeHostMetricsRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeHostPatchRefSet(context string, input interface{}) (slice []HostPatchRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]HostPatchRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeHostPatchRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeHostRefSet(context string, input interface{}) (slice []HostRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]HostRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeHostRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeIntSet(context string, input interface{}) (slice []int, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]int, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeInt(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeMessageRefSet(context string, input interface{}) (slice []MessageRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]MessageRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeMessageRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeNetworkRefSet(context string, input interface{}) (slice []NetworkRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]NetworkRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeNetworkRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeNetworkSriovRefSet(context string, input interface{}) (slice []NetworkSriovRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]NetworkSriovRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeNetworkSriovRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeObserverRefSet(context string, input interface{}) (slice []ObserverRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]ObserverRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeObserverRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePBDRefSet(context string, input interface{}) (slice []PBDRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PBDRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePBDRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePCIRefSet(context string, input interface{}) (slice []PCIRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PCIRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePCIRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePGPURefSet(context string, input interface{}) (slice []PGPURef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PGPURef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePGPURef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePIFMetricsRefSet(context string, input interface{}) (slice []PIFMetricsRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PIFMetricsRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePIFMetricsRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePIFRefSet(context string, input interface{}) (slice []PIFRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PIFRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePIFRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePUSBRefSet(context string, input interface{}) (slice []PUSBRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PUSBRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePUSBRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePVSCacheStorageRefSet(context string, input interface{}) (slice []PVSCacheStorageRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PVSCacheStorageRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePVSCacheStorageRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePVSProxyRefSet(context string, input interface{}) (slice []PVSProxyRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PVSProxyRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePVSProxyRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePVSServerRefSet(context string, input interface{}) (slice []PVSServerRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PVSServerRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePVSServerRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePVSSiteRefSet(context string, input interface{}) (slice []PVSSiteRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PVSSiteRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePVSSiteRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePoolPatchRefSet(context string, input interface{}) (slice []PoolPatchRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PoolPatchRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePoolPatchRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePoolRefSet(context string, input interface{}) (slice []PoolRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PoolRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePoolRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializePoolUpdateRefSet(context string, input interface{}) (slice []PoolUpdateRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]PoolUpdateRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializePoolUpdateRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeProbeResultRecordSet(context string, input interface{}) (slice []ProbeResultRecord, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]ProbeResultRecord, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeProbeResultRecord(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeRepositoryRefSet(context string, input interface{}) (slice []RepositoryRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]RepositoryRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeRepositoryRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeRoleRefSet(context string, input interface{}) (slice []RoleRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]RoleRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeRoleRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeSDNControllerRefSet(context string, input interface{}) (slice []SDNControllerRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]SDNControllerRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeSDNControllerRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeSMRefSet(context string, input interface{}) (slice []SMRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]SMRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeSMRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeSRRefSet(context string, input interface{}) (slice []SRRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]SRRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeSRRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeSecretRefSet(context string, input interface{}) (slice []SecretRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]SecretRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeSecretRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeStringSet(context string, input interface{}) (slice []string, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]string, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeString(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeStringSetSet(context string, input interface{}) (slice [][]string, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([][]string, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeStringSet(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeSubjectRefSet(context string, input interface{}) (slice []SubjectRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]SubjectRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeSubjectRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeTaskRefSet(context string, input interface{}) (slice []TaskRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]TaskRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeTaskRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeTunnelRefSet(context string, input interface{}) (slice []TunnelRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]TunnelRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeTunnelRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeUSBGroupRefSet(context string, input interface{}) (slice []USBGroupRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]USBGroupRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeUSBGroupRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVBDMetricsRefSet(context string, input interface{}) (slice []VBDMetricsRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VBDMetricsRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVBDMetricsRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVBDRefSet(context string, input interface{}) (slice []VBDRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VBDRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVBDRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVDIRefSet(context string, input interface{}) (slice []VDIRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VDIRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVDIRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVGPURefSet(context string, input interface{}) (slice []VGPURef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VGPURef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVGPURef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVGPUTypeRefSet(context string, input interface{}) (slice []VGPUTypeRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VGPUTypeRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVGPUTypeRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVIFMetricsRefSet(context string, input interface{}) (slice []VIFMetricsRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VIFMetricsRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVIFMetricsRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVIFRefSet(context string, input interface{}) (slice []VIFRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VIFRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVIFRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVLANRefSet(context string, input interface{}) (slice []VLANRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VLANRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVLANRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVMApplianceRefSet(context string, input interface{}) (slice []VMApplianceRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMApplianceRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVMApplianceRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVMGuestMetricsRefSet(context string, input interface{}) (slice []VMGuestMetricsRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMGuestMetricsRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVMGuestMetricsRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVMMetricsRefSet(context string, input interface{}) (slice []VMMetricsRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMMetricsRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVMMetricsRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVMPPRefSet(context string, input interface{}) (slice []VMPPRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMPPRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVMPPRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVMRefSet(context string, input interface{}) (slice []VMRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVMRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVMSSRefSet(context string, input interface{}) (slice []VMSSRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VMSSRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVMSSRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVTPMRefSet(context string, input interface{}) (slice []VTPMRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VTPMRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVTPMRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVUSBRefSet(context string, input interface{}) (slice []VUSBRef, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VUSBRef, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVUSBRef(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func deserializeVdiNbdServerInfoRecordSet(context string, input interface{}) (slice []VdiNbdServerInfoRecord, err error) {
-	set, ok := input.([]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	slice = make([]VdiNbdServerInfoRecord, len(set))
-	for index, item := range set {
-		itemContext := fmt.Sprintf("%s[%d]", context, index)
-		itemValue, err := deserializeVdiNbdServerInfoRecord(itemContext, item)
-		if err != nil {
-			return slice, err
-		}
-		slice[index] = itemValue
-	}
-	return
-}
-
-func serializeObserverRecord(context string, record ObserverRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
-	if err != nil {
-		return
-	}
-	rpcStruct["hosts"], err = serializeHostRefSet(fmt.Sprintf("%s.%s", context, "hosts"), record.Hosts)
-	if err != nil {
-		return
-	}
-	rpcStruct["attributes"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "attributes"), record.Attributes)
-	if err != nil {
-		return
-	}
-	rpcStruct["endpoints"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "endpoints"), record.Endpoints)
-	if err != nil {
-		return
-	}
-	rpcStruct["components"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "components"), record.Components)
-	if err != nil {
-		return
-	}
-	rpcStruct["enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "enabled"), record.Enabled)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializePVSCacheStorageRecord(context string, record PVSCacheStorageRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["host"], err = serializeHostRef(fmt.Sprintf("%s.%s", context, "host"), record.Host)
-	if err != nil {
-		return
-	}
-	rpcStruct["SR"], err = serializeSRRef(fmt.Sprintf("%s.%s", context, "SR"), record.SR)
-	if err != nil {
-		return
-	}
-	rpcStruct["site"], err = serializePVSSiteRef(fmt.Sprintf("%s.%s", context, "site"), record.Site)
-	if err != nil {
-		return
-	}
-	rpcStruct["size"], err = serializeInt(fmt.Sprintf("%s.%s", context, "size"), record.Size)
-	if err != nil {
-		return
-	}
-	rpcStruct["VDI"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "VDI"), record.VDI)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeSecretRecord(context string, record SecretRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["value"], err = serializeString(fmt.Sprintf("%s.%s", context, "value"), record.Value)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeUserRecord(context string, record UserRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["short_name"], err = serializeString(fmt.Sprintf("%s.%s", context, "short_name"), record.ShortName)
-	if err != nil {
-		return
-	}
-	rpcStruct["fullname"], err = serializeString(fmt.Sprintf("%s.%s", context, "fullname"), record.Fullname)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeConsoleRecord(context string, record ConsoleRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["protocol"], err = serializeEnumConsoleProtocol(fmt.Sprintf("%s.%s", context, "protocol"), record.Protocol)
-	if err != nil {
-		return
-	}
-	rpcStruct["location"], err = serializeString(fmt.Sprintf("%s.%s", context, "location"), record.Location)
-	if err != nil {
-		return
-	}
-	rpcStruct["VM"], err = serializeVMRef(fmt.Sprintf("%s.%s", context, "VM"), record.VM)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializePBDRecord(context string, record PBDRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["host"], err = serializeHostRef(fmt.Sprintf("%s.%s", context, "host"), record.Host)
-	if err != nil {
-		return
-	}
-	rpcStruct["SR"], err = serializeSRRef(fmt.Sprintf("%s.%s", context, "SR"), record.SR)
-	if err != nil {
-		return
-	}
-	rpcStruct["device_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "device_config"), record.DeviceConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["currently_attached"], err = serializeBool(fmt.Sprintf("%s.%s", context, "currently_attached"), record.CurrentlyAttached)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeVBDRecord(context string, record VBDRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["allowed_operations"], err = serializeEnumVbdOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["current_operations"], err = serializeStringToEnumVbdOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["VM"], err = serializeVMRef(fmt.Sprintf("%s.%s", context, "VM"), record.VM)
-	if err != nil {
-		return
-	}
-	rpcStruct["VDI"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "VDI"), record.VDI)
-	if err != nil {
-		return
-	}
-	rpcStruct["device"], err = serializeString(fmt.Sprintf("%s.%s", context, "device"), record.Device)
-	if err != nil {
-		return
-	}
-	rpcStruct["userdevice"], err = serializeString(fmt.Sprintf("%s.%s", context, "userdevice"), record.Userdevice)
-	if err != nil {
-		return
-	}
-	rpcStruct["bootable"], err = serializeBool(fmt.Sprintf("%s.%s", context, "bootable"), record.Bootable)
-	if err != nil {
-		return
-	}
-	rpcStruct["mode"], err = serializeEnumVbdMode(fmt.Sprintf("%s.%s", context, "mode"), record.Mode)
-	if err != nil {
-		return
-	}
-	rpcStruct["type"], err = serializeEnumVbdType(fmt.Sprintf("%s.%s", context, "type"), record.Type)
-	if err != nil {
-		return
-	}
-	rpcStruct["unpluggable"], err = serializeBool(fmt.Sprintf("%s.%s", context, "unpluggable"), record.Unpluggable)
-	if err != nil {
-		return
-	}
-	rpcStruct["storage_lock"], err = serializeBool(fmt.Sprintf("%s.%s", context, "storage_lock"), record.StorageLock)
-	if err != nil {
-		return
-	}
-	rpcStruct["empty"], err = serializeBool(fmt.Sprintf("%s.%s", context, "empty"), record.Empty)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["currently_attached"], err = serializeBool(fmt.Sprintf("%s.%s", context, "currently_attached"), record.CurrentlyAttached)
-	if err != nil {
-		return
-	}
-	rpcStruct["status_code"], err = serializeInt(fmt.Sprintf("%s.%s", context, "status_code"), record.StatusCode)
-	if err != nil {
-		return
-	}
-	rpcStruct["status_detail"], err = serializeString(fmt.Sprintf("%s.%s", context, "status_detail"), record.StatusDetail)
-	if err != nil {
-		return
-	}
-	rpcStruct["runtime_properties"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "runtime_properties"), record.RuntimeProperties)
-	if err != nil {
-		return
-	}
-	rpcStruct["qos_algorithm_type"], err = serializeString(fmt.Sprintf("%s.%s", context, "qos_algorithm_type"), record.QosAlgorithmType)
-	if err != nil {
-		return
-	}
-	rpcStruct["qos_algorithm_params"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "qos_algorithm_params"), record.QosAlgorithmParams)
-	if err != nil {
-		return
-	}
-	rpcStruct["qos_supported_algorithms"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "qos_supported_algorithms"), record.QosSupportedAlgorithms)
-	if err != nil {
-		return
-	}
-	rpcStruct["metrics"], err = serializeVBDMetricsRef(fmt.Sprintf("%s.%s", context, "metrics"), record.Metrics)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeVDIRecord(context string, record VDIRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
-	if err != nil {
-		return
-	}
-	rpcStruct["allowed_operations"], err = serializeEnumVdiOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["current_operations"], err = serializeStringToEnumVdiOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["SR"], err = serializeSRRef(fmt.Sprintf("%s.%s", context, "SR"), record.SR)
-	if err != nil {
-		return
-	}
-	rpcStruct["VBDs"], err = serializeVBDRefSet(fmt.Sprintf("%s.%s", context, "VBDs"), record.VBDs)
-	if err != nil {
-		return
-	}
-	rpcStruct["crash_dumps"], err = serializeCrashdumpRefSet(fmt.Sprintf("%s.%s", context, "crash_dumps"), record.CrashDumps)
-	if err != nil {
-		return
-	}
-	rpcStruct["virtual_size"], err = serializeInt(fmt.Sprintf("%s.%s", context, "virtual_size"), record.VirtualSize)
-	if err != nil {
-		return
-	}
-	rpcStruct["physical_utilisation"], err = serializeInt(fmt.Sprintf("%s.%s", context, "physical_utilisation"), record.PhysicalUtilisation)
-	if err != nil {
-		return
-	}
-	rpcStruct["type"], err = serializeEnumVdiType(fmt.Sprintf("%s.%s", context, "type"), record.Type)
-	if err != nil {
-		return
-	}
-	rpcStruct["sharable"], err = serializeBool(fmt.Sprintf("%s.%s", context, "sharable"), record.Sharable)
-	if err != nil {
-		return
-	}
-	rpcStruct["read_only"], err = serializeBool(fmt.Sprintf("%s.%s", context, "read_only"), record.ReadOnly)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["storage_lock"], err = serializeBool(fmt.Sprintf("%s.%s", context, "storage_lock"), record.StorageLock)
-	if err != nil {
-		return
-	}
-	rpcStruct["location"], err = serializeString(fmt.Sprintf("%s.%s", context, "location"), record.Location)
-	if err != nil {
-		return
-	}
-	rpcStruct["managed"], err = serializeBool(fmt.Sprintf("%s.%s", context, "managed"), record.Managed)
-	if err != nil {
-		return
-	}
-	rpcStruct["missing"], err = serializeBool(fmt.Sprintf("%s.%s", context, "missing"), record.Missing)
-	if err != nil {
-		return
-	}
-	rpcStruct["parent"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "parent"), record.Parent)
-	if err != nil {
-		return
-	}
-	rpcStruct["xenstore_data"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "xenstore_data"), record.XenstoreData)
-	if err != nil {
-		return
-	}
-	rpcStruct["sm_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "sm_config"), record.SmConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["is_a_snapshot"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_a_snapshot"), record.IsASnapshot)
-	if err != nil {
-		return
-	}
-	rpcStruct["snapshot_of"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "snapshot_of"), record.SnapshotOf)
-	if err != nil {
-		return
-	}
-	rpcStruct["snapshots"], err = serializeVDIRefSet(fmt.Sprintf("%s.%s", context, "snapshots"), record.Snapshots)
-	if err != nil {
-		return
-	}
-	rpcStruct["snapshot_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "snapshot_time"), record.SnapshotTime)
-	if err != nil {
-		return
-	}
-	rpcStruct["tags"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "tags"), record.Tags)
-	if err != nil {
-		return
-	}
-	rpcStruct["allow_caching"], err = serializeBool(fmt.Sprintf("%s.%s", context, "allow_caching"), record.AllowCaching)
-	if err != nil {
-		return
-	}
-	rpcStruct["on_boot"], err = serializeEnumOnBoot(fmt.Sprintf("%s.%s", context, "on_boot"), record.OnBoot)
-	if err != nil {
-		return
-	}
-	rpcStruct["metadata_of_pool"], err = serializePoolRef(fmt.Sprintf("%s.%s", context, "metadata_of_pool"), record.MetadataOfPool)
-	if err != nil {
-		return
-	}
-	rpcStruct["metadata_latest"], err = serializeBool(fmt.Sprintf("%s.%s", context, "metadata_latest"), record.MetadataLatest)
-	if err != nil {
-		return
-	}
-	rpcStruct["is_tools_iso"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_tools_iso"), record.IsToolsIso)
-	if err != nil {
-		return
-	}
-	rpcStruct["cbt_enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "cbt_enabled"), record.CbtEnabled)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeVIFRecord(context string, record VIFRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["allowed_operations"], err = serializeEnumVifOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["current_operations"], err = serializeStringToEnumVifOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["device"], err = serializeString(fmt.Sprintf("%s.%s", context, "device"), record.Device)
-	if err != nil {
-		return
-	}
-	rpcStruct["network"], err = serializeNetworkRef(fmt.Sprintf("%s.%s", context, "network"), record.Network)
-	if err != nil {
-		return
-	}
-	rpcStruct["VM"], err = serializeVMRef(fmt.Sprintf("%s.%s", context, "VM"), record.VM)
-	if err != nil {
-		return
-	}
-	rpcStruct["MAC"], err = serializeString(fmt.Sprintf("%s.%s", context, "MAC"), record.MAC)
-	if err != nil {
-		return
-	}
-	rpcStruct["MTU"], err = serializeInt(fmt.Sprintf("%s.%s", context, "MTU"), record.MTU)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["currently_attached"], err = serializeBool(fmt.Sprintf("%s.%s", context, "currently_attached"), record.CurrentlyAttached)
-	if err != nil {
-		return
-	}
-	rpcStruct["status_code"], err = serializeInt(fmt.Sprintf("%s.%s", context, "status_code"), record.StatusCode)
-	if err != nil {
-		return
-	}
-	rpcStruct["status_detail"], err = serializeString(fmt.Sprintf("%s.%s", context, "status_detail"), record.StatusDetail)
-	if err != nil {
-		return
-	}
-	rpcStruct["runtime_properties"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "runtime_properties"), record.RuntimeProperties)
-	if err != nil {
-		return
-	}
-	rpcStruct["qos_algorithm_type"], err = serializeString(fmt.Sprintf("%s.%s", context, "qos_algorithm_type"), record.QosAlgorithmType)
-	if err != nil {
-		return
-	}
-	rpcStruct["qos_algorithm_params"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "qos_algorithm_params"), record.QosAlgorithmParams)
-	if err != nil {
-		return
-	}
-	rpcStruct["qos_supported_algorithms"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "qos_supported_algorithms"), record.QosSupportedAlgorithms)
-	if err != nil {
-		return
-	}
-	rpcStruct["metrics"], err = serializeVIFMetricsRef(fmt.Sprintf("%s.%s", context, "metrics"), record.Metrics)
-	if err != nil {
-		return
-	}
-	rpcStruct["MAC_autogenerated"], err = serializeBool(fmt.Sprintf("%s.%s", context, "MAC_autogenerated"), record.MACAutogenerated)
-	if err != nil {
-		return
-	}
-	rpcStruct["locking_mode"], err = serializeEnumVifLockingMode(fmt.Sprintf("%s.%s", context, "locking_mode"), record.LockingMode)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv4_allowed"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv4_allowed"), record.Ipv4Allowed)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv6_allowed"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv6_allowed"), record.Ipv6Allowed)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv4_configuration_mode"], err = serializeEnumVifIpv4ConfigurationMode(fmt.Sprintf("%s.%s", context, "ipv4_configuration_mode"), record.Ipv4ConfigurationMode)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv4_addresses"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv4_addresses"), record.Ipv4Addresses)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv4_gateway"], err = serializeString(fmt.Sprintf("%s.%s", context, "ipv4_gateway"), record.Ipv4Gateway)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv6_configuration_mode"], err = serializeEnumVifIpv6ConfigurationMode(fmt.Sprintf("%s.%s", context, "ipv6_configuration_mode"), record.Ipv6ConfigurationMode)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv6_addresses"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv6_addresses"), record.Ipv6Addresses)
-	if err != nil {
-		return
-	}
-	rpcStruct["ipv6_gateway"], err = serializeString(fmt.Sprintf("%s.%s", context, "ipv6_gateway"), record.Ipv6Gateway)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeNetworkRecord(context string, record NetworkRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
-	if err != nil {
-		return
-	}
-	rpcStruct["allowed_operations"], err = serializeEnumNetworkOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["current_operations"], err = serializeStringToEnumNetworkOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["VIFs"], err = serializeVIFRefSet(fmt.Sprintf("%s.%s", context, "VIFs"), record.VIFs)
-	if err != nil {
-		return
-	}
-	rpcStruct["PIFs"], err = serializePIFRefSet(fmt.Sprintf("%s.%s", context, "PIFs"), record.PIFs)
-	if err != nil {
-		return
-	}
-	rpcStruct["MTU"], err = serializeInt(fmt.Sprintf("%s.%s", context, "MTU"), record.MTU)
-	if err != nil {
-		return
-	}
-	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["bridge"], err = serializeString(fmt.Sprintf("%s.%s", context, "bridge"), record.Bridge)
-	if err != nil {
-		return
-	}
-	rpcStruct["managed"], err = serializeBool(fmt.Sprintf("%s.%s", context, "managed"), record.Managed)
-	if err != nil {
-		return
-	}
-	rpcStruct["blobs"], err = serializeStringToBlobRefMap(fmt.Sprintf("%s.%s", context, "blobs"), record.Blobs)
-	if err != nil {
-		return
-	}
-	rpcStruct["tags"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "tags"), record.Tags)
-	if err != nil {
-		return
-	}
-	rpcStruct["default_locking_mode"], err = serializeEnumNetworkDefaultLockingMode(fmt.Sprintf("%s.%s", context, "default_locking_mode"), record.DefaultLockingMode)
-	if err != nil {
-		return
-	}
-	rpcStruct["assigned_ips"], err = serializeVIFRefToStringMap(fmt.Sprintf("%s.%s", context, "assigned_ips"), record.AssignedIps)
-	if err != nil {
-		return
-	}
-	rpcStruct["purpose"], err = serializeEnumNetworkPurposeSet(fmt.Sprintf("%s.%s", context, "purpose"), record.Purpose)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeVMApplianceRecord(context string, record VMApplianceRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
-	if err != nil {
-		return
-	}
-	rpcStruct["allowed_operations"], err = serializeEnumVMApplianceOperationSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["current_operations"], err = serializeStringToEnumVMApplianceOperationMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
-	if err != nil {
-		return
-	}
-	rpcStruct["VMs"], err = serializeVMRefSet(fmt.Sprintf("%s.%s", context, "VMs"), record.VMs)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeVMSSRecord(context string, record VMSSRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
-	if err != nil {
-		return
-	}
-	rpcStruct["enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "enabled"), record.Enabled)
-	if err != nil {
-		return
-	}
-	rpcStruct["type"], err = serializeEnumVmssType(fmt.Sprintf("%s.%s", context, "type"), record.Type)
-	if err != nil {
-		return
-	}
-	rpcStruct["retained_snapshots"], err = serializeInt(fmt.Sprintf("%s.%s", context, "retained_snapshots"), record.RetainedSnapshots)
-	if err != nil {
-		return
-	}
-	rpcStruct["frequency"], err = serializeEnumVmssFrequency(fmt.Sprintf("%s.%s", context, "frequency"), record.Frequency)
-	if err != nil {
-		return
-	}
-	rpcStruct["schedule"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "schedule"), record.Schedule)
-	if err != nil {
-		return
-	}
-	rpcStruct["last_run_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "last_run_time"), record.LastRunTime)
-	if err != nil {
-		return
-	}
-	rpcStruct["VMs"], err = serializeVMRefSet(fmt.Sprintf("%s.%s", context, "VMs"), record.VMs)
-	if err != nil {
-		return
-	}
-	return
-}
-
-func serializeVMPPRecord(context string, record VMPPRecord) (rpcStruct map[string]interface{}, err error) {
-	rpcStruct = map[string]interface{}{}
-	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
-	if err != nil {
-		return
-	}
-	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
-	if err != nil {
-		return
-	}
-	rpcStruct["is_policy_enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_policy_enabled"), record.IsPolicyEnabled)
-	if err != nil {
-		return
-	}
-	rpcStruct["backup_type"], err = serializeEnumVmppBackupType(fmt.Sprintf("%s.%s", context, "backup_type"), record.BackupType)
-	if err != nil {
-		return
-	}
-	rpcStruct["backup_retention_value"], err = serializeInt(fmt.Sprintf("%s.%s", context, "backup_retention_value"), record.BackupRetentionValue)
-	if err != nil {
-		return
-	}
-	rpcStruct["backup_frequency"], err = serializeEnumVmppBackupFrequency(fmt.Sprintf("%s.%s", context, "backup_frequency"), record.BackupFrequency)
-	if err != nil {
-		return
-	}
-	rpcStruct["backup_schedule"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "backup_schedule"), record.BackupSchedule)
-	if err != nil {
-		return
-	}
-	rpcStruct["is_backup_running"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_backup_running"), record.IsBackupRunning)
-	if err != nil {
-		return
-	}
-	rpcStruct["backup_last_run_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "backup_last_run_time"), record.BackupLastRunTime)
-	if err != nil {
-		return
-	}
-	rpcStruct["archive_target_type"], err = serializeEnumVmppArchiveTargetType(fmt.Sprintf("%s.%s", context, "archive_target_type"), record.ArchiveTargetType)
-	if err != nil {
-		return
-	}
-	rpcStruct["archive_target_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "archive_target_config"), record.ArchiveTargetConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["archive_frequency"], err = serializeEnumVmppArchiveFrequency(fmt.Sprintf("%s.%s", context, "archive_frequency"), record.ArchiveFrequency)
-	if err != nil {
-		return
-	}
-	rpcStruct["archive_schedule"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "archive_schedule"), record.ArchiveSchedule)
-	if err != nil {
-		return
-	}
-	rpcStruct["is_archive_running"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_archive_running"), record.IsArchiveRunning)
-	if err != nil {
-		return
-	}
-	rpcStruct["archive_last_run_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "archive_last_run_time"), record.ArchiveLastRunTime)
-	if err != nil {
-		return
-	}
-	rpcStruct["VMs"], err = serializeVMRefSet(fmt.Sprintf("%s.%s", context, "VMs"), record.VMs)
-	if err != nil {
-		return
-	}
-	rpcStruct["is_alarm_enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_alarm_enabled"), record.IsAlarmEnabled)
-	if err != nil {
-		return
-	}
-	rpcStruct["alarm_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "alarm_config"), record.AlarmConfig)
-	if err != nil {
-		return
-	}
-	rpcStruct["recent_alerts"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "recent_alerts"), record.RecentAlerts)
-	if err != nil {
-		return
-	}
-	return
+func serializePoolUpdateRef(context string, ref PoolUpdateRef) (string, error) {
+	_ = context
+	return string(ref), nil
 }
 
 func serializeVMRecord(context string, record VMRecord) (rpcStruct map[string]interface{}, err error) {
@@ -3901,13 +485,555 @@ func serializeVMRecord(context string, record VMRecord) (rpcStruct map[string]in
 	return
 }
 
-func serializeSubjectRecord(context string, record SubjectRecord) (rpcStruct map[string]interface{}, err error) {
+func serializeEnumVMOperationsSet(context string, slice []VMOperations) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumVMOperations(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeStringToEnumVMOperationsMap(context string, goMap map[string]VMOperations) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeEnumVMOperations(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumVMPowerState(context string, value VMPowerState) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeConsoleRefSet(context string, slice []ConsoleRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeConsoleRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeVUSBRefSet(context string, slice []VUSBRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVUSBRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeVTPMRefSet(context string, slice []VTPMRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVTPMRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeVGPURefSet(context string, slice []VGPURef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVGPURef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializePCIRefSet(context string, slice []PCIRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializePCIRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeEnumUpdateGuidancesSet(context string, slice []UpdateGuidances) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumUpdateGuidances(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeEnumUpdateGuidances(context string, value UpdateGuidances) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumOnSoftrebootBehavior(context string, value OnSoftrebootBehavior) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumOnNormalExit(context string, value OnNormalExit) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVMOperationsToStringMap(context string, goMap map[VMOperations]string) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeEnumVMOperations(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeString(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeVDIRefToSRRefMap(context string, goMap map[VDIRef]SRRef) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeVDIRef(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeSRRef(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeVIFRefToNetworkRefMap(context string, goMap map[VIFRef]NetworkRef) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeVIFRef(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeNetworkRef(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeVGPURefToGPUGroupRefMap(context string, goMap map[VGPURef]GPUGroupRef) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeVGPURef(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeGPUGroupRef(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumVMOperations(context string, value VMOperations) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumOnCrashBehaviour(context string, value OnCrashBehaviour) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumDomainType(context string, value DomainType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVMMetricsRef(context string, ref VMMetricsRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVMGuestMetricsRef(context string, ref VMGuestMetricsRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVMPPRecord(context string, record VMPPRecord) (rpcStruct map[string]interface{}, err error) {
 	rpcStruct = map[string]interface{}{}
 	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
 	if err != nil {
 		return
 	}
-	rpcStruct["subject_identifier"], err = serializeString(fmt.Sprintf("%s.%s", context, "subject_identifier"), record.SubjectIdentifier)
+	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
+	if err != nil {
+		return
+	}
+	rpcStruct["is_policy_enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_policy_enabled"), record.IsPolicyEnabled)
+	if err != nil {
+		return
+	}
+	rpcStruct["backup_type"], err = serializeEnumVmppBackupType(fmt.Sprintf("%s.%s", context, "backup_type"), record.BackupType)
+	if err != nil {
+		return
+	}
+	rpcStruct["backup_retention_value"], err = serializeInt(fmt.Sprintf("%s.%s", context, "backup_retention_value"), record.BackupRetentionValue)
+	if err != nil {
+		return
+	}
+	rpcStruct["backup_frequency"], err = serializeEnumVmppBackupFrequency(fmt.Sprintf("%s.%s", context, "backup_frequency"), record.BackupFrequency)
+	if err != nil {
+		return
+	}
+	rpcStruct["backup_schedule"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "backup_schedule"), record.BackupSchedule)
+	if err != nil {
+		return
+	}
+	rpcStruct["is_backup_running"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_backup_running"), record.IsBackupRunning)
+	if err != nil {
+		return
+	}
+	rpcStruct["backup_last_run_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "backup_last_run_time"), record.BackupLastRunTime)
+	if err != nil {
+		return
+	}
+	rpcStruct["archive_target_type"], err = serializeEnumVmppArchiveTargetType(fmt.Sprintf("%s.%s", context, "archive_target_type"), record.ArchiveTargetType)
+	if err != nil {
+		return
+	}
+	rpcStruct["archive_target_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "archive_target_config"), record.ArchiveTargetConfig)
+	if err != nil {
+		return
+	}
+	rpcStruct["archive_frequency"], err = serializeEnumVmppArchiveFrequency(fmt.Sprintf("%s.%s", context, "archive_frequency"), record.ArchiveFrequency)
+	if err != nil {
+		return
+	}
+	rpcStruct["archive_schedule"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "archive_schedule"), record.ArchiveSchedule)
+	if err != nil {
+		return
+	}
+	rpcStruct["is_archive_running"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_archive_running"), record.IsArchiveRunning)
+	if err != nil {
+		return
+	}
+	rpcStruct["archive_last_run_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "archive_last_run_time"), record.ArchiveLastRunTime)
+	if err != nil {
+		return
+	}
+	rpcStruct["VMs"], err = serializeVMRefSet(fmt.Sprintf("%s.%s", context, "VMs"), record.VMs)
+	if err != nil {
+		return
+	}
+	rpcStruct["is_alarm_enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_alarm_enabled"), record.IsAlarmEnabled)
+	if err != nil {
+		return
+	}
+	rpcStruct["alarm_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "alarm_config"), record.AlarmConfig)
+	if err != nil {
+		return
+	}
+	rpcStruct["recent_alerts"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "recent_alerts"), record.RecentAlerts)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeEnumVmppBackupType(context string, value VmppBackupType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVmppBackupFrequency(context string, value VmppBackupFrequency) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVmppArchiveFrequency(context string, value VmppArchiveFrequency) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVmppArchiveTargetType(context string, value VmppArchiveTargetType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVMPPRef(context string, ref VMPPRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVMSSRecord(context string, record VMSSRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
+	if err != nil {
+		return
+	}
+	rpcStruct["enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "enabled"), record.Enabled)
+	if err != nil {
+		return
+	}
+	rpcStruct["type"], err = serializeEnumVmssType(fmt.Sprintf("%s.%s", context, "type"), record.Type)
+	if err != nil {
+		return
+	}
+	rpcStruct["retained_snapshots"], err = serializeInt(fmt.Sprintf("%s.%s", context, "retained_snapshots"), record.RetainedSnapshots)
+	if err != nil {
+		return
+	}
+	rpcStruct["frequency"], err = serializeEnumVmssFrequency(fmt.Sprintf("%s.%s", context, "frequency"), record.Frequency)
+	if err != nil {
+		return
+	}
+	rpcStruct["schedule"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "schedule"), record.Schedule)
+	if err != nil {
+		return
+	}
+	rpcStruct["last_run_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "last_run_time"), record.LastRunTime)
+	if err != nil {
+		return
+	}
+	rpcStruct["VMs"], err = serializeVMRefSet(fmt.Sprintf("%s.%s", context, "VMs"), record.VMs)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeEnumVmssFrequency(context string, value VmssFrequency) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVMSSRef(context string, ref VMSSRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumVmssType(context string, value VmssType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVMApplianceRecord(context string, record VMApplianceRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
+	if err != nil {
+		return
+	}
+	rpcStruct["allowed_operations"], err = serializeEnumVMApplianceOperationSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["current_operations"], err = serializeStringToEnumVMApplianceOperationMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["VMs"], err = serializeVMRefSet(fmt.Sprintf("%s.%s", context, "VMs"), record.VMs)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeEnumVMApplianceOperationSet(context string, slice []VMApplianceOperation) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumVMApplianceOperation(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeStringToEnumVMApplianceOperationMap(context string, goMap map[string]VMApplianceOperation) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeEnumVMApplianceOperation(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumVMApplianceOperation(context string, value VMApplianceOperation) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVMRefSet(context string, slice []VMRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVMRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeVMApplianceRef(context string, ref VMApplianceRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeSessionRef(context string, ref SessionRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeDRTaskRef(context string, ref DRTaskRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumHostDisplay(context string, value HostDisplay) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumHostSchedGran(context string, value HostSchedGran) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumHostNumaAffinityPolicy(context string, value HostNumaAffinityPolicy) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeHostCrashdumpRef(context string, ref HostCrashdumpRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeHostPatchRef(context string, ref HostPatchRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeHostMetricsRef(context string, ref HostMetricsRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeHostCPURef(context string, ref HostCPURef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeNetworkRecord(context string, record NetworkRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
+	if err != nil {
+		return
+	}
+	rpcStruct["allowed_operations"], err = serializeEnumNetworkOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["current_operations"], err = serializeStringToEnumNetworkOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["VIFs"], err = serializeVIFRefSet(fmt.Sprintf("%s.%s", context, "VIFs"), record.VIFs)
+	if err != nil {
+		return
+	}
+	rpcStruct["PIFs"], err = serializePIFRefSet(fmt.Sprintf("%s.%s", context, "PIFs"), record.PIFs)
+	if err != nil {
+		return
+	}
+	rpcStruct["MTU"], err = serializeInt(fmt.Sprintf("%s.%s", context, "MTU"), record.MTU)
 	if err != nil {
 		return
 	}
@@ -3915,11 +1041,1254 @@ func serializeSubjectRecord(context string, record SubjectRecord) (rpcStruct map
 	if err != nil {
 		return
 	}
-	rpcStruct["roles"], err = serializeRoleRefSet(fmt.Sprintf("%s.%s", context, "roles"), record.Roles)
+	rpcStruct["bridge"], err = serializeString(fmt.Sprintf("%s.%s", context, "bridge"), record.Bridge)
+	if err != nil {
+		return
+	}
+	rpcStruct["managed"], err = serializeBool(fmt.Sprintf("%s.%s", context, "managed"), record.Managed)
+	if err != nil {
+		return
+	}
+	rpcStruct["blobs"], err = serializeStringToBlobRefMap(fmt.Sprintf("%s.%s", context, "blobs"), record.Blobs)
+	if err != nil {
+		return
+	}
+	rpcStruct["tags"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "tags"), record.Tags)
+	if err != nil {
+		return
+	}
+	rpcStruct["default_locking_mode"], err = serializeEnumNetworkDefaultLockingMode(fmt.Sprintf("%s.%s", context, "default_locking_mode"), record.DefaultLockingMode)
+	if err != nil {
+		return
+	}
+	rpcStruct["assigned_ips"], err = serializeVIFRefToStringMap(fmt.Sprintf("%s.%s", context, "assigned_ips"), record.AssignedIps)
+	if err != nil {
+		return
+	}
+	rpcStruct["purpose"], err = serializeEnumNetworkPurposeSet(fmt.Sprintf("%s.%s", context, "purpose"), record.Purpose)
 	if err != nil {
 		return
 	}
 	return
+}
+
+func serializeEnumNetworkOperationsSet(context string, slice []NetworkOperations) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumNetworkOperations(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeStringToEnumNetworkOperationsMap(context string, goMap map[string]NetworkOperations) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeEnumNetworkOperations(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumNetworkOperations(context string, value NetworkOperations) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVIFRefSet(context string, slice []VIFRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVIFRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeStringToBlobRefMap(context string, goMap map[string]BlobRef) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeBlobRef(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeVIFRefToStringMap(context string, goMap map[VIFRef]string) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeVIFRef(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeString(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumNetworkPurposeSet(context string, slice []NetworkPurpose) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumNetworkPurpose(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeEnumNetworkDefaultLockingMode(context string, value NetworkDefaultLockingMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumNetworkPurpose(context string, value NetworkPurpose) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVIFRecord(context string, record VIFRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["allowed_operations"], err = serializeEnumVifOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["current_operations"], err = serializeStringToEnumVifOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["device"], err = serializeString(fmt.Sprintf("%s.%s", context, "device"), record.Device)
+	if err != nil {
+		return
+	}
+	rpcStruct["network"], err = serializeNetworkRef(fmt.Sprintf("%s.%s", context, "network"), record.Network)
+	if err != nil {
+		return
+	}
+	rpcStruct["VM"], err = serializeVMRef(fmt.Sprintf("%s.%s", context, "VM"), record.VM)
+	if err != nil {
+		return
+	}
+	rpcStruct["MAC"], err = serializeString(fmt.Sprintf("%s.%s", context, "MAC"), record.MAC)
+	if err != nil {
+		return
+	}
+	rpcStruct["MTU"], err = serializeInt(fmt.Sprintf("%s.%s", context, "MTU"), record.MTU)
+	if err != nil {
+		return
+	}
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
+	if err != nil {
+		return
+	}
+	rpcStruct["currently_attached"], err = serializeBool(fmt.Sprintf("%s.%s", context, "currently_attached"), record.CurrentlyAttached)
+	if err != nil {
+		return
+	}
+	rpcStruct["status_code"], err = serializeInt(fmt.Sprintf("%s.%s", context, "status_code"), record.StatusCode)
+	if err != nil {
+		return
+	}
+	rpcStruct["status_detail"], err = serializeString(fmt.Sprintf("%s.%s", context, "status_detail"), record.StatusDetail)
+	if err != nil {
+		return
+	}
+	rpcStruct["runtime_properties"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "runtime_properties"), record.RuntimeProperties)
+	if err != nil {
+		return
+	}
+	rpcStruct["qos_algorithm_type"], err = serializeString(fmt.Sprintf("%s.%s", context, "qos_algorithm_type"), record.QosAlgorithmType)
+	if err != nil {
+		return
+	}
+	rpcStruct["qos_algorithm_params"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "qos_algorithm_params"), record.QosAlgorithmParams)
+	if err != nil {
+		return
+	}
+	rpcStruct["qos_supported_algorithms"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "qos_supported_algorithms"), record.QosSupportedAlgorithms)
+	if err != nil {
+		return
+	}
+	rpcStruct["metrics"], err = serializeVIFMetricsRef(fmt.Sprintf("%s.%s", context, "metrics"), record.Metrics)
+	if err != nil {
+		return
+	}
+	rpcStruct["MAC_autogenerated"], err = serializeBool(fmt.Sprintf("%s.%s", context, "MAC_autogenerated"), record.MACAutogenerated)
+	if err != nil {
+		return
+	}
+	rpcStruct["locking_mode"], err = serializeEnumVifLockingMode(fmt.Sprintf("%s.%s", context, "locking_mode"), record.LockingMode)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv4_allowed"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv4_allowed"), record.Ipv4Allowed)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv6_allowed"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv6_allowed"), record.Ipv6Allowed)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv4_configuration_mode"], err = serializeEnumVifIpv4ConfigurationMode(fmt.Sprintf("%s.%s", context, "ipv4_configuration_mode"), record.Ipv4ConfigurationMode)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv4_addresses"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv4_addresses"), record.Ipv4Addresses)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv4_gateway"], err = serializeString(fmt.Sprintf("%s.%s", context, "ipv4_gateway"), record.Ipv4Gateway)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv6_configuration_mode"], err = serializeEnumVifIpv6ConfigurationMode(fmt.Sprintf("%s.%s", context, "ipv6_configuration_mode"), record.Ipv6ConfigurationMode)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv6_addresses"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "ipv6_addresses"), record.Ipv6Addresses)
+	if err != nil {
+		return
+	}
+	rpcStruct["ipv6_gateway"], err = serializeString(fmt.Sprintf("%s.%s", context, "ipv6_gateway"), record.Ipv6Gateway)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeEnumVifOperationsSet(context string, slice []VifOperations) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumVifOperations(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeStringToEnumVifOperationsMap(context string, goMap map[string]VifOperations) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeEnumVifOperations(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumVifOperations(context string, value VifOperations) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVifLockingMode(context string, value VifLockingMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVifIpv4ConfigurationMode(context string, value VifIpv4ConfigurationMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVifIpv6ConfigurationMode(context string, value VifIpv6ConfigurationMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVIFMetricsRef(context string, ref VIFMetricsRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumIPConfigurationMode(context string, value IPConfigurationMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumIpv6ConfigurationMode(context string, value Ipv6ConfigurationMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumPrimaryAddressType(context string, value PrimaryAddressType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializePIFMetricsRef(context string, ref PIFMetricsRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePIFRefSet(context string, slice []PIFRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializePIFRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeEnumBondMode(context string, value BondMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeBondRef(context string, ref BondRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVLANRef(context string, ref VLANRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeSMRef(context string, ref SMRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeLVHDRef(context string, ref LVHDRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVDIRecord(context string, record VDIRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
+	if err != nil {
+		return
+	}
+	rpcStruct["allowed_operations"], err = serializeEnumVdiOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["current_operations"], err = serializeStringToEnumVdiOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["SR"], err = serializeSRRef(fmt.Sprintf("%s.%s", context, "SR"), record.SR)
+	if err != nil {
+		return
+	}
+	rpcStruct["VBDs"], err = serializeVBDRefSet(fmt.Sprintf("%s.%s", context, "VBDs"), record.VBDs)
+	if err != nil {
+		return
+	}
+	rpcStruct["crash_dumps"], err = serializeCrashdumpRefSet(fmt.Sprintf("%s.%s", context, "crash_dumps"), record.CrashDumps)
+	if err != nil {
+		return
+	}
+	rpcStruct["virtual_size"], err = serializeInt(fmt.Sprintf("%s.%s", context, "virtual_size"), record.VirtualSize)
+	if err != nil {
+		return
+	}
+	rpcStruct["physical_utilisation"], err = serializeInt(fmt.Sprintf("%s.%s", context, "physical_utilisation"), record.PhysicalUtilisation)
+	if err != nil {
+		return
+	}
+	rpcStruct["type"], err = serializeEnumVdiType(fmt.Sprintf("%s.%s", context, "type"), record.Type)
+	if err != nil {
+		return
+	}
+	rpcStruct["sharable"], err = serializeBool(fmt.Sprintf("%s.%s", context, "sharable"), record.Sharable)
+	if err != nil {
+		return
+	}
+	rpcStruct["read_only"], err = serializeBool(fmt.Sprintf("%s.%s", context, "read_only"), record.ReadOnly)
+	if err != nil {
+		return
+	}
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
+	if err != nil {
+		return
+	}
+	rpcStruct["storage_lock"], err = serializeBool(fmt.Sprintf("%s.%s", context, "storage_lock"), record.StorageLock)
+	if err != nil {
+		return
+	}
+	rpcStruct["location"], err = serializeString(fmt.Sprintf("%s.%s", context, "location"), record.Location)
+	if err != nil {
+		return
+	}
+	rpcStruct["managed"], err = serializeBool(fmt.Sprintf("%s.%s", context, "managed"), record.Managed)
+	if err != nil {
+		return
+	}
+	rpcStruct["missing"], err = serializeBool(fmt.Sprintf("%s.%s", context, "missing"), record.Missing)
+	if err != nil {
+		return
+	}
+	rpcStruct["parent"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "parent"), record.Parent)
+	if err != nil {
+		return
+	}
+	rpcStruct["xenstore_data"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "xenstore_data"), record.XenstoreData)
+	if err != nil {
+		return
+	}
+	rpcStruct["sm_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "sm_config"), record.SmConfig)
+	if err != nil {
+		return
+	}
+	rpcStruct["is_a_snapshot"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_a_snapshot"), record.IsASnapshot)
+	if err != nil {
+		return
+	}
+	rpcStruct["snapshot_of"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "snapshot_of"), record.SnapshotOf)
+	if err != nil {
+		return
+	}
+	rpcStruct["snapshots"], err = serializeVDIRefSet(fmt.Sprintf("%s.%s", context, "snapshots"), record.Snapshots)
+	if err != nil {
+		return
+	}
+	rpcStruct["snapshot_time"], err = serializeTime(fmt.Sprintf("%s.%s", context, "snapshot_time"), record.SnapshotTime)
+	if err != nil {
+		return
+	}
+	rpcStruct["tags"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "tags"), record.Tags)
+	if err != nil {
+		return
+	}
+	rpcStruct["allow_caching"], err = serializeBool(fmt.Sprintf("%s.%s", context, "allow_caching"), record.AllowCaching)
+	if err != nil {
+		return
+	}
+	rpcStruct["on_boot"], err = serializeEnumOnBoot(fmt.Sprintf("%s.%s", context, "on_boot"), record.OnBoot)
+	if err != nil {
+		return
+	}
+	rpcStruct["metadata_of_pool"], err = serializePoolRef(fmt.Sprintf("%s.%s", context, "metadata_of_pool"), record.MetadataOfPool)
+	if err != nil {
+		return
+	}
+	rpcStruct["metadata_latest"], err = serializeBool(fmt.Sprintf("%s.%s", context, "metadata_latest"), record.MetadataLatest)
+	if err != nil {
+		return
+	}
+	rpcStruct["is_tools_iso"], err = serializeBool(fmt.Sprintf("%s.%s", context, "is_tools_iso"), record.IsToolsIso)
+	if err != nil {
+		return
+	}
+	rpcStruct["cbt_enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "cbt_enabled"), record.CbtEnabled)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeEnumVdiOperationsSet(context string, slice []VdiOperations) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumVdiOperations(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeStringToEnumVdiOperationsMap(context string, goMap map[string]VdiOperations) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeEnumVdiOperations(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumVdiOperations(context string, value VdiOperations) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVBDRefSet(context string, slice []VBDRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVBDRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeCrashdumpRefSet(context string, slice []CrashdumpRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeCrashdumpRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeVDIRefSet(context string, slice []VDIRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVDIRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeEnumVdiType(context string, value VdiType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializePoolRef(context string, ref PoolRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumOnBoot(context string, value OnBoot) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVBDRecord(context string, record VBDRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["allowed_operations"], err = serializeEnumVbdOperationsSet(fmt.Sprintf("%s.%s", context, "allowed_operations"), record.AllowedOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["current_operations"], err = serializeStringToEnumVbdOperationsMap(fmt.Sprintf("%s.%s", context, "current_operations"), record.CurrentOperations)
+	if err != nil {
+		return
+	}
+	rpcStruct["VM"], err = serializeVMRef(fmt.Sprintf("%s.%s", context, "VM"), record.VM)
+	if err != nil {
+		return
+	}
+	rpcStruct["VDI"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "VDI"), record.VDI)
+	if err != nil {
+		return
+	}
+	rpcStruct["device"], err = serializeString(fmt.Sprintf("%s.%s", context, "device"), record.Device)
+	if err != nil {
+		return
+	}
+	rpcStruct["userdevice"], err = serializeString(fmt.Sprintf("%s.%s", context, "userdevice"), record.Userdevice)
+	if err != nil {
+		return
+	}
+	rpcStruct["bootable"], err = serializeBool(fmt.Sprintf("%s.%s", context, "bootable"), record.Bootable)
+	if err != nil {
+		return
+	}
+	rpcStruct["mode"], err = serializeEnumVbdMode(fmt.Sprintf("%s.%s", context, "mode"), record.Mode)
+	if err != nil {
+		return
+	}
+	rpcStruct["type"], err = serializeEnumVbdType(fmt.Sprintf("%s.%s", context, "type"), record.Type)
+	if err != nil {
+		return
+	}
+	rpcStruct["unpluggable"], err = serializeBool(fmt.Sprintf("%s.%s", context, "unpluggable"), record.Unpluggable)
+	if err != nil {
+		return
+	}
+	rpcStruct["storage_lock"], err = serializeBool(fmt.Sprintf("%s.%s", context, "storage_lock"), record.StorageLock)
+	if err != nil {
+		return
+	}
+	rpcStruct["empty"], err = serializeBool(fmt.Sprintf("%s.%s", context, "empty"), record.Empty)
+	if err != nil {
+		return
+	}
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
+	if err != nil {
+		return
+	}
+	rpcStruct["currently_attached"], err = serializeBool(fmt.Sprintf("%s.%s", context, "currently_attached"), record.CurrentlyAttached)
+	if err != nil {
+		return
+	}
+	rpcStruct["status_code"], err = serializeInt(fmt.Sprintf("%s.%s", context, "status_code"), record.StatusCode)
+	if err != nil {
+		return
+	}
+	rpcStruct["status_detail"], err = serializeString(fmt.Sprintf("%s.%s", context, "status_detail"), record.StatusDetail)
+	if err != nil {
+		return
+	}
+	rpcStruct["runtime_properties"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "runtime_properties"), record.RuntimeProperties)
+	if err != nil {
+		return
+	}
+	rpcStruct["qos_algorithm_type"], err = serializeString(fmt.Sprintf("%s.%s", context, "qos_algorithm_type"), record.QosAlgorithmType)
+	if err != nil {
+		return
+	}
+	rpcStruct["qos_algorithm_params"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "qos_algorithm_params"), record.QosAlgorithmParams)
+	if err != nil {
+		return
+	}
+	rpcStruct["qos_supported_algorithms"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "qos_supported_algorithms"), record.QosSupportedAlgorithms)
+	if err != nil {
+		return
+	}
+	rpcStruct["metrics"], err = serializeVBDMetricsRef(fmt.Sprintf("%s.%s", context, "metrics"), record.Metrics)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeEnumVbdOperationsSet(context string, slice []VbdOperations) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeEnumVbdOperations(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeStringToEnumVbdOperationsMap(context string, goMap map[string]VbdOperations) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeEnumVbdOperations(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeEnumVbdOperations(context string, value VbdOperations) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeEnumVbdType(context string, value VbdType) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVBDRef(context string, ref VBDRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumVbdMode(context string, value VbdMode) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeVBDMetricsRef(context string, ref VBDMetricsRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePBDRecord(context string, record PBDRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["host"], err = serializeHostRef(fmt.Sprintf("%s.%s", context, "host"), record.Host)
+	if err != nil {
+		return
+	}
+	rpcStruct["SR"], err = serializeSRRef(fmt.Sprintf("%s.%s", context, "SR"), record.SR)
+	if err != nil {
+		return
+	}
+	rpcStruct["device_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "device_config"), record.DeviceConfig)
+	if err != nil {
+		return
+	}
+	rpcStruct["currently_attached"], err = serializeBool(fmt.Sprintf("%s.%s", context, "currently_attached"), record.CurrentlyAttached)
+	if err != nil {
+		return
+	}
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializePBDRef(context string, ref PBDRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeCrashdumpRef(context string, ref CrashdumpRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVTPMRef(context string, ref VTPMRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeConsoleRecord(context string, record ConsoleRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["protocol"], err = serializeEnumConsoleProtocol(fmt.Sprintf("%s.%s", context, "protocol"), record.Protocol)
+	if err != nil {
+		return
+	}
+	rpcStruct["location"], err = serializeString(fmt.Sprintf("%s.%s", context, "location"), record.Location)
+	if err != nil {
+		return
+	}
+	rpcStruct["VM"], err = serializeVMRef(fmt.Sprintf("%s.%s", context, "VM"), record.VM)
+	if err != nil {
+		return
+	}
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeEnumConsoleProtocol(context string, value ConsoleProtocol) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeConsoleRef(context string, ref ConsoleRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeUserRecord(context string, record UserRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["short_name"], err = serializeString(fmt.Sprintf("%s.%s", context, "short_name"), record.ShortName)
+	if err != nil {
+		return
+	}
+	rpcStruct["fullname"], err = serializeString(fmt.Sprintf("%s.%s", context, "fullname"), record.Fullname)
+	if err != nil {
+		return
+	}
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeUserRef(context string, ref UserRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeBlobRef(context string, ref BlobRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeMessageRefSet(context string, slice []MessageRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeMessageRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeEnumCls(context string, value Cls) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+var timeFormats = []string{time.RFC3339, "20060102T15:04:05Z", "20060102T15:04:05"}
+
+//nolint:unparam
+func serializeTime(context string, value time.Time) (string, error) {
+	_ = context
+	return value.Format(time.RFC3339), nil
+}
+
+func serializeMessageRef(context string, ref MessageRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeSecretRecord(context string, record SecretRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["value"], err = serializeString(fmt.Sprintf("%s.%s", context, "value"), record.Value)
+	if err != nil {
+		return
+	}
+	rpcStruct["other_config"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "other_config"), record.OtherConfig)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeSecretRef(context string, ref SecretRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumTunnelProtocol(context string, value TunnelProtocol) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeTunnelRef(context string, ref TunnelRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeNetworkSriovRef(context string, ref NetworkSriovRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePCIRef(context string, ref PCIRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVGPUTypeRefSet(context string, slice []VGPUTypeRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeVGPUTypeRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializePGPURef(context string, ref PGPURef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumAllocationAlgorithm(context string, value AllocationAlgorithm) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeGPUGroupRef(context string, ref GPUGroupRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVGPURef(context string, ref VGPURef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVGPUTypeRef(context string, ref VGPUTypeRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePVSServerRef(context string, ref PVSServerRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVIFRef(context string, ref VIFRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePVSProxyRef(context string, ref PVSProxyRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePVSCacheStorageRecord(context string, record PVSCacheStorageRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["host"], err = serializeHostRef(fmt.Sprintf("%s.%s", context, "host"), record.Host)
+	if err != nil {
+		return
+	}
+	rpcStruct["SR"], err = serializeSRRef(fmt.Sprintf("%s.%s", context, "SR"), record.SR)
+	if err != nil {
+		return
+	}
+	rpcStruct["site"], err = serializePVSSiteRef(fmt.Sprintf("%s.%s", context, "site"), record.Site)
+	if err != nil {
+		return
+	}
+	rpcStruct["size"], err = serializeInt(fmt.Sprintf("%s.%s", context, "size"), record.Size)
+	if err != nil {
+		return
+	}
+	rpcStruct["VDI"], err = serializeVDIRef(fmt.Sprintf("%s.%s", context, "VDI"), record.VDI)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeSRRef(context string, ref SRRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePVSSiteRef(context string, ref PVSSiteRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVDIRef(context string, ref VDIRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePVSCacheStorageRef(context string, ref PVSCacheStorageRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeFeatureRef(context string, ref FeatureRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeEnumSdnControllerProtocol(context string, value SdnControllerProtocol) (string, error) {
+	_ = context
+	return string(value), nil
+}
+
+func serializeInt(context string, value int) (int, error) {
+	_ = context
+	return value, nil
+}
+
+func serializeSDNControllerRef(context string, ref SDNControllerRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePUSBRef(context string, ref PUSBRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVMRef(context string, ref VMRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeUSBGroupRef(context string, ref USBGroupRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeVUSBRef(context string, ref VUSBRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeNetworkRef(context string, ref NetworkRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+//nolint:unparam
+func serializeFloat(context string, value float64) (interface{}, error) {
+	_ = context
+	if math.IsInf(value, 0) {
+		if math.IsInf(value, 1) {
+			return "+Inf", nil
+		}
+		return "-Inf", nil
+	} else if math.IsNaN(value) {
+		return "NaN", nil
+	}
+	return value, nil
+}
+
+func serializeClusterRef(context string, ref ClusterRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializePIFRef(context string, ref PIFRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeClusterHostRef(context string, ref ClusterHostRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeCertificateRef(context string, ref CertificateRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeRepositoryRef(context string, ref RepositoryRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeObserverRecord(context string, record ObserverRecord) (rpcStruct map[string]interface{}, err error) {
+	rpcStruct = map[string]interface{}{}
+	rpcStruct["uuid"], err = serializeString(fmt.Sprintf("%s.%s", context, "uuid"), record.UUID)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_label"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_label"), record.NameLabel)
+	if err != nil {
+		return
+	}
+	rpcStruct["name_description"], err = serializeString(fmt.Sprintf("%s.%s", context, "name_description"), record.NameDescription)
+	if err != nil {
+		return
+	}
+	rpcStruct["hosts"], err = serializeHostRefSet(fmt.Sprintf("%s.%s", context, "hosts"), record.Hosts)
+	if err != nil {
+		return
+	}
+	rpcStruct["attributes"], err = serializeStringToStringMap(fmt.Sprintf("%s.%s", context, "attributes"), record.Attributes)
+	if err != nil {
+		return
+	}
+	rpcStruct["endpoints"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "endpoints"), record.Endpoints)
+	if err != nil {
+		return
+	}
+	rpcStruct["components"], err = serializeStringSet(fmt.Sprintf("%s.%s", context, "components"), record.Components)
+	if err != nil {
+		return
+	}
+	rpcStruct["enabled"], err = serializeBool(fmt.Sprintf("%s.%s", context, "enabled"), record.Enabled)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func serializeHostRefSet(context string, slice []HostRef) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeHostRef(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeHostRef(context string, ref HostRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeBool(context string, value bool) (bool, error) {
+	_ = context
+	return value, nil
+}
+
+func serializeStringToStringMap(context string, goMap map[string]string) (xenMap map[string]interface{}, err error) {
+	xenMap = make(map[string]interface{})
+	for goKey, goValue := range goMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
+		xenKey, err := serializeString(keyContext, goKey)
+		if err != nil {
+			return xenMap, err
+		}
+		xenValue, err := serializeString(keyContext, goValue)
+		if err != nil {
+			return xenMap, err
+		}
+		xenMap[xenKey] = xenValue
+	}
+	return
+}
+
+func serializeObserverRef(context string, ref ObserverRef) (string, error) {
+	_ = context
+	return string(ref), nil
+}
+
+func serializeStringSet(context string, slice []string) (set []interface{}, err error) {
+	set = make([]interface{}, len(slice))
+	for index, item := range slice {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := serializeString(itemContext, item)
+		if err != nil {
+			return set, err
+		}
+		set[index] = itemValue
+	}
+	return
+}
+
+func serializeString(context string, value string) (string, error) {
+	_ = context
+	return value, nil
+}
+
+func deserializeObserverRefToObserverRecordMap(context string, input interface{}) (goMap map[ObserverRef]ObserverRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[ObserverRef]ObserverRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeObserverRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeObserverRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeObserverRefSet(context string, input interface{}) (slice []ObserverRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]ObserverRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeObserverRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeObserverRef(context string, input interface{}) (ObserverRef, error) {
+	var ref ObserverRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return ObserverRef(value), nil
 }
 
 func deserializeObserverRecord(context string, input interface{}) (record ObserverRecord, err error) {
@@ -3983,6 +2352,28 @@ func deserializeObserverRecord(context string, input interface{}) (record Observ
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeRepositoryRefToRepositoryRecordMap(context string, input interface{}) (goMap map[RepositoryRef]RepositoryRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[RepositoryRef]RepositoryRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeRepositoryRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeRepositoryRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -4059,6 +2450,28 @@ func deserializeRepositoryRecord(context string, input interface{}) (record Repo
 	return
 }
 
+func deserializeCertificateRefToCertificateRecordMap(context string, input interface{}) (goMap map[CertificateRef]CertificateRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[CertificateRef]CertificateRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeCertificateRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeCertificateRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeCertificateRecord(context string, input interface{}) (record CertificateRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -4113,6 +2526,46 @@ func deserializeCertificateRecord(context string, input interface{}) (record Cer
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumCertificateType(context string, input interface{}) (value CertificateType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "ca":
+		value = CertificateTypeCa
+	case "host":
+		value = CertificateTypeHost
+	case "host_internal":
+		value = CertificateTypeHostInternal
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "CertificateType", context)
+	}
+	return
+}
+
+func deserializeClusterHostRefToClusterHostRecordMap(context string, input interface{}) (goMap map[ClusterHostRef]ClusterHostRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[ClusterHostRef]ClusterHostRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeClusterHostRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeClusterHostRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -4201,6 +2654,113 @@ func deserializeClusterHostRecord(context string, input interface{}) (record Clu
 		}
 	}
 	return
+}
+
+func deserializeEnumClusterHostOperationSet(context string, input interface{}) (slice []ClusterHostOperation, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]ClusterHostOperation, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumClusterHostOperation(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumClusterHostOperationMap(context string, input interface{}) (goMap map[string]ClusterHostOperation, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]ClusterHostOperation, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumClusterHostOperation(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumClusterHostOperation(context string, input interface{}) (value ClusterHostOperation, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "enable":
+		value = ClusterHostOperationEnable
+	case "disable":
+		value = ClusterHostOperationDisable
+	case "destroy":
+		value = ClusterHostOperationDestroy
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "ClusterHostOperation", context)
+	}
+	return
+}
+
+func deserializeClusterRefToClusterRecordMap(context string, input interface{}) (goMap map[ClusterRef]ClusterRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[ClusterRef]ClusterRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeClusterRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeClusterRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeClusterRefSet(context string, input interface{}) (slice []ClusterRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]ClusterRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeClusterRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeClusterRef(context string, input interface{}) (ClusterRef, error) {
+	var ref ClusterRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return ClusterRef(value), nil
 }
 
 func deserializeClusterRecord(context string, input interface{}) (record ClusterRecord, err error) {
@@ -4317,6 +2877,117 @@ func deserializeClusterRecord(context string, input interface{}) (record Cluster
 	return
 }
 
+func deserializeClusterHostRefSet(context string, input interface{}) (slice []ClusterHostRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]ClusterHostRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeClusterHostRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeClusterHostRef(context string, input interface{}) (ClusterHostRef, error) {
+	var ref ClusterHostRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return ClusterHostRef(value), nil
+}
+
+func deserializeEnumClusterOperationSet(context string, input interface{}) (slice []ClusterOperation, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]ClusterOperation, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumClusterOperation(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumClusterOperationMap(context string, input interface{}) (goMap map[string]ClusterOperation, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]ClusterOperation, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumClusterOperation(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumClusterOperation(context string, input interface{}) (value ClusterOperation, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "add":
+		value = ClusterOperationAdd
+	case "remove":
+		value = ClusterOperationRemove
+	case "enable":
+		value = ClusterOperationEnable
+	case "disable":
+		value = ClusterOperationDisable
+	case "destroy":
+		value = ClusterOperationDestroy
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "ClusterOperation", context)
+	}
+	return
+}
+
+func deserializeVUSBRefToVUSBRecordMap(context string, input interface{}) (goMap map[VUSBRef]VUSBRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VUSBRef]VUSBRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVUSBRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVUSBRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeVUSBRecord(context string, input interface{}) (record VUSBRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -4375,6 +3046,104 @@ func deserializeVUSBRecord(context string, input interface{}) (record VUSBRecord
 	return
 }
 
+func deserializeEnumVusbOperationsSet(context string, input interface{}) (slice []VusbOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VusbOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumVusbOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumVusbOperationsMap(context string, input interface{}) (goMap map[string]VusbOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]VusbOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumVusbOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVusbOperations(context string, input interface{}) (value VusbOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "attach":
+		value = VusbOperationsAttach
+	case "plug":
+		value = VusbOperationsPlug
+	case "unplug":
+		value = VusbOperationsUnplug
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VusbOperations", context)
+	}
+	return
+}
+
+func deserializeUSBGroupRefToUSBGroupRecordMap(context string, input interface{}) (goMap map[USBGroupRef]USBGroupRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[USBGroupRef]USBGroupRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeUSBGroupRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeUSBGroupRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeUSBGroupRefSet(context string, input interface{}) (slice []USBGroupRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]USBGroupRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeUSBGroupRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeUSBGroupRecord(context string, input interface{}) (record USBGroupRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -4422,6 +3191,28 @@ func deserializeUSBGroupRecord(context string, input interface{}) (record USBGro
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializePUSBRefToPUSBRecordMap(context string, input interface{}) (goMap map[PUSBRef]PUSBRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PUSBRef]PUSBRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePUSBRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePUSBRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -4533,48 +3324,62 @@ func deserializePUSBRecord(context string, input interface{}) (record PUSBRecord
 	return
 }
 
-func deserializeVdiNbdServerInfoRecord(context string, input interface{}) (record VdiNbdServerInfoRecord, err error) {
-	rpcStruct, ok := input.(map[string]interface{})
+func deserializeUSBGroupRef(context string, input interface{}) (USBGroupRef, error) {
+	var ref USBGroupRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return USBGroupRef(value), nil
+}
+
+func deserializeSDNControllerRefToSDNControllerRecordMap(context string, input interface{}) (goMap map[SDNControllerRef]SDNControllerRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
 	if !ok {
 		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
 		return
 	}
-	exportnameValue, ok := rpcStruct["exportname"]
-	if ok && exportnameValue != nil {
-		record.Exportname, err = deserializeString(fmt.Sprintf("%s.%s", context, "exportname"), exportnameValue)
+	goMap = make(map[SDNControllerRef]SDNControllerRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeSDNControllerRef(keyContext, xenKey)
 		if err != nil {
-			return
+			return goMap, err
 		}
-	}
-	addressValue, ok := rpcStruct["address"]
-	if ok && addressValue != nil {
-		record.Address, err = deserializeString(fmt.Sprintf("%s.%s", context, "address"), addressValue)
+		goValue, err := deserializeSDNControllerRecord(keyContext, xenValue)
 		if err != nil {
-			return
+			return goMap, err
 		}
-	}
-	portValue, ok := rpcStruct["port"]
-	if ok && portValue != nil {
-		record.Port, err = deserializeInt(fmt.Sprintf("%s.%s", context, "port"), portValue)
-		if err != nil {
-			return
-		}
-	}
-	certValue, ok := rpcStruct["cert"]
-	if ok && certValue != nil {
-		record.Cert, err = deserializeString(fmt.Sprintf("%s.%s", context, "cert"), certValue)
-		if err != nil {
-			return
-		}
-	}
-	subjectValue, ok := rpcStruct["subject"]
-	if ok && subjectValue != nil {
-		record.Subject, err = deserializeString(fmt.Sprintf("%s.%s", context, "subject"), subjectValue)
-		if err != nil {
-			return
-		}
+		goMap[goKey] = goValue
 	}
 	return
+}
+
+func deserializeSDNControllerRefSet(context string, input interface{}) (slice []SDNControllerRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]SDNControllerRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeSDNControllerRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeSDNControllerRef(context string, input interface{}) (SDNControllerRef, error) {
+	var ref SDNControllerRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return SDNControllerRef(value), nil
 }
 
 func deserializeSDNControllerRecord(context string, input interface{}) (record SDNControllerRecord, err error) {
@@ -4610,6 +3415,44 @@ func deserializeSDNControllerRecord(context string, input interface{}) (record S
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumSdnControllerProtocol(context string, input interface{}) (value SdnControllerProtocol, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "ssl":
+		value = SdnControllerProtocolSsl
+	case "pssl":
+		value = SdnControllerProtocolPssl
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "SdnControllerProtocol", context)
+	}
+	return
+}
+
+func deserializeFeatureRefToFeatureRecordMap(context string, input interface{}) (goMap map[FeatureRef]FeatureRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[FeatureRef]FeatureRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeFeatureRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeFeatureRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -4672,6 +3515,28 @@ func deserializeFeatureRecord(context string, input interface{}) (record Feature
 	return
 }
 
+func deserializePVSCacheStorageRefToPVSCacheStorageRecordMap(context string, input interface{}) (goMap map[PVSCacheStorageRef]PVSCacheStorageRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PVSCacheStorageRef]PVSCacheStorageRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePVSCacheStorageRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePVSCacheStorageRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializePVSCacheStorageRecord(context string, input interface{}) (record PVSCacheStorageRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -4723,6 +3588,28 @@ func deserializePVSCacheStorageRecord(context string, input interface{}) (record
 	return
 }
 
+func deserializePVSProxyRefToPVSProxyRecordMap(context string, input interface{}) (goMap map[PVSProxyRef]PVSProxyRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PVSProxyRef]PVSProxyRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePVSProxyRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePVSProxyRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializePVSProxyRecord(context string, input interface{}) (record PVSProxyRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -4763,6 +3650,50 @@ func deserializePVSProxyRecord(context string, input interface{}) (record PVSPro
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumPvsProxyStatus(context string, input interface{}) (value PvsProxyStatus, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "stopped":
+		value = PvsProxyStatusStopped
+	case "initialised":
+		value = PvsProxyStatusInitialised
+	case "caching":
+		value = PvsProxyStatusCaching
+	case "incompatible_write_cache_mode":
+		value = PvsProxyStatusIncompatibleWriteCacheMode
+	case "incompatible_protocol_version":
+		value = PvsProxyStatusIncompatibleProtocolVersion
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PvsProxyStatus", context)
+	}
+	return
+}
+
+func deserializePVSServerRefToPVSServerRecordMap(context string, input interface{}) (goMap map[PVSServerRef]PVSServerRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PVSServerRef]PVSServerRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePVSServerRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePVSServerRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -4809,6 +3740,55 @@ func deserializePVSServerRecord(context string, input interface{}) (record PVSSe
 		}
 	}
 	return
+}
+
+func deserializePVSSiteRefToPVSSiteRecordMap(context string, input interface{}) (goMap map[PVSSiteRef]PVSSiteRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PVSSiteRef]PVSSiteRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePVSSiteRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePVSSiteRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializePVSSiteRefSet(context string, input interface{}) (slice []PVSSiteRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PVSSiteRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePVSSiteRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePVSSiteRef(context string, input interface{}) (PVSSiteRef, error) {
+	var ref PVSSiteRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PVSSiteRef(value), nil
 }
 
 func deserializePVSSiteRecord(context string, input interface{}) (record PVSSiteRecord, err error) {
@@ -4865,6 +3845,109 @@ func deserializePVSSiteRecord(context string, input interface{}) (record PVSSite
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializePVSCacheStorageRefSet(context string, input interface{}) (slice []PVSCacheStorageRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PVSCacheStorageRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePVSCacheStorageRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePVSCacheStorageRef(context string, input interface{}) (PVSCacheStorageRef, error) {
+	var ref PVSCacheStorageRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PVSCacheStorageRef(value), nil
+}
+
+func deserializePVSServerRefSet(context string, input interface{}) (slice []PVSServerRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PVSServerRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePVSServerRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePVSServerRef(context string, input interface{}) (PVSServerRef, error) {
+	var ref PVSServerRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PVSServerRef(value), nil
+}
+
+func deserializePVSProxyRefSet(context string, input interface{}) (slice []PVSProxyRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PVSProxyRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePVSProxyRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePVSProxyRef(context string, input interface{}) (PVSProxyRef, error) {
+	var ref PVSProxyRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PVSProxyRef(value), nil
+}
+
+func deserializeVGPUTypeRefToVGPUTypeRecordMap(context string, input interface{}) (goMap map[VGPUTypeRef]VGPUTypeRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VGPUTypeRef]VGPUTypeRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVGPUTypeRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVGPUTypeRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -4990,6 +4073,50 @@ func deserializeVGPUTypeRecord(context string, input interface{}) (record VGPUTy
 	return
 }
 
+func deserializeEnumVgpuTypeImplementation(context string, input interface{}) (value VgpuTypeImplementation, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "passthrough":
+		value = VgpuTypeImplementationPassthrough
+	case "nvidia":
+		value = VgpuTypeImplementationNvidia
+	case "nvidia_sriov":
+		value = VgpuTypeImplementationNvidiaSriov
+	case "gvt_g":
+		value = VgpuTypeImplementationGvtG
+	case "mxgpu":
+		value = VgpuTypeImplementationMxgpu
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VgpuTypeImplementation", context)
+	}
+	return
+}
+
+func deserializeVGPURefToVGPURecordMap(context string, input interface{}) (goMap map[VGPURef]VGPURecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VGPURef]VGPURecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVGPURef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVGPURecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeVGPURecord(context string, input interface{}) (record VGPURecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5083,6 +4210,46 @@ func deserializeVGPURecord(context string, input interface{}) (record VGPURecord
 	return
 }
 
+func deserializeGPUGroupRefToGPUGroupRecordMap(context string, input interface{}) (goMap map[GPUGroupRef]GPUGroupRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[GPUGroupRef]GPUGroupRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeGPUGroupRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeGPUGroupRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeGPUGroupRefSet(context string, input interface{}) (slice []GPUGroupRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]GPUGroupRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeGPUGroupRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeGPUGroupRecord(context string, input interface{}) (record GPUGroupRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5158,6 +4325,44 @@ func deserializeGPUGroupRecord(context string, input interface{}) (record GPUGro
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumAllocationAlgorithm(context string, input interface{}) (value AllocationAlgorithm, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "breadth_first":
+		value = AllocationAlgorithmBreadthFirst
+	case "depth_first":
+		value = AllocationAlgorithmDepthFirst
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "AllocationAlgorithm", context)
+	}
+	return
+}
+
+func deserializePGPURefToPGPURecordMap(context string, input interface{}) (goMap map[PGPURef]PGPURecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PGPURef]PGPURecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePGPURef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePGPURecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -5255,6 +4460,106 @@ func deserializePGPURecord(context string, input interface{}) (record PGPURecord
 	return
 }
 
+func deserializeGPUGroupRef(context string, input interface{}) (GPUGroupRef, error) {
+	var ref GPUGroupRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return GPUGroupRef(value), nil
+}
+
+func deserializeVGPUTypeRefSet(context string, input interface{}) (slice []VGPUTypeRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VGPUTypeRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVGPUTypeRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVGPUTypeRefToIntMap(context string, input interface{}) (goMap map[VGPUTypeRef]int, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VGPUTypeRef]int, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVGPUTypeRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeInt(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVGPUTypeRef(context string, input interface{}) (VGPUTypeRef, error) {
+	var ref VGPUTypeRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VGPUTypeRef(value), nil
+}
+
+func deserializeEnumPgpuDom0Access(context string, input interface{}) (value PgpuDom0Access, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "enabled":
+		value = PgpuDom0AccessEnabled
+	case "disable_on_reboot":
+		value = PgpuDom0AccessDisableOnReboot
+	case "disabled":
+		value = PgpuDom0AccessDisabled
+	case "enable_on_reboot":
+		value = PgpuDom0AccessEnableOnReboot
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PgpuDom0Access", context)
+	}
+	return
+}
+
+func deserializePCIRefToPCIRecordMap(context string, input interface{}) (goMap map[PCIRef]PCIRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PCIRef]PCIRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePCIRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePCIRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializePCIRecord(context string, input interface{}) (record PCIRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5341,6 +4646,28 @@ func deserializePCIRecord(context string, input interface{}) (record PCIRecord, 
 	return
 }
 
+func deserializeNetworkSriovRefToNetworkSriovRecordMap(context string, input interface{}) (goMap map[NetworkSriovRef]NetworkSriovRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[NetworkSriovRef]NetworkSriovRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeNetworkSriovRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeNetworkSriovRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeNetworkSriovRecord(context string, input interface{}) (record NetworkSriovRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5381,6 +4708,48 @@ func deserializeNetworkSriovRecord(context string, input interface{}) (record Ne
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumSriovConfigurationMode(context string, input interface{}) (value SriovConfigurationMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "sysfs":
+		value = SriovConfigurationModeSysfs
+	case "modprobe":
+		value = SriovConfigurationModeModprobe
+	case "manual":
+		value = SriovConfigurationModeManual
+	case "unknown":
+		value = SriovConfigurationModeUnknown
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "SriovConfigurationMode", context)
+	}
+	return
+}
+
+func deserializeTunnelRefToTunnelRecordMap(context string, input interface{}) (goMap map[TunnelRef]TunnelRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[TunnelRef]TunnelRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeTunnelRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeTunnelRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -5436,6 +4805,62 @@ func deserializeTunnelRecord(context string, input interface{}) (record TunnelRe
 	return
 }
 
+func deserializeEnumTunnelProtocol(context string, input interface{}) (value TunnelProtocol, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "gre":
+		value = TunnelProtocolGre
+	case "vxlan":
+		value = TunnelProtocolVxlan
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TunnelProtocol", context)
+	}
+	return
+}
+
+func deserializeSecretRefToSecretRecordMap(context string, input interface{}) (goMap map[SecretRef]SecretRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[SecretRef]SecretRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeSecretRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeSecretRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeSecretRefSet(context string, input interface{}) (slice []SecretRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]SecretRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeSecretRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeSecretRecord(context string, input interface{}) (record SecretRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5462,6 +4887,46 @@ func deserializeSecretRecord(context string, input interface{}) (record SecretRe
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeMessageRefSet(context string, input interface{}) (slice []MessageRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]MessageRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeMessageRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeMessageRefToMessageRecordMap(context string, input interface{}) (goMap map[MessageRef]MessageRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[MessageRef]MessageRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeMessageRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeMessageRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -5524,6 +4989,85 @@ func deserializeMessageRecord(context string, input interface{}) (record Message
 	return
 }
 
+func deserializeEnumCls(context string, input interface{}) (value Cls, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "VM":
+		value = ClsVM
+	case "Host":
+		value = ClsHost
+	case "SR":
+		value = ClsSR
+	case "Pool":
+		value = ClsPool
+	case "VMPP":
+		value = ClsVMPP
+	case "VMSS":
+		value = ClsVMSS
+	case "PVS_proxy":
+		value = ClsPVSProxy
+	case "VDI":
+		value = ClsVDI
+	case "Certificate":
+		value = ClsCertificate
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "Cls", context)
+	}
+	return
+}
+
+func deserializeMessageRef(context string, input interface{}) (MessageRef, error) {
+	var ref MessageRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return MessageRef(value), nil
+}
+
+func deserializeBlobRefToBlobRecordMap(context string, input interface{}) (goMap map[BlobRef]BlobRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[BlobRef]BlobRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeBlobRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeBlobRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeBlobRefSet(context string, input interface{}) (slice []BlobRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]BlobRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeBlobRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeBlobRecord(context string, input interface{}) (record BlobRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5582,71 +5126,6 @@ func deserializeBlobRecord(context string, input interface{}) (record BlobRecord
 	return
 }
 
-func deserializeDataSourceRecord(context string, input interface{}) (record DataSourceRecord, err error) {
-	rpcStruct, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	nameLabelValue, ok := rpcStruct["name_label"]
-	if ok && nameLabelValue != nil {
-		record.NameLabel, err = deserializeString(fmt.Sprintf("%s.%s", context, "name_label"), nameLabelValue)
-		if err != nil {
-			return
-		}
-	}
-	nameDescriptionValue, ok := rpcStruct["name_description"]
-	if ok && nameDescriptionValue != nil {
-		record.NameDescription, err = deserializeString(fmt.Sprintf("%s.%s", context, "name_description"), nameDescriptionValue)
-		if err != nil {
-			return
-		}
-	}
-	enabledValue, ok := rpcStruct["enabled"]
-	if ok && enabledValue != nil {
-		record.Enabled, err = deserializeBool(fmt.Sprintf("%s.%s", context, "enabled"), enabledValue)
-		if err != nil {
-			return
-		}
-	}
-	standardValue, ok := rpcStruct["standard"]
-	if ok && standardValue != nil {
-		record.Standard, err = deserializeBool(fmt.Sprintf("%s.%s", context, "standard"), standardValue)
-		if err != nil {
-			return
-		}
-	}
-	unitsValue, ok := rpcStruct["units"]
-	if ok && unitsValue != nil {
-		record.Units, err = deserializeString(fmt.Sprintf("%s.%s", context, "units"), unitsValue)
-		if err != nil {
-			return
-		}
-	}
-	minValue, ok := rpcStruct["min"]
-	if ok && minValue != nil {
-		record.Min, err = deserializeFloat(fmt.Sprintf("%s.%s", context, "min"), minValue)
-		if err != nil {
-			return
-		}
-	}
-	maxValue, ok := rpcStruct["max"]
-	if ok && maxValue != nil {
-		record.Max, err = deserializeFloat(fmt.Sprintf("%s.%s", context, "max"), maxValue)
-		if err != nil {
-			return
-		}
-	}
-	valueValue, ok := rpcStruct["value"]
-	if ok && valueValue != nil {
-		record.Value, err = deserializeFloat(fmt.Sprintf("%s.%s", context, "value"), valueValue)
-		if err != nil {
-			return
-		}
-	}
-	return
-}
-
 func deserializeUserRecord(context string, input interface{}) (record UserRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5680,6 +5159,28 @@ func deserializeUserRecord(context string, input interface{}) (record UserRecord
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeConsoleRefToConsoleRecordMap(context string, input interface{}) (goMap map[ConsoleRef]ConsoleRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[ConsoleRef]ConsoleRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeConsoleRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeConsoleRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -5724,6 +5225,46 @@ func deserializeConsoleRecord(context string, input interface{}) (record Console
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumConsoleProtocol(context string, input interface{}) (value ConsoleProtocol, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "vt100":
+		value = ConsoleProtocolVt100
+	case "rfb":
+		value = ConsoleProtocolRfb
+	case "rdp":
+		value = ConsoleProtocolRdp
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "ConsoleProtocol", context)
+	}
+	return
+}
+
+func deserializeVTPMRefToVTPMRecordMap(context string, input interface{}) (goMap map[VTPMRef]VTPMRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VTPMRef]VTPMRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVTPMRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVTPMRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -5793,6 +5334,96 @@ func deserializeVTPMRecord(context string, input interface{}) (record VTPMRecord
 	return
 }
 
+func deserializeEnumVtpmOperationsSet(context string, input interface{}) (slice []VtpmOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VtpmOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumVtpmOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumVtpmOperationsMap(context string, input interface{}) (goMap map[string]VtpmOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]VtpmOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumVtpmOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVtpmOperations(context string, input interface{}) (value VtpmOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "destroy":
+		value = VtpmOperationsDestroy
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VtpmOperations", context)
+	}
+	return
+}
+
+func deserializeEnumPersistenceBackend(context string, input interface{}) (value PersistenceBackend, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "xapi":
+		value = PersistenceBackendXapi
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PersistenceBackend", context)
+	}
+	return
+}
+
+func deserializeCrashdumpRefToCrashdumpRecordMap(context string, input interface{}) (goMap map[CrashdumpRef]CrashdumpRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[CrashdumpRef]CrashdumpRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeCrashdumpRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeCrashdumpRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeCrashdumpRecord(context string, input interface{}) (record CrashdumpRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5826,6 +5457,28 @@ func deserializeCrashdumpRecord(context string, input interface{}) (record Crash
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializePBDRefToPBDRecordMap(context string, input interface{}) (goMap map[PBDRef]PBDRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PBDRef]PBDRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePBDRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePBDRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -5881,6 +5534,46 @@ func deserializePBDRecord(context string, input interface{}) (record PBDRecord, 
 	return
 }
 
+func deserializeVBDMetricsRefToVBDMetricsRecordMap(context string, input interface{}) (goMap map[VBDMetricsRef]VBDMetricsRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VBDMetricsRef]VBDMetricsRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVBDMetricsRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVBDMetricsRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVBDMetricsRefSet(context string, input interface{}) (slice []VBDMetricsRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VBDMetricsRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVBDMetricsRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeVBDMetricsRecord(context string, input interface{}) (record VBDMetricsRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -5921,6 +5614,28 @@ func deserializeVBDMetricsRecord(context string, input interface{}) (record VBDM
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeVBDRefToVBDRecordMap(context string, input interface{}) (goMap map[VBDRef]VBDRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VBDRef]VBDRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVBDRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVBDRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -6081,6 +5796,201 @@ func deserializeVBDRecord(context string, input interface{}) (record VBDRecord, 
 	metricsValue, ok := rpcStruct["metrics"]
 	if ok && metricsValue != nil {
 		record.Metrics, err = deserializeVBDMetricsRef(fmt.Sprintf("%s.%s", context, "metrics"), metricsValue)
+		if err != nil {
+			return
+		}
+	}
+	return
+}
+
+func deserializeEnumVbdOperationsSet(context string, input interface{}) (slice []VbdOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VbdOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumVbdOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumVbdOperationsMap(context string, input interface{}) (goMap map[string]VbdOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]VbdOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumVbdOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVbdOperations(context string, input interface{}) (value VbdOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "attach":
+		value = VbdOperationsAttach
+	case "eject":
+		value = VbdOperationsEject
+	case "insert":
+		value = VbdOperationsInsert
+	case "plug":
+		value = VbdOperationsPlug
+	case "unplug":
+		value = VbdOperationsUnplug
+	case "unplug_force":
+		value = VbdOperationsUnplugForce
+	case "pause":
+		value = VbdOperationsPause
+	case "unpause":
+		value = VbdOperationsUnpause
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VbdOperations", context)
+	}
+	return
+}
+
+func deserializeEnumVbdMode(context string, input interface{}) (value VbdMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "RO":
+		value = VbdModeRO
+	case "RW":
+		value = VbdModeRW
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VbdMode", context)
+	}
+	return
+}
+
+func deserializeEnumVbdType(context string, input interface{}) (value VbdType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "CD":
+		value = VbdTypeCD
+	case "Disk":
+		value = VbdTypeDisk
+	case "Floppy":
+		value = VbdTypeFloppy
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VbdType", context)
+	}
+	return
+}
+
+func deserializeVBDMetricsRef(context string, input interface{}) (VBDMetricsRef, error) {
+	var ref VBDMetricsRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VBDMetricsRef(value), nil
+}
+
+func deserializeVDIRefToVDIRecordMap(context string, input interface{}) (goMap map[VDIRef]VDIRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VDIRef]VDIRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVDIRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVDIRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVdiNbdServerInfoRecordSet(context string, input interface{}) (slice []VdiNbdServerInfoRecord, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VdiNbdServerInfoRecord, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVdiNbdServerInfoRecord(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVdiNbdServerInfoRecord(context string, input interface{}) (record VdiNbdServerInfoRecord, err error) {
+	rpcStruct, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	exportnameValue, ok := rpcStruct["exportname"]
+	if ok && exportnameValue != nil {
+		record.Exportname, err = deserializeString(fmt.Sprintf("%s.%s", context, "exportname"), exportnameValue)
+		if err != nil {
+			return
+		}
+	}
+	addressValue, ok := rpcStruct["address"]
+	if ok && addressValue != nil {
+		record.Address, err = deserializeString(fmt.Sprintf("%s.%s", context, "address"), addressValue)
+		if err != nil {
+			return
+		}
+	}
+	portValue, ok := rpcStruct["port"]
+	if ok && portValue != nil {
+		record.Port, err = deserializeInt(fmt.Sprintf("%s.%s", context, "port"), portValue)
+		if err != nil {
+			return
+		}
+	}
+	certValue, ok := rpcStruct["cert"]
+	if ok && certValue != nil {
+		record.Cert, err = deserializeString(fmt.Sprintf("%s.%s", context, "cert"), certValue)
+		if err != nil {
+			return
+		}
+	}
+	subjectValue, ok := rpcStruct["subject"]
+	if ok && subjectValue != nil {
+		record.Subject, err = deserializeString(fmt.Sprintf("%s.%s", context, "subject"), subjectValue)
 		if err != nil {
 			return
 		}
@@ -6321,6 +6231,151 @@ func deserializeVDIRecord(context string, input interface{}) (record VDIRecord, 
 	return
 }
 
+func deserializeEnumVdiOperationsSet(context string, input interface{}) (slice []VdiOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VdiOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumVdiOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumVdiOperationsMap(context string, input interface{}) (goMap map[string]VdiOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]VdiOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumVdiOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVdiOperations(context string, input interface{}) (value VdiOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "clone":
+		value = VdiOperationsClone
+	case "copy":
+		value = VdiOperationsCopy
+	case "resize":
+		value = VdiOperationsResize
+	case "resize_online":
+		value = VdiOperationsResizeOnline
+	case "snapshot":
+		value = VdiOperationsSnapshot
+	case "mirror":
+		value = VdiOperationsMirror
+	case "destroy":
+		value = VdiOperationsDestroy
+	case "forget":
+		value = VdiOperationsForget
+	case "update":
+		value = VdiOperationsUpdate
+	case "force_unlock":
+		value = VdiOperationsForceUnlock
+	case "generate_config":
+		value = VdiOperationsGenerateConfig
+	case "enable_cbt":
+		value = VdiOperationsEnableCbt
+	case "disable_cbt":
+		value = VdiOperationsDisableCbt
+	case "data_destroy":
+		value = VdiOperationsDataDestroy
+	case "list_changed_blocks":
+		value = VdiOperationsListChangedBlocks
+	case "set_on_boot":
+		value = VdiOperationsSetOnBoot
+	case "blocked":
+		value = VdiOperationsBlocked
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VdiOperations", context)
+	}
+	return
+}
+
+func deserializeEnumVdiType(context string, input interface{}) (value VdiType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "system":
+		value = VdiTypeSystem
+	case "user":
+		value = VdiTypeUser
+	case "ephemeral":
+		value = VdiTypeEphemeral
+	case "suspend":
+		value = VdiTypeSuspend
+	case "crashdump":
+		value = VdiTypeCrashdump
+	case "ha_statefile":
+		value = VdiTypeHaStatefile
+	case "metadata":
+		value = VdiTypeMetadata
+	case "redo_log":
+		value = VdiTypeRedoLog
+	case "rrd":
+		value = VdiTypeRrd
+	case "pvs_cache":
+		value = VdiTypePvsCache
+	case "cbt_metadata":
+		value = VdiTypeCbtMetadata
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VdiType", context)
+	}
+	return
+}
+
+func deserializeEnumOnBoot(context string, input interface{}) (value OnBoot, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "reset":
+		value = OnBootReset
+	case "persist":
+		value = OnBootPersist
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnBoot", context)
+	}
+	return
+}
+
+func deserializeLVHDRef(context string, input interface{}) (LVHDRef, error) {
+	var ref LVHDRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return LVHDRef(value), nil
+}
+
 func deserializeLVHDRecord(context string, input interface{}) (record LVHDRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -6333,6 +6388,46 @@ func deserializeLVHDRecord(context string, input interface{}) (record LVHDRecord
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeSRRefToSRRecordMap(context string, input interface{}) (goMap map[SRRef]SRRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[SRRef]SRRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeSRRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeSRRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeProbeResultRecordSet(context string, input interface{}) (slice []ProbeResultRecord, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]ProbeResultRecord, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeProbeResultRecord(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
 	}
 	return
 }
@@ -6368,6 +6463,18 @@ func deserializeProbeResultRecord(context string, input interface{}) (record Pro
 			return
 		}
 	}
+	return
+}
+
+func deserializeOptionSrStatRecord(context string, input interface{}) (option OptionSrStatRecord, err error) {
+	if input == nil {
+		return
+	}
+	value, err := deserializeSrStatRecord(context, input)
+	if err != nil {
+		return
+	}
+	option = &value
 	return
 }
 
@@ -6422,6 +6529,34 @@ func deserializeSrStatRecord(context string, input interface{}) (record SrStatRe
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeOptionString(context string, input interface{}) (option OptionString, err error) {
+	if input == nil {
+		return
+	}
+	value, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	option = &value
+	return
+}
+
+func deserializeEnumSrHealth(context string, input interface{}) (value SrHealth, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "healthy":
+		value = SrHealthHealthy
+	case "recovering":
+		value = SrHealthRecovering
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "SrHealth", context)
 	}
 	return
 }
@@ -6582,6 +6717,147 @@ func deserializeSRRecord(context string, input interface{}) (record SRRecord, er
 	return
 }
 
+func deserializeEnumStorageOperationsSet(context string, input interface{}) (slice []StorageOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]StorageOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumStorageOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumStorageOperationsMap(context string, input interface{}) (goMap map[string]StorageOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]StorageOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumStorageOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumStorageOperations(context string, input interface{}) (value StorageOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "scan":
+		value = StorageOperationsScan
+	case "destroy":
+		value = StorageOperationsDestroy
+	case "forget":
+		value = StorageOperationsForget
+	case "plug":
+		value = StorageOperationsPlug
+	case "unplug":
+		value = StorageOperationsUnplug
+	case "update":
+		value = StorageOperationsUpdate
+	case "vdi_create":
+		value = StorageOperationsVdiCreate
+	case "vdi_introduce":
+		value = StorageOperationsVdiIntroduce
+	case "vdi_destroy":
+		value = StorageOperationsVdiDestroy
+	case "vdi_resize":
+		value = StorageOperationsVdiResize
+	case "vdi_clone":
+		value = StorageOperationsVdiClone
+	case "vdi_snapshot":
+		value = StorageOperationsVdiSnapshot
+	case "vdi_mirror":
+		value = StorageOperationsVdiMirror
+	case "vdi_enable_cbt":
+		value = StorageOperationsVdiEnableCbt
+	case "vdi_disable_cbt":
+		value = StorageOperationsVdiDisableCbt
+	case "vdi_data_destroy":
+		value = StorageOperationsVdiDataDestroy
+	case "vdi_list_changed_blocks":
+		value = StorageOperationsVdiListChangedBlocks
+	case "vdi_set_on_boot":
+		value = StorageOperationsVdiSetOnBoot
+	case "pbd_create":
+		value = StorageOperationsPbdCreate
+	case "pbd_destroy":
+		value = StorageOperationsPbdDestroy
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "StorageOperations", context)
+	}
+	return
+}
+
+func deserializeSMRefToSMRecordMap(context string, input interface{}) (goMap map[SMRef]SMRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[SMRef]SMRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeSMRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeSMRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeSMRefSet(context string, input interface{}) (slice []SMRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]SMRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeSMRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeSMRef(context string, input interface{}) (SMRef, error) {
+	var ref SMRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return SMRef(value), nil
+}
+
 func deserializeSMRecord(context string, input interface{}) (record SMRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -6689,6 +6965,50 @@ func deserializeSMRecord(context string, input interface{}) (record SMRecord, er
 	return
 }
 
+func deserializeStringToIntMap(context string, input interface{}) (goMap map[string]int, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]int, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeInt(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVLANRefToVLANRecordMap(context string, input interface{}) (goMap map[VLANRef]VLANRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VLANRef]VLANRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVLANRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVLANRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeVLANRecord(context string, input interface{}) (record VLANRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -6729,6 +7049,28 @@ func deserializeVLANRecord(context string, input interface{}) (record VLANRecord
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeBondRefToBondRecordMap(context string, input interface{}) (goMap map[BondRef]BondRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[BondRef]BondRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeBondRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeBondRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -6801,6 +7143,64 @@ func deserializeBondRecord(context string, input interface{}) (record BondRecord
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumBondMode(context string, input interface{}) (value BondMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "balance-slb":
+		value = BondModeBalanceSlb
+	case "active-backup":
+		value = BondModeActiveBackup
+	case "lacp":
+		value = BondModeLacp
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "BondMode", context)
+	}
+	return
+}
+
+func deserializePIFMetricsRefToPIFMetricsRecordMap(context string, input interface{}) (goMap map[PIFMetricsRef]PIFMetricsRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PIFMetricsRef]PIFMetricsRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePIFMetricsRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePIFMetricsRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializePIFMetricsRefSet(context string, input interface{}) (slice []PIFMetricsRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PIFMetricsRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePIFMetricsRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
 	}
 	return
 }
@@ -6901,6 +7301,28 @@ func deserializePIFMetricsRecord(context string, input interface{}) (record PIFM
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializePIFRefToPIFRecordMap(context string, input interface{}) (goMap map[PIFRef]PIFRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PIFRef]PIFRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePIFRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePIFRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -7159,6 +7581,235 @@ func deserializePIFRecord(context string, input interface{}) (record PIFRecord, 
 	return
 }
 
+func deserializePIFMetricsRef(context string, input interface{}) (PIFMetricsRef, error) {
+	var ref PIFMetricsRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PIFMetricsRef(value), nil
+}
+
+func deserializeEnumIPConfigurationMode(context string, input interface{}) (value IPConfigurationMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "None":
+		value = IPConfigurationModeNone
+	case "DHCP":
+		value = IPConfigurationModeDHCP
+	case "Static":
+		value = IPConfigurationModeStatic
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "IPConfigurationMode", context)
+	}
+	return
+}
+
+func deserializeBondRefSet(context string, input interface{}) (slice []BondRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]BondRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeBondRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeBondRef(context string, input interface{}) (BondRef, error) {
+	var ref BondRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return BondRef(value), nil
+}
+
+func deserializeVLANRefSet(context string, input interface{}) (slice []VLANRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VLANRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVLANRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVLANRef(context string, input interface{}) (VLANRef, error) {
+	var ref VLANRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VLANRef(value), nil
+}
+
+func deserializeTunnelRefSet(context string, input interface{}) (slice []TunnelRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]TunnelRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeTunnelRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeTunnelRef(context string, input interface{}) (TunnelRef, error) {
+	var ref TunnelRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return TunnelRef(value), nil
+}
+
+func deserializeEnumIpv6ConfigurationMode(context string, input interface{}) (value Ipv6ConfigurationMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "None":
+		value = Ipv6ConfigurationModeNone
+	case "DHCP":
+		value = Ipv6ConfigurationModeDHCP
+	case "Static":
+		value = Ipv6ConfigurationModeStatic
+	case "Autoconf":
+		value = Ipv6ConfigurationModeAutoconf
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "Ipv6ConfigurationMode", context)
+	}
+	return
+}
+
+func deserializeEnumPrimaryAddressType(context string, input interface{}) (value PrimaryAddressType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "IPv4":
+		value = PrimaryAddressTypeIPv4
+	case "IPv6":
+		value = PrimaryAddressTypeIPv6
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PrimaryAddressType", context)
+	}
+	return
+}
+
+func deserializeEnumPifIgmpStatus(context string, input interface{}) (value PifIgmpStatus, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "enabled":
+		value = PifIgmpStatusEnabled
+	case "disabled":
+		value = PifIgmpStatusDisabled
+	case "unknown":
+		value = PifIgmpStatusUnknown
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PifIgmpStatus", context)
+	}
+	return
+}
+
+func deserializeNetworkSriovRefSet(context string, input interface{}) (slice []NetworkSriovRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]NetworkSriovRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeNetworkSriovRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeNetworkSriovRef(context string, input interface{}) (NetworkSriovRef, error) {
+	var ref NetworkSriovRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return NetworkSriovRef(value), nil
+}
+
+func deserializeVIFMetricsRefToVIFMetricsRecordMap(context string, input interface{}) (goMap map[VIFMetricsRef]VIFMetricsRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VIFMetricsRef]VIFMetricsRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVIFMetricsRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVIFMetricsRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVIFMetricsRefSet(context string, input interface{}) (slice []VIFMetricsRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VIFMetricsRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVIFMetricsRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeVIFMetricsRecord(context string, input interface{}) (record VIFMetricsRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -7199,6 +7850,28 @@ func deserializeVIFMetricsRecord(context string, input interface{}) (record VIFM
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeVIFRefToVIFRecordMap(context string, input interface{}) (goMap map[VIFRef]VIFRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VIFRef]VIFRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVIFRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVIFRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -7401,6 +8074,174 @@ func deserializeVIFRecord(context string, input interface{}) (record VIFRecord, 
 	return
 }
 
+func deserializeEnumVifOperationsSet(context string, input interface{}) (slice []VifOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VifOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumVifOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumVifOperationsMap(context string, input interface{}) (goMap map[string]VifOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]VifOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumVifOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVifOperations(context string, input interface{}) (value VifOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "attach":
+		value = VifOperationsAttach
+	case "plug":
+		value = VifOperationsPlug
+	case "unplug":
+		value = VifOperationsUnplug
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifOperations", context)
+	}
+	return
+}
+
+func deserializeVIFMetricsRef(context string, input interface{}) (VIFMetricsRef, error) {
+	var ref VIFMetricsRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VIFMetricsRef(value), nil
+}
+
+func deserializeEnumVifLockingMode(context string, input interface{}) (value VifLockingMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "network_default":
+		value = VifLockingModeNetworkDefault
+	case "locked":
+		value = VifLockingModeLocked
+	case "unlocked":
+		value = VifLockingModeUnlocked
+	case "disabled":
+		value = VifLockingModeDisabled
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifLockingMode", context)
+	}
+	return
+}
+
+func deserializeEnumVifIpv4ConfigurationMode(context string, input interface{}) (value VifIpv4ConfigurationMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "None":
+		value = VifIpv4ConfigurationModeNone
+	case "Static":
+		value = VifIpv4ConfigurationModeStatic
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifIpv4ConfigurationMode", context)
+	}
+	return
+}
+
+func deserializeEnumVifIpv6ConfigurationMode(context string, input interface{}) (value VifIpv6ConfigurationMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "None":
+		value = VifIpv6ConfigurationModeNone
+	case "Static":
+		value = VifIpv6ConfigurationModeStatic
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifIpv6ConfigurationMode", context)
+	}
+	return
+}
+
+func deserializeNetworkRefToNetworkRecordMap(context string, input interface{}) (goMap map[NetworkRef]NetworkRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[NetworkRef]NetworkRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeNetworkRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeNetworkRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeNetworkRefSet(context string, input interface{}) (slice []NetworkRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]NetworkRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeNetworkRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeNetworkRef(context string, input interface{}) (NetworkRef, error) {
+	var ref NetworkRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return NetworkRef(value), nil
+}
+
 func deserializeNetworkRecord(context string, input interface{}) (record NetworkRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -7522,6 +8363,154 @@ func deserializeNetworkRecord(context string, input interface{}) (record Network
 	return
 }
 
+func deserializeEnumNetworkOperationsSet(context string, input interface{}) (slice []NetworkOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]NetworkOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumNetworkOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumNetworkOperationsMap(context string, input interface{}) (goMap map[string]NetworkOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]NetworkOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumNetworkOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumNetworkOperations(context string, input interface{}) (value NetworkOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "attaching":
+		value = NetworkOperationsAttaching
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "NetworkOperations", context)
+	}
+	return
+}
+
+func deserializeEnumNetworkDefaultLockingMode(context string, input interface{}) (value NetworkDefaultLockingMode, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "unlocked":
+		value = NetworkDefaultLockingModeUnlocked
+	case "disabled":
+		value = NetworkDefaultLockingModeDisabled
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "NetworkDefaultLockingMode", context)
+	}
+	return
+}
+
+func deserializeVIFRefToStringMap(context string, input interface{}) (goMap map[VIFRef]string, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VIFRef]string, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVIFRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeString(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumNetworkPurposeSet(context string, input interface{}) (slice []NetworkPurpose, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]NetworkPurpose, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumNetworkPurpose(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeEnumNetworkPurpose(context string, input interface{}) (value NetworkPurpose, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "nbd":
+		value = NetworkPurposeNbd
+	case "insecure_nbd":
+		value = NetworkPurposeInsecureNbd
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "NetworkPurpose", context)
+	}
+	return
+}
+
+func deserializeHostCPURefToHostCPURecordMap(context string, input interface{}) (goMap map[HostCPURef]HostCPURecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[HostCPURef]HostCPURecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeHostCPURef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeHostCPURecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeHostCPURecord(context string, input interface{}) (record HostCPURecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -7622,6 +8611,46 @@ func deserializeHostCPURecord(context string, input interface{}) (record HostCPU
 	return
 }
 
+func deserializeHostMetricsRefToHostMetricsRecordMap(context string, input interface{}) (goMap map[HostMetricsRef]HostMetricsRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[HostMetricsRef]HostMetricsRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeHostMetricsRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeHostMetricsRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeHostMetricsRefSet(context string, input interface{}) (slice []HostMetricsRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]HostMetricsRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeHostMetricsRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeHostMetricsRecord(context string, input interface{}) (record HostMetricsRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -7669,6 +8698,28 @@ func deserializeHostMetricsRecord(context string, input interface{}) (record Hos
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeHostPatchRefToHostPatchRecordMap(context string, input interface{}) (goMap map[HostPatchRef]HostPatchRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[HostPatchRef]HostPatchRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeHostPatchRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeHostPatchRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -7752,6 +8803,28 @@ func deserializeHostPatchRecord(context string, input interface{}) (record HostP
 	return
 }
 
+func deserializeHostCrashdumpRefToHostCrashdumpRecordMap(context string, input interface{}) (goMap map[HostCrashdumpRef]HostCrashdumpRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[HostCrashdumpRef]HostCrashdumpRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeHostCrashdumpRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeHostCrashdumpRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeHostCrashdumpRecord(context string, input interface{}) (record HostCrashdumpRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -7792,6 +8865,46 @@ func deserializeHostCrashdumpRecord(context string, input interface{}) (record H
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeHostRefToHostRecordMap(context string, input interface{}) (goMap map[HostRef]HostRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[HostRef]HostRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeHostRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeHostRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumHostSchedGran(context string, input interface{}) (value HostSchedGran, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "core":
+		value = HostSchedGranCore
+	case "cpu":
+		value = HostSchedGranCPU
+	case "socket":
+		value = HostSchedGranSocket
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostSchedGran", context)
 	}
 	return
 }
@@ -8295,6 +9408,399 @@ func deserializeHostRecord(context string, input interface{}) (record HostRecord
 	return
 }
 
+func deserializeEnumHostAllowedOperationsSet(context string, input interface{}) (slice []HostAllowedOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]HostAllowedOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumHostAllowedOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumHostAllowedOperationsMap(context string, input interface{}) (goMap map[string]HostAllowedOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]HostAllowedOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumHostAllowedOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumHostAllowedOperations(context string, input interface{}) (value HostAllowedOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "provision":
+		value = HostAllowedOperationsProvision
+	case "evacuate":
+		value = HostAllowedOperationsEvacuate
+	case "shutdown":
+		value = HostAllowedOperationsShutdown
+	case "reboot":
+		value = HostAllowedOperationsReboot
+	case "power_on":
+		value = HostAllowedOperationsPowerOn
+	case "vm_start":
+		value = HostAllowedOperationsVMStart
+	case "vm_resume":
+		value = HostAllowedOperationsVMResume
+	case "vm_migrate":
+		value = HostAllowedOperationsVMMigrate
+	case "apply_updates":
+		value = HostAllowedOperationsApplyUpdates
+	case "enable":
+		value = HostAllowedOperationsEnable
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostAllowedOperations", context)
+	}
+	return
+}
+
+func deserializeHostCrashdumpRefSet(context string, input interface{}) (slice []HostCrashdumpRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]HostCrashdumpRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeHostCrashdumpRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeHostCrashdumpRef(context string, input interface{}) (HostCrashdumpRef, error) {
+	var ref HostCrashdumpRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return HostCrashdumpRef(value), nil
+}
+
+func deserializePBDRefSet(context string, input interface{}) (slice []PBDRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PBDRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePBDRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePBDRef(context string, input interface{}) (PBDRef, error) {
+	var ref PBDRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PBDRef(value), nil
+}
+
+func deserializeHostCPURefSet(context string, input interface{}) (slice []HostCPURef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]HostCPURef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeHostCPURef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeHostCPURef(context string, input interface{}) (HostCPURef, error) {
+	var ref HostCPURef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return HostCPURef(value), nil
+}
+
+func deserializeHostMetricsRef(context string, input interface{}) (HostMetricsRef, error) {
+	var ref HostMetricsRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return HostMetricsRef(value), nil
+}
+
+func deserializePGPURefSet(context string, input interface{}) (slice []PGPURef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PGPURef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePGPURef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePGPURef(context string, input interface{}) (PGPURef, error) {
+	var ref PGPURef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PGPURef(value), nil
+}
+
+func deserializePUSBRefSet(context string, input interface{}) (slice []PUSBRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PUSBRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePUSBRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePUSBRef(context string, input interface{}) (PUSBRef, error) {
+	var ref PUSBRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PUSBRef(value), nil
+}
+
+func deserializeEnumHostDisplay(context string, input interface{}) (value HostDisplay, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "enabled":
+		value = HostDisplayEnabled
+	case "disable_on_reboot":
+		value = HostDisplayDisableOnReboot
+	case "disabled":
+		value = HostDisplayDisabled
+	case "enable_on_reboot":
+		value = HostDisplayEnableOnReboot
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostDisplay", context)
+	}
+	return
+}
+
+func deserializeIntSet(context string, input interface{}) (slice []int, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]int, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeInt(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeFeatureRefSet(context string, input interface{}) (slice []FeatureRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]FeatureRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeFeatureRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeFeatureRef(context string, input interface{}) (FeatureRef, error) {
+	var ref FeatureRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return FeatureRef(value), nil
+}
+
+func deserializeCertificateRefSet(context string, input interface{}) (slice []CertificateRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]CertificateRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeCertificateRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeCertificateRef(context string, input interface{}) (CertificateRef, error) {
+	var ref CertificateRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return CertificateRef(value), nil
+}
+
+func deserializeEnumLatestSyncedUpdatesAppliedState(context string, input interface{}) (value LatestSyncedUpdatesAppliedState, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "yes":
+		value = LatestSyncedUpdatesAppliedStateYes
+	case "no":
+		value = LatestSyncedUpdatesAppliedStateNo
+	case "unknown":
+		value = LatestSyncedUpdatesAppliedStateUnknown
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "LatestSyncedUpdatesAppliedState", context)
+	}
+	return
+}
+
+func deserializeEnumHostNumaAffinityPolicy(context string, input interface{}) (value HostNumaAffinityPolicy, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "any":
+		value = HostNumaAffinityPolicyAny
+	case "best_effort":
+		value = HostNumaAffinityPolicyBestEffort
+	case "default_policy":
+		value = HostNumaAffinityPolicyDefaultPolicy
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostNumaAffinityPolicy", context)
+	}
+	return
+}
+
+func deserializeDRTaskRefToDRTaskRecordMap(context string, input interface{}) (goMap map[DRTaskRef]DRTaskRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[DRTaskRef]DRTaskRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeDRTaskRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeDRTaskRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeDRTaskRefSet(context string, input interface{}) (slice []DRTaskRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]DRTaskRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeDRTaskRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeDRTaskRef(context string, input interface{}) (DRTaskRef, error) {
+	var ref DRTaskRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return DRTaskRef(value), nil
+}
+
 func deserializeDRTaskRecord(context string, input interface{}) (record DRTaskRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -8314,6 +9820,46 @@ func deserializeDRTaskRecord(context string, input interface{}) (record DRTaskRe
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeVMApplianceRefToVMApplianceRecordMap(context string, input interface{}) (goMap map[VMApplianceRef]VMApplianceRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMApplianceRef]VMApplianceRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMApplianceRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVMApplianceRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMApplianceRefSet(context string, input interface{}) (slice []VMApplianceRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMApplianceRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVMApplianceRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
 	}
 	return
 }
@@ -8365,6 +9911,106 @@ func deserializeVMApplianceRecord(context string, input interface{}) (record VMA
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumVMApplianceOperationSet(context string, input interface{}) (slice []VMApplianceOperation, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMApplianceOperation, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumVMApplianceOperation(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumVMApplianceOperationMap(context string, input interface{}) (goMap map[string]VMApplianceOperation, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]VMApplianceOperation, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumVMApplianceOperation(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVMApplianceOperation(context string, input interface{}) (value VMApplianceOperation, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "start":
+		value = VMApplianceOperationStart
+	case "clean_shutdown":
+		value = VMApplianceOperationCleanShutdown
+	case "hard_shutdown":
+		value = VMApplianceOperationHardShutdown
+	case "shutdown":
+		value = VMApplianceOperationShutdown
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VMApplianceOperation", context)
+	}
+	return
+}
+
+func deserializeVMSSRefToVMSSRecordMap(context string, input interface{}) (goMap map[VMSSRef]VMSSRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMSSRef]VMSSRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMSSRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVMSSRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMSSRefSet(context string, input interface{}) (slice []VMSSRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMSSRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVMSSRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
 	}
 	return
 }
@@ -8444,6 +10090,82 @@ func deserializeVMSSRecord(context string, input interface{}) (record VMSSRecord
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumVmssType(context string, input interface{}) (value VmssType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "snapshot":
+		value = VmssTypeSnapshot
+	case "checkpoint":
+		value = VmssTypeCheckpoint
+	case "snapshot_with_quiesce":
+		value = VmssTypeSnapshotWithQuiesce
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmssType", context)
+	}
+	return
+}
+
+func deserializeEnumVmssFrequency(context string, input interface{}) (value VmssFrequency, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "hourly":
+		value = VmssFrequencyHourly
+	case "daily":
+		value = VmssFrequencyDaily
+	case "weekly":
+		value = VmssFrequencyWeekly
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmssFrequency", context)
+	}
+	return
+}
+
+func deserializeVMPPRefToVMPPRecordMap(context string, input interface{}) (goMap map[VMPPRef]VMPPRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMPPRef]VMPPRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMPPRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVMPPRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMPPRefSet(context string, input interface{}) (slice []VMPPRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMPPRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVMPPRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
 	}
 	return
 }
@@ -8597,6 +10319,118 @@ func deserializeVMPPRecord(context string, input interface{}) (record VMPPRecord
 	return
 }
 
+func deserializeEnumVmppBackupType(context string, input interface{}) (value VmppBackupType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "snapshot":
+		value = VmppBackupTypeSnapshot
+	case "checkpoint":
+		value = VmppBackupTypeCheckpoint
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppBackupType", context)
+	}
+	return
+}
+
+func deserializeEnumVmppBackupFrequency(context string, input interface{}) (value VmppBackupFrequency, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "hourly":
+		value = VmppBackupFrequencyHourly
+	case "daily":
+		value = VmppBackupFrequencyDaily
+	case "weekly":
+		value = VmppBackupFrequencyWeekly
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppBackupFrequency", context)
+	}
+	return
+}
+
+func deserializeEnumVmppArchiveTargetType(context string, input interface{}) (value VmppArchiveTargetType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "none":
+		value = VmppArchiveTargetTypeNone
+	case "cifs":
+		value = VmppArchiveTargetTypeCifs
+	case "nfs":
+		value = VmppArchiveTargetTypeNfs
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppArchiveTargetType", context)
+	}
+	return
+}
+
+func deserializeEnumVmppArchiveFrequency(context string, input interface{}) (value VmppArchiveFrequency, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "never":
+		value = VmppArchiveFrequencyNever
+	case "always_after_backup":
+		value = VmppArchiveFrequencyAlwaysAfterBackup
+	case "daily":
+		value = VmppArchiveFrequencyDaily
+	case "weekly":
+		value = VmppArchiveFrequencyWeekly
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppArchiveFrequency", context)
+	}
+	return
+}
+
+func deserializeVMGuestMetricsRefToVMGuestMetricsRecordMap(context string, input interface{}) (goMap map[VMGuestMetricsRef]VMGuestMetricsRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMGuestMetricsRef]VMGuestMetricsRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMGuestMetricsRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVMGuestMetricsRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMGuestMetricsRefSet(context string, input interface{}) (slice []VMGuestMetricsRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMGuestMetricsRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVMGuestMetricsRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeVMGuestMetricsRecord(context string, input interface{}) (record VMGuestMetricsRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -8700,6 +10534,64 @@ func deserializeVMGuestMetricsRecord(context string, input interface{}) (record 
 		if err != nil {
 			return
 		}
+	}
+	return
+}
+
+func deserializeEnumTristateType(context string, input interface{}) (value TristateType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "yes":
+		value = TristateTypeYes
+	case "no":
+		value = TristateTypeNo
+	case "unspecified":
+		value = TristateTypeUnspecified
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TristateType", context)
+	}
+	return
+}
+
+func deserializeVMMetricsRefToVMMetricsRecordMap(context string, input interface{}) (goMap map[VMMetricsRef]VMMetricsRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMMetricsRef]VMMetricsRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMMetricsRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVMMetricsRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMMetricsRefSet(context string, input interface{}) (slice []VMMetricsRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMMetricsRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVMMetricsRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
 	}
 	return
 }
@@ -8818,6 +10710,217 @@ func deserializeVMMetricsRecord(context string, input interface{}) (record VMMet
 	currentDomainTypeValue, ok := rpcStruct["current_domain_type"]
 	if ok && currentDomainTypeValue != nil {
 		record.CurrentDomainType, err = deserializeEnumDomainType(fmt.Sprintf("%s.%s", context, "current_domain_type"), currentDomainTypeValue)
+		if err != nil {
+			return
+		}
+	}
+	return
+}
+
+func deserializeIntToFloatMap(context string, input interface{}) (goMap map[int]float64, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[int]float64, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeInt(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeFloat(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeIntToIntMap(context string, input interface{}) (goMap map[int]int, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[int]int, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeInt(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeInt(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeIntToStringSetMap(context string, input interface{}) (goMap map[int][]string, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[int][]string, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeInt(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeStringSet(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMRefToVMRecordMap(context string, input interface{}) (goMap map[VMRef]VMRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMRef]VMRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeVMRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeSRRefSet(context string, input interface{}) (slice []SRRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]SRRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeSRRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeHostRefToStringSetMap(context string, input interface{}) (goMap map[HostRef][]string, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[HostRef][]string, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeHostRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeStringSet(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeDataSourceRecordSet(context string, input interface{}) (slice []DataSourceRecord, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]DataSourceRecord, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeDataSourceRecord(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeDataSourceRecord(context string, input interface{}) (record DataSourceRecord, err error) {
+	rpcStruct, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	nameLabelValue, ok := rpcStruct["name_label"]
+	if ok && nameLabelValue != nil {
+		record.NameLabel, err = deserializeString(fmt.Sprintf("%s.%s", context, "name_label"), nameLabelValue)
+		if err != nil {
+			return
+		}
+	}
+	nameDescriptionValue, ok := rpcStruct["name_description"]
+	if ok && nameDescriptionValue != nil {
+		record.NameDescription, err = deserializeString(fmt.Sprintf("%s.%s", context, "name_description"), nameDescriptionValue)
+		if err != nil {
+			return
+		}
+	}
+	enabledValue, ok := rpcStruct["enabled"]
+	if ok && enabledValue != nil {
+		record.Enabled, err = deserializeBool(fmt.Sprintf("%s.%s", context, "enabled"), enabledValue)
+		if err != nil {
+			return
+		}
+	}
+	standardValue, ok := rpcStruct["standard"]
+	if ok && standardValue != nil {
+		record.Standard, err = deserializeBool(fmt.Sprintf("%s.%s", context, "standard"), standardValue)
+		if err != nil {
+			return
+		}
+	}
+	unitsValue, ok := rpcStruct["units"]
+	if ok && unitsValue != nil {
+		record.Units, err = deserializeString(fmt.Sprintf("%s.%s", context, "units"), unitsValue)
+		if err != nil {
+			return
+		}
+	}
+	minValue, ok := rpcStruct["min"]
+	if ok && minValue != nil {
+		record.Min, err = deserializeFloat(fmt.Sprintf("%s.%s", context, "min"), minValue)
+		if err != nil {
+			return
+		}
+	}
+	maxValue, ok := rpcStruct["max"]
+	if ok && maxValue != nil {
+		record.Max, err = deserializeFloat(fmt.Sprintf("%s.%s", context, "max"), maxValue)
+		if err != nil {
+			return
+		}
+	}
+	valueValue, ok := rpcStruct["value"]
+	if ok && valueValue != nil {
+		record.Value, err = deserializeFloat(fmt.Sprintf("%s.%s", context, "value"), valueValue)
 		if err != nil {
 			return
 		}
@@ -9464,6 +11567,661 @@ func deserializeVMRecord(context string, input interface{}) (record VMRecord, er
 	return
 }
 
+func deserializeEnumVMOperationsSet(context string, input interface{}) (slice []VMOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumVMOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumVMOperationsMap(context string, input interface{}) (goMap map[string]VMOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]VMOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumVMOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVMPowerState(context string, input interface{}) (value VMPowerState, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "Halted":
+		value = VMPowerStateHalted
+	case "Paused":
+		value = VMPowerStatePaused
+	case "Running":
+		value = VMPowerStateRunning
+	case "Suspended":
+		value = VMPowerStateSuspended
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VMPowerState", context)
+	}
+	return
+}
+
+func deserializeEnumOnSoftrebootBehavior(context string, input interface{}) (value OnSoftrebootBehavior, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "soft_reboot":
+		value = OnSoftrebootBehaviorSoftReboot
+	case "destroy":
+		value = OnSoftrebootBehaviorDestroy
+	case "restart":
+		value = OnSoftrebootBehaviorRestart
+	case "preserve":
+		value = OnSoftrebootBehaviorPreserve
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnSoftrebootBehavior", context)
+	}
+	return
+}
+
+func deserializeEnumOnNormalExit(context string, input interface{}) (value OnNormalExit, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "destroy":
+		value = OnNormalExitDestroy
+	case "restart":
+		value = OnNormalExitRestart
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnNormalExit", context)
+	}
+	return
+}
+
+func deserializeEnumOnCrashBehaviour(context string, input interface{}) (value OnCrashBehaviour, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "destroy":
+		value = OnCrashBehaviourDestroy
+	case "coredump_and_destroy":
+		value = OnCrashBehaviourCoredumpAndDestroy
+	case "restart":
+		value = OnCrashBehaviourRestart
+	case "coredump_and_restart":
+		value = OnCrashBehaviourCoredumpAndRestart
+	case "preserve":
+		value = OnCrashBehaviourPreserve
+	case "rename_restart":
+		value = OnCrashBehaviourRenameRestart
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnCrashBehaviour", context)
+	}
+	return
+}
+
+func deserializeConsoleRefSet(context string, input interface{}) (slice []ConsoleRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]ConsoleRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeConsoleRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeConsoleRef(context string, input interface{}) (ConsoleRef, error) {
+	var ref ConsoleRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return ConsoleRef(value), nil
+}
+
+func deserializeVIFRefSet(context string, input interface{}) (slice []VIFRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VIFRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVIFRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVIFRef(context string, input interface{}) (VIFRef, error) {
+	var ref VIFRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VIFRef(value), nil
+}
+
+func deserializeVBDRefSet(context string, input interface{}) (slice []VBDRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VBDRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVBDRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVBDRef(context string, input interface{}) (VBDRef, error) {
+	var ref VBDRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VBDRef(value), nil
+}
+
+func deserializeVUSBRefSet(context string, input interface{}) (slice []VUSBRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VUSBRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVUSBRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVUSBRef(context string, input interface{}) (VUSBRef, error) {
+	var ref VUSBRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VUSBRef(value), nil
+}
+
+func deserializeCrashdumpRefSet(context string, input interface{}) (slice []CrashdumpRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]CrashdumpRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeCrashdumpRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeCrashdumpRef(context string, input interface{}) (CrashdumpRef, error) {
+	var ref CrashdumpRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return CrashdumpRef(value), nil
+}
+
+func deserializeVTPMRefSet(context string, input interface{}) (slice []VTPMRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VTPMRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVTPMRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVTPMRef(context string, input interface{}) (VTPMRef, error) {
+	var ref VTPMRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VTPMRef(value), nil
+}
+
+func deserializeVMMetricsRef(context string, input interface{}) (VMMetricsRef, error) {
+	var ref VMMetricsRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VMMetricsRef(value), nil
+}
+
+func deserializeVMGuestMetricsRef(context string, input interface{}) (VMGuestMetricsRef, error) {
+	var ref VMGuestMetricsRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VMGuestMetricsRef(value), nil
+}
+
+func deserializeEnumVMOperationsToStringMap(context string, input interface{}) (goMap map[VMOperations]string, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMOperations]string, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeEnumVMOperations(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeString(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumVMOperations(context string, input interface{}) (value VMOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "snapshot":
+		value = VMOperationsSnapshot
+	case "clone":
+		value = VMOperationsClone
+	case "copy":
+		value = VMOperationsCopy
+	case "create_template":
+		value = VMOperationsCreateTemplate
+	case "revert":
+		value = VMOperationsRevert
+	case "checkpoint":
+		value = VMOperationsCheckpoint
+	case "snapshot_with_quiesce":
+		value = VMOperationsSnapshotWithQuiesce
+	case "provision":
+		value = VMOperationsProvision
+	case "start":
+		value = VMOperationsStart
+	case "start_on":
+		value = VMOperationsStartOn
+	case "pause":
+		value = VMOperationsPause
+	case "unpause":
+		value = VMOperationsUnpause
+	case "clean_shutdown":
+		value = VMOperationsCleanShutdown
+	case "clean_reboot":
+		value = VMOperationsCleanReboot
+	case "hard_shutdown":
+		value = VMOperationsHardShutdown
+	case "power_state_reset":
+		value = VMOperationsPowerStateReset
+	case "hard_reboot":
+		value = VMOperationsHardReboot
+	case "suspend":
+		value = VMOperationsSuspend
+	case "csvm":
+		value = VMOperationsCsvm
+	case "resume":
+		value = VMOperationsResume
+	case "resume_on":
+		value = VMOperationsResumeOn
+	case "pool_migrate":
+		value = VMOperationsPoolMigrate
+	case "migrate_send":
+		value = VMOperationsMigrateSend
+	case "get_boot_record":
+		value = VMOperationsGetBootRecord
+	case "send_sysrq":
+		value = VMOperationsSendSysrq
+	case "send_trigger":
+		value = VMOperationsSendTrigger
+	case "query_services":
+		value = VMOperationsQueryServices
+	case "shutdown":
+		value = VMOperationsShutdown
+	case "call_plugin":
+		value = VMOperationsCallPlugin
+	case "changing_memory_live":
+		value = VMOperationsChangingMemoryLive
+	case "awaiting_memory_live":
+		value = VMOperationsAwaitingMemoryLive
+	case "changing_dynamic_range":
+		value = VMOperationsChangingDynamicRange
+	case "changing_static_range":
+		value = VMOperationsChangingStaticRange
+	case "changing_memory_limits":
+		value = VMOperationsChangingMemoryLimits
+	case "changing_shadow_memory":
+		value = VMOperationsChangingShadowMemory
+	case "changing_shadow_memory_live":
+		value = VMOperationsChangingShadowMemoryLive
+	case "changing_VCPUs":
+		value = VMOperationsChangingVCPUs
+	case "changing_VCPUs_live":
+		value = VMOperationsChangingVCPUsLive
+	case "changing_NVRAM":
+		value = VMOperationsChangingNVRAM
+	case "assert_operation_valid":
+		value = VMOperationsAssertOperationValid
+	case "data_source_op":
+		value = VMOperationsDataSourceOp
+	case "update_allowed_operations":
+		value = VMOperationsUpdateAllowedOperations
+	case "make_into_template":
+		value = VMOperationsMakeIntoTemplate
+	case "import":
+		value = VMOperationsImport
+	case "export":
+		value = VMOperationsExport
+	case "metadata_export":
+		value = VMOperationsMetadataExport
+	case "reverting":
+		value = VMOperationsReverting
+	case "destroy":
+		value = VMOperationsDestroy
+	case "create_vtpm":
+		value = VMOperationsCreateVtpm
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VMOperations", context)
+	}
+	return
+}
+
+func deserializeVMRefSet(context string, input interface{}) (slice []VMRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VMRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVMRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVMPPRef(context string, input interface{}) (VMPPRef, error) {
+	var ref VMPPRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VMPPRef(value), nil
+}
+
+func deserializeVMSSRef(context string, input interface{}) (VMSSRef, error) {
+	var ref VMSSRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VMSSRef(value), nil
+}
+
+func deserializeVMApplianceRef(context string, input interface{}) (VMApplianceRef, error) {
+	var ref VMApplianceRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VMApplianceRef(value), nil
+}
+
+func deserializeVGPURefSet(context string, input interface{}) (slice []VGPURef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VGPURef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVGPURef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVGPURef(context string, input interface{}) (VGPURef, error) {
+	var ref VGPURef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VGPURef(value), nil
+}
+
+func deserializePCIRefSet(context string, input interface{}) (slice []PCIRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PCIRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePCIRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePCIRef(context string, input interface{}) (PCIRef, error) {
+	var ref PCIRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PCIRef(value), nil
+}
+
+func deserializeEnumDomainType(context string, input interface{}) (value DomainType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "hvm":
+		value = DomainTypeHvm
+	case "pv":
+		value = DomainTypePv
+	case "pv_in_pvh":
+		value = DomainTypePvInPvh
+	case "pvh":
+		value = DomainTypePvh
+	case "unspecified":
+		value = DomainTypeUnspecified
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "DomainType", context)
+	}
+	return
+}
+
+func deserializeEnumUpdateGuidancesSet(context string, input interface{}) (slice []UpdateGuidances, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]UpdateGuidances, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumUpdateGuidances(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeEnumUpdateGuidances(context string, input interface{}) (value UpdateGuidances, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "reboot_host":
+		value = UpdateGuidancesRebootHost
+	case "reboot_host_on_livepatch_failure":
+		value = UpdateGuidancesRebootHostOnLivepatchFailure
+	case "reboot_host_on_kernel_livepatch_failure":
+		value = UpdateGuidancesRebootHostOnKernelLivepatchFailure
+	case "reboot_host_on_xen_livepatch_failure":
+		value = UpdateGuidancesRebootHostOnXenLivepatchFailure
+	case "restart_toolstack":
+		value = UpdateGuidancesRestartToolstack
+	case "restart_device_model":
+		value = UpdateGuidancesRestartDeviceModel
+	case "restart_vm":
+		value = UpdateGuidancesRestartVM
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "UpdateGuidances", context)
+	}
+	return
+}
+
+func deserializePoolUpdateRefToPoolUpdateRecordMap(context string, input interface{}) (goMap map[PoolUpdateRef]PoolUpdateRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PoolUpdateRef]PoolUpdateRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePoolUpdateRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePoolUpdateRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumLivepatchStatus(context string, input interface{}) (value LivepatchStatus, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "ok_livepatch_complete":
+		value = LivepatchStatusOkLivepatchComplete
+	case "ok_livepatch_incomplete":
+		value = LivepatchStatusOkLivepatchIncomplete
+	case "ok":
+		value = LivepatchStatusOk
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "LivepatchStatus", context)
+	}
+	return
+}
+
+func deserializePoolUpdateRefSet(context string, input interface{}) (slice []PoolUpdateRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PoolUpdateRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePoolUpdateRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializePoolUpdateRecord(context string, input interface{}) (record PoolUpdateRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -9550,6 +12308,93 @@ func deserializePoolUpdateRecord(context string, input interface{}) (record Pool
 	return
 }
 
+func deserializeEnumUpdateAfterApplyGuidanceSet(context string, input interface{}) (slice []UpdateAfterApplyGuidance, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]UpdateAfterApplyGuidance, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumUpdateAfterApplyGuidance(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeEnumUpdateAfterApplyGuidance(context string, input interface{}) (value UpdateAfterApplyGuidance, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "restartHVM":
+		value = UpdateAfterApplyGuidanceRestartHVM
+	case "restartPV":
+		value = UpdateAfterApplyGuidanceRestartPV
+	case "restartHost":
+		value = UpdateAfterApplyGuidanceRestartHost
+	case "restartXAPI":
+		value = UpdateAfterApplyGuidanceRestartXAPI
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "UpdateAfterApplyGuidance", context)
+	}
+	return
+}
+
+func deserializePoolPatchRefToPoolPatchRecordMap(context string, input interface{}) (goMap map[PoolPatchRef]PoolPatchRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PoolPatchRef]PoolPatchRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePoolPatchRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePoolPatchRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializePoolPatchRefSet(context string, input interface{}) (slice []PoolPatchRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PoolPatchRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePoolPatchRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePoolPatchRef(context string, input interface{}) (PoolPatchRef, error) {
+	var ref PoolPatchRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PoolPatchRef(value), nil
+}
+
 func deserializePoolPatchRecord(context string, input interface{}) (record PoolPatchRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -9627,6 +12472,245 @@ func deserializePoolPatchRecord(context string, input interface{}) (record PoolP
 		}
 	}
 	return
+}
+
+func deserializeHostPatchRefSet(context string, input interface{}) (slice []HostPatchRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]HostPatchRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeHostPatchRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeHostPatchRef(context string, input interface{}) (HostPatchRef, error) {
+	var ref HostPatchRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return HostPatchRef(value), nil
+}
+
+func deserializeEnumAfterApplyGuidanceSet(context string, input interface{}) (slice []AfterApplyGuidance, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]AfterApplyGuidance, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumAfterApplyGuidance(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeEnumAfterApplyGuidance(context string, input interface{}) (value AfterApplyGuidance, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "restartHVM":
+		value = AfterApplyGuidanceRestartHVM
+	case "restartPV":
+		value = AfterApplyGuidanceRestartPV
+	case "restartHost":
+		value = AfterApplyGuidanceRestartHost
+	case "restartXAPI":
+		value = AfterApplyGuidanceRestartXAPI
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "AfterApplyGuidance", context)
+	}
+	return
+}
+
+func deserializePoolUpdateRef(context string, input interface{}) (PoolUpdateRef, error) {
+	var ref PoolUpdateRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PoolUpdateRef(value), nil
+}
+
+func deserializePoolRefToPoolRecordMap(context string, input interface{}) (goMap map[PoolRef]PoolRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[PoolRef]PoolRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializePoolRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializePoolRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializePoolRefSet(context string, input interface{}) (slice []PoolRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PoolRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePoolRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringSetSet(context string, input interface{}) (slice [][]string, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([][]string, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeStringSet(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVMRefToStringSetMap(context string, input interface{}) (goMap map[VMRef][]string, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMRef][]string, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeStringSet(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMRefToStringToStringMapMap(context string, input interface{}) (goMap map[VMRef]map[string]string, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[VMRef]map[string]string, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeVMRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeStringToStringMap(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeVMRef(context string, input interface{}) (VMRef, error) {
+	var ref VMRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VMRef(value), nil
+}
+
+func deserializePIFRefSet(context string, input interface{}) (slice []PIFRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PIFRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializePIFRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePIFRef(context string, input interface{}) (PIFRef, error) {
+	var ref PIFRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PIFRef(value), nil
+}
+
+func deserializeHostRefSet(context string, input interface{}) (slice []HostRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]HostRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeHostRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializePoolRef(context string, input interface{}) (PoolRef, error) {
+	var ref PoolRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return PoolRef(value), nil
 }
 
 func deserializePoolRecord(context string, input interface{}) (record PoolRecord, err error) {
@@ -10037,18 +13121,246 @@ func deserializePoolRecord(context string, input interface{}) (record PoolRecord
 	return
 }
 
+func deserializeSRRef(context string, input interface{}) (SRRef, error) {
+	var ref SRRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return SRRef(value), nil
+}
+
+func deserializeStringToBlobRefMap(context string, input interface{}) (goMap map[string]BlobRef, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]BlobRef, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeBlobRef(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeBlobRef(context string, input interface{}) (BlobRef, error) {
+	var ref BlobRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return BlobRef(value), nil
+}
+
+func deserializeVDIRefSet(context string, input interface{}) (slice []VDIRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]VDIRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeVDIRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeVDIRef(context string, input interface{}) (VDIRef, error) {
+	var ref VDIRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return VDIRef(value), nil
+}
+
+func deserializeEnumPoolAllowedOperationsSet(context string, input interface{}) (slice []PoolAllowedOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]PoolAllowedOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumPoolAllowedOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumPoolAllowedOperationsMap(context string, input interface{}) (goMap map[string]PoolAllowedOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]PoolAllowedOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumPoolAllowedOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumPoolAllowedOperations(context string, input interface{}) (value PoolAllowedOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "ha_enable":
+		value = PoolAllowedOperationsHaEnable
+	case "ha_disable":
+		value = PoolAllowedOperationsHaDisable
+	case "cluster_create":
+		value = PoolAllowedOperationsClusterCreate
+	case "designate_new_master":
+		value = PoolAllowedOperationsDesignateNewMaster
+	case "configure_repositories":
+		value = PoolAllowedOperationsConfigureRepositories
+	case "sync_updates":
+		value = PoolAllowedOperationsSyncUpdates
+	case "get_updates":
+		value = PoolAllowedOperationsGetUpdates
+	case "apply_updates":
+		value = PoolAllowedOperationsApplyUpdates
+	case "tls_verification_enable":
+		value = PoolAllowedOperationsTLSVerificationEnable
+	case "cert_refresh":
+		value = PoolAllowedOperationsCertRefresh
+	case "exchange_certificates_on_join":
+		value = PoolAllowedOperationsExchangeCertificatesOnJoin
+	case "exchange_ca_certificates_on_join":
+		value = PoolAllowedOperationsExchangeCaCertificatesOnJoin
+	case "copy_primary_host_certs":
+		value = PoolAllowedOperationsCopyPrimaryHostCerts
+	case "eject":
+		value = PoolAllowedOperationsEject
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PoolAllowedOperations", context)
+	}
+	return
+}
+
+func deserializeRepositoryRefSet(context string, input interface{}) (slice []RepositoryRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]RepositoryRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeRepositoryRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeRepositoryRef(context string, input interface{}) (RepositoryRef, error) {
+	var ref RepositoryRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return RepositoryRef(value), nil
+}
+
+func deserializeSecretRef(context string, input interface{}) (SecretRef, error) {
+	var ref SecretRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return SecretRef(value), nil
+}
+
+func deserializeEnumTelemetryFrequency(context string, input interface{}) (value TelemetryFrequency, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "daily":
+		value = TelemetryFrequencyDaily
+	case "weekly":
+		value = TelemetryFrequencyWeekly
+	case "monthly":
+		value = TelemetryFrequencyMonthly
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TelemetryFrequency", context)
+	}
+	return
+}
+
+func deserializeEnumUpdateSyncFrequency(context string, input interface{}) (value UpdateSyncFrequency, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "daily":
+		value = UpdateSyncFrequencyDaily
+	case "weekly":
+		value = UpdateSyncFrequencyWeekly
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "UpdateSyncFrequency", context)
+	}
+	return
+}
+
+func deserializeEventRecordSet(context string, input interface{}) (slice []EventRecord, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]EventRecord, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEventRecord(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeEventRecord(context string, input interface{}) (record EventRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
 		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
 		return
-	}
-	snapshotValue, ok := rpcStruct["snapshot"]
-	if ok && snapshotValue != nil {
-		record.Snapshot, err = deserializeRecordInterface(fmt.Sprintf("%s.%s", context, "snapshot"), snapshotValue)
-		if err != nil {
-			return
-		}
 	}
 	iDValue, ok := rpcStruct["id"]
 	if ok && iDValue != nil {
@@ -10091,6 +13403,69 @@ func deserializeEventRecord(context string, input interface{}) (record EventReco
 		if err != nil {
 			return
 		}
+	}
+	snapshotValue, ok := rpcStruct["snapshot"]
+	if ok && snapshotValue != nil {
+		record.Snapshot, err = deserializeRecordInterface(fmt.Sprintf("%s.%s", context, "snapshot"), snapshotValue)
+		if err != nil {
+			return
+		}
+	}
+	return
+}
+
+func deserializeInt(context string, input interface{}) (value int, err error) {
+	_ = context
+	if input == nil {
+		return
+	}
+	strValue := fmt.Sprintf("%v", input)
+	value, err = strconv.Atoi(strValue)
+	if err != nil {
+		floatValue, err1 := strconv.ParseFloat(strValue, 64)
+		if err1 == nil {
+			return int(floatValue), nil
+		}
+	}
+	return
+}
+
+func deserializeEnumEventOperation(context string, input interface{}) (value EventOperation, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "add":
+		value = EventOperationAdd
+	case "del":
+		value = EventOperationDel
+	case "mod":
+		value = EventOperationMod
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "EventOperation", context)
+	}
+	return
+}
+
+func deserializeTaskRefToTaskRecordMap(context string, input interface{}) (goMap map[TaskRef]TaskRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[TaskRef]TaskRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeTaskRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeTaskRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
 	}
 	return
 }
@@ -10223,6 +13598,126 @@ func deserializeTaskRecord(context string, input interface{}) (record TaskRecord
 	return
 }
 
+func deserializeEnumTaskAllowedOperationsSet(context string, input interface{}) (slice []TaskAllowedOperations, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]TaskAllowedOperations, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeEnumTaskAllowedOperations(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeStringToEnumTaskAllowedOperationsMap(context string, input interface{}) (goMap map[string]TaskAllowedOperations, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[string]TaskAllowedOperations, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeString(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeEnumTaskAllowedOperations(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeEnumTaskAllowedOperations(context string, input interface{}) (value TaskAllowedOperations, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "cancel":
+		value = TaskAllowedOperationsCancel
+	case "destroy":
+		value = TaskAllowedOperationsDestroy
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TaskAllowedOperations", context)
+	}
+	return
+}
+
+func deserializeEnumTaskStatusType(context string, input interface{}) (value TaskStatusType, err error) {
+	strValue, err := deserializeString(context, input)
+	if err != nil {
+		return
+	}
+	switch strValue {
+	case "pending":
+		value = TaskStatusTypePending
+	case "success":
+		value = TaskStatusTypeSuccess
+	case "failure":
+		value = TaskStatusTypeFailure
+	case "cancelling":
+		value = TaskStatusTypeCancelling
+	case "cancelled":
+		value = TaskStatusTypeCancelled
+	default:
+		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TaskStatusType", context)
+	}
+	return
+}
+
+func deserializeFloat(context string, input interface{}) (value float64, err error) {
+	_ = context
+	if input == nil {
+		return
+	}
+	strValue := fmt.Sprintf("%v", input)
+	value, err = strconv.ParseFloat(strValue, 64)
+	if err != nil {
+		switch strValue {
+		case "+Inf":
+			return math.Inf(1), nil
+		case "-Inf":
+			return math.Inf(-1), nil
+		case "NaN":
+			return math.NaN(), nil
+		}
+	}
+	return
+}
+
+func deserializeRoleRefToRoleRecordMap(context string, input interface{}) (goMap map[RoleRef]RoleRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[RoleRef]RoleRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeRoleRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeRoleRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
 func deserializeRoleRecord(context string, input interface{}) (record RoleRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -10267,6 +13762,46 @@ func deserializeRoleRecord(context string, input interface{}) (record RoleRecord
 	return
 }
 
+func deserializeSubjectRefToSubjectRecordMap(context string, input interface{}) (goMap map[SubjectRef]SubjectRecord, err error) {
+	xenMap, ok := input.(map[string]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	goMap = make(map[SubjectRef]SubjectRecord, len(xenMap))
+	for xenKey, xenValue := range xenMap {
+		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
+		goKey, err := deserializeSubjectRef(keyContext, xenKey)
+		if err != nil {
+			return goMap, err
+		}
+		goValue, err := deserializeSubjectRecord(keyContext, xenValue)
+		if err != nil {
+			return goMap, err
+		}
+		goMap[goKey] = goValue
+	}
+	return
+}
+
+func deserializeSubjectRefSet(context string, input interface{}) (slice []SubjectRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]SubjectRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeSubjectRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
 func deserializeSubjectRecord(context string, input interface{}) (record SubjectRecord, err error) {
 	rpcStruct, ok := input.(map[string]interface{})
 	if !ok {
@@ -10302,6 +13837,33 @@ func deserializeSubjectRecord(context string, input interface{}) (record Subject
 		}
 	}
 	return
+}
+
+func deserializeRoleRefSet(context string, input interface{}) (slice []RoleRef, err error) {
+	set, ok := input.([]interface{})
+	if !ok {
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
+		return
+	}
+	slice = make([]RoleRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeRoleRef(itemContext, item)
+		if err != nil {
+			return slice, err
+		}
+		slice[index] = itemValue
+	}
+	return
+}
+
+func deserializeRoleRef(context string, input interface{}) (RoleRef, error) {
+	var ref RoleRef
+	value, ok := input.(string)
+	if !ok {
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return RoleRef(value), nil
 }
 
 func deserializeSessionRecord(context string, input interface{}) (record SessionRecord, err error) {
@@ -10425,1546 +13987,22 @@ func deserializeSessionRecord(context string, input interface{}) (record Session
 	return
 }
 
-func deserializeRecordInterface(context string, input interface{}) (inter RecordInterface, err error) {
-	_ = context
-	inter = input
-	return
-}
-
-func serializeEnumVMOperationsToStringMap(context string, goMap map[VMOperations]string) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeEnumVMOperations(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeString(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToBlobRefMap(context string, goMap map[string]BlobRef) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeBlobRef(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToEnumNetworkOperationsMap(context string, goMap map[string]NetworkOperations) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeEnumNetworkOperations(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToEnumVMApplianceOperationMap(context string, goMap map[string]VMApplianceOperation) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeEnumVMApplianceOperation(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToEnumVMOperationsMap(context string, goMap map[string]VMOperations) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeEnumVMOperations(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToEnumVbdOperationsMap(context string, goMap map[string]VbdOperations) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeEnumVbdOperations(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToEnumVdiOperationsMap(context string, goMap map[string]VdiOperations) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeEnumVdiOperations(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToEnumVifOperationsMap(context string, goMap map[string]VifOperations) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeEnumVifOperations(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeStringToStringMap(context string, goMap map[string]string) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeString(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeString(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeVDIRefToSRRefMap(context string, goMap map[VDIRef]SRRef) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeVDIRef(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeSRRef(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeVGPURefToGPUGroupRefMap(context string, goMap map[VGPURef]GPUGroupRef) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeVGPURef(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeGPUGroupRef(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeVIFRefToNetworkRefMap(context string, goMap map[VIFRef]NetworkRef) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeVIFRef(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeNetworkRef(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeVIFRefToStringMap(context string, goMap map[VIFRef]string) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeVIFRef(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeString(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func serializeVMRefToStringMap(context string, goMap map[VMRef]string) (xenMap map[string]interface{}, err error) {
-	xenMap = make(map[string]interface{})
-	for goKey, goValue := range goMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, goKey)
-		xenKey, err := serializeVMRef(keyContext, goKey)
-		if err != nil {
-			return xenMap, err
-		}
-		xenValue, err := serializeString(keyContext, goValue)
-		if err != nil {
-			return xenMap, err
-		}
-		xenMap[xenKey] = xenValue
-	}
-	return
-}
-
-func deserializeBlobRefToBlobRecordMap(context string, input interface{}) (goMap map[BlobRef]BlobRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeHostRef(context string, input interface{}) (HostRef, error) {
+	var ref HostRef
+	value, ok := input.(string)
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
 	}
-	goMap = make(map[BlobRef]BlobRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeBlobRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeBlobRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
+	return HostRef(value), nil
 }
 
-func deserializeBondRefToBondRecordMap(context string, input interface{}) (goMap map[BondRef]BondRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeUserRef(context string, input interface{}) (UserRef, error) {
+	var ref UserRef
+	value, ok := input.(string)
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
 	}
-	goMap = make(map[BondRef]BondRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeBondRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeBondRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeCertificateRefToCertificateRecordMap(context string, input interface{}) (goMap map[CertificateRef]CertificateRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[CertificateRef]CertificateRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeCertificateRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeCertificateRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeClusterHostRefToClusterHostRecordMap(context string, input interface{}) (goMap map[ClusterHostRef]ClusterHostRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[ClusterHostRef]ClusterHostRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeClusterHostRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeClusterHostRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeClusterRefToClusterRecordMap(context string, input interface{}) (goMap map[ClusterRef]ClusterRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[ClusterRef]ClusterRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeClusterRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeClusterRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeConsoleRefToConsoleRecordMap(context string, input interface{}) (goMap map[ConsoleRef]ConsoleRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[ConsoleRef]ConsoleRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeConsoleRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeConsoleRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeCrashdumpRefToCrashdumpRecordMap(context string, input interface{}) (goMap map[CrashdumpRef]CrashdumpRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[CrashdumpRef]CrashdumpRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeCrashdumpRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeCrashdumpRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeDRTaskRefToDRTaskRecordMap(context string, input interface{}) (goMap map[DRTaskRef]DRTaskRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[DRTaskRef]DRTaskRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeDRTaskRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeDRTaskRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeEnumVMOperationsToStringMap(context string, input interface{}) (goMap map[VMOperations]string, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMOperations]string, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeEnumVMOperations(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeString(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeFeatureRefToFeatureRecordMap(context string, input interface{}) (goMap map[FeatureRef]FeatureRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[FeatureRef]FeatureRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeFeatureRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeFeatureRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeGPUGroupRefToGPUGroupRecordMap(context string, input interface{}) (goMap map[GPUGroupRef]GPUGroupRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[GPUGroupRef]GPUGroupRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeGPUGroupRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeGPUGroupRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeHostCPURefToHostCPURecordMap(context string, input interface{}) (goMap map[HostCPURef]HostCPURecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[HostCPURef]HostCPURecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeHostCPURef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeHostCPURecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeHostCrashdumpRefToHostCrashdumpRecordMap(context string, input interface{}) (goMap map[HostCrashdumpRef]HostCrashdumpRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[HostCrashdumpRef]HostCrashdumpRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeHostCrashdumpRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeHostCrashdumpRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeHostMetricsRefToHostMetricsRecordMap(context string, input interface{}) (goMap map[HostMetricsRef]HostMetricsRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[HostMetricsRef]HostMetricsRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeHostMetricsRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeHostMetricsRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeHostPatchRefToHostPatchRecordMap(context string, input interface{}) (goMap map[HostPatchRef]HostPatchRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[HostPatchRef]HostPatchRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeHostPatchRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeHostPatchRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeHostRefToHostRecordMap(context string, input interface{}) (goMap map[HostRef]HostRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[HostRef]HostRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeHostRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeHostRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeHostRefToStringSetMap(context string, input interface{}) (goMap map[HostRef][]string, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[HostRef][]string, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeHostRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeStringSet(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeIntToFloatMap(context string, input interface{}) (goMap map[int]float64, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[int]float64, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeInt(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeFloat(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeIntToIntMap(context string, input interface{}) (goMap map[int]int, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[int]int, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeInt(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeInt(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeIntToStringSetMap(context string, input interface{}) (goMap map[int][]string, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[int][]string, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeInt(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeStringSet(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeMessageRefToMessageRecordMap(context string, input interface{}) (goMap map[MessageRef]MessageRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[MessageRef]MessageRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeMessageRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeMessageRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeNetworkRefToNetworkRecordMap(context string, input interface{}) (goMap map[NetworkRef]NetworkRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[NetworkRef]NetworkRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeNetworkRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeNetworkRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeNetworkSriovRefToNetworkSriovRecordMap(context string, input interface{}) (goMap map[NetworkSriovRef]NetworkSriovRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[NetworkSriovRef]NetworkSriovRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeNetworkSriovRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeNetworkSriovRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeObserverRefToObserverRecordMap(context string, input interface{}) (goMap map[ObserverRef]ObserverRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[ObserverRef]ObserverRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeObserverRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeObserverRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePBDRefToPBDRecordMap(context string, input interface{}) (goMap map[PBDRef]PBDRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PBDRef]PBDRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePBDRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePBDRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePCIRefToPCIRecordMap(context string, input interface{}) (goMap map[PCIRef]PCIRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PCIRef]PCIRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePCIRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePCIRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePGPURefToPGPURecordMap(context string, input interface{}) (goMap map[PGPURef]PGPURecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PGPURef]PGPURecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePGPURef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePGPURecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePIFMetricsRefToPIFMetricsRecordMap(context string, input interface{}) (goMap map[PIFMetricsRef]PIFMetricsRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PIFMetricsRef]PIFMetricsRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePIFMetricsRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePIFMetricsRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePIFRefToPIFRecordMap(context string, input interface{}) (goMap map[PIFRef]PIFRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PIFRef]PIFRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePIFRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePIFRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePUSBRefToPUSBRecordMap(context string, input interface{}) (goMap map[PUSBRef]PUSBRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PUSBRef]PUSBRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePUSBRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePUSBRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePVSCacheStorageRefToPVSCacheStorageRecordMap(context string, input interface{}) (goMap map[PVSCacheStorageRef]PVSCacheStorageRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PVSCacheStorageRef]PVSCacheStorageRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePVSCacheStorageRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePVSCacheStorageRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePVSProxyRefToPVSProxyRecordMap(context string, input interface{}) (goMap map[PVSProxyRef]PVSProxyRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PVSProxyRef]PVSProxyRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePVSProxyRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePVSProxyRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePVSServerRefToPVSServerRecordMap(context string, input interface{}) (goMap map[PVSServerRef]PVSServerRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PVSServerRef]PVSServerRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePVSServerRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePVSServerRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePVSSiteRefToPVSSiteRecordMap(context string, input interface{}) (goMap map[PVSSiteRef]PVSSiteRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PVSSiteRef]PVSSiteRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePVSSiteRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePVSSiteRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePoolPatchRefToPoolPatchRecordMap(context string, input interface{}) (goMap map[PoolPatchRef]PoolPatchRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PoolPatchRef]PoolPatchRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePoolPatchRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePoolPatchRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePoolRefToPoolRecordMap(context string, input interface{}) (goMap map[PoolRef]PoolRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PoolRef]PoolRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePoolRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePoolRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializePoolUpdateRefToPoolUpdateRecordMap(context string, input interface{}) (goMap map[PoolUpdateRef]PoolUpdateRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[PoolUpdateRef]PoolUpdateRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializePoolUpdateRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializePoolUpdateRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeRepositoryRefToRepositoryRecordMap(context string, input interface{}) (goMap map[RepositoryRef]RepositoryRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[RepositoryRef]RepositoryRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeRepositoryRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeRepositoryRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeRoleRefToRoleRecordMap(context string, input interface{}) (goMap map[RoleRef]RoleRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[RoleRef]RoleRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeRoleRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeRoleRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeSDNControllerRefToSDNControllerRecordMap(context string, input interface{}) (goMap map[SDNControllerRef]SDNControllerRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[SDNControllerRef]SDNControllerRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeSDNControllerRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeSDNControllerRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeSMRefToSMRecordMap(context string, input interface{}) (goMap map[SMRef]SMRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[SMRef]SMRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeSMRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeSMRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeSRRefToSRRecordMap(context string, input interface{}) (goMap map[SRRef]SRRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[SRRef]SRRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeSRRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeSRRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeSecretRefToSecretRecordMap(context string, input interface{}) (goMap map[SecretRef]SecretRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[SecretRef]SecretRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeSecretRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeSecretRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToBlobRefMap(context string, input interface{}) (goMap map[string]BlobRef, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]BlobRef, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeBlobRef(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumClusterHostOperationMap(context string, input interface{}) (goMap map[string]ClusterHostOperation, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]ClusterHostOperation, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumClusterHostOperation(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumClusterOperationMap(context string, input interface{}) (goMap map[string]ClusterOperation, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]ClusterOperation, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumClusterOperation(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumHostAllowedOperationsMap(context string, input interface{}) (goMap map[string]HostAllowedOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]HostAllowedOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumHostAllowedOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumNetworkOperationsMap(context string, input interface{}) (goMap map[string]NetworkOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]NetworkOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumNetworkOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumPoolAllowedOperationsMap(context string, input interface{}) (goMap map[string]PoolAllowedOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]PoolAllowedOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumPoolAllowedOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumStorageOperationsMap(context string, input interface{}) (goMap map[string]StorageOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]StorageOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumStorageOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumTaskAllowedOperationsMap(context string, input interface{}) (goMap map[string]TaskAllowedOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]TaskAllowedOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumTaskAllowedOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumVMApplianceOperationMap(context string, input interface{}) (goMap map[string]VMApplianceOperation, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]VMApplianceOperation, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumVMApplianceOperation(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumVMOperationsMap(context string, input interface{}) (goMap map[string]VMOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]VMOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumVMOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumVbdOperationsMap(context string, input interface{}) (goMap map[string]VbdOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]VbdOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumVbdOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumVdiOperationsMap(context string, input interface{}) (goMap map[string]VdiOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]VdiOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumVdiOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumVifOperationsMap(context string, input interface{}) (goMap map[string]VifOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]VifOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumVifOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumVtpmOperationsMap(context string, input interface{}) (goMap map[string]VtpmOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]VtpmOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumVtpmOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToEnumVusbOperationsMap(context string, input interface{}) (goMap map[string]VusbOperations, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]VusbOperations, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeEnumVusbOperations(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeStringToIntMap(context string, input interface{}) (goMap map[string]int, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[string]int, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeString(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeInt(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
+	return UserRef(value), nil
 }
 
 func deserializeStringToStringMap(context string, input interface{}) (goMap map[string]string, err error) {
@@ -11989,2129 +14027,109 @@ func deserializeStringToStringMap(context string, input interface{}) (goMap map[
 	return
 }
 
-func deserializeSubjectRefToSubjectRecordMap(context string, input interface{}) (goMap map[SubjectRef]SubjectRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeSubjectRef(context string, input interface{}) (SubjectRef, error) {
+	var ref SubjectRef
+	value, ok := input.(string)
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
+	}
+	return SubjectRef(value), nil
+}
+
+func deserializeTime(context string, input interface{}) (value time.Time, err error) {
+	_ = context
+	if input == nil {
 		return
 	}
-	goMap = make(map[SubjectRef]SubjectRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeSubjectRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
+	strValue := fmt.Sprintf("%v", input)
+	floatValue, err := strconv.ParseFloat(strValue, 64)
+	if err != nil {
+		for _, timeFormat := range timeFormats {
+			value, err = time.Parse(timeFormat, strValue)
+			if err == nil {
+				return value, nil
+			}
 		}
-		goValue, err := deserializeSubjectRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
+		return
 	}
+	unixTimestamp, err := strconv.ParseInt(strconv.Itoa(int(floatValue)), 10, 64)
+	value = time.Unix(unixTimestamp, 0)
+
 	return
 }
 
-func deserializeTaskRefToTaskRecordMap(context string, input interface{}) (goMap map[TaskRef]TaskRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeStringSet(context string, input interface{}) (slice []string, err error) {
+	set, ok := input.([]interface{})
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
 		return
 	}
-	goMap = make(map[TaskRef]TaskRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeTaskRef(keyContext, xenKey)
+	slice = make([]string, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeString(itemContext, item)
 		if err != nil {
-			return goMap, err
+			return slice, err
 		}
-		goValue, err := deserializeTaskRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
+		slice[index] = itemValue
 	}
 	return
 }
 
-func deserializeTunnelRefToTunnelRecordMap(context string, input interface{}) (goMap map[TunnelRef]TunnelRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeTaskRefSet(context string, input interface{}) (slice []TaskRef, err error) {
+	set, ok := input.([]interface{})
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "[]interface{}", context, reflect.TypeOf(input), input)
 		return
 	}
-	goMap = make(map[TunnelRef]TunnelRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeTunnelRef(keyContext, xenKey)
+	slice = make([]TaskRef, len(set))
+	for index, item := range set {
+		itemContext := fmt.Sprintf("%s[%d]", context, index)
+		itemValue, err := deserializeTaskRef(itemContext, item)
 		if err != nil {
-			return goMap, err
+			return slice, err
 		}
-		goValue, err := deserializeTunnelRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
+		slice[index] = itemValue
 	}
 	return
 }
 
-func deserializeUSBGroupRefToUSBGroupRecordMap(context string, input interface{}) (goMap map[USBGroupRef]USBGroupRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeTaskRef(context string, input interface{}) (TaskRef, error) {
+	var ref TaskRef
+	value, ok := input.(string)
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
 	}
-	goMap = make(map[USBGroupRef]USBGroupRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeUSBGroupRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeUSBGroupRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
+	return TaskRef(value), nil
 }
 
-func deserializeVBDMetricsRefToVBDMetricsRecordMap(context string, input interface{}) (goMap map[VBDMetricsRef]VBDMetricsRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeSessionRef(context string, input interface{}) (SessionRef, error) {
+	var ref SessionRef
+	value, ok := input.(string)
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
+		return ref, fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
 	}
-	goMap = make(map[VBDMetricsRef]VBDMetricsRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVBDMetricsRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVBDMetricsRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
+	return SessionRef(value), nil
 }
 
-func deserializeVBDRefToVBDRecordMap(context string, input interface{}) (goMap map[VBDRef]VBDRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeString(context string, input interface{}) (value string, err error) {
+	if input == nil {
+		return
+	}
+	value, ok := input.(string)
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VBDRef]VBDRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVBDRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVBDRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "string", context, reflect.TypeOf(input), input)
 	}
 	return
 }
 
-func deserializeVDIRefToVDIRecordMap(context string, input interface{}) (goMap map[VDIRef]VDIRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
+func deserializeBool(context string, input interface{}) (value bool, err error) {
+	if input == nil {
+		return
+	}
+	value, ok := input.(bool)
 	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VDIRef]VDIRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVDIRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVDIRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVGPURefToVGPURecordMap(context string, input interface{}) (goMap map[VGPURef]VGPURecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VGPURef]VGPURecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVGPURef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVGPURecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVGPUTypeRefToIntMap(context string, input interface{}) (goMap map[VGPUTypeRef]int, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VGPUTypeRef]int, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVGPUTypeRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeInt(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVGPUTypeRefToVGPUTypeRecordMap(context string, input interface{}) (goMap map[VGPUTypeRef]VGPUTypeRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VGPUTypeRef]VGPUTypeRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVGPUTypeRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVGPUTypeRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVIFMetricsRefToVIFMetricsRecordMap(context string, input interface{}) (goMap map[VIFMetricsRef]VIFMetricsRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VIFMetricsRef]VIFMetricsRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVIFMetricsRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVIFMetricsRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVIFRefToStringMap(context string, input interface{}) (goMap map[VIFRef]string, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VIFRef]string, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVIFRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeString(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVIFRefToVIFRecordMap(context string, input interface{}) (goMap map[VIFRef]VIFRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VIFRef]VIFRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVIFRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVIFRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVLANRefToVLANRecordMap(context string, input interface{}) (goMap map[VLANRef]VLANRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VLANRef]VLANRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVLANRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVLANRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMApplianceRefToVMApplianceRecordMap(context string, input interface{}) (goMap map[VMApplianceRef]VMApplianceRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMApplianceRef]VMApplianceRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMApplianceRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVMApplianceRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMGuestMetricsRefToVMGuestMetricsRecordMap(context string, input interface{}) (goMap map[VMGuestMetricsRef]VMGuestMetricsRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMGuestMetricsRef]VMGuestMetricsRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMGuestMetricsRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVMGuestMetricsRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMMetricsRefToVMMetricsRecordMap(context string, input interface{}) (goMap map[VMMetricsRef]VMMetricsRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMMetricsRef]VMMetricsRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMMetricsRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVMMetricsRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMPPRefToVMPPRecordMap(context string, input interface{}) (goMap map[VMPPRef]VMPPRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMPPRef]VMPPRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMPPRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVMPPRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMRefToStringSetMap(context string, input interface{}) (goMap map[VMRef][]string, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMRef][]string, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeStringSet(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMRefToStringToStringMapMap(context string, input interface{}) (goMap map[VMRef]map[string]string, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMRef]map[string]string, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeStringToStringMap(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMRefToVMRecordMap(context string, input interface{}) (goMap map[VMRef]VMRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMRef]VMRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVMRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVMSSRefToVMSSRecordMap(context string, input interface{}) (goMap map[VMSSRef]VMSSRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VMSSRef]VMSSRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVMSSRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVMSSRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVTPMRefToVTPMRecordMap(context string, input interface{}) (goMap map[VTPMRef]VTPMRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VTPMRef]VTPMRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVTPMRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVTPMRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func deserializeVUSBRefToVUSBRecordMap(context string, input interface{}) (goMap map[VUSBRef]VUSBRecord, err error) {
-	xenMap, ok := input.(map[string]interface{})
-	if !ok {
-		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "map[string]interface{}", context, reflect.TypeOf(input), input)
-		return
-	}
-	goMap = make(map[VUSBRef]VUSBRecord, len(xenMap))
-	for xenKey, xenValue := range xenMap {
-		keyContext := fmt.Sprintf("%s[%s]", context, xenKey)
-		goKey, err := deserializeVUSBRef(keyContext, xenKey)
-		if err != nil {
-			return goMap, err
-		}
-		goValue, err := deserializeVUSBRecord(keyContext, xenValue)
-		if err != nil {
-			return goMap, err
-		}
-		goMap[goKey] = goValue
-	}
-	return
-}
-
-func serializeEnumAllocationAlgorithm(context string, value AllocationAlgorithm) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumBondMode(context string, value BondMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumCls(context string, value Cls) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumConsoleProtocol(context string, value ConsoleProtocol) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumDomainType(context string, value DomainType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumHostDisplay(context string, value HostDisplay) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumHostNumaAffinityPolicy(context string, value HostNumaAffinityPolicy) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumHostSchedGran(context string, value HostSchedGran) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumIPConfigurationMode(context string, value IPConfigurationMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumIpv6ConfigurationMode(context string, value Ipv6ConfigurationMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumNetworkDefaultLockingMode(context string, value NetworkDefaultLockingMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumNetworkOperations(context string, value NetworkOperations) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumNetworkPurpose(context string, value NetworkPurpose) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumOnBoot(context string, value OnBoot) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumOnCrashBehaviour(context string, value OnCrashBehaviour) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumOnNormalExit(context string, value OnNormalExit) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumOnSoftrebootBehavior(context string, value OnSoftrebootBehavior) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumPrimaryAddressType(context string, value PrimaryAddressType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumSdnControllerProtocol(context string, value SdnControllerProtocol) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumTaskStatusType(context string, value TaskStatusType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumTunnelProtocol(context string, value TunnelProtocol) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumUpdateGuidances(context string, value UpdateGuidances) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumUpdateSyncFrequency(context string, value UpdateSyncFrequency) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVMApplianceOperation(context string, value VMApplianceOperation) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVMOperations(context string, value VMOperations) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVMPowerState(context string, value VMPowerState) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVbdMode(context string, value VbdMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVbdOperations(context string, value VbdOperations) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVbdType(context string, value VbdType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVdiOperations(context string, value VdiOperations) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVdiType(context string, value VdiType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVifIpv4ConfigurationMode(context string, value VifIpv4ConfigurationMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVifIpv6ConfigurationMode(context string, value VifIpv6ConfigurationMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVifLockingMode(context string, value VifLockingMode) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVifOperations(context string, value VifOperations) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVmppArchiveFrequency(context string, value VmppArchiveFrequency) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVmppArchiveTargetType(context string, value VmppArchiveTargetType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVmppBackupFrequency(context string, value VmppBackupFrequency) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVmppBackupType(context string, value VmppBackupType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVmssFrequency(context string, value VmssFrequency) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func serializeEnumVmssType(context string, value VmssType) (string, error) {
-	_ = context
-	return string(value), nil
-}
-
-func deserializeEnumAfterApplyGuidance(context string, input interface{}) (value AfterApplyGuidance, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "restartHVM":
-		value = AfterApplyGuidanceRestartHVM
-	case "restartPV":
-		value = AfterApplyGuidanceRestartPV
-	case "restartHost":
-		value = AfterApplyGuidanceRestartHost
-	case "restartXAPI":
-		value = AfterApplyGuidanceRestartXAPI
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "AfterApplyGuidance", context)
-	}
-	return
-}
-
-func deserializeEnumAllocationAlgorithm(context string, input interface{}) (value AllocationAlgorithm, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "breadth_first":
-		value = AllocationAlgorithmBreadthFirst
-	case "depth_first":
-		value = AllocationAlgorithmDepthFirst
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "AllocationAlgorithm", context)
-	}
-	return
-}
-
-func deserializeEnumBondMode(context string, input interface{}) (value BondMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "balance-slb":
-		value = BondModeBalanceSlb
-	case "active-backup":
-		value = BondModeActiveBackup
-	case "lacp":
-		value = BondModeLacp
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "BondMode", context)
-	}
-	return
-}
-
-func deserializeEnumCertificateType(context string, input interface{}) (value CertificateType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "ca":
-		value = CertificateTypeCa
-	case "host":
-		value = CertificateTypeHost
-	case "host_internal":
-		value = CertificateTypeHostInternal
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "CertificateType", context)
-	}
-	return
-}
-
-func deserializeEnumCls(context string, input interface{}) (value Cls, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "VM":
-		value = ClsVM
-	case "Host":
-		value = ClsHost
-	case "SR":
-		value = ClsSR
-	case "Pool":
-		value = ClsPool
-	case "VMPP":
-		value = ClsVMPP
-	case "VMSS":
-		value = ClsVMSS
-	case "PVS_proxy":
-		value = ClsPVSProxy
-	case "VDI":
-		value = ClsVDI
-	case "Certificate":
-		value = ClsCertificate
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "Cls", context)
-	}
-	return
-}
-
-func deserializeEnumClusterHostOperation(context string, input interface{}) (value ClusterHostOperation, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "enable":
-		value = ClusterHostOperationEnable
-	case "disable":
-		value = ClusterHostOperationDisable
-	case "destroy":
-		value = ClusterHostOperationDestroy
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "ClusterHostOperation", context)
-	}
-	return
-}
-
-func deserializeEnumClusterOperation(context string, input interface{}) (value ClusterOperation, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "add":
-		value = ClusterOperationAdd
-	case "remove":
-		value = ClusterOperationRemove
-	case "enable":
-		value = ClusterOperationEnable
-	case "disable":
-		value = ClusterOperationDisable
-	case "destroy":
-		value = ClusterOperationDestroy
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "ClusterOperation", context)
-	}
-	return
-}
-
-func deserializeEnumConsoleProtocol(context string, input interface{}) (value ConsoleProtocol, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "vt100":
-		value = ConsoleProtocolVt100
-	case "rfb":
-		value = ConsoleProtocolRfb
-	case "rdp":
-		value = ConsoleProtocolRdp
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "ConsoleProtocol", context)
-	}
-	return
-}
-
-func deserializeEnumDomainType(context string, input interface{}) (value DomainType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "hvm":
-		value = DomainTypeHvm
-	case "pv":
-		value = DomainTypePv
-	case "pv_in_pvh":
-		value = DomainTypePvInPvh
-	case "pvh":
-		value = DomainTypePvh
-	case "unspecified":
-		value = DomainTypeUnspecified
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "DomainType", context)
-	}
-	return
-}
-
-func deserializeEnumEventOperation(context string, input interface{}) (value EventOperation, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "add":
-		value = EventOperationAdd
-	case "del":
-		value = EventOperationDel
-	case "mod":
-		value = EventOperationMod
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "EventOperation", context)
-	}
-	return
-}
-
-func deserializeEnumHostAllowedOperations(context string, input interface{}) (value HostAllowedOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "provision":
-		value = HostAllowedOperationsProvision
-	case "evacuate":
-		value = HostAllowedOperationsEvacuate
-	case "shutdown":
-		value = HostAllowedOperationsShutdown
-	case "reboot":
-		value = HostAllowedOperationsReboot
-	case "power_on":
-		value = HostAllowedOperationsPowerOn
-	case "vm_start":
-		value = HostAllowedOperationsVMStart
-	case "vm_resume":
-		value = HostAllowedOperationsVMResume
-	case "vm_migrate":
-		value = HostAllowedOperationsVMMigrate
-	case "apply_updates":
-		value = HostAllowedOperationsApplyUpdates
-	case "enable":
-		value = HostAllowedOperationsEnable
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostAllowedOperations", context)
-	}
-	return
-}
-
-func deserializeEnumHostDisplay(context string, input interface{}) (value HostDisplay, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "enabled":
-		value = HostDisplayEnabled
-	case "disable_on_reboot":
-		value = HostDisplayDisableOnReboot
-	case "disabled":
-		value = HostDisplayDisabled
-	case "enable_on_reboot":
-		value = HostDisplayEnableOnReboot
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostDisplay", context)
-	}
-	return
-}
-
-func deserializeEnumHostNumaAffinityPolicy(context string, input interface{}) (value HostNumaAffinityPolicy, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "any":
-		value = HostNumaAffinityPolicyAny
-	case "best_effort":
-		value = HostNumaAffinityPolicyBestEffort
-	case "default_policy":
-		value = HostNumaAffinityPolicyDefaultPolicy
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostNumaAffinityPolicy", context)
-	}
-	return
-}
-
-func deserializeEnumHostSchedGran(context string, input interface{}) (value HostSchedGran, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "core":
-		value = HostSchedGranCore
-	case "cpu":
-		value = HostSchedGranCPU
-	case "socket":
-		value = HostSchedGranSocket
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "HostSchedGran", context)
-	}
-	return
-}
-
-func deserializeEnumIPConfigurationMode(context string, input interface{}) (value IPConfigurationMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "None":
-		value = IPConfigurationModeNone
-	case "DHCP":
-		value = IPConfigurationModeDHCP
-	case "Static":
-		value = IPConfigurationModeStatic
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "IPConfigurationMode", context)
-	}
-	return
-}
-
-func deserializeEnumIpv6ConfigurationMode(context string, input interface{}) (value Ipv6ConfigurationMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "None":
-		value = Ipv6ConfigurationModeNone
-	case "DHCP":
-		value = Ipv6ConfigurationModeDHCP
-	case "Static":
-		value = Ipv6ConfigurationModeStatic
-	case "Autoconf":
-		value = Ipv6ConfigurationModeAutoconf
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "Ipv6ConfigurationMode", context)
-	}
-	return
-}
-
-func deserializeEnumLatestSyncedUpdatesAppliedState(context string, input interface{}) (value LatestSyncedUpdatesAppliedState, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "yes":
-		value = LatestSyncedUpdatesAppliedStateYes
-	case "no":
-		value = LatestSyncedUpdatesAppliedStateNo
-	case "unknown":
-		value = LatestSyncedUpdatesAppliedStateUnknown
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "LatestSyncedUpdatesAppliedState", context)
-	}
-	return
-}
-
-func deserializeEnumLivepatchStatus(context string, input interface{}) (value LivepatchStatus, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "ok_livepatch_complete":
-		value = LivepatchStatusOkLivepatchComplete
-	case "ok_livepatch_incomplete":
-		value = LivepatchStatusOkLivepatchIncomplete
-	case "ok":
-		value = LivepatchStatusOk
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "LivepatchStatus", context)
-	}
-	return
-}
-
-func deserializeEnumNetworkDefaultLockingMode(context string, input interface{}) (value NetworkDefaultLockingMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "unlocked":
-		value = NetworkDefaultLockingModeUnlocked
-	case "disabled":
-		value = NetworkDefaultLockingModeDisabled
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "NetworkDefaultLockingMode", context)
-	}
-	return
-}
-
-func deserializeEnumNetworkOperations(context string, input interface{}) (value NetworkOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "attaching":
-		value = NetworkOperationsAttaching
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "NetworkOperations", context)
-	}
-	return
-}
-
-func deserializeEnumNetworkPurpose(context string, input interface{}) (value NetworkPurpose, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "nbd":
-		value = NetworkPurposeNbd
-	case "insecure_nbd":
-		value = NetworkPurposeInsecureNbd
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "NetworkPurpose", context)
-	}
-	return
-}
-
-func deserializeEnumOnBoot(context string, input interface{}) (value OnBoot, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "reset":
-		value = OnBootReset
-	case "persist":
-		value = OnBootPersist
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnBoot", context)
-	}
-	return
-}
-
-func deserializeEnumOnCrashBehaviour(context string, input interface{}) (value OnCrashBehaviour, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "destroy":
-		value = OnCrashBehaviourDestroy
-	case "coredump_and_destroy":
-		value = OnCrashBehaviourCoredumpAndDestroy
-	case "restart":
-		value = OnCrashBehaviourRestart
-	case "coredump_and_restart":
-		value = OnCrashBehaviourCoredumpAndRestart
-	case "preserve":
-		value = OnCrashBehaviourPreserve
-	case "rename_restart":
-		value = OnCrashBehaviourRenameRestart
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnCrashBehaviour", context)
-	}
-	return
-}
-
-func deserializeEnumOnNormalExit(context string, input interface{}) (value OnNormalExit, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "destroy":
-		value = OnNormalExitDestroy
-	case "restart":
-		value = OnNormalExitRestart
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnNormalExit", context)
-	}
-	return
-}
-
-func deserializeEnumOnSoftrebootBehavior(context string, input interface{}) (value OnSoftrebootBehavior, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "soft_reboot":
-		value = OnSoftrebootBehaviorSoftReboot
-	case "destroy":
-		value = OnSoftrebootBehaviorDestroy
-	case "restart":
-		value = OnSoftrebootBehaviorRestart
-	case "preserve":
-		value = OnSoftrebootBehaviorPreserve
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "OnSoftrebootBehavior", context)
-	}
-	return
-}
-
-func deserializeEnumPersistenceBackend(context string, input interface{}) (value PersistenceBackend, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "xapi":
-		value = PersistenceBackendXapi
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PersistenceBackend", context)
-	}
-	return
-}
-
-func deserializeEnumPgpuDom0Access(context string, input interface{}) (value PgpuDom0Access, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "enabled":
-		value = PgpuDom0AccessEnabled
-	case "disable_on_reboot":
-		value = PgpuDom0AccessDisableOnReboot
-	case "disabled":
-		value = PgpuDom0AccessDisabled
-	case "enable_on_reboot":
-		value = PgpuDom0AccessEnableOnReboot
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PgpuDom0Access", context)
-	}
-	return
-}
-
-func deserializeEnumPifIgmpStatus(context string, input interface{}) (value PifIgmpStatus, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "enabled":
-		value = PifIgmpStatusEnabled
-	case "disabled":
-		value = PifIgmpStatusDisabled
-	case "unknown":
-		value = PifIgmpStatusUnknown
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PifIgmpStatus", context)
-	}
-	return
-}
-
-func deserializeEnumPoolAllowedOperations(context string, input interface{}) (value PoolAllowedOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "ha_enable":
-		value = PoolAllowedOperationsHaEnable
-	case "ha_disable":
-		value = PoolAllowedOperationsHaDisable
-	case "cluster_create":
-		value = PoolAllowedOperationsClusterCreate
-	case "designate_new_master":
-		value = PoolAllowedOperationsDesignateNewMaster
-	case "configure_repositories":
-		value = PoolAllowedOperationsConfigureRepositories
-	case "sync_updates":
-		value = PoolAllowedOperationsSyncUpdates
-	case "get_updates":
-		value = PoolAllowedOperationsGetUpdates
-	case "apply_updates":
-		value = PoolAllowedOperationsApplyUpdates
-	case "tls_verification_enable":
-		value = PoolAllowedOperationsTLSVerificationEnable
-	case "cert_refresh":
-		value = PoolAllowedOperationsCertRefresh
-	case "exchange_certificates_on_join":
-		value = PoolAllowedOperationsExchangeCertificatesOnJoin
-	case "exchange_ca_certificates_on_join":
-		value = PoolAllowedOperationsExchangeCaCertificatesOnJoin
-	case "copy_primary_host_certs":
-		value = PoolAllowedOperationsCopyPrimaryHostCerts
-	case "eject":
-		value = PoolAllowedOperationsEject
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PoolAllowedOperations", context)
-	}
-	return
-}
-
-func deserializeEnumPrimaryAddressType(context string, input interface{}) (value PrimaryAddressType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "IPv4":
-		value = PrimaryAddressTypeIPv4
-	case "IPv6":
-		value = PrimaryAddressTypeIPv6
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PrimaryAddressType", context)
-	}
-	return
-}
-
-func deserializeEnumPvsProxyStatus(context string, input interface{}) (value PvsProxyStatus, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "stopped":
-		value = PvsProxyStatusStopped
-	case "initialised":
-		value = PvsProxyStatusInitialised
-	case "caching":
-		value = PvsProxyStatusCaching
-	case "incompatible_write_cache_mode":
-		value = PvsProxyStatusIncompatibleWriteCacheMode
-	case "incompatible_protocol_version":
-		value = PvsProxyStatusIncompatibleProtocolVersion
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "PvsProxyStatus", context)
-	}
-	return
-}
-
-func deserializeEnumSdnControllerProtocol(context string, input interface{}) (value SdnControllerProtocol, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "ssl":
-		value = SdnControllerProtocolSsl
-	case "pssl":
-		value = SdnControllerProtocolPssl
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "SdnControllerProtocol", context)
-	}
-	return
-}
-
-func deserializeEnumSrHealth(context string, input interface{}) (value SrHealth, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "healthy":
-		value = SrHealthHealthy
-	case "recovering":
-		value = SrHealthRecovering
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "SrHealth", context)
-	}
-	return
-}
-
-func deserializeEnumSriovConfigurationMode(context string, input interface{}) (value SriovConfigurationMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "sysfs":
-		value = SriovConfigurationModeSysfs
-	case "modprobe":
-		value = SriovConfigurationModeModprobe
-	case "manual":
-		value = SriovConfigurationModeManual
-	case "unknown":
-		value = SriovConfigurationModeUnknown
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "SriovConfigurationMode", context)
-	}
-	return
-}
-
-func deserializeEnumStorageOperations(context string, input interface{}) (value StorageOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "scan":
-		value = StorageOperationsScan
-	case "destroy":
-		value = StorageOperationsDestroy
-	case "forget":
-		value = StorageOperationsForget
-	case "plug":
-		value = StorageOperationsPlug
-	case "unplug":
-		value = StorageOperationsUnplug
-	case "update":
-		value = StorageOperationsUpdate
-	case "vdi_create":
-		value = StorageOperationsVdiCreate
-	case "vdi_introduce":
-		value = StorageOperationsVdiIntroduce
-	case "vdi_destroy":
-		value = StorageOperationsVdiDestroy
-	case "vdi_resize":
-		value = StorageOperationsVdiResize
-	case "vdi_clone":
-		value = StorageOperationsVdiClone
-	case "vdi_snapshot":
-		value = StorageOperationsVdiSnapshot
-	case "vdi_mirror":
-		value = StorageOperationsVdiMirror
-	case "vdi_enable_cbt":
-		value = StorageOperationsVdiEnableCbt
-	case "vdi_disable_cbt":
-		value = StorageOperationsVdiDisableCbt
-	case "vdi_data_destroy":
-		value = StorageOperationsVdiDataDestroy
-	case "vdi_list_changed_blocks":
-		value = StorageOperationsVdiListChangedBlocks
-	case "vdi_set_on_boot":
-		value = StorageOperationsVdiSetOnBoot
-	case "pbd_create":
-		value = StorageOperationsPbdCreate
-	case "pbd_destroy":
-		value = StorageOperationsPbdDestroy
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "StorageOperations", context)
-	}
-	return
-}
-
-func deserializeEnumTaskAllowedOperations(context string, input interface{}) (value TaskAllowedOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "cancel":
-		value = TaskAllowedOperationsCancel
-	case "destroy":
-		value = TaskAllowedOperationsDestroy
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TaskAllowedOperations", context)
-	}
-	return
-}
-
-func deserializeEnumTaskStatusType(context string, input interface{}) (value TaskStatusType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "pending":
-		value = TaskStatusTypePending
-	case "success":
-		value = TaskStatusTypeSuccess
-	case "failure":
-		value = TaskStatusTypeFailure
-	case "cancelling":
-		value = TaskStatusTypeCancelling
-	case "cancelled":
-		value = TaskStatusTypeCancelled
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TaskStatusType", context)
-	}
-	return
-}
-
-func deserializeEnumTelemetryFrequency(context string, input interface{}) (value TelemetryFrequency, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "daily":
-		value = TelemetryFrequencyDaily
-	case "weekly":
-		value = TelemetryFrequencyWeekly
-	case "monthly":
-		value = TelemetryFrequencyMonthly
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TelemetryFrequency", context)
-	}
-	return
-}
-
-func deserializeEnumTristateType(context string, input interface{}) (value TristateType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "yes":
-		value = TristateTypeYes
-	case "no":
-		value = TristateTypeNo
-	case "unspecified":
-		value = TristateTypeUnspecified
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TristateType", context)
-	}
-	return
-}
-
-func deserializeEnumTunnelProtocol(context string, input interface{}) (value TunnelProtocol, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "gre":
-		value = TunnelProtocolGre
-	case "vxlan":
-		value = TunnelProtocolVxlan
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "TunnelProtocol", context)
-	}
-	return
-}
-
-func deserializeEnumUpdateAfterApplyGuidance(context string, input interface{}) (value UpdateAfterApplyGuidance, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "restartHVM":
-		value = UpdateAfterApplyGuidanceRestartHVM
-	case "restartPV":
-		value = UpdateAfterApplyGuidanceRestartPV
-	case "restartHost":
-		value = UpdateAfterApplyGuidanceRestartHost
-	case "restartXAPI":
-		value = UpdateAfterApplyGuidanceRestartXAPI
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "UpdateAfterApplyGuidance", context)
-	}
-	return
-}
-
-func deserializeEnumUpdateGuidances(context string, input interface{}) (value UpdateGuidances, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "reboot_host":
-		value = UpdateGuidancesRebootHost
-	case "reboot_host_on_livepatch_failure":
-		value = UpdateGuidancesRebootHostOnLivepatchFailure
-	case "reboot_host_on_kernel_livepatch_failure":
-		value = UpdateGuidancesRebootHostOnKernelLivepatchFailure
-	case "reboot_host_on_xen_livepatch_failure":
-		value = UpdateGuidancesRebootHostOnXenLivepatchFailure
-	case "restart_toolstack":
-		value = UpdateGuidancesRestartToolstack
-	case "restart_device_model":
-		value = UpdateGuidancesRestartDeviceModel
-	case "restart_vm":
-		value = UpdateGuidancesRestartVM
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "UpdateGuidances", context)
-	}
-	return
-}
-
-func deserializeEnumUpdateSyncFrequency(context string, input interface{}) (value UpdateSyncFrequency, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "daily":
-		value = UpdateSyncFrequencyDaily
-	case "weekly":
-		value = UpdateSyncFrequencyWeekly
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "UpdateSyncFrequency", context)
-	}
-	return
-}
-
-func deserializeEnumVMApplianceOperation(context string, input interface{}) (value VMApplianceOperation, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "start":
-		value = VMApplianceOperationStart
-	case "clean_shutdown":
-		value = VMApplianceOperationCleanShutdown
-	case "hard_shutdown":
-		value = VMApplianceOperationHardShutdown
-	case "shutdown":
-		value = VMApplianceOperationShutdown
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VMApplianceOperation", context)
-	}
-	return
-}
-
-func deserializeEnumVMOperations(context string, input interface{}) (value VMOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "snapshot":
-		value = VMOperationsSnapshot
-	case "clone":
-		value = VMOperationsClone
-	case "copy":
-		value = VMOperationsCopy
-	case "create_template":
-		value = VMOperationsCreateTemplate
-	case "revert":
-		value = VMOperationsRevert
-	case "checkpoint":
-		value = VMOperationsCheckpoint
-	case "snapshot_with_quiesce":
-		value = VMOperationsSnapshotWithQuiesce
-	case "provision":
-		value = VMOperationsProvision
-	case "start":
-		value = VMOperationsStart
-	case "start_on":
-		value = VMOperationsStartOn
-	case "pause":
-		value = VMOperationsPause
-	case "unpause":
-		value = VMOperationsUnpause
-	case "clean_shutdown":
-		value = VMOperationsCleanShutdown
-	case "clean_reboot":
-		value = VMOperationsCleanReboot
-	case "hard_shutdown":
-		value = VMOperationsHardShutdown
-	case "power_state_reset":
-		value = VMOperationsPowerStateReset
-	case "hard_reboot":
-		value = VMOperationsHardReboot
-	case "suspend":
-		value = VMOperationsSuspend
-	case "csvm":
-		value = VMOperationsCsvm
-	case "resume":
-		value = VMOperationsResume
-	case "resume_on":
-		value = VMOperationsResumeOn
-	case "pool_migrate":
-		value = VMOperationsPoolMigrate
-	case "migrate_send":
-		value = VMOperationsMigrateSend
-	case "get_boot_record":
-		value = VMOperationsGetBootRecord
-	case "send_sysrq":
-		value = VMOperationsSendSysrq
-	case "send_trigger":
-		value = VMOperationsSendTrigger
-	case "query_services":
-		value = VMOperationsQueryServices
-	case "shutdown":
-		value = VMOperationsShutdown
-	case "call_plugin":
-		value = VMOperationsCallPlugin
-	case "changing_memory_live":
-		value = VMOperationsChangingMemoryLive
-	case "awaiting_memory_live":
-		value = VMOperationsAwaitingMemoryLive
-	case "changing_dynamic_range":
-		value = VMOperationsChangingDynamicRange
-	case "changing_static_range":
-		value = VMOperationsChangingStaticRange
-	case "changing_memory_limits":
-		value = VMOperationsChangingMemoryLimits
-	case "changing_shadow_memory":
-		value = VMOperationsChangingShadowMemory
-	case "changing_shadow_memory_live":
-		value = VMOperationsChangingShadowMemoryLive
-	case "changing_VCPUs":
-		value = VMOperationsChangingVCPUs
-	case "changing_VCPUs_live":
-		value = VMOperationsChangingVCPUsLive
-	case "changing_NVRAM":
-		value = VMOperationsChangingNVRAM
-	case "assert_operation_valid":
-		value = VMOperationsAssertOperationValid
-	case "data_source_op":
-		value = VMOperationsDataSourceOp
-	case "update_allowed_operations":
-		value = VMOperationsUpdateAllowedOperations
-	case "make_into_template":
-		value = VMOperationsMakeIntoTemplate
-	case "import":
-		value = VMOperationsImport
-	case "export":
-		value = VMOperationsExport
-	case "metadata_export":
-		value = VMOperationsMetadataExport
-	case "reverting":
-		value = VMOperationsReverting
-	case "destroy":
-		value = VMOperationsDestroy
-	case "create_vtpm":
-		value = VMOperationsCreateVtpm
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VMOperations", context)
-	}
-	return
-}
-
-func deserializeEnumVMPowerState(context string, input interface{}) (value VMPowerState, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "Halted":
-		value = VMPowerStateHalted
-	case "Paused":
-		value = VMPowerStatePaused
-	case "Running":
-		value = VMPowerStateRunning
-	case "Suspended":
-		value = VMPowerStateSuspended
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VMPowerState", context)
-	}
-	return
-}
-
-func deserializeEnumVbdMode(context string, input interface{}) (value VbdMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "RO":
-		value = VbdModeRO
-	case "RW":
-		value = VbdModeRW
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VbdMode", context)
-	}
-	return
-}
-
-func deserializeEnumVbdOperations(context string, input interface{}) (value VbdOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "attach":
-		value = VbdOperationsAttach
-	case "eject":
-		value = VbdOperationsEject
-	case "insert":
-		value = VbdOperationsInsert
-	case "plug":
-		value = VbdOperationsPlug
-	case "unplug":
-		value = VbdOperationsUnplug
-	case "unplug_force":
-		value = VbdOperationsUnplugForce
-	case "pause":
-		value = VbdOperationsPause
-	case "unpause":
-		value = VbdOperationsUnpause
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VbdOperations", context)
-	}
-	return
-}
-
-func deserializeEnumVbdType(context string, input interface{}) (value VbdType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "CD":
-		value = VbdTypeCD
-	case "Disk":
-		value = VbdTypeDisk
-	case "Floppy":
-		value = VbdTypeFloppy
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VbdType", context)
-	}
-	return
-}
-
-func deserializeEnumVdiOperations(context string, input interface{}) (value VdiOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "clone":
-		value = VdiOperationsClone
-	case "copy":
-		value = VdiOperationsCopy
-	case "resize":
-		value = VdiOperationsResize
-	case "resize_online":
-		value = VdiOperationsResizeOnline
-	case "snapshot":
-		value = VdiOperationsSnapshot
-	case "mirror":
-		value = VdiOperationsMirror
-	case "destroy":
-		value = VdiOperationsDestroy
-	case "forget":
-		value = VdiOperationsForget
-	case "update":
-		value = VdiOperationsUpdate
-	case "force_unlock":
-		value = VdiOperationsForceUnlock
-	case "generate_config":
-		value = VdiOperationsGenerateConfig
-	case "enable_cbt":
-		value = VdiOperationsEnableCbt
-	case "disable_cbt":
-		value = VdiOperationsDisableCbt
-	case "data_destroy":
-		value = VdiOperationsDataDestroy
-	case "list_changed_blocks":
-		value = VdiOperationsListChangedBlocks
-	case "set_on_boot":
-		value = VdiOperationsSetOnBoot
-	case "blocked":
-		value = VdiOperationsBlocked
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VdiOperations", context)
-	}
-	return
-}
-
-func deserializeEnumVdiType(context string, input interface{}) (value VdiType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "system":
-		value = VdiTypeSystem
-	case "user":
-		value = VdiTypeUser
-	case "ephemeral":
-		value = VdiTypeEphemeral
-	case "suspend":
-		value = VdiTypeSuspend
-	case "crashdump":
-		value = VdiTypeCrashdump
-	case "ha_statefile":
-		value = VdiTypeHaStatefile
-	case "metadata":
-		value = VdiTypeMetadata
-	case "redo_log":
-		value = VdiTypeRedoLog
-	case "rrd":
-		value = VdiTypeRrd
-	case "pvs_cache":
-		value = VdiTypePvsCache
-	case "cbt_metadata":
-		value = VdiTypeCbtMetadata
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VdiType", context)
-	}
-	return
-}
-
-func deserializeEnumVgpuTypeImplementation(context string, input interface{}) (value VgpuTypeImplementation, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "passthrough":
-		value = VgpuTypeImplementationPassthrough
-	case "nvidia":
-		value = VgpuTypeImplementationNvidia
-	case "nvidia_sriov":
-		value = VgpuTypeImplementationNvidiaSriov
-	case "gvt_g":
-		value = VgpuTypeImplementationGvtG
-	case "mxgpu":
-		value = VgpuTypeImplementationMxgpu
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VgpuTypeImplementation", context)
-	}
-	return
-}
-
-func deserializeEnumVifIpv4ConfigurationMode(context string, input interface{}) (value VifIpv4ConfigurationMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "None":
-		value = VifIpv4ConfigurationModeNone
-	case "Static":
-		value = VifIpv4ConfigurationModeStatic
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifIpv4ConfigurationMode", context)
-	}
-	return
-}
-
-func deserializeEnumVifIpv6ConfigurationMode(context string, input interface{}) (value VifIpv6ConfigurationMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "None":
-		value = VifIpv6ConfigurationModeNone
-	case "Static":
-		value = VifIpv6ConfigurationModeStatic
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifIpv6ConfigurationMode", context)
-	}
-	return
-}
-
-func deserializeEnumVifLockingMode(context string, input interface{}) (value VifLockingMode, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "network_default":
-		value = VifLockingModeNetworkDefault
-	case "locked":
-		value = VifLockingModeLocked
-	case "unlocked":
-		value = VifLockingModeUnlocked
-	case "disabled":
-		value = VifLockingModeDisabled
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifLockingMode", context)
-	}
-	return
-}
-
-func deserializeEnumVifOperations(context string, input interface{}) (value VifOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "attach":
-		value = VifOperationsAttach
-	case "plug":
-		value = VifOperationsPlug
-	case "unplug":
-		value = VifOperationsUnplug
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VifOperations", context)
-	}
-	return
-}
-
-func deserializeEnumVmppArchiveFrequency(context string, input interface{}) (value VmppArchiveFrequency, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "never":
-		value = VmppArchiveFrequencyNever
-	case "always_after_backup":
-		value = VmppArchiveFrequencyAlwaysAfterBackup
-	case "daily":
-		value = VmppArchiveFrequencyDaily
-	case "weekly":
-		value = VmppArchiveFrequencyWeekly
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppArchiveFrequency", context)
-	}
-	return
-}
-
-func deserializeEnumVmppArchiveTargetType(context string, input interface{}) (value VmppArchiveTargetType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "none":
-		value = VmppArchiveTargetTypeNone
-	case "cifs":
-		value = VmppArchiveTargetTypeCifs
-	case "nfs":
-		value = VmppArchiveTargetTypeNfs
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppArchiveTargetType", context)
-	}
-	return
-}
-
-func deserializeEnumVmppBackupFrequency(context string, input interface{}) (value VmppBackupFrequency, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "hourly":
-		value = VmppBackupFrequencyHourly
-	case "daily":
-		value = VmppBackupFrequencyDaily
-	case "weekly":
-		value = VmppBackupFrequencyWeekly
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppBackupFrequency", context)
-	}
-	return
-}
-
-func deserializeEnumVmppBackupType(context string, input interface{}) (value VmppBackupType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "snapshot":
-		value = VmppBackupTypeSnapshot
-	case "checkpoint":
-		value = VmppBackupTypeCheckpoint
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmppBackupType", context)
-	}
-	return
-}
-
-func deserializeEnumVmssFrequency(context string, input interface{}) (value VmssFrequency, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "hourly":
-		value = VmssFrequencyHourly
-	case "daily":
-		value = VmssFrequencyDaily
-	case "weekly":
-		value = VmssFrequencyWeekly
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmssFrequency", context)
-	}
-	return
-}
-
-func deserializeEnumVmssType(context string, input interface{}) (value VmssType, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "snapshot":
-		value = VmssTypeSnapshot
-	case "checkpoint":
-		value = VmssTypeCheckpoint
-	case "snapshot_with_quiesce":
-		value = VmssTypeSnapshotWithQuiesce
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VmssType", context)
-	}
-	return
-}
-
-func deserializeEnumVtpmOperations(context string, input interface{}) (value VtpmOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "destroy":
-		value = VtpmOperationsDestroy
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VtpmOperations", context)
-	}
-	return
-}
-
-func deserializeEnumVusbOperations(context string, input interface{}) (value VusbOperations, err error) {
-	strValue, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	switch strValue {
-	case "attach":
-		value = VusbOperationsAttach
-	case "plug":
-		value = VusbOperationsPlug
-	case "unplug":
-		value = VusbOperationsUnplug
-	default:
-		err = fmt.Errorf("unable to parse XenAPI response: got value %q for enum %s at %s, but this is not any of the known values", strValue, "VusbOperations", context)
+		err = fmt.Errorf("failed to parse XenAPI response: expected Go type %s at %s but got Go type %s with value %v", "bool", context, reflect.TypeOf(input), input)
 	}
 	return
 }
@@ -14146,26 +14164,8 @@ func deserializeEventBatch(context string, input interface{}) (batch EventBatch,
 	return
 }
 
-func deserializeOptionSrStatRecord(context string, input interface{}) (option OptionSrStatRecord, err error) {
-	if input == nil {
-		return
-	}
-	value, err := deserializeSrStatRecord(context, input)
-	if err != nil {
-		return
-	}
-	option = &value
-	return
-}
-
-func deserializeOptionString(context string, input interface{}) (option OptionString, err error) {
-	if input == nil {
-		return
-	}
-	value, err := deserializeString(context, input)
-	if err != nil {
-		return
-	}
-	option = &value
+func deserializeRecordInterface(context string, input interface{}) (inter RecordInterface, err error) {
+	_ = context
+	inter = input
 	return
 }

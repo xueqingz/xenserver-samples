@@ -14,26 +14,48 @@ type auth struct{}
 
 var Auth auth
 
-// GetSubjectIdentifier: This call queries the external directory service to obtain the subject_identifier as a string from the human-readable subject_name
-func (auth) GetSubjectIdentifier(session *Session, subjectName string) (retval string, err error) {
-	method := "auth.get_subject_identifier"
+// GetGroupMembership: This calls queries the external directory service to obtain the transitively-closed set of groups that the the subject_identifier is member of.
+// Version: george
+func (auth) GetGroupMembership(session *Session, subjectIdentifier string) (retval []string, err error) {
+	method := "auth.get_group_membership"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	subjectNameArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "subject_name"), subjectName)
+	subjectIdentifierArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "subject_identifier"), subjectIdentifier)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, subjectNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, subjectIdentifierArg)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeString(method+" -> ", result)
+	retval, err = deserializeStringSet(method+" -> ", result)
+	return
+}
+
+// GetGroupMembership2: This calls queries the external directory service to obtain the transitively-closed set of groups that the the subject_identifier is member of.
+// Version: george
+func (auth) GetGroupMembership2(session *Session, subjectIdentifier string) (retval []string, err error) {
+	method := "auth.get_group_membership"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	subjectIdentifierArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "subject_identifier"), subjectIdentifier)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, subjectIdentifierArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringSet(method+" -> ", result)
 	return
 }
 
 // GetSubjectInformationFromIdentifier: This call queries the external directory service to obtain the user information (e.g. username, organization etc) from the specified subject_identifier
+// Version: george
 func (auth) GetSubjectInformationFromIdentifier(session *Session, subjectIdentifier string) (retval map[string]string, err error) {
 	method := "auth.get_subject_information_from_identifier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -52,9 +74,10 @@ func (auth) GetSubjectInformationFromIdentifier(session *Session, subjectIdentif
 	return
 }
 
-// GetGroupMembership: This calls queries the external directory service to obtain the transitively-closed set of groups that the the subject_identifier is member of.
-func (auth) GetGroupMembership(session *Session, subjectIdentifier string) (retval []string, err error) {
-	method := "auth.get_group_membership"
+// GetSubjectInformationFromIdentifier2: This call queries the external directory service to obtain the user information (e.g. username, organization etc) from the specified subject_identifier
+// Version: george
+func (auth) GetSubjectInformationFromIdentifier2(session *Session, subjectIdentifier string) (retval map[string]string, err error) {
+	method := "auth.get_subject_information_from_identifier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -67,6 +90,46 @@ func (auth) GetGroupMembership(session *Session, subjectIdentifier string) (retv
 	if err != nil {
 		return
 	}
-	retval, err = deserializeStringSet(method+" -> ", result)
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetSubjectIdentifier: This call queries the external directory service to obtain the subject_identifier as a string from the human-readable subject_name
+// Version: george
+func (auth) GetSubjectIdentifier(session *Session, subjectName string) (retval string, err error) {
+	method := "auth.get_subject_identifier"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	subjectNameArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "subject_name"), subjectName)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, subjectNameArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetSubjectIdentifier2: This call queries the external directory service to obtain the subject_identifier as a string from the human-readable subject_name
+// Version: george
+func (auth) GetSubjectIdentifier2(session *Session, subjectName string) (retval string, err error) {
+	method := "auth.get_subject_identifier"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	subjectNameArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "subject_name"), subjectName)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, subjectNameArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
 	return
 }

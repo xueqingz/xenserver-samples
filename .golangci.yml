@@ -74,7 +74,8 @@ linters:
     - gci # controls golang package import order and makes it always deterministic
     - tagalign # checks that struct tags are well aligned
     - wrapcheck # checks that errors returned from external packages are wrapped
-    - dogsled # checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())    ## disabled
+    - dogsled # checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())    
+  ## disabled
     #- gochecknoglobals # checks that no global variables exist
     #- gocyclo # computes and checks the cyclomatic complexity of functions
     #- nestif # reports deeply nested if statements

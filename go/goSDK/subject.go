@@ -22,9 +22,74 @@ type subject struct{}
 
 var Subject subject
 
-// GetRecord: Get a record containing the current state of the given subject.
-func (subject) GetRecord(session *Session, self SubjectRef) (retval SubjectRecord, err error) {
-	method := "subject.get_record"
+// GetAllRecords: Return a map of subject references to subject records for all subjects known to the system.
+// Version: george
+func (subject) GetAllRecords(session *Session) (retval map[SubjectRef]SubjectRecord, err error) {
+	method := "subject.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeSubjectRefToSubjectRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAllRecords1: Return a map of subject references to subject records for all subjects known to the system.
+// Version: george
+func (subject) GetAllRecords1(session *Session) (retval map[SubjectRef]SubjectRecord, err error) {
+	method := "subject.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeSubjectRefToSubjectRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAll: Return a list of all the subjects known to the system.
+// Version: george
+func (subject) GetAll(session *Session) (retval []SubjectRef, err error) {
+	method := "subject.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeSubjectRefSet(method+" -> ", result)
+	return
+}
+
+// GetAll1: Return a list of all the subjects known to the system.
+// Version: george
+func (subject) GetAll1(session *Session) (retval []SubjectRef, err error) {
+	method := "subject.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeSubjectRefSet(method+" -> ", result)
+	return
+}
+
+// GetPermissionsNameLabel: This call returns a list of permission names given a subject
+// Version: midnight-ride
+func (subject) GetPermissionsNameLabel(session *Session, self SubjectRef) (retval []string, err error) {
+	method := "subject.get_permissions_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -37,30 +102,344 @@ func (subject) GetRecord(session *Session, self SubjectRef) (retval SubjectRecor
 	if err != nil {
 		return
 	}
-	retval, err = deserializeSubjectRecord(method+" -> ", result)
+	retval, err = deserializeStringSet(method+" -> ", result)
 	return
 }
 
-// GetByUUID: Get a reference to the subject instance with the specified UUID.
-func (subject) GetByUUID(session *Session, uUID string) (retval SubjectRef, err error) {
-	method := "subject.get_by_uuid"
+// GetPermissionsNameLabel2: This call returns a list of permission names given a subject
+// Version: midnight-ride
+func (subject) GetPermissionsNameLabel2(session *Session, self SubjectRef) (retval []string, err error) {
+	method := "subject.get_permissions_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeSubjectRef(method+" -> ", result)
+	retval, err = deserializeStringSet(method+" -> ", result)
+	return
+}
+
+// RemoveFromRoles: This call removes a role from a subject
+// Version: midnight-ride
+func (subject) RemoveFromRoles(session *Session, self SubjectRef, role RoleRef) (err error) {
+	method := "subject.remove_from_roles"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	roleArg, err := serializeRoleRef(fmt.Sprintf("%s(%s)", method, "role"), role)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, roleArg)
+	return
+}
+
+// RemoveFromRoles3: This call removes a role from a subject
+// Version: midnight-ride
+func (subject) RemoveFromRoles3(session *Session, self SubjectRef, role RoleRef) (err error) {
+	method := "subject.remove_from_roles"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	roleArg, err := serializeRoleRef(fmt.Sprintf("%s(%s)", method, "role"), role)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, roleArg)
+	return
+}
+
+// AddToRoles: This call adds a new role to a subject
+// Version: midnight-ride
+func (subject) AddToRoles(session *Session, self SubjectRef, role RoleRef) (err error) {
+	method := "subject.add_to_roles"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	roleArg, err := serializeRoleRef(fmt.Sprintf("%s(%s)", method, "role"), role)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, roleArg)
+	return
+}
+
+// AddToRoles3: This call adds a new role to a subject
+// Version: midnight-ride
+func (subject) AddToRoles3(session *Session, self SubjectRef, role RoleRef) (err error) {
+	method := "subject.add_to_roles"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	roleArg, err := serializeRoleRef(fmt.Sprintf("%s(%s)", method, "role"), role)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, roleArg)
+	return
+}
+
+// GetRoles: Get the roles field of the given subject.
+// Version: george
+func (subject) GetRoles(session *Session, self SubjectRef) (retval []RoleRef, err error) {
+	method := "subject.get_roles"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeRoleRefSet(method+" -> ", result)
+	return
+}
+
+// GetRoles2: Get the roles field of the given subject.
+// Version: george
+func (subject) GetRoles2(session *Session, self SubjectRef) (retval []RoleRef, err error) {
+	method := "subject.get_roles"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeRoleRefSet(method+" -> ", result)
+	return
+}
+
+// GetOtherConfig: Get the other_config field of the given subject.
+// Version: george
+func (subject) GetOtherConfig(session *Session, self SubjectRef) (retval map[string]string, err error) {
+	method := "subject.get_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetOtherConfig2: Get the other_config field of the given subject.
+// Version: george
+func (subject) GetOtherConfig2(session *Session, self SubjectRef) (retval map[string]string, err error) {
+	method := "subject.get_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetSubjectIdentifier: Get the subject_identifier field of the given subject.
+// Version: george
+func (subject) GetSubjectIdentifier(session *Session, self SubjectRef) (retval string, err error) {
+	method := "subject.get_subject_identifier"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetSubjectIdentifier2: Get the subject_identifier field of the given subject.
+// Version: george
+func (subject) GetSubjectIdentifier2(session *Session, self SubjectRef) (retval string, err error) {
+	method := "subject.get_subject_identifier"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetUUID: Get the uuid field of the given subject.
+// Version: george
+func (subject) GetUUID(session *Session, self SubjectRef) (retval string, err error) {
+	method := "subject.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetUUID2: Get the uuid field of the given subject.
+// Version: george
+func (subject) GetUUID2(session *Session, self SubjectRef) (retval string, err error) {
+	method := "subject.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// Destroy: Destroy the specified subject instance.
+// Version: george
+func (subject) Destroy(session *Session, self SubjectRef) (err error) {
+	method := "subject.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// AsyncDestroy: Destroy the specified subject instance.
+// Version: george
+func (subject) AsyncDestroy(session *Session, self SubjectRef) (retval TaskRef, err error) {
+	method := "Async.subject.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// Destroy2: Destroy the specified subject instance.
+// Version: george
+func (subject) Destroy2(session *Session, self SubjectRef) (err error) {
+	method := "subject.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// AsyncDestroy2: Destroy the specified subject instance.
+// Version: george
+func (subject) AsyncDestroy2(session *Session, self SubjectRef) (retval TaskRef, err error) {
+	method := "Async.subject.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
 
 // Create: Create a new subject instance, and return its handle. The constructor args are: subject_identifier, other_config (* = non-optional).
+// Version: george
 func (subject) Create(session *Session, args SubjectRecord) (retval SubjectRef, err error) {
 	method := "subject.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -80,6 +459,7 @@ func (subject) Create(session *Session, args SubjectRecord) (retval SubjectRef, 
 }
 
 // AsyncCreate: Create a new subject instance, and return its handle. The constructor args are: subject_identifier, other_config (* = non-optional).
+// Version: george
 func (subject) AsyncCreate(session *Session, args SubjectRecord) (retval TaskRef, err error) {
 	method := "Async.subject.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -98,33 +478,39 @@ func (subject) AsyncCreate(session *Session, args SubjectRecord) (retval TaskRef
 	return
 }
 
-// Destroy: Destroy the specified subject instance.
-func (subject) Destroy(session *Session, self SubjectRef) (err error) {
-	method := "subject.destroy"
+// Create2: Create a new subject instance, and return its handle. The constructor args are: subject_identifier, other_config (* = non-optional).
+// Version: george
+func (subject) Create2(session *Session, args SubjectRecord) (retval SubjectRef, err error) {
+	method := "subject.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	argsArg, err := serializeSubjectRecord(fmt.Sprintf("%s(%s)", method, "args"), args)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	result, err := session.client.sendCall(method, sessionIDArg, argsArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeSubjectRef(method+" -> ", result)
 	return
 }
 
-// AsyncDestroy: Destroy the specified subject instance.
-func (subject) AsyncDestroy(session *Session, self SubjectRef) (retval TaskRef, err error) {
-	method := "Async.subject.destroy"
+// AsyncCreate2: Create a new subject instance, and return its handle. The constructor args are: subject_identifier, other_config (* = non-optional).
+// Version: george
+func (subject) AsyncCreate2(session *Session, args SubjectRecord) (retval TaskRef, err error) {
+	method := "Async.subject.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	argsArg, err := serializeSubjectRecord(fmt.Sprintf("%s(%s)", method, "args"), args)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	result, err := session.client.sendCall(method, sessionIDArg, argsArg)
 	if err != nil {
 		return
 	}
@@ -132,9 +518,50 @@ func (subject) AsyncDestroy(session *Session, self SubjectRef) (retval TaskRef, 
 	return
 }
 
-// GetUUID: Get the uuid field of the given subject.
-func (subject) GetUUID(session *Session, self SubjectRef) (retval string, err error) {
-	method := "subject.get_uuid"
+// GetByUUID: Get a reference to the subject instance with the specified UUID.
+// Version: george
+func (subject) GetByUUID(session *Session, uUID string) (retval SubjectRef, err error) {
+	method := "subject.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeSubjectRef(method+" -> ", result)
+	return
+}
+
+// GetByUUID2: Get a reference to the subject instance with the specified UUID.
+// Version: george
+func (subject) GetByUUID2(session *Session, uUID string) (retval SubjectRef, err error) {
+	method := "subject.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeSubjectRef(method+" -> ", result)
+	return
+}
+
+// GetRecord: Get a record containing the current state of the given subject.
+// Version: george
+func (subject) GetRecord(session *Session, self SubjectRef) (retval SubjectRecord, err error) {
+	method := "subject.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -147,13 +574,14 @@ func (subject) GetUUID(session *Session, self SubjectRef) (retval string, err er
 	if err != nil {
 		return
 	}
-	retval, err = deserializeString(method+" -> ", result)
+	retval, err = deserializeSubjectRecord(method+" -> ", result)
 	return
 }
 
-// GetSubjectIdentifier: Get the subject_identifier field of the given subject.
-func (subject) GetSubjectIdentifier(session *Session, self SubjectRef) (retval string, err error) {
-	method := "subject.get_subject_identifier"
+// GetRecord2: Get a record containing the current state of the given subject.
+// Version: george
+func (subject) GetRecord2(session *Session, self SubjectRef) (retval SubjectRecord, err error) {
+	method := "subject.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -166,131 +594,6 @@ func (subject) GetSubjectIdentifier(session *Session, self SubjectRef) (retval s
 	if err != nil {
 		return
 	}
-	retval, err = deserializeString(method+" -> ", result)
-	return
-}
-
-// GetOtherConfig: Get the other_config field of the given subject.
-func (subject) GetOtherConfig(session *Session, self SubjectRef) (retval map[string]string, err error) {
-	method := "subject.get_other_config"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetRoles: Get the roles field of the given subject.
-func (subject) GetRoles(session *Session, self SubjectRef) (retval []RoleRef, err error) {
-	method := "subject.get_roles"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeRoleRefSet(method+" -> ", result)
-	return
-}
-
-// AddToRoles: This call adds a new role to a subject
-func (subject) AddToRoles(session *Session, self SubjectRef, role RoleRef) (err error) {
-	method := "subject.add_to_roles"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	roleArg, err := serializeRoleRef(fmt.Sprintf("%s(%s)", method, "role"), role)
-	if err != nil {
-		return
-	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, roleArg)
-	return
-}
-
-// RemoveFromRoles: This call removes a role from a subject
-func (subject) RemoveFromRoles(session *Session, self SubjectRef, role RoleRef) (err error) {
-	method := "subject.remove_from_roles"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	roleArg, err := serializeRoleRef(fmt.Sprintf("%s(%s)", method, "role"), role)
-	if err != nil {
-		return
-	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, roleArg)
-	return
-}
-
-// GetPermissionsNameLabel: This call returns a list of permission names given a subject
-func (subject) GetPermissionsNameLabel(session *Session, self SubjectRef) (retval []string, err error) {
-	method := "subject.get_permissions_name_label"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeSubjectRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringSet(method+" -> ", result)
-	return
-}
-
-// GetAll: Return a list of all the subjects known to the system.
-func (subject) GetAll(session *Session) (retval []SubjectRef, err error) {
-	method := "subject.get_all"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeSubjectRefSet(method+" -> ", result)
-	return
-}
-
-// GetAllRecords: Return a map of subject references to subject records for all subjects known to the system.
-func (subject) GetAllRecords(session *Session) (retval map[SubjectRef]SubjectRecord, err error) {
-	method := "subject.get_all_records"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeSubjectRefToSubjectRecordMap(method+" -> ", result)
+	retval, err = deserializeSubjectRecord(method+" -> ", result)
 	return
 }

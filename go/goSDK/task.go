@@ -49,56 +49,47 @@ type task struct{}
 
 var Task task
 
-// GetRecord: Get a record containing the current state of the given task.
-func (task) GetRecord(session *Session, self TaskRef) (retval TaskRecord, err error) {
-	method := "task.get_record"
+// GetAllRecords: Return a map of task references to task records for all tasks known to the system.
+// Version: rio
+func (task) GetAllRecords(session *Session) (retval map[TaskRef]TaskRecord, err error) {
+	method := "task.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	result, err := session.client.sendCall(method, sessionIDArg)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeTaskRecord(method+" -> ", result)
+	retval, err = deserializeTaskRefToTaskRecordMap(method+" -> ", result)
 	return
 }
 
-// GetByUUID: Get a reference to the task instance with the specified UUID.
-func (task) GetByUUID(session *Session, uUID string) (retval TaskRef, err error) {
-	method := "task.get_by_uuid"
+// GetAllRecords1: Return a map of task references to task records for all tasks known to the system.
+// Version: rio
+func (task) GetAllRecords1(session *Session) (retval map[TaskRef]TaskRecord, err error) {
+	method := "task.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	result, err := session.client.sendCall(method, sessionIDArg)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeTaskRef(method+" -> ", result)
+	retval, err = deserializeTaskRefToTaskRecordMap(method+" -> ", result)
 	return
 }
 
-// GetByNameLabel: Get all the task instances with the given label.
-func (task) GetByNameLabel(session *Session, label string) (retval []TaskRef, err error) {
-	method := "task.get_by_name_label"
+// GetAll: Return a list of all the tasks known to the system.
+// Version: rio
+func (task) GetAll(session *Session) (retval []TaskRef, err error) {
+	method := "task.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	labelArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "label"), label)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, labelArg)
+	result, err := session.client.sendCall(method, sessionIDArg)
 	if err != nil {
 		return
 	}
@@ -106,303 +97,15 @@ func (task) GetByNameLabel(session *Session, label string) (retval []TaskRef, er
 	return
 }
 
-// GetUUID: Get the uuid field of the given task.
-func (task) GetUUID(session *Session, self TaskRef) (retval string, err error) {
-	method := "task.get_uuid"
+// GetAll1: Return a list of all the tasks known to the system.
+// Version: rio
+func (task) GetAll1(session *Session) (retval []TaskRef, err error) {
+	method := "task.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeString(method+" -> ", result)
-	return
-}
-
-// GetNameLabel: Get the name/label field of the given task.
-func (task) GetNameLabel(session *Session, self TaskRef) (retval string, err error) {
-	method := "task.get_name_label"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeString(method+" -> ", result)
-	return
-}
-
-// GetNameDescription: Get the name/description field of the given task.
-func (task) GetNameDescription(session *Session, self TaskRef) (retval string, err error) {
-	method := "task.get_name_description"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeString(method+" -> ", result)
-	return
-}
-
-// GetAllowedOperations: Get the allowed_operations field of the given task.
-func (task) GetAllowedOperations(session *Session, self TaskRef) (retval []TaskAllowedOperations, err error) {
-	method := "task.get_allowed_operations"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeEnumTaskAllowedOperationsSet(method+" -> ", result)
-	return
-}
-
-// GetCurrentOperations: Get the current_operations field of the given task.
-func (task) GetCurrentOperations(session *Session, self TaskRef) (retval map[string]TaskAllowedOperations, err error) {
-	method := "task.get_current_operations"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToEnumTaskAllowedOperationsMap(method+" -> ", result)
-	return
-}
-
-// GetCreated: Get the created field of the given task.
-func (task) GetCreated(session *Session, self TaskRef) (retval time.Time, err error) {
-	method := "task.get_created"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeTime(method+" -> ", result)
-	return
-}
-
-// GetFinished: Get the finished field of the given task.
-func (task) GetFinished(session *Session, self TaskRef) (retval time.Time, err error) {
-	method := "task.get_finished"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeTime(method+" -> ", result)
-	return
-}
-
-// GetStatus: Get the status field of the given task.
-func (task) GetStatus(session *Session, self TaskRef) (retval TaskStatusType, err error) {
-	method := "task.get_status"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeEnumTaskStatusType(method+" -> ", result)
-	return
-}
-
-// GetResidentOn: Get the resident_on field of the given task.
-func (task) GetResidentOn(session *Session, self TaskRef) (retval HostRef, err error) {
-	method := "task.get_resident_on"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeHostRef(method+" -> ", result)
-	return
-}
-
-// GetProgress: Get the progress field of the given task.
-func (task) GetProgress(session *Session, self TaskRef) (retval float64, err error) {
-	method := "task.get_progress"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeFloat(method+" -> ", result)
-	return
-}
-
-// GetType: Get the type field of the given task.
-func (task) GetType(session *Session, self TaskRef) (retval string, err error) {
-	method := "task.get_type"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeString(method+" -> ", result)
-	return
-}
-
-// GetResult: Get the result field of the given task.
-func (task) GetResult(session *Session, self TaskRef) (retval string, err error) {
-	method := "task.get_result"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeString(method+" -> ", result)
-	return
-}
-
-// GetErrorInfo: Get the error_info field of the given task.
-func (task) GetErrorInfo(session *Session, self TaskRef) (retval []string, err error) {
-	method := "task.get_error_info"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringSet(method+" -> ", result)
-	return
-}
-
-// GetOtherConfig: Get the other_config field of the given task.
-func (task) GetOtherConfig(session *Session, self TaskRef) (retval map[string]string, err error) {
-	method := "task.get_other_config"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeStringToStringMap(method+" -> ", result)
-	return
-}
-
-// GetSubtaskOf: Get the subtask_of field of the given task.
-func (task) GetSubtaskOf(session *Session, self TaskRef) (retval TaskRef, err error) {
-	method := "task.get_subtask_of"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeTaskRef(method+" -> ", result)
-	return
-}
-
-// GetSubtasks: Get the subtasks field of the given task.
-func (task) GetSubtasks(session *Session, self TaskRef) (retval []TaskRef, err error) {
-	method := "task.get_subtasks"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	result, err := session.client.sendCall(method, sessionIDArg)
 	if err != nil {
 		return
 	}
@@ -410,9 +113,10 @@ func (task) GetSubtasks(session *Session, self TaskRef) (retval []TaskRef, err e
 	return
 }
 
-// GetBacktrace: Get the backtrace field of the given task.
-func (task) GetBacktrace(session *Session, self TaskRef) (retval string, err error) {
-	method := "task.get_backtrace"
+// SetErrorInfo: Set the task error info
+// Version: 21.3.0
+func (task) SetErrorInfo(session *Session, self TaskRef, value []string) (err error) {
+	method := "task.set_error_info"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -421,26 +125,7 @@ func (task) GetBacktrace(session *Session, self TaskRef) (retval string, err err
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeString(method+" -> ", result)
-	return
-}
-
-// SetOtherConfig: Set the other_config field of the given task.
-func (task) SetOtherConfig(session *Session, self TaskRef, value map[string]string) (err error) {
-	method := "task.set_other_config"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
+	valueArg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "value"), value)
 	if err != nil {
 		return
 	}
@@ -448,9 +133,10 @@ func (task) SetOtherConfig(session *Session, self TaskRef, value map[string]stri
 	return
 }
 
-// AddToOtherConfig: Add the given key-value pair to the other_config field of the given task.
-func (task) AddToOtherConfig(session *Session, self TaskRef, key string, value string) (err error) {
-	method := "task.add_to_other_config"
+// SetErrorInfo3: Set the task error info
+// Version: 21.3.0
+func (task) SetErrorInfo3(session *Session, self TaskRef, value []string) (err error) {
+	method := "task.set_error_info"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -459,7 +145,23 @@ func (task) AddToOtherConfig(session *Session, self TaskRef, key string, value s
 	if err != nil {
 		return
 	}
-	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
+	valueArg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetResult: Set the task result
+// Version: 21.3.0
+func (task) SetResult(session *Session, self TaskRef, value string) (err error) {
+	method := "task.set_result"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
@@ -467,13 +169,14 @@ func (task) AddToOtherConfig(session *Session, self TaskRef, key string, value s
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg, valueArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
 	return
 }
 
-// RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given task.  If the key is not in that Map, then do nothing.
-func (task) RemoveFromOtherConfig(session *Session, self TaskRef, key string) (err error) {
-	method := "task.remove_from_other_config"
+// SetResult3: Set the task result
+// Version: 21.3.0
+func (task) SetResult3(session *Session, self TaskRef, value string) (err error) {
+	method := "task.set_result"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -482,15 +185,212 @@ func (task) RemoveFromOtherConfig(session *Session, self TaskRef, key string) (e
 	if err != nil {
 		return
 	}
-	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
+	valueArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "value"), value)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetProgress: Set the task progress
+// Version: stockholm
+func (task) SetProgress(session *Session, self TaskRef, value float64) (err error) {
+	method := "task.set_progress"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeFloat(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetProgress3: Set the task progress
+// Version: stockholm
+func (task) SetProgress3(session *Session, self TaskRef, value float64) (err error) {
+	method := "task.set_progress"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeFloat(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetStatus: Set the task status
+// Version: falcon
+func (task) SetStatus(session *Session, self TaskRef, value TaskStatusType) (err error) {
+	method := "task.set_status"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeEnumTaskStatusType(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetStatus3: Set the task status
+// Version: falcon
+func (task) SetStatus3(session *Session, self TaskRef, value TaskStatusType) (err error) {
+	method := "task.set_status"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeEnumTaskStatusType(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// Cancel: Request that a task be cancelled. Note that a task may fail to be cancelled and may complete or fail normally and note that, even when a task does cancel, it might take an arbitrary amount of time.
+// Version: rio
+//
+// Errors:
+// OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
+func (task) Cancel(session *Session, task TaskRef) (err error) {
+	method := "task.cancel"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	taskArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "task"), task)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, taskArg)
+	return
+}
+
+// AsyncCancel: Request that a task be cancelled. Note that a task may fail to be cancelled and may complete or fail normally and note that, even when a task does cancel, it might take an arbitrary amount of time.
+// Version: rio
+//
+// Errors:
+// OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
+func (task) AsyncCancel(session *Session, task TaskRef) (retval TaskRef, err error) {
+	method := "Async.task.cancel"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	taskArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "task"), task)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, taskArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// Cancel2: Request that a task be cancelled. Note that a task may fail to be cancelled and may complete or fail normally and note that, even when a task does cancel, it might take an arbitrary amount of time.
+// Version: rio
+//
+// Errors:
+// OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
+func (task) Cancel2(session *Session, task TaskRef) (err error) {
+	method := "task.cancel"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	taskArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "task"), task)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, taskArg)
+	return
+}
+
+// AsyncCancel2: Request that a task be cancelled. Note that a task may fail to be cancelled and may complete or fail normally and note that, even when a task does cancel, it might take an arbitrary amount of time.
+// Version: rio
+//
+// Errors:
+// OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
+func (task) AsyncCancel2(session *Session, task TaskRef) (retval TaskRef, err error) {
+	method := "Async.task.cancel"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	taskArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "task"), task)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, taskArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// Destroy: Destroy the task object
+// Version: rio
+func (task) Destroy(session *Session, self TaskRef) (err error) {
+	method := "task.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// Destroy2: Destroy the task object
+// Version: rio
+func (task) Destroy2(session *Session, self TaskRef) (err error) {
+	method := "task.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
 	return
 }
 
 // Create: Create a new task object which must be manually destroyed.
+// Version: rio
 func (task) Create(session *Session, label string, description string) (retval TaskRef, err error) {
 	method := "task.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -513,9 +413,74 @@ func (task) Create(session *Session, label string, description string) (retval T
 	return
 }
 
-// Destroy: Destroy the task object
-func (task) Destroy(session *Session, self TaskRef) (err error) {
-	method := "task.destroy"
+// Create3: Create a new task object which must be manually destroyed.
+// Version: rio
+func (task) Create3(session *Session, label string, description string) (retval TaskRef, err error) {
+	method := "task.create"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	labelArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "label"), label)
+	if err != nil {
+		return
+	}
+	descriptionArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "description"), description)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, labelArg, descriptionArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given task.  If the key is not in that Map, then do nothing.
+// Version: miami
+func (task) RemoveFromOtherConfig(session *Session, self TaskRef, key string) (err error) {
+	method := "task.remove_from_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
+	return
+}
+
+// RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given task.  If the key is not in that Map, then do nothing.
+// Version: miami
+func (task) RemoveFromOtherConfig3(session *Session, self TaskRef, key string) (err error) {
+	method := "task.remove_from_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg)
+	return
+}
+
+// RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given task.  If the key is not in that Map, then do nothing.
+// Version: rio
+func (task) RemoveFromOtherConfig2(session *Session, self TaskRef) (err error) {
+	method := "task.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -528,49 +493,10 @@ func (task) Destroy(session *Session, self TaskRef) (err error) {
 	return
 }
 
-// Cancel: Request that a task be cancelled. Note that a task may fail to be cancelled and may complete or fail normally and note that, even when a task does cancel, it might take an arbitrary amount of time.
-//
-// Errors:
-// OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (task) Cancel(session *Session, task TaskRef) (err error) {
-	method := "task.cancel"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	taskArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "task"), task)
-	if err != nil {
-		return
-	}
-	_, err = session.client.sendCall(method, sessionIDArg, taskArg)
-	return
-}
-
-// AsyncCancel: Request that a task be cancelled. Note that a task may fail to be cancelled and may complete or fail normally and note that, even when a task does cancel, it might take an arbitrary amount of time.
-//
-// Errors:
-// OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (task) AsyncCancel(session *Session, task TaskRef) (retval TaskRef, err error) {
-	method := "Async.task.cancel"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	taskArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "task"), task)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, taskArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeTaskRef(method+" -> ", result)
-	return
-}
-
-// SetStatus: Set the task status
-func (task) SetStatus(session *Session, self TaskRef, value TaskStatusType) (err error) {
-	method := "task.set_status"
+// AddToOtherConfig: Add the given key-value pair to the other_config field of the given task.
+// Version: miami
+func (task) AddToOtherConfig(session *Session, self TaskRef, key string, value string) (err error) {
+	method := "task.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -579,41 +505,7 @@ func (task) SetStatus(session *Session, self TaskRef, value TaskStatusType) (err
 	if err != nil {
 		return
 	}
-	valueArg, err := serializeEnumTaskStatusType(fmt.Sprintf("%s(%s)", method, "value"), value)
-	if err != nil {
-		return
-	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
-	return
-}
-
-// SetProgress: Set the task progress
-func (task) SetProgress(session *Session, self TaskRef, value float64) (err error) {
-	method := "task.set_progress"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
-	if err != nil {
-		return
-	}
-	valueArg, err := serializeFloat(fmt.Sprintf("%s(%s)", method, "value"), value)
-	if err != nil {
-		return
-	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
-	return
-}
-
-// SetResult: Set the task result
-func (task) SetResult(session *Session, self TaskRef, value string) (err error) {
-	method := "task.set_result"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
 	if err != nil {
 		return
 	}
@@ -621,13 +513,14 @@ func (task) SetResult(session *Session, self TaskRef, value string) (err error) 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg, valueArg)
 	return
 }
 
-// SetErrorInfo: Set the task error info
-func (task) SetErrorInfo(session *Session, self TaskRef, value []string) (err error) {
-	method := "task.set_error_info"
+// AddToOtherConfig4: Add the given key-value pair to the other_config field of the given task.
+// Version: miami
+func (task) AddToOtherConfig4(session *Session, self TaskRef, key string, value string) (err error) {
+	method := "task.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -636,7 +529,47 @@ func (task) SetErrorInfo(session *Session, self TaskRef, value []string) (err er
 	if err != nil {
 		return
 	}
-	valueArg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "value"), value)
+	keyArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "key"), key)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, keyArg, valueArg)
+	return
+}
+
+// AddToOtherConfig2: Add the given key-value pair to the other_config field of the given task.
+// Version: rio
+func (task) AddToOtherConfig2(session *Session, self TaskRef) (err error) {
+	method := "task.add_to_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// SetOtherConfig: Set the other_config field of the given task.
+// Version: miami
+func (task) SetOtherConfig(session *Session, self TaskRef, value map[string]string) (err error) {
+	method := "task.set_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
 	if err != nil {
 		return
 	}
@@ -644,14 +577,95 @@ func (task) SetErrorInfo(session *Session, self TaskRef, value []string) (err er
 	return
 }
 
-// GetAll: Return a list of all the tasks known to the system.
-func (task) GetAll(session *Session) (retval []TaskRef, err error) {
-	method := "task.get_all"
+// SetOtherConfig3: Set the other_config field of the given task.
+// Version: miami
+func (task) SetOtherConfig3(session *Session, self TaskRef, value map[string]string) (err error) {
+	method := "task.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	valueArg, err := serializeStringToStringMap(fmt.Sprintf("%s(%s)", method, "value"), value)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, valueArg)
+	return
+}
+
+// SetOtherConfig2: Set the other_config field of the given task.
+// Version: rio
+func (task) SetOtherConfig2(session *Session, self TaskRef) (err error) {
+	method := "task.set_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// GetBacktrace: Get the backtrace field of the given task.
+// Version: rio
+func (task) GetBacktrace(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_backtrace"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetBacktrace2: Get the backtrace field of the given task.
+// Version: rio
+func (task) GetBacktrace2(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_backtrace"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetSubtasks: Get the subtasks field of the given task.
+// Version: rio
+func (task) GetSubtasks(session *Session, self TaskRef) (retval []TaskRef, err error) {
+	method := "task.get_subtasks"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
 	if err != nil {
 		return
 	}
@@ -659,17 +673,742 @@ func (task) GetAll(session *Session) (retval []TaskRef, err error) {
 	return
 }
 
-// GetAllRecords: Return a map of task references to task records for all tasks known to the system.
-func (task) GetAllRecords(session *Session) (retval map[TaskRef]TaskRecord, err error) {
-	method := "task.get_all_records"
+// GetSubtasks2: Get the subtasks field of the given task.
+// Version: rio
+func (task) GetSubtasks2(session *Session, self TaskRef) (retval []TaskRef, err error) {
+	method := "task.get_subtasks"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeTaskRefToTaskRecordMap(method+" -> ", result)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRefSet(method+" -> ", result)
+	return
+}
+
+// GetSubtaskOf: Get the subtask_of field of the given task.
+// Version: rio
+func (task) GetSubtaskOf(session *Session, self TaskRef) (retval TaskRef, err error) {
+	method := "task.get_subtask_of"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// GetSubtaskOf2: Get the subtask_of field of the given task.
+// Version: rio
+func (task) GetSubtaskOf2(session *Session, self TaskRef) (retval TaskRef, err error) {
+	method := "task.get_subtask_of"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// GetOtherConfig: Get the other_config field of the given task.
+// Version: rio
+func (task) GetOtherConfig(session *Session, self TaskRef) (retval map[string]string, err error) {
+	method := "task.get_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetOtherConfig2: Get the other_config field of the given task.
+// Version: rio
+func (task) GetOtherConfig2(session *Session, self TaskRef) (retval map[string]string, err error) {
+	method := "task.get_other_config"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToStringMap(method+" -> ", result)
+	return
+}
+
+// GetErrorInfo: Get the error_info field of the given task.
+// Version: rio
+func (task) GetErrorInfo(session *Session, self TaskRef) (retval []string, err error) {
+	method := "task.get_error_info"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringSet(method+" -> ", result)
+	return
+}
+
+// GetErrorInfo2: Get the error_info field of the given task.
+// Version: rio
+func (task) GetErrorInfo2(session *Session, self TaskRef) (retval []string, err error) {
+	method := "task.get_error_info"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringSet(method+" -> ", result)
+	return
+}
+
+// GetResult: Get the result field of the given task.
+// Version: rio
+func (task) GetResult(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_result"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetResult2: Get the result field of the given task.
+// Version: rio
+func (task) GetResult2(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_result"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetType: Get the type field of the given task.
+// Version: rio
+func (task) GetType(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_type"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetType2: Get the type field of the given task.
+// Version: rio
+func (task) GetType2(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_type"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetProgress: Get the progress field of the given task.
+// Version: rio
+func (task) GetProgress(session *Session, self TaskRef) (retval float64, err error) {
+	method := "task.get_progress"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeFloat(method+" -> ", result)
+	return
+}
+
+// GetProgress2: Get the progress field of the given task.
+// Version: rio
+func (task) GetProgress2(session *Session, self TaskRef) (retval float64, err error) {
+	method := "task.get_progress"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeFloat(method+" -> ", result)
+	return
+}
+
+// GetResidentOn: Get the resident_on field of the given task.
+// Version: rio
+func (task) GetResidentOn(session *Session, self TaskRef) (retval HostRef, err error) {
+	method := "task.get_resident_on"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeHostRef(method+" -> ", result)
+	return
+}
+
+// GetResidentOn2: Get the resident_on field of the given task.
+// Version: rio
+func (task) GetResidentOn2(session *Session, self TaskRef) (retval HostRef, err error) {
+	method := "task.get_resident_on"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeHostRef(method+" -> ", result)
+	return
+}
+
+// GetStatus: Get the status field of the given task.
+// Version: rio
+func (task) GetStatus(session *Session, self TaskRef) (retval TaskStatusType, err error) {
+	method := "task.get_status"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTaskStatusType(method+" -> ", result)
+	return
+}
+
+// GetStatus2: Get the status field of the given task.
+// Version: rio
+func (task) GetStatus2(session *Session, self TaskRef) (retval TaskStatusType, err error) {
+	method := "task.get_status"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTaskStatusType(method+" -> ", result)
+	return
+}
+
+// GetFinished: Get the finished field of the given task.
+// Version: rio
+func (task) GetFinished(session *Session, self TaskRef) (retval time.Time, err error) {
+	method := "task.get_finished"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTime(method+" -> ", result)
+	return
+}
+
+// GetFinished2: Get the finished field of the given task.
+// Version: rio
+func (task) GetFinished2(session *Session, self TaskRef) (retval time.Time, err error) {
+	method := "task.get_finished"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTime(method+" -> ", result)
+	return
+}
+
+// GetCreated: Get the created field of the given task.
+// Version: rio
+func (task) GetCreated(session *Session, self TaskRef) (retval time.Time, err error) {
+	method := "task.get_created"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTime(method+" -> ", result)
+	return
+}
+
+// GetCreated2: Get the created field of the given task.
+// Version: rio
+func (task) GetCreated2(session *Session, self TaskRef) (retval time.Time, err error) {
+	method := "task.get_created"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTime(method+" -> ", result)
+	return
+}
+
+// GetCurrentOperations: Get the current_operations field of the given task.
+// Version: rio
+func (task) GetCurrentOperations(session *Session, self TaskRef) (retval map[string]TaskAllowedOperations, err error) {
+	method := "task.get_current_operations"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToEnumTaskAllowedOperationsMap(method+" -> ", result)
+	return
+}
+
+// GetCurrentOperations2: Get the current_operations field of the given task.
+// Version: rio
+func (task) GetCurrentOperations2(session *Session, self TaskRef) (retval map[string]TaskAllowedOperations, err error) {
+	method := "task.get_current_operations"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeStringToEnumTaskAllowedOperationsMap(method+" -> ", result)
+	return
+}
+
+// GetAllowedOperations: Get the allowed_operations field of the given task.
+// Version: rio
+func (task) GetAllowedOperations(session *Session, self TaskRef) (retval []TaskAllowedOperations, err error) {
+	method := "task.get_allowed_operations"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTaskAllowedOperationsSet(method+" -> ", result)
+	return
+}
+
+// GetAllowedOperations2: Get the allowed_operations field of the given task.
+// Version: rio
+func (task) GetAllowedOperations2(session *Session, self TaskRef) (retval []TaskAllowedOperations, err error) {
+	method := "task.get_allowed_operations"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeEnumTaskAllowedOperationsSet(method+" -> ", result)
+	return
+}
+
+// GetNameDescription: Get the name/description field of the given task.
+// Version: rio
+func (task) GetNameDescription(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_name_description"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetNameDescription2: Get the name/description field of the given task.
+// Version: rio
+func (task) GetNameDescription2(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_name_description"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetNameLabel: Get the name/label field of the given task.
+// Version: rio
+func (task) GetNameLabel(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_name_label"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetNameLabel2: Get the name/label field of the given task.
+// Version: rio
+func (task) GetNameLabel2(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_name_label"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetUUID: Get the uuid field of the given task.
+// Version: rio
+func (task) GetUUID(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetUUID2: Get the uuid field of the given task.
+// Version: rio
+func (task) GetUUID2(session *Session, self TaskRef) (retval string, err error) {
+	method := "task.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetByNameLabel: Get all the task instances with the given label.
+// Version: rio
+func (task) GetByNameLabel(session *Session, label string) (retval []TaskRef, err error) {
+	method := "task.get_by_name_label"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	labelArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "label"), label)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, labelArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRefSet(method+" -> ", result)
+	return
+}
+
+// GetByNameLabel2: Get all the task instances with the given label.
+// Version: rio
+func (task) GetByNameLabel2(session *Session, label string) (retval []TaskRef, err error) {
+	method := "task.get_by_name_label"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	labelArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "label"), label)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, labelArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRefSet(method+" -> ", result)
+	return
+}
+
+// GetByUUID: Get a reference to the task instance with the specified UUID.
+// Version: rio
+func (task) GetByUUID(session *Session, uUID string) (retval TaskRef, err error) {
+	method := "task.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// GetByUUID2: Get a reference to the task instance with the specified UUID.
+// Version: rio
+func (task) GetByUUID2(session *Session, uUID string) (retval TaskRef, err error) {
+	method := "task.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRef(method+" -> ", result)
+	return
+}
+
+// GetRecord: Get a record containing the current state of the given task.
+// Version: rio
+func (task) GetRecord(session *Session, self TaskRef) (retval TaskRecord, err error) {
+	method := "task.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRecord(method+" -> ", result)
+	return
+}
+
+// GetRecord2: Get a record containing the current state of the given task.
+// Version: rio
+func (task) GetRecord2(session *Session, self TaskRef) (retval TaskRecord, err error) {
+	method := "task.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeTaskRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeTaskRecord(method+" -> ", result)
 	return
 }

@@ -24,9 +24,74 @@ type networkSriov struct{}
 
 var NetworkSriov networkSriov
 
-// GetRecord: Get a record containing the current state of the given network_sriov.
-func (networkSriov) GetRecord(session *Session, self NetworkSriovRef) (retval NetworkSriovRecord, err error) {
-	method := "network_sriov.get_record"
+// GetAllRecords: Return a map of network_sriov references to network_sriov records for all network_sriovs known to the system.
+// Version: kolkata
+func (networkSriov) GetAllRecords(session *Session) (retval map[NetworkSriovRef]NetworkSriovRecord, err error) {
+	method := "network_sriov.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRefToNetworkSriovRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAllRecords1: Return a map of network_sriov references to network_sriov records for all network_sriovs known to the system.
+// Version: kolkata
+func (networkSriov) GetAllRecords1(session *Session) (retval map[NetworkSriovRef]NetworkSriovRecord, err error) {
+	method := "network_sriov.get_all_records"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRefToNetworkSriovRecordMap(method+" -> ", result)
+	return
+}
+
+// GetAll: Return a list of all the network_sriovs known to the system.
+// Version: kolkata
+func (networkSriov) GetAll(session *Session) (retval []NetworkSriovRef, err error) {
+	method := "network_sriov.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRefSet(method+" -> ", result)
+	return
+}
+
+// GetAll1: Return a list of all the network_sriovs known to the system.
+// Version: kolkata
+func (networkSriov) GetAll1(session *Session) (retval []NetworkSriovRef, err error) {
+	method := "network_sriov.get_all"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRefSet(method+" -> ", result)
+	return
+}
+
+// GetRemainingCapacity: Get the number of free SR-IOV VFs on the associated PIF
+// Version: kolkata
+func (networkSriov) GetRemainingCapacity(session *Session, self NetworkSriovRef) (retval int, err error) {
+	method := "network_sriov.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -39,32 +104,14 @@ func (networkSriov) GetRecord(session *Session, self NetworkSriovRef) (retval Ne
 	if err != nil {
 		return
 	}
-	retval, err = deserializeNetworkSriovRecord(method+" -> ", result)
+	retval, err = deserializeInt(method+" -> ", result)
 	return
 }
 
-// GetByUUID: Get a reference to the network_sriov instance with the specified UUID.
-func (networkSriov) GetByUUID(session *Session, uUID string) (retval NetworkSriovRef, err error) {
-	method := "network_sriov.get_by_uuid"
-	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
-	if err != nil {
-		return
-	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
-	if err != nil {
-		return
-	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
-	if err != nil {
-		return
-	}
-	retval, err = deserializeNetworkSriovRef(method+" -> ", result)
-	return
-}
-
-// GetUUID: Get the uuid field of the given network_sriov.
-func (networkSriov) GetUUID(session *Session, self NetworkSriovRef) (retval string, err error) {
-	method := "network_sriov.get_uuid"
+// AsyncGetRemainingCapacity: Get the number of free SR-IOV VFs on the associated PIF
+// Version: kolkata
+func (networkSriov) AsyncGetRemainingCapacity(session *Session, self NetworkSriovRef) (retval TaskRef, err error) {
+	method := "Async.network_sriov.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -77,13 +124,14 @@ func (networkSriov) GetUUID(session *Session, self NetworkSriovRef) (retval stri
 	if err != nil {
 		return
 	}
-	retval, err = deserializeString(method+" -> ", result)
+	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
 
-// GetPhysicalPIF: Get the physical_PIF field of the given network_sriov.
-func (networkSriov) GetPhysicalPIF(session *Session, self NetworkSriovRef) (retval PIFRef, err error) {
-	method := "network_sriov.get_physical_PIF"
+// GetRemainingCapacity2: Get the number of free SR-IOV VFs on the associated PIF
+// Version: kolkata
+func (networkSriov) GetRemainingCapacity2(session *Session, self NetworkSriovRef) (retval int, err error) {
+	method := "network_sriov.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -96,13 +144,14 @@ func (networkSriov) GetPhysicalPIF(session *Session, self NetworkSriovRef) (retv
 	if err != nil {
 		return
 	}
-	retval, err = deserializePIFRef(method+" -> ", result)
+	retval, err = deserializeInt(method+" -> ", result)
 	return
 }
 
-// GetLogicalPIF: Get the logical_PIF field of the given network_sriov.
-func (networkSriov) GetLogicalPIF(session *Session, self NetworkSriovRef) (retval PIFRef, err error) {
-	method := "network_sriov.get_logical_PIF"
+// AsyncGetRemainingCapacity2: Get the number of free SR-IOV VFs on the associated PIF
+// Version: kolkata
+func (networkSriov) AsyncGetRemainingCapacity2(session *Session, self NetworkSriovRef) (retval TaskRef, err error) {
+	method := "Async.network_sriov.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -115,13 +164,30 @@ func (networkSriov) GetLogicalPIF(session *Session, self NetworkSriovRef) (retva
 	if err != nil {
 		return
 	}
-	retval, err = deserializePIFRef(method+" -> ", result)
+	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
 
-// GetRequiresReboot: Get the requires_reboot field of the given network_sriov.
-func (networkSriov) GetRequiresReboot(session *Session, self NetworkSriovRef) (retval bool, err error) {
-	method := "network_sriov.get_requires_reboot"
+// Destroy: Disable SR-IOV on the specific PIF. It will destroy the network-sriov and the logical PIF accordingly.
+// Version: kolkata
+func (networkSriov) Destroy(session *Session, self NetworkSriovRef) (err error) {
+	method := "network_sriov.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// AsyncDestroy: Disable SR-IOV on the specific PIF. It will destroy the network-sriov and the logical PIF accordingly.
+// Version: kolkata
+func (networkSriov) AsyncDestroy(session *Session, self NetworkSriovRef) (retval TaskRef, err error) {
+	method := "Async.network_sriov.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -134,13 +200,30 @@ func (networkSriov) GetRequiresReboot(session *Session, self NetworkSriovRef) (r
 	if err != nil {
 		return
 	}
-	retval, err = deserializeBool(method+" -> ", result)
+	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
 
-// GetConfigurationMode: Get the configuration_mode field of the given network_sriov.
-func (networkSriov) GetConfigurationMode(session *Session, self NetworkSriovRef) (retval SriovConfigurationMode, err error) {
-	method := "network_sriov.get_configuration_mode"
+// Destroy2: Disable SR-IOV on the specific PIF. It will destroy the network-sriov and the logical PIF accordingly.
+// Version: kolkata
+func (networkSriov) Destroy2(session *Session, self NetworkSriovRef) (err error) {
+	method := "network_sriov.destroy"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	return
+}
+
+// AsyncDestroy2: Disable SR-IOV on the specific PIF. It will destroy the network-sriov and the logical PIF accordingly.
+// Version: kolkata
+func (networkSriov) AsyncDestroy2(session *Session, self NetworkSriovRef) (retval TaskRef, err error) {
+	method := "Async.network_sriov.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -153,11 +236,12 @@ func (networkSriov) GetConfigurationMode(session *Session, self NetworkSriovRef)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeEnumSriovConfigurationMode(method+" -> ", result)
+	retval, err = deserializeTaskRef(method+" -> ", result)
 	return
 }
 
 // Create: Enable SR-IOV on the specific PIF. It will create a network-sriov based on the specific PIF and automatically create a logical PIF to connect the specific network.
+// Version: kolkata
 func (networkSriov) Create(session *Session, pif PIFRef, network NetworkRef) (retval NetworkSriovRef, err error) {
 	method := "network_sriov.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -181,6 +265,7 @@ func (networkSriov) Create(session *Session, pif PIFRef, network NetworkRef) (re
 }
 
 // AsyncCreate: Enable SR-IOV on the specific PIF. It will create a network-sriov based on the specific PIF and automatically create a logical PIF to connect the specific network.
+// Version: kolkata
 func (networkSriov) AsyncCreate(session *Session, pif PIFRef, network NetworkRef) (retval TaskRef, err error) {
 	method := "Async.network_sriov.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
@@ -203,33 +288,47 @@ func (networkSriov) AsyncCreate(session *Session, pif PIFRef, network NetworkRef
 	return
 }
 
-// Destroy: Disable SR-IOV on the specific PIF. It will destroy the network-sriov and the logical PIF accordingly.
-func (networkSriov) Destroy(session *Session, self NetworkSriovRef) (err error) {
-	method := "network_sriov.destroy"
+// Create3: Enable SR-IOV on the specific PIF. It will create a network-sriov based on the specific PIF and automatically create a logical PIF to connect the specific network.
+// Version: kolkata
+func (networkSriov) Create3(session *Session, pif PIFRef, network NetworkRef) (retval NetworkSriovRef, err error) {
+	method := "network_sriov.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	pifArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "pif"), pif)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg)
+	networkArg, err := serializeNetworkRef(fmt.Sprintf("%s(%s)", method, "network"), network)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRef(method+" -> ", result)
 	return
 }
 
-// AsyncDestroy: Disable SR-IOV on the specific PIF. It will destroy the network-sriov and the logical PIF accordingly.
-func (networkSriov) AsyncDestroy(session *Session, self NetworkSriovRef) (retval TaskRef, err error) {
-	method := "Async.network_sriov.destroy"
+// AsyncCreate3: Enable SR-IOV on the specific PIF. It will create a network-sriov based on the specific PIF and automatically create a logical PIF to connect the specific network.
+// Version: kolkata
+func (networkSriov) AsyncCreate3(session *Session, pif PIFRef, network NetworkRef) (retval TaskRef, err error) {
+	method := "Async.network_sriov.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	pifArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "pif"), pif)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	networkArg, err := serializeNetworkRef(fmt.Sprintf("%s(%s)", method, "network"), network)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg)
 	if err != nil {
 		return
 	}
@@ -237,9 +336,10 @@ func (networkSriov) AsyncDestroy(session *Session, self NetworkSriovRef) (retval
 	return
 }
 
-// GetRemainingCapacity: Get the number of free SR-IOV VFs on the associated PIF
-func (networkSriov) GetRemainingCapacity(session *Session, self NetworkSriovRef) (retval int, err error) {
-	method := "network_sriov.get_remaining_capacity"
+// GetConfigurationMode: Get the configuration_mode field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetConfigurationMode(session *Session, self NetworkSriovRef) (retval SriovConfigurationMode, err error) {
+	method := "network_sriov.get_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -252,13 +352,14 @@ func (networkSriov) GetRemainingCapacity(session *Session, self NetworkSriovRef)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeInt(method+" -> ", result)
+	retval, err = deserializeEnumSriovConfigurationMode(method+" -> ", result)
 	return
 }
 
-// AsyncGetRemainingCapacity: Get the number of free SR-IOV VFs on the associated PIF
-func (networkSriov) AsyncGetRemainingCapacity(session *Session, self NetworkSriovRef) (retval TaskRef, err error) {
-	method := "Async.network_sriov.get_remaining_capacity"
+// GetConfigurationMode2: Get the configuration_mode field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetConfigurationMode2(session *Session, self NetworkSriovRef) (retval SriovConfigurationMode, err error) {
+	method := "network_sriov.get_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
@@ -271,36 +372,246 @@ func (networkSriov) AsyncGetRemainingCapacity(session *Session, self NetworkSrio
 	if err != nil {
 		return
 	}
-	retval, err = deserializeTaskRef(method+" -> ", result)
+	retval, err = deserializeEnumSriovConfigurationMode(method+" -> ", result)
 	return
 }
 
-// GetAll: Return a list of all the network_sriovs known to the system.
-func (networkSriov) GetAll(session *Session) (retval []NetworkSriovRef, err error) {
-	method := "network_sriov.get_all"
+// GetRequiresReboot: Get the requires_reboot field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetRequiresReboot(session *Session, self NetworkSriovRef) (retval bool, err error) {
+	method := "network_sriov.get_requires_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeNetworkSriovRefSet(method+" -> ", result)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
 	return
 }
 
-// GetAllRecords: Return a map of network_sriov references to network_sriov records for all network_sriovs known to the system.
-func (networkSriov) GetAllRecords(session *Session) (retval map[NetworkSriovRef]NetworkSriovRecord, err error) {
-	method := "network_sriov.get_all_records"
+// GetRequiresReboot2: Get the requires_reboot field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetRequiresReboot2(session *Session, self NetworkSriovRef) (retval bool, err error) {
+	method := "network_sriov.get_requires_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg)
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
 	if err != nil {
 		return
 	}
-	retval, err = deserializeNetworkSriovRefToNetworkSriovRecordMap(method+" -> ", result)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeBool(method+" -> ", result)
+	return
+}
+
+// GetLogicalPIF: Get the logical_PIF field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetLogicalPIF(session *Session, self NetworkSriovRef) (retval PIFRef, err error) {
+	method := "network_sriov.get_logical_PIF"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializePIFRef(method+" -> ", result)
+	return
+}
+
+// GetLogicalPIF2: Get the logical_PIF field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetLogicalPIF2(session *Session, self NetworkSriovRef) (retval PIFRef, err error) {
+	method := "network_sriov.get_logical_PIF"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializePIFRef(method+" -> ", result)
+	return
+}
+
+// GetPhysicalPIF: Get the physical_PIF field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetPhysicalPIF(session *Session, self NetworkSriovRef) (retval PIFRef, err error) {
+	method := "network_sriov.get_physical_PIF"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializePIFRef(method+" -> ", result)
+	return
+}
+
+// GetPhysicalPIF2: Get the physical_PIF field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetPhysicalPIF2(session *Session, self NetworkSriovRef) (retval PIFRef, err error) {
+	method := "network_sriov.get_physical_PIF"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializePIFRef(method+" -> ", result)
+	return
+}
+
+// GetUUID: Get the uuid field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetUUID(session *Session, self NetworkSriovRef) (retval string, err error) {
+	method := "network_sriov.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetUUID2: Get the uuid field of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetUUID2(session *Session, self NetworkSriovRef) (retval string, err error) {
+	method := "network_sriov.get_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeString(method+" -> ", result)
+	return
+}
+
+// GetByUUID: Get a reference to the network_sriov instance with the specified UUID.
+// Version: kolkata
+func (networkSriov) GetByUUID(session *Session, uUID string) (retval NetworkSriovRef, err error) {
+	method := "network_sriov.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRef(method+" -> ", result)
+	return
+}
+
+// GetByUUID2: Get a reference to the network_sriov instance with the specified UUID.
+// Version: kolkata
+func (networkSriov) GetByUUID2(session *Session, uUID string) (retval NetworkSriovRef, err error) {
+	method := "network_sriov.get_by_uuid"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRef(method+" -> ", result)
+	return
+}
+
+// GetRecord: Get a record containing the current state of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetRecord(session *Session, self NetworkSriovRef) (retval NetworkSriovRecord, err error) {
+	method := "network_sriov.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRecord(method+" -> ", result)
+	return
+}
+
+// GetRecord2: Get a record containing the current state of the given network_sriov.
+// Version: kolkata
+func (networkSriov) GetRecord2(session *Session, self NetworkSriovRef) (retval NetworkSriovRecord, err error) {
+	method := "network_sriov.get_record"
+	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
+	if err != nil {
+		return
+	}
+	selfArg, err := serializeNetworkSriovRef(fmt.Sprintf("%s(%s)", method, "self"), self)
+	if err != nil {
+		return
+	}
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg)
+	if err != nil {
+		return
+	}
+	retval, err = deserializeNetworkSriovRecord(method+" -> ", result)
 	return
 }
