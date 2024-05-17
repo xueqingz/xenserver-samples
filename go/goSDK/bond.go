@@ -362,7 +362,7 @@ func (bond) AsyncDestroy2(session *Session, self BondRef) (retval TaskRef, err e
 
 // Create: Create an interface bond
 // Version: tampa
-func (bond) Create(session *Session, network NetworkRef, members []PIFRef, mAC string, mode BondMode, properties map[string]string) (retval BondRef, err error) {
+func (bond) Create(session *Session, network NetworkRef, members []PIFRef, mac string, mode BondMode, properties map[string]string) (retval BondRef, err error) {
 	method := "Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -376,7 +376,7 @@ func (bond) Create(session *Session, network NetworkRef, members []PIFRef, mAC s
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -388,7 +388,7 @@ func (bond) Create(session *Session, network NetworkRef, members []PIFRef, mAC s
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg, modeArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg, modeArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -398,7 +398,7 @@ func (bond) Create(session *Session, network NetworkRef, members []PIFRef, mAC s
 
 // AsyncCreate: Create an interface bond
 // Version: tampa
-func (bond) AsyncCreate(session *Session, network NetworkRef, members []PIFRef, mAC string, mode BondMode, properties map[string]string) (retval TaskRef, err error) {
+func (bond) AsyncCreate(session *Session, network NetworkRef, members []PIFRef, mac string, mode BondMode, properties map[string]string) (retval TaskRef, err error) {
 	method := "Async.Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -412,7 +412,7 @@ func (bond) AsyncCreate(session *Session, network NetworkRef, members []PIFRef, 
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -424,7 +424,7 @@ func (bond) AsyncCreate(session *Session, network NetworkRef, members []PIFRef, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg, modeArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg, modeArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -434,7 +434,7 @@ func (bond) AsyncCreate(session *Session, network NetworkRef, members []PIFRef, 
 
 // Create6: Create an interface bond
 // Version: tampa
-func (bond) Create6(session *Session, network NetworkRef, members []PIFRef, mAC string, mode BondMode, properties map[string]string) (retval BondRef, err error) {
+func (bond) Create6(session *Session, network NetworkRef, members []PIFRef, mac string, mode BondMode, properties map[string]string) (retval BondRef, err error) {
 	method := "Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -448,7 +448,7 @@ func (bond) Create6(session *Session, network NetworkRef, members []PIFRef, mAC 
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -460,7 +460,7 @@ func (bond) Create6(session *Session, network NetworkRef, members []PIFRef, mAC 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg, modeArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg, modeArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -470,7 +470,7 @@ func (bond) Create6(session *Session, network NetworkRef, members []PIFRef, mAC 
 
 // AsyncCreate6: Create an interface bond
 // Version: tampa
-func (bond) AsyncCreate6(session *Session, network NetworkRef, members []PIFRef, mAC string, mode BondMode, properties map[string]string) (retval TaskRef, err error) {
+func (bond) AsyncCreate6(session *Session, network NetworkRef, members []PIFRef, mac string, mode BondMode, properties map[string]string) (retval TaskRef, err error) {
 	method := "Async.Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -484,7 +484,7 @@ func (bond) AsyncCreate6(session *Session, network NetworkRef, members []PIFRef,
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -496,7 +496,7 @@ func (bond) AsyncCreate6(session *Session, network NetworkRef, members []PIFRef,
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg, modeArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg, modeArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -506,7 +506,7 @@ func (bond) AsyncCreate6(session *Session, network NetworkRef, members []PIFRef,
 
 // Create5: Create an interface bond
 // Version: boston
-func (bond) Create5(session *Session, network NetworkRef, members []PIFRef, mAC string, mode BondMode) (retval BondRef, err error) {
+func (bond) Create5(session *Session, network NetworkRef, members []PIFRef, mac string, mode BondMode) (retval BondRef, err error) {
 	method := "Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -520,7 +520,7 @@ func (bond) Create5(session *Session, network NetworkRef, members []PIFRef, mAC 
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -528,7 +528,7 @@ func (bond) Create5(session *Session, network NetworkRef, members []PIFRef, mAC 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg, modeArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg, modeArg)
 	if err != nil {
 		return
 	}
@@ -538,7 +538,7 @@ func (bond) Create5(session *Session, network NetworkRef, members []PIFRef, mAC 
 
 // AsyncCreate5: Create an interface bond
 // Version: boston
-func (bond) AsyncCreate5(session *Session, network NetworkRef, members []PIFRef, mAC string, mode BondMode) (retval TaskRef, err error) {
+func (bond) AsyncCreate5(session *Session, network NetworkRef, members []PIFRef, mac string, mode BondMode) (retval TaskRef, err error) {
 	method := "Async.Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -552,7 +552,7 @@ func (bond) AsyncCreate5(session *Session, network NetworkRef, members []PIFRef,
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -560,7 +560,7 @@ func (bond) AsyncCreate5(session *Session, network NetworkRef, members []PIFRef,
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg, modeArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg, modeArg)
 	if err != nil {
 		return
 	}
@@ -570,7 +570,7 @@ func (bond) AsyncCreate5(session *Session, network NetworkRef, members []PIFRef,
 
 // Create4: Create an interface bond
 // Version: miami
-func (bond) Create4(session *Session, network NetworkRef, members []PIFRef, mAC string) (retval BondRef, err error) {
+func (bond) Create4(session *Session, network NetworkRef, members []PIFRef, mac string) (retval BondRef, err error) {
 	method := "Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -584,11 +584,11 @@ func (bond) Create4(session *Session, network NetworkRef, members []PIFRef, mAC 
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg)
 	if err != nil {
 		return
 	}
@@ -598,7 +598,7 @@ func (bond) Create4(session *Session, network NetworkRef, members []PIFRef, mAC 
 
 // AsyncCreate4: Create an interface bond
 // Version: miami
-func (bond) AsyncCreate4(session *Session, network NetworkRef, members []PIFRef, mAC string) (retval TaskRef, err error) {
+func (bond) AsyncCreate4(session *Session, network NetworkRef, members []PIFRef, mac string) (retval TaskRef, err error) {
 	method := "Async.Bond.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -612,11 +612,11 @@ func (bond) AsyncCreate4(session *Session, network NetworkRef, members []PIFRef,
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, mACArg)
+	result, err := session.client.sendCall(method, sessionIDArg, networkArg, membersArg, macArg)
 	if err != nil {
 		return
 	}
@@ -1114,17 +1114,17 @@ func (bond) GetUUID2(session *Session, self BondRef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the Bond instance with the specified UUID.
 // Version: miami
-func (bond) GetByUUID(session *Session, uUID string) (retval BondRef, err error) {
+func (bond) GetByUUID(session *Session, uuid string) (retval BondRef, err error) {
 	method := "Bond.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1134,17 +1134,17 @@ func (bond) GetByUUID(session *Session, uUID string) (retval BondRef, err error)
 
 // GetByUUID2: Get a reference to the Bond instance with the specified UUID.
 // Version: miami
-func (bond) GetByUUID2(session *Session, uUID string) (retval BondRef, err error) {
+func (bond) GetByUUID2(session *Session, uuid string) (retval BondRef, err error) {
 	method := "Bond.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

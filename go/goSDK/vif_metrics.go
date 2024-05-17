@@ -21,13 +21,13 @@ type VIFMetricsRecord struct {
 type VIFMetricsRef string
 
 // The metrics associated with a virtual network device
-type vIFMetrics struct{}
+type vifMetrics struct{}
 
-var VIFMetrics vIFMetrics
+var VIFMetrics vifMetrics
 
 // GetAllRecords: Return a map of VIF_metrics references to VIF_metrics records for all VIF_metrics instances known to the system.
 // Version: rio
-func (vIFMetrics) GetAllRecords(session *Session) (retval map[VIFMetricsRef]VIFMetricsRecord, err error) {
+func (vifMetrics) GetAllRecords(session *Session) (retval map[VIFMetricsRef]VIFMetricsRecord, err error) {
 	method := "VIF_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -43,7 +43,7 @@ func (vIFMetrics) GetAllRecords(session *Session) (retval map[VIFMetricsRef]VIFM
 
 // GetAllRecords1: Return a map of VIF_metrics references to VIF_metrics records for all VIF_metrics instances known to the system.
 // Version: rio
-func (vIFMetrics) GetAllRecords1(session *Session) (retval map[VIFMetricsRef]VIFMetricsRecord, err error) {
+func (vifMetrics) GetAllRecords1(session *Session) (retval map[VIFMetricsRef]VIFMetricsRecord, err error) {
 	method := "VIF_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -59,7 +59,7 @@ func (vIFMetrics) GetAllRecords1(session *Session) (retval map[VIFMetricsRef]VIF
 
 // GetAll: Return a list of all the VIF_metrics instances known to the system.
 // Version: rio
-func (vIFMetrics) GetAll(session *Session) (retval []VIFMetricsRef, err error) {
+func (vifMetrics) GetAll(session *Session) (retval []VIFMetricsRef, err error) {
 	method := "VIF_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -75,7 +75,7 @@ func (vIFMetrics) GetAll(session *Session) (retval []VIFMetricsRef, err error) {
 
 // GetAll1: Return a list of all the VIF_metrics instances known to the system.
 // Version: rio
-func (vIFMetrics) GetAll1(session *Session) (retval []VIFMetricsRef, err error) {
+func (vifMetrics) GetAll1(session *Session) (retval []VIFMetricsRef, err error) {
 	method := "VIF_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -91,7 +91,7 @@ func (vIFMetrics) GetAll1(session *Session) (retval []VIFMetricsRef, err error) 
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VIF_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vIFMetrics) RemoveFromOtherConfig(session *Session, self VIFMetricsRef, key string) (err error) {
+func (vifMetrics) RemoveFromOtherConfig(session *Session, self VIFMetricsRef, key string) (err error) {
 	method := "VIF_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -111,7 +111,7 @@ func (vIFMetrics) RemoveFromOtherConfig(session *Session, self VIFMetricsRef, ke
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VIF_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vIFMetrics) RemoveFromOtherConfig3(session *Session, self VIFMetricsRef, key string) (err error) {
+func (vifMetrics) RemoveFromOtherConfig3(session *Session, self VIFMetricsRef, key string) (err error) {
 	method := "VIF_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -131,7 +131,7 @@ func (vIFMetrics) RemoveFromOtherConfig3(session *Session, self VIFMetricsRef, k
 
 // RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given VIF_metrics.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vIFMetrics) RemoveFromOtherConfig2(session *Session, self VIFMetricsRef) (err error) {
+func (vifMetrics) RemoveFromOtherConfig2(session *Session, self VIFMetricsRef) (err error) {
 	method := "VIF_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -147,7 +147,7 @@ func (vIFMetrics) RemoveFromOtherConfig2(session *Session, self VIFMetricsRef) (
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VIF_metrics.
 // Version: orlando
-func (vIFMetrics) AddToOtherConfig(session *Session, self VIFMetricsRef, key string, value string) (err error) {
+func (vifMetrics) AddToOtherConfig(session *Session, self VIFMetricsRef, key string, value string) (err error) {
 	method := "VIF_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -171,7 +171,7 @@ func (vIFMetrics) AddToOtherConfig(session *Session, self VIFMetricsRef, key str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VIF_metrics.
 // Version: orlando
-func (vIFMetrics) AddToOtherConfig4(session *Session, self VIFMetricsRef, key string, value string) (err error) {
+func (vifMetrics) AddToOtherConfig4(session *Session, self VIFMetricsRef, key string, value string) (err error) {
 	method := "VIF_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -195,7 +195,7 @@ func (vIFMetrics) AddToOtherConfig4(session *Session, self VIFMetricsRef, key st
 
 // AddToOtherConfig2: Add the given key-value pair to the other_config field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) AddToOtherConfig2(session *Session, self VIFMetricsRef) (err error) {
+func (vifMetrics) AddToOtherConfig2(session *Session, self VIFMetricsRef) (err error) {
 	method := "VIF_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -211,7 +211,7 @@ func (vIFMetrics) AddToOtherConfig2(session *Session, self VIFMetricsRef) (err e
 
 // SetOtherConfig: Set the other_config field of the given VIF_metrics.
 // Version: orlando
-func (vIFMetrics) SetOtherConfig(session *Session, self VIFMetricsRef, value map[string]string) (err error) {
+func (vifMetrics) SetOtherConfig(session *Session, self VIFMetricsRef, value map[string]string) (err error) {
 	method := "VIF_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -231,7 +231,7 @@ func (vIFMetrics) SetOtherConfig(session *Session, self VIFMetricsRef, value map
 
 // SetOtherConfig3: Set the other_config field of the given VIF_metrics.
 // Version: orlando
-func (vIFMetrics) SetOtherConfig3(session *Session, self VIFMetricsRef, value map[string]string) (err error) {
+func (vifMetrics) SetOtherConfig3(session *Session, self VIFMetricsRef, value map[string]string) (err error) {
 	method := "VIF_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -251,7 +251,7 @@ func (vIFMetrics) SetOtherConfig3(session *Session, self VIFMetricsRef, value ma
 
 // SetOtherConfig2: Set the other_config field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) SetOtherConfig2(session *Session, self VIFMetricsRef) (err error) {
+func (vifMetrics) SetOtherConfig2(session *Session, self VIFMetricsRef) (err error) {
 	method := "VIF_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -267,7 +267,7 @@ func (vIFMetrics) SetOtherConfig2(session *Session, self VIFMetricsRef) (err err
 
 // GetOtherConfig: Get the other_config field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetOtherConfig(session *Session, self VIFMetricsRef) (retval map[string]string, err error) {
+func (vifMetrics) GetOtherConfig(session *Session, self VIFMetricsRef) (retval map[string]string, err error) {
 	method := "VIF_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -287,7 +287,7 @@ func (vIFMetrics) GetOtherConfig(session *Session, self VIFMetricsRef) (retval m
 
 // GetOtherConfig2: Get the other_config field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetOtherConfig2(session *Session, self VIFMetricsRef) (retval map[string]string, err error) {
+func (vifMetrics) GetOtherConfig2(session *Session, self VIFMetricsRef) (retval map[string]string, err error) {
 	method := "VIF_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -307,7 +307,7 @@ func (vIFMetrics) GetOtherConfig2(session *Session, self VIFMetricsRef) (retval 
 
 // GetLastUpdated: Get the last_updated field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetLastUpdated(session *Session, self VIFMetricsRef) (retval time.Time, err error) {
+func (vifMetrics) GetLastUpdated(session *Session, self VIFMetricsRef) (retval time.Time, err error) {
 	method := "VIF_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -327,7 +327,7 @@ func (vIFMetrics) GetLastUpdated(session *Session, self VIFMetricsRef) (retval t
 
 // GetLastUpdated2: Get the last_updated field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetLastUpdated2(session *Session, self VIFMetricsRef) (retval time.Time, err error) {
+func (vifMetrics) GetLastUpdated2(session *Session, self VIFMetricsRef) (retval time.Time, err error) {
 	method := "VIF_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -347,7 +347,7 @@ func (vIFMetrics) GetLastUpdated2(session *Session, self VIFMetricsRef) (retval 
 
 // GetIoWriteKbs: Get the io/write_kbs field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetIoWriteKbs(session *Session, self VIFMetricsRef) (retval float64, err error) {
+func (vifMetrics) GetIoWriteKbs(session *Session, self VIFMetricsRef) (retval float64, err error) {
 	method := "VIF_metrics.get_io_write_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -367,7 +367,7 @@ func (vIFMetrics) GetIoWriteKbs(session *Session, self VIFMetricsRef) (retval fl
 
 // GetIoWriteKbs2: Get the io/write_kbs field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetIoWriteKbs2(session *Session, self VIFMetricsRef) (retval float64, err error) {
+func (vifMetrics) GetIoWriteKbs2(session *Session, self VIFMetricsRef) (retval float64, err error) {
 	method := "VIF_metrics.get_io_write_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -387,7 +387,7 @@ func (vIFMetrics) GetIoWriteKbs2(session *Session, self VIFMetricsRef) (retval f
 
 // GetIoReadKbs: Get the io/read_kbs field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetIoReadKbs(session *Session, self VIFMetricsRef) (retval float64, err error) {
+func (vifMetrics) GetIoReadKbs(session *Session, self VIFMetricsRef) (retval float64, err error) {
 	method := "VIF_metrics.get_io_read_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -407,7 +407,7 @@ func (vIFMetrics) GetIoReadKbs(session *Session, self VIFMetricsRef) (retval flo
 
 // GetIoReadKbs2: Get the io/read_kbs field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetIoReadKbs2(session *Session, self VIFMetricsRef) (retval float64, err error) {
+func (vifMetrics) GetIoReadKbs2(session *Session, self VIFMetricsRef) (retval float64, err error) {
 	method := "VIF_metrics.get_io_read_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -427,7 +427,7 @@ func (vIFMetrics) GetIoReadKbs2(session *Session, self VIFMetricsRef) (retval fl
 
 // GetUUID: Get the uuid field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetUUID(session *Session, self VIFMetricsRef) (retval string, err error) {
+func (vifMetrics) GetUUID(session *Session, self VIFMetricsRef) (retval string, err error) {
 	method := "VIF_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -447,7 +447,7 @@ func (vIFMetrics) GetUUID(session *Session, self VIFMetricsRef) (retval string, 
 
 // GetUUID2: Get the uuid field of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetUUID2(session *Session, self VIFMetricsRef) (retval string, err error) {
+func (vifMetrics) GetUUID2(session *Session, self VIFMetricsRef) (retval string, err error) {
 	method := "VIF_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -467,17 +467,17 @@ func (vIFMetrics) GetUUID2(session *Session, self VIFMetricsRef) (retval string,
 
 // GetByUUID: Get a reference to the VIF_metrics instance with the specified UUID.
 // Version: rio
-func (vIFMetrics) GetByUUID(session *Session, uUID string) (retval VIFMetricsRef, err error) {
+func (vifMetrics) GetByUUID(session *Session, uuid string) (retval VIFMetricsRef, err error) {
 	method := "VIF_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -487,17 +487,17 @@ func (vIFMetrics) GetByUUID(session *Session, uUID string) (retval VIFMetricsRef
 
 // GetByUUID2: Get a reference to the VIF_metrics instance with the specified UUID.
 // Version: rio
-func (vIFMetrics) GetByUUID2(session *Session, uUID string) (retval VIFMetricsRef, err error) {
+func (vifMetrics) GetByUUID2(session *Session, uuid string) (retval VIFMetricsRef, err error) {
 	method := "VIF_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -507,7 +507,7 @@ func (vIFMetrics) GetByUUID2(session *Session, uUID string) (retval VIFMetricsRe
 
 // GetRecord: Get a record containing the current state of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetRecord(session *Session, self VIFMetricsRef) (retval VIFMetricsRecord, err error) {
+func (vifMetrics) GetRecord(session *Session, self VIFMetricsRef) (retval VIFMetricsRecord, err error) {
 	method := "VIF_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -527,7 +527,7 @@ func (vIFMetrics) GetRecord(session *Session, self VIFMetricsRef) (retval VIFMet
 
 // GetRecord2: Get a record containing the current state of the given VIF_metrics.
 // Version: rio
-func (vIFMetrics) GetRecord2(session *Session, self VIFMetricsRef) (retval VIFMetricsRecord, err error) {
+func (vifMetrics) GetRecord2(session *Session, self VIFMetricsRef) (retval VIFMetricsRecord, err error) {
 	method := "VIF_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

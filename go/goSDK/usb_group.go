@@ -22,13 +22,13 @@ type USBGroupRecord struct {
 type USBGroupRef string
 
 // A group of compatible USBs across the resource pool
-type uSBGroup struct{}
+type usbGroup struct{}
 
-var USBGroup uSBGroup
+var USBGroup usbGroup
 
 // GetAllRecords: Return a map of USB_group references to USB_group records for all USB_groups known to the system.
 // Version: inverness
-func (uSBGroup) GetAllRecords(session *Session) (retval map[USBGroupRef]USBGroupRecord, err error) {
+func (usbGroup) GetAllRecords(session *Session) (retval map[USBGroupRef]USBGroupRecord, err error) {
 	method := "USB_group.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -44,7 +44,7 @@ func (uSBGroup) GetAllRecords(session *Session) (retval map[USBGroupRef]USBGroup
 
 // GetAllRecords1: Return a map of USB_group references to USB_group records for all USB_groups known to the system.
 // Version: inverness
-func (uSBGroup) GetAllRecords1(session *Session) (retval map[USBGroupRef]USBGroupRecord, err error) {
+func (usbGroup) GetAllRecords1(session *Session) (retval map[USBGroupRef]USBGroupRecord, err error) {
 	method := "USB_group.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -60,7 +60,7 @@ func (uSBGroup) GetAllRecords1(session *Session) (retval map[USBGroupRef]USBGrou
 
 // GetAll: Return a list of all the USB_groups known to the system.
 // Version: inverness
-func (uSBGroup) GetAll(session *Session) (retval []USBGroupRef, err error) {
+func (usbGroup) GetAll(session *Session) (retval []USBGroupRef, err error) {
 	method := "USB_group.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -76,7 +76,7 @@ func (uSBGroup) GetAll(session *Session) (retval []USBGroupRef, err error) {
 
 // GetAll1: Return a list of all the USB_groups known to the system.
 // Version: inverness
-func (uSBGroup) GetAll1(session *Session) (retval []USBGroupRef, err error) {
+func (usbGroup) GetAll1(session *Session) (retval []USBGroupRef, err error) {
 	method := "USB_group.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -92,7 +92,7 @@ func (uSBGroup) GetAll1(session *Session) (retval []USBGroupRef, err error) {
 
 // Destroy:
 // Version: inverness
-func (uSBGroup) Destroy(session *Session, self USBGroupRef) (err error) {
+func (usbGroup) Destroy(session *Session, self USBGroupRef) (err error) {
 	method := "USB_group.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -108,7 +108,7 @@ func (uSBGroup) Destroy(session *Session, self USBGroupRef) (err error) {
 
 // AsyncDestroy:
 // Version: inverness
-func (uSBGroup) AsyncDestroy(session *Session, self USBGroupRef) (retval TaskRef, err error) {
+func (usbGroup) AsyncDestroy(session *Session, self USBGroupRef) (retval TaskRef, err error) {
 	method := "Async.USB_group.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -128,7 +128,7 @@ func (uSBGroup) AsyncDestroy(session *Session, self USBGroupRef) (retval TaskRef
 
 // Destroy2:
 // Version: inverness
-func (uSBGroup) Destroy2(session *Session, self USBGroupRef) (err error) {
+func (usbGroup) Destroy2(session *Session, self USBGroupRef) (err error) {
 	method := "USB_group.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -144,7 +144,7 @@ func (uSBGroup) Destroy2(session *Session, self USBGroupRef) (err error) {
 
 // AsyncDestroy2:
 // Version: inverness
-func (uSBGroup) AsyncDestroy2(session *Session, self USBGroupRef) (retval TaskRef, err error) {
+func (usbGroup) AsyncDestroy2(session *Session, self USBGroupRef) (retval TaskRef, err error) {
 	method := "Async.USB_group.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -164,7 +164,7 @@ func (uSBGroup) AsyncDestroy2(session *Session, self USBGroupRef) (retval TaskRe
 
 // Create:
 // Version: inverness
-func (uSBGroup) Create(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval USBGroupRef, err error) {
+func (usbGroup) Create(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval USBGroupRef, err error) {
 	method := "USB_group.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -192,7 +192,7 @@ func (uSBGroup) Create(session *Session, nameLabel string, nameDescription strin
 
 // AsyncCreate:
 // Version: inverness
-func (uSBGroup) AsyncCreate(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval TaskRef, err error) {
+func (usbGroup) AsyncCreate(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.USB_group.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -220,7 +220,7 @@ func (uSBGroup) AsyncCreate(session *Session, nameLabel string, nameDescription 
 
 // Create4:
 // Version: inverness
-func (uSBGroup) Create4(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval USBGroupRef, err error) {
+func (usbGroup) Create4(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval USBGroupRef, err error) {
 	method := "USB_group.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -248,7 +248,7 @@ func (uSBGroup) Create4(session *Session, nameLabel string, nameDescription stri
 
 // AsyncCreate4:
 // Version: inverness
-func (uSBGroup) AsyncCreate4(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval TaskRef, err error) {
+func (usbGroup) AsyncCreate4(session *Session, nameLabel string, nameDescription string, otherConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.USB_group.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -276,7 +276,7 @@ func (uSBGroup) AsyncCreate4(session *Session, nameLabel string, nameDescription
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given USB_group.  If the key is not in that Map, then do nothing.
 // Version: inverness
-func (uSBGroup) RemoveFromOtherConfig(session *Session, self USBGroupRef, key string) (err error) {
+func (usbGroup) RemoveFromOtherConfig(session *Session, self USBGroupRef, key string) (err error) {
 	method := "USB_group.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -296,7 +296,7 @@ func (uSBGroup) RemoveFromOtherConfig(session *Session, self USBGroupRef, key st
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given USB_group.  If the key is not in that Map, then do nothing.
 // Version: inverness
-func (uSBGroup) RemoveFromOtherConfig3(session *Session, self USBGroupRef, key string) (err error) {
+func (usbGroup) RemoveFromOtherConfig3(session *Session, self USBGroupRef, key string) (err error) {
 	method := "USB_group.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -316,7 +316,7 @@ func (uSBGroup) RemoveFromOtherConfig3(session *Session, self USBGroupRef, key s
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given USB_group.
 // Version: inverness
-func (uSBGroup) AddToOtherConfig(session *Session, self USBGroupRef, key string, value string) (err error) {
+func (usbGroup) AddToOtherConfig(session *Session, self USBGroupRef, key string, value string) (err error) {
 	method := "USB_group.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -340,7 +340,7 @@ func (uSBGroup) AddToOtherConfig(session *Session, self USBGroupRef, key string,
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given USB_group.
 // Version: inverness
-func (uSBGroup) AddToOtherConfig4(session *Session, self USBGroupRef, key string, value string) (err error) {
+func (usbGroup) AddToOtherConfig4(session *Session, self USBGroupRef, key string, value string) (err error) {
 	method := "USB_group.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -364,7 +364,7 @@ func (uSBGroup) AddToOtherConfig4(session *Session, self USBGroupRef, key string
 
 // SetOtherConfig: Set the other_config field of the given USB_group.
 // Version: inverness
-func (uSBGroup) SetOtherConfig(session *Session, self USBGroupRef, value map[string]string) (err error) {
+func (usbGroup) SetOtherConfig(session *Session, self USBGroupRef, value map[string]string) (err error) {
 	method := "USB_group.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -384,7 +384,7 @@ func (uSBGroup) SetOtherConfig(session *Session, self USBGroupRef, value map[str
 
 // SetOtherConfig3: Set the other_config field of the given USB_group.
 // Version: inverness
-func (uSBGroup) SetOtherConfig3(session *Session, self USBGroupRef, value map[string]string) (err error) {
+func (usbGroup) SetOtherConfig3(session *Session, self USBGroupRef, value map[string]string) (err error) {
 	method := "USB_group.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -404,7 +404,7 @@ func (uSBGroup) SetOtherConfig3(session *Session, self USBGroupRef, value map[st
 
 // SetNameDescription: Set the name/description field of the given USB_group.
 // Version: inverness
-func (uSBGroup) SetNameDescription(session *Session, self USBGroupRef, value string) (err error) {
+func (usbGroup) SetNameDescription(session *Session, self USBGroupRef, value string) (err error) {
 	method := "USB_group.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -424,7 +424,7 @@ func (uSBGroup) SetNameDescription(session *Session, self USBGroupRef, value str
 
 // SetNameDescription3: Set the name/description field of the given USB_group.
 // Version: inverness
-func (uSBGroup) SetNameDescription3(session *Session, self USBGroupRef, value string) (err error) {
+func (usbGroup) SetNameDescription3(session *Session, self USBGroupRef, value string) (err error) {
 	method := "USB_group.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -444,7 +444,7 @@ func (uSBGroup) SetNameDescription3(session *Session, self USBGroupRef, value st
 
 // SetNameLabel: Set the name/label field of the given USB_group.
 // Version: inverness
-func (uSBGroup) SetNameLabel(session *Session, self USBGroupRef, value string) (err error) {
+func (usbGroup) SetNameLabel(session *Session, self USBGroupRef, value string) (err error) {
 	method := "USB_group.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -464,7 +464,7 @@ func (uSBGroup) SetNameLabel(session *Session, self USBGroupRef, value string) (
 
 // SetNameLabel3: Set the name/label field of the given USB_group.
 // Version: inverness
-func (uSBGroup) SetNameLabel3(session *Session, self USBGroupRef, value string) (err error) {
+func (usbGroup) SetNameLabel3(session *Session, self USBGroupRef, value string) (err error) {
 	method := "USB_group.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -484,7 +484,7 @@ func (uSBGroup) SetNameLabel3(session *Session, self USBGroupRef, value string) 
 
 // GetOtherConfig: Get the other_config field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetOtherConfig(session *Session, self USBGroupRef) (retval map[string]string, err error) {
+func (usbGroup) GetOtherConfig(session *Session, self USBGroupRef) (retval map[string]string, err error) {
 	method := "USB_group.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -504,7 +504,7 @@ func (uSBGroup) GetOtherConfig(session *Session, self USBGroupRef) (retval map[s
 
 // GetOtherConfig2: Get the other_config field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetOtherConfig2(session *Session, self USBGroupRef) (retval map[string]string, err error) {
+func (usbGroup) GetOtherConfig2(session *Session, self USBGroupRef) (retval map[string]string, err error) {
 	method := "USB_group.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -524,7 +524,7 @@ func (uSBGroup) GetOtherConfig2(session *Session, self USBGroupRef) (retval map[
 
 // GetVUSBs: Get the VUSBs field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetVUSBs(session *Session, self USBGroupRef) (retval []VUSBRef, err error) {
+func (usbGroup) GetVUSBs(session *Session, self USBGroupRef) (retval []VUSBRef, err error) {
 	method := "USB_group.get_VUSBs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -544,7 +544,7 @@ func (uSBGroup) GetVUSBs(session *Session, self USBGroupRef) (retval []VUSBRef, 
 
 // GetVUSBs2: Get the VUSBs field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetVUSBs2(session *Session, self USBGroupRef) (retval []VUSBRef, err error) {
+func (usbGroup) GetVUSBs2(session *Session, self USBGroupRef) (retval []VUSBRef, err error) {
 	method := "USB_group.get_VUSBs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -564,7 +564,7 @@ func (uSBGroup) GetVUSBs2(session *Session, self USBGroupRef) (retval []VUSBRef,
 
 // GetPUSBs: Get the PUSBs field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetPUSBs(session *Session, self USBGroupRef) (retval []PUSBRef, err error) {
+func (usbGroup) GetPUSBs(session *Session, self USBGroupRef) (retval []PUSBRef, err error) {
 	method := "USB_group.get_PUSBs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -584,7 +584,7 @@ func (uSBGroup) GetPUSBs(session *Session, self USBGroupRef) (retval []PUSBRef, 
 
 // GetPUSBs2: Get the PUSBs field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetPUSBs2(session *Session, self USBGroupRef) (retval []PUSBRef, err error) {
+func (usbGroup) GetPUSBs2(session *Session, self USBGroupRef) (retval []PUSBRef, err error) {
 	method := "USB_group.get_PUSBs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -604,7 +604,7 @@ func (uSBGroup) GetPUSBs2(session *Session, self USBGroupRef) (retval []PUSBRef,
 
 // GetNameDescription: Get the name/description field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetNameDescription(session *Session, self USBGroupRef) (retval string, err error) {
+func (usbGroup) GetNameDescription(session *Session, self USBGroupRef) (retval string, err error) {
 	method := "USB_group.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -624,7 +624,7 @@ func (uSBGroup) GetNameDescription(session *Session, self USBGroupRef) (retval s
 
 // GetNameDescription2: Get the name/description field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetNameDescription2(session *Session, self USBGroupRef) (retval string, err error) {
+func (usbGroup) GetNameDescription2(session *Session, self USBGroupRef) (retval string, err error) {
 	method := "USB_group.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -644,7 +644,7 @@ func (uSBGroup) GetNameDescription2(session *Session, self USBGroupRef) (retval 
 
 // GetNameLabel: Get the name/label field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetNameLabel(session *Session, self USBGroupRef) (retval string, err error) {
+func (usbGroup) GetNameLabel(session *Session, self USBGroupRef) (retval string, err error) {
 	method := "USB_group.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -664,7 +664,7 @@ func (uSBGroup) GetNameLabel(session *Session, self USBGroupRef) (retval string,
 
 // GetNameLabel2: Get the name/label field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetNameLabel2(session *Session, self USBGroupRef) (retval string, err error) {
+func (usbGroup) GetNameLabel2(session *Session, self USBGroupRef) (retval string, err error) {
 	method := "USB_group.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -684,7 +684,7 @@ func (uSBGroup) GetNameLabel2(session *Session, self USBGroupRef) (retval string
 
 // GetUUID: Get the uuid field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetUUID(session *Session, self USBGroupRef) (retval string, err error) {
+func (usbGroup) GetUUID(session *Session, self USBGroupRef) (retval string, err error) {
 	method := "USB_group.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -704,7 +704,7 @@ func (uSBGroup) GetUUID(session *Session, self USBGroupRef) (retval string, err 
 
 // GetUUID2: Get the uuid field of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetUUID2(session *Session, self USBGroupRef) (retval string, err error) {
+func (usbGroup) GetUUID2(session *Session, self USBGroupRef) (retval string, err error) {
 	method := "USB_group.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -724,7 +724,7 @@ func (uSBGroup) GetUUID2(session *Session, self USBGroupRef) (retval string, err
 
 // GetByNameLabel: Get all the USB_group instances with the given label.
 // Version: inverness
-func (uSBGroup) GetByNameLabel(session *Session, label string) (retval []USBGroupRef, err error) {
+func (usbGroup) GetByNameLabel(session *Session, label string) (retval []USBGroupRef, err error) {
 	method := "USB_group.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -744,7 +744,7 @@ func (uSBGroup) GetByNameLabel(session *Session, label string) (retval []USBGrou
 
 // GetByNameLabel2: Get all the USB_group instances with the given label.
 // Version: inverness
-func (uSBGroup) GetByNameLabel2(session *Session, label string) (retval []USBGroupRef, err error) {
+func (usbGroup) GetByNameLabel2(session *Session, label string) (retval []USBGroupRef, err error) {
 	method := "USB_group.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -764,17 +764,17 @@ func (uSBGroup) GetByNameLabel2(session *Session, label string) (retval []USBGro
 
 // GetByUUID: Get a reference to the USB_group instance with the specified UUID.
 // Version: inverness
-func (uSBGroup) GetByUUID(session *Session, uUID string) (retval USBGroupRef, err error) {
+func (usbGroup) GetByUUID(session *Session, uuid string) (retval USBGroupRef, err error) {
 	method := "USB_group.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -784,17 +784,17 @@ func (uSBGroup) GetByUUID(session *Session, uUID string) (retval USBGroupRef, er
 
 // GetByUUID2: Get a reference to the USB_group instance with the specified UUID.
 // Version: inverness
-func (uSBGroup) GetByUUID2(session *Session, uUID string) (retval USBGroupRef, err error) {
+func (usbGroup) GetByUUID2(session *Session, uuid string) (retval USBGroupRef, err error) {
 	method := "USB_group.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -804,7 +804,7 @@ func (uSBGroup) GetByUUID2(session *Session, uUID string) (retval USBGroupRef, e
 
 // GetRecord: Get a record containing the current state of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetRecord(session *Session, self USBGroupRef) (retval USBGroupRecord, err error) {
+func (usbGroup) GetRecord(session *Session, self USBGroupRef) (retval USBGroupRecord, err error) {
 	method := "USB_group.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -824,7 +824,7 @@ func (uSBGroup) GetRecord(session *Session, self USBGroupRef) (retval USBGroupRe
 
 // GetRecord2: Get a record containing the current state of the given USB_group.
 // Version: inverness
-func (uSBGroup) GetRecord2(session *Session, self USBGroupRef) (retval USBGroupRecord, err error) {
+func (usbGroup) GetRecord2(session *Session, self USBGroupRef) (retval USBGroupRecord, err error) {
 	method := "USB_group.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

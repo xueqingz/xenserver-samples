@@ -683,17 +683,17 @@ func (blob) GetByNameLabel2(session *Session, label string) (retval []BlobRef, e
 
 // GetByUUID: Get a reference to the blob instance with the specified UUID.
 // Version: orlando
-func (blob) GetByUUID(session *Session, uUID string) (retval BlobRef, err error) {
+func (blob) GetByUUID(session *Session, uuid string) (retval BlobRef, err error) {
 	method := "blob.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -703,17 +703,17 @@ func (blob) GetByUUID(session *Session, uUID string) (retval BlobRef, err error)
 
 // GetByUUID2: Get a reference to the blob instance with the specified UUID.
 // Version: orlando
-func (blob) GetByUUID2(session *Session, uUID string) (retval BlobRef, err error) {
+func (blob) GetByUUID2(session *Session, uuid string) (retval BlobRef, err error) {
 	method := "blob.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

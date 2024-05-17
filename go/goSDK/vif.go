@@ -64,13 +64,13 @@ type VIFRecord struct {
 type VIFRef string
 
 // A virtual network interface
-type vIF struct{}
+type vif struct{}
 
-var VIF vIF
+var VIF vif
 
 // GetAllRecords: Return a map of VIF references to VIF records for all VIFs known to the system.
 // Version: rio
-func (vIF) GetAllRecords(session *Session) (retval map[VIFRef]VIFRecord, err error) {
+func (vif) GetAllRecords(session *Session) (retval map[VIFRef]VIFRecord, err error) {
 	method := "VIF.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -86,7 +86,7 @@ func (vIF) GetAllRecords(session *Session) (retval map[VIFRef]VIFRecord, err err
 
 // GetAllRecords1: Return a map of VIF references to VIF records for all VIFs known to the system.
 // Version: rio
-func (vIF) GetAllRecords1(session *Session) (retval map[VIFRef]VIFRecord, err error) {
+func (vif) GetAllRecords1(session *Session) (retval map[VIFRef]VIFRecord, err error) {
 	method := "VIF.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -102,7 +102,7 @@ func (vIF) GetAllRecords1(session *Session) (retval map[VIFRef]VIFRecord, err er
 
 // GetAll: Return a list of all the VIFs known to the system.
 // Version: rio
-func (vIF) GetAll(session *Session) (retval []VIFRef, err error) {
+func (vif) GetAll(session *Session) (retval []VIFRef, err error) {
 	method := "VIF.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -118,7 +118,7 @@ func (vIF) GetAll(session *Session) (retval []VIFRef, err error) {
 
 // GetAll1: Return a list of all the VIFs known to the system.
 // Version: rio
-func (vIF) GetAll1(session *Session) (retval []VIFRef, err error) {
+func (vif) GetAll1(session *Session) (retval []VIFRef, err error) {
 	method := "VIF.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -134,7 +134,7 @@ func (vIF) GetAll1(session *Session) (retval []VIFRef, err error) {
 
 // ConfigureIpv6: Configure IPv6 settings for this virtual interface
 // Version: dundee
-func (vIF) ConfigureIpv6(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (err error) {
+func (vif) ConfigureIpv6(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (err error) {
 	method := "VIF.configure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -162,7 +162,7 @@ func (vIF) ConfigureIpv6(session *Session, self VIFRef, mode VifIpv6Configuratio
 
 // AsyncConfigureIpv6: Configure IPv6 settings for this virtual interface
 // Version: dundee
-func (vIF) AsyncConfigureIpv6(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
+func (vif) AsyncConfigureIpv6(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
 	method := "Async.VIF.configure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -194,7 +194,7 @@ func (vIF) AsyncConfigureIpv6(session *Session, self VIFRef, mode VifIpv6Configu
 
 // ConfigureIpv65: Configure IPv6 settings for this virtual interface
 // Version: dundee
-func (vIF) ConfigureIpv65(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (err error) {
+func (vif) ConfigureIpv65(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (err error) {
 	method := "VIF.configure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -222,7 +222,7 @@ func (vIF) ConfigureIpv65(session *Session, self VIFRef, mode VifIpv6Configurati
 
 // AsyncConfigureIpv65: Configure IPv6 settings for this virtual interface
 // Version: dundee
-func (vIF) AsyncConfigureIpv65(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
+func (vif) AsyncConfigureIpv65(session *Session, self VIFRef, mode VifIpv6ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
 	method := "Async.VIF.configure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -254,7 +254,7 @@ func (vIF) AsyncConfigureIpv65(session *Session, self VIFRef, mode VifIpv6Config
 
 // ConfigureIpv4: Configure IPv4 settings for this virtual interface
 // Version: dundee
-func (vIF) ConfigureIpv4(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (err error) {
+func (vif) ConfigureIpv4(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (err error) {
 	method := "VIF.configure_ipv4"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -282,7 +282,7 @@ func (vIF) ConfigureIpv4(session *Session, self VIFRef, mode VifIpv4Configuratio
 
 // AsyncConfigureIpv4: Configure IPv4 settings for this virtual interface
 // Version: dundee
-func (vIF) AsyncConfigureIpv4(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
+func (vif) AsyncConfigureIpv4(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
 	method := "Async.VIF.configure_ipv4"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -314,7 +314,7 @@ func (vIF) AsyncConfigureIpv4(session *Session, self VIFRef, mode VifIpv4Configu
 
 // ConfigureIpv45: Configure IPv4 settings for this virtual interface
 // Version: dundee
-func (vIF) ConfigureIpv45(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (err error) {
+func (vif) ConfigureIpv45(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (err error) {
 	method := "VIF.configure_ipv4"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -342,7 +342,7 @@ func (vIF) ConfigureIpv45(session *Session, self VIFRef, mode VifIpv4Configurati
 
 // AsyncConfigureIpv45: Configure IPv4 settings for this virtual interface
 // Version: dundee
-func (vIF) AsyncConfigureIpv45(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
+func (vif) AsyncConfigureIpv45(session *Session, self VIFRef, mode VifIpv4ConfigurationMode, address string, gateway string) (retval TaskRef, err error) {
 	method := "Async.VIF.configure_ipv4"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -374,7 +374,7 @@ func (vIF) AsyncConfigureIpv45(session *Session, self VIFRef, mode VifIpv4Config
 
 // RemoveIpv6Allowed: Removes an IPv6 address from this VIF
 // Version: tampa
-func (vIF) RemoveIpv6Allowed(session *Session, self VIFRef, value string) (err error) {
+func (vif) RemoveIpv6Allowed(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.remove_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -394,7 +394,7 @@ func (vIF) RemoveIpv6Allowed(session *Session, self VIFRef, value string) (err e
 
 // AsyncRemoveIpv6Allowed: Removes an IPv6 address from this VIF
 // Version: tampa
-func (vIF) AsyncRemoveIpv6Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncRemoveIpv6Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.remove_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -418,7 +418,7 @@ func (vIF) AsyncRemoveIpv6Allowed(session *Session, self VIFRef, value string) (
 
 // RemoveIpv6Allowed3: Removes an IPv6 address from this VIF
 // Version: tampa
-func (vIF) RemoveIpv6Allowed3(session *Session, self VIFRef, value string) (err error) {
+func (vif) RemoveIpv6Allowed3(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.remove_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -438,7 +438,7 @@ func (vIF) RemoveIpv6Allowed3(session *Session, self VIFRef, value string) (err 
 
 // AsyncRemoveIpv6Allowed3: Removes an IPv6 address from this VIF
 // Version: tampa
-func (vIF) AsyncRemoveIpv6Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncRemoveIpv6Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.remove_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -462,7 +462,7 @@ func (vIF) AsyncRemoveIpv6Allowed3(session *Session, self VIFRef, value string) 
 
 // AddIpv6Allowed: Associates an IPv6 address with this VIF
 // Version: tampa
-func (vIF) AddIpv6Allowed(session *Session, self VIFRef, value string) (err error) {
+func (vif) AddIpv6Allowed(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.add_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -482,7 +482,7 @@ func (vIF) AddIpv6Allowed(session *Session, self VIFRef, value string) (err erro
 
 // AsyncAddIpv6Allowed: Associates an IPv6 address with this VIF
 // Version: tampa
-func (vIF) AsyncAddIpv6Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncAddIpv6Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.add_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -506,7 +506,7 @@ func (vIF) AsyncAddIpv6Allowed(session *Session, self VIFRef, value string) (ret
 
 // AddIpv6Allowed3: Associates an IPv6 address with this VIF
 // Version: tampa
-func (vIF) AddIpv6Allowed3(session *Session, self VIFRef, value string) (err error) {
+func (vif) AddIpv6Allowed3(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.add_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -526,7 +526,7 @@ func (vIF) AddIpv6Allowed3(session *Session, self VIFRef, value string) (err err
 
 // AsyncAddIpv6Allowed3: Associates an IPv6 address with this VIF
 // Version: tampa
-func (vIF) AsyncAddIpv6Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncAddIpv6Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.add_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -550,7 +550,7 @@ func (vIF) AsyncAddIpv6Allowed3(session *Session, self VIFRef, value string) (re
 
 // SetIpv6Allowed: Set the IPv6 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) SetIpv6Allowed(session *Session, self VIFRef, value []string) (err error) {
+func (vif) SetIpv6Allowed(session *Session, self VIFRef, value []string) (err error) {
 	method := "VIF.set_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -570,7 +570,7 @@ func (vIF) SetIpv6Allowed(session *Session, self VIFRef, value []string) (err er
 
 // AsyncSetIpv6Allowed: Set the IPv6 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) AsyncSetIpv6Allowed(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
+func (vif) AsyncSetIpv6Allowed(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
 	method := "Async.VIF.set_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -594,7 +594,7 @@ func (vIF) AsyncSetIpv6Allowed(session *Session, self VIFRef, value []string) (r
 
 // SetIpv6Allowed3: Set the IPv6 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) SetIpv6Allowed3(session *Session, self VIFRef, value []string) (err error) {
+func (vif) SetIpv6Allowed3(session *Session, self VIFRef, value []string) (err error) {
 	method := "VIF.set_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -614,7 +614,7 @@ func (vIF) SetIpv6Allowed3(session *Session, self VIFRef, value []string) (err e
 
 // AsyncSetIpv6Allowed3: Set the IPv6 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) AsyncSetIpv6Allowed3(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
+func (vif) AsyncSetIpv6Allowed3(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
 	method := "Async.VIF.set_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -638,7 +638,7 @@ func (vIF) AsyncSetIpv6Allowed3(session *Session, self VIFRef, value []string) (
 
 // RemoveIpv4Allowed: Removes an IPv4 address from this VIF
 // Version: tampa
-func (vIF) RemoveIpv4Allowed(session *Session, self VIFRef, value string) (err error) {
+func (vif) RemoveIpv4Allowed(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.remove_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -658,7 +658,7 @@ func (vIF) RemoveIpv4Allowed(session *Session, self VIFRef, value string) (err e
 
 // AsyncRemoveIpv4Allowed: Removes an IPv4 address from this VIF
 // Version: tampa
-func (vIF) AsyncRemoveIpv4Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncRemoveIpv4Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.remove_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -682,7 +682,7 @@ func (vIF) AsyncRemoveIpv4Allowed(session *Session, self VIFRef, value string) (
 
 // RemoveIpv4Allowed3: Removes an IPv4 address from this VIF
 // Version: tampa
-func (vIF) RemoveIpv4Allowed3(session *Session, self VIFRef, value string) (err error) {
+func (vif) RemoveIpv4Allowed3(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.remove_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -702,7 +702,7 @@ func (vIF) RemoveIpv4Allowed3(session *Session, self VIFRef, value string) (err 
 
 // AsyncRemoveIpv4Allowed3: Removes an IPv4 address from this VIF
 // Version: tampa
-func (vIF) AsyncRemoveIpv4Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncRemoveIpv4Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.remove_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -726,7 +726,7 @@ func (vIF) AsyncRemoveIpv4Allowed3(session *Session, self VIFRef, value string) 
 
 // AddIpv4Allowed: Associates an IPv4 address with this VIF
 // Version: tampa
-func (vIF) AddIpv4Allowed(session *Session, self VIFRef, value string) (err error) {
+func (vif) AddIpv4Allowed(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.add_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -746,7 +746,7 @@ func (vIF) AddIpv4Allowed(session *Session, self VIFRef, value string) (err erro
 
 // AsyncAddIpv4Allowed: Associates an IPv4 address with this VIF
 // Version: tampa
-func (vIF) AsyncAddIpv4Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncAddIpv4Allowed(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.add_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -770,7 +770,7 @@ func (vIF) AsyncAddIpv4Allowed(session *Session, self VIFRef, value string) (ret
 
 // AddIpv4Allowed3: Associates an IPv4 address with this VIF
 // Version: tampa
-func (vIF) AddIpv4Allowed3(session *Session, self VIFRef, value string) (err error) {
+func (vif) AddIpv4Allowed3(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.add_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -790,7 +790,7 @@ func (vIF) AddIpv4Allowed3(session *Session, self VIFRef, value string) (err err
 
 // AsyncAddIpv4Allowed3: Associates an IPv4 address with this VIF
 // Version: tampa
-func (vIF) AsyncAddIpv4Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
+func (vif) AsyncAddIpv4Allowed3(session *Session, self VIFRef, value string) (retval TaskRef, err error) {
 	method := "Async.VIF.add_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -814,7 +814,7 @@ func (vIF) AsyncAddIpv4Allowed3(session *Session, self VIFRef, value string) (re
 
 // SetIpv4Allowed: Set the IPv4 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) SetIpv4Allowed(session *Session, self VIFRef, value []string) (err error) {
+func (vif) SetIpv4Allowed(session *Session, self VIFRef, value []string) (err error) {
 	method := "VIF.set_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -834,7 +834,7 @@ func (vIF) SetIpv4Allowed(session *Session, self VIFRef, value []string) (err er
 
 // AsyncSetIpv4Allowed: Set the IPv4 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) AsyncSetIpv4Allowed(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
+func (vif) AsyncSetIpv4Allowed(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
 	method := "Async.VIF.set_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -858,7 +858,7 @@ func (vIF) AsyncSetIpv4Allowed(session *Session, self VIFRef, value []string) (r
 
 // SetIpv4Allowed3: Set the IPv4 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) SetIpv4Allowed3(session *Session, self VIFRef, value []string) (err error) {
+func (vif) SetIpv4Allowed3(session *Session, self VIFRef, value []string) (err error) {
 	method := "VIF.set_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -878,7 +878,7 @@ func (vIF) SetIpv4Allowed3(session *Session, self VIFRef, value []string) (err e
 
 // AsyncSetIpv4Allowed3: Set the IPv4 addresses to which traffic on this VIF can be restricted
 // Version: tampa
-func (vIF) AsyncSetIpv4Allowed3(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
+func (vif) AsyncSetIpv4Allowed3(session *Session, self VIFRef, value []string) (retval TaskRef, err error) {
 	method := "Async.VIF.set_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -902,7 +902,7 @@ func (vIF) AsyncSetIpv4Allowed3(session *Session, self VIFRef, value []string) (
 
 // SetLockingMode: Set the locking mode for this VIF
 // Version: tampa
-func (vIF) SetLockingMode(session *Session, self VIFRef, value VifLockingMode) (err error) {
+func (vif) SetLockingMode(session *Session, self VIFRef, value VifLockingMode) (err error) {
 	method := "VIF.set_locking_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -922,7 +922,7 @@ func (vIF) SetLockingMode(session *Session, self VIFRef, value VifLockingMode) (
 
 // AsyncSetLockingMode: Set the locking mode for this VIF
 // Version: tampa
-func (vIF) AsyncSetLockingMode(session *Session, self VIFRef, value VifLockingMode) (retval TaskRef, err error) {
+func (vif) AsyncSetLockingMode(session *Session, self VIFRef, value VifLockingMode) (retval TaskRef, err error) {
 	method := "Async.VIF.set_locking_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -946,7 +946,7 @@ func (vIF) AsyncSetLockingMode(session *Session, self VIFRef, value VifLockingMo
 
 // SetLockingMode3: Set the locking mode for this VIF
 // Version: tampa
-func (vIF) SetLockingMode3(session *Session, self VIFRef, value VifLockingMode) (err error) {
+func (vif) SetLockingMode3(session *Session, self VIFRef, value VifLockingMode) (err error) {
 	method := "VIF.set_locking_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -966,7 +966,7 @@ func (vIF) SetLockingMode3(session *Session, self VIFRef, value VifLockingMode) 
 
 // AsyncSetLockingMode3: Set the locking mode for this VIF
 // Version: tampa
-func (vIF) AsyncSetLockingMode3(session *Session, self VIFRef, value VifLockingMode) (retval TaskRef, err error) {
+func (vif) AsyncSetLockingMode3(session *Session, self VIFRef, value VifLockingMode) (retval TaskRef, err error) {
 	method := "Async.VIF.set_locking_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -990,7 +990,7 @@ func (vIF) AsyncSetLockingMode3(session *Session, self VIFRef, value VifLockingM
 
 // Move: Move the specified VIF to the specified network, even while the VM is running
 // Version: ely
-func (vIF) Move(session *Session, self VIFRef, network NetworkRef) (err error) {
+func (vif) Move(session *Session, self VIFRef, network NetworkRef) (err error) {
 	method := "VIF.move"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1010,7 +1010,7 @@ func (vIF) Move(session *Session, self VIFRef, network NetworkRef) (err error) {
 
 // AsyncMove: Move the specified VIF to the specified network, even while the VM is running
 // Version: ely
-func (vIF) AsyncMove(session *Session, self VIFRef, network NetworkRef) (retval TaskRef, err error) {
+func (vif) AsyncMove(session *Session, self VIFRef, network NetworkRef) (retval TaskRef, err error) {
 	method := "Async.VIF.move"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1034,7 +1034,7 @@ func (vIF) AsyncMove(session *Session, self VIFRef, network NetworkRef) (retval 
 
 // Move3: Move the specified VIF to the specified network, even while the VM is running
 // Version: ely
-func (vIF) Move3(session *Session, self VIFRef, network NetworkRef) (err error) {
+func (vif) Move3(session *Session, self VIFRef, network NetworkRef) (err error) {
 	method := "VIF.move"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1054,7 +1054,7 @@ func (vIF) Move3(session *Session, self VIFRef, network NetworkRef) (err error) 
 
 // AsyncMove3: Move the specified VIF to the specified network, even while the VM is running
 // Version: ely
-func (vIF) AsyncMove3(session *Session, self VIFRef, network NetworkRef) (retval TaskRef, err error) {
+func (vif) AsyncMove3(session *Session, self VIFRef, network NetworkRef) (retval TaskRef, err error) {
 	method := "Async.VIF.move"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1078,7 +1078,7 @@ func (vIF) AsyncMove3(session *Session, self VIFRef, network NetworkRef) (retval
 
 // UnplugForce: Forcibly unplug the specified VIF
 // Version: boston
-func (vIF) UnplugForce(session *Session, self VIFRef) (err error) {
+func (vif) UnplugForce(session *Session, self VIFRef) (err error) {
 	method := "VIF.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1094,7 +1094,7 @@ func (vIF) UnplugForce(session *Session, self VIFRef) (err error) {
 
 // AsyncUnplugForce: Forcibly unplug the specified VIF
 // Version: boston
-func (vIF) AsyncUnplugForce(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncUnplugForce(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1114,7 +1114,7 @@ func (vIF) AsyncUnplugForce(session *Session, self VIFRef) (retval TaskRef, err 
 
 // UnplugForce2: Forcibly unplug the specified VIF
 // Version: boston
-func (vIF) UnplugForce2(session *Session, self VIFRef) (err error) {
+func (vif) UnplugForce2(session *Session, self VIFRef) (err error) {
 	method := "VIF.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1130,7 +1130,7 @@ func (vIF) UnplugForce2(session *Session, self VIFRef) (err error) {
 
 // AsyncUnplugForce2: Forcibly unplug the specified VIF
 // Version: boston
-func (vIF) AsyncUnplugForce2(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncUnplugForce2(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1150,7 +1150,7 @@ func (vIF) AsyncUnplugForce2(session *Session, self VIFRef) (retval TaskRef, err
 
 // Unplug: Hot-unplug the specified VIF, dynamically unattaching it from the running VM
 // Version: rio
-func (vIF) Unplug(session *Session, self VIFRef) (err error) {
+func (vif) Unplug(session *Session, self VIFRef) (err error) {
 	method := "VIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1166,7 +1166,7 @@ func (vIF) Unplug(session *Session, self VIFRef) (err error) {
 
 // AsyncUnplug: Hot-unplug the specified VIF, dynamically unattaching it from the running VM
 // Version: rio
-func (vIF) AsyncUnplug(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncUnplug(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1186,7 +1186,7 @@ func (vIF) AsyncUnplug(session *Session, self VIFRef) (retval TaskRef, err error
 
 // Unplug2: Hot-unplug the specified VIF, dynamically unattaching it from the running VM
 // Version: rio
-func (vIF) Unplug2(session *Session, self VIFRef) (err error) {
+func (vif) Unplug2(session *Session, self VIFRef) (err error) {
 	method := "VIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1202,7 +1202,7 @@ func (vIF) Unplug2(session *Session, self VIFRef) (err error) {
 
 // AsyncUnplug2: Hot-unplug the specified VIF, dynamically unattaching it from the running VM
 // Version: rio
-func (vIF) AsyncUnplug2(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncUnplug2(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1222,7 +1222,7 @@ func (vIF) AsyncUnplug2(session *Session, self VIFRef) (retval TaskRef, err erro
 
 // Plug: Hotplug the specified VIF, dynamically attaching it to the running VM
 // Version: rio
-func (vIF) Plug(session *Session, self VIFRef) (err error) {
+func (vif) Plug(session *Session, self VIFRef) (err error) {
 	method := "VIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1238,7 +1238,7 @@ func (vIF) Plug(session *Session, self VIFRef) (err error) {
 
 // AsyncPlug: Hotplug the specified VIF, dynamically attaching it to the running VM
 // Version: rio
-func (vIF) AsyncPlug(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncPlug(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1258,7 +1258,7 @@ func (vIF) AsyncPlug(session *Session, self VIFRef) (retval TaskRef, err error) 
 
 // Plug2: Hotplug the specified VIF, dynamically attaching it to the running VM
 // Version: rio
-func (vIF) Plug2(session *Session, self VIFRef) (err error) {
+func (vif) Plug2(session *Session, self VIFRef) (err error) {
 	method := "VIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1274,7 +1274,7 @@ func (vIF) Plug2(session *Session, self VIFRef) (err error) {
 
 // AsyncPlug2: Hotplug the specified VIF, dynamically attaching it to the running VM
 // Version: rio
-func (vIF) AsyncPlug2(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncPlug2(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1294,7 +1294,7 @@ func (vIF) AsyncPlug2(session *Session, self VIFRef) (retval TaskRef, err error)
 
 // RemoveFromQosAlgorithmParams: Remove the given key and its corresponding value from the qos/algorithm_params field of the given VIF.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vIF) RemoveFromQosAlgorithmParams(session *Session, self VIFRef, key string) (err error) {
+func (vif) RemoveFromQosAlgorithmParams(session *Session, self VIFRef, key string) (err error) {
 	method := "VIF.remove_from_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1314,7 +1314,7 @@ func (vIF) RemoveFromQosAlgorithmParams(session *Session, self VIFRef, key strin
 
 // RemoveFromQosAlgorithmParams3: Remove the given key and its corresponding value from the qos/algorithm_params field of the given VIF.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vIF) RemoveFromQosAlgorithmParams3(session *Session, self VIFRef, key string) (err error) {
+func (vif) RemoveFromQosAlgorithmParams3(session *Session, self VIFRef, key string) (err error) {
 	method := "VIF.remove_from_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1334,7 +1334,7 @@ func (vIF) RemoveFromQosAlgorithmParams3(session *Session, self VIFRef, key stri
 
 // AddToQosAlgorithmParams: Add the given key-value pair to the qos/algorithm_params field of the given VIF.
 // Version: rio
-func (vIF) AddToQosAlgorithmParams(session *Session, self VIFRef, key string, value string) (err error) {
+func (vif) AddToQosAlgorithmParams(session *Session, self VIFRef, key string, value string) (err error) {
 	method := "VIF.add_to_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1358,7 +1358,7 @@ func (vIF) AddToQosAlgorithmParams(session *Session, self VIFRef, key string, va
 
 // AddToQosAlgorithmParams4: Add the given key-value pair to the qos/algorithm_params field of the given VIF.
 // Version: rio
-func (vIF) AddToQosAlgorithmParams4(session *Session, self VIFRef, key string, value string) (err error) {
+func (vif) AddToQosAlgorithmParams4(session *Session, self VIFRef, key string, value string) (err error) {
 	method := "VIF.add_to_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1382,7 +1382,7 @@ func (vIF) AddToQosAlgorithmParams4(session *Session, self VIFRef, key string, v
 
 // SetQosAlgorithmParams: Set the qos/algorithm_params field of the given VIF.
 // Version: rio
-func (vIF) SetQosAlgorithmParams(session *Session, self VIFRef, value map[string]string) (err error) {
+func (vif) SetQosAlgorithmParams(session *Session, self VIFRef, value map[string]string) (err error) {
 	method := "VIF.set_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1402,7 +1402,7 @@ func (vIF) SetQosAlgorithmParams(session *Session, self VIFRef, value map[string
 
 // SetQosAlgorithmParams3: Set the qos/algorithm_params field of the given VIF.
 // Version: rio
-func (vIF) SetQosAlgorithmParams3(session *Session, self VIFRef, value map[string]string) (err error) {
+func (vif) SetQosAlgorithmParams3(session *Session, self VIFRef, value map[string]string) (err error) {
 	method := "VIF.set_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1422,7 +1422,7 @@ func (vIF) SetQosAlgorithmParams3(session *Session, self VIFRef, value map[strin
 
 // SetQosAlgorithmType: Set the qos/algorithm_type field of the given VIF.
 // Version: rio
-func (vIF) SetQosAlgorithmType(session *Session, self VIFRef, value string) (err error) {
+func (vif) SetQosAlgorithmType(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.set_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1442,7 +1442,7 @@ func (vIF) SetQosAlgorithmType(session *Session, self VIFRef, value string) (err
 
 // SetQosAlgorithmType3: Set the qos/algorithm_type field of the given VIF.
 // Version: rio
-func (vIF) SetQosAlgorithmType3(session *Session, self VIFRef, value string) (err error) {
+func (vif) SetQosAlgorithmType3(session *Session, self VIFRef, value string) (err error) {
 	method := "VIF.set_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1462,7 +1462,7 @@ func (vIF) SetQosAlgorithmType3(session *Session, self VIFRef, value string) (er
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VIF.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vIF) RemoveFromOtherConfig(session *Session, self VIFRef, key string) (err error) {
+func (vif) RemoveFromOtherConfig(session *Session, self VIFRef, key string) (err error) {
 	method := "VIF.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1482,7 +1482,7 @@ func (vIF) RemoveFromOtherConfig(session *Session, self VIFRef, key string) (err
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VIF.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vIF) RemoveFromOtherConfig3(session *Session, self VIFRef, key string) (err error) {
+func (vif) RemoveFromOtherConfig3(session *Session, self VIFRef, key string) (err error) {
 	method := "VIF.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1502,7 +1502,7 @@ func (vIF) RemoveFromOtherConfig3(session *Session, self VIFRef, key string) (er
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VIF.
 // Version: rio
-func (vIF) AddToOtherConfig(session *Session, self VIFRef, key string, value string) (err error) {
+func (vif) AddToOtherConfig(session *Session, self VIFRef, key string, value string) (err error) {
 	method := "VIF.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1526,7 +1526,7 @@ func (vIF) AddToOtherConfig(session *Session, self VIFRef, key string, value str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VIF.
 // Version: rio
-func (vIF) AddToOtherConfig4(session *Session, self VIFRef, key string, value string) (err error) {
+func (vif) AddToOtherConfig4(session *Session, self VIFRef, key string, value string) (err error) {
 	method := "VIF.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1550,7 +1550,7 @@ func (vIF) AddToOtherConfig4(session *Session, self VIFRef, key string, value st
 
 // SetOtherConfig: Set the other_config field of the given VIF.
 // Version: rio
-func (vIF) SetOtherConfig(session *Session, self VIFRef, value map[string]string) (err error) {
+func (vif) SetOtherConfig(session *Session, self VIFRef, value map[string]string) (err error) {
 	method := "VIF.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1570,7 +1570,7 @@ func (vIF) SetOtherConfig(session *Session, self VIFRef, value map[string]string
 
 // SetOtherConfig3: Set the other_config field of the given VIF.
 // Version: rio
-func (vIF) SetOtherConfig3(session *Session, self VIFRef, value map[string]string) (err error) {
+func (vif) SetOtherConfig3(session *Session, self VIFRef, value map[string]string) (err error) {
 	method := "VIF.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1590,7 +1590,7 @@ func (vIF) SetOtherConfig3(session *Session, self VIFRef, value map[string]strin
 
 // GetIpv6Gateway: Get the ipv6_gateway field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6Gateway(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetIpv6Gateway(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_ipv6_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1610,7 +1610,7 @@ func (vIF) GetIpv6Gateway(session *Session, self VIFRef) (retval string, err err
 
 // GetIpv6Gateway2: Get the ipv6_gateway field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6Gateway2(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetIpv6Gateway2(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_ipv6_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1630,7 +1630,7 @@ func (vIF) GetIpv6Gateway2(session *Session, self VIFRef) (retval string, err er
 
 // GetIpv6Addresses: Get the ipv6_addresses field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6Addresses(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv6Addresses(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv6_addresses"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1650,7 +1650,7 @@ func (vIF) GetIpv6Addresses(session *Session, self VIFRef) (retval []string, err
 
 // GetIpv6Addresses2: Get the ipv6_addresses field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6Addresses2(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv6Addresses2(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv6_addresses"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1670,7 +1670,7 @@ func (vIF) GetIpv6Addresses2(session *Session, self VIFRef) (retval []string, er
 
 // GetIpv6ConfigurationMode: Get the ipv6_configuration_mode field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6ConfigurationMode(session *Session, self VIFRef) (retval VifIpv6ConfigurationMode, err error) {
+func (vif) GetIpv6ConfigurationMode(session *Session, self VIFRef) (retval VifIpv6ConfigurationMode, err error) {
 	method := "VIF.get_ipv6_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1690,7 +1690,7 @@ func (vIF) GetIpv6ConfigurationMode(session *Session, self VIFRef) (retval VifIp
 
 // GetIpv6ConfigurationMode2: Get the ipv6_configuration_mode field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6ConfigurationMode2(session *Session, self VIFRef) (retval VifIpv6ConfigurationMode, err error) {
+func (vif) GetIpv6ConfigurationMode2(session *Session, self VIFRef) (retval VifIpv6ConfigurationMode, err error) {
 	method := "VIF.get_ipv6_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1710,7 +1710,7 @@ func (vIF) GetIpv6ConfigurationMode2(session *Session, self VIFRef) (retval VifI
 
 // GetIpv4Gateway: Get the ipv4_gateway field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4Gateway(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetIpv4Gateway(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_ipv4_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1730,7 +1730,7 @@ func (vIF) GetIpv4Gateway(session *Session, self VIFRef) (retval string, err err
 
 // GetIpv4Gateway2: Get the ipv4_gateway field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4Gateway2(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetIpv4Gateway2(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_ipv4_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1750,7 +1750,7 @@ func (vIF) GetIpv4Gateway2(session *Session, self VIFRef) (retval string, err er
 
 // GetIpv4Addresses: Get the ipv4_addresses field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4Addresses(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv4Addresses(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv4_addresses"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1770,7 +1770,7 @@ func (vIF) GetIpv4Addresses(session *Session, self VIFRef) (retval []string, err
 
 // GetIpv4Addresses2: Get the ipv4_addresses field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4Addresses2(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv4Addresses2(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv4_addresses"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1790,7 +1790,7 @@ func (vIF) GetIpv4Addresses2(session *Session, self VIFRef) (retval []string, er
 
 // GetIpv4ConfigurationMode: Get the ipv4_configuration_mode field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4ConfigurationMode(session *Session, self VIFRef) (retval VifIpv4ConfigurationMode, err error) {
+func (vif) GetIpv4ConfigurationMode(session *Session, self VIFRef) (retval VifIpv4ConfigurationMode, err error) {
 	method := "VIF.get_ipv4_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1810,7 +1810,7 @@ func (vIF) GetIpv4ConfigurationMode(session *Session, self VIFRef) (retval VifIp
 
 // GetIpv4ConfigurationMode2: Get the ipv4_configuration_mode field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4ConfigurationMode2(session *Session, self VIFRef) (retval VifIpv4ConfigurationMode, err error) {
+func (vif) GetIpv4ConfigurationMode2(session *Session, self VIFRef) (retval VifIpv4ConfigurationMode, err error) {
 	method := "VIF.get_ipv4_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1830,7 +1830,7 @@ func (vIF) GetIpv4ConfigurationMode2(session *Session, self VIFRef) (retval VifI
 
 // GetIpv6Allowed: Get the ipv6_allowed field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6Allowed(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv6Allowed(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1850,7 +1850,7 @@ func (vIF) GetIpv6Allowed(session *Session, self VIFRef) (retval []string, err e
 
 // GetIpv6Allowed2: Get the ipv6_allowed field of the given VIF.
 // Version: rio
-func (vIF) GetIpv6Allowed2(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv6Allowed2(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv6_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1870,7 +1870,7 @@ func (vIF) GetIpv6Allowed2(session *Session, self VIFRef) (retval []string, err 
 
 // GetIpv4Allowed: Get the ipv4_allowed field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4Allowed(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv4Allowed(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1890,7 +1890,7 @@ func (vIF) GetIpv4Allowed(session *Session, self VIFRef) (retval []string, err e
 
 // GetIpv4Allowed2: Get the ipv4_allowed field of the given VIF.
 // Version: rio
-func (vIF) GetIpv4Allowed2(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetIpv4Allowed2(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_ipv4_allowed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1910,7 +1910,7 @@ func (vIF) GetIpv4Allowed2(session *Session, self VIFRef) (retval []string, err 
 
 // GetLockingMode: Get the locking_mode field of the given VIF.
 // Version: rio
-func (vIF) GetLockingMode(session *Session, self VIFRef) (retval VifLockingMode, err error) {
+func (vif) GetLockingMode(session *Session, self VIFRef) (retval VifLockingMode, err error) {
 	method := "VIF.get_locking_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1930,7 +1930,7 @@ func (vIF) GetLockingMode(session *Session, self VIFRef) (retval VifLockingMode,
 
 // GetLockingMode2: Get the locking_mode field of the given VIF.
 // Version: rio
-func (vIF) GetLockingMode2(session *Session, self VIFRef) (retval VifLockingMode, err error) {
+func (vif) GetLockingMode2(session *Session, self VIFRef) (retval VifLockingMode, err error) {
 	method := "VIF.get_locking_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1950,7 +1950,7 @@ func (vIF) GetLockingMode2(session *Session, self VIFRef) (retval VifLockingMode
 
 // GetMACAutogenerated: Get the MAC_autogenerated field of the given VIF.
 // Version: rio
-func (vIF) GetMACAutogenerated(session *Session, self VIFRef) (retval bool, err error) {
+func (vif) GetMACAutogenerated(session *Session, self VIFRef) (retval bool, err error) {
 	method := "VIF.get_MAC_autogenerated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1970,7 +1970,7 @@ func (vIF) GetMACAutogenerated(session *Session, self VIFRef) (retval bool, err 
 
 // GetMACAutogenerated2: Get the MAC_autogenerated field of the given VIF.
 // Version: rio
-func (vIF) GetMACAutogenerated2(session *Session, self VIFRef) (retval bool, err error) {
+func (vif) GetMACAutogenerated2(session *Session, self VIFRef) (retval bool, err error) {
 	method := "VIF.get_MAC_autogenerated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1990,7 +1990,7 @@ func (vIF) GetMACAutogenerated2(session *Session, self VIFRef) (retval bool, err
 
 // GetMetrics: Get the metrics field of the given VIF.
 // Version: rio
-func (vIF) GetMetrics(session *Session, self VIFRef) (retval VIFMetricsRef, err error) {
+func (vif) GetMetrics(session *Session, self VIFRef) (retval VIFMetricsRef, err error) {
 	method := "VIF.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2010,7 +2010,7 @@ func (vIF) GetMetrics(session *Session, self VIFRef) (retval VIFMetricsRef, err 
 
 // GetMetrics2: Get the metrics field of the given VIF.
 // Version: rio
-func (vIF) GetMetrics2(session *Session, self VIFRef) (retval VIFMetricsRef, err error) {
+func (vif) GetMetrics2(session *Session, self VIFRef) (retval VIFMetricsRef, err error) {
 	method := "VIF.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2030,7 +2030,7 @@ func (vIF) GetMetrics2(session *Session, self VIFRef) (retval VIFMetricsRef, err
 
 // GetQosSupportedAlgorithms: Get the qos/supported_algorithms field of the given VIF.
 // Version: rio
-func (vIF) GetQosSupportedAlgorithms(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetQosSupportedAlgorithms(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_qos_supported_algorithms"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2050,7 +2050,7 @@ func (vIF) GetQosSupportedAlgorithms(session *Session, self VIFRef) (retval []st
 
 // GetQosSupportedAlgorithms2: Get the qos/supported_algorithms field of the given VIF.
 // Version: rio
-func (vIF) GetQosSupportedAlgorithms2(session *Session, self VIFRef) (retval []string, err error) {
+func (vif) GetQosSupportedAlgorithms2(session *Session, self VIFRef) (retval []string, err error) {
 	method := "VIF.get_qos_supported_algorithms"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2070,7 +2070,7 @@ func (vIF) GetQosSupportedAlgorithms2(session *Session, self VIFRef) (retval []s
 
 // GetQosAlgorithmParams: Get the qos/algorithm_params field of the given VIF.
 // Version: rio
-func (vIF) GetQosAlgorithmParams(session *Session, self VIFRef) (retval map[string]string, err error) {
+func (vif) GetQosAlgorithmParams(session *Session, self VIFRef) (retval map[string]string, err error) {
 	method := "VIF.get_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2090,7 +2090,7 @@ func (vIF) GetQosAlgorithmParams(session *Session, self VIFRef) (retval map[stri
 
 // GetQosAlgorithmParams2: Get the qos/algorithm_params field of the given VIF.
 // Version: rio
-func (vIF) GetQosAlgorithmParams2(session *Session, self VIFRef) (retval map[string]string, err error) {
+func (vif) GetQosAlgorithmParams2(session *Session, self VIFRef) (retval map[string]string, err error) {
 	method := "VIF.get_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2110,7 +2110,7 @@ func (vIF) GetQosAlgorithmParams2(session *Session, self VIFRef) (retval map[str
 
 // GetQosAlgorithmType: Get the qos/algorithm_type field of the given VIF.
 // Version: rio
-func (vIF) GetQosAlgorithmType(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetQosAlgorithmType(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2130,7 +2130,7 @@ func (vIF) GetQosAlgorithmType(session *Session, self VIFRef) (retval string, er
 
 // GetQosAlgorithmType2: Get the qos/algorithm_type field of the given VIF.
 // Version: rio
-func (vIF) GetQosAlgorithmType2(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetQosAlgorithmType2(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2150,7 +2150,7 @@ func (vIF) GetQosAlgorithmType2(session *Session, self VIFRef) (retval string, e
 
 // GetRuntimeProperties: Get the runtime_properties field of the given VIF.
 // Version: rio
-func (vIF) GetRuntimeProperties(session *Session, self VIFRef) (retval map[string]string, err error) {
+func (vif) GetRuntimeProperties(session *Session, self VIFRef) (retval map[string]string, err error) {
 	method := "VIF.get_runtime_properties"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2170,7 +2170,7 @@ func (vIF) GetRuntimeProperties(session *Session, self VIFRef) (retval map[strin
 
 // GetRuntimeProperties2: Get the runtime_properties field of the given VIF.
 // Version: rio
-func (vIF) GetRuntimeProperties2(session *Session, self VIFRef) (retval map[string]string, err error) {
+func (vif) GetRuntimeProperties2(session *Session, self VIFRef) (retval map[string]string, err error) {
 	method := "VIF.get_runtime_properties"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2190,7 +2190,7 @@ func (vIF) GetRuntimeProperties2(session *Session, self VIFRef) (retval map[stri
 
 // GetStatusDetail: Get the status_detail field of the given VIF.
 // Version: rio
-func (vIF) GetStatusDetail(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetStatusDetail(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_status_detail"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2210,7 +2210,7 @@ func (vIF) GetStatusDetail(session *Session, self VIFRef) (retval string, err er
 
 // GetStatusDetail2: Get the status_detail field of the given VIF.
 // Version: rio
-func (vIF) GetStatusDetail2(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetStatusDetail2(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_status_detail"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2230,7 +2230,7 @@ func (vIF) GetStatusDetail2(session *Session, self VIFRef) (retval string, err e
 
 // GetStatusCode: Get the status_code field of the given VIF.
 // Version: rio
-func (vIF) GetStatusCode(session *Session, self VIFRef) (retval int, err error) {
+func (vif) GetStatusCode(session *Session, self VIFRef) (retval int, err error) {
 	method := "VIF.get_status_code"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2250,7 +2250,7 @@ func (vIF) GetStatusCode(session *Session, self VIFRef) (retval int, err error) 
 
 // GetStatusCode2: Get the status_code field of the given VIF.
 // Version: rio
-func (vIF) GetStatusCode2(session *Session, self VIFRef) (retval int, err error) {
+func (vif) GetStatusCode2(session *Session, self VIFRef) (retval int, err error) {
 	method := "VIF.get_status_code"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2270,7 +2270,7 @@ func (vIF) GetStatusCode2(session *Session, self VIFRef) (retval int, err error)
 
 // GetCurrentlyAttached: Get the currently_attached field of the given VIF.
 // Version: rio
-func (vIF) GetCurrentlyAttached(session *Session, self VIFRef) (retval bool, err error) {
+func (vif) GetCurrentlyAttached(session *Session, self VIFRef) (retval bool, err error) {
 	method := "VIF.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2290,7 +2290,7 @@ func (vIF) GetCurrentlyAttached(session *Session, self VIFRef) (retval bool, err
 
 // GetCurrentlyAttached2: Get the currently_attached field of the given VIF.
 // Version: rio
-func (vIF) GetCurrentlyAttached2(session *Session, self VIFRef) (retval bool, err error) {
+func (vif) GetCurrentlyAttached2(session *Session, self VIFRef) (retval bool, err error) {
 	method := "VIF.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2310,7 +2310,7 @@ func (vIF) GetCurrentlyAttached2(session *Session, self VIFRef) (retval bool, er
 
 // GetOtherConfig: Get the other_config field of the given VIF.
 // Version: rio
-func (vIF) GetOtherConfig(session *Session, self VIFRef) (retval map[string]string, err error) {
+func (vif) GetOtherConfig(session *Session, self VIFRef) (retval map[string]string, err error) {
 	method := "VIF.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2330,7 +2330,7 @@ func (vIF) GetOtherConfig(session *Session, self VIFRef) (retval map[string]stri
 
 // GetOtherConfig2: Get the other_config field of the given VIF.
 // Version: rio
-func (vIF) GetOtherConfig2(session *Session, self VIFRef) (retval map[string]string, err error) {
+func (vif) GetOtherConfig2(session *Session, self VIFRef) (retval map[string]string, err error) {
 	method := "VIF.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2350,7 +2350,7 @@ func (vIF) GetOtherConfig2(session *Session, self VIFRef) (retval map[string]str
 
 // GetMTU: Get the MTU field of the given VIF.
 // Version: rio
-func (vIF) GetMTU(session *Session, self VIFRef) (retval int, err error) {
+func (vif) GetMTU(session *Session, self VIFRef) (retval int, err error) {
 	method := "VIF.get_MTU"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2370,7 +2370,7 @@ func (vIF) GetMTU(session *Session, self VIFRef) (retval int, err error) {
 
 // GetMTU2: Get the MTU field of the given VIF.
 // Version: rio
-func (vIF) GetMTU2(session *Session, self VIFRef) (retval int, err error) {
+func (vif) GetMTU2(session *Session, self VIFRef) (retval int, err error) {
 	method := "VIF.get_MTU"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2390,7 +2390,7 @@ func (vIF) GetMTU2(session *Session, self VIFRef) (retval int, err error) {
 
 // GetMAC: Get the MAC field of the given VIF.
 // Version: rio
-func (vIF) GetMAC(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetMAC(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_MAC"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2410,7 +2410,7 @@ func (vIF) GetMAC(session *Session, self VIFRef) (retval string, err error) {
 
 // GetMAC2: Get the MAC field of the given VIF.
 // Version: rio
-func (vIF) GetMAC2(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetMAC2(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_MAC"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2430,7 +2430,7 @@ func (vIF) GetMAC2(session *Session, self VIFRef) (retval string, err error) {
 
 // GetVM: Get the VM field of the given VIF.
 // Version: rio
-func (vIF) GetVM(session *Session, self VIFRef) (retval VMRef, err error) {
+func (vif) GetVM(session *Session, self VIFRef) (retval VMRef, err error) {
 	method := "VIF.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2450,7 +2450,7 @@ func (vIF) GetVM(session *Session, self VIFRef) (retval VMRef, err error) {
 
 // GetVM2: Get the VM field of the given VIF.
 // Version: rio
-func (vIF) GetVM2(session *Session, self VIFRef) (retval VMRef, err error) {
+func (vif) GetVM2(session *Session, self VIFRef) (retval VMRef, err error) {
 	method := "VIF.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2470,7 +2470,7 @@ func (vIF) GetVM2(session *Session, self VIFRef) (retval VMRef, err error) {
 
 // GetNetwork: Get the network field of the given VIF.
 // Version: rio
-func (vIF) GetNetwork(session *Session, self VIFRef) (retval NetworkRef, err error) {
+func (vif) GetNetwork(session *Session, self VIFRef) (retval NetworkRef, err error) {
 	method := "VIF.get_network"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2490,7 +2490,7 @@ func (vIF) GetNetwork(session *Session, self VIFRef) (retval NetworkRef, err err
 
 // GetNetwork2: Get the network field of the given VIF.
 // Version: rio
-func (vIF) GetNetwork2(session *Session, self VIFRef) (retval NetworkRef, err error) {
+func (vif) GetNetwork2(session *Session, self VIFRef) (retval NetworkRef, err error) {
 	method := "VIF.get_network"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2510,7 +2510,7 @@ func (vIF) GetNetwork2(session *Session, self VIFRef) (retval NetworkRef, err er
 
 // GetDevice: Get the device field of the given VIF.
 // Version: rio
-func (vIF) GetDevice(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetDevice(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2530,7 +2530,7 @@ func (vIF) GetDevice(session *Session, self VIFRef) (retval string, err error) {
 
 // GetDevice2: Get the device field of the given VIF.
 // Version: rio
-func (vIF) GetDevice2(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetDevice2(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2550,7 +2550,7 @@ func (vIF) GetDevice2(session *Session, self VIFRef) (retval string, err error) 
 
 // GetCurrentOperations: Get the current_operations field of the given VIF.
 // Version: rio
-func (vIF) GetCurrentOperations(session *Session, self VIFRef) (retval map[string]VifOperations, err error) {
+func (vif) GetCurrentOperations(session *Session, self VIFRef) (retval map[string]VifOperations, err error) {
 	method := "VIF.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2570,7 +2570,7 @@ func (vIF) GetCurrentOperations(session *Session, self VIFRef) (retval map[strin
 
 // GetCurrentOperations2: Get the current_operations field of the given VIF.
 // Version: rio
-func (vIF) GetCurrentOperations2(session *Session, self VIFRef) (retval map[string]VifOperations, err error) {
+func (vif) GetCurrentOperations2(session *Session, self VIFRef) (retval map[string]VifOperations, err error) {
 	method := "VIF.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2590,7 +2590,7 @@ func (vIF) GetCurrentOperations2(session *Session, self VIFRef) (retval map[stri
 
 // GetAllowedOperations: Get the allowed_operations field of the given VIF.
 // Version: rio
-func (vIF) GetAllowedOperations(session *Session, self VIFRef) (retval []VifOperations, err error) {
+func (vif) GetAllowedOperations(session *Session, self VIFRef) (retval []VifOperations, err error) {
 	method := "VIF.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2610,7 +2610,7 @@ func (vIF) GetAllowedOperations(session *Session, self VIFRef) (retval []VifOper
 
 // GetAllowedOperations2: Get the allowed_operations field of the given VIF.
 // Version: rio
-func (vIF) GetAllowedOperations2(session *Session, self VIFRef) (retval []VifOperations, err error) {
+func (vif) GetAllowedOperations2(session *Session, self VIFRef) (retval []VifOperations, err error) {
 	method := "VIF.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2630,7 +2630,7 @@ func (vIF) GetAllowedOperations2(session *Session, self VIFRef) (retval []VifOpe
 
 // GetUUID: Get the uuid field of the given VIF.
 // Version: rio
-func (vIF) GetUUID(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetUUID(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2650,7 +2650,7 @@ func (vIF) GetUUID(session *Session, self VIFRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VIF.
 // Version: rio
-func (vIF) GetUUID2(session *Session, self VIFRef) (retval string, err error) {
+func (vif) GetUUID2(session *Session, self VIFRef) (retval string, err error) {
 	method := "VIF.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2670,7 +2670,7 @@ func (vIF) GetUUID2(session *Session, self VIFRef) (retval string, err error) {
 
 // Destroy: Destroy the specified VIF instance.
 // Version: rio
-func (vIF) Destroy(session *Session, self VIFRef) (err error) {
+func (vif) Destroy(session *Session, self VIFRef) (err error) {
 	method := "VIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2686,7 +2686,7 @@ func (vIF) Destroy(session *Session, self VIFRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VIF instance.
 // Version: rio
-func (vIF) AsyncDestroy(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncDestroy(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2706,7 +2706,7 @@ func (vIF) AsyncDestroy(session *Session, self VIFRef) (retval TaskRef, err erro
 
 // Destroy2: Destroy the specified VIF instance.
 // Version: rio
-func (vIF) Destroy2(session *Session, self VIFRef) (err error) {
+func (vif) Destroy2(session *Session, self VIFRef) (err error) {
 	method := "VIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2722,7 +2722,7 @@ func (vIF) Destroy2(session *Session, self VIFRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VIF instance.
 // Version: rio
-func (vIF) AsyncDestroy2(session *Session, self VIFRef) (retval TaskRef, err error) {
+func (vif) AsyncDestroy2(session *Session, self VIFRef) (retval TaskRef, err error) {
 	method := "Async.VIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2742,7 +2742,7 @@ func (vIF) AsyncDestroy2(session *Session, self VIFRef) (retval TaskRef, err err
 
 // Create: Create a new VIF instance, and return its handle. The constructor args are: device*, network*, VM*, MAC*, MTU*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params*, locking_mode, ipv4_allowed, ipv6_allowed (* = non-optional).
 // Version: rio
-func (vIF) Create(session *Session, args VIFRecord) (retval VIFRef, err error) {
+func (vif) Create(session *Session, args VIFRecord) (retval VIFRef, err error) {
 	method := "VIF.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2762,7 +2762,7 @@ func (vIF) Create(session *Session, args VIFRecord) (retval VIFRef, err error) {
 
 // AsyncCreate: Create a new VIF instance, and return its handle. The constructor args are: device*, network*, VM*, MAC*, MTU*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params*, locking_mode, ipv4_allowed, ipv6_allowed (* = non-optional).
 // Version: rio
-func (vIF) AsyncCreate(session *Session, args VIFRecord) (retval TaskRef, err error) {
+func (vif) AsyncCreate(session *Session, args VIFRecord) (retval TaskRef, err error) {
 	method := "Async.VIF.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2782,7 +2782,7 @@ func (vIF) AsyncCreate(session *Session, args VIFRecord) (retval TaskRef, err er
 
 // Create2: Create a new VIF instance, and return its handle. The constructor args are: device*, network*, VM*, MAC*, MTU*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params*, locking_mode, ipv4_allowed, ipv6_allowed (* = non-optional).
 // Version: rio
-func (vIF) Create2(session *Session, args VIFRecord) (retval VIFRef, err error) {
+func (vif) Create2(session *Session, args VIFRecord) (retval VIFRef, err error) {
 	method := "VIF.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2802,7 +2802,7 @@ func (vIF) Create2(session *Session, args VIFRecord) (retval VIFRef, err error) 
 
 // AsyncCreate2: Create a new VIF instance, and return its handle. The constructor args are: device*, network*, VM*, MAC*, MTU*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params*, locking_mode, ipv4_allowed, ipv6_allowed (* = non-optional).
 // Version: rio
-func (vIF) AsyncCreate2(session *Session, args VIFRecord) (retval TaskRef, err error) {
+func (vif) AsyncCreate2(session *Session, args VIFRecord) (retval TaskRef, err error) {
 	method := "Async.VIF.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2822,17 +2822,17 @@ func (vIF) AsyncCreate2(session *Session, args VIFRecord) (retval TaskRef, err e
 
 // GetByUUID: Get a reference to the VIF instance with the specified UUID.
 // Version: rio
-func (vIF) GetByUUID(session *Session, uUID string) (retval VIFRef, err error) {
+func (vif) GetByUUID(session *Session, uuid string) (retval VIFRef, err error) {
 	method := "VIF.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -2842,17 +2842,17 @@ func (vIF) GetByUUID(session *Session, uUID string) (retval VIFRef, err error) {
 
 // GetByUUID2: Get a reference to the VIF instance with the specified UUID.
 // Version: rio
-func (vIF) GetByUUID2(session *Session, uUID string) (retval VIFRef, err error) {
+func (vif) GetByUUID2(session *Session, uuid string) (retval VIFRef, err error) {
 	method := "VIF.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -2862,7 +2862,7 @@ func (vIF) GetByUUID2(session *Session, uUID string) (retval VIFRef, err error) 
 
 // GetRecord: Get a record containing the current state of the given VIF.
 // Version: rio
-func (vIF) GetRecord(session *Session, self VIFRef) (retval VIFRecord, err error) {
+func (vif) GetRecord(session *Session, self VIFRef) (retval VIFRecord, err error) {
 	method := "VIF.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2882,7 +2882,7 @@ func (vIF) GetRecord(session *Session, self VIFRef) (retval VIFRecord, err error
 
 // GetRecord2: Get a record containing the current state of the given VIF.
 // Version: rio
-func (vIF) GetRecord2(session *Session, self VIFRef) (retval VIFRecord, err error) {
+func (vif) GetRecord2(session *Session, self VIFRef) (retval VIFRecord, err error) {
 	method := "VIF.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

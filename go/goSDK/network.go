@@ -1836,17 +1836,17 @@ func (network) AsyncCreate2(session *Session, args NetworkRecord) (retval TaskRe
 
 // GetByUUID: Get a reference to the network instance with the specified UUID.
 // Version: rio
-func (network) GetByUUID(session *Session, uUID string) (retval NetworkRef, err error) {
+func (network) GetByUUID(session *Session, uuid string) (retval NetworkRef, err error) {
 	method := "network.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1856,17 +1856,17 @@ func (network) GetByUUID(session *Session, uUID string) (retval NetworkRef, err 
 
 // GetByUUID2: Get a reference to the network instance with the specified UUID.
 // Version: rio
-func (network) GetByUUID2(session *Session, uUID string) (retval NetworkRef, err error) {
+func (network) GetByUUID2(session *Session, uuid string) (retval NetworkRef, err error) {
 	method := "network.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

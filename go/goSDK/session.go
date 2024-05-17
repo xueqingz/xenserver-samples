@@ -1370,17 +1370,17 @@ func (class *Session) GetUUID1(self SessionRef) (retval string, err error) {
 
 // GetByUUID: Get a reference to the session instance with the specified UUID.
 // Version: rio
-func (class *Session) GetByUUID(uUID string) (retval SessionRef, err error) {
+func (class *Session) GetByUUID(uuid string) (retval SessionRef, err error) {
 	method := "session.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), class.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := class.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := class.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1390,17 +1390,17 @@ func (class *Session) GetByUUID(uUID string) (retval SessionRef, err error) {
 
 // GetByUUID1: Get a reference to the session instance with the specified UUID.
 // Version: rio
-func (class *Session) GetByUUID1(uUID string) (retval SessionRef, err error) {
+func (class *Session) GetByUUID1(uuid string) (retval SessionRef, err error) {
 	method := "session.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), class.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := class.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := class.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

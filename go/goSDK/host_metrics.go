@@ -509,17 +509,17 @@ func (hostMetrics) GetUUID2(session *Session, self HostMetricsRef) (retval strin
 
 // GetByUUID: Get a reference to the host_metrics instance with the specified UUID.
 // Version: rio
-func (hostMetrics) GetByUUID(session *Session, uUID string) (retval HostMetricsRef, err error) {
+func (hostMetrics) GetByUUID(session *Session, uuid string) (retval HostMetricsRef, err error) {
 	method := "host_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -529,17 +529,17 @@ func (hostMetrics) GetByUUID(session *Session, uUID string) (retval HostMetricsR
 
 // GetByUUID2: Get a reference to the host_metrics instance with the specified UUID.
 // Version: rio
-func (hostMetrics) GetByUUID2(session *Session, uUID string) (retval HostMetricsRef, err error) {
+func (hostMetrics) GetByUUID2(session *Session, uuid string) (retval HostMetricsRef, err error) {
 	method := "host_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

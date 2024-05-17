@@ -963,7 +963,7 @@ func (pool) AsyncDisableRepositoryProxy2(session *Session, self PoolRef) (retval
 
 // ConfigureRepositoryProxy: Configure proxy for RPM package repositories.
 // Version: 21.3.0
-func (pool) ConfigureRepositoryProxy(session *Session, self PoolRef, uRL string, username string, password string) (err error) {
+func (pool) ConfigureRepositoryProxy(session *Session, self PoolRef, url string, username string, password string) (err error) {
 	method := "pool.configure_repository_proxy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -973,7 +973,7 @@ func (pool) ConfigureRepositoryProxy(session *Session, self PoolRef, uRL string,
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -985,13 +985,13 @@ func (pool) ConfigureRepositoryProxy(session *Session, self PoolRef, uRL string,
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, usernameArg, passwordArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, urlArg, usernameArg, passwordArg)
 	return
 }
 
 // AsyncConfigureRepositoryProxy: Configure proxy for RPM package repositories.
 // Version: 21.3.0
-func (pool) AsyncConfigureRepositoryProxy(session *Session, self PoolRef, uRL string, username string, password string) (retval TaskRef, err error) {
+func (pool) AsyncConfigureRepositoryProxy(session *Session, self PoolRef, url string, username string, password string) (retval TaskRef, err error) {
 	method := "Async.pool.configure_repository_proxy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1001,7 +1001,7 @@ func (pool) AsyncConfigureRepositoryProxy(session *Session, self PoolRef, uRL st
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -1013,7 +1013,7 @@ func (pool) AsyncConfigureRepositoryProxy(session *Session, self PoolRef, uRL st
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, usernameArg, passwordArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, urlArg, usernameArg, passwordArg)
 	if err != nil {
 		return
 	}
@@ -1023,7 +1023,7 @@ func (pool) AsyncConfigureRepositoryProxy(session *Session, self PoolRef, uRL st
 
 // ConfigureRepositoryProxy5: Configure proxy for RPM package repositories.
 // Version: 21.3.0
-func (pool) ConfigureRepositoryProxy5(session *Session, self PoolRef, uRL string, username string, password string) (err error) {
+func (pool) ConfigureRepositoryProxy5(session *Session, self PoolRef, url string, username string, password string) (err error) {
 	method := "pool.configure_repository_proxy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1033,7 +1033,7 @@ func (pool) ConfigureRepositoryProxy5(session *Session, self PoolRef, uRL string
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -1045,13 +1045,13 @@ func (pool) ConfigureRepositoryProxy5(session *Session, self PoolRef, uRL string
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, usernameArg, passwordArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, urlArg, usernameArg, passwordArg)
 	return
 }
 
 // AsyncConfigureRepositoryProxy5: Configure proxy for RPM package repositories.
 // Version: 21.3.0
-func (pool) AsyncConfigureRepositoryProxy5(session *Session, self PoolRef, uRL string, username string, password string) (retval TaskRef, err error) {
+func (pool) AsyncConfigureRepositoryProxy5(session *Session, self PoolRef, url string, username string, password string) (retval TaskRef, err error) {
 	method := "Async.pool.configure_repository_proxy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1061,7 +1061,7 @@ func (pool) AsyncConfigureRepositoryProxy5(session *Session, self PoolRef, uRL s
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -1073,7 +1073,7 @@ func (pool) AsyncConfigureRepositoryProxy5(session *Session, self PoolRef, uRL s
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, usernameArg, passwordArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, urlArg, usernameArg, passwordArg)
 	if err != nil {
 		return
 	}
@@ -4954,7 +4954,7 @@ func (pool) AsyncEnableHa3(session *Session, heartbeatSrs []SRRef, configuration
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) CreateVLANFromPIF(session *Session, pif PIFRef, network NetworkRef, vLAN int) (retval []PIFRef, err error) {
+func (pool) CreateVLANFromPIF(session *Session, pif PIFRef, network NetworkRef, vlan int) (retval []PIFRef, err error) {
 	method := "pool.create_VLAN_from_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4968,11 +4968,11 @@ func (pool) CreateVLANFromPIF(session *Session, pif PIFRef, network NetworkRef, 
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -4985,7 +4985,7 @@ func (pool) CreateVLANFromPIF(session *Session, pif PIFRef, network NetworkRef, 
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) AsyncCreateVLANFromPIF(session *Session, pif PIFRef, network NetworkRef, vLAN int) (retval TaskRef, err error) {
+func (pool) AsyncCreateVLANFromPIF(session *Session, pif PIFRef, network NetworkRef, vlan int) (retval TaskRef, err error) {
 	method := "Async.pool.create_VLAN_from_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4999,11 +4999,11 @@ func (pool) AsyncCreateVLANFromPIF(session *Session, pif PIFRef, network Network
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -5016,7 +5016,7 @@ func (pool) AsyncCreateVLANFromPIF(session *Session, pif PIFRef, network Network
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) CreateVLANFromPIF4(session *Session, pif PIFRef, network NetworkRef, vLAN int) (retval []PIFRef, err error) {
+func (pool) CreateVLANFromPIF4(session *Session, pif PIFRef, network NetworkRef, vlan int) (retval []PIFRef, err error) {
 	method := "pool.create_VLAN_from_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5030,11 +5030,11 @@ func (pool) CreateVLANFromPIF4(session *Session, pif PIFRef, network NetworkRef,
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -5047,7 +5047,7 @@ func (pool) CreateVLANFromPIF4(session *Session, pif PIFRef, network NetworkRef,
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) AsyncCreateVLANFromPIF4(session *Session, pif PIFRef, network NetworkRef, vLAN int) (retval TaskRef, err error) {
+func (pool) AsyncCreateVLANFromPIF4(session *Session, pif PIFRef, network NetworkRef, vlan int) (retval TaskRef, err error) {
 	method := "Async.pool.create_VLAN_from_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5061,11 +5061,11 @@ func (pool) AsyncCreateVLANFromPIF4(session *Session, pif PIFRef, network Networ
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -5182,7 +5182,7 @@ func (pool) AsyncManagementReconfigure2(session *Session, network NetworkRef) (r
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) CreateVLAN(session *Session, device string, network NetworkRef, vLAN int) (retval []PIFRef, err error) {
+func (pool) CreateVLAN(session *Session, device string, network NetworkRef, vlan int) (retval []PIFRef, err error) {
 	method := "pool.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5196,11 +5196,11 @@ func (pool) CreateVLAN(session *Session, device string, network NetworkRef, vLAN
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -5213,7 +5213,7 @@ func (pool) CreateVLAN(session *Session, device string, network NetworkRef, vLAN
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) AsyncCreateVLAN(session *Session, device string, network NetworkRef, vLAN int) (retval TaskRef, err error) {
+func (pool) AsyncCreateVLAN(session *Session, device string, network NetworkRef, vlan int) (retval TaskRef, err error) {
 	method := "Async.pool.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5227,11 +5227,11 @@ func (pool) AsyncCreateVLAN(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -5244,7 +5244,7 @@ func (pool) AsyncCreateVLAN(session *Session, device string, network NetworkRef,
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) CreateVLAN4(session *Session, device string, network NetworkRef, vLAN int) (retval []PIFRef, err error) {
+func (pool) CreateVLAN4(session *Session, device string, network NetworkRef, vlan int) (retval []PIFRef, err error) {
 	method := "pool.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5258,11 +5258,11 @@ func (pool) CreateVLAN4(session *Session, device string, network NetworkRef, vLA
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -5275,7 +5275,7 @@ func (pool) CreateVLAN4(session *Session, device string, network NetworkRef, vLA
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pool) AsyncCreateVLAN4(session *Session, device string, network NetworkRef, vLAN int) (retval TaskRef, err error) {
+func (pool) AsyncCreateVLAN4(session *Session, device string, network NetworkRef, vlan int) (retval TaskRef, err error) {
 	method := "Async.pool.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5289,11 +5289,11 @@ func (pool) AsyncCreateVLAN4(session *Session, device string, network NetworkRef
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -9275,17 +9275,17 @@ func (pool) GetUUID2(session *Session, self PoolRef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the pool instance with the specified UUID.
 // Version: rio
-func (pool) GetByUUID(session *Session, uUID string) (retval PoolRef, err error) {
+func (pool) GetByUUID(session *Session, uuid string) (retval PoolRef, err error) {
 	method := "pool.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -9295,17 +9295,17 @@ func (pool) GetByUUID(session *Session, uUID string) (retval PoolRef, err error)
 
 // GetByUUID2: Get a reference to the pool instance with the specified UUID.
 // Version: rio
-func (pool) GetByUUID2(session *Session, uUID string) (retval PoolRef, err error) {
+func (pool) GetByUUID2(session *Session, uuid string) (retval PoolRef, err error) {
 	method := "pool.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

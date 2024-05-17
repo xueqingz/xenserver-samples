@@ -37,13 +37,13 @@ type PIFMetricsRecord struct {
 type PIFMetricsRef string
 
 // The metrics associated with a physical network interface
-type pIFMetrics struct{}
+type pifMetrics struct{}
 
-var PIFMetrics pIFMetrics
+var PIFMetrics pifMetrics
 
 // GetAllRecords: Return a map of PIF_metrics references to PIF_metrics records for all PIF_metrics instances known to the system.
 // Version: rio
-func (pIFMetrics) GetAllRecords(session *Session) (retval map[PIFMetricsRef]PIFMetricsRecord, err error) {
+func (pifMetrics) GetAllRecords(session *Session) (retval map[PIFMetricsRef]PIFMetricsRecord, err error) {
 	method := "PIF_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -59,7 +59,7 @@ func (pIFMetrics) GetAllRecords(session *Session) (retval map[PIFMetricsRef]PIFM
 
 // GetAllRecords1: Return a map of PIF_metrics references to PIF_metrics records for all PIF_metrics instances known to the system.
 // Version: rio
-func (pIFMetrics) GetAllRecords1(session *Session) (retval map[PIFMetricsRef]PIFMetricsRecord, err error) {
+func (pifMetrics) GetAllRecords1(session *Session) (retval map[PIFMetricsRef]PIFMetricsRecord, err error) {
 	method := "PIF_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -75,7 +75,7 @@ func (pIFMetrics) GetAllRecords1(session *Session) (retval map[PIFMetricsRef]PIF
 
 // GetAll: Return a list of all the PIF_metrics instances known to the system.
 // Version: rio
-func (pIFMetrics) GetAll(session *Session) (retval []PIFMetricsRef, err error) {
+func (pifMetrics) GetAll(session *Session) (retval []PIFMetricsRef, err error) {
 	method := "PIF_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -91,7 +91,7 @@ func (pIFMetrics) GetAll(session *Session) (retval []PIFMetricsRef, err error) {
 
 // GetAll1: Return a list of all the PIF_metrics instances known to the system.
 // Version: rio
-func (pIFMetrics) GetAll1(session *Session) (retval []PIFMetricsRef, err error) {
+func (pifMetrics) GetAll1(session *Session) (retval []PIFMetricsRef, err error) {
 	method := "PIF_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -107,7 +107,7 @@ func (pIFMetrics) GetAll1(session *Session) (retval []PIFMetricsRef, err error) 
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given PIF_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (pIFMetrics) RemoveFromOtherConfig(session *Session, self PIFMetricsRef, key string) (err error) {
+func (pifMetrics) RemoveFromOtherConfig(session *Session, self PIFMetricsRef, key string) (err error) {
 	method := "PIF_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -127,7 +127,7 @@ func (pIFMetrics) RemoveFromOtherConfig(session *Session, self PIFMetricsRef, ke
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given PIF_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (pIFMetrics) RemoveFromOtherConfig3(session *Session, self PIFMetricsRef, key string) (err error) {
+func (pifMetrics) RemoveFromOtherConfig3(session *Session, self PIFMetricsRef, key string) (err error) {
 	method := "PIF_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -147,7 +147,7 @@ func (pIFMetrics) RemoveFromOtherConfig3(session *Session, self PIFMetricsRef, k
 
 // RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given PIF_metrics.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (pIFMetrics) RemoveFromOtherConfig2(session *Session, self PIFMetricsRef) (err error) {
+func (pifMetrics) RemoveFromOtherConfig2(session *Session, self PIFMetricsRef) (err error) {
 	method := "PIF_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -163,7 +163,7 @@ func (pIFMetrics) RemoveFromOtherConfig2(session *Session, self PIFMetricsRef) (
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given PIF_metrics.
 // Version: orlando
-func (pIFMetrics) AddToOtherConfig(session *Session, self PIFMetricsRef, key string, value string) (err error) {
+func (pifMetrics) AddToOtherConfig(session *Session, self PIFMetricsRef, key string, value string) (err error) {
 	method := "PIF_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -187,7 +187,7 @@ func (pIFMetrics) AddToOtherConfig(session *Session, self PIFMetricsRef, key str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given PIF_metrics.
 // Version: orlando
-func (pIFMetrics) AddToOtherConfig4(session *Session, self PIFMetricsRef, key string, value string) (err error) {
+func (pifMetrics) AddToOtherConfig4(session *Session, self PIFMetricsRef, key string, value string) (err error) {
 	method := "PIF_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -211,7 +211,7 @@ func (pIFMetrics) AddToOtherConfig4(session *Session, self PIFMetricsRef, key st
 
 // AddToOtherConfig2: Add the given key-value pair to the other_config field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) AddToOtherConfig2(session *Session, self PIFMetricsRef) (err error) {
+func (pifMetrics) AddToOtherConfig2(session *Session, self PIFMetricsRef) (err error) {
 	method := "PIF_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -227,7 +227,7 @@ func (pIFMetrics) AddToOtherConfig2(session *Session, self PIFMetricsRef) (err e
 
 // SetOtherConfig: Set the other_config field of the given PIF_metrics.
 // Version: orlando
-func (pIFMetrics) SetOtherConfig(session *Session, self PIFMetricsRef, value map[string]string) (err error) {
+func (pifMetrics) SetOtherConfig(session *Session, self PIFMetricsRef, value map[string]string) (err error) {
 	method := "PIF_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -247,7 +247,7 @@ func (pIFMetrics) SetOtherConfig(session *Session, self PIFMetricsRef, value map
 
 // SetOtherConfig3: Set the other_config field of the given PIF_metrics.
 // Version: orlando
-func (pIFMetrics) SetOtherConfig3(session *Session, self PIFMetricsRef, value map[string]string) (err error) {
+func (pifMetrics) SetOtherConfig3(session *Session, self PIFMetricsRef, value map[string]string) (err error) {
 	method := "PIF_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -267,7 +267,7 @@ func (pIFMetrics) SetOtherConfig3(session *Session, self PIFMetricsRef, value ma
 
 // SetOtherConfig2: Set the other_config field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) SetOtherConfig2(session *Session, self PIFMetricsRef) (err error) {
+func (pifMetrics) SetOtherConfig2(session *Session, self PIFMetricsRef) (err error) {
 	method := "PIF_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -283,7 +283,7 @@ func (pIFMetrics) SetOtherConfig2(session *Session, self PIFMetricsRef) (err err
 
 // GetOtherConfig: Get the other_config field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetOtherConfig(session *Session, self PIFMetricsRef) (retval map[string]string, err error) {
+func (pifMetrics) GetOtherConfig(session *Session, self PIFMetricsRef) (retval map[string]string, err error) {
 	method := "PIF_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -303,7 +303,7 @@ func (pIFMetrics) GetOtherConfig(session *Session, self PIFMetricsRef) (retval m
 
 // GetOtherConfig2: Get the other_config field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetOtherConfig2(session *Session, self PIFMetricsRef) (retval map[string]string, err error) {
+func (pifMetrics) GetOtherConfig2(session *Session, self PIFMetricsRef) (retval map[string]string, err error) {
 	method := "PIF_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -323,7 +323,7 @@ func (pIFMetrics) GetOtherConfig2(session *Session, self PIFMetricsRef) (retval 
 
 // GetLastUpdated: Get the last_updated field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetLastUpdated(session *Session, self PIFMetricsRef) (retval time.Time, err error) {
+func (pifMetrics) GetLastUpdated(session *Session, self PIFMetricsRef) (retval time.Time, err error) {
 	method := "PIF_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -343,7 +343,7 @@ func (pIFMetrics) GetLastUpdated(session *Session, self PIFMetricsRef) (retval t
 
 // GetLastUpdated2: Get the last_updated field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetLastUpdated2(session *Session, self PIFMetricsRef) (retval time.Time, err error) {
+func (pifMetrics) GetLastUpdated2(session *Session, self PIFMetricsRef) (retval time.Time, err error) {
 	method := "PIF_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -363,7 +363,7 @@ func (pIFMetrics) GetLastUpdated2(session *Session, self PIFMetricsRef) (retval 
 
 // GetPciBusPath: Get the pci_bus_path field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetPciBusPath(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetPciBusPath(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_pci_bus_path"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -383,7 +383,7 @@ func (pIFMetrics) GetPciBusPath(session *Session, self PIFMetricsRef) (retval st
 
 // GetPciBusPath2: Get the pci_bus_path field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetPciBusPath2(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetPciBusPath2(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_pci_bus_path"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -403,7 +403,7 @@ func (pIFMetrics) GetPciBusPath2(session *Session, self PIFMetricsRef) (retval s
 
 // GetDuplex: Get the duplex field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetDuplex(session *Session, self PIFMetricsRef) (retval bool, err error) {
+func (pifMetrics) GetDuplex(session *Session, self PIFMetricsRef) (retval bool, err error) {
 	method := "PIF_metrics.get_duplex"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -423,7 +423,7 @@ func (pIFMetrics) GetDuplex(session *Session, self PIFMetricsRef) (retval bool, 
 
 // GetDuplex2: Get the duplex field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetDuplex2(session *Session, self PIFMetricsRef) (retval bool, err error) {
+func (pifMetrics) GetDuplex2(session *Session, self PIFMetricsRef) (retval bool, err error) {
 	method := "PIF_metrics.get_duplex"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -443,7 +443,7 @@ func (pIFMetrics) GetDuplex2(session *Session, self PIFMetricsRef) (retval bool,
 
 // GetSpeed: Get the speed field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetSpeed(session *Session, self PIFMetricsRef) (retval int, err error) {
+func (pifMetrics) GetSpeed(session *Session, self PIFMetricsRef) (retval int, err error) {
 	method := "PIF_metrics.get_speed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -463,7 +463,7 @@ func (pIFMetrics) GetSpeed(session *Session, self PIFMetricsRef) (retval int, er
 
 // GetSpeed2: Get the speed field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetSpeed2(session *Session, self PIFMetricsRef) (retval int, err error) {
+func (pifMetrics) GetSpeed2(session *Session, self PIFMetricsRef) (retval int, err error) {
 	method := "PIF_metrics.get_speed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -483,7 +483,7 @@ func (pIFMetrics) GetSpeed2(session *Session, self PIFMetricsRef) (retval int, e
 
 // GetDeviceName: Get the device_name field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetDeviceName(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetDeviceName(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_device_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -503,7 +503,7 @@ func (pIFMetrics) GetDeviceName(session *Session, self PIFMetricsRef) (retval st
 
 // GetDeviceName2: Get the device_name field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetDeviceName2(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetDeviceName2(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_device_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -523,7 +523,7 @@ func (pIFMetrics) GetDeviceName2(session *Session, self PIFMetricsRef) (retval s
 
 // GetDeviceID: Get the device_id field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetDeviceID(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetDeviceID(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_device_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -543,7 +543,7 @@ func (pIFMetrics) GetDeviceID(session *Session, self PIFMetricsRef) (retval stri
 
 // GetDeviceID2: Get the device_id field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetDeviceID2(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetDeviceID2(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_device_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -563,7 +563,7 @@ func (pIFMetrics) GetDeviceID2(session *Session, self PIFMetricsRef) (retval str
 
 // GetVendorName: Get the vendor_name field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetVendorName(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetVendorName(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -583,7 +583,7 @@ func (pIFMetrics) GetVendorName(session *Session, self PIFMetricsRef) (retval st
 
 // GetVendorName2: Get the vendor_name field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetVendorName2(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetVendorName2(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -603,7 +603,7 @@ func (pIFMetrics) GetVendorName2(session *Session, self PIFMetricsRef) (retval s
 
 // GetVendorID: Get the vendor_id field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetVendorID(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetVendorID(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_vendor_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -623,7 +623,7 @@ func (pIFMetrics) GetVendorID(session *Session, self PIFMetricsRef) (retval stri
 
 // GetVendorID2: Get the vendor_id field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetVendorID2(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetVendorID2(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_vendor_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -643,7 +643,7 @@ func (pIFMetrics) GetVendorID2(session *Session, self PIFMetricsRef) (retval str
 
 // GetCarrier: Get the carrier field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetCarrier(session *Session, self PIFMetricsRef) (retval bool, err error) {
+func (pifMetrics) GetCarrier(session *Session, self PIFMetricsRef) (retval bool, err error) {
 	method := "PIF_metrics.get_carrier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -663,7 +663,7 @@ func (pIFMetrics) GetCarrier(session *Session, self PIFMetricsRef) (retval bool,
 
 // GetCarrier2: Get the carrier field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetCarrier2(session *Session, self PIFMetricsRef) (retval bool, err error) {
+func (pifMetrics) GetCarrier2(session *Session, self PIFMetricsRef) (retval bool, err error) {
 	method := "PIF_metrics.get_carrier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -683,7 +683,7 @@ func (pIFMetrics) GetCarrier2(session *Session, self PIFMetricsRef) (retval bool
 
 // GetIoWriteKbs: Get the io/write_kbs field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetIoWriteKbs(session *Session, self PIFMetricsRef) (retval float64, err error) {
+func (pifMetrics) GetIoWriteKbs(session *Session, self PIFMetricsRef) (retval float64, err error) {
 	method := "PIF_metrics.get_io_write_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -703,7 +703,7 @@ func (pIFMetrics) GetIoWriteKbs(session *Session, self PIFMetricsRef) (retval fl
 
 // GetIoWriteKbs2: Get the io/write_kbs field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetIoWriteKbs2(session *Session, self PIFMetricsRef) (retval float64, err error) {
+func (pifMetrics) GetIoWriteKbs2(session *Session, self PIFMetricsRef) (retval float64, err error) {
 	method := "PIF_metrics.get_io_write_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -723,7 +723,7 @@ func (pIFMetrics) GetIoWriteKbs2(session *Session, self PIFMetricsRef) (retval f
 
 // GetIoReadKbs: Get the io/read_kbs field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetIoReadKbs(session *Session, self PIFMetricsRef) (retval float64, err error) {
+func (pifMetrics) GetIoReadKbs(session *Session, self PIFMetricsRef) (retval float64, err error) {
 	method := "PIF_metrics.get_io_read_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -743,7 +743,7 @@ func (pIFMetrics) GetIoReadKbs(session *Session, self PIFMetricsRef) (retval flo
 
 // GetIoReadKbs2: Get the io/read_kbs field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetIoReadKbs2(session *Session, self PIFMetricsRef) (retval float64, err error) {
+func (pifMetrics) GetIoReadKbs2(session *Session, self PIFMetricsRef) (retval float64, err error) {
 	method := "PIF_metrics.get_io_read_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -763,7 +763,7 @@ func (pIFMetrics) GetIoReadKbs2(session *Session, self PIFMetricsRef) (retval fl
 
 // GetUUID: Get the uuid field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetUUID(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetUUID(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -783,7 +783,7 @@ func (pIFMetrics) GetUUID(session *Session, self PIFMetricsRef) (retval string, 
 
 // GetUUID2: Get the uuid field of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetUUID2(session *Session, self PIFMetricsRef) (retval string, err error) {
+func (pifMetrics) GetUUID2(session *Session, self PIFMetricsRef) (retval string, err error) {
 	method := "PIF_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -803,17 +803,17 @@ func (pIFMetrics) GetUUID2(session *Session, self PIFMetricsRef) (retval string,
 
 // GetByUUID: Get a reference to the PIF_metrics instance with the specified UUID.
 // Version: rio
-func (pIFMetrics) GetByUUID(session *Session, uUID string) (retval PIFMetricsRef, err error) {
+func (pifMetrics) GetByUUID(session *Session, uuid string) (retval PIFMetricsRef, err error) {
 	method := "PIF_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -823,17 +823,17 @@ func (pIFMetrics) GetByUUID(session *Session, uUID string) (retval PIFMetricsRef
 
 // GetByUUID2: Get a reference to the PIF_metrics instance with the specified UUID.
 // Version: rio
-func (pIFMetrics) GetByUUID2(session *Session, uUID string) (retval PIFMetricsRef, err error) {
+func (pifMetrics) GetByUUID2(session *Session, uuid string) (retval PIFMetricsRef, err error) {
 	method := "PIF_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -843,7 +843,7 @@ func (pIFMetrics) GetByUUID2(session *Session, uUID string) (retval PIFMetricsRe
 
 // GetRecord: Get a record containing the current state of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetRecord(session *Session, self PIFMetricsRef) (retval PIFMetricsRecord, err error) {
+func (pifMetrics) GetRecord(session *Session, self PIFMetricsRef) (retval PIFMetricsRecord, err error) {
 	method := "PIF_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -863,7 +863,7 @@ func (pIFMetrics) GetRecord(session *Session, self PIFMetricsRef) (retval PIFMet
 
 // GetRecord2: Get a record containing the current state of the given PIF_metrics.
 // Version: rio
-func (pIFMetrics) GetRecord2(session *Session, self PIFMetricsRef) (retval PIFMetricsRecord, err error) {
+func (pifMetrics) GetRecord2(session *Session, self PIFMetricsRef) (retval PIFMetricsRecord, err error) {
 	method := "PIF_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

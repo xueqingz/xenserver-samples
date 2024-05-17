@@ -4727,7 +4727,7 @@ func (host) ListMethods1(session *Session) (retval []string, err error) {
 
 // BugreportUpload: Run xen-bugtool --yestoall and upload the output to support
 // Version: rio
-func (host) BugreportUpload(session *Session, host HostRef, uRL string, options map[string]string) (err error) {
+func (host) BugreportUpload(session *Session, host HostRef, url string, options map[string]string) (err error) {
 	method := "host.bugreport_upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4737,7 +4737,7 @@ func (host) BugreportUpload(session *Session, host HostRef, uRL string, options 
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -4745,13 +4745,13 @@ func (host) BugreportUpload(session *Session, host HostRef, uRL string, options 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, hostArg, uRLArg, optionsArg)
+	_, err = session.client.sendCall(method, sessionIDArg, hostArg, urlArg, optionsArg)
 	return
 }
 
 // AsyncBugreportUpload: Run xen-bugtool --yestoall and upload the output to support
 // Version: rio
-func (host) AsyncBugreportUpload(session *Session, host HostRef, uRL string, options map[string]string) (retval TaskRef, err error) {
+func (host) AsyncBugreportUpload(session *Session, host HostRef, url string, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.host.bugreport_upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4761,7 +4761,7 @@ func (host) AsyncBugreportUpload(session *Session, host HostRef, uRL string, opt
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -4769,7 +4769,7 @@ func (host) AsyncBugreportUpload(session *Session, host HostRef, uRL string, opt
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, uRLArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, urlArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -4779,7 +4779,7 @@ func (host) AsyncBugreportUpload(session *Session, host HostRef, uRL string, opt
 
 // BugreportUpload4: Run xen-bugtool --yestoall and upload the output to support
 // Version: rio
-func (host) BugreportUpload4(session *Session, host HostRef, uRL string, options map[string]string) (err error) {
+func (host) BugreportUpload4(session *Session, host HostRef, url string, options map[string]string) (err error) {
 	method := "host.bugreport_upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4789,7 +4789,7 @@ func (host) BugreportUpload4(session *Session, host HostRef, uRL string, options
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -4797,13 +4797,13 @@ func (host) BugreportUpload4(session *Session, host HostRef, uRL string, options
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, hostArg, uRLArg, optionsArg)
+	_, err = session.client.sendCall(method, sessionIDArg, hostArg, urlArg, optionsArg)
 	return
 }
 
 // AsyncBugreportUpload4: Run xen-bugtool --yestoall and upload the output to support
 // Version: rio
-func (host) AsyncBugreportUpload4(session *Session, host HostRef, uRL string, options map[string]string) (retval TaskRef, err error) {
+func (host) AsyncBugreportUpload4(session *Session, host HostRef, url string, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.host.bugreport_upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4813,7 +4813,7 @@ func (host) AsyncBugreportUpload4(session *Session, host HostRef, uRL string, op
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -4821,7 +4821,7 @@ func (host) AsyncBugreportUpload4(session *Session, host HostRef, uRL string, op
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, uRLArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, urlArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -9359,17 +9359,17 @@ func (host) GetByNameLabel2(session *Session, label string) (retval []HostRef, e
 
 // GetByUUID: Get a reference to the host instance with the specified UUID.
 // Version: rio
-func (host) GetByUUID(session *Session, uUID string) (retval HostRef, err error) {
+func (host) GetByUUID(session *Session, uuid string) (retval HostRef, err error) {
 	method := "host.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -9379,17 +9379,17 @@ func (host) GetByUUID(session *Session, uUID string) (retval HostRef, err error)
 
 // GetByUUID2: Get a reference to the host instance with the specified UUID.
 // Version: rio
-func (host) GetByUUID2(session *Session, uUID string) (retval HostRef, err error) {
+func (host) GetByUUID2(session *Session, uuid string) (retval HostRef, err error) {
 	method := "host.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

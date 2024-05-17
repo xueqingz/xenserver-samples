@@ -496,17 +496,17 @@ func (crashdump) GetUUID2(session *Session, self CrashdumpRef) (retval string, e
 
 // GetByUUID: Get a reference to the crashdump instance with the specified UUID.
 // Version: rio
-func (crashdump) GetByUUID(session *Session, uUID string) (retval CrashdumpRef, err error) {
+func (crashdump) GetByUUID(session *Session, uuid string) (retval CrashdumpRef, err error) {
 	method := "crashdump.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -516,17 +516,17 @@ func (crashdump) GetByUUID(session *Session, uUID string) (retval CrashdumpRef, 
 
 // GetByUUID2: Get a reference to the crashdump instance with the specified UUID.
 // Version: rio
-func (crashdump) GetByUUID2(session *Session, uUID string) (retval CrashdumpRef, err error) {
+func (crashdump) GetByUUID2(session *Session, uuid string) (retval CrashdumpRef, err error) {
 	method := "crashdump.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

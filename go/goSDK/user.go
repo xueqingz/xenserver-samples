@@ -552,17 +552,17 @@ func (user) AsyncCreate2(session *Session, args UserRecord) (retval TaskRef, err
 
 // GetByUUID: Get a reference to the user instance with the specified UUID.
 // Version: rio
-func (user) GetByUUID(session *Session, uUID string) (retval UserRef, err error) {
+func (user) GetByUUID(session *Session, uuid string) (retval UserRef, err error) {
 	method := "user.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -572,17 +572,17 @@ func (user) GetByUUID(session *Session, uUID string) (retval UserRef, err error)
 
 // GetByUUID2: Get a reference to the user instance with the specified UUID.
 // Version: rio
-func (user) GetByUUID2(session *Session, uUID string) (retval UserRef, err error) {
+func (user) GetByUUID2(session *Session, uuid string) (retval UserRef, err error) {
 	method := "user.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

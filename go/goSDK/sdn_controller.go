@@ -18,13 +18,13 @@ type SDNControllerRecord struct {
 type SDNControllerRef string
 
 // Describes the SDN controller that is to connect with the pool
-type sDNController struct{}
+type sdnController struct{}
 
-var SDNController sDNController
+var SDNController sdnController
 
 // GetAllRecords: Return a map of SDN_controller references to SDN_controller records for all SDN_controllers known to the system.
 // Version: falcon
-func (sDNController) GetAllRecords(session *Session) (retval map[SDNControllerRef]SDNControllerRecord, err error) {
+func (sdnController) GetAllRecords(session *Session) (retval map[SDNControllerRef]SDNControllerRecord, err error) {
 	method := "SDN_controller.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -40,7 +40,7 @@ func (sDNController) GetAllRecords(session *Session) (retval map[SDNControllerRe
 
 // GetAllRecords1: Return a map of SDN_controller references to SDN_controller records for all SDN_controllers known to the system.
 // Version: falcon
-func (sDNController) GetAllRecords1(session *Session) (retval map[SDNControllerRef]SDNControllerRecord, err error) {
+func (sdnController) GetAllRecords1(session *Session) (retval map[SDNControllerRef]SDNControllerRecord, err error) {
 	method := "SDN_controller.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -56,7 +56,7 @@ func (sDNController) GetAllRecords1(session *Session) (retval map[SDNControllerR
 
 // GetAll: Return a list of all the SDN_controllers known to the system.
 // Version: falcon
-func (sDNController) GetAll(session *Session) (retval []SDNControllerRef, err error) {
+func (sdnController) GetAll(session *Session) (retval []SDNControllerRef, err error) {
 	method := "SDN_controller.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -72,7 +72,7 @@ func (sDNController) GetAll(session *Session) (retval []SDNControllerRef, err er
 
 // GetAll1: Return a list of all the SDN_controllers known to the system.
 // Version: falcon
-func (sDNController) GetAll1(session *Session) (retval []SDNControllerRef, err error) {
+func (sdnController) GetAll1(session *Session) (retval []SDNControllerRef, err error) {
 	method := "SDN_controller.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -88,7 +88,7 @@ func (sDNController) GetAll1(session *Session) (retval []SDNControllerRef, err e
 
 // Forget: Remove the OVS manager of the pool and destroy the db record.
 // Version: falcon
-func (sDNController) Forget(session *Session, self SDNControllerRef) (err error) {
+func (sdnController) Forget(session *Session, self SDNControllerRef) (err error) {
 	method := "SDN_controller.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -104,7 +104,7 @@ func (sDNController) Forget(session *Session, self SDNControllerRef) (err error)
 
 // AsyncForget: Remove the OVS manager of the pool and destroy the db record.
 // Version: falcon
-func (sDNController) AsyncForget(session *Session, self SDNControllerRef) (retval TaskRef, err error) {
+func (sdnController) AsyncForget(session *Session, self SDNControllerRef) (retval TaskRef, err error) {
 	method := "Async.SDN_controller.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -124,7 +124,7 @@ func (sDNController) AsyncForget(session *Session, self SDNControllerRef) (retva
 
 // Forget2: Remove the OVS manager of the pool and destroy the db record.
 // Version: falcon
-func (sDNController) Forget2(session *Session, self SDNControllerRef) (err error) {
+func (sdnController) Forget2(session *Session, self SDNControllerRef) (err error) {
 	method := "SDN_controller.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -140,7 +140,7 @@ func (sDNController) Forget2(session *Session, self SDNControllerRef) (err error
 
 // AsyncForget2: Remove the OVS manager of the pool and destroy the db record.
 // Version: falcon
-func (sDNController) AsyncForget2(session *Session, self SDNControllerRef) (retval TaskRef, err error) {
+func (sdnController) AsyncForget2(session *Session, self SDNControllerRef) (retval TaskRef, err error) {
 	method := "Async.SDN_controller.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -160,7 +160,7 @@ func (sDNController) AsyncForget2(session *Session, self SDNControllerRef) (retv
 
 // Introduce: Introduce an SDN controller to the pool.
 // Version: falcon
-func (sDNController) Introduce(session *Session, protocol SdnControllerProtocol, address string, port int) (retval SDNControllerRef, err error) {
+func (sdnController) Introduce(session *Session, protocol SdnControllerProtocol, address string, port int) (retval SDNControllerRef, err error) {
 	method := "SDN_controller.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -188,7 +188,7 @@ func (sDNController) Introduce(session *Session, protocol SdnControllerProtocol,
 
 // AsyncIntroduce: Introduce an SDN controller to the pool.
 // Version: falcon
-func (sDNController) AsyncIntroduce(session *Session, protocol SdnControllerProtocol, address string, port int) (retval TaskRef, err error) {
+func (sdnController) AsyncIntroduce(session *Session, protocol SdnControllerProtocol, address string, port int) (retval TaskRef, err error) {
 	method := "Async.SDN_controller.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -216,7 +216,7 @@ func (sDNController) AsyncIntroduce(session *Session, protocol SdnControllerProt
 
 // Introduce4: Introduce an SDN controller to the pool.
 // Version: falcon
-func (sDNController) Introduce4(session *Session, protocol SdnControllerProtocol, address string, port int) (retval SDNControllerRef, err error) {
+func (sdnController) Introduce4(session *Session, protocol SdnControllerProtocol, address string, port int) (retval SDNControllerRef, err error) {
 	method := "SDN_controller.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -244,7 +244,7 @@ func (sDNController) Introduce4(session *Session, protocol SdnControllerProtocol
 
 // AsyncIntroduce4: Introduce an SDN controller to the pool.
 // Version: falcon
-func (sDNController) AsyncIntroduce4(session *Session, protocol SdnControllerProtocol, address string, port int) (retval TaskRef, err error) {
+func (sdnController) AsyncIntroduce4(session *Session, protocol SdnControllerProtocol, address string, port int) (retval TaskRef, err error) {
 	method := "Async.SDN_controller.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -272,7 +272,7 @@ func (sDNController) AsyncIntroduce4(session *Session, protocol SdnControllerPro
 
 // GetPort: Get the port field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetPort(session *Session, self SDNControllerRef) (retval int, err error) {
+func (sdnController) GetPort(session *Session, self SDNControllerRef) (retval int, err error) {
 	method := "SDN_controller.get_port"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -292,7 +292,7 @@ func (sDNController) GetPort(session *Session, self SDNControllerRef) (retval in
 
 // GetPort2: Get the port field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetPort2(session *Session, self SDNControllerRef) (retval int, err error) {
+func (sdnController) GetPort2(session *Session, self SDNControllerRef) (retval int, err error) {
 	method := "SDN_controller.get_port"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -312,7 +312,7 @@ func (sDNController) GetPort2(session *Session, self SDNControllerRef) (retval i
 
 // GetAddress: Get the address field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetAddress(session *Session, self SDNControllerRef) (retval string, err error) {
+func (sdnController) GetAddress(session *Session, self SDNControllerRef) (retval string, err error) {
 	method := "SDN_controller.get_address"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -332,7 +332,7 @@ func (sDNController) GetAddress(session *Session, self SDNControllerRef) (retval
 
 // GetAddress2: Get the address field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetAddress2(session *Session, self SDNControllerRef) (retval string, err error) {
+func (sdnController) GetAddress2(session *Session, self SDNControllerRef) (retval string, err error) {
 	method := "SDN_controller.get_address"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -352,7 +352,7 @@ func (sDNController) GetAddress2(session *Session, self SDNControllerRef) (retva
 
 // GetProtocol: Get the protocol field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetProtocol(session *Session, self SDNControllerRef) (retval SdnControllerProtocol, err error) {
+func (sdnController) GetProtocol(session *Session, self SDNControllerRef) (retval SdnControllerProtocol, err error) {
 	method := "SDN_controller.get_protocol"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -372,7 +372,7 @@ func (sDNController) GetProtocol(session *Session, self SDNControllerRef) (retva
 
 // GetProtocol2: Get the protocol field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetProtocol2(session *Session, self SDNControllerRef) (retval SdnControllerProtocol, err error) {
+func (sdnController) GetProtocol2(session *Session, self SDNControllerRef) (retval SdnControllerProtocol, err error) {
 	method := "SDN_controller.get_protocol"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -392,7 +392,7 @@ func (sDNController) GetProtocol2(session *Session, self SDNControllerRef) (retv
 
 // GetUUID: Get the uuid field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetUUID(session *Session, self SDNControllerRef) (retval string, err error) {
+func (sdnController) GetUUID(session *Session, self SDNControllerRef) (retval string, err error) {
 	method := "SDN_controller.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -412,7 +412,7 @@ func (sDNController) GetUUID(session *Session, self SDNControllerRef) (retval st
 
 // GetUUID2: Get the uuid field of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetUUID2(session *Session, self SDNControllerRef) (retval string, err error) {
+func (sdnController) GetUUID2(session *Session, self SDNControllerRef) (retval string, err error) {
 	method := "SDN_controller.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -432,17 +432,17 @@ func (sDNController) GetUUID2(session *Session, self SDNControllerRef) (retval s
 
 // GetByUUID: Get a reference to the SDN_controller instance with the specified UUID.
 // Version: falcon
-func (sDNController) GetByUUID(session *Session, uUID string) (retval SDNControllerRef, err error) {
+func (sdnController) GetByUUID(session *Session, uuid string) (retval SDNControllerRef, err error) {
 	method := "SDN_controller.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -452,17 +452,17 @@ func (sDNController) GetByUUID(session *Session, uUID string) (retval SDNControl
 
 // GetByUUID2: Get a reference to the SDN_controller instance with the specified UUID.
 // Version: falcon
-func (sDNController) GetByUUID2(session *Session, uUID string) (retval SDNControllerRef, err error) {
+func (sdnController) GetByUUID2(session *Session, uuid string) (retval SDNControllerRef, err error) {
 	method := "SDN_controller.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -472,7 +472,7 @@ func (sDNController) GetByUUID2(session *Session, uUID string) (retval SDNContro
 
 // GetRecord: Get a record containing the current state of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetRecord(session *Session, self SDNControllerRef) (retval SDNControllerRecord, err error) {
+func (sdnController) GetRecord(session *Session, self SDNControllerRef) (retval SDNControllerRecord, err error) {
 	method := "SDN_controller.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -492,7 +492,7 @@ func (sDNController) GetRecord(session *Session, self SDNControllerRef) (retval 
 
 // GetRecord2: Get a record containing the current state of the given SDN_controller.
 // Version: falcon
-func (sDNController) GetRecord2(session *Session, self SDNControllerRef) (retval SDNControllerRecord, err error) {
+func (sdnController) GetRecord2(session *Session, self SDNControllerRef) (retval SDNControllerRecord, err error) {
 	method := "SDN_controller.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

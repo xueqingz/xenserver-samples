@@ -1236,17 +1236,17 @@ func (poolPatch) GetByNameLabel2(session *Session, label string) (retval []PoolP
 
 // GetByUUID: Get a reference to the pool_patch instance with the specified UUID.
 // Version: miami
-func (poolPatch) GetByUUID(session *Session, uUID string) (retval PoolPatchRef, err error) {
+func (poolPatch) GetByUUID(session *Session, uuid string) (retval PoolPatchRef, err error) {
 	method := "pool_patch.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1256,17 +1256,17 @@ func (poolPatch) GetByUUID(session *Session, uUID string) (retval PoolPatchRef, 
 
 // GetByUUID2: Get a reference to the pool_patch instance with the specified UUID.
 // Version: miami
-func (poolPatch) GetByUUID2(session *Session, uUID string) (retval PoolPatchRef, err error) {
+func (poolPatch) GetByUUID2(session *Session, uuid string) (retval PoolPatchRef, err error) {
 	method := "pool_patch.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

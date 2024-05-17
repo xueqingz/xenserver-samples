@@ -20,13 +20,13 @@ type PVSServerRecord struct {
 type PVSServerRef string
 
 // individual machine serving provisioning (block) data
-type pVSServer struct{}
+type pvsServer struct{}
 
-var PVSServer pVSServer
+var PVSServer pvsServer
 
 // GetAllRecords: Return a map of PVS_server references to PVS_server records for all PVS_servers known to the system.
 // Version: ely
-func (pVSServer) GetAllRecords(session *Session) (retval map[PVSServerRef]PVSServerRecord, err error) {
+func (pvsServer) GetAllRecords(session *Session) (retval map[PVSServerRef]PVSServerRecord, err error) {
 	method := "PVS_server.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -42,7 +42,7 @@ func (pVSServer) GetAllRecords(session *Session) (retval map[PVSServerRef]PVSSer
 
 // GetAllRecords1: Return a map of PVS_server references to PVS_server records for all PVS_servers known to the system.
 // Version: ely
-func (pVSServer) GetAllRecords1(session *Session) (retval map[PVSServerRef]PVSServerRecord, err error) {
+func (pvsServer) GetAllRecords1(session *Session) (retval map[PVSServerRef]PVSServerRecord, err error) {
 	method := "PVS_server.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -58,7 +58,7 @@ func (pVSServer) GetAllRecords1(session *Session) (retval map[PVSServerRef]PVSSe
 
 // GetAll: Return a list of all the PVS_servers known to the system.
 // Version: ely
-func (pVSServer) GetAll(session *Session) (retval []PVSServerRef, err error) {
+func (pvsServer) GetAll(session *Session) (retval []PVSServerRef, err error) {
 	method := "PVS_server.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -74,7 +74,7 @@ func (pVSServer) GetAll(session *Session) (retval []PVSServerRef, err error) {
 
 // GetAll1: Return a list of all the PVS_servers known to the system.
 // Version: ely
-func (pVSServer) GetAll1(session *Session) (retval []PVSServerRef, err error) {
+func (pvsServer) GetAll1(session *Session) (retval []PVSServerRef, err error) {
 	method := "PVS_server.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -90,7 +90,7 @@ func (pVSServer) GetAll1(session *Session) (retval []PVSServerRef, err error) {
 
 // Forget: forget a PVS server
 // Version: ely
-func (pVSServer) Forget(session *Session, self PVSServerRef) (err error) {
+func (pvsServer) Forget(session *Session, self PVSServerRef) (err error) {
 	method := "PVS_server.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -106,7 +106,7 @@ func (pVSServer) Forget(session *Session, self PVSServerRef) (err error) {
 
 // AsyncForget: forget a PVS server
 // Version: ely
-func (pVSServer) AsyncForget(session *Session, self PVSServerRef) (retval TaskRef, err error) {
+func (pvsServer) AsyncForget(session *Session, self PVSServerRef) (retval TaskRef, err error) {
 	method := "Async.PVS_server.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -126,7 +126,7 @@ func (pVSServer) AsyncForget(session *Session, self PVSServerRef) (retval TaskRe
 
 // Forget2: forget a PVS server
 // Version: ely
-func (pVSServer) Forget2(session *Session, self PVSServerRef) (err error) {
+func (pvsServer) Forget2(session *Session, self PVSServerRef) (err error) {
 	method := "PVS_server.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -142,7 +142,7 @@ func (pVSServer) Forget2(session *Session, self PVSServerRef) (err error) {
 
 // AsyncForget2: forget a PVS server
 // Version: ely
-func (pVSServer) AsyncForget2(session *Session, self PVSServerRef) (retval TaskRef, err error) {
+func (pvsServer) AsyncForget2(session *Session, self PVSServerRef) (retval TaskRef, err error) {
 	method := "Async.PVS_server.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -162,7 +162,7 @@ func (pVSServer) AsyncForget2(session *Session, self PVSServerRef) (retval TaskR
 
 // Introduce: introduce new PVS server
 // Version: ely
-func (pVSServer) Introduce(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval PVSServerRef, err error) {
+func (pvsServer) Introduce(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval PVSServerRef, err error) {
 	method := "PVS_server.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -194,7 +194,7 @@ func (pVSServer) Introduce(session *Session, addresses []string, firstPort int, 
 
 // AsyncIntroduce: introduce new PVS server
 // Version: ely
-func (pVSServer) AsyncIntroduce(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval TaskRef, err error) {
+func (pvsServer) AsyncIntroduce(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval TaskRef, err error) {
 	method := "Async.PVS_server.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -226,7 +226,7 @@ func (pVSServer) AsyncIntroduce(session *Session, addresses []string, firstPort 
 
 // Introduce5: introduce new PVS server
 // Version: ely
-func (pVSServer) Introduce5(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval PVSServerRef, err error) {
+func (pvsServer) Introduce5(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval PVSServerRef, err error) {
 	method := "PVS_server.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -258,7 +258,7 @@ func (pVSServer) Introduce5(session *Session, addresses []string, firstPort int,
 
 // AsyncIntroduce5: introduce new PVS server
 // Version: ely
-func (pVSServer) AsyncIntroduce5(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval TaskRef, err error) {
+func (pvsServer) AsyncIntroduce5(session *Session, addresses []string, firstPort int, lastPort int, site PVSSiteRef) (retval TaskRef, err error) {
 	method := "Async.PVS_server.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -290,7 +290,7 @@ func (pVSServer) AsyncIntroduce5(session *Session, addresses []string, firstPort
 
 // GetSite: Get the site field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetSite(session *Session, self PVSServerRef) (retval PVSSiteRef, err error) {
+func (pvsServer) GetSite(session *Session, self PVSServerRef) (retval PVSSiteRef, err error) {
 	method := "PVS_server.get_site"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -310,7 +310,7 @@ func (pVSServer) GetSite(session *Session, self PVSServerRef) (retval PVSSiteRef
 
 // GetSite2: Get the site field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetSite2(session *Session, self PVSServerRef) (retval PVSSiteRef, err error) {
+func (pvsServer) GetSite2(session *Session, self PVSServerRef) (retval PVSSiteRef, err error) {
 	method := "PVS_server.get_site"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -330,7 +330,7 @@ func (pVSServer) GetSite2(session *Session, self PVSServerRef) (retval PVSSiteRe
 
 // GetLastPort: Get the last_port field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetLastPort(session *Session, self PVSServerRef) (retval int, err error) {
+func (pvsServer) GetLastPort(session *Session, self PVSServerRef) (retval int, err error) {
 	method := "PVS_server.get_last_port"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -350,7 +350,7 @@ func (pVSServer) GetLastPort(session *Session, self PVSServerRef) (retval int, e
 
 // GetLastPort2: Get the last_port field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetLastPort2(session *Session, self PVSServerRef) (retval int, err error) {
+func (pvsServer) GetLastPort2(session *Session, self PVSServerRef) (retval int, err error) {
 	method := "PVS_server.get_last_port"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -370,7 +370,7 @@ func (pVSServer) GetLastPort2(session *Session, self PVSServerRef) (retval int, 
 
 // GetFirstPort: Get the first_port field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetFirstPort(session *Session, self PVSServerRef) (retval int, err error) {
+func (pvsServer) GetFirstPort(session *Session, self PVSServerRef) (retval int, err error) {
 	method := "PVS_server.get_first_port"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -390,7 +390,7 @@ func (pVSServer) GetFirstPort(session *Session, self PVSServerRef) (retval int, 
 
 // GetFirstPort2: Get the first_port field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetFirstPort2(session *Session, self PVSServerRef) (retval int, err error) {
+func (pvsServer) GetFirstPort2(session *Session, self PVSServerRef) (retval int, err error) {
 	method := "PVS_server.get_first_port"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -410,7 +410,7 @@ func (pVSServer) GetFirstPort2(session *Session, self PVSServerRef) (retval int,
 
 // GetAddresses: Get the addresses field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetAddresses(session *Session, self PVSServerRef) (retval []string, err error) {
+func (pvsServer) GetAddresses(session *Session, self PVSServerRef) (retval []string, err error) {
 	method := "PVS_server.get_addresses"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -430,7 +430,7 @@ func (pVSServer) GetAddresses(session *Session, self PVSServerRef) (retval []str
 
 // GetAddresses2: Get the addresses field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetAddresses2(session *Session, self PVSServerRef) (retval []string, err error) {
+func (pvsServer) GetAddresses2(session *Session, self PVSServerRef) (retval []string, err error) {
 	method := "PVS_server.get_addresses"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -450,7 +450,7 @@ func (pVSServer) GetAddresses2(session *Session, self PVSServerRef) (retval []st
 
 // GetUUID: Get the uuid field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetUUID(session *Session, self PVSServerRef) (retval string, err error) {
+func (pvsServer) GetUUID(session *Session, self PVSServerRef) (retval string, err error) {
 	method := "PVS_server.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -470,7 +470,7 @@ func (pVSServer) GetUUID(session *Session, self PVSServerRef) (retval string, er
 
 // GetUUID2: Get the uuid field of the given PVS_server.
 // Version: ely
-func (pVSServer) GetUUID2(session *Session, self PVSServerRef) (retval string, err error) {
+func (pvsServer) GetUUID2(session *Session, self PVSServerRef) (retval string, err error) {
 	method := "PVS_server.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -490,17 +490,17 @@ func (pVSServer) GetUUID2(session *Session, self PVSServerRef) (retval string, e
 
 // GetByUUID: Get a reference to the PVS_server instance with the specified UUID.
 // Version: ely
-func (pVSServer) GetByUUID(session *Session, uUID string) (retval PVSServerRef, err error) {
+func (pvsServer) GetByUUID(session *Session, uuid string) (retval PVSServerRef, err error) {
 	method := "PVS_server.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -510,17 +510,17 @@ func (pVSServer) GetByUUID(session *Session, uUID string) (retval PVSServerRef, 
 
 // GetByUUID2: Get a reference to the PVS_server instance with the specified UUID.
 // Version: ely
-func (pVSServer) GetByUUID2(session *Session, uUID string) (retval PVSServerRef, err error) {
+func (pvsServer) GetByUUID2(session *Session, uuid string) (retval PVSServerRef, err error) {
 	method := "PVS_server.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -530,7 +530,7 @@ func (pVSServer) GetByUUID2(session *Session, uUID string) (retval PVSServerRef,
 
 // GetRecord: Get a record containing the current state of the given PVS_server.
 // Version: ely
-func (pVSServer) GetRecord(session *Session, self PVSServerRef) (retval PVSServerRecord, err error) {
+func (pvsServer) GetRecord(session *Session, self PVSServerRef) (retval PVSServerRecord, err error) {
 	method := "PVS_server.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -550,7 +550,7 @@ func (pVSServer) GetRecord(session *Session, self PVSServerRef) (retval PVSServe
 
 // GetRecord2: Get a record containing the current state of the given PVS_server.
 // Version: ely
-func (pVSServer) GetRecord2(session *Session, self PVSServerRef) (retval PVSServerRecord, err error) {
+func (pvsServer) GetRecord2(session *Session, self PVSServerRef) (retval PVSServerRecord, err error) {
 	method := "PVS_server.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

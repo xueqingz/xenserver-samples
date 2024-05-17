@@ -75,13 +75,13 @@ type VDIRecord struct {
 type VDIRef string
 
 // A virtual disk image
-type vDI struct{}
+type vdi struct{}
 
-var VDI vDI
+var VDI vdi
 
 // GetAllRecords: Return a map of VDI references to VDI records for all VDIs known to the system.
 // Version: rio
-func (vDI) GetAllRecords(session *Session) (retval map[VDIRef]VDIRecord, err error) {
+func (vdi) GetAllRecords(session *Session) (retval map[VDIRef]VDIRecord, err error) {
 	method := "VDI.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -97,7 +97,7 @@ func (vDI) GetAllRecords(session *Session) (retval map[VDIRef]VDIRecord, err err
 
 // GetAllRecords1: Return a map of VDI references to VDI records for all VDIs known to the system.
 // Version: rio
-func (vDI) GetAllRecords1(session *Session) (retval map[VDIRef]VDIRecord, err error) {
+func (vdi) GetAllRecords1(session *Session) (retval map[VDIRef]VDIRecord, err error) {
 	method := "VDI.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -113,7 +113,7 @@ func (vDI) GetAllRecords1(session *Session) (retval map[VDIRef]VDIRecord, err er
 
 // GetAll: Return a list of all the VDIs known to the system.
 // Version: rio
-func (vDI) GetAll(session *Session) (retval []VDIRef, err error) {
+func (vdi) GetAll(session *Session) (retval []VDIRef, err error) {
 	method := "VDI.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -129,7 +129,7 @@ func (vDI) GetAll(session *Session) (retval []VDIRef, err error) {
 
 // GetAll1: Return a list of all the VDIs known to the system.
 // Version: rio
-func (vDI) GetAll1(session *Session) (retval []VDIRef, err error) {
+func (vdi) GetAll1(session *Session) (retval []VDIRef, err error) {
 	method := "VDI.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -148,7 +148,7 @@ func (vDI) GetAll1(session *Session) (retval []VDIRef, err error) {
 //
 // Errors:
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
-func (vDI) GetNbdInfo(session *Session, self VDIRef) (retval []VdiNbdServerInfoRecord, err error) {
+func (vdi) GetNbdInfo(session *Session, self VDIRef) (retval []VdiNbdServerInfoRecord, err error) {
 	method := "VDI.get_nbd_info"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -171,7 +171,7 @@ func (vDI) GetNbdInfo(session *Session, self VDIRef) (retval []VdiNbdServerInfoR
 //
 // Errors:
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
-func (vDI) GetNbdInfo2(session *Session, self VDIRef) (retval []VdiNbdServerInfoRecord, err error) {
+func (vdi) GetNbdInfo2(session *Session, self VDIRef) (retval []VdiNbdServerInfoRecord, err error) {
 	method := "VDI.get_nbd_info"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -198,7 +198,7 @@ func (vDI) GetNbdInfo2(session *Session, self VDIRef) (retval []VdiNbdServerInfo
 // SR_NOT_ATTACHED - The SR is not attached.
 // SR_HAS_NO_PBDS - The SR has no attached PBDs
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
-func (vDI) ListChangedBlocks(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval string, err error) {
+func (vdi) ListChangedBlocks(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval string, err error) {
 	method := "VDI.list_changed_blocks"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -229,7 +229,7 @@ func (vDI) ListChangedBlocks(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (re
 // SR_NOT_ATTACHED - The SR is not attached.
 // SR_HAS_NO_PBDS - The SR has no attached PBDs
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
-func (vDI) AsyncListChangedBlocks(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncListChangedBlocks(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.list_changed_blocks"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -260,7 +260,7 @@ func (vDI) AsyncListChangedBlocks(session *Session, vdiFrom VDIRef, vdiTo VDIRef
 // SR_NOT_ATTACHED - The SR is not attached.
 // SR_HAS_NO_PBDS - The SR has no attached PBDs
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
-func (vDI) ListChangedBlocks3(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval string, err error) {
+func (vdi) ListChangedBlocks3(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval string, err error) {
 	method := "VDI.list_changed_blocks"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -291,7 +291,7 @@ func (vDI) ListChangedBlocks3(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (r
 // SR_NOT_ATTACHED - The SR is not attached.
 // SR_HAS_NO_PBDS - The SR has no attached PBDs
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
-func (vDI) AsyncListChangedBlocks3(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncListChangedBlocks3(session *Session, vdiFrom VDIRef, vdiTo VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.list_changed_blocks"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -326,7 +326,7 @@ func (vDI) AsyncListChangedBlocks3(session *Session, vdiFrom VDIRef, vdiTo VDIRe
 // VDI_NO_CBT_METADATA - The requested operation is not allowed because the specified VDI does not have changed block tracking metadata.
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
 // VDI_IS_A_PHYSICAL_DEVICE - The operation cannot be performed on physical device
-func (vDI) DataDestroy(session *Session, self VDIRef) (err error) {
+func (vdi) DataDestroy(session *Session, self VDIRef) (err error) {
 	method := "VDI.data_destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -353,7 +353,7 @@ func (vDI) DataDestroy(session *Session, self VDIRef) (err error) {
 // VDI_NO_CBT_METADATA - The requested operation is not allowed because the specified VDI does not have changed block tracking metadata.
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
 // VDI_IS_A_PHYSICAL_DEVICE - The operation cannot be performed on physical device
-func (vDI) AsyncDataDestroy(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncDataDestroy(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.data_destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -384,7 +384,7 @@ func (vDI) AsyncDataDestroy(session *Session, self VDIRef) (retval TaskRef, err 
 // VDI_NO_CBT_METADATA - The requested operation is not allowed because the specified VDI does not have changed block tracking metadata.
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
 // VDI_IS_A_PHYSICAL_DEVICE - The operation cannot be performed on physical device
-func (vDI) DataDestroy2(session *Session, self VDIRef) (err error) {
+func (vdi) DataDestroy2(session *Session, self VDIRef) (err error) {
 	method := "VDI.data_destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -411,7 +411,7 @@ func (vDI) DataDestroy2(session *Session, self VDIRef) (err error) {
 // VDI_NO_CBT_METADATA - The requested operation is not allowed because the specified VDI does not have changed block tracking metadata.
 // VDI_IN_USE - This operation cannot be performed because this VDI is in use by some other operation
 // VDI_IS_A_PHYSICAL_DEVICE - The operation cannot be performed on physical device
-func (vDI) AsyncDataDestroy2(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncDataDestroy2(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.data_destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -440,7 +440,7 @@ func (vDI) AsyncDataDestroy2(session *Session, self VDIRef) (retval TaskRef, err
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) DisableCbt(session *Session, self VDIRef) (err error) {
+func (vdi) DisableCbt(session *Session, self VDIRef) (err error) {
 	method := "VDI.disable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -465,7 +465,7 @@ func (vDI) DisableCbt(session *Session, self VDIRef) (err error) {
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) AsyncDisableCbt(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncDisableCbt(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.disable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -494,7 +494,7 @@ func (vDI) AsyncDisableCbt(session *Session, self VDIRef) (retval TaskRef, err e
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) DisableCbt2(session *Session, self VDIRef) (err error) {
+func (vdi) DisableCbt2(session *Session, self VDIRef) (err error) {
 	method := "VDI.disable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -519,7 +519,7 @@ func (vDI) DisableCbt2(session *Session, self VDIRef) (err error) {
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) AsyncDisableCbt2(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncDisableCbt2(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.disable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -548,7 +548,7 @@ func (vDI) AsyncDisableCbt2(session *Session, self VDIRef) (retval TaskRef, err 
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) EnableCbt(session *Session, self VDIRef) (err error) {
+func (vdi) EnableCbt(session *Session, self VDIRef) (err error) {
 	method := "VDI.enable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -573,7 +573,7 @@ func (vDI) EnableCbt(session *Session, self VDIRef) (err error) {
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) AsyncEnableCbt(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncEnableCbt(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.enable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -602,7 +602,7 @@ func (vDI) AsyncEnableCbt(session *Session, self VDIRef) (retval TaskRef, err er
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) EnableCbt2(session *Session, self VDIRef) (err error) {
+func (vdi) EnableCbt2(session *Session, self VDIRef) (err error) {
 	method := "VDI.enable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -627,7 +627,7 @@ func (vDI) EnableCbt2(session *Session, self VDIRef) (err error) {
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VDI_INCOMPATIBLE_TYPE - This operation cannot be performed because the specified VDI is of an incompatible type (eg: an HA statefile cannot be attached to a guest)
 // VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION - This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs.
-func (vDI) AsyncEnableCbt2(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncEnableCbt2(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.enable_cbt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -647,7 +647,7 @@ func (vDI) AsyncEnableCbt2(session *Session, self VDIRef) (retval TaskRef, err e
 
 // PoolMigrate: Migrate a VDI, which may be attached to a running guest, to a different SR. The destination SR must be visible to the guest.
 // Version: tampa
-func (vDI) PoolMigrate(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval VDIRef, err error) {
+func (vdi) PoolMigrate(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval VDIRef, err error) {
 	method := "VDI.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -675,7 +675,7 @@ func (vDI) PoolMigrate(session *Session, vdi VDIRef, sr SRRef, options map[strin
 
 // AsyncPoolMigrate: Migrate a VDI, which may be attached to a running guest, to a different SR. The destination SR must be visible to the guest.
 // Version: tampa
-func (vDI) AsyncPoolMigrate(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncPoolMigrate(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -703,7 +703,7 @@ func (vDI) AsyncPoolMigrate(session *Session, vdi VDIRef, sr SRRef, options map[
 
 // PoolMigrate4: Migrate a VDI, which may be attached to a running guest, to a different SR. The destination SR must be visible to the guest.
 // Version: tampa
-func (vDI) PoolMigrate4(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval VDIRef, err error) {
+func (vdi) PoolMigrate4(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval VDIRef, err error) {
 	method := "VDI.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -731,7 +731,7 @@ func (vDI) PoolMigrate4(session *Session, vdi VDIRef, sr SRRef, options map[stri
 
 // AsyncPoolMigrate4: Migrate a VDI, which may be attached to a running guest, to a different SR. The destination SR must be visible to the guest.
 // Version: tampa
-func (vDI) AsyncPoolMigrate4(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncPoolMigrate4(session *Session, vdi VDIRef, sr SRRef, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -759,7 +759,7 @@ func (vDI) AsyncPoolMigrate4(session *Session, vdi VDIRef, sr SRRef, options map
 
 // ReadDatabasePoolUUID: Check the VDI cache for the pool UUID of the database on this VDI.
 // Version: boston
-func (vDI) ReadDatabasePoolUUID(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) ReadDatabasePoolUUID(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.read_database_pool_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -779,7 +779,7 @@ func (vDI) ReadDatabasePoolUUID(session *Session, self VDIRef) (retval string, e
 
 // AsyncReadDatabasePoolUUID: Check the VDI cache for the pool UUID of the database on this VDI.
 // Version: boston
-func (vDI) AsyncReadDatabasePoolUUID(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncReadDatabasePoolUUID(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.read_database_pool_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -799,7 +799,7 @@ func (vDI) AsyncReadDatabasePoolUUID(session *Session, self VDIRef) (retval Task
 
 // ReadDatabasePoolUUID2: Check the VDI cache for the pool UUID of the database on this VDI.
 // Version: boston
-func (vDI) ReadDatabasePoolUUID2(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) ReadDatabasePoolUUID2(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.read_database_pool_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -819,7 +819,7 @@ func (vDI) ReadDatabasePoolUUID2(session *Session, self VDIRef) (retval string, 
 
 // AsyncReadDatabasePoolUUID2: Check the VDI cache for the pool UUID of the database on this VDI.
 // Version: boston
-func (vDI) AsyncReadDatabasePoolUUID2(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncReadDatabasePoolUUID2(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.read_database_pool_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -839,7 +839,7 @@ func (vDI) AsyncReadDatabasePoolUUID2(session *Session, self VDIRef) (retval Tas
 
 // OpenDatabase: Load the metadata found on the supplied VDI and return a session reference which can be used in API calls to query its contents.
 // Version: boston
-func (vDI) OpenDatabase(session *Session, self VDIRef) (retval SessionRef, err error) {
+func (vdi) OpenDatabase(session *Session, self VDIRef) (retval SessionRef, err error) {
 	method := "VDI.open_database"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -859,7 +859,7 @@ func (vDI) OpenDatabase(session *Session, self VDIRef) (retval SessionRef, err e
 
 // AsyncOpenDatabase: Load the metadata found on the supplied VDI and return a session reference which can be used in API calls to query its contents.
 // Version: boston
-func (vDI) AsyncOpenDatabase(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncOpenDatabase(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.open_database"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -879,7 +879,7 @@ func (vDI) AsyncOpenDatabase(session *Session, self VDIRef) (retval TaskRef, err
 
 // OpenDatabase2: Load the metadata found on the supplied VDI and return a session reference which can be used in API calls to query its contents.
 // Version: boston
-func (vDI) OpenDatabase2(session *Session, self VDIRef) (retval SessionRef, err error) {
+func (vdi) OpenDatabase2(session *Session, self VDIRef) (retval SessionRef, err error) {
 	method := "VDI.open_database"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -899,7 +899,7 @@ func (vDI) OpenDatabase2(session *Session, self VDIRef) (retval SessionRef, err 
 
 // AsyncOpenDatabase2: Load the metadata found on the supplied VDI and return a session reference which can be used in API calls to query its contents.
 // Version: boston
-func (vDI) AsyncOpenDatabase2(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncOpenDatabase2(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.open_database"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -919,7 +919,7 @@ func (vDI) AsyncOpenDatabase2(session *Session, self VDIRef) (retval TaskRef, er
 
 // SetAllowCaching: Set the value of the allow_caching parameter. This value can only be changed when the VDI is not attached to a running VM. The caching behaviour is only affected by this flag for VHD-based VDIs that have one parent and no child VHDs. Moreover, caching only takes place when the host running the VM containing this VDI has a nominated SR for local caching.
 // Version: cowley
-func (vDI) SetAllowCaching(session *Session, self VDIRef, value bool) (err error) {
+func (vdi) SetAllowCaching(session *Session, self VDIRef, value bool) (err error) {
 	method := "VDI.set_allow_caching"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -939,7 +939,7 @@ func (vDI) SetAllowCaching(session *Session, self VDIRef, value bool) (err error
 
 // AsyncSetAllowCaching: Set the value of the allow_caching parameter. This value can only be changed when the VDI is not attached to a running VM. The caching behaviour is only affected by this flag for VHD-based VDIs that have one parent and no child VHDs. Moreover, caching only takes place when the host running the VM containing this VDI has a nominated SR for local caching.
 // Version: cowley
-func (vDI) AsyncSetAllowCaching(session *Session, self VDIRef, value bool) (retval TaskRef, err error) {
+func (vdi) AsyncSetAllowCaching(session *Session, self VDIRef, value bool) (retval TaskRef, err error) {
 	method := "Async.VDI.set_allow_caching"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -963,7 +963,7 @@ func (vDI) AsyncSetAllowCaching(session *Session, self VDIRef, value bool) (retv
 
 // SetAllowCaching3: Set the value of the allow_caching parameter. This value can only be changed when the VDI is not attached to a running VM. The caching behaviour is only affected by this flag for VHD-based VDIs that have one parent and no child VHDs. Moreover, caching only takes place when the host running the VM containing this VDI has a nominated SR for local caching.
 // Version: cowley
-func (vDI) SetAllowCaching3(session *Session, self VDIRef, value bool) (err error) {
+func (vdi) SetAllowCaching3(session *Session, self VDIRef, value bool) (err error) {
 	method := "VDI.set_allow_caching"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -983,7 +983,7 @@ func (vDI) SetAllowCaching3(session *Session, self VDIRef, value bool) (err erro
 
 // AsyncSetAllowCaching3: Set the value of the allow_caching parameter. This value can only be changed when the VDI is not attached to a running VM. The caching behaviour is only affected by this flag for VHD-based VDIs that have one parent and no child VHDs. Moreover, caching only takes place when the host running the VM containing this VDI has a nominated SR for local caching.
 // Version: cowley
-func (vDI) AsyncSetAllowCaching3(session *Session, self VDIRef, value bool) (retval TaskRef, err error) {
+func (vdi) AsyncSetAllowCaching3(session *Session, self VDIRef, value bool) (retval TaskRef, err error) {
 	method := "Async.VDI.set_allow_caching"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1007,7 +1007,7 @@ func (vDI) AsyncSetAllowCaching3(session *Session, self VDIRef, value bool) (ret
 
 // SetOnBoot: Set the value of the on_boot parameter. This value can only be changed when the VDI is not attached to a running VM.
 // Version: cowley
-func (vDI) SetOnBoot(session *Session, self VDIRef, value OnBoot) (err error) {
+func (vdi) SetOnBoot(session *Session, self VDIRef, value OnBoot) (err error) {
 	method := "VDI.set_on_boot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1027,7 +1027,7 @@ func (vDI) SetOnBoot(session *Session, self VDIRef, value OnBoot) (err error) {
 
 // AsyncSetOnBoot: Set the value of the on_boot parameter. This value can only be changed when the VDI is not attached to a running VM.
 // Version: cowley
-func (vDI) AsyncSetOnBoot(session *Session, self VDIRef, value OnBoot) (retval TaskRef, err error) {
+func (vdi) AsyncSetOnBoot(session *Session, self VDIRef, value OnBoot) (retval TaskRef, err error) {
 	method := "Async.VDI.set_on_boot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1051,7 +1051,7 @@ func (vDI) AsyncSetOnBoot(session *Session, self VDIRef, value OnBoot) (retval T
 
 // SetOnBoot3: Set the value of the on_boot parameter. This value can only be changed when the VDI is not attached to a running VM.
 // Version: cowley
-func (vDI) SetOnBoot3(session *Session, self VDIRef, value OnBoot) (err error) {
+func (vdi) SetOnBoot3(session *Session, self VDIRef, value OnBoot) (err error) {
 	method := "VDI.set_on_boot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1071,7 +1071,7 @@ func (vDI) SetOnBoot3(session *Session, self VDIRef, value OnBoot) (err error) {
 
 // AsyncSetOnBoot3: Set the value of the on_boot parameter. This value can only be changed when the VDI is not attached to a running VM.
 // Version: cowley
-func (vDI) AsyncSetOnBoot3(session *Session, self VDIRef, value OnBoot) (retval TaskRef, err error) {
+func (vdi) AsyncSetOnBoot3(session *Session, self VDIRef, value OnBoot) (retval TaskRef, err error) {
 	method := "Async.VDI.set_on_boot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1095,7 +1095,7 @@ func (vDI) AsyncSetOnBoot3(session *Session, self VDIRef, value OnBoot) (retval 
 
 // SetNameDescription: Set the name description of the VDI. This can only happen when its SR is currently attached.
 // Version: rio
-func (vDI) SetNameDescription(session *Session, self VDIRef, value string) (err error) {
+func (vdi) SetNameDescription(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1115,7 +1115,7 @@ func (vDI) SetNameDescription(session *Session, self VDIRef, value string) (err 
 
 // AsyncSetNameDescription: Set the name description of the VDI. This can only happen when its SR is currently attached.
 // Version: rio
-func (vDI) AsyncSetNameDescription(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
+func (vdi) AsyncSetNameDescription(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
 	method := "Async.VDI.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1139,7 +1139,7 @@ func (vDI) AsyncSetNameDescription(session *Session, self VDIRef, value string) 
 
 // SetNameDescription3: Set the name description of the VDI. This can only happen when its SR is currently attached.
 // Version: rio
-func (vDI) SetNameDescription3(session *Session, self VDIRef, value string) (err error) {
+func (vdi) SetNameDescription3(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1159,7 +1159,7 @@ func (vDI) SetNameDescription3(session *Session, self VDIRef, value string) (err
 
 // AsyncSetNameDescription3: Set the name description of the VDI. This can only happen when its SR is currently attached.
 // Version: rio
-func (vDI) AsyncSetNameDescription3(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
+func (vdi) AsyncSetNameDescription3(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
 	method := "Async.VDI.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1183,7 +1183,7 @@ func (vDI) AsyncSetNameDescription3(session *Session, self VDIRef, value string)
 
 // SetNameLabel: Set the name label of the VDI. This can only happen when then its SR is currently attached.
 // Version: rio
-func (vDI) SetNameLabel(session *Session, self VDIRef, value string) (err error) {
+func (vdi) SetNameLabel(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1203,7 +1203,7 @@ func (vDI) SetNameLabel(session *Session, self VDIRef, value string) (err error)
 
 // AsyncSetNameLabel: Set the name label of the VDI. This can only happen when then its SR is currently attached.
 // Version: rio
-func (vDI) AsyncSetNameLabel(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
+func (vdi) AsyncSetNameLabel(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
 	method := "Async.VDI.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1227,7 +1227,7 @@ func (vDI) AsyncSetNameLabel(session *Session, self VDIRef, value string) (retva
 
 // SetNameLabel3: Set the name label of the VDI. This can only happen when then its SR is currently attached.
 // Version: rio
-func (vDI) SetNameLabel3(session *Session, self VDIRef, value string) (err error) {
+func (vdi) SetNameLabel3(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1247,7 +1247,7 @@ func (vDI) SetNameLabel3(session *Session, self VDIRef, value string) (err error
 
 // AsyncSetNameLabel3: Set the name label of the VDI. This can only happen when then its SR is currently attached.
 // Version: rio
-func (vDI) AsyncSetNameLabel3(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
+func (vdi) AsyncSetNameLabel3(session *Session, self VDIRef, value string) (retval TaskRef, err error) {
 	method := "Async.VDI.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1271,7 +1271,7 @@ func (vDI) AsyncSetNameLabel3(session *Session, self VDIRef, value string) (retv
 
 // SetReadOnly: Sets the VDI&apos;s read_only field
 // Version: rio
-func (vDI) SetReadOnly(session *Session, self VDIRef, value bool) (err error) {
+func (vdi) SetReadOnly(session *Session, self VDIRef, value bool) (err error) {
 	method := "VDI.set_read_only"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1291,7 +1291,7 @@ func (vDI) SetReadOnly(session *Session, self VDIRef, value bool) (err error) {
 
 // SetReadOnly3: Sets the VDI&apos;s read_only field
 // Version: rio
-func (vDI) SetReadOnly3(session *Session, self VDIRef, value bool) (err error) {
+func (vdi) SetReadOnly3(session *Session, self VDIRef, value bool) (err error) {
 	method := "VDI.set_read_only"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1311,7 +1311,7 @@ func (vDI) SetReadOnly3(session *Session, self VDIRef, value bool) (err error) {
 
 // SetSharable: Sets the VDI&apos;s sharable field
 // Version: george
-func (vDI) SetSharable(session *Session, self VDIRef, value bool) (err error) {
+func (vdi) SetSharable(session *Session, self VDIRef, value bool) (err error) {
 	method := "VDI.set_sharable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1331,7 +1331,7 @@ func (vDI) SetSharable(session *Session, self VDIRef, value bool) (err error) {
 
 // SetSharable3: Sets the VDI&apos;s sharable field
 // Version: george
-func (vDI) SetSharable3(session *Session, self VDIRef, value bool) (err error) {
+func (vdi) SetSharable3(session *Session, self VDIRef, value bool) (err error) {
 	method := "VDI.set_sharable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1351,7 +1351,7 @@ func (vDI) SetSharable3(session *Session, self VDIRef, value bool) (err error) {
 
 // Forget: Removes a VDI record from the database
 // Version: rio
-func (vDI) Forget(session *Session, vdi VDIRef) (err error) {
+func (vdi) Forget(session *Session, vdi VDIRef) (err error) {
 	method := "VDI.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1367,7 +1367,7 @@ func (vDI) Forget(session *Session, vdi VDIRef) (err error) {
 
 // AsyncForget: Removes a VDI record from the database
 // Version: rio
-func (vDI) AsyncForget(session *Session, vdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncForget(session *Session, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1387,7 +1387,7 @@ func (vDI) AsyncForget(session *Session, vdi VDIRef) (retval TaskRef, err error)
 
 // Forget2: Removes a VDI record from the database
 // Version: rio
-func (vDI) Forget2(session *Session, vdi VDIRef) (err error) {
+func (vdi) Forget2(session *Session, vdi VDIRef) (err error) {
 	method := "VDI.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1403,7 +1403,7 @@ func (vDI) Forget2(session *Session, vdi VDIRef) (err error) {
 
 // AsyncForget2: Removes a VDI record from the database
 // Version: rio
-func (vDI) AsyncForget2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncForget2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1428,7 +1428,7 @@ func (vDI) AsyncForget2(session *Session, vdi VDIRef) (retval TaskRef, err error
 // VDI_READONLY - The operation required write access but this VDI is read-only
 // VDI_TOO_SMALL - The VDI is too small. Please resize it to at least the minimum size.
 // VDI_NOT_SPARSE - The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or &apos;block differences&apos; or &apos;disk deltas&apos;) between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.
-func (vDI) Copy(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval VDIRef, err error) {
+func (vdi) Copy(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval VDIRef, err error) {
 	method := "VDI.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1465,7 +1465,7 @@ func (vDI) Copy(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi 
 // VDI_READONLY - The operation required write access but this VDI is read-only
 // VDI_TOO_SMALL - The VDI is too small. Please resize it to at least the minimum size.
 // VDI_NOT_SPARSE - The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or &apos;block differences&apos; or &apos;disk deltas&apos;) between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.
-func (vDI) AsyncCopy(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncCopy(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1502,7 +1502,7 @@ func (vDI) AsyncCopy(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, int
 // VDI_READONLY - The operation required write access but this VDI is read-only
 // VDI_TOO_SMALL - The VDI is too small. Please resize it to at least the minimum size.
 // VDI_NOT_SPARSE - The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or &apos;block differences&apos; or &apos;disk deltas&apos;) between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.
-func (vDI) Copy5(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval VDIRef, err error) {
+func (vdi) Copy5(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval VDIRef, err error) {
 	method := "VDI.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1539,7 +1539,7 @@ func (vDI) Copy5(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi
 // VDI_READONLY - The operation required write access but this VDI is read-only
 // VDI_TOO_SMALL - The VDI is too small. Please resize it to at least the minimum size.
 // VDI_NOT_SPARSE - The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or &apos;block differences&apos; or &apos;disk deltas&apos;) between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.
-func (vDI) AsyncCopy5(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncCopy5(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, intoVdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1576,7 +1576,7 @@ func (vDI) AsyncCopy5(session *Session, vdi VDIRef, sr SRRef, baseVdi VDIRef, in
 // VDI_READONLY - The operation required write access but this VDI is read-only
 // VDI_TOO_SMALL - The VDI is too small. Please resize it to at least the minimum size.
 // VDI_NOT_SPARSE - The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or &apos;block differences&apos; or &apos;disk deltas&apos;) between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.
-func (vDI) Copy3(session *Session, vdi VDIRef, sr SRRef) (retval VDIRef, err error) {
+func (vdi) Copy3(session *Session, vdi VDIRef, sr SRRef) (retval VDIRef, err error) {
 	method := "VDI.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1605,7 +1605,7 @@ func (vDI) Copy3(session *Session, vdi VDIRef, sr SRRef) (retval VDIRef, err err
 // VDI_READONLY - The operation required write access but this VDI is read-only
 // VDI_TOO_SMALL - The VDI is too small. Please resize it to at least the minimum size.
 // VDI_NOT_SPARSE - The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or &apos;block differences&apos; or &apos;disk deltas&apos;) between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.
-func (vDI) AsyncCopy3(session *Session, vdi VDIRef, sr SRRef) (retval TaskRef, err error) {
+func (vdi) AsyncCopy3(session *Session, vdi VDIRef, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.VDI.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1632,7 +1632,7 @@ func (vDI) AsyncCopy3(session *Session, vdi VDIRef, sr SRRef) (retval TaskRef, e
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) Update(session *Session, vdi VDIRef) (err error) {
+func (vdi) Update(session *Session, vdi VDIRef) (err error) {
 	method := "VDI.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1651,7 +1651,7 @@ func (vDI) Update(session *Session, vdi VDIRef) (err error) {
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) AsyncUpdate(session *Session, vdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncUpdate(session *Session, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1674,7 +1674,7 @@ func (vDI) AsyncUpdate(session *Session, vdi VDIRef) (retval TaskRef, err error)
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) Update2(session *Session, vdi VDIRef) (err error) {
+func (vdi) Update2(session *Session, vdi VDIRef) (err error) {
 	method := "VDI.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1693,7 +1693,7 @@ func (vDI) Update2(session *Session, vdi VDIRef) (err error) {
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) AsyncUpdate2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncUpdate2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1716,13 +1716,13 @@ func (vDI) AsyncUpdate2(session *Session, vdi VDIRef) (retval TaskRef, err error
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) Introduce(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval VDIRef, err error) {
+func (vdi) Introduce(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval VDIRef, err error) {
 	method := "VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -1734,7 +1734,7 @@ func (vDI) Introduce(session *Session, uUID string, nameLabel string, nameDescri
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -1794,7 +1794,7 @@ func (vDI) Introduce(session *Session, uUID string, nameLabel string, nameDescri
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
 	if err != nil {
 		return
 	}
@@ -1807,13 +1807,13 @@ func (vDI) Introduce(session *Session, uUID string, nameLabel string, nameDescri
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) AsyncIntroduce(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncIntroduce(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -1825,7 +1825,7 @@ func (vDI) AsyncIntroduce(session *Session, uUID string, nameLabel string, nameD
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -1885,7 +1885,7 @@ func (vDI) AsyncIntroduce(session *Session, uUID string, nameLabel string, nameD
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
 	if err != nil {
 		return
 	}
@@ -1898,13 +1898,13 @@ func (vDI) AsyncIntroduce(session *Session, uUID string, nameLabel string, nameD
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) Introduce19(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval VDIRef, err error) {
+func (vdi) Introduce19(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval VDIRef, err error) {
 	method := "VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -1916,7 +1916,7 @@ func (vDI) Introduce19(session *Session, uUID string, nameLabel string, nameDesc
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -1976,7 +1976,7 @@ func (vDI) Introduce19(session *Session, uUID string, nameLabel string, nameDesc
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
 	if err != nil {
 		return
 	}
@@ -1989,13 +1989,13 @@ func (vDI) Introduce19(session *Session, uUID string, nameLabel string, nameDesc
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) AsyncIntroduce19(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncIntroduce19(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string, managed bool, virtualSize int, physicalUtilisation int, metadataOfPool PoolRef, isASnapshot bool, snapshotTime time.Time, snapshotOf VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2007,7 +2007,7 @@ func (vDI) AsyncIntroduce19(session *Session, uUID string, nameLabel string, nam
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -2067,7 +2067,7 @@ func (vDI) AsyncIntroduce19(session *Session, uUID string, nameLabel string, nam
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg, managedArg, virtualSizeArg, physicalUtilisationArg, metadataOfPoolArg, isASnapshotArg, snapshotTimeArg, snapshotOfArg)
 	if err != nil {
 		return
 	}
@@ -2080,13 +2080,13 @@ func (vDI) AsyncIntroduce19(session *Session, uUID string, nameLabel string, nam
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) Introduce12(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string) (retval VDIRef, err error) {
+func (vdi) Introduce12(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string) (retval VDIRef, err error) {
 	method := "VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2098,7 +2098,7 @@ func (vDI) Introduce12(session *Session, uUID string, nameLabel string, nameDesc
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -2130,7 +2130,7 @@ func (vDI) Introduce12(session *Session, uUID string, nameLabel string, nameDesc
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg)
 	if err != nil {
 		return
 	}
@@ -2143,13 +2143,13 @@ func (vDI) Introduce12(session *Session, uUID string, nameLabel string, nameDesc
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) AsyncIntroduce12(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncIntroduce12(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2161,7 +2161,7 @@ func (vDI) AsyncIntroduce12(session *Session, uUID string, nameLabel string, nam
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -2193,7 +2193,7 @@ func (vDI) AsyncIntroduce12(session *Session, uUID string, nameLabel string, nam
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg, smConfigArg)
 	if err != nil {
 		return
 	}
@@ -2206,13 +2206,13 @@ func (vDI) AsyncIntroduce12(session *Session, uUID string, nameLabel string, nam
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) Introduce11(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string) (retval VDIRef, err error) {
+func (vdi) Introduce11(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string) (retval VDIRef, err error) {
 	method := "VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2224,7 +2224,7 @@ func (vDI) Introduce11(session *Session, uUID string, nameLabel string, nameDesc
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -2252,7 +2252,7 @@ func (vDI) Introduce11(session *Session, uUID string, nameLabel string, nameDesc
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg)
 	if err != nil {
 		return
 	}
@@ -2265,13 +2265,13 @@ func (vDI) Introduce11(session *Session, uUID string, nameLabel string, nameDesc
 //
 // Errors:
 // SR_OPERATION_NOT_SUPPORTED - The SR backend does not support the operation (check the SR&apos;s allowed operations)
-func (vDI) AsyncIntroduce11(session *Session, uUID string, nameLabel string, nameDescription string, sR SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncIntroduce11(session *Session, uuid string, nameLabel string, nameDescription string, sr SRRef, typeKey VdiType, sharable bool, readOnly bool, otherConfig map[string]string, location string, xenstoreData map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2283,7 +2283,7 @@ func (vDI) AsyncIntroduce11(session *Session, uUID string, nameLabel string, nam
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -2311,7 +2311,7 @@ func (vDI) AsyncIntroduce11(session *Session, uUID string, nameLabel string, nam
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, sRArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, srArg, typeKeyArg, sharableArg, readOnlyArg, otherConfigArg, locationArg, xenstoreDataArg)
 	if err != nil {
 		return
 	}
@@ -2321,7 +2321,7 @@ func (vDI) AsyncIntroduce11(session *Session, uUID string, nameLabel string, nam
 
 // ResizeOnline: Resize the VDI which may or may not be attached to running guests.
 // Version: rio
-func (vDI) ResizeOnline(session *Session, vdi VDIRef, size int) (err error) {
+func (vdi) ResizeOnline(session *Session, vdi VDIRef, size int) (err error) {
 	method := "VDI.resize_online"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2341,7 +2341,7 @@ func (vDI) ResizeOnline(session *Session, vdi VDIRef, size int) (err error) {
 
 // AsyncResizeOnline: Resize the VDI which may or may not be attached to running guests.
 // Version: rio
-func (vDI) AsyncResizeOnline(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
+func (vdi) AsyncResizeOnline(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
 	method := "Async.VDI.resize_online"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2365,7 +2365,7 @@ func (vDI) AsyncResizeOnline(session *Session, vdi VDIRef, size int) (retval Tas
 
 // ResizeOnline3: Resize the VDI which may or may not be attached to running guests.
 // Version: rio
-func (vDI) ResizeOnline3(session *Session, vdi VDIRef, size int) (err error) {
+func (vdi) ResizeOnline3(session *Session, vdi VDIRef, size int) (err error) {
 	method := "VDI.resize_online"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2385,7 +2385,7 @@ func (vDI) ResizeOnline3(session *Session, vdi VDIRef, size int) (err error) {
 
 // AsyncResizeOnline3: Resize the VDI which may or may not be attached to running guests.
 // Version: rio
-func (vDI) AsyncResizeOnline3(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
+func (vdi) AsyncResizeOnline3(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
 	method := "Async.VDI.resize_online"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2409,7 +2409,7 @@ func (vDI) AsyncResizeOnline3(session *Session, vdi VDIRef, size int) (retval Ta
 
 // Resize: Resize the VDI.
 // Version: rio
-func (vDI) Resize(session *Session, vdi VDIRef, size int) (err error) {
+func (vdi) Resize(session *Session, vdi VDIRef, size int) (err error) {
 	method := "VDI.resize"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2429,7 +2429,7 @@ func (vDI) Resize(session *Session, vdi VDIRef, size int) (err error) {
 
 // AsyncResize: Resize the VDI.
 // Version: rio
-func (vDI) AsyncResize(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
+func (vdi) AsyncResize(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
 	method := "Async.VDI.resize"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2453,7 +2453,7 @@ func (vDI) AsyncResize(session *Session, vdi VDIRef, size int) (retval TaskRef, 
 
 // Resize3: Resize the VDI.
 // Version: rio
-func (vDI) Resize3(session *Session, vdi VDIRef, size int) (err error) {
+func (vdi) Resize3(session *Session, vdi VDIRef, size int) (err error) {
 	method := "VDI.resize"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2473,7 +2473,7 @@ func (vDI) Resize3(session *Session, vdi VDIRef, size int) (err error) {
 
 // AsyncResize3: Resize the VDI.
 // Version: rio
-func (vDI) AsyncResize3(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
+func (vdi) AsyncResize3(session *Session, vdi VDIRef, size int) (retval TaskRef, err error) {
 	method := "Async.VDI.resize"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2497,7 +2497,7 @@ func (vDI) AsyncResize3(session *Session, vdi VDIRef, size int) (retval TaskRef,
 
 // Clone: Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) Clone(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
+func (vdi) Clone(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
 	method := "VDI.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2521,7 +2521,7 @@ func (vDI) Clone(session *Session, vdi VDIRef, driverParams map[string]string) (
 
 // AsyncClone: Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) AsyncClone(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncClone(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2545,7 +2545,7 @@ func (vDI) AsyncClone(session *Session, vdi VDIRef, driverParams map[string]stri
 
 // Clone3: Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) Clone3(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
+func (vdi) Clone3(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
 	method := "VDI.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2569,7 +2569,7 @@ func (vDI) Clone3(session *Session, vdi VDIRef, driverParams map[string]string) 
 
 // AsyncClone3: Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) AsyncClone3(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncClone3(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2593,7 +2593,7 @@ func (vDI) AsyncClone3(session *Session, vdi VDIRef, driverParams map[string]str
 
 // Clone2: Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
 // Version: rio
-func (vDI) Clone2(session *Session, vdi VDIRef) (retval VDIRef, err error) {
+func (vdi) Clone2(session *Session, vdi VDIRef) (retval VDIRef, err error) {
 	method := "VDI.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2613,7 +2613,7 @@ func (vDI) Clone2(session *Session, vdi VDIRef) (retval VDIRef, err error) {
 
 // AsyncClone2: Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
 // Version: rio
-func (vDI) AsyncClone2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncClone2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2633,7 +2633,7 @@ func (vDI) AsyncClone2(session *Session, vdi VDIRef) (retval TaskRef, err error)
 
 // Snapshot: Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) Snapshot(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
+func (vdi) Snapshot(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
 	method := "VDI.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2657,7 +2657,7 @@ func (vDI) Snapshot(session *Session, vdi VDIRef, driverParams map[string]string
 
 // AsyncSnapshot: Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) AsyncSnapshot(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncSnapshot(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2681,7 +2681,7 @@ func (vDI) AsyncSnapshot(session *Session, vdi VDIRef, driverParams map[string]s
 
 // Snapshot3: Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) Snapshot3(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
+func (vdi) Snapshot3(session *Session, vdi VDIRef, driverParams map[string]string) (retval VDIRef, err error) {
 	method := "VDI.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2705,7 +2705,7 @@ func (vDI) Snapshot3(session *Session, vdi VDIRef, driverParams map[string]strin
 
 // AsyncSnapshot3: Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
 // Version: miami
-func (vDI) AsyncSnapshot3(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
+func (vdi) AsyncSnapshot3(session *Session, vdi VDIRef, driverParams map[string]string) (retval TaskRef, err error) {
 	method := "Async.VDI.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2729,7 +2729,7 @@ func (vDI) AsyncSnapshot3(session *Session, vdi VDIRef, driverParams map[string]
 
 // Snapshot2: Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
 // Version: rio
-func (vDI) Snapshot2(session *Session, vdi VDIRef) (retval VDIRef, err error) {
+func (vdi) Snapshot2(session *Session, vdi VDIRef) (retval VDIRef, err error) {
 	method := "VDI.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2749,7 +2749,7 @@ func (vDI) Snapshot2(session *Session, vdi VDIRef) (retval VDIRef, err error) {
 
 // AsyncSnapshot2: Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
 // Version: rio
-func (vDI) AsyncSnapshot2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncSnapshot2(session *Session, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2769,7 +2769,7 @@ func (vDI) AsyncSnapshot2(session *Session, vdi VDIRef) (retval TaskRef, err err
 
 // RemoveTags: Remove the given value from the tags field of the given VDI.  If the value is not in that Set, then do nothing.
 // Version: orlando
-func (vDI) RemoveTags(session *Session, self VDIRef, value string) (err error) {
+func (vdi) RemoveTags(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2789,7 +2789,7 @@ func (vDI) RemoveTags(session *Session, self VDIRef, value string) (err error) {
 
 // RemoveTags3: Remove the given value from the tags field of the given VDI.  If the value is not in that Set, then do nothing.
 // Version: orlando
-func (vDI) RemoveTags3(session *Session, self VDIRef, value string) (err error) {
+func (vdi) RemoveTags3(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2809,7 +2809,7 @@ func (vDI) RemoveTags3(session *Session, self VDIRef, value string) (err error) 
 
 // RemoveTags2: Remove the given value from the tags field of the given VDI.  If the value is not in that Set, then do nothing.
 // Version: rio
-func (vDI) RemoveTags2(session *Session, self VDIRef) (err error) {
+func (vdi) RemoveTags2(session *Session, self VDIRef) (err error) {
 	method := "VDI.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2825,7 +2825,7 @@ func (vDI) RemoveTags2(session *Session, self VDIRef) (err error) {
 
 // AddTags: Add the given value to the tags field of the given VDI.  If the value is already in that Set, then do nothing.
 // Version: orlando
-func (vDI) AddTags(session *Session, self VDIRef, value string) (err error) {
+func (vdi) AddTags(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2845,7 +2845,7 @@ func (vDI) AddTags(session *Session, self VDIRef, value string) (err error) {
 
 // AddTags3: Add the given value to the tags field of the given VDI.  If the value is already in that Set, then do nothing.
 // Version: orlando
-func (vDI) AddTags3(session *Session, self VDIRef, value string) (err error) {
+func (vdi) AddTags3(session *Session, self VDIRef, value string) (err error) {
 	method := "VDI.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2865,7 +2865,7 @@ func (vDI) AddTags3(session *Session, self VDIRef, value string) (err error) {
 
 // AddTags2: Add the given value to the tags field of the given VDI.  If the value is already in that Set, then do nothing.
 // Version: rio
-func (vDI) AddTags2(session *Session, self VDIRef) (err error) {
+func (vdi) AddTags2(session *Session, self VDIRef) (err error) {
 	method := "VDI.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2881,7 +2881,7 @@ func (vDI) AddTags2(session *Session, self VDIRef) (err error) {
 
 // SetTags: Set the tags field of the given VDI.
 // Version: orlando
-func (vDI) SetTags(session *Session, self VDIRef, value []string) (err error) {
+func (vdi) SetTags(session *Session, self VDIRef, value []string) (err error) {
 	method := "VDI.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2901,7 +2901,7 @@ func (vDI) SetTags(session *Session, self VDIRef, value []string) (err error) {
 
 // SetTags3: Set the tags field of the given VDI.
 // Version: orlando
-func (vDI) SetTags3(session *Session, self VDIRef, value []string) (err error) {
+func (vdi) SetTags3(session *Session, self VDIRef, value []string) (err error) {
 	method := "VDI.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2921,7 +2921,7 @@ func (vDI) SetTags3(session *Session, self VDIRef, value []string) (err error) {
 
 // SetTags2: Set the tags field of the given VDI.
 // Version: rio
-func (vDI) SetTags2(session *Session, self VDIRef) (err error) {
+func (vdi) SetTags2(session *Session, self VDIRef) (err error) {
 	method := "VDI.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2937,7 +2937,7 @@ func (vDI) SetTags2(session *Session, self VDIRef) (err error) {
 
 // RemoveFromSmConfig: Remove the given key and its corresponding value from the sm_config field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vDI) RemoveFromSmConfig(session *Session, self VDIRef, key string) (err error) {
+func (vdi) RemoveFromSmConfig(session *Session, self VDIRef, key string) (err error) {
 	method := "VDI.remove_from_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2957,7 +2957,7 @@ func (vDI) RemoveFromSmConfig(session *Session, self VDIRef, key string) (err er
 
 // RemoveFromSmConfig3: Remove the given key and its corresponding value from the sm_config field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vDI) RemoveFromSmConfig3(session *Session, self VDIRef, key string) (err error) {
+func (vdi) RemoveFromSmConfig3(session *Session, self VDIRef, key string) (err error) {
 	method := "VDI.remove_from_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2977,7 +2977,7 @@ func (vDI) RemoveFromSmConfig3(session *Session, self VDIRef, key string) (err e
 
 // RemoveFromSmConfig2: Remove the given key and its corresponding value from the sm_config field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vDI) RemoveFromSmConfig2(session *Session, self VDIRef) (err error) {
+func (vdi) RemoveFromSmConfig2(session *Session, self VDIRef) (err error) {
 	method := "VDI.remove_from_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2993,7 +2993,7 @@ func (vDI) RemoveFromSmConfig2(session *Session, self VDIRef) (err error) {
 
 // AddToSmConfig: Add the given key-value pair to the sm_config field of the given VDI.
 // Version: miami
-func (vDI) AddToSmConfig(session *Session, self VDIRef, key string, value string) (err error) {
+func (vdi) AddToSmConfig(session *Session, self VDIRef, key string, value string) (err error) {
 	method := "VDI.add_to_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3017,7 +3017,7 @@ func (vDI) AddToSmConfig(session *Session, self VDIRef, key string, value string
 
 // AddToSmConfig4: Add the given key-value pair to the sm_config field of the given VDI.
 // Version: miami
-func (vDI) AddToSmConfig4(session *Session, self VDIRef, key string, value string) (err error) {
+func (vdi) AddToSmConfig4(session *Session, self VDIRef, key string, value string) (err error) {
 	method := "VDI.add_to_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3041,7 +3041,7 @@ func (vDI) AddToSmConfig4(session *Session, self VDIRef, key string, value strin
 
 // AddToSmConfig2: Add the given key-value pair to the sm_config field of the given VDI.
 // Version: rio
-func (vDI) AddToSmConfig2(session *Session, self VDIRef) (err error) {
+func (vdi) AddToSmConfig2(session *Session, self VDIRef) (err error) {
 	method := "VDI.add_to_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3057,7 +3057,7 @@ func (vDI) AddToSmConfig2(session *Session, self VDIRef) (err error) {
 
 // SetSmConfig: Set the sm_config field of the given VDI.
 // Version: miami
-func (vDI) SetSmConfig(session *Session, self VDIRef, value map[string]string) (err error) {
+func (vdi) SetSmConfig(session *Session, self VDIRef, value map[string]string) (err error) {
 	method := "VDI.set_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3077,7 +3077,7 @@ func (vDI) SetSmConfig(session *Session, self VDIRef, value map[string]string) (
 
 // SetSmConfig3: Set the sm_config field of the given VDI.
 // Version: miami
-func (vDI) SetSmConfig3(session *Session, self VDIRef, value map[string]string) (err error) {
+func (vdi) SetSmConfig3(session *Session, self VDIRef, value map[string]string) (err error) {
 	method := "VDI.set_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3097,7 +3097,7 @@ func (vDI) SetSmConfig3(session *Session, self VDIRef, value map[string]string) 
 
 // SetSmConfig2: Set the sm_config field of the given VDI.
 // Version: rio
-func (vDI) SetSmConfig2(session *Session, self VDIRef) (err error) {
+func (vdi) SetSmConfig2(session *Session, self VDIRef) (err error) {
 	method := "VDI.set_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3113,7 +3113,7 @@ func (vDI) SetSmConfig2(session *Session, self VDIRef) (err error) {
 
 // RemoveFromXenstoreData: Remove the given key and its corresponding value from the xenstore_data field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vDI) RemoveFromXenstoreData(session *Session, self VDIRef, key string) (err error) {
+func (vdi) RemoveFromXenstoreData(session *Session, self VDIRef, key string) (err error) {
 	method := "VDI.remove_from_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3133,7 +3133,7 @@ func (vDI) RemoveFromXenstoreData(session *Session, self VDIRef, key string) (er
 
 // RemoveFromXenstoreData3: Remove the given key and its corresponding value from the xenstore_data field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vDI) RemoveFromXenstoreData3(session *Session, self VDIRef, key string) (err error) {
+func (vdi) RemoveFromXenstoreData3(session *Session, self VDIRef, key string) (err error) {
 	method := "VDI.remove_from_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3153,7 +3153,7 @@ func (vDI) RemoveFromXenstoreData3(session *Session, self VDIRef, key string) (e
 
 // RemoveFromXenstoreData2: Remove the given key and its corresponding value from the xenstore_data field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vDI) RemoveFromXenstoreData2(session *Session, self VDIRef) (err error) {
+func (vdi) RemoveFromXenstoreData2(session *Session, self VDIRef) (err error) {
 	method := "VDI.remove_from_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3169,7 +3169,7 @@ func (vDI) RemoveFromXenstoreData2(session *Session, self VDIRef) (err error) {
 
 // AddToXenstoreData: Add the given key-value pair to the xenstore_data field of the given VDI.
 // Version: miami
-func (vDI) AddToXenstoreData(session *Session, self VDIRef, key string, value string) (err error) {
+func (vdi) AddToXenstoreData(session *Session, self VDIRef, key string, value string) (err error) {
 	method := "VDI.add_to_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3193,7 +3193,7 @@ func (vDI) AddToXenstoreData(session *Session, self VDIRef, key string, value st
 
 // AddToXenstoreData4: Add the given key-value pair to the xenstore_data field of the given VDI.
 // Version: miami
-func (vDI) AddToXenstoreData4(session *Session, self VDIRef, key string, value string) (err error) {
+func (vdi) AddToXenstoreData4(session *Session, self VDIRef, key string, value string) (err error) {
 	method := "VDI.add_to_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3217,7 +3217,7 @@ func (vDI) AddToXenstoreData4(session *Session, self VDIRef, key string, value s
 
 // AddToXenstoreData2: Add the given key-value pair to the xenstore_data field of the given VDI.
 // Version: rio
-func (vDI) AddToXenstoreData2(session *Session, self VDIRef) (err error) {
+func (vdi) AddToXenstoreData2(session *Session, self VDIRef) (err error) {
 	method := "VDI.add_to_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3233,7 +3233,7 @@ func (vDI) AddToXenstoreData2(session *Session, self VDIRef) (err error) {
 
 // SetXenstoreData: Set the xenstore_data field of the given VDI.
 // Version: miami
-func (vDI) SetXenstoreData(session *Session, self VDIRef, value map[string]string) (err error) {
+func (vdi) SetXenstoreData(session *Session, self VDIRef, value map[string]string) (err error) {
 	method := "VDI.set_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3253,7 +3253,7 @@ func (vDI) SetXenstoreData(session *Session, self VDIRef, value map[string]strin
 
 // SetXenstoreData3: Set the xenstore_data field of the given VDI.
 // Version: miami
-func (vDI) SetXenstoreData3(session *Session, self VDIRef, value map[string]string) (err error) {
+func (vdi) SetXenstoreData3(session *Session, self VDIRef, value map[string]string) (err error) {
 	method := "VDI.set_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3273,7 +3273,7 @@ func (vDI) SetXenstoreData3(session *Session, self VDIRef, value map[string]stri
 
 // SetXenstoreData2: Set the xenstore_data field of the given VDI.
 // Version: rio
-func (vDI) SetXenstoreData2(session *Session, self VDIRef) (err error) {
+func (vdi) SetXenstoreData2(session *Session, self VDIRef) (err error) {
 	method := "VDI.set_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3289,7 +3289,7 @@ func (vDI) SetXenstoreData2(session *Session, self VDIRef) (err error) {
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vDI) RemoveFromOtherConfig(session *Session, self VDIRef, key string) (err error) {
+func (vdi) RemoveFromOtherConfig(session *Session, self VDIRef, key string) (err error) {
 	method := "VDI.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3309,7 +3309,7 @@ func (vDI) RemoveFromOtherConfig(session *Session, self VDIRef, key string) (err
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VDI.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vDI) RemoveFromOtherConfig3(session *Session, self VDIRef, key string) (err error) {
+func (vdi) RemoveFromOtherConfig3(session *Session, self VDIRef, key string) (err error) {
 	method := "VDI.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3329,7 +3329,7 @@ func (vDI) RemoveFromOtherConfig3(session *Session, self VDIRef, key string) (er
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VDI.
 // Version: rio
-func (vDI) AddToOtherConfig(session *Session, self VDIRef, key string, value string) (err error) {
+func (vdi) AddToOtherConfig(session *Session, self VDIRef, key string, value string) (err error) {
 	method := "VDI.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3353,7 +3353,7 @@ func (vDI) AddToOtherConfig(session *Session, self VDIRef, key string, value str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VDI.
 // Version: rio
-func (vDI) AddToOtherConfig4(session *Session, self VDIRef, key string, value string) (err error) {
+func (vdi) AddToOtherConfig4(session *Session, self VDIRef, key string, value string) (err error) {
 	method := "VDI.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3377,7 +3377,7 @@ func (vDI) AddToOtherConfig4(session *Session, self VDIRef, key string, value st
 
 // SetOtherConfig: Set the other_config field of the given VDI.
 // Version: rio
-func (vDI) SetOtherConfig(session *Session, self VDIRef, value map[string]string) (err error) {
+func (vdi) SetOtherConfig(session *Session, self VDIRef, value map[string]string) (err error) {
 	method := "VDI.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3397,7 +3397,7 @@ func (vDI) SetOtherConfig(session *Session, self VDIRef, value map[string]string
 
 // SetOtherConfig3: Set the other_config field of the given VDI.
 // Version: rio
-func (vDI) SetOtherConfig3(session *Session, self VDIRef, value map[string]string) (err error) {
+func (vdi) SetOtherConfig3(session *Session, self VDIRef, value map[string]string) (err error) {
 	method := "VDI.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3417,7 +3417,7 @@ func (vDI) SetOtherConfig3(session *Session, self VDIRef, value map[string]strin
 
 // GetCbtEnabled: Get the cbt_enabled field of the given VDI.
 // Version: rio
-func (vDI) GetCbtEnabled(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetCbtEnabled(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_cbt_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3437,7 +3437,7 @@ func (vDI) GetCbtEnabled(session *Session, self VDIRef) (retval bool, err error)
 
 // GetCbtEnabled2: Get the cbt_enabled field of the given VDI.
 // Version: rio
-func (vDI) GetCbtEnabled2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetCbtEnabled2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_cbt_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3457,7 +3457,7 @@ func (vDI) GetCbtEnabled2(session *Session, self VDIRef) (retval bool, err error
 
 // GetIsToolsIso: Get the is_tools_iso field of the given VDI.
 // Version: rio
-func (vDI) GetIsToolsIso(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetIsToolsIso(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_is_tools_iso"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3477,7 +3477,7 @@ func (vDI) GetIsToolsIso(session *Session, self VDIRef) (retval bool, err error)
 
 // GetIsToolsIso2: Get the is_tools_iso field of the given VDI.
 // Version: rio
-func (vDI) GetIsToolsIso2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetIsToolsIso2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_is_tools_iso"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3497,7 +3497,7 @@ func (vDI) GetIsToolsIso2(session *Session, self VDIRef) (retval bool, err error
 
 // GetMetadataLatest: Get the metadata_latest field of the given VDI.
 // Version: rio
-func (vDI) GetMetadataLatest(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetMetadataLatest(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_metadata_latest"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3517,7 +3517,7 @@ func (vDI) GetMetadataLatest(session *Session, self VDIRef) (retval bool, err er
 
 // GetMetadataLatest2: Get the metadata_latest field of the given VDI.
 // Version: rio
-func (vDI) GetMetadataLatest2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetMetadataLatest2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_metadata_latest"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3537,7 +3537,7 @@ func (vDI) GetMetadataLatest2(session *Session, self VDIRef) (retval bool, err e
 
 // GetMetadataOfPool: Get the metadata_of_pool field of the given VDI.
 // Version: rio
-func (vDI) GetMetadataOfPool(session *Session, self VDIRef) (retval PoolRef, err error) {
+func (vdi) GetMetadataOfPool(session *Session, self VDIRef) (retval PoolRef, err error) {
 	method := "VDI.get_metadata_of_pool"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3557,7 +3557,7 @@ func (vDI) GetMetadataOfPool(session *Session, self VDIRef) (retval PoolRef, err
 
 // GetMetadataOfPool2: Get the metadata_of_pool field of the given VDI.
 // Version: rio
-func (vDI) GetMetadataOfPool2(session *Session, self VDIRef) (retval PoolRef, err error) {
+func (vdi) GetMetadataOfPool2(session *Session, self VDIRef) (retval PoolRef, err error) {
 	method := "VDI.get_metadata_of_pool"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3577,7 +3577,7 @@ func (vDI) GetMetadataOfPool2(session *Session, self VDIRef) (retval PoolRef, er
 
 // GetOnBoot: Get the on_boot field of the given VDI.
 // Version: rio
-func (vDI) GetOnBoot(session *Session, self VDIRef) (retval OnBoot, err error) {
+func (vdi) GetOnBoot(session *Session, self VDIRef) (retval OnBoot, err error) {
 	method := "VDI.get_on_boot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3597,7 +3597,7 @@ func (vDI) GetOnBoot(session *Session, self VDIRef) (retval OnBoot, err error) {
 
 // GetOnBoot2: Get the on_boot field of the given VDI.
 // Version: rio
-func (vDI) GetOnBoot2(session *Session, self VDIRef) (retval OnBoot, err error) {
+func (vdi) GetOnBoot2(session *Session, self VDIRef) (retval OnBoot, err error) {
 	method := "VDI.get_on_boot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3617,7 +3617,7 @@ func (vDI) GetOnBoot2(session *Session, self VDIRef) (retval OnBoot, err error) 
 
 // GetAllowCaching: Get the allow_caching field of the given VDI.
 // Version: rio
-func (vDI) GetAllowCaching(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetAllowCaching(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_allow_caching"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3637,7 +3637,7 @@ func (vDI) GetAllowCaching(session *Session, self VDIRef) (retval bool, err erro
 
 // GetAllowCaching2: Get the allow_caching field of the given VDI.
 // Version: rio
-func (vDI) GetAllowCaching2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetAllowCaching2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_allow_caching"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3657,7 +3657,7 @@ func (vDI) GetAllowCaching2(session *Session, self VDIRef) (retval bool, err err
 
 // GetTags: Get the tags field of the given VDI.
 // Version: rio
-func (vDI) GetTags(session *Session, self VDIRef) (retval []string, err error) {
+func (vdi) GetTags(session *Session, self VDIRef) (retval []string, err error) {
 	method := "VDI.get_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3677,7 +3677,7 @@ func (vDI) GetTags(session *Session, self VDIRef) (retval []string, err error) {
 
 // GetTags2: Get the tags field of the given VDI.
 // Version: rio
-func (vDI) GetTags2(session *Session, self VDIRef) (retval []string, err error) {
+func (vdi) GetTags2(session *Session, self VDIRef) (retval []string, err error) {
 	method := "VDI.get_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3697,7 +3697,7 @@ func (vDI) GetTags2(session *Session, self VDIRef) (retval []string, err error) 
 
 // GetSnapshotTime: Get the snapshot_time field of the given VDI.
 // Version: rio
-func (vDI) GetSnapshotTime(session *Session, self VDIRef) (retval time.Time, err error) {
+func (vdi) GetSnapshotTime(session *Session, self VDIRef) (retval time.Time, err error) {
 	method := "VDI.get_snapshot_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3717,7 +3717,7 @@ func (vDI) GetSnapshotTime(session *Session, self VDIRef) (retval time.Time, err
 
 // GetSnapshotTime2: Get the snapshot_time field of the given VDI.
 // Version: rio
-func (vDI) GetSnapshotTime2(session *Session, self VDIRef) (retval time.Time, err error) {
+func (vdi) GetSnapshotTime2(session *Session, self VDIRef) (retval time.Time, err error) {
 	method := "VDI.get_snapshot_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3737,7 +3737,7 @@ func (vDI) GetSnapshotTime2(session *Session, self VDIRef) (retval time.Time, er
 
 // GetSnapshots: Get the snapshots field of the given VDI.
 // Version: rio
-func (vDI) GetSnapshots(session *Session, self VDIRef) (retval []VDIRef, err error) {
+func (vdi) GetSnapshots(session *Session, self VDIRef) (retval []VDIRef, err error) {
 	method := "VDI.get_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3757,7 +3757,7 @@ func (vDI) GetSnapshots(session *Session, self VDIRef) (retval []VDIRef, err err
 
 // GetSnapshots2: Get the snapshots field of the given VDI.
 // Version: rio
-func (vDI) GetSnapshots2(session *Session, self VDIRef) (retval []VDIRef, err error) {
+func (vdi) GetSnapshots2(session *Session, self VDIRef) (retval []VDIRef, err error) {
 	method := "VDI.get_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3777,7 +3777,7 @@ func (vDI) GetSnapshots2(session *Session, self VDIRef) (retval []VDIRef, err er
 
 // GetSnapshotOf: Get the snapshot_of field of the given VDI.
 // Version: rio
-func (vDI) GetSnapshotOf(session *Session, self VDIRef) (retval VDIRef, err error) {
+func (vdi) GetSnapshotOf(session *Session, self VDIRef) (retval VDIRef, err error) {
 	method := "VDI.get_snapshot_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3797,7 +3797,7 @@ func (vDI) GetSnapshotOf(session *Session, self VDIRef) (retval VDIRef, err erro
 
 // GetSnapshotOf2: Get the snapshot_of field of the given VDI.
 // Version: rio
-func (vDI) GetSnapshotOf2(session *Session, self VDIRef) (retval VDIRef, err error) {
+func (vdi) GetSnapshotOf2(session *Session, self VDIRef) (retval VDIRef, err error) {
 	method := "VDI.get_snapshot_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3817,7 +3817,7 @@ func (vDI) GetSnapshotOf2(session *Session, self VDIRef) (retval VDIRef, err err
 
 // GetIsASnapshot: Get the is_a_snapshot field of the given VDI.
 // Version: rio
-func (vDI) GetIsASnapshot(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetIsASnapshot(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_is_a_snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3837,7 +3837,7 @@ func (vDI) GetIsASnapshot(session *Session, self VDIRef) (retval bool, err error
 
 // GetIsASnapshot2: Get the is_a_snapshot field of the given VDI.
 // Version: rio
-func (vDI) GetIsASnapshot2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetIsASnapshot2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_is_a_snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3857,7 +3857,7 @@ func (vDI) GetIsASnapshot2(session *Session, self VDIRef) (retval bool, err erro
 
 // GetSmConfig: Get the sm_config field of the given VDI.
 // Version: rio
-func (vDI) GetSmConfig(session *Session, self VDIRef) (retval map[string]string, err error) {
+func (vdi) GetSmConfig(session *Session, self VDIRef) (retval map[string]string, err error) {
 	method := "VDI.get_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3877,7 +3877,7 @@ func (vDI) GetSmConfig(session *Session, self VDIRef) (retval map[string]string,
 
 // GetSmConfig2: Get the sm_config field of the given VDI.
 // Version: rio
-func (vDI) GetSmConfig2(session *Session, self VDIRef) (retval map[string]string, err error) {
+func (vdi) GetSmConfig2(session *Session, self VDIRef) (retval map[string]string, err error) {
 	method := "VDI.get_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3897,7 +3897,7 @@ func (vDI) GetSmConfig2(session *Session, self VDIRef) (retval map[string]string
 
 // GetXenstoreData: Get the xenstore_data field of the given VDI.
 // Version: rio
-func (vDI) GetXenstoreData(session *Session, self VDIRef) (retval map[string]string, err error) {
+func (vdi) GetXenstoreData(session *Session, self VDIRef) (retval map[string]string, err error) {
 	method := "VDI.get_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3917,7 +3917,7 @@ func (vDI) GetXenstoreData(session *Session, self VDIRef) (retval map[string]str
 
 // GetXenstoreData2: Get the xenstore_data field of the given VDI.
 // Version: rio
-func (vDI) GetXenstoreData2(session *Session, self VDIRef) (retval map[string]string, err error) {
+func (vdi) GetXenstoreData2(session *Session, self VDIRef) (retval map[string]string, err error) {
 	method := "VDI.get_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3937,7 +3937,7 @@ func (vDI) GetXenstoreData2(session *Session, self VDIRef) (retval map[string]st
 
 // GetParent: Get the parent field of the given VDI.
 // Version: rio
-func (vDI) GetParent(session *Session, self VDIRef) (retval VDIRef, err error) {
+func (vdi) GetParent(session *Session, self VDIRef) (retval VDIRef, err error) {
 	method := "VDI.get_parent"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3957,7 +3957,7 @@ func (vDI) GetParent(session *Session, self VDIRef) (retval VDIRef, err error) {
 
 // GetParent2: Get the parent field of the given VDI.
 // Version: rio
-func (vDI) GetParent2(session *Session, self VDIRef) (retval VDIRef, err error) {
+func (vdi) GetParent2(session *Session, self VDIRef) (retval VDIRef, err error) {
 	method := "VDI.get_parent"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3977,7 +3977,7 @@ func (vDI) GetParent2(session *Session, self VDIRef) (retval VDIRef, err error) 
 
 // GetMissing: Get the missing field of the given VDI.
 // Version: rio
-func (vDI) GetMissing(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetMissing(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_missing"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3997,7 +3997,7 @@ func (vDI) GetMissing(session *Session, self VDIRef) (retval bool, err error) {
 
 // GetMissing2: Get the missing field of the given VDI.
 // Version: rio
-func (vDI) GetMissing2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetMissing2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_missing"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4017,7 +4017,7 @@ func (vDI) GetMissing2(session *Session, self VDIRef) (retval bool, err error) {
 
 // GetManaged: Get the managed field of the given VDI.
 // Version: rio
-func (vDI) GetManaged(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetManaged(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_managed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4037,7 +4037,7 @@ func (vDI) GetManaged(session *Session, self VDIRef) (retval bool, err error) {
 
 // GetManaged2: Get the managed field of the given VDI.
 // Version: rio
-func (vDI) GetManaged2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetManaged2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_managed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4057,7 +4057,7 @@ func (vDI) GetManaged2(session *Session, self VDIRef) (retval bool, err error) {
 
 // GetLocation: Get the location field of the given VDI.
 // Version: rio
-func (vDI) GetLocation(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetLocation(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_location"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4077,7 +4077,7 @@ func (vDI) GetLocation(session *Session, self VDIRef) (retval string, err error)
 
 // GetLocation2: Get the location field of the given VDI.
 // Version: rio
-func (vDI) GetLocation2(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetLocation2(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_location"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4097,7 +4097,7 @@ func (vDI) GetLocation2(session *Session, self VDIRef) (retval string, err error
 
 // GetStorageLock: Get the storage_lock field of the given VDI.
 // Version: rio
-func (vDI) GetStorageLock(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetStorageLock(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_storage_lock"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4117,7 +4117,7 @@ func (vDI) GetStorageLock(session *Session, self VDIRef) (retval bool, err error
 
 // GetStorageLock2: Get the storage_lock field of the given VDI.
 // Version: rio
-func (vDI) GetStorageLock2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetStorageLock2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_storage_lock"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4137,7 +4137,7 @@ func (vDI) GetStorageLock2(session *Session, self VDIRef) (retval bool, err erro
 
 // GetOtherConfig: Get the other_config field of the given VDI.
 // Version: rio
-func (vDI) GetOtherConfig(session *Session, self VDIRef) (retval map[string]string, err error) {
+func (vdi) GetOtherConfig(session *Session, self VDIRef) (retval map[string]string, err error) {
 	method := "VDI.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4157,7 +4157,7 @@ func (vDI) GetOtherConfig(session *Session, self VDIRef) (retval map[string]stri
 
 // GetOtherConfig2: Get the other_config field of the given VDI.
 // Version: rio
-func (vDI) GetOtherConfig2(session *Session, self VDIRef) (retval map[string]string, err error) {
+func (vdi) GetOtherConfig2(session *Session, self VDIRef) (retval map[string]string, err error) {
 	method := "VDI.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4177,7 +4177,7 @@ func (vDI) GetOtherConfig2(session *Session, self VDIRef) (retval map[string]str
 
 // GetReadOnly: Get the read_only field of the given VDI.
 // Version: rio
-func (vDI) GetReadOnly(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetReadOnly(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_read_only"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4197,7 +4197,7 @@ func (vDI) GetReadOnly(session *Session, self VDIRef) (retval bool, err error) {
 
 // GetReadOnly2: Get the read_only field of the given VDI.
 // Version: rio
-func (vDI) GetReadOnly2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetReadOnly2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_read_only"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4217,7 +4217,7 @@ func (vDI) GetReadOnly2(session *Session, self VDIRef) (retval bool, err error) 
 
 // GetSharable: Get the sharable field of the given VDI.
 // Version: rio
-func (vDI) GetSharable(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetSharable(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_sharable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4237,7 +4237,7 @@ func (vDI) GetSharable(session *Session, self VDIRef) (retval bool, err error) {
 
 // GetSharable2: Get the sharable field of the given VDI.
 // Version: rio
-func (vDI) GetSharable2(session *Session, self VDIRef) (retval bool, err error) {
+func (vdi) GetSharable2(session *Session, self VDIRef) (retval bool, err error) {
 	method := "VDI.get_sharable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4257,7 +4257,7 @@ func (vDI) GetSharable2(session *Session, self VDIRef) (retval bool, err error) 
 
 // GetType: Get the type field of the given VDI.
 // Version: rio
-func (vDI) GetType(session *Session, self VDIRef) (retval VdiType, err error) {
+func (vdi) GetType(session *Session, self VDIRef) (retval VdiType, err error) {
 	method := "VDI.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4277,7 +4277,7 @@ func (vDI) GetType(session *Session, self VDIRef) (retval VdiType, err error) {
 
 // GetType2: Get the type field of the given VDI.
 // Version: rio
-func (vDI) GetType2(session *Session, self VDIRef) (retval VdiType, err error) {
+func (vdi) GetType2(session *Session, self VDIRef) (retval VdiType, err error) {
 	method := "VDI.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4297,7 +4297,7 @@ func (vDI) GetType2(session *Session, self VDIRef) (retval VdiType, err error) {
 
 // GetPhysicalUtilisation: Get the physical_utilisation field of the given VDI.
 // Version: rio
-func (vDI) GetPhysicalUtilisation(session *Session, self VDIRef) (retval int, err error) {
+func (vdi) GetPhysicalUtilisation(session *Session, self VDIRef) (retval int, err error) {
 	method := "VDI.get_physical_utilisation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4317,7 +4317,7 @@ func (vDI) GetPhysicalUtilisation(session *Session, self VDIRef) (retval int, er
 
 // GetPhysicalUtilisation2: Get the physical_utilisation field of the given VDI.
 // Version: rio
-func (vDI) GetPhysicalUtilisation2(session *Session, self VDIRef) (retval int, err error) {
+func (vdi) GetPhysicalUtilisation2(session *Session, self VDIRef) (retval int, err error) {
 	method := "VDI.get_physical_utilisation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4337,7 +4337,7 @@ func (vDI) GetPhysicalUtilisation2(session *Session, self VDIRef) (retval int, e
 
 // GetVirtualSize: Get the virtual_size field of the given VDI.
 // Version: rio
-func (vDI) GetVirtualSize(session *Session, self VDIRef) (retval int, err error) {
+func (vdi) GetVirtualSize(session *Session, self VDIRef) (retval int, err error) {
 	method := "VDI.get_virtual_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4357,7 +4357,7 @@ func (vDI) GetVirtualSize(session *Session, self VDIRef) (retval int, err error)
 
 // GetVirtualSize2: Get the virtual_size field of the given VDI.
 // Version: rio
-func (vDI) GetVirtualSize2(session *Session, self VDIRef) (retval int, err error) {
+func (vdi) GetVirtualSize2(session *Session, self VDIRef) (retval int, err error) {
 	method := "VDI.get_virtual_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4377,7 +4377,7 @@ func (vDI) GetVirtualSize2(session *Session, self VDIRef) (retval int, err error
 
 // GetCrashDumps: Get the crash_dumps field of the given VDI.
 // Version: rio
-func (vDI) GetCrashDumps(session *Session, self VDIRef) (retval []CrashdumpRef, err error) {
+func (vdi) GetCrashDumps(session *Session, self VDIRef) (retval []CrashdumpRef, err error) {
 	method := "VDI.get_crash_dumps"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4397,7 +4397,7 @@ func (vDI) GetCrashDumps(session *Session, self VDIRef) (retval []CrashdumpRef, 
 
 // GetCrashDumps2: Get the crash_dumps field of the given VDI.
 // Version: rio
-func (vDI) GetCrashDumps2(session *Session, self VDIRef) (retval []CrashdumpRef, err error) {
+func (vdi) GetCrashDumps2(session *Session, self VDIRef) (retval []CrashdumpRef, err error) {
 	method := "VDI.get_crash_dumps"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4417,7 +4417,7 @@ func (vDI) GetCrashDumps2(session *Session, self VDIRef) (retval []CrashdumpRef,
 
 // GetVBDs: Get the VBDs field of the given VDI.
 // Version: rio
-func (vDI) GetVBDs(session *Session, self VDIRef) (retval []VBDRef, err error) {
+func (vdi) GetVBDs(session *Session, self VDIRef) (retval []VBDRef, err error) {
 	method := "VDI.get_VBDs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4437,7 +4437,7 @@ func (vDI) GetVBDs(session *Session, self VDIRef) (retval []VBDRef, err error) {
 
 // GetVBDs2: Get the VBDs field of the given VDI.
 // Version: rio
-func (vDI) GetVBDs2(session *Session, self VDIRef) (retval []VBDRef, err error) {
+func (vdi) GetVBDs2(session *Session, self VDIRef) (retval []VBDRef, err error) {
 	method := "VDI.get_VBDs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4457,7 +4457,7 @@ func (vDI) GetVBDs2(session *Session, self VDIRef) (retval []VBDRef, err error) 
 
 // GetSR: Get the SR field of the given VDI.
 // Version: rio
-func (vDI) GetSR(session *Session, self VDIRef) (retval SRRef, err error) {
+func (vdi) GetSR(session *Session, self VDIRef) (retval SRRef, err error) {
 	method := "VDI.get_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4477,7 +4477,7 @@ func (vDI) GetSR(session *Session, self VDIRef) (retval SRRef, err error) {
 
 // GetSR2: Get the SR field of the given VDI.
 // Version: rio
-func (vDI) GetSR2(session *Session, self VDIRef) (retval SRRef, err error) {
+func (vdi) GetSR2(session *Session, self VDIRef) (retval SRRef, err error) {
 	method := "VDI.get_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4497,7 +4497,7 @@ func (vDI) GetSR2(session *Session, self VDIRef) (retval SRRef, err error) {
 
 // GetCurrentOperations: Get the current_operations field of the given VDI.
 // Version: rio
-func (vDI) GetCurrentOperations(session *Session, self VDIRef) (retval map[string]VdiOperations, err error) {
+func (vdi) GetCurrentOperations(session *Session, self VDIRef) (retval map[string]VdiOperations, err error) {
 	method := "VDI.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4517,7 +4517,7 @@ func (vDI) GetCurrentOperations(session *Session, self VDIRef) (retval map[strin
 
 // GetCurrentOperations2: Get the current_operations field of the given VDI.
 // Version: rio
-func (vDI) GetCurrentOperations2(session *Session, self VDIRef) (retval map[string]VdiOperations, err error) {
+func (vdi) GetCurrentOperations2(session *Session, self VDIRef) (retval map[string]VdiOperations, err error) {
 	method := "VDI.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4537,7 +4537,7 @@ func (vDI) GetCurrentOperations2(session *Session, self VDIRef) (retval map[stri
 
 // GetAllowedOperations: Get the allowed_operations field of the given VDI.
 // Version: rio
-func (vDI) GetAllowedOperations(session *Session, self VDIRef) (retval []VdiOperations, err error) {
+func (vdi) GetAllowedOperations(session *Session, self VDIRef) (retval []VdiOperations, err error) {
 	method := "VDI.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4557,7 +4557,7 @@ func (vDI) GetAllowedOperations(session *Session, self VDIRef) (retval []VdiOper
 
 // GetAllowedOperations2: Get the allowed_operations field of the given VDI.
 // Version: rio
-func (vDI) GetAllowedOperations2(session *Session, self VDIRef) (retval []VdiOperations, err error) {
+func (vdi) GetAllowedOperations2(session *Session, self VDIRef) (retval []VdiOperations, err error) {
 	method := "VDI.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4577,7 +4577,7 @@ func (vDI) GetAllowedOperations2(session *Session, self VDIRef) (retval []VdiOpe
 
 // GetNameDescription: Get the name/description field of the given VDI.
 // Version: rio
-func (vDI) GetNameDescription(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetNameDescription(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4597,7 +4597,7 @@ func (vDI) GetNameDescription(session *Session, self VDIRef) (retval string, err
 
 // GetNameDescription2: Get the name/description field of the given VDI.
 // Version: rio
-func (vDI) GetNameDescription2(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetNameDescription2(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4617,7 +4617,7 @@ func (vDI) GetNameDescription2(session *Session, self VDIRef) (retval string, er
 
 // GetNameLabel: Get the name/label field of the given VDI.
 // Version: rio
-func (vDI) GetNameLabel(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetNameLabel(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4637,7 +4637,7 @@ func (vDI) GetNameLabel(session *Session, self VDIRef) (retval string, err error
 
 // GetNameLabel2: Get the name/label field of the given VDI.
 // Version: rio
-func (vDI) GetNameLabel2(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetNameLabel2(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4657,7 +4657,7 @@ func (vDI) GetNameLabel2(session *Session, self VDIRef) (retval string, err erro
 
 // GetUUID: Get the uuid field of the given VDI.
 // Version: rio
-func (vDI) GetUUID(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetUUID(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4677,7 +4677,7 @@ func (vDI) GetUUID(session *Session, self VDIRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VDI.
 // Version: rio
-func (vDI) GetUUID2(session *Session, self VDIRef) (retval string, err error) {
+func (vdi) GetUUID2(session *Session, self VDIRef) (retval string, err error) {
 	method := "VDI.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4697,7 +4697,7 @@ func (vDI) GetUUID2(session *Session, self VDIRef) (retval string, err error) {
 
 // GetByNameLabel: Get all the VDI instances with the given label.
 // Version: rio
-func (vDI) GetByNameLabel(session *Session, label string) (retval []VDIRef, err error) {
+func (vdi) GetByNameLabel(session *Session, label string) (retval []VDIRef, err error) {
 	method := "VDI.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4717,7 +4717,7 @@ func (vDI) GetByNameLabel(session *Session, label string) (retval []VDIRef, err 
 
 // GetByNameLabel2: Get all the VDI instances with the given label.
 // Version: rio
-func (vDI) GetByNameLabel2(session *Session, label string) (retval []VDIRef, err error) {
+func (vdi) GetByNameLabel2(session *Session, label string) (retval []VDIRef, err error) {
 	method := "VDI.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4737,7 +4737,7 @@ func (vDI) GetByNameLabel2(session *Session, label string) (retval []VDIRef, err
 
 // Destroy: Destroy the specified VDI instance.
 // Version: rio
-func (vDI) Destroy(session *Session, self VDIRef) (err error) {
+func (vdi) Destroy(session *Session, self VDIRef) (err error) {
 	method := "VDI.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4753,7 +4753,7 @@ func (vDI) Destroy(session *Session, self VDIRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VDI instance.
 // Version: rio
-func (vDI) AsyncDestroy(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncDestroy(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4773,7 +4773,7 @@ func (vDI) AsyncDestroy(session *Session, self VDIRef) (retval TaskRef, err erro
 
 // Destroy2: Destroy the specified VDI instance.
 // Version: rio
-func (vDI) Destroy2(session *Session, self VDIRef) (err error) {
+func (vdi) Destroy2(session *Session, self VDIRef) (err error) {
 	method := "VDI.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4789,7 +4789,7 @@ func (vDI) Destroy2(session *Session, self VDIRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VDI instance.
 // Version: rio
-func (vDI) AsyncDestroy2(session *Session, self VDIRef) (retval TaskRef, err error) {
+func (vdi) AsyncDestroy2(session *Session, self VDIRef) (retval TaskRef, err error) {
 	method := "Async.VDI.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4809,7 +4809,7 @@ func (vDI) AsyncDestroy2(session *Session, self VDIRef) (retval TaskRef, err err
 
 // Create: Create a new VDI instance, and return its handle. The constructor args are: name_label, name_description, SR*, virtual_size*, type*, sharable*, read_only*, other_config*, xenstore_data, sm_config, tags (* = non-optional).
 // Version: rio
-func (vDI) Create(session *Session, args VDIRecord) (retval VDIRef, err error) {
+func (vdi) Create(session *Session, args VDIRecord) (retval VDIRef, err error) {
 	method := "VDI.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4829,7 +4829,7 @@ func (vDI) Create(session *Session, args VDIRecord) (retval VDIRef, err error) {
 
 // AsyncCreate: Create a new VDI instance, and return its handle. The constructor args are: name_label, name_description, SR*, virtual_size*, type*, sharable*, read_only*, other_config*, xenstore_data, sm_config, tags (* = non-optional).
 // Version: rio
-func (vDI) AsyncCreate(session *Session, args VDIRecord) (retval TaskRef, err error) {
+func (vdi) AsyncCreate(session *Session, args VDIRecord) (retval TaskRef, err error) {
 	method := "Async.VDI.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4849,7 +4849,7 @@ func (vDI) AsyncCreate(session *Session, args VDIRecord) (retval TaskRef, err er
 
 // Create2: Create a new VDI instance, and return its handle. The constructor args are: name_label, name_description, SR*, virtual_size*, type*, sharable*, read_only*, other_config*, xenstore_data, sm_config, tags (* = non-optional).
 // Version: rio
-func (vDI) Create2(session *Session, args VDIRecord) (retval VDIRef, err error) {
+func (vdi) Create2(session *Session, args VDIRecord) (retval VDIRef, err error) {
 	method := "VDI.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4869,7 +4869,7 @@ func (vDI) Create2(session *Session, args VDIRecord) (retval VDIRef, err error) 
 
 // AsyncCreate2: Create a new VDI instance, and return its handle. The constructor args are: name_label, name_description, SR*, virtual_size*, type*, sharable*, read_only*, other_config*, xenstore_data, sm_config, tags (* = non-optional).
 // Version: rio
-func (vDI) AsyncCreate2(session *Session, args VDIRecord) (retval TaskRef, err error) {
+func (vdi) AsyncCreate2(session *Session, args VDIRecord) (retval TaskRef, err error) {
 	method := "Async.VDI.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4889,17 +4889,17 @@ func (vDI) AsyncCreate2(session *Session, args VDIRecord) (retval TaskRef, err e
 
 // GetByUUID: Get a reference to the VDI instance with the specified UUID.
 // Version: rio
-func (vDI) GetByUUID(session *Session, uUID string) (retval VDIRef, err error) {
+func (vdi) GetByUUID(session *Session, uuid string) (retval VDIRef, err error) {
 	method := "VDI.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -4909,17 +4909,17 @@ func (vDI) GetByUUID(session *Session, uUID string) (retval VDIRef, err error) {
 
 // GetByUUID2: Get a reference to the VDI instance with the specified UUID.
 // Version: rio
-func (vDI) GetByUUID2(session *Session, uUID string) (retval VDIRef, err error) {
+func (vdi) GetByUUID2(session *Session, uuid string) (retval VDIRef, err error) {
 	method := "VDI.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -4929,7 +4929,7 @@ func (vDI) GetByUUID2(session *Session, uUID string) (retval VDIRef, err error) 
 
 // GetRecord: Get a record containing the current state of the given VDI.
 // Version: rio
-func (vDI) GetRecord(session *Session, self VDIRef) (retval VDIRecord, err error) {
+func (vdi) GetRecord(session *Session, self VDIRef) (retval VDIRecord, err error) {
 	method := "VDI.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4949,7 +4949,7 @@ func (vDI) GetRecord(session *Session, self VDIRef) (retval VDIRecord, err error
 
 // GetRecord2: Get a record containing the current state of the given VDI.
 // Version: rio
-func (vDI) GetRecord2(session *Session, self VDIRef) (retval VDIRecord, err error) {
+func (vdi) GetRecord2(session *Session, self VDIRef) (retval VDIRecord, err error) {
 	method := "VDI.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

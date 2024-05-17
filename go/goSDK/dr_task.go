@@ -14,13 +14,13 @@ type DRTaskRecord struct {
 type DRTaskRef string
 
 // DR task
-type dRTask struct{}
+type drTask struct{}
 
-var DRTask dRTask
+var DRTask drTask
 
 // GetAllRecords: Return a map of DR_task references to DR_task records for all DR_tasks known to the system.
 // Version: boston
-func (dRTask) GetAllRecords(session *Session) (retval map[DRTaskRef]DRTaskRecord, err error) {
+func (drTask) GetAllRecords(session *Session) (retval map[DRTaskRef]DRTaskRecord, err error) {
 	method := "DR_task.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -36,7 +36,7 @@ func (dRTask) GetAllRecords(session *Session) (retval map[DRTaskRef]DRTaskRecord
 
 // GetAllRecords1: Return a map of DR_task references to DR_task records for all DR_tasks known to the system.
 // Version: boston
-func (dRTask) GetAllRecords1(session *Session) (retval map[DRTaskRef]DRTaskRecord, err error) {
+func (drTask) GetAllRecords1(session *Session) (retval map[DRTaskRef]DRTaskRecord, err error) {
 	method := "DR_task.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -52,7 +52,7 @@ func (dRTask) GetAllRecords1(session *Session) (retval map[DRTaskRef]DRTaskRecor
 
 // GetAll: Return a list of all the DR_tasks known to the system.
 // Version: boston
-func (dRTask) GetAll(session *Session) (retval []DRTaskRef, err error) {
+func (drTask) GetAll(session *Session) (retval []DRTaskRef, err error) {
 	method := "DR_task.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -68,7 +68,7 @@ func (dRTask) GetAll(session *Session) (retval []DRTaskRef, err error) {
 
 // GetAll1: Return a list of all the DR_tasks known to the system.
 // Version: boston
-func (dRTask) GetAll1(session *Session) (retval []DRTaskRef, err error) {
+func (drTask) GetAll1(session *Session) (retval []DRTaskRef, err error) {
 	method := "DR_task.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -84,7 +84,7 @@ func (dRTask) GetAll1(session *Session) (retval []DRTaskRef, err error) {
 
 // Destroy: Destroy the disaster recovery task, detaching and forgetting any SRs introduced which are no longer required
 // Version: boston
-func (dRTask) Destroy(session *Session, self DRTaskRef) (err error) {
+func (drTask) Destroy(session *Session, self DRTaskRef) (err error) {
 	method := "DR_task.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -100,7 +100,7 @@ func (dRTask) Destroy(session *Session, self DRTaskRef) (err error) {
 
 // AsyncDestroy: Destroy the disaster recovery task, detaching and forgetting any SRs introduced which are no longer required
 // Version: boston
-func (dRTask) AsyncDestroy(session *Session, self DRTaskRef) (retval TaskRef, err error) {
+func (drTask) AsyncDestroy(session *Session, self DRTaskRef) (retval TaskRef, err error) {
 	method := "Async.DR_task.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -120,7 +120,7 @@ func (dRTask) AsyncDestroy(session *Session, self DRTaskRef) (retval TaskRef, er
 
 // Destroy2: Destroy the disaster recovery task, detaching and forgetting any SRs introduced which are no longer required
 // Version: boston
-func (dRTask) Destroy2(session *Session, self DRTaskRef) (err error) {
+func (drTask) Destroy2(session *Session, self DRTaskRef) (err error) {
 	method := "DR_task.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -136,7 +136,7 @@ func (dRTask) Destroy2(session *Session, self DRTaskRef) (err error) {
 
 // AsyncDestroy2: Destroy the disaster recovery task, detaching and forgetting any SRs introduced which are no longer required
 // Version: boston
-func (dRTask) AsyncDestroy2(session *Session, self DRTaskRef) (retval TaskRef, err error) {
+func (drTask) AsyncDestroy2(session *Session, self DRTaskRef) (retval TaskRef, err error) {
 	method := "Async.DR_task.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -156,7 +156,7 @@ func (dRTask) AsyncDestroy2(session *Session, self DRTaskRef) (retval TaskRef, e
 
 // Create: Create a disaster recovery task which will query the supplied list of devices
 // Version: boston
-func (dRTask) Create(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval DRTaskRef, err error) {
+func (drTask) Create(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval DRTaskRef, err error) {
 	method := "DR_task.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -184,7 +184,7 @@ func (dRTask) Create(session *Session, typeKey string, deviceConfig map[string]s
 
 // AsyncCreate: Create a disaster recovery task which will query the supplied list of devices
 // Version: boston
-func (dRTask) AsyncCreate(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval TaskRef, err error) {
+func (drTask) AsyncCreate(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval TaskRef, err error) {
 	method := "Async.DR_task.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -212,7 +212,7 @@ func (dRTask) AsyncCreate(session *Session, typeKey string, deviceConfig map[str
 
 // Create4: Create a disaster recovery task which will query the supplied list of devices
 // Version: boston
-func (dRTask) Create4(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval DRTaskRef, err error) {
+func (drTask) Create4(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval DRTaskRef, err error) {
 	method := "DR_task.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -240,7 +240,7 @@ func (dRTask) Create4(session *Session, typeKey string, deviceConfig map[string]
 
 // AsyncCreate4: Create a disaster recovery task which will query the supplied list of devices
 // Version: boston
-func (dRTask) AsyncCreate4(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval TaskRef, err error) {
+func (drTask) AsyncCreate4(session *Session, typeKey string, deviceConfig map[string]string, whitelist []string) (retval TaskRef, err error) {
 	method := "Async.DR_task.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -268,7 +268,7 @@ func (dRTask) AsyncCreate4(session *Session, typeKey string, deviceConfig map[st
 
 // GetIntroducedSRs: Get the introduced_SRs field of the given DR_task.
 // Version: boston
-func (dRTask) GetIntroducedSRs(session *Session, self DRTaskRef) (retval []SRRef, err error) {
+func (drTask) GetIntroducedSRs(session *Session, self DRTaskRef) (retval []SRRef, err error) {
 	method := "DR_task.get_introduced_SRs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -288,7 +288,7 @@ func (dRTask) GetIntroducedSRs(session *Session, self DRTaskRef) (retval []SRRef
 
 // GetIntroducedSRs2: Get the introduced_SRs field of the given DR_task.
 // Version: boston
-func (dRTask) GetIntroducedSRs2(session *Session, self DRTaskRef) (retval []SRRef, err error) {
+func (drTask) GetIntroducedSRs2(session *Session, self DRTaskRef) (retval []SRRef, err error) {
 	method := "DR_task.get_introduced_SRs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -308,7 +308,7 @@ func (dRTask) GetIntroducedSRs2(session *Session, self DRTaskRef) (retval []SRRe
 
 // GetUUID: Get the uuid field of the given DR_task.
 // Version: boston
-func (dRTask) GetUUID(session *Session, self DRTaskRef) (retval string, err error) {
+func (drTask) GetUUID(session *Session, self DRTaskRef) (retval string, err error) {
 	method := "DR_task.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -328,7 +328,7 @@ func (dRTask) GetUUID(session *Session, self DRTaskRef) (retval string, err erro
 
 // GetUUID2: Get the uuid field of the given DR_task.
 // Version: boston
-func (dRTask) GetUUID2(session *Session, self DRTaskRef) (retval string, err error) {
+func (drTask) GetUUID2(session *Session, self DRTaskRef) (retval string, err error) {
 	method := "DR_task.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -348,17 +348,17 @@ func (dRTask) GetUUID2(session *Session, self DRTaskRef) (retval string, err err
 
 // GetByUUID: Get a reference to the DR_task instance with the specified UUID.
 // Version: boston
-func (dRTask) GetByUUID(session *Session, uUID string) (retval DRTaskRef, err error) {
+func (drTask) GetByUUID(session *Session, uuid string) (retval DRTaskRef, err error) {
 	method := "DR_task.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -368,17 +368,17 @@ func (dRTask) GetByUUID(session *Session, uUID string) (retval DRTaskRef, err er
 
 // GetByUUID2: Get a reference to the DR_task instance with the specified UUID.
 // Version: boston
-func (dRTask) GetByUUID2(session *Session, uUID string) (retval DRTaskRef, err error) {
+func (drTask) GetByUUID2(session *Session, uuid string) (retval DRTaskRef, err error) {
 	method := "DR_task.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -388,7 +388,7 @@ func (dRTask) GetByUUID2(session *Session, uUID string) (retval DRTaskRef, err e
 
 // GetRecord: Get a record containing the current state of the given DR_task.
 // Version: boston
-func (dRTask) GetRecord(session *Session, self DRTaskRef) (retval DRTaskRecord, err error) {
+func (drTask) GetRecord(session *Session, self DRTaskRef) (retval DRTaskRecord, err error) {
 	method := "DR_task.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -408,7 +408,7 @@ func (dRTask) GetRecord(session *Session, self DRTaskRef) (retval DRTaskRecord, 
 
 // GetRecord2: Get a record containing the current state of the given DR_task.
 // Version: boston
-func (dRTask) GetRecord2(session *Session, self DRTaskRef) (retval DRTaskRecord, err error) {
+func (drTask) GetRecord2(session *Session, self DRTaskRef) (retval DRTaskRecord, err error) {
 	method := "DR_task.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

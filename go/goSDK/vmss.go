@@ -31,13 +31,13 @@ type VMSSRecord struct {
 type VMSSRef string
 
 // VM Snapshot Schedule
-type vMSS struct{}
+type vmss struct{}
 
-var VMSS vMSS
+var VMSS vmss
 
 // GetAllRecords: Return a map of VMSS references to VMSS records for all VMSSs known to the system.
 // Version: falcon
-func (vMSS) GetAllRecords(session *Session) (retval map[VMSSRef]VMSSRecord, err error) {
+func (vmss) GetAllRecords(session *Session) (retval map[VMSSRef]VMSSRecord, err error) {
 	method := "VMSS.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -53,7 +53,7 @@ func (vMSS) GetAllRecords(session *Session) (retval map[VMSSRef]VMSSRecord, err 
 
 // GetAllRecords1: Return a map of VMSS references to VMSS records for all VMSSs known to the system.
 // Version: falcon
-func (vMSS) GetAllRecords1(session *Session) (retval map[VMSSRef]VMSSRecord, err error) {
+func (vmss) GetAllRecords1(session *Session) (retval map[VMSSRef]VMSSRecord, err error) {
 	method := "VMSS.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -69,7 +69,7 @@ func (vMSS) GetAllRecords1(session *Session) (retval map[VMSSRef]VMSSRecord, err
 
 // GetAll: Return a list of all the VMSSs known to the system.
 // Version: falcon
-func (vMSS) GetAll(session *Session) (retval []VMSSRef, err error) {
+func (vmss) GetAll(session *Session) (retval []VMSSRef, err error) {
 	method := "VMSS.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -85,7 +85,7 @@ func (vMSS) GetAll(session *Session) (retval []VMSSRef, err error) {
 
 // GetAll1: Return a list of all the VMSSs known to the system.
 // Version: falcon
-func (vMSS) GetAll1(session *Session) (retval []VMSSRef, err error) {
+func (vmss) GetAll1(session *Session) (retval []VMSSRef, err error) {
 	method := "VMSS.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -101,7 +101,7 @@ func (vMSS) GetAll1(session *Session) (retval []VMSSRef, err error) {
 
 // SetType:
 // Version: falcon
-func (vMSS) SetType(session *Session, self VMSSRef, value VmssType) (err error) {
+func (vmss) SetType(session *Session, self VMSSRef, value VmssType) (err error) {
 	method := "VMSS.set_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -121,7 +121,7 @@ func (vMSS) SetType(session *Session, self VMSSRef, value VmssType) (err error) 
 
 // SetType3:
 // Version: falcon
-func (vMSS) SetType3(session *Session, self VMSSRef, value VmssType) (err error) {
+func (vmss) SetType3(session *Session, self VMSSRef, value VmssType) (err error) {
 	method := "VMSS.set_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -141,7 +141,7 @@ func (vMSS) SetType3(session *Session, self VMSSRef, value VmssType) (err error)
 
 // SetLastRunTime:
 // Version: falcon
-func (vMSS) SetLastRunTime(session *Session, self VMSSRef, value time.Time) (err error) {
+func (vmss) SetLastRunTime(session *Session, self VMSSRef, value time.Time) (err error) {
 	method := "VMSS.set_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -161,7 +161,7 @@ func (vMSS) SetLastRunTime(session *Session, self VMSSRef, value time.Time) (err
 
 // SetLastRunTime3:
 // Version: falcon
-func (vMSS) SetLastRunTime3(session *Session, self VMSSRef, value time.Time) (err error) {
+func (vmss) SetLastRunTime3(session *Session, self VMSSRef, value time.Time) (err error) {
 	method := "VMSS.set_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -181,7 +181,7 @@ func (vMSS) SetLastRunTime3(session *Session, self VMSSRef, value time.Time) (er
 
 // RemoveFromSchedule:
 // Version: falcon
-func (vMSS) RemoveFromSchedule(session *Session, self VMSSRef, key string) (err error) {
+func (vmss) RemoveFromSchedule(session *Session, self VMSSRef, key string) (err error) {
 	method := "VMSS.remove_from_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -201,7 +201,7 @@ func (vMSS) RemoveFromSchedule(session *Session, self VMSSRef, key string) (err 
 
 // RemoveFromSchedule3:
 // Version: falcon
-func (vMSS) RemoveFromSchedule3(session *Session, self VMSSRef, key string) (err error) {
+func (vmss) RemoveFromSchedule3(session *Session, self VMSSRef, key string) (err error) {
 	method := "VMSS.remove_from_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -221,7 +221,7 @@ func (vMSS) RemoveFromSchedule3(session *Session, self VMSSRef, key string) (err
 
 // AddToSchedule:
 // Version: falcon
-func (vMSS) AddToSchedule(session *Session, self VMSSRef, key string, value string) (err error) {
+func (vmss) AddToSchedule(session *Session, self VMSSRef, key string, value string) (err error) {
 	method := "VMSS.add_to_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -245,7 +245,7 @@ func (vMSS) AddToSchedule(session *Session, self VMSSRef, key string, value stri
 
 // AddToSchedule4:
 // Version: falcon
-func (vMSS) AddToSchedule4(session *Session, self VMSSRef, key string, value string) (err error) {
+func (vmss) AddToSchedule4(session *Session, self VMSSRef, key string, value string) (err error) {
 	method := "VMSS.add_to_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -269,7 +269,7 @@ func (vMSS) AddToSchedule4(session *Session, self VMSSRef, key string, value str
 
 // SetSchedule:
 // Version: falcon
-func (vMSS) SetSchedule(session *Session, self VMSSRef, value map[string]string) (err error) {
+func (vmss) SetSchedule(session *Session, self VMSSRef, value map[string]string) (err error) {
 	method := "VMSS.set_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -289,7 +289,7 @@ func (vMSS) SetSchedule(session *Session, self VMSSRef, value map[string]string)
 
 // SetSchedule3:
 // Version: falcon
-func (vMSS) SetSchedule3(session *Session, self VMSSRef, value map[string]string) (err error) {
+func (vmss) SetSchedule3(session *Session, self VMSSRef, value map[string]string) (err error) {
 	method := "VMSS.set_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -309,7 +309,7 @@ func (vMSS) SetSchedule3(session *Session, self VMSSRef, value map[string]string
 
 // SetFrequency: Set the value of the frequency field
 // Version: falcon
-func (vMSS) SetFrequency(session *Session, self VMSSRef, value VmssFrequency) (err error) {
+func (vmss) SetFrequency(session *Session, self VMSSRef, value VmssFrequency) (err error) {
 	method := "VMSS.set_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -329,7 +329,7 @@ func (vMSS) SetFrequency(session *Session, self VMSSRef, value VmssFrequency) (e
 
 // SetFrequency3: Set the value of the frequency field
 // Version: falcon
-func (vMSS) SetFrequency3(session *Session, self VMSSRef, value VmssFrequency) (err error) {
+func (vmss) SetFrequency3(session *Session, self VMSSRef, value VmssFrequency) (err error) {
 	method := "VMSS.set_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -349,7 +349,7 @@ func (vMSS) SetFrequency3(session *Session, self VMSSRef, value VmssFrequency) (
 
 // SetRetainedSnapshots:
 // Version: falcon
-func (vMSS) SetRetainedSnapshots(session *Session, self VMSSRef, value int) (err error) {
+func (vmss) SetRetainedSnapshots(session *Session, self VMSSRef, value int) (err error) {
 	method := "VMSS.set_retained_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -369,7 +369,7 @@ func (vMSS) SetRetainedSnapshots(session *Session, self VMSSRef, value int) (err
 
 // SetRetainedSnapshots3:
 // Version: falcon
-func (vMSS) SetRetainedSnapshots3(session *Session, self VMSSRef, value int) (err error) {
+func (vmss) SetRetainedSnapshots3(session *Session, self VMSSRef, value int) (err error) {
 	method := "VMSS.set_retained_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -389,7 +389,7 @@ func (vMSS) SetRetainedSnapshots3(session *Session, self VMSSRef, value int) (er
 
 // SnapshotNow: This call executes the snapshot schedule immediately
 // Version: falcon
-func (vMSS) SnapshotNow(session *Session, vmss VMSSRef) (retval string, err error) {
+func (vmss) SnapshotNow(session *Session, vmss VMSSRef) (retval string, err error) {
 	method := "VMSS.snapshot_now"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -409,7 +409,7 @@ func (vMSS) SnapshotNow(session *Session, vmss VMSSRef) (retval string, err erro
 
 // SnapshotNow2: This call executes the snapshot schedule immediately
 // Version: falcon
-func (vMSS) SnapshotNow2(session *Session, vmss VMSSRef) (retval string, err error) {
+func (vmss) SnapshotNow2(session *Session, vmss VMSSRef) (retval string, err error) {
 	method := "VMSS.snapshot_now"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -429,7 +429,7 @@ func (vMSS) SnapshotNow2(session *Session, vmss VMSSRef) (retval string, err err
 
 // SetEnabled: Set the enabled field of the given VMSS.
 // Version: falcon
-func (vMSS) SetEnabled(session *Session, self VMSSRef, value bool) (err error) {
+func (vmss) SetEnabled(session *Session, self VMSSRef, value bool) (err error) {
 	method := "VMSS.set_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -449,7 +449,7 @@ func (vMSS) SetEnabled(session *Session, self VMSSRef, value bool) (err error) {
 
 // SetEnabled3: Set the enabled field of the given VMSS.
 // Version: falcon
-func (vMSS) SetEnabled3(session *Session, self VMSSRef, value bool) (err error) {
+func (vmss) SetEnabled3(session *Session, self VMSSRef, value bool) (err error) {
 	method := "VMSS.set_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -469,7 +469,7 @@ func (vMSS) SetEnabled3(session *Session, self VMSSRef, value bool) (err error) 
 
 // SetEnabled2: Set the enabled field of the given VMSS.
 // Version: rio
-func (vMSS) SetEnabled2(session *Session, value bool) (err error) {
+func (vmss) SetEnabled2(session *Session, value bool) (err error) {
 	method := "VMSS.set_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -485,7 +485,7 @@ func (vMSS) SetEnabled2(session *Session, value bool) (err error) {
 
 // SetNameDescription: Set the name/description field of the given VMSS.
 // Version: falcon
-func (vMSS) SetNameDescription(session *Session, self VMSSRef, value string) (err error) {
+func (vmss) SetNameDescription(session *Session, self VMSSRef, value string) (err error) {
 	method := "VMSS.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -505,7 +505,7 @@ func (vMSS) SetNameDescription(session *Session, self VMSSRef, value string) (er
 
 // SetNameDescription3: Set the name/description field of the given VMSS.
 // Version: falcon
-func (vMSS) SetNameDescription3(session *Session, self VMSSRef, value string) (err error) {
+func (vmss) SetNameDescription3(session *Session, self VMSSRef, value string) (err error) {
 	method := "VMSS.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -525,7 +525,7 @@ func (vMSS) SetNameDescription3(session *Session, self VMSSRef, value string) (e
 
 // SetNameDescription2: Set the name/description field of the given VMSS.
 // Version: rio
-func (vMSS) SetNameDescription2(session *Session, value string) (err error) {
+func (vmss) SetNameDescription2(session *Session, value string) (err error) {
 	method := "VMSS.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -541,7 +541,7 @@ func (vMSS) SetNameDescription2(session *Session, value string) (err error) {
 
 // SetNameLabel: Set the name/label field of the given VMSS.
 // Version: falcon
-func (vMSS) SetNameLabel(session *Session, self VMSSRef, value string) (err error) {
+func (vmss) SetNameLabel(session *Session, self VMSSRef, value string) (err error) {
 	method := "VMSS.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -561,7 +561,7 @@ func (vMSS) SetNameLabel(session *Session, self VMSSRef, value string) (err erro
 
 // SetNameLabel3: Set the name/label field of the given VMSS.
 // Version: falcon
-func (vMSS) SetNameLabel3(session *Session, self VMSSRef, value string) (err error) {
+func (vmss) SetNameLabel3(session *Session, self VMSSRef, value string) (err error) {
 	method := "VMSS.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -581,7 +581,7 @@ func (vMSS) SetNameLabel3(session *Session, self VMSSRef, value string) (err err
 
 // SetNameLabel2: Set the name/label field of the given VMSS.
 // Version: rio
-func (vMSS) SetNameLabel2(session *Session, value string) (err error) {
+func (vmss) SetNameLabel2(session *Session, value string) (err error) {
 	method := "VMSS.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -597,7 +597,7 @@ func (vMSS) SetNameLabel2(session *Session, value string) (err error) {
 
 // GetVMs: Get the VMs field of the given VMSS.
 // Version: falcon
-func (vMSS) GetVMs(session *Session, self VMSSRef) (retval []VMRef, err error) {
+func (vmss) GetVMs(session *Session, self VMSSRef) (retval []VMRef, err error) {
 	method := "VMSS.get_VMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -617,7 +617,7 @@ func (vMSS) GetVMs(session *Session, self VMSSRef) (retval []VMRef, err error) {
 
 // GetVMs2: Get the VMs field of the given VMSS.
 // Version: falcon
-func (vMSS) GetVMs2(session *Session, self VMSSRef) (retval []VMRef, err error) {
+func (vmss) GetVMs2(session *Session, self VMSSRef) (retval []VMRef, err error) {
 	method := "VMSS.get_VMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -637,7 +637,7 @@ func (vMSS) GetVMs2(session *Session, self VMSSRef) (retval []VMRef, err error) 
 
 // GetLastRunTime: Get the last_run_time field of the given VMSS.
 // Version: falcon
-func (vMSS) GetLastRunTime(session *Session, self VMSSRef) (retval time.Time, err error) {
+func (vmss) GetLastRunTime(session *Session, self VMSSRef) (retval time.Time, err error) {
 	method := "VMSS.get_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -657,7 +657,7 @@ func (vMSS) GetLastRunTime(session *Session, self VMSSRef) (retval time.Time, er
 
 // GetLastRunTime2: Get the last_run_time field of the given VMSS.
 // Version: falcon
-func (vMSS) GetLastRunTime2(session *Session, self VMSSRef) (retval time.Time, err error) {
+func (vmss) GetLastRunTime2(session *Session, self VMSSRef) (retval time.Time, err error) {
 	method := "VMSS.get_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -677,7 +677,7 @@ func (vMSS) GetLastRunTime2(session *Session, self VMSSRef) (retval time.Time, e
 
 // GetSchedule: Get the schedule field of the given VMSS.
 // Version: falcon
-func (vMSS) GetSchedule(session *Session, self VMSSRef) (retval map[string]string, err error) {
+func (vmss) GetSchedule(session *Session, self VMSSRef) (retval map[string]string, err error) {
 	method := "VMSS.get_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -697,7 +697,7 @@ func (vMSS) GetSchedule(session *Session, self VMSSRef) (retval map[string]strin
 
 // GetSchedule2: Get the schedule field of the given VMSS.
 // Version: falcon
-func (vMSS) GetSchedule2(session *Session, self VMSSRef) (retval map[string]string, err error) {
+func (vmss) GetSchedule2(session *Session, self VMSSRef) (retval map[string]string, err error) {
 	method := "VMSS.get_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -717,7 +717,7 @@ func (vMSS) GetSchedule2(session *Session, self VMSSRef) (retval map[string]stri
 
 // GetFrequency: Get the frequency field of the given VMSS.
 // Version: falcon
-func (vMSS) GetFrequency(session *Session, self VMSSRef) (retval VmssFrequency, err error) {
+func (vmss) GetFrequency(session *Session, self VMSSRef) (retval VmssFrequency, err error) {
 	method := "VMSS.get_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -737,7 +737,7 @@ func (vMSS) GetFrequency(session *Session, self VMSSRef) (retval VmssFrequency, 
 
 // GetFrequency2: Get the frequency field of the given VMSS.
 // Version: falcon
-func (vMSS) GetFrequency2(session *Session, self VMSSRef) (retval VmssFrequency, err error) {
+func (vmss) GetFrequency2(session *Session, self VMSSRef) (retval VmssFrequency, err error) {
 	method := "VMSS.get_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -757,7 +757,7 @@ func (vMSS) GetFrequency2(session *Session, self VMSSRef) (retval VmssFrequency,
 
 // GetRetainedSnapshots: Get the retained_snapshots field of the given VMSS.
 // Version: falcon
-func (vMSS) GetRetainedSnapshots(session *Session, self VMSSRef) (retval int, err error) {
+func (vmss) GetRetainedSnapshots(session *Session, self VMSSRef) (retval int, err error) {
 	method := "VMSS.get_retained_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -777,7 +777,7 @@ func (vMSS) GetRetainedSnapshots(session *Session, self VMSSRef) (retval int, er
 
 // GetRetainedSnapshots2: Get the retained_snapshots field of the given VMSS.
 // Version: falcon
-func (vMSS) GetRetainedSnapshots2(session *Session, self VMSSRef) (retval int, err error) {
+func (vmss) GetRetainedSnapshots2(session *Session, self VMSSRef) (retval int, err error) {
 	method := "VMSS.get_retained_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -797,7 +797,7 @@ func (vMSS) GetRetainedSnapshots2(session *Session, self VMSSRef) (retval int, e
 
 // GetType: Get the type field of the given VMSS.
 // Version: falcon
-func (vMSS) GetType(session *Session, self VMSSRef) (retval VmssType, err error) {
+func (vmss) GetType(session *Session, self VMSSRef) (retval VmssType, err error) {
 	method := "VMSS.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -817,7 +817,7 @@ func (vMSS) GetType(session *Session, self VMSSRef) (retval VmssType, err error)
 
 // GetType2: Get the type field of the given VMSS.
 // Version: falcon
-func (vMSS) GetType2(session *Session, self VMSSRef) (retval VmssType, err error) {
+func (vmss) GetType2(session *Session, self VMSSRef) (retval VmssType, err error) {
 	method := "VMSS.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -837,7 +837,7 @@ func (vMSS) GetType2(session *Session, self VMSSRef) (retval VmssType, err error
 
 // GetEnabled: Get the enabled field of the given VMSS.
 // Version: falcon
-func (vMSS) GetEnabled(session *Session, self VMSSRef) (retval bool, err error) {
+func (vmss) GetEnabled(session *Session, self VMSSRef) (retval bool, err error) {
 	method := "VMSS.get_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -857,7 +857,7 @@ func (vMSS) GetEnabled(session *Session, self VMSSRef) (retval bool, err error) 
 
 // GetEnabled2: Get the enabled field of the given VMSS.
 // Version: falcon
-func (vMSS) GetEnabled2(session *Session, self VMSSRef) (retval bool, err error) {
+func (vmss) GetEnabled2(session *Session, self VMSSRef) (retval bool, err error) {
 	method := "VMSS.get_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -877,7 +877,7 @@ func (vMSS) GetEnabled2(session *Session, self VMSSRef) (retval bool, err error)
 
 // GetNameDescription: Get the name/description field of the given VMSS.
 // Version: falcon
-func (vMSS) GetNameDescription(session *Session, self VMSSRef) (retval string, err error) {
+func (vmss) GetNameDescription(session *Session, self VMSSRef) (retval string, err error) {
 	method := "VMSS.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -897,7 +897,7 @@ func (vMSS) GetNameDescription(session *Session, self VMSSRef) (retval string, e
 
 // GetNameDescription2: Get the name/description field of the given VMSS.
 // Version: falcon
-func (vMSS) GetNameDescription2(session *Session, self VMSSRef) (retval string, err error) {
+func (vmss) GetNameDescription2(session *Session, self VMSSRef) (retval string, err error) {
 	method := "VMSS.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -917,7 +917,7 @@ func (vMSS) GetNameDescription2(session *Session, self VMSSRef) (retval string, 
 
 // GetNameLabel: Get the name/label field of the given VMSS.
 // Version: falcon
-func (vMSS) GetNameLabel(session *Session, self VMSSRef) (retval string, err error) {
+func (vmss) GetNameLabel(session *Session, self VMSSRef) (retval string, err error) {
 	method := "VMSS.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -937,7 +937,7 @@ func (vMSS) GetNameLabel(session *Session, self VMSSRef) (retval string, err err
 
 // GetNameLabel2: Get the name/label field of the given VMSS.
 // Version: falcon
-func (vMSS) GetNameLabel2(session *Session, self VMSSRef) (retval string, err error) {
+func (vmss) GetNameLabel2(session *Session, self VMSSRef) (retval string, err error) {
 	method := "VMSS.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -957,7 +957,7 @@ func (vMSS) GetNameLabel2(session *Session, self VMSSRef) (retval string, err er
 
 // GetUUID: Get the uuid field of the given VMSS.
 // Version: falcon
-func (vMSS) GetUUID(session *Session, self VMSSRef) (retval string, err error) {
+func (vmss) GetUUID(session *Session, self VMSSRef) (retval string, err error) {
 	method := "VMSS.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -977,7 +977,7 @@ func (vMSS) GetUUID(session *Session, self VMSSRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VMSS.
 // Version: falcon
-func (vMSS) GetUUID2(session *Session, self VMSSRef) (retval string, err error) {
+func (vmss) GetUUID2(session *Session, self VMSSRef) (retval string, err error) {
 	method := "VMSS.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -997,7 +997,7 @@ func (vMSS) GetUUID2(session *Session, self VMSSRef) (retval string, err error) 
 
 // GetByNameLabel: Get all the VMSS instances with the given label.
 // Version: falcon
-func (vMSS) GetByNameLabel(session *Session, label string) (retval []VMSSRef, err error) {
+func (vmss) GetByNameLabel(session *Session, label string) (retval []VMSSRef, err error) {
 	method := "VMSS.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1017,7 +1017,7 @@ func (vMSS) GetByNameLabel(session *Session, label string) (retval []VMSSRef, er
 
 // GetByNameLabel2: Get all the VMSS instances with the given label.
 // Version: falcon
-func (vMSS) GetByNameLabel2(session *Session, label string) (retval []VMSSRef, err error) {
+func (vmss) GetByNameLabel2(session *Session, label string) (retval []VMSSRef, err error) {
 	method := "VMSS.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1037,7 +1037,7 @@ func (vMSS) GetByNameLabel2(session *Session, label string) (retval []VMSSRef, e
 
 // Destroy: Destroy the specified VMSS instance.
 // Version: falcon
-func (vMSS) Destroy(session *Session, self VMSSRef) (err error) {
+func (vmss) Destroy(session *Session, self VMSSRef) (err error) {
 	method := "VMSS.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1053,7 +1053,7 @@ func (vMSS) Destroy(session *Session, self VMSSRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VMSS instance.
 // Version: falcon
-func (vMSS) AsyncDestroy(session *Session, self VMSSRef) (retval TaskRef, err error) {
+func (vmss) AsyncDestroy(session *Session, self VMSSRef) (retval TaskRef, err error) {
 	method := "Async.VMSS.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1073,7 +1073,7 @@ func (vMSS) AsyncDestroy(session *Session, self VMSSRef) (retval TaskRef, err er
 
 // Destroy2: Destroy the specified VMSS instance.
 // Version: falcon
-func (vMSS) Destroy2(session *Session, self VMSSRef) (err error) {
+func (vmss) Destroy2(session *Session, self VMSSRef) (err error) {
 	method := "VMSS.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1089,7 +1089,7 @@ func (vMSS) Destroy2(session *Session, self VMSSRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VMSS instance.
 // Version: falcon
-func (vMSS) AsyncDestroy2(session *Session, self VMSSRef) (retval TaskRef, err error) {
+func (vmss) AsyncDestroy2(session *Session, self VMSSRef) (retval TaskRef, err error) {
 	method := "Async.VMSS.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1109,7 +1109,7 @@ func (vMSS) AsyncDestroy2(session *Session, self VMSSRef) (retval TaskRef, err e
 
 // Create: Create a new VMSS instance, and return its handle. The constructor args are: name_label, name_description, enabled, type*, retained_snapshots, frequency*, schedule (* = non-optional).
 // Version: falcon
-func (vMSS) Create(session *Session, args VMSSRecord) (retval VMSSRef, err error) {
+func (vmss) Create(session *Session, args VMSSRecord) (retval VMSSRef, err error) {
 	method := "VMSS.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1129,7 +1129,7 @@ func (vMSS) Create(session *Session, args VMSSRecord) (retval VMSSRef, err error
 
 // AsyncCreate: Create a new VMSS instance, and return its handle. The constructor args are: name_label, name_description, enabled, type*, retained_snapshots, frequency*, schedule (* = non-optional).
 // Version: falcon
-func (vMSS) AsyncCreate(session *Session, args VMSSRecord) (retval TaskRef, err error) {
+func (vmss) AsyncCreate(session *Session, args VMSSRecord) (retval TaskRef, err error) {
 	method := "Async.VMSS.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1149,7 +1149,7 @@ func (vMSS) AsyncCreate(session *Session, args VMSSRecord) (retval TaskRef, err 
 
 // Create2: Create a new VMSS instance, and return its handle. The constructor args are: name_label, name_description, enabled, type*, retained_snapshots, frequency*, schedule (* = non-optional).
 // Version: falcon
-func (vMSS) Create2(session *Session, args VMSSRecord) (retval VMSSRef, err error) {
+func (vmss) Create2(session *Session, args VMSSRecord) (retval VMSSRef, err error) {
 	method := "VMSS.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1169,7 +1169,7 @@ func (vMSS) Create2(session *Session, args VMSSRecord) (retval VMSSRef, err erro
 
 // AsyncCreate2: Create a new VMSS instance, and return its handle. The constructor args are: name_label, name_description, enabled, type*, retained_snapshots, frequency*, schedule (* = non-optional).
 // Version: falcon
-func (vMSS) AsyncCreate2(session *Session, args VMSSRecord) (retval TaskRef, err error) {
+func (vmss) AsyncCreate2(session *Session, args VMSSRecord) (retval TaskRef, err error) {
 	method := "Async.VMSS.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1189,17 +1189,17 @@ func (vMSS) AsyncCreate2(session *Session, args VMSSRecord) (retval TaskRef, err
 
 // GetByUUID: Get a reference to the VMSS instance with the specified UUID.
 // Version: falcon
-func (vMSS) GetByUUID(session *Session, uUID string) (retval VMSSRef, err error) {
+func (vmss) GetByUUID(session *Session, uuid string) (retval VMSSRef, err error) {
 	method := "VMSS.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1209,17 +1209,17 @@ func (vMSS) GetByUUID(session *Session, uUID string) (retval VMSSRef, err error)
 
 // GetByUUID2: Get a reference to the VMSS instance with the specified UUID.
 // Version: falcon
-func (vMSS) GetByUUID2(session *Session, uUID string) (retval VMSSRef, err error) {
+func (vmss) GetByUUID2(session *Session, uuid string) (retval VMSSRef, err error) {
 	method := "VMSS.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1229,7 +1229,7 @@ func (vMSS) GetByUUID2(session *Session, uUID string) (retval VMSSRef, err error
 
 // GetRecord: Get a record containing the current state of the given VMSS.
 // Version: falcon
-func (vMSS) GetRecord(session *Session, self VMSSRef) (retval VMSSRecord, err error) {
+func (vmss) GetRecord(session *Session, self VMSSRef) (retval VMSSRecord, err error) {
 	method := "VMSS.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1249,7 +1249,7 @@ func (vMSS) GetRecord(session *Session, self VMSSRef) (retval VMSSRecord, err er
 
 // GetRecord2: Get a record containing the current state of the given VMSS.
 // Version: falcon
-func (vMSS) GetRecord2(session *Session, self VMSSRef) (retval VMSSRecord, err error) {
+func (vmss) GetRecord2(session *Session, self VMSSRef) (retval VMSSRecord, err error) {
 	method := "VMSS.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

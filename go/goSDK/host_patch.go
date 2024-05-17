@@ -869,17 +869,17 @@ func (hostPatch) GetByNameLabel2(session *Session, label string) (retval []HostP
 
 // GetByUUID: Get a reference to the host_patch instance with the specified UUID.
 // Version: rio
-func (hostPatch) GetByUUID(session *Session, uUID string) (retval HostPatchRef, err error) {
+func (hostPatch) GetByUUID(session *Session, uuid string) (retval HostPatchRef, err error) {
 	method := "host_patch.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -889,17 +889,17 @@ func (hostPatch) GetByUUID(session *Session, uUID string) (retval HostPatchRef, 
 
 // GetByUUID2: Get a reference to the host_patch instance with the specified UUID.
 // Version: rio
-func (hostPatch) GetByUUID2(session *Session, uUID string) (retval HostPatchRef, err error) {
+func (hostPatch) GetByUUID2(session *Session, uuid string) (retval HostPatchRef, err error) {
 	method := "host_patch.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

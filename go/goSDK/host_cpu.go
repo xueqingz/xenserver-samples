@@ -802,17 +802,17 @@ func (hostCPU) GetUUID2(session *Session, self HostCPURef) (retval string, err e
 
 // GetByUUID: Get a reference to the host_cpu instance with the specified UUID.
 // Version: rio
-func (hostCPU) GetByUUID(session *Session, uUID string) (retval HostCPURef, err error) {
+func (hostCPU) GetByUUID(session *Session, uuid string) (retval HostCPURef, err error) {
 	method := "host_cpu.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -822,17 +822,17 @@ func (hostCPU) GetByUUID(session *Session, uUID string) (retval HostCPURef, err 
 
 // GetByUUID2: Get a reference to the host_cpu instance with the specified UUID.
 // Version: rio
-func (hostCPU) GetByUUID2(session *Session, uUID string) (retval HostCPURef, err error) {
+func (hostCPU) GetByUUID2(session *Session, uuid string) (retval HostCPURef, err error) {
 	method := "host_cpu.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

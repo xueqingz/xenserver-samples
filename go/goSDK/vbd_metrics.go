@@ -21,13 +21,13 @@ type VBDMetricsRecord struct {
 type VBDMetricsRef string
 
 // The metrics associated with a virtual block device
-type vBDMetrics struct{}
+type vbdMetrics struct{}
 
-var VBDMetrics vBDMetrics
+var VBDMetrics vbdMetrics
 
 // GetAllRecords: Return a map of VBD_metrics references to VBD_metrics records for all VBD_metrics instances known to the system.
 // Version: rio
-func (vBDMetrics) GetAllRecords(session *Session) (retval map[VBDMetricsRef]VBDMetricsRecord, err error) {
+func (vbdMetrics) GetAllRecords(session *Session) (retval map[VBDMetricsRef]VBDMetricsRecord, err error) {
 	method := "VBD_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -43,7 +43,7 @@ func (vBDMetrics) GetAllRecords(session *Session) (retval map[VBDMetricsRef]VBDM
 
 // GetAllRecords1: Return a map of VBD_metrics references to VBD_metrics records for all VBD_metrics instances known to the system.
 // Version: rio
-func (vBDMetrics) GetAllRecords1(session *Session) (retval map[VBDMetricsRef]VBDMetricsRecord, err error) {
+func (vbdMetrics) GetAllRecords1(session *Session) (retval map[VBDMetricsRef]VBDMetricsRecord, err error) {
 	method := "VBD_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -59,7 +59,7 @@ func (vBDMetrics) GetAllRecords1(session *Session) (retval map[VBDMetricsRef]VBD
 
 // GetAll: Return a list of all the VBD_metrics instances known to the system.
 // Version: rio
-func (vBDMetrics) GetAll(session *Session) (retval []VBDMetricsRef, err error) {
+func (vbdMetrics) GetAll(session *Session) (retval []VBDMetricsRef, err error) {
 	method := "VBD_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -75,7 +75,7 @@ func (vBDMetrics) GetAll(session *Session) (retval []VBDMetricsRef, err error) {
 
 // GetAll1: Return a list of all the VBD_metrics instances known to the system.
 // Version: rio
-func (vBDMetrics) GetAll1(session *Session) (retval []VBDMetricsRef, err error) {
+func (vbdMetrics) GetAll1(session *Session) (retval []VBDMetricsRef, err error) {
 	method := "VBD_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -91,7 +91,7 @@ func (vBDMetrics) GetAll1(session *Session) (retval []VBDMetricsRef, err error) 
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VBD_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vBDMetrics) RemoveFromOtherConfig(session *Session, self VBDMetricsRef, key string) (err error) {
+func (vbdMetrics) RemoveFromOtherConfig(session *Session, self VBDMetricsRef, key string) (err error) {
 	method := "VBD_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -111,7 +111,7 @@ func (vBDMetrics) RemoveFromOtherConfig(session *Session, self VBDMetricsRef, ke
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VBD_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vBDMetrics) RemoveFromOtherConfig3(session *Session, self VBDMetricsRef, key string) (err error) {
+func (vbdMetrics) RemoveFromOtherConfig3(session *Session, self VBDMetricsRef, key string) (err error) {
 	method := "VBD_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -131,7 +131,7 @@ func (vBDMetrics) RemoveFromOtherConfig3(session *Session, self VBDMetricsRef, k
 
 // RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given VBD_metrics.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vBDMetrics) RemoveFromOtherConfig2(session *Session, self VBDMetricsRef) (err error) {
+func (vbdMetrics) RemoveFromOtherConfig2(session *Session, self VBDMetricsRef) (err error) {
 	method := "VBD_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -147,7 +147,7 @@ func (vBDMetrics) RemoveFromOtherConfig2(session *Session, self VBDMetricsRef) (
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VBD_metrics.
 // Version: orlando
-func (vBDMetrics) AddToOtherConfig(session *Session, self VBDMetricsRef, key string, value string) (err error) {
+func (vbdMetrics) AddToOtherConfig(session *Session, self VBDMetricsRef, key string, value string) (err error) {
 	method := "VBD_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -171,7 +171,7 @@ func (vBDMetrics) AddToOtherConfig(session *Session, self VBDMetricsRef, key str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VBD_metrics.
 // Version: orlando
-func (vBDMetrics) AddToOtherConfig4(session *Session, self VBDMetricsRef, key string, value string) (err error) {
+func (vbdMetrics) AddToOtherConfig4(session *Session, self VBDMetricsRef, key string, value string) (err error) {
 	method := "VBD_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -195,7 +195,7 @@ func (vBDMetrics) AddToOtherConfig4(session *Session, self VBDMetricsRef, key st
 
 // AddToOtherConfig2: Add the given key-value pair to the other_config field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) AddToOtherConfig2(session *Session, self VBDMetricsRef) (err error) {
+func (vbdMetrics) AddToOtherConfig2(session *Session, self VBDMetricsRef) (err error) {
 	method := "VBD_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -211,7 +211,7 @@ func (vBDMetrics) AddToOtherConfig2(session *Session, self VBDMetricsRef) (err e
 
 // SetOtherConfig: Set the other_config field of the given VBD_metrics.
 // Version: orlando
-func (vBDMetrics) SetOtherConfig(session *Session, self VBDMetricsRef, value map[string]string) (err error) {
+func (vbdMetrics) SetOtherConfig(session *Session, self VBDMetricsRef, value map[string]string) (err error) {
 	method := "VBD_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -231,7 +231,7 @@ func (vBDMetrics) SetOtherConfig(session *Session, self VBDMetricsRef, value map
 
 // SetOtherConfig3: Set the other_config field of the given VBD_metrics.
 // Version: orlando
-func (vBDMetrics) SetOtherConfig3(session *Session, self VBDMetricsRef, value map[string]string) (err error) {
+func (vbdMetrics) SetOtherConfig3(session *Session, self VBDMetricsRef, value map[string]string) (err error) {
 	method := "VBD_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -251,7 +251,7 @@ func (vBDMetrics) SetOtherConfig3(session *Session, self VBDMetricsRef, value ma
 
 // SetOtherConfig2: Set the other_config field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) SetOtherConfig2(session *Session, self VBDMetricsRef) (err error) {
+func (vbdMetrics) SetOtherConfig2(session *Session, self VBDMetricsRef) (err error) {
 	method := "VBD_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -267,7 +267,7 @@ func (vBDMetrics) SetOtherConfig2(session *Session, self VBDMetricsRef) (err err
 
 // GetOtherConfig: Get the other_config field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetOtherConfig(session *Session, self VBDMetricsRef) (retval map[string]string, err error) {
+func (vbdMetrics) GetOtherConfig(session *Session, self VBDMetricsRef) (retval map[string]string, err error) {
 	method := "VBD_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -287,7 +287,7 @@ func (vBDMetrics) GetOtherConfig(session *Session, self VBDMetricsRef) (retval m
 
 // GetOtherConfig2: Get the other_config field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetOtherConfig2(session *Session, self VBDMetricsRef) (retval map[string]string, err error) {
+func (vbdMetrics) GetOtherConfig2(session *Session, self VBDMetricsRef) (retval map[string]string, err error) {
 	method := "VBD_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -307,7 +307,7 @@ func (vBDMetrics) GetOtherConfig2(session *Session, self VBDMetricsRef) (retval 
 
 // GetLastUpdated: Get the last_updated field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetLastUpdated(session *Session, self VBDMetricsRef) (retval time.Time, err error) {
+func (vbdMetrics) GetLastUpdated(session *Session, self VBDMetricsRef) (retval time.Time, err error) {
 	method := "VBD_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -327,7 +327,7 @@ func (vBDMetrics) GetLastUpdated(session *Session, self VBDMetricsRef) (retval t
 
 // GetLastUpdated2: Get the last_updated field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetLastUpdated2(session *Session, self VBDMetricsRef) (retval time.Time, err error) {
+func (vbdMetrics) GetLastUpdated2(session *Session, self VBDMetricsRef) (retval time.Time, err error) {
 	method := "VBD_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -347,7 +347,7 @@ func (vBDMetrics) GetLastUpdated2(session *Session, self VBDMetricsRef) (retval 
 
 // GetIoWriteKbs: Get the io/write_kbs field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetIoWriteKbs(session *Session, self VBDMetricsRef) (retval float64, err error) {
+func (vbdMetrics) GetIoWriteKbs(session *Session, self VBDMetricsRef) (retval float64, err error) {
 	method := "VBD_metrics.get_io_write_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -367,7 +367,7 @@ func (vBDMetrics) GetIoWriteKbs(session *Session, self VBDMetricsRef) (retval fl
 
 // GetIoWriteKbs2: Get the io/write_kbs field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetIoWriteKbs2(session *Session, self VBDMetricsRef) (retval float64, err error) {
+func (vbdMetrics) GetIoWriteKbs2(session *Session, self VBDMetricsRef) (retval float64, err error) {
 	method := "VBD_metrics.get_io_write_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -387,7 +387,7 @@ func (vBDMetrics) GetIoWriteKbs2(session *Session, self VBDMetricsRef) (retval f
 
 // GetIoReadKbs: Get the io/read_kbs field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetIoReadKbs(session *Session, self VBDMetricsRef) (retval float64, err error) {
+func (vbdMetrics) GetIoReadKbs(session *Session, self VBDMetricsRef) (retval float64, err error) {
 	method := "VBD_metrics.get_io_read_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -407,7 +407,7 @@ func (vBDMetrics) GetIoReadKbs(session *Session, self VBDMetricsRef) (retval flo
 
 // GetIoReadKbs2: Get the io/read_kbs field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetIoReadKbs2(session *Session, self VBDMetricsRef) (retval float64, err error) {
+func (vbdMetrics) GetIoReadKbs2(session *Session, self VBDMetricsRef) (retval float64, err error) {
 	method := "VBD_metrics.get_io_read_kbs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -427,7 +427,7 @@ func (vBDMetrics) GetIoReadKbs2(session *Session, self VBDMetricsRef) (retval fl
 
 // GetUUID: Get the uuid field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetUUID(session *Session, self VBDMetricsRef) (retval string, err error) {
+func (vbdMetrics) GetUUID(session *Session, self VBDMetricsRef) (retval string, err error) {
 	method := "VBD_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -447,7 +447,7 @@ func (vBDMetrics) GetUUID(session *Session, self VBDMetricsRef) (retval string, 
 
 // GetUUID2: Get the uuid field of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetUUID2(session *Session, self VBDMetricsRef) (retval string, err error) {
+func (vbdMetrics) GetUUID2(session *Session, self VBDMetricsRef) (retval string, err error) {
 	method := "VBD_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -467,17 +467,17 @@ func (vBDMetrics) GetUUID2(session *Session, self VBDMetricsRef) (retval string,
 
 // GetByUUID: Get a reference to the VBD_metrics instance with the specified UUID.
 // Version: rio
-func (vBDMetrics) GetByUUID(session *Session, uUID string) (retval VBDMetricsRef, err error) {
+func (vbdMetrics) GetByUUID(session *Session, uuid string) (retval VBDMetricsRef, err error) {
 	method := "VBD_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -487,17 +487,17 @@ func (vBDMetrics) GetByUUID(session *Session, uUID string) (retval VBDMetricsRef
 
 // GetByUUID2: Get a reference to the VBD_metrics instance with the specified UUID.
 // Version: rio
-func (vBDMetrics) GetByUUID2(session *Session, uUID string) (retval VBDMetricsRef, err error) {
+func (vbdMetrics) GetByUUID2(session *Session, uuid string) (retval VBDMetricsRef, err error) {
 	method := "VBD_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -507,7 +507,7 @@ func (vBDMetrics) GetByUUID2(session *Session, uUID string) (retval VBDMetricsRe
 
 // GetRecord: Get a record containing the current state of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetRecord(session *Session, self VBDMetricsRef) (retval VBDMetricsRecord, err error) {
+func (vbdMetrics) GetRecord(session *Session, self VBDMetricsRef) (retval VBDMetricsRecord, err error) {
 	method := "VBD_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -527,7 +527,7 @@ func (vBDMetrics) GetRecord(session *Session, self VBDMetricsRef) (retval VBDMet
 
 // GetRecord2: Get a record containing the current state of the given VBD_metrics.
 // Version: rio
-func (vBDMetrics) GetRecord2(session *Session, self VBDMetricsRef) (retval VBDMetricsRecord, err error) {
+func (vbdMetrics) GetRecord2(session *Session, self VBDMetricsRef) (retval VBDMetricsRecord, err error) {
 	method := "VBD_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

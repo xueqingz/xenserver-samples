@@ -38,13 +38,13 @@ type SMRecord struct {
 type SMRef string
 
 // A storage manager plugin
-type sM struct{}
+type sm struct{}
 
-var SM sM
+var SM sm
 
 // GetAllRecords: Return a map of SM references to SM records for all SMs known to the system.
 // Version: rio
-func (sM) GetAllRecords(session *Session) (retval map[SMRef]SMRecord, err error) {
+func (sm) GetAllRecords(session *Session) (retval map[SMRef]SMRecord, err error) {
 	method := "SM.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -60,7 +60,7 @@ func (sM) GetAllRecords(session *Session) (retval map[SMRef]SMRecord, err error)
 
 // GetAllRecords1: Return a map of SM references to SM records for all SMs known to the system.
 // Version: rio
-func (sM) GetAllRecords1(session *Session) (retval map[SMRef]SMRecord, err error) {
+func (sm) GetAllRecords1(session *Session) (retval map[SMRef]SMRecord, err error) {
 	method := "SM.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -76,7 +76,7 @@ func (sM) GetAllRecords1(session *Session) (retval map[SMRef]SMRecord, err error
 
 // GetAll: Return a list of all the SMs known to the system.
 // Version: rio
-func (sM) GetAll(session *Session) (retval []SMRef, err error) {
+func (sm) GetAll(session *Session) (retval []SMRef, err error) {
 	method := "SM.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -92,7 +92,7 @@ func (sM) GetAll(session *Session) (retval []SMRef, err error) {
 
 // GetAll1: Return a list of all the SMs known to the system.
 // Version: rio
-func (sM) GetAll1(session *Session) (retval []SMRef, err error) {
+func (sm) GetAll1(session *Session) (retval []SMRef, err error) {
 	method := "SM.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -108,7 +108,7 @@ func (sM) GetAll1(session *Session) (retval []SMRef, err error) {
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given SM.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (sM) RemoveFromOtherConfig(session *Session, self SMRef, key string) (err error) {
+func (sm) RemoveFromOtherConfig(session *Session, self SMRef, key string) (err error) {
 	method := "SM.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -128,7 +128,7 @@ func (sM) RemoveFromOtherConfig(session *Session, self SMRef, key string) (err e
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given SM.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (sM) RemoveFromOtherConfig3(session *Session, self SMRef, key string) (err error) {
+func (sm) RemoveFromOtherConfig3(session *Session, self SMRef, key string) (err error) {
 	method := "SM.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -148,7 +148,7 @@ func (sM) RemoveFromOtherConfig3(session *Session, self SMRef, key string) (err 
 
 // RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given SM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (sM) RemoveFromOtherConfig2(session *Session, self SMRef) (err error) {
+func (sm) RemoveFromOtherConfig2(session *Session, self SMRef) (err error) {
 	method := "SM.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -164,7 +164,7 @@ func (sM) RemoveFromOtherConfig2(session *Session, self SMRef) (err error) {
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given SM.
 // Version: miami
-func (sM) AddToOtherConfig(session *Session, self SMRef, key string, value string) (err error) {
+func (sm) AddToOtherConfig(session *Session, self SMRef, key string, value string) (err error) {
 	method := "SM.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -188,7 +188,7 @@ func (sM) AddToOtherConfig(session *Session, self SMRef, key string, value strin
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given SM.
 // Version: miami
-func (sM) AddToOtherConfig4(session *Session, self SMRef, key string, value string) (err error) {
+func (sm) AddToOtherConfig4(session *Session, self SMRef, key string, value string) (err error) {
 	method := "SM.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -212,7 +212,7 @@ func (sM) AddToOtherConfig4(session *Session, self SMRef, key string, value stri
 
 // AddToOtherConfig2: Add the given key-value pair to the other_config field of the given SM.
 // Version: rio
-func (sM) AddToOtherConfig2(session *Session, self SMRef) (err error) {
+func (sm) AddToOtherConfig2(session *Session, self SMRef) (err error) {
 	method := "SM.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -228,7 +228,7 @@ func (sM) AddToOtherConfig2(session *Session, self SMRef) (err error) {
 
 // SetOtherConfig: Set the other_config field of the given SM.
 // Version: miami
-func (sM) SetOtherConfig(session *Session, self SMRef, value map[string]string) (err error) {
+func (sm) SetOtherConfig(session *Session, self SMRef, value map[string]string) (err error) {
 	method := "SM.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -248,7 +248,7 @@ func (sM) SetOtherConfig(session *Session, self SMRef, value map[string]string) 
 
 // SetOtherConfig3: Set the other_config field of the given SM.
 // Version: miami
-func (sM) SetOtherConfig3(session *Session, self SMRef, value map[string]string) (err error) {
+func (sm) SetOtherConfig3(session *Session, self SMRef, value map[string]string) (err error) {
 	method := "SM.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -268,7 +268,7 @@ func (sM) SetOtherConfig3(session *Session, self SMRef, value map[string]string)
 
 // SetOtherConfig2: Set the other_config field of the given SM.
 // Version: rio
-func (sM) SetOtherConfig2(session *Session, self SMRef) (err error) {
+func (sm) SetOtherConfig2(session *Session, self SMRef) (err error) {
 	method := "SM.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -284,7 +284,7 @@ func (sM) SetOtherConfig2(session *Session, self SMRef) (err error) {
 
 // GetRequiredClusterStack: Get the required_cluster_stack field of the given SM.
 // Version: rio
-func (sM) GetRequiredClusterStack(session *Session, self SMRef) (retval []string, err error) {
+func (sm) GetRequiredClusterStack(session *Session, self SMRef) (retval []string, err error) {
 	method := "SM.get_required_cluster_stack"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -304,7 +304,7 @@ func (sM) GetRequiredClusterStack(session *Session, self SMRef) (retval []string
 
 // GetRequiredClusterStack2: Get the required_cluster_stack field of the given SM.
 // Version: rio
-func (sM) GetRequiredClusterStack2(session *Session, self SMRef) (retval []string, err error) {
+func (sm) GetRequiredClusterStack2(session *Session, self SMRef) (retval []string, err error) {
 	method := "SM.get_required_cluster_stack"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -324,7 +324,7 @@ func (sM) GetRequiredClusterStack2(session *Session, self SMRef) (retval []strin
 
 // GetDriverFilename: Get the driver_filename field of the given SM.
 // Version: rio
-func (sM) GetDriverFilename(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetDriverFilename(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_driver_filename"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -344,7 +344,7 @@ func (sM) GetDriverFilename(session *Session, self SMRef) (retval string, err er
 
 // GetDriverFilename2: Get the driver_filename field of the given SM.
 // Version: rio
-func (sM) GetDriverFilename2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetDriverFilename2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_driver_filename"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -364,7 +364,7 @@ func (sM) GetDriverFilename2(session *Session, self SMRef) (retval string, err e
 
 // GetOtherConfig: Get the other_config field of the given SM.
 // Version: rio
-func (sM) GetOtherConfig(session *Session, self SMRef) (retval map[string]string, err error) {
+func (sm) GetOtherConfig(session *Session, self SMRef) (retval map[string]string, err error) {
 	method := "SM.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -384,7 +384,7 @@ func (sM) GetOtherConfig(session *Session, self SMRef) (retval map[string]string
 
 // GetOtherConfig2: Get the other_config field of the given SM.
 // Version: rio
-func (sM) GetOtherConfig2(session *Session, self SMRef) (retval map[string]string, err error) {
+func (sm) GetOtherConfig2(session *Session, self SMRef) (retval map[string]string, err error) {
 	method := "SM.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -404,7 +404,7 @@ func (sM) GetOtherConfig2(session *Session, self SMRef) (retval map[string]strin
 
 // GetFeatures: Get the features field of the given SM.
 // Version: rio
-func (sM) GetFeatures(session *Session, self SMRef) (retval map[string]int, err error) {
+func (sm) GetFeatures(session *Session, self SMRef) (retval map[string]int, err error) {
 	method := "SM.get_features"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -424,7 +424,7 @@ func (sM) GetFeatures(session *Session, self SMRef) (retval map[string]int, err 
 
 // GetFeatures2: Get the features field of the given SM.
 // Version: rio
-func (sM) GetFeatures2(session *Session, self SMRef) (retval map[string]int, err error) {
+func (sm) GetFeatures2(session *Session, self SMRef) (retval map[string]int, err error) {
 	method := "SM.get_features"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -444,7 +444,7 @@ func (sM) GetFeatures2(session *Session, self SMRef) (retval map[string]int, err
 
 // GetCapabilities: Get the capabilities field of the given SM.
 // Version: rio
-func (sM) GetCapabilities(session *Session, self SMRef) (retval []string, err error) {
+func (sm) GetCapabilities(session *Session, self SMRef) (retval []string, err error) {
 	method := "SM.get_capabilities"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -464,7 +464,7 @@ func (sM) GetCapabilities(session *Session, self SMRef) (retval []string, err er
 
 // GetCapabilities2: Get the capabilities field of the given SM.
 // Version: rio
-func (sM) GetCapabilities2(session *Session, self SMRef) (retval []string, err error) {
+func (sm) GetCapabilities2(session *Session, self SMRef) (retval []string, err error) {
 	method := "SM.get_capabilities"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -484,7 +484,7 @@ func (sM) GetCapabilities2(session *Session, self SMRef) (retval []string, err e
 
 // GetConfiguration: Get the configuration field of the given SM.
 // Version: rio
-func (sM) GetConfiguration(session *Session, self SMRef) (retval map[string]string, err error) {
+func (sm) GetConfiguration(session *Session, self SMRef) (retval map[string]string, err error) {
 	method := "SM.get_configuration"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -504,7 +504,7 @@ func (sM) GetConfiguration(session *Session, self SMRef) (retval map[string]stri
 
 // GetConfiguration2: Get the configuration field of the given SM.
 // Version: rio
-func (sM) GetConfiguration2(session *Session, self SMRef) (retval map[string]string, err error) {
+func (sm) GetConfiguration2(session *Session, self SMRef) (retval map[string]string, err error) {
 	method := "SM.get_configuration"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -524,7 +524,7 @@ func (sM) GetConfiguration2(session *Session, self SMRef) (retval map[string]str
 
 // GetRequiredAPIVersion: Get the required_api_version field of the given SM.
 // Version: rio
-func (sM) GetRequiredAPIVersion(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetRequiredAPIVersion(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_required_api_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -544,7 +544,7 @@ func (sM) GetRequiredAPIVersion(session *Session, self SMRef) (retval string, er
 
 // GetRequiredAPIVersion2: Get the required_api_version field of the given SM.
 // Version: rio
-func (sM) GetRequiredAPIVersion2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetRequiredAPIVersion2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_required_api_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -564,7 +564,7 @@ func (sM) GetRequiredAPIVersion2(session *Session, self SMRef) (retval string, e
 
 // GetVersion: Get the version field of the given SM.
 // Version: rio
-func (sM) GetVersion(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetVersion(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -584,7 +584,7 @@ func (sM) GetVersion(session *Session, self SMRef) (retval string, err error) {
 
 // GetVersion2: Get the version field of the given SM.
 // Version: rio
-func (sM) GetVersion2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetVersion2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -604,7 +604,7 @@ func (sM) GetVersion2(session *Session, self SMRef) (retval string, err error) {
 
 // GetCopyright: Get the copyright field of the given SM.
 // Version: rio
-func (sM) GetCopyright(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetCopyright(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_copyright"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -624,7 +624,7 @@ func (sM) GetCopyright(session *Session, self SMRef) (retval string, err error) 
 
 // GetCopyright2: Get the copyright field of the given SM.
 // Version: rio
-func (sM) GetCopyright2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetCopyright2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_copyright"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -644,7 +644,7 @@ func (sM) GetCopyright2(session *Session, self SMRef) (retval string, err error)
 
 // GetVendor: Get the vendor field of the given SM.
 // Version: rio
-func (sM) GetVendor(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetVendor(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_vendor"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -664,7 +664,7 @@ func (sM) GetVendor(session *Session, self SMRef) (retval string, err error) {
 
 // GetVendor2: Get the vendor field of the given SM.
 // Version: rio
-func (sM) GetVendor2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetVendor2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_vendor"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -684,7 +684,7 @@ func (sM) GetVendor2(session *Session, self SMRef) (retval string, err error) {
 
 // GetType: Get the type field of the given SM.
 // Version: rio
-func (sM) GetType(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetType(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -704,7 +704,7 @@ func (sM) GetType(session *Session, self SMRef) (retval string, err error) {
 
 // GetType2: Get the type field of the given SM.
 // Version: rio
-func (sM) GetType2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetType2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -724,7 +724,7 @@ func (sM) GetType2(session *Session, self SMRef) (retval string, err error) {
 
 // GetNameDescription: Get the name/description field of the given SM.
 // Version: rio
-func (sM) GetNameDescription(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetNameDescription(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -744,7 +744,7 @@ func (sM) GetNameDescription(session *Session, self SMRef) (retval string, err e
 
 // GetNameDescription2: Get the name/description field of the given SM.
 // Version: rio
-func (sM) GetNameDescription2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetNameDescription2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -764,7 +764,7 @@ func (sM) GetNameDescription2(session *Session, self SMRef) (retval string, err 
 
 // GetNameLabel: Get the name/label field of the given SM.
 // Version: rio
-func (sM) GetNameLabel(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetNameLabel(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -784,7 +784,7 @@ func (sM) GetNameLabel(session *Session, self SMRef) (retval string, err error) 
 
 // GetNameLabel2: Get the name/label field of the given SM.
 // Version: rio
-func (sM) GetNameLabel2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetNameLabel2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -804,7 +804,7 @@ func (sM) GetNameLabel2(session *Session, self SMRef) (retval string, err error)
 
 // GetUUID: Get the uuid field of the given SM.
 // Version: rio
-func (sM) GetUUID(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetUUID(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -824,7 +824,7 @@ func (sM) GetUUID(session *Session, self SMRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given SM.
 // Version: rio
-func (sM) GetUUID2(session *Session, self SMRef) (retval string, err error) {
+func (sm) GetUUID2(session *Session, self SMRef) (retval string, err error) {
 	method := "SM.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -844,7 +844,7 @@ func (sM) GetUUID2(session *Session, self SMRef) (retval string, err error) {
 
 // GetByNameLabel: Get all the SM instances with the given label.
 // Version: rio
-func (sM) GetByNameLabel(session *Session, label string) (retval []SMRef, err error) {
+func (sm) GetByNameLabel(session *Session, label string) (retval []SMRef, err error) {
 	method := "SM.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -864,7 +864,7 @@ func (sM) GetByNameLabel(session *Session, label string) (retval []SMRef, err er
 
 // GetByNameLabel2: Get all the SM instances with the given label.
 // Version: rio
-func (sM) GetByNameLabel2(session *Session, label string) (retval []SMRef, err error) {
+func (sm) GetByNameLabel2(session *Session, label string) (retval []SMRef, err error) {
 	method := "SM.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -884,17 +884,17 @@ func (sM) GetByNameLabel2(session *Session, label string) (retval []SMRef, err e
 
 // GetByUUID: Get a reference to the SM instance with the specified UUID.
 // Version: rio
-func (sM) GetByUUID(session *Session, uUID string) (retval SMRef, err error) {
+func (sm) GetByUUID(session *Session, uuid string) (retval SMRef, err error) {
 	method := "SM.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -904,17 +904,17 @@ func (sM) GetByUUID(session *Session, uUID string) (retval SMRef, err error) {
 
 // GetByUUID2: Get a reference to the SM instance with the specified UUID.
 // Version: rio
-func (sM) GetByUUID2(session *Session, uUID string) (retval SMRef, err error) {
+func (sm) GetByUUID2(session *Session, uuid string) (retval SMRef, err error) {
 	method := "SM.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -924,7 +924,7 @@ func (sM) GetByUUID2(session *Session, uUID string) (retval SMRef, err error) {
 
 // GetRecord: Get a record containing the current state of the given SM.
 // Version: rio
-func (sM) GetRecord(session *Session, self SMRef) (retval SMRecord, err error) {
+func (sm) GetRecord(session *Session, self SMRef) (retval SMRecord, err error) {
 	method := "SM.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -944,7 +944,7 @@ func (sM) GetRecord(session *Session, self SMRef) (retval SMRecord, err error) {
 
 // GetRecord2: Get a record containing the current state of the given SM.
 // Version: rio
-func (sM) GetRecord2(session *Session, self SMRef) (retval SMRecord, err error) {
+func (sm) GetRecord2(session *Session, self SMRef) (retval SMRecord, err error) {
 	method := "SM.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

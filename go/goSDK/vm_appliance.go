@@ -22,13 +22,13 @@ type VMApplianceRecord struct {
 type VMApplianceRef string
 
 // VM appliance
-type vMAppliance struct{}
+type vmAppliance struct{}
 
-var VMAppliance vMAppliance
+var VMAppliance vmAppliance
 
 // GetAllRecords: Return a map of VM_appliance references to VM_appliance records for all VM_appliances known to the system.
 // Version: boston
-func (vMAppliance) GetAllRecords(session *Session) (retval map[VMApplianceRef]VMApplianceRecord, err error) {
+func (vmAppliance) GetAllRecords(session *Session) (retval map[VMApplianceRef]VMApplianceRecord, err error) {
 	method := "VM_appliance.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -44,7 +44,7 @@ func (vMAppliance) GetAllRecords(session *Session) (retval map[VMApplianceRef]VM
 
 // GetAllRecords1: Return a map of VM_appliance references to VM_appliance records for all VM_appliances known to the system.
 // Version: boston
-func (vMAppliance) GetAllRecords1(session *Session) (retval map[VMApplianceRef]VMApplianceRecord, err error) {
+func (vmAppliance) GetAllRecords1(session *Session) (retval map[VMApplianceRef]VMApplianceRecord, err error) {
 	method := "VM_appliance.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -60,7 +60,7 @@ func (vMAppliance) GetAllRecords1(session *Session) (retval map[VMApplianceRef]V
 
 // GetAll: Return a list of all the VM_appliances known to the system.
 // Version: boston
-func (vMAppliance) GetAll(session *Session) (retval []VMApplianceRef, err error) {
+func (vmAppliance) GetAll(session *Session) (retval []VMApplianceRef, err error) {
 	method := "VM_appliance.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -76,7 +76,7 @@ func (vMAppliance) GetAll(session *Session) (retval []VMApplianceRef, err error)
 
 // GetAll1: Return a list of all the VM_appliances known to the system.
 // Version: boston
-func (vMAppliance) GetAll1(session *Session) (retval []VMApplianceRef, err error) {
+func (vmAppliance) GetAll1(session *Session) (retval []VMApplianceRef, err error) {
 	method := "VM_appliance.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -95,7 +95,7 @@ func (vMAppliance) GetAll1(session *Session) (retval []VMApplianceRef, err error
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) Recover(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (err error) {
+func (vmAppliance) Recover(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (err error) {
 	method := "VM_appliance.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -122,7 +122,7 @@ func (vMAppliance) Recover(session *Session, self VMApplianceRef, sessionTo Sess
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) AsyncRecover(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
+func (vmAppliance) AsyncRecover(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -153,7 +153,7 @@ func (vMAppliance) AsyncRecover(session *Session, self VMApplianceRef, sessionTo
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) Recover4(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (err error) {
+func (vmAppliance) Recover4(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (err error) {
 	method := "VM_appliance.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -180,7 +180,7 @@ func (vMAppliance) Recover4(session *Session, self VMApplianceRef, sessionTo Ses
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) AsyncRecover4(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
+func (vmAppliance) AsyncRecover4(session *Session, self VMApplianceRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -208,7 +208,7 @@ func (vMAppliance) AsyncRecover4(session *Session, self VMApplianceRef, sessionT
 
 // GetSRsRequiredForRecovery: Get the list of SRs required by the VM appliance to recover.
 // Version: creedence
-func (vMAppliance) GetSRsRequiredForRecovery(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval []SRRef, err error) {
+func (vmAppliance) GetSRsRequiredForRecovery(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval []SRRef, err error) {
 	method := "VM_appliance.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -232,7 +232,7 @@ func (vMAppliance) GetSRsRequiredForRecovery(session *Session, self VMApplianceR
 
 // AsyncGetSRsRequiredForRecovery: Get the list of SRs required by the VM appliance to recover.
 // Version: creedence
-func (vMAppliance) AsyncGetSRsRequiredForRecovery(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncGetSRsRequiredForRecovery(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -256,7 +256,7 @@ func (vMAppliance) AsyncGetSRsRequiredForRecovery(session *Session, self VMAppli
 
 // GetSRsRequiredForRecovery3: Get the list of SRs required by the VM appliance to recover.
 // Version: creedence
-func (vMAppliance) GetSRsRequiredForRecovery3(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval []SRRef, err error) {
+func (vmAppliance) GetSRsRequiredForRecovery3(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval []SRRef, err error) {
 	method := "VM_appliance.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -280,7 +280,7 @@ func (vMAppliance) GetSRsRequiredForRecovery3(session *Session, self VMAppliance
 
 // AsyncGetSRsRequiredForRecovery3: Get the list of SRs required by the VM appliance to recover.
 // Version: creedence
-func (vMAppliance) AsyncGetSRsRequiredForRecovery3(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncGetSRsRequiredForRecovery3(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -307,7 +307,7 @@ func (vMAppliance) AsyncGetSRsRequiredForRecovery3(session *Session, self VMAppl
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) AssertCanBeRecovered(session *Session, self VMApplianceRef, sessionTo SessionRef) (err error) {
+func (vmAppliance) AssertCanBeRecovered(session *Session, self VMApplianceRef, sessionTo SessionRef) (err error) {
 	method := "VM_appliance.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -330,7 +330,7 @@ func (vMAppliance) AssertCanBeRecovered(session *Session, self VMApplianceRef, s
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) AsyncAssertCanBeRecovered(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncAssertCanBeRecovered(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -357,7 +357,7 @@ func (vMAppliance) AsyncAssertCanBeRecovered(session *Session, self VMApplianceR
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) AssertCanBeRecovered3(session *Session, self VMApplianceRef, sessionTo SessionRef) (err error) {
+func (vmAppliance) AssertCanBeRecovered3(session *Session, self VMApplianceRef, sessionTo SessionRef) (err error) {
 	method := "VM_appliance.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -380,7 +380,7 @@ func (vMAppliance) AssertCanBeRecovered3(session *Session, self VMApplianceRef, 
 //
 // Errors:
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vMAppliance) AsyncAssertCanBeRecovered3(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncAssertCanBeRecovered3(session *Session, self VMApplianceRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -407,7 +407,7 @@ func (vMAppliance) AsyncAssertCanBeRecovered3(session *Session, self VMAppliance
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) Shutdown(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) Shutdown(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -426,7 +426,7 @@ func (vMAppliance) Shutdown(session *Session, self VMApplianceRef) (err error) {
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncShutdown(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncShutdown(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -449,7 +449,7 @@ func (vMAppliance) AsyncShutdown(session *Session, self VMApplianceRef) (retval 
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) Shutdown2(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) Shutdown2(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -468,7 +468,7 @@ func (vMAppliance) Shutdown2(session *Session, self VMApplianceRef) (err error) 
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncShutdown2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncShutdown2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -491,7 +491,7 @@ func (vMAppliance) AsyncShutdown2(session *Session, self VMApplianceRef) (retval
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) HardShutdown(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) HardShutdown(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -510,7 +510,7 @@ func (vMAppliance) HardShutdown(session *Session, self VMApplianceRef) (err erro
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncHardShutdown(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncHardShutdown(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -533,7 +533,7 @@ func (vMAppliance) AsyncHardShutdown(session *Session, self VMApplianceRef) (ret
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) HardShutdown2(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) HardShutdown2(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -552,7 +552,7 @@ func (vMAppliance) HardShutdown2(session *Session, self VMApplianceRef) (err err
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncHardShutdown2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncHardShutdown2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -575,7 +575,7 @@ func (vMAppliance) AsyncHardShutdown2(session *Session, self VMApplianceRef) (re
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) CleanShutdown(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) CleanShutdown(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -594,7 +594,7 @@ func (vMAppliance) CleanShutdown(session *Session, self VMApplianceRef) (err err
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncCleanShutdown(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncCleanShutdown(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -617,7 +617,7 @@ func (vMAppliance) AsyncCleanShutdown(session *Session, self VMApplianceRef) (re
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) CleanShutdown2(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) CleanShutdown2(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -636,7 +636,7 @@ func (vMAppliance) CleanShutdown2(session *Session, self VMApplianceRef) (err er
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncCleanShutdown2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncCleanShutdown2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -659,7 +659,7 @@ func (vMAppliance) AsyncCleanShutdown2(session *Session, self VMApplianceRef) (r
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) Start(session *Session, self VMApplianceRef, paused bool) (err error) {
+func (vmAppliance) Start(session *Session, self VMApplianceRef, paused bool) (err error) {
 	method := "VM_appliance.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -682,7 +682,7 @@ func (vMAppliance) Start(session *Session, self VMApplianceRef, paused bool) (er
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncStart(session *Session, self VMApplianceRef, paused bool) (retval TaskRef, err error) {
+func (vmAppliance) AsyncStart(session *Session, self VMApplianceRef, paused bool) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -709,7 +709,7 @@ func (vMAppliance) AsyncStart(session *Session, self VMApplianceRef, paused bool
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) Start3(session *Session, self VMApplianceRef, paused bool) (err error) {
+func (vmAppliance) Start3(session *Session, self VMApplianceRef, paused bool) (err error) {
 	method := "VM_appliance.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -732,7 +732,7 @@ func (vMAppliance) Start3(session *Session, self VMApplianceRef, paused bool) (e
 //
 // Errors:
 // OPERATION_PARTIALLY_FAILED - Some VMs belonging to the appliance threw an exception while carrying out the specified operation
-func (vMAppliance) AsyncStart3(session *Session, self VMApplianceRef, paused bool) (retval TaskRef, err error) {
+func (vmAppliance) AsyncStart3(session *Session, self VMApplianceRef, paused bool) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -756,7 +756,7 @@ func (vMAppliance) AsyncStart3(session *Session, self VMApplianceRef, paused boo
 
 // SetNameDescription: Set the name/description field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) SetNameDescription(session *Session, self VMApplianceRef, value string) (err error) {
+func (vmAppliance) SetNameDescription(session *Session, self VMApplianceRef, value string) (err error) {
 	method := "VM_appliance.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -776,7 +776,7 @@ func (vMAppliance) SetNameDescription(session *Session, self VMApplianceRef, val
 
 // SetNameDescription3: Set the name/description field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) SetNameDescription3(session *Session, self VMApplianceRef, value string) (err error) {
+func (vmAppliance) SetNameDescription3(session *Session, self VMApplianceRef, value string) (err error) {
 	method := "VM_appliance.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -796,7 +796,7 @@ func (vMAppliance) SetNameDescription3(session *Session, self VMApplianceRef, va
 
 // SetNameDescription2: Set the name/description field of the given VM_appliance.
 // Version: rio
-func (vMAppliance) SetNameDescription2(session *Session, value string) (err error) {
+func (vmAppliance) SetNameDescription2(session *Session, value string) (err error) {
 	method := "VM_appliance.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -812,7 +812,7 @@ func (vMAppliance) SetNameDescription2(session *Session, value string) (err erro
 
 // SetNameLabel: Set the name/label field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) SetNameLabel(session *Session, self VMApplianceRef, value string) (err error) {
+func (vmAppliance) SetNameLabel(session *Session, self VMApplianceRef, value string) (err error) {
 	method := "VM_appliance.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -832,7 +832,7 @@ func (vMAppliance) SetNameLabel(session *Session, self VMApplianceRef, value str
 
 // SetNameLabel3: Set the name/label field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) SetNameLabel3(session *Session, self VMApplianceRef, value string) (err error) {
+func (vmAppliance) SetNameLabel3(session *Session, self VMApplianceRef, value string) (err error) {
 	method := "VM_appliance.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -852,7 +852,7 @@ func (vMAppliance) SetNameLabel3(session *Session, self VMApplianceRef, value st
 
 // SetNameLabel2: Set the name/label field of the given VM_appliance.
 // Version: rio
-func (vMAppliance) SetNameLabel2(session *Session, value string) (err error) {
+func (vmAppliance) SetNameLabel2(session *Session, value string) (err error) {
 	method := "VM_appliance.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -868,7 +868,7 @@ func (vMAppliance) SetNameLabel2(session *Session, value string) (err error) {
 
 // GetVMs: Get the VMs field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetVMs(session *Session, self VMApplianceRef) (retval []VMRef, err error) {
+func (vmAppliance) GetVMs(session *Session, self VMApplianceRef) (retval []VMRef, err error) {
 	method := "VM_appliance.get_VMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -888,7 +888,7 @@ func (vMAppliance) GetVMs(session *Session, self VMApplianceRef) (retval []VMRef
 
 // GetVMs2: Get the VMs field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetVMs2(session *Session, self VMApplianceRef) (retval []VMRef, err error) {
+func (vmAppliance) GetVMs2(session *Session, self VMApplianceRef) (retval []VMRef, err error) {
 	method := "VM_appliance.get_VMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -908,7 +908,7 @@ func (vMAppliance) GetVMs2(session *Session, self VMApplianceRef) (retval []VMRe
 
 // GetCurrentOperations: Get the current_operations field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetCurrentOperations(session *Session, self VMApplianceRef) (retval map[string]VMApplianceOperation, err error) {
+func (vmAppliance) GetCurrentOperations(session *Session, self VMApplianceRef) (retval map[string]VMApplianceOperation, err error) {
 	method := "VM_appliance.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -928,7 +928,7 @@ func (vMAppliance) GetCurrentOperations(session *Session, self VMApplianceRef) (
 
 // GetCurrentOperations2: Get the current_operations field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetCurrentOperations2(session *Session, self VMApplianceRef) (retval map[string]VMApplianceOperation, err error) {
+func (vmAppliance) GetCurrentOperations2(session *Session, self VMApplianceRef) (retval map[string]VMApplianceOperation, err error) {
 	method := "VM_appliance.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -948,7 +948,7 @@ func (vMAppliance) GetCurrentOperations2(session *Session, self VMApplianceRef) 
 
 // GetAllowedOperations: Get the allowed_operations field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetAllowedOperations(session *Session, self VMApplianceRef) (retval []VMApplianceOperation, err error) {
+func (vmAppliance) GetAllowedOperations(session *Session, self VMApplianceRef) (retval []VMApplianceOperation, err error) {
 	method := "VM_appliance.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -968,7 +968,7 @@ func (vMAppliance) GetAllowedOperations(session *Session, self VMApplianceRef) (
 
 // GetAllowedOperations2: Get the allowed_operations field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetAllowedOperations2(session *Session, self VMApplianceRef) (retval []VMApplianceOperation, err error) {
+func (vmAppliance) GetAllowedOperations2(session *Session, self VMApplianceRef) (retval []VMApplianceOperation, err error) {
 	method := "VM_appliance.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -988,7 +988,7 @@ func (vMAppliance) GetAllowedOperations2(session *Session, self VMApplianceRef) 
 
 // GetNameDescription: Get the name/description field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetNameDescription(session *Session, self VMApplianceRef) (retval string, err error) {
+func (vmAppliance) GetNameDescription(session *Session, self VMApplianceRef) (retval string, err error) {
 	method := "VM_appliance.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1008,7 +1008,7 @@ func (vMAppliance) GetNameDescription(session *Session, self VMApplianceRef) (re
 
 // GetNameDescription2: Get the name/description field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetNameDescription2(session *Session, self VMApplianceRef) (retval string, err error) {
+func (vmAppliance) GetNameDescription2(session *Session, self VMApplianceRef) (retval string, err error) {
 	method := "VM_appliance.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1028,7 +1028,7 @@ func (vMAppliance) GetNameDescription2(session *Session, self VMApplianceRef) (r
 
 // GetNameLabel: Get the name/label field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetNameLabel(session *Session, self VMApplianceRef) (retval string, err error) {
+func (vmAppliance) GetNameLabel(session *Session, self VMApplianceRef) (retval string, err error) {
 	method := "VM_appliance.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1048,7 +1048,7 @@ func (vMAppliance) GetNameLabel(session *Session, self VMApplianceRef) (retval s
 
 // GetNameLabel2: Get the name/label field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetNameLabel2(session *Session, self VMApplianceRef) (retval string, err error) {
+func (vmAppliance) GetNameLabel2(session *Session, self VMApplianceRef) (retval string, err error) {
 	method := "VM_appliance.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1068,7 +1068,7 @@ func (vMAppliance) GetNameLabel2(session *Session, self VMApplianceRef) (retval 
 
 // GetUUID: Get the uuid field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetUUID(session *Session, self VMApplianceRef) (retval string, err error) {
+func (vmAppliance) GetUUID(session *Session, self VMApplianceRef) (retval string, err error) {
 	method := "VM_appliance.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1088,7 +1088,7 @@ func (vMAppliance) GetUUID(session *Session, self VMApplianceRef) (retval string
 
 // GetUUID2: Get the uuid field of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetUUID2(session *Session, self VMApplianceRef) (retval string, err error) {
+func (vmAppliance) GetUUID2(session *Session, self VMApplianceRef) (retval string, err error) {
 	method := "VM_appliance.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1108,7 +1108,7 @@ func (vMAppliance) GetUUID2(session *Session, self VMApplianceRef) (retval strin
 
 // GetByNameLabel: Get all the VM_appliance instances with the given label.
 // Version: boston
-func (vMAppliance) GetByNameLabel(session *Session, label string) (retval []VMApplianceRef, err error) {
+func (vmAppliance) GetByNameLabel(session *Session, label string) (retval []VMApplianceRef, err error) {
 	method := "VM_appliance.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1128,7 +1128,7 @@ func (vMAppliance) GetByNameLabel(session *Session, label string) (retval []VMAp
 
 // GetByNameLabel2: Get all the VM_appliance instances with the given label.
 // Version: boston
-func (vMAppliance) GetByNameLabel2(session *Session, label string) (retval []VMApplianceRef, err error) {
+func (vmAppliance) GetByNameLabel2(session *Session, label string) (retval []VMApplianceRef, err error) {
 	method := "VM_appliance.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1148,7 +1148,7 @@ func (vMAppliance) GetByNameLabel2(session *Session, label string) (retval []VMA
 
 // Destroy: Destroy the specified VM_appliance instance.
 // Version: boston
-func (vMAppliance) Destroy(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) Destroy(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1164,7 +1164,7 @@ func (vMAppliance) Destroy(session *Session, self VMApplianceRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VM_appliance instance.
 // Version: boston
-func (vMAppliance) AsyncDestroy(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncDestroy(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1184,7 +1184,7 @@ func (vMAppliance) AsyncDestroy(session *Session, self VMApplianceRef) (retval T
 
 // Destroy2: Destroy the specified VM_appliance instance.
 // Version: boston
-func (vMAppliance) Destroy2(session *Session, self VMApplianceRef) (err error) {
+func (vmAppliance) Destroy2(session *Session, self VMApplianceRef) (err error) {
 	method := "VM_appliance.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1200,7 +1200,7 @@ func (vMAppliance) Destroy2(session *Session, self VMApplianceRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VM_appliance instance.
 // Version: boston
-func (vMAppliance) AsyncDestroy2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
+func (vmAppliance) AsyncDestroy2(session *Session, self VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1220,7 +1220,7 @@ func (vMAppliance) AsyncDestroy2(session *Session, self VMApplianceRef) (retval 
 
 // Create: Create a new VM_appliance instance, and return its handle. The constructor args are: name_label, name_description (* = non-optional).
 // Version: boston
-func (vMAppliance) Create(session *Session, args VMApplianceRecord) (retval VMApplianceRef, err error) {
+func (vmAppliance) Create(session *Session, args VMApplianceRecord) (retval VMApplianceRef, err error) {
 	method := "VM_appliance.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1240,7 +1240,7 @@ func (vMAppliance) Create(session *Session, args VMApplianceRecord) (retval VMAp
 
 // AsyncCreate: Create a new VM_appliance instance, and return its handle. The constructor args are: name_label, name_description (* = non-optional).
 // Version: boston
-func (vMAppliance) AsyncCreate(session *Session, args VMApplianceRecord) (retval TaskRef, err error) {
+func (vmAppliance) AsyncCreate(session *Session, args VMApplianceRecord) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1260,7 +1260,7 @@ func (vMAppliance) AsyncCreate(session *Session, args VMApplianceRecord) (retval
 
 // Create2: Create a new VM_appliance instance, and return its handle. The constructor args are: name_label, name_description (* = non-optional).
 // Version: boston
-func (vMAppliance) Create2(session *Session, args VMApplianceRecord) (retval VMApplianceRef, err error) {
+func (vmAppliance) Create2(session *Session, args VMApplianceRecord) (retval VMApplianceRef, err error) {
 	method := "VM_appliance.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1280,7 +1280,7 @@ func (vMAppliance) Create2(session *Session, args VMApplianceRecord) (retval VMA
 
 // AsyncCreate2: Create a new VM_appliance instance, and return its handle. The constructor args are: name_label, name_description (* = non-optional).
 // Version: boston
-func (vMAppliance) AsyncCreate2(session *Session, args VMApplianceRecord) (retval TaskRef, err error) {
+func (vmAppliance) AsyncCreate2(session *Session, args VMApplianceRecord) (retval TaskRef, err error) {
 	method := "Async.VM_appliance.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1300,17 +1300,17 @@ func (vMAppliance) AsyncCreate2(session *Session, args VMApplianceRecord) (retva
 
 // GetByUUID: Get a reference to the VM_appliance instance with the specified UUID.
 // Version: boston
-func (vMAppliance) GetByUUID(session *Session, uUID string) (retval VMApplianceRef, err error) {
+func (vmAppliance) GetByUUID(session *Session, uuid string) (retval VMApplianceRef, err error) {
 	method := "VM_appliance.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1320,17 +1320,17 @@ func (vMAppliance) GetByUUID(session *Session, uUID string) (retval VMApplianceR
 
 // GetByUUID2: Get a reference to the VM_appliance instance with the specified UUID.
 // Version: boston
-func (vMAppliance) GetByUUID2(session *Session, uUID string) (retval VMApplianceRef, err error) {
+func (vmAppliance) GetByUUID2(session *Session, uuid string) (retval VMApplianceRef, err error) {
 	method := "VM_appliance.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1340,7 +1340,7 @@ func (vMAppliance) GetByUUID2(session *Session, uUID string) (retval VMAppliance
 
 // GetRecord: Get a record containing the current state of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetRecord(session *Session, self VMApplianceRef) (retval VMApplianceRecord, err error) {
+func (vmAppliance) GetRecord(session *Session, self VMApplianceRef) (retval VMApplianceRecord, err error) {
 	method := "VM_appliance.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1360,7 +1360,7 @@ func (vMAppliance) GetRecord(session *Session, self VMApplianceRef) (retval VMAp
 
 // GetRecord2: Get a record containing the current state of the given VM_appliance.
 // Version: boston
-func (vMAppliance) GetRecord2(session *Session, self VMApplianceRef) (retval VMApplianceRecord, err error) {
+func (vmAppliance) GetRecord2(session *Session, self VMApplianceRef) (retval VMApplianceRecord, err error) {
 	method := "VM_appliance.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

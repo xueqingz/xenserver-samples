@@ -51,13 +51,13 @@ type VMPPRecord struct {
 type VMPPRef string
 
 // VM Protection Policy
-type vMPP struct{}
+type vmpp struct{}
 
-var VMPP vMPP
+var VMPP vmpp
 
 // GetAllRecords: Return a map of VMPP references to VMPP records for all VMPPs known to the system.
 // Version: cowley
-func (vMPP) GetAllRecords(session *Session) (retval map[VMPPRef]VMPPRecord, err error) {
+func (vmpp) GetAllRecords(session *Session) (retval map[VMPPRef]VMPPRecord, err error) {
 	method := "VMPP.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -73,7 +73,7 @@ func (vMPP) GetAllRecords(session *Session) (retval map[VMPPRef]VMPPRecord, err 
 
 // GetAllRecords1: Return a map of VMPP references to VMPP records for all VMPPs known to the system.
 // Version: cowley
-func (vMPP) GetAllRecords1(session *Session) (retval map[VMPPRef]VMPPRecord, err error) {
+func (vmpp) GetAllRecords1(session *Session) (retval map[VMPPRef]VMPPRecord, err error) {
 	method := "VMPP.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -89,7 +89,7 @@ func (vMPP) GetAllRecords1(session *Session) (retval map[VMPPRef]VMPPRecord, err
 
 // GetAll: Return a list of all the VMPPs known to the system.
 // Version: cowley
-func (vMPP) GetAll(session *Session) (retval []VMPPRef, err error) {
+func (vmpp) GetAll(session *Session) (retval []VMPPRef, err error) {
 	method := "VMPP.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -105,7 +105,7 @@ func (vMPP) GetAll(session *Session) (retval []VMPPRef, err error) {
 
 // GetAll1: Return a list of all the VMPPs known to the system.
 // Version: cowley
-func (vMPP) GetAll1(session *Session) (retval []VMPPRef, err error) {
+func (vmpp) GetAll1(session *Session) (retval []VMPPRef, err error) {
 	method := "VMPP.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -121,7 +121,7 @@ func (vMPP) GetAll1(session *Session) (retval []VMPPRef, err error) {
 
 // SetArchiveLastRunTime:
 // Version: cowley
-func (vMPP) SetArchiveLastRunTime(session *Session, self VMPPRef, value time.Time) (err error) {
+func (vmpp) SetArchiveLastRunTime(session *Session, self VMPPRef, value time.Time) (err error) {
 	method := "VMPP.set_archive_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -141,7 +141,7 @@ func (vMPP) SetArchiveLastRunTime(session *Session, self VMPPRef, value time.Tim
 
 // SetArchiveLastRunTime3:
 // Version: cowley
-func (vMPP) SetArchiveLastRunTime3(session *Session, self VMPPRef, value time.Time) (err error) {
+func (vmpp) SetArchiveLastRunTime3(session *Session, self VMPPRef, value time.Time) (err error) {
 	method := "VMPP.set_archive_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -161,7 +161,7 @@ func (vMPP) SetArchiveLastRunTime3(session *Session, self VMPPRef, value time.Ti
 
 // SetBackupLastRunTime:
 // Version: cowley
-func (vMPP) SetBackupLastRunTime(session *Session, self VMPPRef, value time.Time) (err error) {
+func (vmpp) SetBackupLastRunTime(session *Session, self VMPPRef, value time.Time) (err error) {
 	method := "VMPP.set_backup_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -181,7 +181,7 @@ func (vMPP) SetBackupLastRunTime(session *Session, self VMPPRef, value time.Time
 
 // SetBackupLastRunTime3:
 // Version: cowley
-func (vMPP) SetBackupLastRunTime3(session *Session, self VMPPRef, value time.Time) (err error) {
+func (vmpp) SetBackupLastRunTime3(session *Session, self VMPPRef, value time.Time) (err error) {
 	method := "VMPP.set_backup_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -201,7 +201,7 @@ func (vMPP) SetBackupLastRunTime3(session *Session, self VMPPRef, value time.Tim
 
 // RemoveFromAlarmConfig:
 // Version: cowley
-func (vMPP) RemoveFromAlarmConfig(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromAlarmConfig(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -221,7 +221,7 @@ func (vMPP) RemoveFromAlarmConfig(session *Session, self VMPPRef, key string) (e
 
 // RemoveFromAlarmConfig3:
 // Version: cowley
-func (vMPP) RemoveFromAlarmConfig3(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromAlarmConfig3(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -241,7 +241,7 @@ func (vMPP) RemoveFromAlarmConfig3(session *Session, self VMPPRef, key string) (
 
 // RemoveFromArchiveSchedule:
 // Version: cowley
-func (vMPP) RemoveFromArchiveSchedule(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromArchiveSchedule(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -261,7 +261,7 @@ func (vMPP) RemoveFromArchiveSchedule(session *Session, self VMPPRef, key string
 
 // RemoveFromArchiveSchedule3:
 // Version: cowley
-func (vMPP) RemoveFromArchiveSchedule3(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromArchiveSchedule3(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -281,7 +281,7 @@ func (vMPP) RemoveFromArchiveSchedule3(session *Session, self VMPPRef, key strin
 
 // RemoveFromArchiveTargetConfig:
 // Version: cowley
-func (vMPP) RemoveFromArchiveTargetConfig(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromArchiveTargetConfig(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -301,7 +301,7 @@ func (vMPP) RemoveFromArchiveTargetConfig(session *Session, self VMPPRef, key st
 
 // RemoveFromArchiveTargetConfig3:
 // Version: cowley
-func (vMPP) RemoveFromArchiveTargetConfig3(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromArchiveTargetConfig3(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -321,7 +321,7 @@ func (vMPP) RemoveFromArchiveTargetConfig3(session *Session, self VMPPRef, key s
 
 // RemoveFromBackupSchedule:
 // Version: cowley
-func (vMPP) RemoveFromBackupSchedule(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromBackupSchedule(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -341,7 +341,7 @@ func (vMPP) RemoveFromBackupSchedule(session *Session, self VMPPRef, key string)
 
 // RemoveFromBackupSchedule3:
 // Version: cowley
-func (vMPP) RemoveFromBackupSchedule3(session *Session, self VMPPRef, key string) (err error) {
+func (vmpp) RemoveFromBackupSchedule3(session *Session, self VMPPRef, key string) (err error) {
 	method := "VMPP.remove_from_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -361,7 +361,7 @@ func (vMPP) RemoveFromBackupSchedule3(session *Session, self VMPPRef, key string
 
 // AddToAlarmConfig:
 // Version: cowley
-func (vMPP) AddToAlarmConfig(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToAlarmConfig(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -385,7 +385,7 @@ func (vMPP) AddToAlarmConfig(session *Session, self VMPPRef, key string, value s
 
 // AddToAlarmConfig4:
 // Version: cowley
-func (vMPP) AddToAlarmConfig4(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToAlarmConfig4(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -409,7 +409,7 @@ func (vMPP) AddToAlarmConfig4(session *Session, self VMPPRef, key string, value 
 
 // AddToArchiveSchedule:
 // Version: cowley
-func (vMPP) AddToArchiveSchedule(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToArchiveSchedule(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -433,7 +433,7 @@ func (vMPP) AddToArchiveSchedule(session *Session, self VMPPRef, key string, val
 
 // AddToArchiveSchedule4:
 // Version: cowley
-func (vMPP) AddToArchiveSchedule4(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToArchiveSchedule4(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -457,7 +457,7 @@ func (vMPP) AddToArchiveSchedule4(session *Session, self VMPPRef, key string, va
 
 // AddToArchiveTargetConfig:
 // Version: cowley
-func (vMPP) AddToArchiveTargetConfig(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToArchiveTargetConfig(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -481,7 +481,7 @@ func (vMPP) AddToArchiveTargetConfig(session *Session, self VMPPRef, key string,
 
 // AddToArchiveTargetConfig4:
 // Version: cowley
-func (vMPP) AddToArchiveTargetConfig4(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToArchiveTargetConfig4(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -505,7 +505,7 @@ func (vMPP) AddToArchiveTargetConfig4(session *Session, self VMPPRef, key string
 
 // AddToBackupSchedule:
 // Version: cowley
-func (vMPP) AddToBackupSchedule(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToBackupSchedule(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -529,7 +529,7 @@ func (vMPP) AddToBackupSchedule(session *Session, self VMPPRef, key string, valu
 
 // AddToBackupSchedule4:
 // Version: cowley
-func (vMPP) AddToBackupSchedule4(session *Session, self VMPPRef, key string, value string) (err error) {
+func (vmpp) AddToBackupSchedule4(session *Session, self VMPPRef, key string, value string) (err error) {
 	method := "VMPP.add_to_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -553,7 +553,7 @@ func (vMPP) AddToBackupSchedule4(session *Session, self VMPPRef, key string, val
 
 // SetAlarmConfig:
 // Version: cowley
-func (vMPP) SetAlarmConfig(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetAlarmConfig(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -573,7 +573,7 @@ func (vMPP) SetAlarmConfig(session *Session, self VMPPRef, value map[string]stri
 
 // SetAlarmConfig3:
 // Version: cowley
-func (vMPP) SetAlarmConfig3(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetAlarmConfig3(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -593,7 +593,7 @@ func (vMPP) SetAlarmConfig3(session *Session, self VMPPRef, value map[string]str
 
 // SetIsAlarmEnabled: Set the value of the is_alarm_enabled field
 // Version: cowley
-func (vMPP) SetIsAlarmEnabled(session *Session, self VMPPRef, value bool) (err error) {
+func (vmpp) SetIsAlarmEnabled(session *Session, self VMPPRef, value bool) (err error) {
 	method := "VMPP.set_is_alarm_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -613,7 +613,7 @@ func (vMPP) SetIsAlarmEnabled(session *Session, self VMPPRef, value bool) (err e
 
 // SetIsAlarmEnabled3: Set the value of the is_alarm_enabled field
 // Version: cowley
-func (vMPP) SetIsAlarmEnabled3(session *Session, self VMPPRef, value bool) (err error) {
+func (vmpp) SetIsAlarmEnabled3(session *Session, self VMPPRef, value bool) (err error) {
 	method := "VMPP.set_is_alarm_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -633,7 +633,7 @@ func (vMPP) SetIsAlarmEnabled3(session *Session, self VMPPRef, value bool) (err 
 
 // SetArchiveTargetConfig:
 // Version: cowley
-func (vMPP) SetArchiveTargetConfig(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetArchiveTargetConfig(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -653,7 +653,7 @@ func (vMPP) SetArchiveTargetConfig(session *Session, self VMPPRef, value map[str
 
 // SetArchiveTargetConfig3:
 // Version: cowley
-func (vMPP) SetArchiveTargetConfig3(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetArchiveTargetConfig3(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -673,7 +673,7 @@ func (vMPP) SetArchiveTargetConfig3(session *Session, self VMPPRef, value map[st
 
 // SetArchiveTargetType: Set the value of the archive_target_config_type field
 // Version: cowley
-func (vMPP) SetArchiveTargetType(session *Session, self VMPPRef, value VmppArchiveTargetType) (err error) {
+func (vmpp) SetArchiveTargetType(session *Session, self VMPPRef, value VmppArchiveTargetType) (err error) {
 	method := "VMPP.set_archive_target_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -693,7 +693,7 @@ func (vMPP) SetArchiveTargetType(session *Session, self VMPPRef, value VmppArchi
 
 // SetArchiveTargetType3: Set the value of the archive_target_config_type field
 // Version: cowley
-func (vMPP) SetArchiveTargetType3(session *Session, self VMPPRef, value VmppArchiveTargetType) (err error) {
+func (vmpp) SetArchiveTargetType3(session *Session, self VMPPRef, value VmppArchiveTargetType) (err error) {
 	method := "VMPP.set_archive_target_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -713,7 +713,7 @@ func (vMPP) SetArchiveTargetType3(session *Session, self VMPPRef, value VmppArch
 
 // SetArchiveSchedule:
 // Version: cowley
-func (vMPP) SetArchiveSchedule(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetArchiveSchedule(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -733,7 +733,7 @@ func (vMPP) SetArchiveSchedule(session *Session, self VMPPRef, value map[string]
 
 // SetArchiveSchedule3:
 // Version: cowley
-func (vMPP) SetArchiveSchedule3(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetArchiveSchedule3(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -753,7 +753,7 @@ func (vMPP) SetArchiveSchedule3(session *Session, self VMPPRef, value map[string
 
 // SetArchiveFrequency: Set the value of the archive_frequency field
 // Version: cowley
-func (vMPP) SetArchiveFrequency(session *Session, self VMPPRef, value VmppArchiveFrequency) (err error) {
+func (vmpp) SetArchiveFrequency(session *Session, self VMPPRef, value VmppArchiveFrequency) (err error) {
 	method := "VMPP.set_archive_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -773,7 +773,7 @@ func (vMPP) SetArchiveFrequency(session *Session, self VMPPRef, value VmppArchiv
 
 // SetArchiveFrequency3: Set the value of the archive_frequency field
 // Version: cowley
-func (vMPP) SetArchiveFrequency3(session *Session, self VMPPRef, value VmppArchiveFrequency) (err error) {
+func (vmpp) SetArchiveFrequency3(session *Session, self VMPPRef, value VmppArchiveFrequency) (err error) {
 	method := "VMPP.set_archive_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -793,7 +793,7 @@ func (vMPP) SetArchiveFrequency3(session *Session, self VMPPRef, value VmppArchi
 
 // SetBackupSchedule:
 // Version: cowley
-func (vMPP) SetBackupSchedule(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetBackupSchedule(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -813,7 +813,7 @@ func (vMPP) SetBackupSchedule(session *Session, self VMPPRef, value map[string]s
 
 // SetBackupSchedule3:
 // Version: cowley
-func (vMPP) SetBackupSchedule3(session *Session, self VMPPRef, value map[string]string) (err error) {
+func (vmpp) SetBackupSchedule3(session *Session, self VMPPRef, value map[string]string) (err error) {
 	method := "VMPP.set_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -833,7 +833,7 @@ func (vMPP) SetBackupSchedule3(session *Session, self VMPPRef, value map[string]
 
 // SetBackupFrequency: Set the value of the backup_frequency field
 // Version: cowley
-func (vMPP) SetBackupFrequency(session *Session, self VMPPRef, value VmppBackupFrequency) (err error) {
+func (vmpp) SetBackupFrequency(session *Session, self VMPPRef, value VmppBackupFrequency) (err error) {
 	method := "VMPP.set_backup_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -853,7 +853,7 @@ func (vMPP) SetBackupFrequency(session *Session, self VMPPRef, value VmppBackupF
 
 // SetBackupFrequency3: Set the value of the backup_frequency field
 // Version: cowley
-func (vMPP) SetBackupFrequency3(session *Session, self VMPPRef, value VmppBackupFrequency) (err error) {
+func (vmpp) SetBackupFrequency3(session *Session, self VMPPRef, value VmppBackupFrequency) (err error) {
 	method := "VMPP.set_backup_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -873,7 +873,7 @@ func (vMPP) SetBackupFrequency3(session *Session, self VMPPRef, value VmppBackup
 
 // SetBackupRetentionValue:
 // Version: cowley
-func (vMPP) SetBackupRetentionValue(session *Session, self VMPPRef, value int) (err error) {
+func (vmpp) SetBackupRetentionValue(session *Session, self VMPPRef, value int) (err error) {
 	method := "VMPP.set_backup_retention_value"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -893,7 +893,7 @@ func (vMPP) SetBackupRetentionValue(session *Session, self VMPPRef, value int) (
 
 // SetBackupRetentionValue3:
 // Version: cowley
-func (vMPP) SetBackupRetentionValue3(session *Session, self VMPPRef, value int) (err error) {
+func (vmpp) SetBackupRetentionValue3(session *Session, self VMPPRef, value int) (err error) {
 	method := "VMPP.set_backup_retention_value"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -913,7 +913,7 @@ func (vMPP) SetBackupRetentionValue3(session *Session, self VMPPRef, value int) 
 
 // GetAlerts: This call fetches a history of alerts for a given protection policy
 // Version: cowley
-func (vMPP) GetAlerts(session *Session, vmpp VMPPRef, hoursFromNow int) (retval []string, err error) {
+func (vmpp) GetAlerts(session *Session, vmpp VMPPRef, hoursFromNow int) (retval []string, err error) {
 	method := "VMPP.get_alerts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -937,7 +937,7 @@ func (vMPP) GetAlerts(session *Session, vmpp VMPPRef, hoursFromNow int) (retval 
 
 // GetAlerts3: This call fetches a history of alerts for a given protection policy
 // Version: cowley
-func (vMPP) GetAlerts3(session *Session, vmpp VMPPRef, hoursFromNow int) (retval []string, err error) {
+func (vmpp) GetAlerts3(session *Session, vmpp VMPPRef, hoursFromNow int) (retval []string, err error) {
 	method := "VMPP.get_alerts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -961,7 +961,7 @@ func (vMPP) GetAlerts3(session *Session, vmpp VMPPRef, hoursFromNow int) (retval
 
 // ArchiveNow: This call archives the snapshot provided as a parameter
 // Version: cowley
-func (vMPP) ArchiveNow(session *Session, snapshot VMRef) (retval string, err error) {
+func (vmpp) ArchiveNow(session *Session, snapshot VMRef) (retval string, err error) {
 	method := "VMPP.archive_now"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -981,7 +981,7 @@ func (vMPP) ArchiveNow(session *Session, snapshot VMRef) (retval string, err err
 
 // ArchiveNow2: This call archives the snapshot provided as a parameter
 // Version: cowley
-func (vMPP) ArchiveNow2(session *Session, snapshot VMRef) (retval string, err error) {
+func (vmpp) ArchiveNow2(session *Session, snapshot VMRef) (retval string, err error) {
 	method := "VMPP.archive_now"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1001,7 +1001,7 @@ func (vMPP) ArchiveNow2(session *Session, snapshot VMRef) (retval string, err er
 
 // ProtectNow: This call executes the protection policy immediately
 // Version: cowley
-func (vMPP) ProtectNow(session *Session, vmpp VMPPRef) (retval string, err error) {
+func (vmpp) ProtectNow(session *Session, vmpp VMPPRef) (retval string, err error) {
 	method := "VMPP.protect_now"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1021,7 +1021,7 @@ func (vMPP) ProtectNow(session *Session, vmpp VMPPRef) (retval string, err error
 
 // ProtectNow2: This call executes the protection policy immediately
 // Version: cowley
-func (vMPP) ProtectNow2(session *Session, vmpp VMPPRef) (retval string, err error) {
+func (vmpp) ProtectNow2(session *Session, vmpp VMPPRef) (retval string, err error) {
 	method := "VMPP.protect_now"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1041,7 +1041,7 @@ func (vMPP) ProtectNow2(session *Session, vmpp VMPPRef) (retval string, err erro
 
 // SetBackupType: Set the backup_type field of the given VMPP.
 // Version: cowley
-func (vMPP) SetBackupType(session *Session, self VMPPRef, value VmppBackupType) (err error) {
+func (vmpp) SetBackupType(session *Session, self VMPPRef, value VmppBackupType) (err error) {
 	method := "VMPP.set_backup_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1061,7 +1061,7 @@ func (vMPP) SetBackupType(session *Session, self VMPPRef, value VmppBackupType) 
 
 // SetBackupType3: Set the backup_type field of the given VMPP.
 // Version: cowley
-func (vMPP) SetBackupType3(session *Session, self VMPPRef, value VmppBackupType) (err error) {
+func (vmpp) SetBackupType3(session *Session, self VMPPRef, value VmppBackupType) (err error) {
 	method := "VMPP.set_backup_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1081,7 +1081,7 @@ func (vMPP) SetBackupType3(session *Session, self VMPPRef, value VmppBackupType)
 
 // SetIsPolicyEnabled: Set the is_policy_enabled field of the given VMPP.
 // Version: cowley
-func (vMPP) SetIsPolicyEnabled(session *Session, self VMPPRef, value bool) (err error) {
+func (vmpp) SetIsPolicyEnabled(session *Session, self VMPPRef, value bool) (err error) {
 	method := "VMPP.set_is_policy_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1101,7 +1101,7 @@ func (vMPP) SetIsPolicyEnabled(session *Session, self VMPPRef, value bool) (err 
 
 // SetIsPolicyEnabled3: Set the is_policy_enabled field of the given VMPP.
 // Version: cowley
-func (vMPP) SetIsPolicyEnabled3(session *Session, self VMPPRef, value bool) (err error) {
+func (vmpp) SetIsPolicyEnabled3(session *Session, self VMPPRef, value bool) (err error) {
 	method := "VMPP.set_is_policy_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1121,7 +1121,7 @@ func (vMPP) SetIsPolicyEnabled3(session *Session, self VMPPRef, value bool) (err
 
 // SetNameDescription: Set the name/description field of the given VMPP.
 // Version: cowley
-func (vMPP) SetNameDescription(session *Session, self VMPPRef, value string) (err error) {
+func (vmpp) SetNameDescription(session *Session, self VMPPRef, value string) (err error) {
 	method := "VMPP.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1141,7 +1141,7 @@ func (vMPP) SetNameDescription(session *Session, self VMPPRef, value string) (er
 
 // SetNameDescription3: Set the name/description field of the given VMPP.
 // Version: cowley
-func (vMPP) SetNameDescription3(session *Session, self VMPPRef, value string) (err error) {
+func (vmpp) SetNameDescription3(session *Session, self VMPPRef, value string) (err error) {
 	method := "VMPP.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1161,7 +1161,7 @@ func (vMPP) SetNameDescription3(session *Session, self VMPPRef, value string) (e
 
 // SetNameDescription2: Set the name/description field of the given VMPP.
 // Version: rio
-func (vMPP) SetNameDescription2(session *Session, value string) (err error) {
+func (vmpp) SetNameDescription2(session *Session, value string) (err error) {
 	method := "VMPP.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1177,7 +1177,7 @@ func (vMPP) SetNameDescription2(session *Session, value string) (err error) {
 
 // SetNameLabel: Set the name/label field of the given VMPP.
 // Version: cowley
-func (vMPP) SetNameLabel(session *Session, self VMPPRef, value string) (err error) {
+func (vmpp) SetNameLabel(session *Session, self VMPPRef, value string) (err error) {
 	method := "VMPP.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1197,7 +1197,7 @@ func (vMPP) SetNameLabel(session *Session, self VMPPRef, value string) (err erro
 
 // SetNameLabel3: Set the name/label field of the given VMPP.
 // Version: cowley
-func (vMPP) SetNameLabel3(session *Session, self VMPPRef, value string) (err error) {
+func (vmpp) SetNameLabel3(session *Session, self VMPPRef, value string) (err error) {
 	method := "VMPP.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1217,7 +1217,7 @@ func (vMPP) SetNameLabel3(session *Session, self VMPPRef, value string) (err err
 
 // SetNameLabel2: Set the name/label field of the given VMPP.
 // Version: rio
-func (vMPP) SetNameLabel2(session *Session, value string) (err error) {
+func (vmpp) SetNameLabel2(session *Session, value string) (err error) {
 	method := "VMPP.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1233,7 +1233,7 @@ func (vMPP) SetNameLabel2(session *Session, value string) (err error) {
 
 // GetRecentAlerts: Get the recent_alerts field of the given VMPP.
 // Version: cowley
-func (vMPP) GetRecentAlerts(session *Session, self VMPPRef) (retval []string, err error) {
+func (vmpp) GetRecentAlerts(session *Session, self VMPPRef) (retval []string, err error) {
 	method := "VMPP.get_recent_alerts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1253,7 +1253,7 @@ func (vMPP) GetRecentAlerts(session *Session, self VMPPRef) (retval []string, er
 
 // GetRecentAlerts2: Get the recent_alerts field of the given VMPP.
 // Version: cowley
-func (vMPP) GetRecentAlerts2(session *Session, self VMPPRef) (retval []string, err error) {
+func (vmpp) GetRecentAlerts2(session *Session, self VMPPRef) (retval []string, err error) {
 	method := "VMPP.get_recent_alerts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1273,7 +1273,7 @@ func (vMPP) GetRecentAlerts2(session *Session, self VMPPRef) (retval []string, e
 
 // GetAlarmConfig: Get the alarm_config field of the given VMPP.
 // Version: cowley
-func (vMPP) GetAlarmConfig(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetAlarmConfig(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1293,7 +1293,7 @@ func (vMPP) GetAlarmConfig(session *Session, self VMPPRef) (retval map[string]st
 
 // GetAlarmConfig2: Get the alarm_config field of the given VMPP.
 // Version: cowley
-func (vMPP) GetAlarmConfig2(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetAlarmConfig2(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_alarm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1313,7 +1313,7 @@ func (vMPP) GetAlarmConfig2(session *Session, self VMPPRef) (retval map[string]s
 
 // GetIsAlarmEnabled: Get the is_alarm_enabled field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsAlarmEnabled(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsAlarmEnabled(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_alarm_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1333,7 +1333,7 @@ func (vMPP) GetIsAlarmEnabled(session *Session, self VMPPRef) (retval bool, err 
 
 // GetIsAlarmEnabled2: Get the is_alarm_enabled field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsAlarmEnabled2(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsAlarmEnabled2(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_alarm_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1353,7 +1353,7 @@ func (vMPP) GetIsAlarmEnabled2(session *Session, self VMPPRef) (retval bool, err
 
 // GetVMs: Get the VMs field of the given VMPP.
 // Version: cowley
-func (vMPP) GetVMs(session *Session, self VMPPRef) (retval []VMRef, err error) {
+func (vmpp) GetVMs(session *Session, self VMPPRef) (retval []VMRef, err error) {
 	method := "VMPP.get_VMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1373,7 +1373,7 @@ func (vMPP) GetVMs(session *Session, self VMPPRef) (retval []VMRef, err error) {
 
 // GetVMs2: Get the VMs field of the given VMPP.
 // Version: cowley
-func (vMPP) GetVMs2(session *Session, self VMPPRef) (retval []VMRef, err error) {
+func (vmpp) GetVMs2(session *Session, self VMPPRef) (retval []VMRef, err error) {
 	method := "VMPP.get_VMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1393,7 +1393,7 @@ func (vMPP) GetVMs2(session *Session, self VMPPRef) (retval []VMRef, err error) 
 
 // GetArchiveLastRunTime: Get the archive_last_run_time field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveLastRunTime(session *Session, self VMPPRef) (retval time.Time, err error) {
+func (vmpp) GetArchiveLastRunTime(session *Session, self VMPPRef) (retval time.Time, err error) {
 	method := "VMPP.get_archive_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1413,7 +1413,7 @@ func (vMPP) GetArchiveLastRunTime(session *Session, self VMPPRef) (retval time.T
 
 // GetArchiveLastRunTime2: Get the archive_last_run_time field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveLastRunTime2(session *Session, self VMPPRef) (retval time.Time, err error) {
+func (vmpp) GetArchiveLastRunTime2(session *Session, self VMPPRef) (retval time.Time, err error) {
 	method := "VMPP.get_archive_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1433,7 +1433,7 @@ func (vMPP) GetArchiveLastRunTime2(session *Session, self VMPPRef) (retval time.
 
 // GetIsArchiveRunning: Get the is_archive_running field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsArchiveRunning(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsArchiveRunning(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_archive_running"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1453,7 +1453,7 @@ func (vMPP) GetIsArchiveRunning(session *Session, self VMPPRef) (retval bool, er
 
 // GetIsArchiveRunning2: Get the is_archive_running field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsArchiveRunning2(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsArchiveRunning2(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_archive_running"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1473,7 +1473,7 @@ func (vMPP) GetIsArchiveRunning2(session *Session, self VMPPRef) (retval bool, e
 
 // GetArchiveSchedule: Get the archive_schedule field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveSchedule(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetArchiveSchedule(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1493,7 +1493,7 @@ func (vMPP) GetArchiveSchedule(session *Session, self VMPPRef) (retval map[strin
 
 // GetArchiveSchedule2: Get the archive_schedule field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveSchedule2(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetArchiveSchedule2(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_archive_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1513,7 +1513,7 @@ func (vMPP) GetArchiveSchedule2(session *Session, self VMPPRef) (retval map[stri
 
 // GetArchiveFrequency: Get the archive_frequency field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveFrequency(session *Session, self VMPPRef) (retval VmppArchiveFrequency, err error) {
+func (vmpp) GetArchiveFrequency(session *Session, self VMPPRef) (retval VmppArchiveFrequency, err error) {
 	method := "VMPP.get_archive_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1533,7 +1533,7 @@ func (vMPP) GetArchiveFrequency(session *Session, self VMPPRef) (retval VmppArch
 
 // GetArchiveFrequency2: Get the archive_frequency field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveFrequency2(session *Session, self VMPPRef) (retval VmppArchiveFrequency, err error) {
+func (vmpp) GetArchiveFrequency2(session *Session, self VMPPRef) (retval VmppArchiveFrequency, err error) {
 	method := "VMPP.get_archive_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1553,7 +1553,7 @@ func (vMPP) GetArchiveFrequency2(session *Session, self VMPPRef) (retval VmppArc
 
 // GetArchiveTargetConfig: Get the archive_target_config field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveTargetConfig(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetArchiveTargetConfig(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1573,7 +1573,7 @@ func (vMPP) GetArchiveTargetConfig(session *Session, self VMPPRef) (retval map[s
 
 // GetArchiveTargetConfig2: Get the archive_target_config field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveTargetConfig2(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetArchiveTargetConfig2(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_archive_target_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1593,7 +1593,7 @@ func (vMPP) GetArchiveTargetConfig2(session *Session, self VMPPRef) (retval map[
 
 // GetArchiveTargetType: Get the archive_target_type field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveTargetType(session *Session, self VMPPRef) (retval VmppArchiveTargetType, err error) {
+func (vmpp) GetArchiveTargetType(session *Session, self VMPPRef) (retval VmppArchiveTargetType, err error) {
 	method := "VMPP.get_archive_target_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1613,7 +1613,7 @@ func (vMPP) GetArchiveTargetType(session *Session, self VMPPRef) (retval VmppArc
 
 // GetArchiveTargetType2: Get the archive_target_type field of the given VMPP.
 // Version: cowley
-func (vMPP) GetArchiveTargetType2(session *Session, self VMPPRef) (retval VmppArchiveTargetType, err error) {
+func (vmpp) GetArchiveTargetType2(session *Session, self VMPPRef) (retval VmppArchiveTargetType, err error) {
 	method := "VMPP.get_archive_target_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1633,7 +1633,7 @@ func (vMPP) GetArchiveTargetType2(session *Session, self VMPPRef) (retval VmppAr
 
 // GetBackupLastRunTime: Get the backup_last_run_time field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupLastRunTime(session *Session, self VMPPRef) (retval time.Time, err error) {
+func (vmpp) GetBackupLastRunTime(session *Session, self VMPPRef) (retval time.Time, err error) {
 	method := "VMPP.get_backup_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1653,7 +1653,7 @@ func (vMPP) GetBackupLastRunTime(session *Session, self VMPPRef) (retval time.Ti
 
 // GetBackupLastRunTime2: Get the backup_last_run_time field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupLastRunTime2(session *Session, self VMPPRef) (retval time.Time, err error) {
+func (vmpp) GetBackupLastRunTime2(session *Session, self VMPPRef) (retval time.Time, err error) {
 	method := "VMPP.get_backup_last_run_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1673,7 +1673,7 @@ func (vMPP) GetBackupLastRunTime2(session *Session, self VMPPRef) (retval time.T
 
 // GetIsBackupRunning: Get the is_backup_running field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsBackupRunning(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsBackupRunning(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_backup_running"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1693,7 +1693,7 @@ func (vMPP) GetIsBackupRunning(session *Session, self VMPPRef) (retval bool, err
 
 // GetIsBackupRunning2: Get the is_backup_running field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsBackupRunning2(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsBackupRunning2(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_backup_running"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1713,7 +1713,7 @@ func (vMPP) GetIsBackupRunning2(session *Session, self VMPPRef) (retval bool, er
 
 // GetBackupSchedule: Get the backup_schedule field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupSchedule(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetBackupSchedule(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1733,7 +1733,7 @@ func (vMPP) GetBackupSchedule(session *Session, self VMPPRef) (retval map[string
 
 // GetBackupSchedule2: Get the backup_schedule field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupSchedule2(session *Session, self VMPPRef) (retval map[string]string, err error) {
+func (vmpp) GetBackupSchedule2(session *Session, self VMPPRef) (retval map[string]string, err error) {
 	method := "VMPP.get_backup_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1753,7 +1753,7 @@ func (vMPP) GetBackupSchedule2(session *Session, self VMPPRef) (retval map[strin
 
 // GetBackupFrequency: Get the backup_frequency field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupFrequency(session *Session, self VMPPRef) (retval VmppBackupFrequency, err error) {
+func (vmpp) GetBackupFrequency(session *Session, self VMPPRef) (retval VmppBackupFrequency, err error) {
 	method := "VMPP.get_backup_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1773,7 +1773,7 @@ func (vMPP) GetBackupFrequency(session *Session, self VMPPRef) (retval VmppBacku
 
 // GetBackupFrequency2: Get the backup_frequency field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupFrequency2(session *Session, self VMPPRef) (retval VmppBackupFrequency, err error) {
+func (vmpp) GetBackupFrequency2(session *Session, self VMPPRef) (retval VmppBackupFrequency, err error) {
 	method := "VMPP.get_backup_frequency"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1793,7 +1793,7 @@ func (vMPP) GetBackupFrequency2(session *Session, self VMPPRef) (retval VmppBack
 
 // GetBackupRetentionValue: Get the backup_retention_value field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupRetentionValue(session *Session, self VMPPRef) (retval int, err error) {
+func (vmpp) GetBackupRetentionValue(session *Session, self VMPPRef) (retval int, err error) {
 	method := "VMPP.get_backup_retention_value"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1813,7 +1813,7 @@ func (vMPP) GetBackupRetentionValue(session *Session, self VMPPRef) (retval int,
 
 // GetBackupRetentionValue2: Get the backup_retention_value field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupRetentionValue2(session *Session, self VMPPRef) (retval int, err error) {
+func (vmpp) GetBackupRetentionValue2(session *Session, self VMPPRef) (retval int, err error) {
 	method := "VMPP.get_backup_retention_value"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1833,7 +1833,7 @@ func (vMPP) GetBackupRetentionValue2(session *Session, self VMPPRef) (retval int
 
 // GetBackupType: Get the backup_type field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupType(session *Session, self VMPPRef) (retval VmppBackupType, err error) {
+func (vmpp) GetBackupType(session *Session, self VMPPRef) (retval VmppBackupType, err error) {
 	method := "VMPP.get_backup_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1853,7 +1853,7 @@ func (vMPP) GetBackupType(session *Session, self VMPPRef) (retval VmppBackupType
 
 // GetBackupType2: Get the backup_type field of the given VMPP.
 // Version: cowley
-func (vMPP) GetBackupType2(session *Session, self VMPPRef) (retval VmppBackupType, err error) {
+func (vmpp) GetBackupType2(session *Session, self VMPPRef) (retval VmppBackupType, err error) {
 	method := "VMPP.get_backup_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1873,7 +1873,7 @@ func (vMPP) GetBackupType2(session *Session, self VMPPRef) (retval VmppBackupTyp
 
 // GetIsPolicyEnabled: Get the is_policy_enabled field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsPolicyEnabled(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsPolicyEnabled(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_policy_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1893,7 +1893,7 @@ func (vMPP) GetIsPolicyEnabled(session *Session, self VMPPRef) (retval bool, err
 
 // GetIsPolicyEnabled2: Get the is_policy_enabled field of the given VMPP.
 // Version: cowley
-func (vMPP) GetIsPolicyEnabled2(session *Session, self VMPPRef) (retval bool, err error) {
+func (vmpp) GetIsPolicyEnabled2(session *Session, self VMPPRef) (retval bool, err error) {
 	method := "VMPP.get_is_policy_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1913,7 +1913,7 @@ func (vMPP) GetIsPolicyEnabled2(session *Session, self VMPPRef) (retval bool, er
 
 // GetNameDescription: Get the name/description field of the given VMPP.
 // Version: cowley
-func (vMPP) GetNameDescription(session *Session, self VMPPRef) (retval string, err error) {
+func (vmpp) GetNameDescription(session *Session, self VMPPRef) (retval string, err error) {
 	method := "VMPP.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1933,7 +1933,7 @@ func (vMPP) GetNameDescription(session *Session, self VMPPRef) (retval string, e
 
 // GetNameDescription2: Get the name/description field of the given VMPP.
 // Version: cowley
-func (vMPP) GetNameDescription2(session *Session, self VMPPRef) (retval string, err error) {
+func (vmpp) GetNameDescription2(session *Session, self VMPPRef) (retval string, err error) {
 	method := "VMPP.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1953,7 +1953,7 @@ func (vMPP) GetNameDescription2(session *Session, self VMPPRef) (retval string, 
 
 // GetNameLabel: Get the name/label field of the given VMPP.
 // Version: cowley
-func (vMPP) GetNameLabel(session *Session, self VMPPRef) (retval string, err error) {
+func (vmpp) GetNameLabel(session *Session, self VMPPRef) (retval string, err error) {
 	method := "VMPP.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1973,7 +1973,7 @@ func (vMPP) GetNameLabel(session *Session, self VMPPRef) (retval string, err err
 
 // GetNameLabel2: Get the name/label field of the given VMPP.
 // Version: cowley
-func (vMPP) GetNameLabel2(session *Session, self VMPPRef) (retval string, err error) {
+func (vmpp) GetNameLabel2(session *Session, self VMPPRef) (retval string, err error) {
 	method := "VMPP.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1993,7 +1993,7 @@ func (vMPP) GetNameLabel2(session *Session, self VMPPRef) (retval string, err er
 
 // GetUUID: Get the uuid field of the given VMPP.
 // Version: cowley
-func (vMPP) GetUUID(session *Session, self VMPPRef) (retval string, err error) {
+func (vmpp) GetUUID(session *Session, self VMPPRef) (retval string, err error) {
 	method := "VMPP.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2013,7 +2013,7 @@ func (vMPP) GetUUID(session *Session, self VMPPRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VMPP.
 // Version: cowley
-func (vMPP) GetUUID2(session *Session, self VMPPRef) (retval string, err error) {
+func (vmpp) GetUUID2(session *Session, self VMPPRef) (retval string, err error) {
 	method := "VMPP.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2033,7 +2033,7 @@ func (vMPP) GetUUID2(session *Session, self VMPPRef) (retval string, err error) 
 
 // GetByNameLabel: Get all the VMPP instances with the given label.
 // Version: cowley
-func (vMPP) GetByNameLabel(session *Session, label string) (retval []VMPPRef, err error) {
+func (vmpp) GetByNameLabel(session *Session, label string) (retval []VMPPRef, err error) {
 	method := "VMPP.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2053,7 +2053,7 @@ func (vMPP) GetByNameLabel(session *Session, label string) (retval []VMPPRef, er
 
 // GetByNameLabel2: Get all the VMPP instances with the given label.
 // Version: cowley
-func (vMPP) GetByNameLabel2(session *Session, label string) (retval []VMPPRef, err error) {
+func (vmpp) GetByNameLabel2(session *Session, label string) (retval []VMPPRef, err error) {
 	method := "VMPP.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2073,7 +2073,7 @@ func (vMPP) GetByNameLabel2(session *Session, label string) (retval []VMPPRef, e
 
 // Destroy: Destroy the specified VMPP instance.
 // Version: cowley
-func (vMPP) Destroy(session *Session, self VMPPRef) (err error) {
+func (vmpp) Destroy(session *Session, self VMPPRef) (err error) {
 	method := "VMPP.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2089,7 +2089,7 @@ func (vMPP) Destroy(session *Session, self VMPPRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VMPP instance.
 // Version: cowley
-func (vMPP) AsyncDestroy(session *Session, self VMPPRef) (retval TaskRef, err error) {
+func (vmpp) AsyncDestroy(session *Session, self VMPPRef) (retval TaskRef, err error) {
 	method := "Async.VMPP.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2109,7 +2109,7 @@ func (vMPP) AsyncDestroy(session *Session, self VMPPRef) (retval TaskRef, err er
 
 // Destroy2: Destroy the specified VMPP instance.
 // Version: cowley
-func (vMPP) Destroy2(session *Session, self VMPPRef) (err error) {
+func (vmpp) Destroy2(session *Session, self VMPPRef) (err error) {
 	method := "VMPP.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2125,7 +2125,7 @@ func (vMPP) Destroy2(session *Session, self VMPPRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VMPP instance.
 // Version: cowley
-func (vMPP) AsyncDestroy2(session *Session, self VMPPRef) (retval TaskRef, err error) {
+func (vmpp) AsyncDestroy2(session *Session, self VMPPRef) (retval TaskRef, err error) {
 	method := "Async.VMPP.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2145,7 +2145,7 @@ func (vMPP) AsyncDestroy2(session *Session, self VMPPRef) (retval TaskRef, err e
 
 // Create: Create a new VMPP instance, and return its handle. The constructor args are: name_label, name_description, is_policy_enabled, backup_type, backup_retention_value, backup_frequency, backup_schedule, archive_target_type, archive_target_config, archive_frequency, archive_schedule, is_alarm_enabled, alarm_config (* = non-optional).
 // Version: cowley
-func (vMPP) Create(session *Session, args VMPPRecord) (retval VMPPRef, err error) {
+func (vmpp) Create(session *Session, args VMPPRecord) (retval VMPPRef, err error) {
 	method := "VMPP.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2165,7 +2165,7 @@ func (vMPP) Create(session *Session, args VMPPRecord) (retval VMPPRef, err error
 
 // AsyncCreate: Create a new VMPP instance, and return its handle. The constructor args are: name_label, name_description, is_policy_enabled, backup_type, backup_retention_value, backup_frequency, backup_schedule, archive_target_type, archive_target_config, archive_frequency, archive_schedule, is_alarm_enabled, alarm_config (* = non-optional).
 // Version: cowley
-func (vMPP) AsyncCreate(session *Session, args VMPPRecord) (retval TaskRef, err error) {
+func (vmpp) AsyncCreate(session *Session, args VMPPRecord) (retval TaskRef, err error) {
 	method := "Async.VMPP.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2185,7 +2185,7 @@ func (vMPP) AsyncCreate(session *Session, args VMPPRecord) (retval TaskRef, err 
 
 // Create2: Create a new VMPP instance, and return its handle. The constructor args are: name_label, name_description, is_policy_enabled, backup_type, backup_retention_value, backup_frequency, backup_schedule, archive_target_type, archive_target_config, archive_frequency, archive_schedule, is_alarm_enabled, alarm_config (* = non-optional).
 // Version: cowley
-func (vMPP) Create2(session *Session, args VMPPRecord) (retval VMPPRef, err error) {
+func (vmpp) Create2(session *Session, args VMPPRecord) (retval VMPPRef, err error) {
 	method := "VMPP.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2205,7 +2205,7 @@ func (vMPP) Create2(session *Session, args VMPPRecord) (retval VMPPRef, err erro
 
 // AsyncCreate2: Create a new VMPP instance, and return its handle. The constructor args are: name_label, name_description, is_policy_enabled, backup_type, backup_retention_value, backup_frequency, backup_schedule, archive_target_type, archive_target_config, archive_frequency, archive_schedule, is_alarm_enabled, alarm_config (* = non-optional).
 // Version: cowley
-func (vMPP) AsyncCreate2(session *Session, args VMPPRecord) (retval TaskRef, err error) {
+func (vmpp) AsyncCreate2(session *Session, args VMPPRecord) (retval TaskRef, err error) {
 	method := "Async.VMPP.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2225,17 +2225,17 @@ func (vMPP) AsyncCreate2(session *Session, args VMPPRecord) (retval TaskRef, err
 
 // GetByUUID: Get a reference to the VMPP instance with the specified UUID.
 // Version: cowley
-func (vMPP) GetByUUID(session *Session, uUID string) (retval VMPPRef, err error) {
+func (vmpp) GetByUUID(session *Session, uuid string) (retval VMPPRef, err error) {
 	method := "VMPP.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -2245,17 +2245,17 @@ func (vMPP) GetByUUID(session *Session, uUID string) (retval VMPPRef, err error)
 
 // GetByUUID2: Get a reference to the VMPP instance with the specified UUID.
 // Version: cowley
-func (vMPP) GetByUUID2(session *Session, uUID string) (retval VMPPRef, err error) {
+func (vmpp) GetByUUID2(session *Session, uuid string) (retval VMPPRef, err error) {
 	method := "VMPP.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -2265,7 +2265,7 @@ func (vMPP) GetByUUID2(session *Session, uUID string) (retval VMPPRef, err error
 
 // GetRecord: Get a record containing the current state of the given VMPP.
 // Version: cowley
-func (vMPP) GetRecord(session *Session, self VMPPRef) (retval VMPPRecord, err error) {
+func (vmpp) GetRecord(session *Session, self VMPPRef) (retval VMPPRecord, err error) {
 	method := "VMPP.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2285,7 +2285,7 @@ func (vMPP) GetRecord(session *Session, self VMPPRef) (retval VMPPRecord, err er
 
 // GetRecord2: Get a record containing the current state of the given VMPP.
 // Version: cowley
-func (vMPP) GetRecord2(session *Session, self VMPPRef) (retval VMPPRecord, err error) {
+func (vmpp) GetRecord2(session *Session, self VMPPRef) (retval VMPPRecord, err error) {
 	method := "VMPP.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

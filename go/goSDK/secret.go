@@ -594,17 +594,17 @@ func (secret) AsyncCreate2(session *Session, args SecretRecord) (retval TaskRef,
 
 // GetByUUID: Get a reference to the secret instance with the specified UUID.
 // Version: midnight-ride
-func (secret) GetByUUID(session *Session, uUID string) (retval SecretRef, err error) {
+func (secret) GetByUUID(session *Session, uuid string) (retval SecretRef, err error) {
 	method := "secret.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -614,17 +614,17 @@ func (secret) GetByUUID(session *Session, uUID string) (retval SecretRef, err er
 
 // GetByUUID2: Get a reference to the secret instance with the specified UUID.
 // Version: midnight-ride
-func (secret) GetByUUID2(session *Session, uUID string) (retval SecretRef, err error) {
+func (secret) GetByUUID2(session *Session, uuid string) (retval SecretRef, err error) {
 	method := "secret.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

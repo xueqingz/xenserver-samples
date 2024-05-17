@@ -80,13 +80,13 @@ type PIFRecord struct {
 type PIFRef string
 
 // A physical network interface (note separate VLANs are represented as several PIFs)
-type pIF struct{}
+type pif struct{}
 
-var PIF pIF
+var PIF pif
 
 // GetAllRecords: Return a map of PIF references to PIF records for all PIFs known to the system.
 // Version: rio
-func (pIF) GetAllRecords(session *Session) (retval map[PIFRef]PIFRecord, err error) {
+func (pif) GetAllRecords(session *Session) (retval map[PIFRef]PIFRecord, err error) {
 	method := "PIF.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -102,7 +102,7 @@ func (pIF) GetAllRecords(session *Session) (retval map[PIFRef]PIFRecord, err err
 
 // GetAllRecords1: Return a map of PIF references to PIF records for all PIFs known to the system.
 // Version: rio
-func (pIF) GetAllRecords1(session *Session) (retval map[PIFRef]PIFRecord, err error) {
+func (pif) GetAllRecords1(session *Session) (retval map[PIFRef]PIFRecord, err error) {
 	method := "PIF.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -118,7 +118,7 @@ func (pIF) GetAllRecords1(session *Session) (retval map[PIFRef]PIFRecord, err er
 
 // GetAll: Return a list of all the PIFs known to the system.
 // Version: rio
-func (pIF) GetAll(session *Session) (retval []PIFRef, err error) {
+func (pif) GetAll(session *Session) (retval []PIFRef, err error) {
 	method := "PIF.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -134,7 +134,7 @@ func (pIF) GetAll(session *Session) (retval []PIFRef, err error) {
 
 // GetAll1: Return a list of all the PIFs known to the system.
 // Version: rio
-func (pIF) GetAll1(session *Session) (retval []PIFRef, err error) {
+func (pif) GetAll1(session *Session) (retval []PIFRef, err error) {
 	method := "PIF.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -150,7 +150,7 @@ func (pIF) GetAll1(session *Session) (retval []PIFRef, err error) {
 
 // SetProperty: Set the value of a property of the PIF
 // Version: creedence
-func (pIF) SetProperty(session *Session, self PIFRef, name string, value string) (err error) {
+func (pif) SetProperty(session *Session, self PIFRef, name string, value string) (err error) {
 	method := "PIF.set_property"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -174,7 +174,7 @@ func (pIF) SetProperty(session *Session, self PIFRef, name string, value string)
 
 // AsyncSetProperty: Set the value of a property of the PIF
 // Version: creedence
-func (pIF) AsyncSetProperty(session *Session, self PIFRef, name string, value string) (retval TaskRef, err error) {
+func (pif) AsyncSetProperty(session *Session, self PIFRef, name string, value string) (retval TaskRef, err error) {
 	method := "Async.PIF.set_property"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -202,7 +202,7 @@ func (pIF) AsyncSetProperty(session *Session, self PIFRef, name string, value st
 
 // SetProperty4: Set the value of a property of the PIF
 // Version: creedence
-func (pIF) SetProperty4(session *Session, self PIFRef, name string, value string) (err error) {
+func (pif) SetProperty4(session *Session, self PIFRef, name string, value string) (err error) {
 	method := "PIF.set_property"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -226,7 +226,7 @@ func (pIF) SetProperty4(session *Session, self PIFRef, name string, value string
 
 // AsyncSetProperty4: Set the value of a property of the PIF
 // Version: creedence
-func (pIF) AsyncSetProperty4(session *Session, self PIFRef, name string, value string) (retval TaskRef, err error) {
+func (pif) AsyncSetProperty4(session *Session, self PIFRef, name string, value string) (retval TaskRef, err error) {
 	method := "Async.PIF.set_property"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -254,7 +254,7 @@ func (pIF) AsyncSetProperty4(session *Session, self PIFRef, name string, value s
 
 // DBForget: Destroy a PIF database record.
 // Version: orlando
-func (pIF) DBForget(session *Session, self PIFRef) (err error) {
+func (pif) DBForget(session *Session, self PIFRef) (err error) {
 	method := "PIF.db_forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -270,7 +270,7 @@ func (pIF) DBForget(session *Session, self PIFRef) (err error) {
 
 // AsyncDBForget: Destroy a PIF database record.
 // Version: orlando
-func (pIF) AsyncDBForget(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncDBForget(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.db_forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -290,7 +290,7 @@ func (pIF) AsyncDBForget(session *Session, self PIFRef) (retval TaskRef, err err
 
 // DBForget2: Destroy a PIF database record.
 // Version: orlando
-func (pIF) DBForget2(session *Session, self PIFRef) (err error) {
+func (pif) DBForget2(session *Session, self PIFRef) (err error) {
 	method := "PIF.db_forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -306,7 +306,7 @@ func (pIF) DBForget2(session *Session, self PIFRef) (err error) {
 
 // AsyncDBForget2: Destroy a PIF database record.
 // Version: orlando
-func (pIF) AsyncDBForget2(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncDBForget2(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.db_forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -326,7 +326,7 @@ func (pIF) AsyncDBForget2(session *Session, self PIFRef) (retval TaskRef, err er
 
 // DBIntroduce: Create a new PIF record in the database only
 // Version: creedence
-func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval PIFRef, err error) {
+func (pif) DBIntroduce(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval PIFRef, err error) {
 	method := "PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -344,15 +344,15 @@ func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -360,11 +360,11 @@ func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -376,7 +376,7 @@ func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -384,7 +384,7 @@ func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -404,7 +404,7 @@ func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -424,7 +424,7 @@ func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -434,7 +434,7 @@ func (pIF) DBIntroduce(session *Session, device string, network NetworkRef, host
 
 // AsyncDBIntroduce: Create a new PIF record in the database only
 // Version: creedence
-func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval TaskRef, err error) {
+func (pif) AsyncDBIntroduce(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval TaskRef, err error) {
 	method := "Async.PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -452,15 +452,15 @@ func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -468,11 +468,11 @@ func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -484,7 +484,7 @@ func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -492,7 +492,7 @@ func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -512,7 +512,7 @@ func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -532,7 +532,7 @@ func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -542,7 +542,7 @@ func (pIF) AsyncDBIntroduce(session *Session, device string, network NetworkRef,
 
 // DBIntroduce24: Create a new PIF record in the database only
 // Version: creedence
-func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval PIFRef, err error) {
+func (pif) DBIntroduce24(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval PIFRef, err error) {
 	method := "PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -560,15 +560,15 @@ func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -576,11 +576,11 @@ func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -592,7 +592,7 @@ func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -600,7 +600,7 @@ func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -620,7 +620,7 @@ func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -640,7 +640,7 @@ func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -650,7 +650,7 @@ func (pIF) DBIntroduce24(session *Session, device string, network NetworkRef, ho
 
 // AsyncDBIntroduce24: Create a new PIF record in the database only
 // Version: creedence
-func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval TaskRef, err error) {
+func (pif) AsyncDBIntroduce24(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool, properties map[string]string) (retval TaskRef, err error) {
 	method := "Async.PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -668,15 +668,15 @@ func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -684,11 +684,11 @@ func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -700,7 +700,7 @@ func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -708,7 +708,7 @@ func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -728,7 +728,7 @@ func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -748,7 +748,7 @@ func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg, propertiesArg)
 	if err != nil {
 		return
 	}
@@ -758,7 +758,7 @@ func (pIF) AsyncDBIntroduce24(session *Session, device string, network NetworkRe
 
 // DBIntroduce23: Create a new PIF record in the database only
 // Version: vgpu-productisation
-func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool) (retval PIFRef, err error) {
+func (pif) DBIntroduce23(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool) (retval PIFRef, err error) {
 	method := "PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -776,15 +776,15 @@ func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -792,11 +792,11 @@ func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -808,7 +808,7 @@ func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -816,7 +816,7 @@ func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -836,7 +836,7 @@ func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -852,7 +852,7 @@ func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg)
 	if err != nil {
 		return
 	}
@@ -862,7 +862,7 @@ func (pIF) DBIntroduce23(session *Session, device string, network NetworkRef, ho
 
 // AsyncDBIntroduce23: Create a new PIF record in the database only
 // Version: vgpu-productisation
-func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool) (retval TaskRef, err error) {
+func (pif) AsyncDBIntroduce23(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType, managed bool) (retval TaskRef, err error) {
 	method := "Async.PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -880,15 +880,15 @@ func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -896,11 +896,11 @@ func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -912,7 +912,7 @@ func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -920,7 +920,7 @@ func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -940,7 +940,7 @@ func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -956,7 +956,7 @@ func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg, managedArg)
 	if err != nil {
 		return
 	}
@@ -966,7 +966,7 @@ func (pIF) AsyncDBIntroduce23(session *Session, device string, network NetworkRe
 
 // DBIntroduce22: Create a new PIF record in the database only
 // Version: boston
-func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType) (retval PIFRef, err error) {
+func (pif) DBIntroduce22(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType) (retval PIFRef, err error) {
 	method := "PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -984,15 +984,15 @@ func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -1000,11 +1000,11 @@ func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -1016,7 +1016,7 @@ func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -1024,7 +1024,7 @@ func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -1044,7 +1044,7 @@ func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -1056,7 +1056,7 @@ func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg)
 	if err != nil {
 		return
 	}
@@ -1066,7 +1066,7 @@ func (pIF) DBIntroduce22(session *Session, device string, network NetworkRef, ho
 
 // AsyncDBIntroduce22: Create a new PIF record in the database only
 // Version: boston
-func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, iPv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType) (retval TaskRef, err error) {
+func (pif) AsyncDBIntroduce22(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool, ipv6ConfigurationMode Ipv6ConfigurationMode, ipv6 []string, ipv6Gateway string, primaryAddressType PrimaryAddressType) (retval TaskRef, err error) {
 	method := "Async.PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1084,15 +1084,15 @@ func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -1100,11 +1100,11 @@ func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -1116,7 +1116,7 @@ func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -1124,7 +1124,7 @@ func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -1144,7 +1144,7 @@ func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeStringSet(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -1156,7 +1156,7 @@ func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, iPv6Arg, ipv6GatewayArg, primaryAddressTypeArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg, ipv6ConfigurationModeArg, ipv6Arg, ipv6GatewayArg, primaryAddressTypeArg)
 	if err != nil {
 		return
 	}
@@ -1166,7 +1166,7 @@ func (pIF) AsyncDBIntroduce22(session *Session, device string, network NetworkRe
 
 // DBIntroduce18: Create a new PIF record in the database only
 // Version: orlando
-func (pIF) DBIntroduce18(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool) (retval PIFRef, err error) {
+func (pif) DBIntroduce18(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool) (retval PIFRef, err error) {
 	method := "PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1184,15 +1184,15 @@ func (pIF) DBIntroduce18(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -1200,11 +1200,11 @@ func (pIF) DBIntroduce18(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -1216,7 +1216,7 @@ func (pIF) DBIntroduce18(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -1224,7 +1224,7 @@ func (pIF) DBIntroduce18(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -1240,7 +1240,7 @@ func (pIF) DBIntroduce18(session *Session, device string, network NetworkRef, ho
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg)
 	if err != nil {
 		return
 	}
@@ -1250,7 +1250,7 @@ func (pIF) DBIntroduce18(session *Session, device string, network NetworkRef, ho
 
 // AsyncDBIntroduce18: Create a new PIF record in the database only
 // Version: orlando
-func (pIF) AsyncDBIntroduce18(session *Session, device string, network NetworkRef, host HostRef, mAC string, mTU int, vLAN int, physical bool, iPConfigurationMode IPConfigurationMode, iP string, netmask string, gateway string, dNS string, bondSlaveOf BondRef, vLANMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool) (retval TaskRef, err error) {
+func (pif) AsyncDBIntroduce18(session *Session, device string, network NetworkRef, host HostRef, mac string, mtu int, vlan int, physical bool, ipConfigurationMode IPConfigurationMode, ip string, netmask string, gateway string, dns string, bondSlaveOf BondRef, vlanMasterOf VLANRef, management bool, otherConfig map[string]string, disallowUnplug bool) (retval TaskRef, err error) {
 	method := "Async.PIF.db_introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1268,15 +1268,15 @@ func (pIF) AsyncDBIntroduce18(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
-	mTUArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mTU)
+	mtuArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "MTU"), mtu)
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
@@ -1284,11 +1284,11 @@ func (pIF) AsyncDBIntroduce18(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	iPConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), iPConfigurationMode)
+	ipConfigurationModeArg, err := serializeEnumIPConfigurationMode(fmt.Sprintf("%s(%s)", method, "ip_configuration_mode"), ipConfigurationMode)
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -1300,7 +1300,7 @@ func (pIF) AsyncDBIntroduce18(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
@@ -1308,7 +1308,7 @@ func (pIF) AsyncDBIntroduce18(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	vLANMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vLANMasterOf)
+	vlanMasterOfArg, err := serializeVLANRef(fmt.Sprintf("%s(%s)", method, "VLAN_master_of"), vlanMasterOf)
 	if err != nil {
 		return
 	}
@@ -1324,7 +1324,7 @@ func (pIF) AsyncDBIntroduce18(session *Session, device string, network NetworkRe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, mACArg, mTUArg, vLANArg, physicalArg, iPConfigurationModeArg, iPArg, netmaskArg, gatewayArg, dNSArg, bondSlaveOfArg, vLANMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, macArg, mtuArg, vlanArg, physicalArg, ipConfigurationModeArg, ipArg, netmaskArg, gatewayArg, dnsArg, bondSlaveOfArg, vlanMasterOfArg, managementArg, otherConfigArg, disallowUnplugArg)
 	if err != nil {
 		return
 	}
@@ -1337,7 +1337,7 @@ func (pIF) AsyncDBIntroduce18(session *Session, device string, network NetworkRe
 //
 // Errors:
 // TRANSPORT_PIF_NOT_CONFIGURED - The tunnel transport PIF has no IP configuration set.
-func (pIF) Plug(session *Session, self PIFRef) (err error) {
+func (pif) Plug(session *Session, self PIFRef) (err error) {
 	method := "PIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1356,7 +1356,7 @@ func (pIF) Plug(session *Session, self PIFRef) (err error) {
 //
 // Errors:
 // TRANSPORT_PIF_NOT_CONFIGURED - The tunnel transport PIF has no IP configuration set.
-func (pIF) AsyncPlug(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncPlug(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1379,7 +1379,7 @@ func (pIF) AsyncPlug(session *Session, self PIFRef) (retval TaskRef, err error) 
 //
 // Errors:
 // TRANSPORT_PIF_NOT_CONFIGURED - The tunnel transport PIF has no IP configuration set.
-func (pIF) Plug2(session *Session, self PIFRef) (err error) {
+func (pif) Plug2(session *Session, self PIFRef) (err error) {
 	method := "PIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1398,7 +1398,7 @@ func (pIF) Plug2(session *Session, self PIFRef) (err error) {
 //
 // Errors:
 // TRANSPORT_PIF_NOT_CONFIGURED - The tunnel transport PIF has no IP configuration set.
-func (pIF) AsyncPlug2(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncPlug2(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1422,7 +1422,7 @@ func (pIF) AsyncPlug2(session *Session, self PIFRef) (retval TaskRef, err error)
 // Errors:
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) SetDisallowUnplug(session *Session, self PIFRef, value bool) (err error) {
+func (pif) SetDisallowUnplug(session *Session, self PIFRef, value bool) (err error) {
 	method := "PIF.set_disallow_unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1446,7 +1446,7 @@ func (pIF) SetDisallowUnplug(session *Session, self PIFRef, value bool) (err err
 // Errors:
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncSetDisallowUnplug(session *Session, self PIFRef, value bool) (retval TaskRef, err error) {
+func (pif) AsyncSetDisallowUnplug(session *Session, self PIFRef, value bool) (retval TaskRef, err error) {
 	method := "Async.PIF.set_disallow_unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1474,7 +1474,7 @@ func (pIF) AsyncSetDisallowUnplug(session *Session, self PIFRef, value bool) (re
 // Errors:
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) SetDisallowUnplug3(session *Session, self PIFRef, value bool) (err error) {
+func (pif) SetDisallowUnplug3(session *Session, self PIFRef, value bool) (err error) {
 	method := "PIF.set_disallow_unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1498,7 +1498,7 @@ func (pIF) SetDisallowUnplug3(session *Session, self PIFRef, value bool) (err er
 // Errors:
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncSetDisallowUnplug3(session *Session, self PIFRef, value bool) (retval TaskRef, err error) {
+func (pif) AsyncSetDisallowUnplug3(session *Session, self PIFRef, value bool) (retval TaskRef, err error) {
 	method := "Async.PIF.set_disallow_unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1528,7 +1528,7 @@ func (pIF) AsyncSetDisallowUnplug3(session *Session, self PIFRef, value bool) (r
 // VIF_IN_USE - Network has active VIFs
 // PIF_DOES_NOT_ALLOW_UNPLUG - The operation you requested cannot be performed because the specified PIF does not allow unplug.
 // PIF_HAS_FCOE_SR_IN_USE - The operation you requested cannot be performed because the specified PIF has FCoE SR in use.
-func (pIF) Unplug(session *Session, self PIFRef) (err error) {
+func (pif) Unplug(session *Session, self PIFRef) (err error) {
 	method := "PIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1550,7 +1550,7 @@ func (pIF) Unplug(session *Session, self PIFRef) (err error) {
 // VIF_IN_USE - Network has active VIFs
 // PIF_DOES_NOT_ALLOW_UNPLUG - The operation you requested cannot be performed because the specified PIF does not allow unplug.
 // PIF_HAS_FCOE_SR_IN_USE - The operation you requested cannot be performed because the specified PIF has FCoE SR in use.
-func (pIF) AsyncUnplug(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncUnplug(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1576,7 +1576,7 @@ func (pIF) AsyncUnplug(session *Session, self PIFRef) (retval TaskRef, err error
 // VIF_IN_USE - Network has active VIFs
 // PIF_DOES_NOT_ALLOW_UNPLUG - The operation you requested cannot be performed because the specified PIF does not allow unplug.
 // PIF_HAS_FCOE_SR_IN_USE - The operation you requested cannot be performed because the specified PIF has FCoE SR in use.
-func (pIF) Unplug2(session *Session, self PIFRef) (err error) {
+func (pif) Unplug2(session *Session, self PIFRef) (err error) {
 	method := "PIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1598,7 +1598,7 @@ func (pIF) Unplug2(session *Session, self PIFRef) (err error) {
 // VIF_IN_USE - Network has active VIFs
 // PIF_DOES_NOT_ALLOW_UNPLUG - The operation you requested cannot be performed because the specified PIF does not allow unplug.
 // PIF_HAS_FCOE_SR_IN_USE - The operation you requested cannot be performed because the specified PIF has FCoE SR in use.
-func (pIF) AsyncUnplug2(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncUnplug2(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1622,7 +1622,7 @@ func (pIF) AsyncUnplug2(session *Session, self PIFRef) (retval TaskRef, err erro
 // Errors:
 // PIF_TUNNEL_STILL_EXISTS - Operation cannot proceed while a tunnel exists on this interface.
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) Forget(session *Session, self PIFRef) (err error) {
+func (pif) Forget(session *Session, self PIFRef) (err error) {
 	method := "PIF.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1642,7 +1642,7 @@ func (pIF) Forget(session *Session, self PIFRef) (err error) {
 // Errors:
 // PIF_TUNNEL_STILL_EXISTS - Operation cannot proceed while a tunnel exists on this interface.
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncForget(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncForget(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1666,7 +1666,7 @@ func (pIF) AsyncForget(session *Session, self PIFRef) (retval TaskRef, err error
 // Errors:
 // PIF_TUNNEL_STILL_EXISTS - Operation cannot proceed while a tunnel exists on this interface.
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) Forget2(session *Session, self PIFRef) (err error) {
+func (pif) Forget2(session *Session, self PIFRef) (err error) {
 	method := "PIF.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1686,7 +1686,7 @@ func (pIF) Forget2(session *Session, self PIFRef) (err error) {
 // Errors:
 // PIF_TUNNEL_STILL_EXISTS - Operation cannot proceed while a tunnel exists on this interface.
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncForget2(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncForget2(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1706,7 +1706,7 @@ func (pIF) AsyncForget2(session *Session, self PIFRef) (retval TaskRef, err erro
 
 // Introduce: Create a PIF object matching a particular network interface
 // Version: vgpu-productisation
-func (pIF) Introduce(session *Session, host HostRef, mAC string, device string, managed bool) (retval PIFRef, err error) {
+func (pif) Introduce(session *Session, host HostRef, mac string, device string, managed bool) (retval PIFRef, err error) {
 	method := "PIF.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1716,7 +1716,7 @@ func (pIF) Introduce(session *Session, host HostRef, mAC string, device string, 
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -1728,7 +1728,7 @@ func (pIF) Introduce(session *Session, host HostRef, mAC string, device string, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, mACArg, deviceArg, managedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, macArg, deviceArg, managedArg)
 	if err != nil {
 		return
 	}
@@ -1738,7 +1738,7 @@ func (pIF) Introduce(session *Session, host HostRef, mAC string, device string, 
 
 // AsyncIntroduce: Create a PIF object matching a particular network interface
 // Version: vgpu-productisation
-func (pIF) AsyncIntroduce(session *Session, host HostRef, mAC string, device string, managed bool) (retval TaskRef, err error) {
+func (pif) AsyncIntroduce(session *Session, host HostRef, mac string, device string, managed bool) (retval TaskRef, err error) {
 	method := "Async.PIF.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1748,7 +1748,7 @@ func (pIF) AsyncIntroduce(session *Session, host HostRef, mAC string, device str
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -1760,7 +1760,7 @@ func (pIF) AsyncIntroduce(session *Session, host HostRef, mAC string, device str
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, mACArg, deviceArg, managedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, macArg, deviceArg, managedArg)
 	if err != nil {
 		return
 	}
@@ -1770,7 +1770,7 @@ func (pIF) AsyncIntroduce(session *Session, host HostRef, mAC string, device str
 
 // Introduce5: Create a PIF object matching a particular network interface
 // Version: vgpu-productisation
-func (pIF) Introduce5(session *Session, host HostRef, mAC string, device string, managed bool) (retval PIFRef, err error) {
+func (pif) Introduce5(session *Session, host HostRef, mac string, device string, managed bool) (retval PIFRef, err error) {
 	method := "PIF.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1780,7 +1780,7 @@ func (pIF) Introduce5(session *Session, host HostRef, mAC string, device string,
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -1792,7 +1792,7 @@ func (pIF) Introduce5(session *Session, host HostRef, mAC string, device string,
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, mACArg, deviceArg, managedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, macArg, deviceArg, managedArg)
 	if err != nil {
 		return
 	}
@@ -1802,7 +1802,7 @@ func (pIF) Introduce5(session *Session, host HostRef, mAC string, device string,
 
 // AsyncIntroduce5: Create a PIF object matching a particular network interface
 // Version: vgpu-productisation
-func (pIF) AsyncIntroduce5(session *Session, host HostRef, mAC string, device string, managed bool) (retval TaskRef, err error) {
+func (pif) AsyncIntroduce5(session *Session, host HostRef, mac string, device string, managed bool) (retval TaskRef, err error) {
 	method := "Async.PIF.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1812,7 +1812,7 @@ func (pIF) AsyncIntroduce5(session *Session, host HostRef, mAC string, device st
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -1824,7 +1824,7 @@ func (pIF) AsyncIntroduce5(session *Session, host HostRef, mAC string, device st
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, mACArg, deviceArg, managedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, macArg, deviceArg, managedArg)
 	if err != nil {
 		return
 	}
@@ -1834,7 +1834,7 @@ func (pIF) AsyncIntroduce5(session *Session, host HostRef, mAC string, device st
 
 // Introduce4: Create a PIF object matching a particular network interface
 // Version: miami
-func (pIF) Introduce4(session *Session, host HostRef, mAC string, device string) (retval PIFRef, err error) {
+func (pif) Introduce4(session *Session, host HostRef, mac string, device string) (retval PIFRef, err error) {
 	method := "PIF.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1844,7 +1844,7 @@ func (pIF) Introduce4(session *Session, host HostRef, mAC string, device string)
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -1852,7 +1852,7 @@ func (pIF) Introduce4(session *Session, host HostRef, mAC string, device string)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, mACArg, deviceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, macArg, deviceArg)
 	if err != nil {
 		return
 	}
@@ -1862,7 +1862,7 @@ func (pIF) Introduce4(session *Session, host HostRef, mAC string, device string)
 
 // AsyncIntroduce4: Create a PIF object matching a particular network interface
 // Version: miami
-func (pIF) AsyncIntroduce4(session *Session, host HostRef, mAC string, device string) (retval TaskRef, err error) {
+func (pif) AsyncIntroduce4(session *Session, host HostRef, mac string, device string) (retval TaskRef, err error) {
 	method := "Async.PIF.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1872,7 +1872,7 @@ func (pIF) AsyncIntroduce4(session *Session, host HostRef, mAC string, device st
 	if err != nil {
 		return
 	}
-	mACArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mAC)
+	macArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "MAC"), mac)
 	if err != nil {
 		return
 	}
@@ -1880,7 +1880,7 @@ func (pIF) AsyncIntroduce4(session *Session, host HostRef, mAC string, device st
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, mACArg, deviceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, macArg, deviceArg)
 	if err != nil {
 		return
 	}
@@ -1890,7 +1890,7 @@ func (pIF) AsyncIntroduce4(session *Session, host HostRef, mAC string, device st
 
 // Scan: Scan for physical interfaces on a host and create PIF objects to represent them
 // Version: miami
-func (pIF) Scan(session *Session, host HostRef) (err error) {
+func (pif) Scan(session *Session, host HostRef) (err error) {
 	method := "PIF.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1906,7 +1906,7 @@ func (pIF) Scan(session *Session, host HostRef) (err error) {
 
 // AsyncScan: Scan for physical interfaces on a host and create PIF objects to represent them
 // Version: miami
-func (pIF) AsyncScan(session *Session, host HostRef) (retval TaskRef, err error) {
+func (pif) AsyncScan(session *Session, host HostRef) (retval TaskRef, err error) {
 	method := "Async.PIF.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1926,7 +1926,7 @@ func (pIF) AsyncScan(session *Session, host HostRef) (retval TaskRef, err error)
 
 // Scan2: Scan for physical interfaces on a host and create PIF objects to represent them
 // Version: miami
-func (pIF) Scan2(session *Session, host HostRef) (err error) {
+func (pif) Scan2(session *Session, host HostRef) (err error) {
 	method := "PIF.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1942,7 +1942,7 @@ func (pIF) Scan2(session *Session, host HostRef) (err error) {
 
 // AsyncScan2: Scan for physical interfaces on a host and create PIF objects to represent them
 // Version: miami
-func (pIF) AsyncScan2(session *Session, host HostRef) (retval TaskRef, err error) {
+func (pif) AsyncScan2(session *Session, host HostRef) (retval TaskRef, err error) {
 	method := "Async.PIF.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1962,7 +1962,7 @@ func (pIF) AsyncScan2(session *Session, host HostRef) (retval TaskRef, err error
 
 // SetPrimaryAddressType: Change the primary address type used by this PIF
 // Version: tampa
-func (pIF) SetPrimaryAddressType(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (err error) {
+func (pif) SetPrimaryAddressType(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (err error) {
 	method := "PIF.set_primary_address_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1982,7 +1982,7 @@ func (pIF) SetPrimaryAddressType(session *Session, self PIFRef, primaryAddressTy
 
 // AsyncSetPrimaryAddressType: Change the primary address type used by this PIF
 // Version: tampa
-func (pIF) AsyncSetPrimaryAddressType(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (retval TaskRef, err error) {
+func (pif) AsyncSetPrimaryAddressType(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (retval TaskRef, err error) {
 	method := "Async.PIF.set_primary_address_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2006,7 +2006,7 @@ func (pIF) AsyncSetPrimaryAddressType(session *Session, self PIFRef, primaryAddr
 
 // SetPrimaryAddressType3: Change the primary address type used by this PIF
 // Version: tampa
-func (pIF) SetPrimaryAddressType3(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (err error) {
+func (pif) SetPrimaryAddressType3(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (err error) {
 	method := "PIF.set_primary_address_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2026,7 +2026,7 @@ func (pIF) SetPrimaryAddressType3(session *Session, self PIFRef, primaryAddressT
 
 // AsyncSetPrimaryAddressType3: Change the primary address type used by this PIF
 // Version: tampa
-func (pIF) AsyncSetPrimaryAddressType3(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (retval TaskRef, err error) {
+func (pif) AsyncSetPrimaryAddressType3(session *Session, self PIFRef, primaryAddressType PrimaryAddressType) (retval TaskRef, err error) {
 	method := "Async.PIF.set_primary_address_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2053,7 +2053,7 @@ func (pIF) AsyncSetPrimaryAddressType3(session *Session, self PIFRef, primaryAdd
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) ReconfigureIpv6(session *Session, self PIFRef, mode Ipv6ConfigurationMode, iPv6 string, gateway string, dNS string) (err error) {
+func (pif) ReconfigureIpv6(session *Session, self PIFRef, mode Ipv6ConfigurationMode, ipv6 string, gateway string, dns string) (err error) {
 	method := "PIF.reconfigure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2067,7 +2067,7 @@ func (pIF) ReconfigureIpv6(session *Session, self PIFRef, mode Ipv6Configuration
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -2075,11 +2075,11 @@ func (pIF) ReconfigureIpv6(session *Session, self PIFRef, mode Ipv6Configuration
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPv6Arg, gatewayArg, dNSArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipv6Arg, gatewayArg, dnsArg)
 	return
 }
 
@@ -2088,7 +2088,7 @@ func (pIF) ReconfigureIpv6(session *Session, self PIFRef, mode Ipv6Configuration
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncReconfigureIpv6(session *Session, self PIFRef, mode Ipv6ConfigurationMode, iPv6 string, gateway string, dNS string) (retval TaskRef, err error) {
+func (pif) AsyncReconfigureIpv6(session *Session, self PIFRef, mode Ipv6ConfigurationMode, ipv6 string, gateway string, dns string) (retval TaskRef, err error) {
 	method := "Async.PIF.reconfigure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2102,7 +2102,7 @@ func (pIF) AsyncReconfigureIpv6(session *Session, self PIFRef, mode Ipv6Configur
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -2110,11 +2110,11 @@ func (pIF) AsyncReconfigureIpv6(session *Session, self PIFRef, mode Ipv6Configur
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPv6Arg, gatewayArg, dNSArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipv6Arg, gatewayArg, dnsArg)
 	if err != nil {
 		return
 	}
@@ -2127,7 +2127,7 @@ func (pIF) AsyncReconfigureIpv6(session *Session, self PIFRef, mode Ipv6Configur
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) ReconfigureIpv66(session *Session, self PIFRef, mode Ipv6ConfigurationMode, iPv6 string, gateway string, dNS string) (err error) {
+func (pif) ReconfigureIpv66(session *Session, self PIFRef, mode Ipv6ConfigurationMode, ipv6 string, gateway string, dns string) (err error) {
 	method := "PIF.reconfigure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2141,7 +2141,7 @@ func (pIF) ReconfigureIpv66(session *Session, self PIFRef, mode Ipv6Configuratio
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -2149,11 +2149,11 @@ func (pIF) ReconfigureIpv66(session *Session, self PIFRef, mode Ipv6Configuratio
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPv6Arg, gatewayArg, dNSArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipv6Arg, gatewayArg, dnsArg)
 	return
 }
 
@@ -2162,7 +2162,7 @@ func (pIF) ReconfigureIpv66(session *Session, self PIFRef, mode Ipv6Configuratio
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncReconfigureIpv66(session *Session, self PIFRef, mode Ipv6ConfigurationMode, iPv6 string, gateway string, dNS string) (retval TaskRef, err error) {
+func (pif) AsyncReconfigureIpv66(session *Session, self PIFRef, mode Ipv6ConfigurationMode, ipv6 string, gateway string, dns string) (retval TaskRef, err error) {
 	method := "Async.PIF.reconfigure_ipv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2176,7 +2176,7 @@ func (pIF) AsyncReconfigureIpv66(session *Session, self PIFRef, mode Ipv6Configu
 	if err != nil {
 		return
 	}
-	iPv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), iPv6)
+	ipv6Arg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IPv6"), ipv6)
 	if err != nil {
 		return
 	}
@@ -2184,11 +2184,11 @@ func (pIF) AsyncReconfigureIpv66(session *Session, self PIFRef, mode Ipv6Configu
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPv6Arg, gatewayArg, dNSArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipv6Arg, gatewayArg, dnsArg)
 	if err != nil {
 		return
 	}
@@ -2201,7 +2201,7 @@ func (pIF) AsyncReconfigureIpv66(session *Session, self PIFRef, mode Ipv6Configu
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) ReconfigureIP(session *Session, self PIFRef, mode IPConfigurationMode, iP string, netmask string, gateway string, dNS string) (err error) {
+func (pif) ReconfigureIP(session *Session, self PIFRef, mode IPConfigurationMode, ip string, netmask string, gateway string, dns string) (err error) {
 	method := "PIF.reconfigure_ip"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2215,7 +2215,7 @@ func (pIF) ReconfigureIP(session *Session, self PIFRef, mode IPConfigurationMode
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -2227,11 +2227,11 @@ func (pIF) ReconfigureIP(session *Session, self PIFRef, mode IPConfigurationMode
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPArg, netmaskArg, gatewayArg, dNSArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipArg, netmaskArg, gatewayArg, dnsArg)
 	return
 }
 
@@ -2240,7 +2240,7 @@ func (pIF) ReconfigureIP(session *Session, self PIFRef, mode IPConfigurationMode
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncReconfigureIP(session *Session, self PIFRef, mode IPConfigurationMode, iP string, netmask string, gateway string, dNS string) (retval TaskRef, err error) {
+func (pif) AsyncReconfigureIP(session *Session, self PIFRef, mode IPConfigurationMode, ip string, netmask string, gateway string, dns string) (retval TaskRef, err error) {
 	method := "Async.PIF.reconfigure_ip"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2254,7 +2254,7 @@ func (pIF) AsyncReconfigureIP(session *Session, self PIFRef, mode IPConfiguratio
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -2266,11 +2266,11 @@ func (pIF) AsyncReconfigureIP(session *Session, self PIFRef, mode IPConfiguratio
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPArg, netmaskArg, gatewayArg, dNSArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipArg, netmaskArg, gatewayArg, dnsArg)
 	if err != nil {
 		return
 	}
@@ -2283,7 +2283,7 @@ func (pIF) AsyncReconfigureIP(session *Session, self PIFRef, mode IPConfiguratio
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) ReconfigureIP7(session *Session, self PIFRef, mode IPConfigurationMode, iP string, netmask string, gateway string, dNS string) (err error) {
+func (pif) ReconfigureIP7(session *Session, self PIFRef, mode IPConfigurationMode, ip string, netmask string, gateway string, dns string) (err error) {
 	method := "PIF.reconfigure_ip"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2297,7 +2297,7 @@ func (pIF) ReconfigureIP7(session *Session, self PIFRef, mode IPConfigurationMod
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -2309,11 +2309,11 @@ func (pIF) ReconfigureIP7(session *Session, self PIFRef, mode IPConfigurationMod
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPArg, netmaskArg, gatewayArg, dNSArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipArg, netmaskArg, gatewayArg, dnsArg)
 	return
 }
 
@@ -2322,7 +2322,7 @@ func (pIF) ReconfigureIP7(session *Session, self PIFRef, mode IPConfigurationMod
 //
 // Errors:
 // CLUSTERING_ENABLED - An operation was attempted while clustering was enabled on the cluster_host.
-func (pIF) AsyncReconfigureIP7(session *Session, self PIFRef, mode IPConfigurationMode, iP string, netmask string, gateway string, dNS string) (retval TaskRef, err error) {
+func (pif) AsyncReconfigureIP7(session *Session, self PIFRef, mode IPConfigurationMode, ip string, netmask string, gateway string, dns string) (retval TaskRef, err error) {
 	method := "Async.PIF.reconfigure_ip"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2336,7 +2336,7 @@ func (pIF) AsyncReconfigureIP7(session *Session, self PIFRef, mode IPConfigurati
 	if err != nil {
 		return
 	}
-	iPArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), iP)
+	ipArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "IP"), ip)
 	if err != nil {
 		return
 	}
@@ -2348,11 +2348,11 @@ func (pIF) AsyncReconfigureIP7(session *Session, self PIFRef, mode IPConfigurati
 	if err != nil {
 		return
 	}
-	dNSArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dNS)
+	dnsArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "DNS"), dns)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, iPArg, netmaskArg, gatewayArg, dNSArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, modeArg, ipArg, netmaskArg, gatewayArg, dnsArg)
 	if err != nil {
 		return
 	}
@@ -2365,7 +2365,7 @@ func (pIF) AsyncReconfigureIP7(session *Session, self PIFRef, mode IPConfigurati
 //
 // Errors:
 // PIF_IS_PHYSICAL - You tried to destroy a PIF, but it represents an aspect of the physical host configuration, and so cannot be destroyed. The parameter echoes the PIF handle you gave.
-func (pIF) Destroy(session *Session, self PIFRef) (err error) {
+func (pif) Destroy(session *Session, self PIFRef) (err error) {
 	method := "PIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2384,7 +2384,7 @@ func (pIF) Destroy(session *Session, self PIFRef) (err error) {
 //
 // Errors:
 // PIF_IS_PHYSICAL - You tried to destroy a PIF, but it represents an aspect of the physical host configuration, and so cannot be destroyed. The parameter echoes the PIF handle you gave.
-func (pIF) AsyncDestroy(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncDestroy(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2407,7 +2407,7 @@ func (pIF) AsyncDestroy(session *Session, self PIFRef) (retval TaskRef, err erro
 //
 // Errors:
 // PIF_IS_PHYSICAL - You tried to destroy a PIF, but it represents an aspect of the physical host configuration, and so cannot be destroyed. The parameter echoes the PIF handle you gave.
-func (pIF) Destroy2(session *Session, self PIFRef) (err error) {
+func (pif) Destroy2(session *Session, self PIFRef) (err error) {
 	method := "PIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2426,7 +2426,7 @@ func (pIF) Destroy2(session *Session, self PIFRef) (err error) {
 //
 // Errors:
 // PIF_IS_PHYSICAL - You tried to destroy a PIF, but it represents an aspect of the physical host configuration, and so cannot be destroyed. The parameter echoes the PIF handle you gave.
-func (pIF) AsyncDestroy2(session *Session, self PIFRef) (retval TaskRef, err error) {
+func (pif) AsyncDestroy2(session *Session, self PIFRef) (retval TaskRef, err error) {
 	method := "Async.PIF.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2449,7 +2449,7 @@ func (pIF) AsyncDestroy2(session *Session, self PIFRef) (retval TaskRef, err err
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pIF) CreateVLAN(session *Session, device string, network NetworkRef, host HostRef, vLAN int) (retval PIFRef, err error) {
+func (pif) CreateVLAN(session *Session, device string, network NetworkRef, host HostRef, vlan int) (retval PIFRef, err error) {
 	method := "PIF.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2467,11 +2467,11 @@ func (pIF) CreateVLAN(session *Session, device string, network NetworkRef, host 
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -2484,7 +2484,7 @@ func (pIF) CreateVLAN(session *Session, device string, network NetworkRef, host 
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pIF) AsyncCreateVLAN(session *Session, device string, network NetworkRef, host HostRef, vLAN int) (retval TaskRef, err error) {
+func (pif) AsyncCreateVLAN(session *Session, device string, network NetworkRef, host HostRef, vlan int) (retval TaskRef, err error) {
 	method := "Async.PIF.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2502,11 +2502,11 @@ func (pIF) AsyncCreateVLAN(session *Session, device string, network NetworkRef, 
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -2519,7 +2519,7 @@ func (pIF) AsyncCreateVLAN(session *Session, device string, network NetworkRef, 
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pIF) CreateVLAN5(session *Session, device string, network NetworkRef, host HostRef, vLAN int) (retval PIFRef, err error) {
+func (pif) CreateVLAN5(session *Session, device string, network NetworkRef, host HostRef, vlan int) (retval PIFRef, err error) {
 	method := "PIF.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2537,11 +2537,11 @@ func (pIF) CreateVLAN5(session *Session, device string, network NetworkRef, host
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -2554,7 +2554,7 @@ func (pIF) CreateVLAN5(session *Session, device string, network NetworkRef, host
 //
 // Errors:
 // VLAN_TAG_INVALID - You tried to create a VLAN, but the tag you gave was invalid -- it must be between 0 and 4094. The parameter echoes the VLAN tag you gave.
-func (pIF) AsyncCreateVLAN5(session *Session, device string, network NetworkRef, host HostRef, vLAN int) (retval TaskRef, err error) {
+func (pif) AsyncCreateVLAN5(session *Session, device string, network NetworkRef, host HostRef, vlan int) (retval TaskRef, err error) {
 	method := "Async.PIF.create_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2572,11 +2572,11 @@ func (pIF) AsyncCreateVLAN5(session *Session, device string, network NetworkRef,
 	if err != nil {
 		return
 	}
-	vLANArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vLAN)
+	vlanArg, err := serializeInt(fmt.Sprintf("%s(%s)", method, "VLAN"), vlan)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vLANArg)
+	result, err := session.client.sendCall(method, sessionIDArg, deviceArg, networkArg, hostArg, vlanArg)
 	if err != nil {
 		return
 	}
@@ -2586,7 +2586,7 @@ func (pIF) AsyncCreateVLAN5(session *Session, device string, network NetworkRef,
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given PIF.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (pIF) RemoveFromOtherConfig(session *Session, self PIFRef, key string) (err error) {
+func (pif) RemoveFromOtherConfig(session *Session, self PIFRef, key string) (err error) {
 	method := "PIF.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2606,7 +2606,7 @@ func (pIF) RemoveFromOtherConfig(session *Session, self PIFRef, key string) (err
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given PIF.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (pIF) RemoveFromOtherConfig3(session *Session, self PIFRef, key string) (err error) {
+func (pif) RemoveFromOtherConfig3(session *Session, self PIFRef, key string) (err error) {
 	method := "PIF.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2626,7 +2626,7 @@ func (pIF) RemoveFromOtherConfig3(session *Session, self PIFRef, key string) (er
 
 // RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given PIF.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (pIF) RemoveFromOtherConfig2(session *Session, self PIFRef) (err error) {
+func (pif) RemoveFromOtherConfig2(session *Session, self PIFRef) (err error) {
 	method := "PIF.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2642,7 +2642,7 @@ func (pIF) RemoveFromOtherConfig2(session *Session, self PIFRef) (err error) {
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given PIF.
 // Version: miami
-func (pIF) AddToOtherConfig(session *Session, self PIFRef, key string, value string) (err error) {
+func (pif) AddToOtherConfig(session *Session, self PIFRef, key string, value string) (err error) {
 	method := "PIF.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2666,7 +2666,7 @@ func (pIF) AddToOtherConfig(session *Session, self PIFRef, key string, value str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given PIF.
 // Version: miami
-func (pIF) AddToOtherConfig4(session *Session, self PIFRef, key string, value string) (err error) {
+func (pif) AddToOtherConfig4(session *Session, self PIFRef, key string, value string) (err error) {
 	method := "PIF.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2690,7 +2690,7 @@ func (pIF) AddToOtherConfig4(session *Session, self PIFRef, key string, value st
 
 // AddToOtherConfig2: Add the given key-value pair to the other_config field of the given PIF.
 // Version: rio
-func (pIF) AddToOtherConfig2(session *Session, self PIFRef) (err error) {
+func (pif) AddToOtherConfig2(session *Session, self PIFRef) (err error) {
 	method := "PIF.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2706,7 +2706,7 @@ func (pIF) AddToOtherConfig2(session *Session, self PIFRef) (err error) {
 
 // SetOtherConfig: Set the other_config field of the given PIF.
 // Version: miami
-func (pIF) SetOtherConfig(session *Session, self PIFRef, value map[string]string) (err error) {
+func (pif) SetOtherConfig(session *Session, self PIFRef, value map[string]string) (err error) {
 	method := "PIF.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2726,7 +2726,7 @@ func (pIF) SetOtherConfig(session *Session, self PIFRef, value map[string]string
 
 // SetOtherConfig3: Set the other_config field of the given PIF.
 // Version: miami
-func (pIF) SetOtherConfig3(session *Session, self PIFRef, value map[string]string) (err error) {
+func (pif) SetOtherConfig3(session *Session, self PIFRef, value map[string]string) (err error) {
 	method := "PIF.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2746,7 +2746,7 @@ func (pIF) SetOtherConfig3(session *Session, self PIFRef, value map[string]strin
 
 // SetOtherConfig2: Set the other_config field of the given PIF.
 // Version: rio
-func (pIF) SetOtherConfig2(session *Session, self PIFRef) (err error) {
+func (pif) SetOtherConfig2(session *Session, self PIFRef) (err error) {
 	method := "PIF.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2762,7 +2762,7 @@ func (pIF) SetOtherConfig2(session *Session, self PIFRef) (err error) {
 
 // GetPCI: Get the PCI field of the given PIF.
 // Version: rio
-func (pIF) GetPCI(session *Session, self PIFRef) (retval PCIRef, err error) {
+func (pif) GetPCI(session *Session, self PIFRef) (retval PCIRef, err error) {
 	method := "PIF.get_PCI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2782,7 +2782,7 @@ func (pIF) GetPCI(session *Session, self PIFRef) (retval PCIRef, err error) {
 
 // GetPCI2: Get the PCI field of the given PIF.
 // Version: rio
-func (pIF) GetPCI2(session *Session, self PIFRef) (retval PCIRef, err error) {
+func (pif) GetPCI2(session *Session, self PIFRef) (retval PCIRef, err error) {
 	method := "PIF.get_PCI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2802,7 +2802,7 @@ func (pIF) GetPCI2(session *Session, self PIFRef) (retval PCIRef, err error) {
 
 // GetSriovLogicalPIFOf: Get the sriov_logical_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetSriovLogicalPIFOf(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
+func (pif) GetSriovLogicalPIFOf(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
 	method := "PIF.get_sriov_logical_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2822,7 +2822,7 @@ func (pIF) GetSriovLogicalPIFOf(session *Session, self PIFRef) (retval []Network
 
 // GetSriovLogicalPIFOf2: Get the sriov_logical_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetSriovLogicalPIFOf2(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
+func (pif) GetSriovLogicalPIFOf2(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
 	method := "PIF.get_sriov_logical_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2842,7 +2842,7 @@ func (pIF) GetSriovLogicalPIFOf2(session *Session, self PIFRef) (retval []Networ
 
 // GetSriovPhysicalPIFOf: Get the sriov_physical_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetSriovPhysicalPIFOf(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
+func (pif) GetSriovPhysicalPIFOf(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
 	method := "PIF.get_sriov_physical_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2862,7 +2862,7 @@ func (pIF) GetSriovPhysicalPIFOf(session *Session, self PIFRef) (retval []Networ
 
 // GetSriovPhysicalPIFOf2: Get the sriov_physical_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetSriovPhysicalPIFOf2(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
+func (pif) GetSriovPhysicalPIFOf2(session *Session, self PIFRef) (retval []NetworkSriovRef, err error) {
 	method := "PIF.get_sriov_physical_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2882,7 +2882,7 @@ func (pIF) GetSriovPhysicalPIFOf2(session *Session, self PIFRef) (retval []Netwo
 
 // GetIgmpSnoopingStatus: Get the igmp_snooping_status field of the given PIF.
 // Version: rio
-func (pIF) GetIgmpSnoopingStatus(session *Session, self PIFRef) (retval PifIgmpStatus, err error) {
+func (pif) GetIgmpSnoopingStatus(session *Session, self PIFRef) (retval PifIgmpStatus, err error) {
 	method := "PIF.get_igmp_snooping_status"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2902,7 +2902,7 @@ func (pIF) GetIgmpSnoopingStatus(session *Session, self PIFRef) (retval PifIgmpS
 
 // GetIgmpSnoopingStatus2: Get the igmp_snooping_status field of the given PIF.
 // Version: rio
-func (pIF) GetIgmpSnoopingStatus2(session *Session, self PIFRef) (retval PifIgmpStatus, err error) {
+func (pif) GetIgmpSnoopingStatus2(session *Session, self PIFRef) (retval PifIgmpStatus, err error) {
 	method := "PIF.get_igmp_snooping_status"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2922,7 +2922,7 @@ func (pIF) GetIgmpSnoopingStatus2(session *Session, self PIFRef) (retval PifIgmp
 
 // GetCapabilities: Get the capabilities field of the given PIF.
 // Version: rio
-func (pIF) GetCapabilities(session *Session, self PIFRef) (retval []string, err error) {
+func (pif) GetCapabilities(session *Session, self PIFRef) (retval []string, err error) {
 	method := "PIF.get_capabilities"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2942,7 +2942,7 @@ func (pIF) GetCapabilities(session *Session, self PIFRef) (retval []string, err 
 
 // GetCapabilities2: Get the capabilities field of the given PIF.
 // Version: rio
-func (pIF) GetCapabilities2(session *Session, self PIFRef) (retval []string, err error) {
+func (pif) GetCapabilities2(session *Session, self PIFRef) (retval []string, err error) {
 	method := "PIF.get_capabilities"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2962,7 +2962,7 @@ func (pIF) GetCapabilities2(session *Session, self PIFRef) (retval []string, err
 
 // GetProperties: Get the properties field of the given PIF.
 // Version: rio
-func (pIF) GetProperties(session *Session, self PIFRef) (retval map[string]string, err error) {
+func (pif) GetProperties(session *Session, self PIFRef) (retval map[string]string, err error) {
 	method := "PIF.get_properties"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2982,7 +2982,7 @@ func (pIF) GetProperties(session *Session, self PIFRef) (retval map[string]strin
 
 // GetProperties2: Get the properties field of the given PIF.
 // Version: rio
-func (pIF) GetProperties2(session *Session, self PIFRef) (retval map[string]string, err error) {
+func (pif) GetProperties2(session *Session, self PIFRef) (retval map[string]string, err error) {
 	method := "PIF.get_properties"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3002,7 +3002,7 @@ func (pIF) GetProperties2(session *Session, self PIFRef) (retval map[string]stri
 
 // GetManaged: Get the managed field of the given PIF.
 // Version: rio
-func (pIF) GetManaged(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetManaged(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_managed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3022,7 +3022,7 @@ func (pIF) GetManaged(session *Session, self PIFRef) (retval bool, err error) {
 
 // GetManaged2: Get the managed field of the given PIF.
 // Version: rio
-func (pIF) GetManaged2(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetManaged2(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_managed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3042,7 +3042,7 @@ func (pIF) GetManaged2(session *Session, self PIFRef) (retval bool, err error) {
 
 // GetPrimaryAddressType: Get the primary_address_type field of the given PIF.
 // Version: rio
-func (pIF) GetPrimaryAddressType(session *Session, self PIFRef) (retval PrimaryAddressType, err error) {
+func (pif) GetPrimaryAddressType(session *Session, self PIFRef) (retval PrimaryAddressType, err error) {
 	method := "PIF.get_primary_address_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3062,7 +3062,7 @@ func (pIF) GetPrimaryAddressType(session *Session, self PIFRef) (retval PrimaryA
 
 // GetPrimaryAddressType2: Get the primary_address_type field of the given PIF.
 // Version: rio
-func (pIF) GetPrimaryAddressType2(session *Session, self PIFRef) (retval PrimaryAddressType, err error) {
+func (pif) GetPrimaryAddressType2(session *Session, self PIFRef) (retval PrimaryAddressType, err error) {
 	method := "PIF.get_primary_address_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3082,7 +3082,7 @@ func (pIF) GetPrimaryAddressType2(session *Session, self PIFRef) (retval Primary
 
 // GetIpv6Gateway: Get the ipv6_gateway field of the given PIF.
 // Version: rio
-func (pIF) GetIpv6Gateway(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetIpv6Gateway(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_ipv6_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3102,7 +3102,7 @@ func (pIF) GetIpv6Gateway(session *Session, self PIFRef) (retval string, err err
 
 // GetIpv6Gateway2: Get the ipv6_gateway field of the given PIF.
 // Version: rio
-func (pIF) GetIpv6Gateway2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetIpv6Gateway2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_ipv6_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3122,7 +3122,7 @@ func (pIF) GetIpv6Gateway2(session *Session, self PIFRef) (retval string, err er
 
 // GetIPv6: Get the IPv6 field of the given PIF.
 // Version: rio
-func (pIF) GetIPv6(session *Session, self PIFRef) (retval []string, err error) {
+func (pif) GetIPv6(session *Session, self PIFRef) (retval []string, err error) {
 	method := "PIF.get_IPv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3142,7 +3142,7 @@ func (pIF) GetIPv6(session *Session, self PIFRef) (retval []string, err error) {
 
 // GetIPv62: Get the IPv6 field of the given PIF.
 // Version: rio
-func (pIF) GetIPv62(session *Session, self PIFRef) (retval []string, err error) {
+func (pif) GetIPv62(session *Session, self PIFRef) (retval []string, err error) {
 	method := "PIF.get_IPv6"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3162,7 +3162,7 @@ func (pIF) GetIPv62(session *Session, self PIFRef) (retval []string, err error) 
 
 // GetIpv6ConfigurationMode: Get the ipv6_configuration_mode field of the given PIF.
 // Version: rio
-func (pIF) GetIpv6ConfigurationMode(session *Session, self PIFRef) (retval Ipv6ConfigurationMode, err error) {
+func (pif) GetIpv6ConfigurationMode(session *Session, self PIFRef) (retval Ipv6ConfigurationMode, err error) {
 	method := "PIF.get_ipv6_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3182,7 +3182,7 @@ func (pIF) GetIpv6ConfigurationMode(session *Session, self PIFRef) (retval Ipv6C
 
 // GetIpv6ConfigurationMode2: Get the ipv6_configuration_mode field of the given PIF.
 // Version: rio
-func (pIF) GetIpv6ConfigurationMode2(session *Session, self PIFRef) (retval Ipv6ConfigurationMode, err error) {
+func (pif) GetIpv6ConfigurationMode2(session *Session, self PIFRef) (retval Ipv6ConfigurationMode, err error) {
 	method := "PIF.get_ipv6_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3202,7 +3202,7 @@ func (pIF) GetIpv6ConfigurationMode2(session *Session, self PIFRef) (retval Ipv6
 
 // GetTunnelTransportPIFOf: Get the tunnel_transport_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetTunnelTransportPIFOf(session *Session, self PIFRef) (retval []TunnelRef, err error) {
+func (pif) GetTunnelTransportPIFOf(session *Session, self PIFRef) (retval []TunnelRef, err error) {
 	method := "PIF.get_tunnel_transport_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3222,7 +3222,7 @@ func (pIF) GetTunnelTransportPIFOf(session *Session, self PIFRef) (retval []Tunn
 
 // GetTunnelTransportPIFOf2: Get the tunnel_transport_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetTunnelTransportPIFOf2(session *Session, self PIFRef) (retval []TunnelRef, err error) {
+func (pif) GetTunnelTransportPIFOf2(session *Session, self PIFRef) (retval []TunnelRef, err error) {
 	method := "PIF.get_tunnel_transport_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3242,7 +3242,7 @@ func (pIF) GetTunnelTransportPIFOf2(session *Session, self PIFRef) (retval []Tun
 
 // GetTunnelAccessPIFOf: Get the tunnel_access_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetTunnelAccessPIFOf(session *Session, self PIFRef) (retval []TunnelRef, err error) {
+func (pif) GetTunnelAccessPIFOf(session *Session, self PIFRef) (retval []TunnelRef, err error) {
 	method := "PIF.get_tunnel_access_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3262,7 +3262,7 @@ func (pIF) GetTunnelAccessPIFOf(session *Session, self PIFRef) (retval []TunnelR
 
 // GetTunnelAccessPIFOf2: Get the tunnel_access_PIF_of field of the given PIF.
 // Version: rio
-func (pIF) GetTunnelAccessPIFOf2(session *Session, self PIFRef) (retval []TunnelRef, err error) {
+func (pif) GetTunnelAccessPIFOf2(session *Session, self PIFRef) (retval []TunnelRef, err error) {
 	method := "PIF.get_tunnel_access_PIF_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3282,7 +3282,7 @@ func (pIF) GetTunnelAccessPIFOf2(session *Session, self PIFRef) (retval []Tunnel
 
 // GetDisallowUnplug: Get the disallow_unplug field of the given PIF.
 // Version: rio
-func (pIF) GetDisallowUnplug(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetDisallowUnplug(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_disallow_unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3302,7 +3302,7 @@ func (pIF) GetDisallowUnplug(session *Session, self PIFRef) (retval bool, err er
 
 // GetDisallowUnplug2: Get the disallow_unplug field of the given PIF.
 // Version: rio
-func (pIF) GetDisallowUnplug2(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetDisallowUnplug2(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_disallow_unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3322,7 +3322,7 @@ func (pIF) GetDisallowUnplug2(session *Session, self PIFRef) (retval bool, err e
 
 // GetOtherConfig: Get the other_config field of the given PIF.
 // Version: rio
-func (pIF) GetOtherConfig(session *Session, self PIFRef) (retval map[string]string, err error) {
+func (pif) GetOtherConfig(session *Session, self PIFRef) (retval map[string]string, err error) {
 	method := "PIF.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3342,7 +3342,7 @@ func (pIF) GetOtherConfig(session *Session, self PIFRef) (retval map[string]stri
 
 // GetOtherConfig2: Get the other_config field of the given PIF.
 // Version: rio
-func (pIF) GetOtherConfig2(session *Session, self PIFRef) (retval map[string]string, err error) {
+func (pif) GetOtherConfig2(session *Session, self PIFRef) (retval map[string]string, err error) {
 	method := "PIF.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3362,7 +3362,7 @@ func (pIF) GetOtherConfig2(session *Session, self PIFRef) (retval map[string]str
 
 // GetManagement: Get the management field of the given PIF.
 // Version: rio
-func (pIF) GetManagement(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetManagement(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_management"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3382,7 +3382,7 @@ func (pIF) GetManagement(session *Session, self PIFRef) (retval bool, err error)
 
 // GetManagement2: Get the management field of the given PIF.
 // Version: rio
-func (pIF) GetManagement2(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetManagement2(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_management"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3402,7 +3402,7 @@ func (pIF) GetManagement2(session *Session, self PIFRef) (retval bool, err error
 
 // GetVLANSlaveOf: Get the VLAN_slave_of field of the given PIF.
 // Version: rio
-func (pIF) GetVLANSlaveOf(session *Session, self PIFRef) (retval []VLANRef, err error) {
+func (pif) GetVLANSlaveOf(session *Session, self PIFRef) (retval []VLANRef, err error) {
 	method := "PIF.get_VLAN_slave_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3422,7 +3422,7 @@ func (pIF) GetVLANSlaveOf(session *Session, self PIFRef) (retval []VLANRef, err 
 
 // GetVLANSlaveOf2: Get the VLAN_slave_of field of the given PIF.
 // Version: rio
-func (pIF) GetVLANSlaveOf2(session *Session, self PIFRef) (retval []VLANRef, err error) {
+func (pif) GetVLANSlaveOf2(session *Session, self PIFRef) (retval []VLANRef, err error) {
 	method := "PIF.get_VLAN_slave_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3442,7 +3442,7 @@ func (pIF) GetVLANSlaveOf2(session *Session, self PIFRef) (retval []VLANRef, err
 
 // GetVLANMasterOf: Get the VLAN_master_of field of the given PIF.
 // Version: rio
-func (pIF) GetVLANMasterOf(session *Session, self PIFRef) (retval VLANRef, err error) {
+func (pif) GetVLANMasterOf(session *Session, self PIFRef) (retval VLANRef, err error) {
 	method := "PIF.get_VLAN_master_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3462,7 +3462,7 @@ func (pIF) GetVLANMasterOf(session *Session, self PIFRef) (retval VLANRef, err e
 
 // GetVLANMasterOf2: Get the VLAN_master_of field of the given PIF.
 // Version: rio
-func (pIF) GetVLANMasterOf2(session *Session, self PIFRef) (retval VLANRef, err error) {
+func (pif) GetVLANMasterOf2(session *Session, self PIFRef) (retval VLANRef, err error) {
 	method := "PIF.get_VLAN_master_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3482,7 +3482,7 @@ func (pIF) GetVLANMasterOf2(session *Session, self PIFRef) (retval VLANRef, err 
 
 // GetBondMasterOf: Get the bond_master_of field of the given PIF.
 // Version: rio
-func (pIF) GetBondMasterOf(session *Session, self PIFRef) (retval []BondRef, err error) {
+func (pif) GetBondMasterOf(session *Session, self PIFRef) (retval []BondRef, err error) {
 	method := "PIF.get_bond_master_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3502,7 +3502,7 @@ func (pIF) GetBondMasterOf(session *Session, self PIFRef) (retval []BondRef, err
 
 // GetBondMasterOf2: Get the bond_master_of field of the given PIF.
 // Version: rio
-func (pIF) GetBondMasterOf2(session *Session, self PIFRef) (retval []BondRef, err error) {
+func (pif) GetBondMasterOf2(session *Session, self PIFRef) (retval []BondRef, err error) {
 	method := "PIF.get_bond_master_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3522,7 +3522,7 @@ func (pIF) GetBondMasterOf2(session *Session, self PIFRef) (retval []BondRef, er
 
 // GetBondSlaveOf: Get the bond_slave_of field of the given PIF.
 // Version: rio
-func (pIF) GetBondSlaveOf(session *Session, self PIFRef) (retval BondRef, err error) {
+func (pif) GetBondSlaveOf(session *Session, self PIFRef) (retval BondRef, err error) {
 	method := "PIF.get_bond_slave_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3542,7 +3542,7 @@ func (pIF) GetBondSlaveOf(session *Session, self PIFRef) (retval BondRef, err er
 
 // GetBondSlaveOf2: Get the bond_slave_of field of the given PIF.
 // Version: rio
-func (pIF) GetBondSlaveOf2(session *Session, self PIFRef) (retval BondRef, err error) {
+func (pif) GetBondSlaveOf2(session *Session, self PIFRef) (retval BondRef, err error) {
 	method := "PIF.get_bond_slave_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3562,7 +3562,7 @@ func (pIF) GetBondSlaveOf2(session *Session, self PIFRef) (retval BondRef, err e
 
 // GetDNS: Get the DNS field of the given PIF.
 // Version: rio
-func (pIF) GetDNS(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetDNS(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_DNS"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3582,7 +3582,7 @@ func (pIF) GetDNS(session *Session, self PIFRef) (retval string, err error) {
 
 // GetDNS2: Get the DNS field of the given PIF.
 // Version: rio
-func (pIF) GetDNS2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetDNS2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_DNS"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3602,7 +3602,7 @@ func (pIF) GetDNS2(session *Session, self PIFRef) (retval string, err error) {
 
 // GetGateway: Get the gateway field of the given PIF.
 // Version: rio
-func (pIF) GetGateway(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetGateway(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3622,7 +3622,7 @@ func (pIF) GetGateway(session *Session, self PIFRef) (retval string, err error) 
 
 // GetGateway2: Get the gateway field of the given PIF.
 // Version: rio
-func (pIF) GetGateway2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetGateway2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_gateway"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3642,7 +3642,7 @@ func (pIF) GetGateway2(session *Session, self PIFRef) (retval string, err error)
 
 // GetNetmask: Get the netmask field of the given PIF.
 // Version: rio
-func (pIF) GetNetmask(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetNetmask(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_netmask"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3662,7 +3662,7 @@ func (pIF) GetNetmask(session *Session, self PIFRef) (retval string, err error) 
 
 // GetNetmask2: Get the netmask field of the given PIF.
 // Version: rio
-func (pIF) GetNetmask2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetNetmask2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_netmask"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3682,7 +3682,7 @@ func (pIF) GetNetmask2(session *Session, self PIFRef) (retval string, err error)
 
 // GetIP: Get the IP field of the given PIF.
 // Version: rio
-func (pIF) GetIP(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetIP(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_IP"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3702,7 +3702,7 @@ func (pIF) GetIP(session *Session, self PIFRef) (retval string, err error) {
 
 // GetIP2: Get the IP field of the given PIF.
 // Version: rio
-func (pIF) GetIP2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetIP2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_IP"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3722,7 +3722,7 @@ func (pIF) GetIP2(session *Session, self PIFRef) (retval string, err error) {
 
 // GetIPConfigurationMode: Get the ip_configuration_mode field of the given PIF.
 // Version: rio
-func (pIF) GetIPConfigurationMode(session *Session, self PIFRef) (retval IPConfigurationMode, err error) {
+func (pif) GetIPConfigurationMode(session *Session, self PIFRef) (retval IPConfigurationMode, err error) {
 	method := "PIF.get_ip_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3742,7 +3742,7 @@ func (pIF) GetIPConfigurationMode(session *Session, self PIFRef) (retval IPConfi
 
 // GetIPConfigurationMode2: Get the ip_configuration_mode field of the given PIF.
 // Version: rio
-func (pIF) GetIPConfigurationMode2(session *Session, self PIFRef) (retval IPConfigurationMode, err error) {
+func (pif) GetIPConfigurationMode2(session *Session, self PIFRef) (retval IPConfigurationMode, err error) {
 	method := "PIF.get_ip_configuration_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3762,7 +3762,7 @@ func (pIF) GetIPConfigurationMode2(session *Session, self PIFRef) (retval IPConf
 
 // GetCurrentlyAttached: Get the currently_attached field of the given PIF.
 // Version: rio
-func (pIF) GetCurrentlyAttached(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetCurrentlyAttached(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3782,7 +3782,7 @@ func (pIF) GetCurrentlyAttached(session *Session, self PIFRef) (retval bool, err
 
 // GetCurrentlyAttached2: Get the currently_attached field of the given PIF.
 // Version: rio
-func (pIF) GetCurrentlyAttached2(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetCurrentlyAttached2(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3802,7 +3802,7 @@ func (pIF) GetCurrentlyAttached2(session *Session, self PIFRef) (retval bool, er
 
 // GetPhysical: Get the physical field of the given PIF.
 // Version: rio
-func (pIF) GetPhysical(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetPhysical(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_physical"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3822,7 +3822,7 @@ func (pIF) GetPhysical(session *Session, self PIFRef) (retval bool, err error) {
 
 // GetPhysical2: Get the physical field of the given PIF.
 // Version: rio
-func (pIF) GetPhysical2(session *Session, self PIFRef) (retval bool, err error) {
+func (pif) GetPhysical2(session *Session, self PIFRef) (retval bool, err error) {
 	method := "PIF.get_physical"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3842,7 +3842,7 @@ func (pIF) GetPhysical2(session *Session, self PIFRef) (retval bool, err error) 
 
 // GetMetrics: Get the metrics field of the given PIF.
 // Version: rio
-func (pIF) GetMetrics(session *Session, self PIFRef) (retval PIFMetricsRef, err error) {
+func (pif) GetMetrics(session *Session, self PIFRef) (retval PIFMetricsRef, err error) {
 	method := "PIF.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3862,7 +3862,7 @@ func (pIF) GetMetrics(session *Session, self PIFRef) (retval PIFMetricsRef, err 
 
 // GetMetrics2: Get the metrics field of the given PIF.
 // Version: rio
-func (pIF) GetMetrics2(session *Session, self PIFRef) (retval PIFMetricsRef, err error) {
+func (pif) GetMetrics2(session *Session, self PIFRef) (retval PIFMetricsRef, err error) {
 	method := "PIF.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3882,7 +3882,7 @@ func (pIF) GetMetrics2(session *Session, self PIFRef) (retval PIFMetricsRef, err
 
 // GetVLAN: Get the VLAN field of the given PIF.
 // Version: rio
-func (pIF) GetVLAN(session *Session, self PIFRef) (retval int, err error) {
+func (pif) GetVLAN(session *Session, self PIFRef) (retval int, err error) {
 	method := "PIF.get_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3902,7 +3902,7 @@ func (pIF) GetVLAN(session *Session, self PIFRef) (retval int, err error) {
 
 // GetVLAN2: Get the VLAN field of the given PIF.
 // Version: rio
-func (pIF) GetVLAN2(session *Session, self PIFRef) (retval int, err error) {
+func (pif) GetVLAN2(session *Session, self PIFRef) (retval int, err error) {
 	method := "PIF.get_VLAN"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3922,7 +3922,7 @@ func (pIF) GetVLAN2(session *Session, self PIFRef) (retval int, err error) {
 
 // GetMTU: Get the MTU field of the given PIF.
 // Version: rio
-func (pIF) GetMTU(session *Session, self PIFRef) (retval int, err error) {
+func (pif) GetMTU(session *Session, self PIFRef) (retval int, err error) {
 	method := "PIF.get_MTU"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3942,7 +3942,7 @@ func (pIF) GetMTU(session *Session, self PIFRef) (retval int, err error) {
 
 // GetMTU2: Get the MTU field of the given PIF.
 // Version: rio
-func (pIF) GetMTU2(session *Session, self PIFRef) (retval int, err error) {
+func (pif) GetMTU2(session *Session, self PIFRef) (retval int, err error) {
 	method := "PIF.get_MTU"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3962,7 +3962,7 @@ func (pIF) GetMTU2(session *Session, self PIFRef) (retval int, err error) {
 
 // GetMAC: Get the MAC field of the given PIF.
 // Version: rio
-func (pIF) GetMAC(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetMAC(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_MAC"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3982,7 +3982,7 @@ func (pIF) GetMAC(session *Session, self PIFRef) (retval string, err error) {
 
 // GetMAC2: Get the MAC field of the given PIF.
 // Version: rio
-func (pIF) GetMAC2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetMAC2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_MAC"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4002,7 +4002,7 @@ func (pIF) GetMAC2(session *Session, self PIFRef) (retval string, err error) {
 
 // GetHost: Get the host field of the given PIF.
 // Version: rio
-func (pIF) GetHost(session *Session, self PIFRef) (retval HostRef, err error) {
+func (pif) GetHost(session *Session, self PIFRef) (retval HostRef, err error) {
 	method := "PIF.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4022,7 +4022,7 @@ func (pIF) GetHost(session *Session, self PIFRef) (retval HostRef, err error) {
 
 // GetHost2: Get the host field of the given PIF.
 // Version: rio
-func (pIF) GetHost2(session *Session, self PIFRef) (retval HostRef, err error) {
+func (pif) GetHost2(session *Session, self PIFRef) (retval HostRef, err error) {
 	method := "PIF.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4042,7 +4042,7 @@ func (pIF) GetHost2(session *Session, self PIFRef) (retval HostRef, err error) {
 
 // GetNetwork: Get the network field of the given PIF.
 // Version: rio
-func (pIF) GetNetwork(session *Session, self PIFRef) (retval NetworkRef, err error) {
+func (pif) GetNetwork(session *Session, self PIFRef) (retval NetworkRef, err error) {
 	method := "PIF.get_network"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4062,7 +4062,7 @@ func (pIF) GetNetwork(session *Session, self PIFRef) (retval NetworkRef, err err
 
 // GetNetwork2: Get the network field of the given PIF.
 // Version: rio
-func (pIF) GetNetwork2(session *Session, self PIFRef) (retval NetworkRef, err error) {
+func (pif) GetNetwork2(session *Session, self PIFRef) (retval NetworkRef, err error) {
 	method := "PIF.get_network"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4082,7 +4082,7 @@ func (pIF) GetNetwork2(session *Session, self PIFRef) (retval NetworkRef, err er
 
 // GetDevice: Get the device field of the given PIF.
 // Version: rio
-func (pIF) GetDevice(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetDevice(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4102,7 +4102,7 @@ func (pIF) GetDevice(session *Session, self PIFRef) (retval string, err error) {
 
 // GetDevice2: Get the device field of the given PIF.
 // Version: rio
-func (pIF) GetDevice2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetDevice2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4122,7 +4122,7 @@ func (pIF) GetDevice2(session *Session, self PIFRef) (retval string, err error) 
 
 // GetUUID: Get the uuid field of the given PIF.
 // Version: rio
-func (pIF) GetUUID(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetUUID(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4142,7 +4142,7 @@ func (pIF) GetUUID(session *Session, self PIFRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given PIF.
 // Version: rio
-func (pIF) GetUUID2(session *Session, self PIFRef) (retval string, err error) {
+func (pif) GetUUID2(session *Session, self PIFRef) (retval string, err error) {
 	method := "PIF.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4162,17 +4162,17 @@ func (pIF) GetUUID2(session *Session, self PIFRef) (retval string, err error) {
 
 // GetByUUID: Get a reference to the PIF instance with the specified UUID.
 // Version: rio
-func (pIF) GetByUUID(session *Session, uUID string) (retval PIFRef, err error) {
+func (pif) GetByUUID(session *Session, uuid string) (retval PIFRef, err error) {
 	method := "PIF.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -4182,17 +4182,17 @@ func (pIF) GetByUUID(session *Session, uUID string) (retval PIFRef, err error) {
 
 // GetByUUID2: Get a reference to the PIF instance with the specified UUID.
 // Version: rio
-func (pIF) GetByUUID2(session *Session, uUID string) (retval PIFRef, err error) {
+func (pif) GetByUUID2(session *Session, uuid string) (retval PIFRef, err error) {
 	method := "PIF.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -4202,7 +4202,7 @@ func (pIF) GetByUUID2(session *Session, uUID string) (retval PIFRef, err error) 
 
 // GetRecord: Get a record containing the current state of the given PIF.
 // Version: rio
-func (pIF) GetRecord(session *Session, self PIFRef) (retval PIFRecord, err error) {
+func (pif) GetRecord(session *Session, self PIFRef) (retval PIFRecord, err error) {
 	method := "PIF.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4222,7 +4222,7 @@ func (pIF) GetRecord(session *Session, self PIFRef) (retval PIFRecord, err error
 
 // GetRecord2: Get a record containing the current state of the given PIF.
 // Version: rio
-func (pIF) GetRecord2(session *Session, self PIFRef) (retval PIFRecord, err error) {
+func (pif) GetRecord2(session *Session, self PIFRef) (retval PIFRecord, err error) {
 	method := "PIF.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

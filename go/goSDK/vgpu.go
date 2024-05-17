@@ -34,13 +34,13 @@ type VGPURecord struct {
 type VGPURef string
 
 // A virtual GPU (vGPU)
-type vGPU struct{}
+type vgpu struct{}
 
-var VGPU vGPU
+var VGPU vgpu
 
 // GetAllRecords: Return a map of VGPU references to VGPU records for all VGPUs known to the system.
 // Version: boston
-func (vGPU) GetAllRecords(session *Session) (retval map[VGPURef]VGPURecord, err error) {
+func (vgpu) GetAllRecords(session *Session) (retval map[VGPURef]VGPURecord, err error) {
 	method := "VGPU.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -56,7 +56,7 @@ func (vGPU) GetAllRecords(session *Session) (retval map[VGPURef]VGPURecord, err 
 
 // GetAllRecords1: Return a map of VGPU references to VGPU records for all VGPUs known to the system.
 // Version: boston
-func (vGPU) GetAllRecords1(session *Session) (retval map[VGPURef]VGPURecord, err error) {
+func (vgpu) GetAllRecords1(session *Session) (retval map[VGPURef]VGPURecord, err error) {
 	method := "VGPU.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -72,7 +72,7 @@ func (vGPU) GetAllRecords1(session *Session) (retval map[VGPURef]VGPURecord, err
 
 // GetAll: Return a list of all the VGPUs known to the system.
 // Version: boston
-func (vGPU) GetAll(session *Session) (retval []VGPURef, err error) {
+func (vgpu) GetAll(session *Session) (retval []VGPURef, err error) {
 	method := "VGPU.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -88,7 +88,7 @@ func (vGPU) GetAll(session *Session) (retval []VGPURef, err error) {
 
 // GetAll1: Return a list of all the VGPUs known to the system.
 // Version: boston
-func (vGPU) GetAll1(session *Session) (retval []VGPURef, err error) {
+func (vgpu) GetAll1(session *Session) (retval []VGPURef, err error) {
 	method := "VGPU.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -104,7 +104,7 @@ func (vGPU) GetAll1(session *Session) (retval []VGPURef, err error) {
 
 // Destroy:
 // Version: boston
-func (vGPU) Destroy(session *Session, self VGPURef) (err error) {
+func (vgpu) Destroy(session *Session, self VGPURef) (err error) {
 	method := "VGPU.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -120,7 +120,7 @@ func (vGPU) Destroy(session *Session, self VGPURef) (err error) {
 
 // AsyncDestroy:
 // Version: boston
-func (vGPU) AsyncDestroy(session *Session, self VGPURef) (retval TaskRef, err error) {
+func (vgpu) AsyncDestroy(session *Session, self VGPURef) (retval TaskRef, err error) {
 	method := "Async.VGPU.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -140,7 +140,7 @@ func (vGPU) AsyncDestroy(session *Session, self VGPURef) (retval TaskRef, err er
 
 // Destroy2:
 // Version: boston
-func (vGPU) Destroy2(session *Session, self VGPURef) (err error) {
+func (vgpu) Destroy2(session *Session, self VGPURef) (err error) {
 	method := "VGPU.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -156,7 +156,7 @@ func (vGPU) Destroy2(session *Session, self VGPURef) (err error) {
 
 // AsyncDestroy2:
 // Version: boston
-func (vGPU) AsyncDestroy2(session *Session, self VGPURef) (retval TaskRef, err error) {
+func (vgpu) AsyncDestroy2(session *Session, self VGPURef) (retval TaskRef, err error) {
 	method := "Async.VGPU.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -176,17 +176,17 @@ func (vGPU) AsyncDestroy2(session *Session, self VGPURef) (retval TaskRef, err e
 
 // Create:
 // Version: vgpu-tech-preview
-func (vGPU) Create(session *Session, vM VMRef, gPUGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval VGPURef, err error) {
+func (vgpu) Create(session *Session, vm VMRef, gpuGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval VGPURef, err error) {
 	method := "VGPU.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vm)
 	if err != nil {
 		return
 	}
-	gPUGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gPUGroup)
+	gpuGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gpuGroup)
 	if err != nil {
 		return
 	}
@@ -202,7 +202,7 @@ func (vGPU) Create(session *Session, vM VMRef, gPUGroup GPUGroupRef, device stri
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, gPUGroupArg, deviceArg, otherConfigArg, typeKeyArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, gpuGroupArg, deviceArg, otherConfigArg, typeKeyArg)
 	if err != nil {
 		return
 	}
@@ -212,17 +212,17 @@ func (vGPU) Create(session *Session, vM VMRef, gPUGroup GPUGroupRef, device stri
 
 // AsyncCreate:
 // Version: vgpu-tech-preview
-func (vGPU) AsyncCreate(session *Session, vM VMRef, gPUGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval TaskRef, err error) {
+func (vgpu) AsyncCreate(session *Session, vm VMRef, gpuGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.VGPU.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vm)
 	if err != nil {
 		return
 	}
-	gPUGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gPUGroup)
+	gpuGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gpuGroup)
 	if err != nil {
 		return
 	}
@@ -238,7 +238,7 @@ func (vGPU) AsyncCreate(session *Session, vM VMRef, gPUGroup GPUGroupRef, device
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, gPUGroupArg, deviceArg, otherConfigArg, typeKeyArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, gpuGroupArg, deviceArg, otherConfigArg, typeKeyArg)
 	if err != nil {
 		return
 	}
@@ -248,17 +248,17 @@ func (vGPU) AsyncCreate(session *Session, vM VMRef, gPUGroup GPUGroupRef, device
 
 // Create6:
 // Version: vgpu-tech-preview
-func (vGPU) Create6(session *Session, vM VMRef, gPUGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval VGPURef, err error) {
+func (vgpu) Create6(session *Session, vm VMRef, gpuGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval VGPURef, err error) {
 	method := "VGPU.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vm)
 	if err != nil {
 		return
 	}
-	gPUGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gPUGroup)
+	gpuGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gpuGroup)
 	if err != nil {
 		return
 	}
@@ -274,7 +274,7 @@ func (vGPU) Create6(session *Session, vM VMRef, gPUGroup GPUGroupRef, device str
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, gPUGroupArg, deviceArg, otherConfigArg, typeKeyArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, gpuGroupArg, deviceArg, otherConfigArg, typeKeyArg)
 	if err != nil {
 		return
 	}
@@ -284,17 +284,17 @@ func (vGPU) Create6(session *Session, vM VMRef, gPUGroup GPUGroupRef, device str
 
 // AsyncCreate6:
 // Version: vgpu-tech-preview
-func (vGPU) AsyncCreate6(session *Session, vM VMRef, gPUGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval TaskRef, err error) {
+func (vgpu) AsyncCreate6(session *Session, vm VMRef, gpuGroup GPUGroupRef, device string, otherConfig map[string]string, typeKey VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.VGPU.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vm)
 	if err != nil {
 		return
 	}
-	gPUGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gPUGroup)
+	gpuGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gpuGroup)
 	if err != nil {
 		return
 	}
@@ -310,7 +310,7 @@ func (vGPU) AsyncCreate6(session *Session, vM VMRef, gPUGroup GPUGroupRef, devic
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, gPUGroupArg, deviceArg, otherConfigArg, typeKeyArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, gpuGroupArg, deviceArg, otherConfigArg, typeKeyArg)
 	if err != nil {
 		return
 	}
@@ -320,17 +320,17 @@ func (vGPU) AsyncCreate6(session *Session, vM VMRef, gPUGroup GPUGroupRef, devic
 
 // Create5:
 // Version: boston
-func (vGPU) Create5(session *Session, vM VMRef, gPUGroup GPUGroupRef, device string, otherConfig map[string]string) (retval VGPURef, err error) {
+func (vgpu) Create5(session *Session, vm VMRef, gpuGroup GPUGroupRef, device string, otherConfig map[string]string) (retval VGPURef, err error) {
 	method := "VGPU.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vm)
 	if err != nil {
 		return
 	}
-	gPUGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gPUGroup)
+	gpuGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gpuGroup)
 	if err != nil {
 		return
 	}
@@ -342,7 +342,7 @@ func (vGPU) Create5(session *Session, vM VMRef, gPUGroup GPUGroupRef, device str
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, gPUGroupArg, deviceArg, otherConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, gpuGroupArg, deviceArg, otherConfigArg)
 	if err != nil {
 		return
 	}
@@ -352,17 +352,17 @@ func (vGPU) Create5(session *Session, vM VMRef, gPUGroup GPUGroupRef, device str
 
 // AsyncCreate5:
 // Version: boston
-func (vGPU) AsyncCreate5(session *Session, vM VMRef, gPUGroup GPUGroupRef, device string, otherConfig map[string]string) (retval TaskRef, err error) {
+func (vgpu) AsyncCreate5(session *Session, vm VMRef, gpuGroup GPUGroupRef, device string, otherConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.VGPU.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "VM"), vm)
 	if err != nil {
 		return
 	}
-	gPUGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gPUGroup)
+	gpuGroupArg, err := serializeGPUGroupRef(fmt.Sprintf("%s(%s)", method, "GPU_group"), gpuGroup)
 	if err != nil {
 		return
 	}
@@ -374,7 +374,7 @@ func (vGPU) AsyncCreate5(session *Session, vM VMRef, gPUGroup GPUGroupRef, devic
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, gPUGroupArg, deviceArg, otherConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, gpuGroupArg, deviceArg, otherConfigArg)
 	if err != nil {
 		return
 	}
@@ -384,7 +384,7 @@ func (vGPU) AsyncCreate5(session *Session, vM VMRef, gPUGroup GPUGroupRef, devic
 
 // SetExtraArgs: Set the extra_args field of the given VGPU.
 // Version: quebec
-func (vGPU) SetExtraArgs(session *Session, self VGPURef, value string) (err error) {
+func (vgpu) SetExtraArgs(session *Session, self VGPURef, value string) (err error) {
 	method := "VGPU.set_extra_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -404,7 +404,7 @@ func (vGPU) SetExtraArgs(session *Session, self VGPURef, value string) (err erro
 
 // SetExtraArgs3: Set the extra_args field of the given VGPU.
 // Version: quebec
-func (vGPU) SetExtraArgs3(session *Session, self VGPURef, value string) (err error) {
+func (vgpu) SetExtraArgs3(session *Session, self VGPURef, value string) (err error) {
 	method := "VGPU.set_extra_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -424,7 +424,7 @@ func (vGPU) SetExtraArgs3(session *Session, self VGPURef, value string) (err err
 
 // SetExtraArgs2: Set the extra_args field of the given VGPU.
 // Version: boston
-func (vGPU) SetExtraArgs2(session *Session, self VGPURef) (err error) {
+func (vgpu) SetExtraArgs2(session *Session, self VGPURef) (err error) {
 	method := "VGPU.set_extra_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -440,7 +440,7 @@ func (vGPU) SetExtraArgs2(session *Session, self VGPURef) (err error) {
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VGPU.  If the key is not in that Map, then do nothing.
 // Version: boston
-func (vGPU) RemoveFromOtherConfig(session *Session, self VGPURef, key string) (err error) {
+func (vgpu) RemoveFromOtherConfig(session *Session, self VGPURef, key string) (err error) {
 	method := "VGPU.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -460,7 +460,7 @@ func (vGPU) RemoveFromOtherConfig(session *Session, self VGPURef, key string) (e
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VGPU.  If the key is not in that Map, then do nothing.
 // Version: boston
-func (vGPU) RemoveFromOtherConfig3(session *Session, self VGPURef, key string) (err error) {
+func (vgpu) RemoveFromOtherConfig3(session *Session, self VGPURef, key string) (err error) {
 	method := "VGPU.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -480,7 +480,7 @@ func (vGPU) RemoveFromOtherConfig3(session *Session, self VGPURef, key string) (
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VGPU.
 // Version: boston
-func (vGPU) AddToOtherConfig(session *Session, self VGPURef, key string, value string) (err error) {
+func (vgpu) AddToOtherConfig(session *Session, self VGPURef, key string, value string) (err error) {
 	method := "VGPU.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -504,7 +504,7 @@ func (vGPU) AddToOtherConfig(session *Session, self VGPURef, key string, value s
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VGPU.
 // Version: boston
-func (vGPU) AddToOtherConfig4(session *Session, self VGPURef, key string, value string) (err error) {
+func (vgpu) AddToOtherConfig4(session *Session, self VGPURef, key string, value string) (err error) {
 	method := "VGPU.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -528,7 +528,7 @@ func (vGPU) AddToOtherConfig4(session *Session, self VGPURef, key string, value 
 
 // SetOtherConfig: Set the other_config field of the given VGPU.
 // Version: boston
-func (vGPU) SetOtherConfig(session *Session, self VGPURef, value map[string]string) (err error) {
+func (vgpu) SetOtherConfig(session *Session, self VGPURef, value map[string]string) (err error) {
 	method := "VGPU.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -548,7 +548,7 @@ func (vGPU) SetOtherConfig(session *Session, self VGPURef, value map[string]stri
 
 // SetOtherConfig3: Set the other_config field of the given VGPU.
 // Version: boston
-func (vGPU) SetOtherConfig3(session *Session, self VGPURef, value map[string]string) (err error) {
+func (vgpu) SetOtherConfig3(session *Session, self VGPURef, value map[string]string) (err error) {
 	method := "VGPU.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -568,7 +568,7 @@ func (vGPU) SetOtherConfig3(session *Session, self VGPURef, value map[string]str
 
 // GetPCI: Get the PCI field of the given VGPU.
 // Version: boston
-func (vGPU) GetPCI(session *Session, self VGPURef) (retval PCIRef, err error) {
+func (vgpu) GetPCI(session *Session, self VGPURef) (retval PCIRef, err error) {
 	method := "VGPU.get_PCI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -588,7 +588,7 @@ func (vGPU) GetPCI(session *Session, self VGPURef) (retval PCIRef, err error) {
 
 // GetPCI2: Get the PCI field of the given VGPU.
 // Version: boston
-func (vGPU) GetPCI2(session *Session, self VGPURef) (retval PCIRef, err error) {
+func (vgpu) GetPCI2(session *Session, self VGPURef) (retval PCIRef, err error) {
 	method := "VGPU.get_PCI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -608,7 +608,7 @@ func (vGPU) GetPCI2(session *Session, self VGPURef) (retval PCIRef, err error) {
 
 // GetExtraArgs: Get the extra_args field of the given VGPU.
 // Version: boston
-func (vGPU) GetExtraArgs(session *Session, self VGPURef) (retval string, err error) {
+func (vgpu) GetExtraArgs(session *Session, self VGPURef) (retval string, err error) {
 	method := "VGPU.get_extra_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -628,7 +628,7 @@ func (vGPU) GetExtraArgs(session *Session, self VGPURef) (retval string, err err
 
 // GetExtraArgs2: Get the extra_args field of the given VGPU.
 // Version: boston
-func (vGPU) GetExtraArgs2(session *Session, self VGPURef) (retval string, err error) {
+func (vgpu) GetExtraArgs2(session *Session, self VGPURef) (retval string, err error) {
 	method := "VGPU.get_extra_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -648,7 +648,7 @@ func (vGPU) GetExtraArgs2(session *Session, self VGPURef) (retval string, err er
 
 // GetCompatibilityMetadata: Get the compatibility_metadata field of the given VGPU.
 // Version: boston
-func (vGPU) GetCompatibilityMetadata(session *Session, self VGPURef) (retval map[string]string, err error) {
+func (vgpu) GetCompatibilityMetadata(session *Session, self VGPURef) (retval map[string]string, err error) {
 	method := "VGPU.get_compatibility_metadata"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -668,7 +668,7 @@ func (vGPU) GetCompatibilityMetadata(session *Session, self VGPURef) (retval map
 
 // GetCompatibilityMetadata2: Get the compatibility_metadata field of the given VGPU.
 // Version: boston
-func (vGPU) GetCompatibilityMetadata2(session *Session, self VGPURef) (retval map[string]string, err error) {
+func (vgpu) GetCompatibilityMetadata2(session *Session, self VGPURef) (retval map[string]string, err error) {
 	method := "VGPU.get_compatibility_metadata"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -688,7 +688,7 @@ func (vGPU) GetCompatibilityMetadata2(session *Session, self VGPURef) (retval ma
 
 // GetScheduledToBeResidentOn: Get the scheduled_to_be_resident_on field of the given VGPU.
 // Version: boston
-func (vGPU) GetScheduledToBeResidentOn(session *Session, self VGPURef) (retval PGPURef, err error) {
+func (vgpu) GetScheduledToBeResidentOn(session *Session, self VGPURef) (retval PGPURef, err error) {
 	method := "VGPU.get_scheduled_to_be_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -708,7 +708,7 @@ func (vGPU) GetScheduledToBeResidentOn(session *Session, self VGPURef) (retval P
 
 // GetScheduledToBeResidentOn2: Get the scheduled_to_be_resident_on field of the given VGPU.
 // Version: boston
-func (vGPU) GetScheduledToBeResidentOn2(session *Session, self VGPURef) (retval PGPURef, err error) {
+func (vgpu) GetScheduledToBeResidentOn2(session *Session, self VGPURef) (retval PGPURef, err error) {
 	method := "VGPU.get_scheduled_to_be_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -728,7 +728,7 @@ func (vGPU) GetScheduledToBeResidentOn2(session *Session, self VGPURef) (retval 
 
 // GetResidentOn: Get the resident_on field of the given VGPU.
 // Version: boston
-func (vGPU) GetResidentOn(session *Session, self VGPURef) (retval PGPURef, err error) {
+func (vgpu) GetResidentOn(session *Session, self VGPURef) (retval PGPURef, err error) {
 	method := "VGPU.get_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -748,7 +748,7 @@ func (vGPU) GetResidentOn(session *Session, self VGPURef) (retval PGPURef, err e
 
 // GetResidentOn2: Get the resident_on field of the given VGPU.
 // Version: boston
-func (vGPU) GetResidentOn2(session *Session, self VGPURef) (retval PGPURef, err error) {
+func (vgpu) GetResidentOn2(session *Session, self VGPURef) (retval PGPURef, err error) {
 	method := "VGPU.get_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -768,7 +768,7 @@ func (vGPU) GetResidentOn2(session *Session, self VGPURef) (retval PGPURef, err 
 
 // GetType: Get the type field of the given VGPU.
 // Version: boston
-func (vGPU) GetType(session *Session, self VGPURef) (retval VGPUTypeRef, err error) {
+func (vgpu) GetType(session *Session, self VGPURef) (retval VGPUTypeRef, err error) {
 	method := "VGPU.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -788,7 +788,7 @@ func (vGPU) GetType(session *Session, self VGPURef) (retval VGPUTypeRef, err err
 
 // GetType2: Get the type field of the given VGPU.
 // Version: boston
-func (vGPU) GetType2(session *Session, self VGPURef) (retval VGPUTypeRef, err error) {
+func (vgpu) GetType2(session *Session, self VGPURef) (retval VGPUTypeRef, err error) {
 	method := "VGPU.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -808,7 +808,7 @@ func (vGPU) GetType2(session *Session, self VGPURef) (retval VGPUTypeRef, err er
 
 // GetOtherConfig: Get the other_config field of the given VGPU.
 // Version: boston
-func (vGPU) GetOtherConfig(session *Session, self VGPURef) (retval map[string]string, err error) {
+func (vgpu) GetOtherConfig(session *Session, self VGPURef) (retval map[string]string, err error) {
 	method := "VGPU.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -828,7 +828,7 @@ func (vGPU) GetOtherConfig(session *Session, self VGPURef) (retval map[string]st
 
 // GetOtherConfig2: Get the other_config field of the given VGPU.
 // Version: boston
-func (vGPU) GetOtherConfig2(session *Session, self VGPURef) (retval map[string]string, err error) {
+func (vgpu) GetOtherConfig2(session *Session, self VGPURef) (retval map[string]string, err error) {
 	method := "VGPU.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -848,7 +848,7 @@ func (vGPU) GetOtherConfig2(session *Session, self VGPURef) (retval map[string]s
 
 // GetCurrentlyAttached: Get the currently_attached field of the given VGPU.
 // Version: boston
-func (vGPU) GetCurrentlyAttached(session *Session, self VGPURef) (retval bool, err error) {
+func (vgpu) GetCurrentlyAttached(session *Session, self VGPURef) (retval bool, err error) {
 	method := "VGPU.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -868,7 +868,7 @@ func (vGPU) GetCurrentlyAttached(session *Session, self VGPURef) (retval bool, e
 
 // GetCurrentlyAttached2: Get the currently_attached field of the given VGPU.
 // Version: boston
-func (vGPU) GetCurrentlyAttached2(session *Session, self VGPURef) (retval bool, err error) {
+func (vgpu) GetCurrentlyAttached2(session *Session, self VGPURef) (retval bool, err error) {
 	method := "VGPU.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -888,7 +888,7 @@ func (vGPU) GetCurrentlyAttached2(session *Session, self VGPURef) (retval bool, 
 
 // GetDevice: Get the device field of the given VGPU.
 // Version: boston
-func (vGPU) GetDevice(session *Session, self VGPURef) (retval string, err error) {
+func (vgpu) GetDevice(session *Session, self VGPURef) (retval string, err error) {
 	method := "VGPU.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -908,7 +908,7 @@ func (vGPU) GetDevice(session *Session, self VGPURef) (retval string, err error)
 
 // GetDevice2: Get the device field of the given VGPU.
 // Version: boston
-func (vGPU) GetDevice2(session *Session, self VGPURef) (retval string, err error) {
+func (vgpu) GetDevice2(session *Session, self VGPURef) (retval string, err error) {
 	method := "VGPU.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -928,7 +928,7 @@ func (vGPU) GetDevice2(session *Session, self VGPURef) (retval string, err error
 
 // GetGPUGroup: Get the GPU_group field of the given VGPU.
 // Version: boston
-func (vGPU) GetGPUGroup(session *Session, self VGPURef) (retval GPUGroupRef, err error) {
+func (vgpu) GetGPUGroup(session *Session, self VGPURef) (retval GPUGroupRef, err error) {
 	method := "VGPU.get_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -948,7 +948,7 @@ func (vGPU) GetGPUGroup(session *Session, self VGPURef) (retval GPUGroupRef, err
 
 // GetGPUGroup2: Get the GPU_group field of the given VGPU.
 // Version: boston
-func (vGPU) GetGPUGroup2(session *Session, self VGPURef) (retval GPUGroupRef, err error) {
+func (vgpu) GetGPUGroup2(session *Session, self VGPURef) (retval GPUGroupRef, err error) {
 	method := "VGPU.get_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -968,7 +968,7 @@ func (vGPU) GetGPUGroup2(session *Session, self VGPURef) (retval GPUGroupRef, er
 
 // GetVM: Get the VM field of the given VGPU.
 // Version: boston
-func (vGPU) GetVM(session *Session, self VGPURef) (retval VMRef, err error) {
+func (vgpu) GetVM(session *Session, self VGPURef) (retval VMRef, err error) {
 	method := "VGPU.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -988,7 +988,7 @@ func (vGPU) GetVM(session *Session, self VGPURef) (retval VMRef, err error) {
 
 // GetVM2: Get the VM field of the given VGPU.
 // Version: boston
-func (vGPU) GetVM2(session *Session, self VGPURef) (retval VMRef, err error) {
+func (vgpu) GetVM2(session *Session, self VGPURef) (retval VMRef, err error) {
 	method := "VGPU.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1008,7 +1008,7 @@ func (vGPU) GetVM2(session *Session, self VGPURef) (retval VMRef, err error) {
 
 // GetUUID: Get the uuid field of the given VGPU.
 // Version: boston
-func (vGPU) GetUUID(session *Session, self VGPURef) (retval string, err error) {
+func (vgpu) GetUUID(session *Session, self VGPURef) (retval string, err error) {
 	method := "VGPU.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1028,7 +1028,7 @@ func (vGPU) GetUUID(session *Session, self VGPURef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VGPU.
 // Version: boston
-func (vGPU) GetUUID2(session *Session, self VGPURef) (retval string, err error) {
+func (vgpu) GetUUID2(session *Session, self VGPURef) (retval string, err error) {
 	method := "VGPU.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1048,17 +1048,17 @@ func (vGPU) GetUUID2(session *Session, self VGPURef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the VGPU instance with the specified UUID.
 // Version: boston
-func (vGPU) GetByUUID(session *Session, uUID string) (retval VGPURef, err error) {
+func (vgpu) GetByUUID(session *Session, uuid string) (retval VGPURef, err error) {
 	method := "VGPU.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1068,17 +1068,17 @@ func (vGPU) GetByUUID(session *Session, uUID string) (retval VGPURef, err error)
 
 // GetByUUID2: Get a reference to the VGPU instance with the specified UUID.
 // Version: boston
-func (vGPU) GetByUUID2(session *Session, uUID string) (retval VGPURef, err error) {
+func (vgpu) GetByUUID2(session *Session, uuid string) (retval VGPURef, err error) {
 	method := "VGPU.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1088,7 +1088,7 @@ func (vGPU) GetByUUID2(session *Session, uUID string) (retval VGPURef, err error
 
 // GetRecord: Get a record containing the current state of the given VGPU.
 // Version: boston
-func (vGPU) GetRecord(session *Session, self VGPURef) (retval VGPURecord, err error) {
+func (vgpu) GetRecord(session *Session, self VGPURef) (retval VGPURecord, err error) {
 	method := "VGPU.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1108,7 +1108,7 @@ func (vGPU) GetRecord(session *Session, self VGPURef) (retval VGPURecord, err er
 
 // GetRecord2: Get a record containing the current state of the given VGPU.
 // Version: boston
-func (vGPU) GetRecord2(session *Session, self VGPURef) (retval VGPURecord, err error) {
+func (vgpu) GetRecord2(session *Session, self VGPURef) (retval VGPURecord, err error) {
 	method := "VGPU.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

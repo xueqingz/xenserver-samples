@@ -54,13 +54,13 @@ type VBDRecord struct {
 type VBDRef string
 
 // A virtual block device
-type vBD struct{}
+type vbd struct{}
 
-var VBD vBD
+var VBD vbd
 
 // GetAllRecords: Return a map of VBD references to VBD records for all VBDs known to the system.
 // Version: rio
-func (vBD) GetAllRecords(session *Session) (retval map[VBDRef]VBDRecord, err error) {
+func (vbd) GetAllRecords(session *Session) (retval map[VBDRef]VBDRecord, err error) {
 	method := "VBD.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -76,7 +76,7 @@ func (vBD) GetAllRecords(session *Session) (retval map[VBDRef]VBDRecord, err err
 
 // GetAllRecords1: Return a map of VBD references to VBD records for all VBDs known to the system.
 // Version: rio
-func (vBD) GetAllRecords1(session *Session) (retval map[VBDRef]VBDRecord, err error) {
+func (vbd) GetAllRecords1(session *Session) (retval map[VBDRef]VBDRecord, err error) {
 	method := "VBD.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -92,7 +92,7 @@ func (vBD) GetAllRecords1(session *Session) (retval map[VBDRef]VBDRecord, err er
 
 // GetAll: Return a list of all the VBDs known to the system.
 // Version: rio
-func (vBD) GetAll(session *Session) (retval []VBDRef, err error) {
+func (vbd) GetAll(session *Session) (retval []VBDRef, err error) {
 	method := "VBD.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -108,7 +108,7 @@ func (vBD) GetAll(session *Session) (retval []VBDRef, err error) {
 
 // GetAll1: Return a list of all the VBDs known to the system.
 // Version: rio
-func (vBD) GetAll1(session *Session) (retval []VBDRef, err error) {
+func (vbd) GetAll1(session *Session) (retval []VBDRef, err error) {
 	method := "VBD.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -124,7 +124,7 @@ func (vBD) GetAll1(session *Session) (retval []VBDRef, err error) {
 
 // SetMode: Sets the mode of the VBD. The power_state of the VM must be halted.
 // Version: rio
-func (vBD) SetMode(session *Session, self VBDRef, value VbdMode) (err error) {
+func (vbd) SetMode(session *Session, self VBDRef, value VbdMode) (err error) {
 	method := "VBD.set_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -144,7 +144,7 @@ func (vBD) SetMode(session *Session, self VBDRef, value VbdMode) (err error) {
 
 // AsyncSetMode: Sets the mode of the VBD. The power_state of the VM must be halted.
 // Version: rio
-func (vBD) AsyncSetMode(session *Session, self VBDRef, value VbdMode) (retval TaskRef, err error) {
+func (vbd) AsyncSetMode(session *Session, self VBDRef, value VbdMode) (retval TaskRef, err error) {
 	method := "Async.VBD.set_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -168,7 +168,7 @@ func (vBD) AsyncSetMode(session *Session, self VBDRef, value VbdMode) (retval Ta
 
 // SetMode3: Sets the mode of the VBD. The power_state of the VM must be halted.
 // Version: rio
-func (vBD) SetMode3(session *Session, self VBDRef, value VbdMode) (err error) {
+func (vbd) SetMode3(session *Session, self VBDRef, value VbdMode) (err error) {
 	method := "VBD.set_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -188,7 +188,7 @@ func (vBD) SetMode3(session *Session, self VBDRef, value VbdMode) (err error) {
 
 // AsyncSetMode3: Sets the mode of the VBD. The power_state of the VM must be halted.
 // Version: rio
-func (vBD) AsyncSetMode3(session *Session, self VBDRef, value VbdMode) (retval TaskRef, err error) {
+func (vbd) AsyncSetMode3(session *Session, self VBDRef, value VbdMode) (retval TaskRef, err error) {
 	method := "Async.VBD.set_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -212,7 +212,7 @@ func (vBD) AsyncSetMode3(session *Session, self VBDRef, value VbdMode) (retval T
 
 // AssertAttachable: Throws an error if this VBD could not be attached to this VM if the VM were running. Intended for debugging.
 // Version: rio
-func (vBD) AssertAttachable(session *Session, self VBDRef) (err error) {
+func (vbd) AssertAttachable(session *Session, self VBDRef) (err error) {
 	method := "VBD.assert_attachable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -228,7 +228,7 @@ func (vBD) AssertAttachable(session *Session, self VBDRef) (err error) {
 
 // AsyncAssertAttachable: Throws an error if this VBD could not be attached to this VM if the VM were running. Intended for debugging.
 // Version: rio
-func (vBD) AsyncAssertAttachable(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncAssertAttachable(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.assert_attachable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -248,7 +248,7 @@ func (vBD) AsyncAssertAttachable(session *Session, self VBDRef) (retval TaskRef,
 
 // AssertAttachable2: Throws an error if this VBD could not be attached to this VM if the VM were running. Intended for debugging.
 // Version: rio
-func (vBD) AssertAttachable2(session *Session, self VBDRef) (err error) {
+func (vbd) AssertAttachable2(session *Session, self VBDRef) (err error) {
 	method := "VBD.assert_attachable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -264,7 +264,7 @@ func (vBD) AssertAttachable2(session *Session, self VBDRef) (err error) {
 
 // AsyncAssertAttachable2: Throws an error if this VBD could not be attached to this VM if the VM were running. Intended for debugging.
 // Version: rio
-func (vBD) AsyncAssertAttachable2(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncAssertAttachable2(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.assert_attachable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -284,7 +284,7 @@ func (vBD) AsyncAssertAttachable2(session *Session, self VBDRef) (retval TaskRef
 
 // UnplugForce: Forcibly unplug the specified VBD
 // Version: rio
-func (vBD) UnplugForce(session *Session, self VBDRef) (err error) {
+func (vbd) UnplugForce(session *Session, self VBDRef) (err error) {
 	method := "VBD.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -300,7 +300,7 @@ func (vBD) UnplugForce(session *Session, self VBDRef) (err error) {
 
 // AsyncUnplugForce: Forcibly unplug the specified VBD
 // Version: rio
-func (vBD) AsyncUnplugForce(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncUnplugForce(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -320,7 +320,7 @@ func (vBD) AsyncUnplugForce(session *Session, self VBDRef) (retval TaskRef, err 
 
 // UnplugForce2: Forcibly unplug the specified VBD
 // Version: rio
-func (vBD) UnplugForce2(session *Session, self VBDRef) (err error) {
+func (vbd) UnplugForce2(session *Session, self VBDRef) (err error) {
 	method := "VBD.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -336,7 +336,7 @@ func (vBD) UnplugForce2(session *Session, self VBDRef) (err error) {
 
 // AsyncUnplugForce2: Forcibly unplug the specified VBD
 // Version: rio
-func (vBD) AsyncUnplugForce2(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncUnplugForce2(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.unplug_force"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -360,7 +360,7 @@ func (vBD) AsyncUnplugForce2(session *Session, self VBDRef) (retval TaskRef, err
 // Errors:
 // DEVICE_DETACH_REJECTED - The VM rejected the attempt to detach the device.
 // DEVICE_ALREADY_DETACHED - The device is not currently attached
-func (vBD) Unplug(session *Session, self VBDRef) (err error) {
+func (vbd) Unplug(session *Session, self VBDRef) (err error) {
 	method := "VBD.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -380,7 +380,7 @@ func (vBD) Unplug(session *Session, self VBDRef) (err error) {
 // Errors:
 // DEVICE_DETACH_REJECTED - The VM rejected the attempt to detach the device.
 // DEVICE_ALREADY_DETACHED - The device is not currently attached
-func (vBD) AsyncUnplug(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncUnplug(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -404,7 +404,7 @@ func (vBD) AsyncUnplug(session *Session, self VBDRef) (retval TaskRef, err error
 // Errors:
 // DEVICE_DETACH_REJECTED - The VM rejected the attempt to detach the device.
 // DEVICE_ALREADY_DETACHED - The device is not currently attached
-func (vBD) Unplug2(session *Session, self VBDRef) (err error) {
+func (vbd) Unplug2(session *Session, self VBDRef) (err error) {
 	method := "VBD.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -424,7 +424,7 @@ func (vBD) Unplug2(session *Session, self VBDRef) (err error) {
 // Errors:
 // DEVICE_DETACH_REJECTED - The VM rejected the attempt to detach the device.
 // DEVICE_ALREADY_DETACHED - The device is not currently attached
-func (vBD) AsyncUnplug2(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncUnplug2(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.unplug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -444,7 +444,7 @@ func (vBD) AsyncUnplug2(session *Session, self VBDRef) (retval TaskRef, err erro
 
 // Plug: Hotplug the specified VBD, dynamically attaching it to the running VM
 // Version: rio
-func (vBD) Plug(session *Session, self VBDRef) (err error) {
+func (vbd) Plug(session *Session, self VBDRef) (err error) {
 	method := "VBD.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -460,7 +460,7 @@ func (vBD) Plug(session *Session, self VBDRef) (err error) {
 
 // AsyncPlug: Hotplug the specified VBD, dynamically attaching it to the running VM
 // Version: rio
-func (vBD) AsyncPlug(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncPlug(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -480,7 +480,7 @@ func (vBD) AsyncPlug(session *Session, self VBDRef) (retval TaskRef, err error) 
 
 // Plug2: Hotplug the specified VBD, dynamically attaching it to the running VM
 // Version: rio
-func (vBD) Plug2(session *Session, self VBDRef) (err error) {
+func (vbd) Plug2(session *Session, self VBDRef) (err error) {
 	method := "VBD.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -496,7 +496,7 @@ func (vBD) Plug2(session *Session, self VBDRef) (err error) {
 
 // AsyncPlug2: Hotplug the specified VBD, dynamically attaching it to the running VM
 // Version: rio
-func (vBD) AsyncPlug2(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncPlug2(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.plug"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -520,7 +520,7 @@ func (vBD) AsyncPlug2(session *Session, self VBDRef) (retval TaskRef, err error)
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_NOT_EMPTY - Operation could not be performed because the drive is not empty
-func (vBD) Insert(session *Session, vbd VBDRef, vdi VDIRef) (err error) {
+func (vbd) Insert(session *Session, vbd VBDRef, vdi VDIRef) (err error) {
 	method := "VBD.insert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -544,7 +544,7 @@ func (vBD) Insert(session *Session, vbd VBDRef, vdi VDIRef) (err error) {
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_NOT_EMPTY - Operation could not be performed because the drive is not empty
-func (vBD) AsyncInsert(session *Session, vbd VBDRef, vdi VDIRef) (retval TaskRef, err error) {
+func (vbd) AsyncInsert(session *Session, vbd VBDRef, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VBD.insert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -572,7 +572,7 @@ func (vBD) AsyncInsert(session *Session, vbd VBDRef, vdi VDIRef) (retval TaskRef
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_NOT_EMPTY - Operation could not be performed because the drive is not empty
-func (vBD) Insert3(session *Session, vbd VBDRef, vdi VDIRef) (err error) {
+func (vbd) Insert3(session *Session, vbd VBDRef, vdi VDIRef) (err error) {
 	method := "VBD.insert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -596,7 +596,7 @@ func (vBD) Insert3(session *Session, vbd VBDRef, vdi VDIRef) (err error) {
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_NOT_EMPTY - Operation could not be performed because the drive is not empty
-func (vBD) AsyncInsert3(session *Session, vbd VBDRef, vdi VDIRef) (retval TaskRef, err error) {
+func (vbd) AsyncInsert3(session *Session, vbd VBDRef, vdi VDIRef) (retval TaskRef, err error) {
 	method := "Async.VBD.insert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -624,7 +624,7 @@ func (vBD) AsyncInsert3(session *Session, vbd VBDRef, vdi VDIRef) (retval TaskRe
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_IS_EMPTY - Operation could not be performed because the drive is empty
-func (vBD) Eject(session *Session, vbd VBDRef) (err error) {
+func (vbd) Eject(session *Session, vbd VBDRef) (err error) {
 	method := "VBD.eject"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -644,7 +644,7 @@ func (vBD) Eject(session *Session, vbd VBDRef) (err error) {
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_IS_EMPTY - Operation could not be performed because the drive is empty
-func (vBD) AsyncEject(session *Session, vbd VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncEject(session *Session, vbd VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.eject"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -668,7 +668,7 @@ func (vBD) AsyncEject(session *Session, vbd VBDRef) (retval TaskRef, err error) 
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_IS_EMPTY - Operation could not be performed because the drive is empty
-func (vBD) Eject2(session *Session, vbd VBDRef) (err error) {
+func (vbd) Eject2(session *Session, vbd VBDRef) (err error) {
 	method := "VBD.eject"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -688,7 +688,7 @@ func (vBD) Eject2(session *Session, vbd VBDRef) (err error) {
 // Errors:
 // VBD_NOT_REMOVABLE_MEDIA - Media could not be ejected because it is not removable
 // VBD_IS_EMPTY - Operation could not be performed because the drive is empty
-func (vBD) AsyncEject2(session *Session, vbd VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncEject2(session *Session, vbd VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.eject"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -708,7 +708,7 @@ func (vBD) AsyncEject2(session *Session, vbd VBDRef) (retval TaskRef, err error)
 
 // RemoveFromQosAlgorithmParams: Remove the given key and its corresponding value from the qos/algorithm_params field of the given VBD.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vBD) RemoveFromQosAlgorithmParams(session *Session, self VBDRef, key string) (err error) {
+func (vbd) RemoveFromQosAlgorithmParams(session *Session, self VBDRef, key string) (err error) {
 	method := "VBD.remove_from_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -728,7 +728,7 @@ func (vBD) RemoveFromQosAlgorithmParams(session *Session, self VBDRef, key strin
 
 // RemoveFromQosAlgorithmParams3: Remove the given key and its corresponding value from the qos/algorithm_params field of the given VBD.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vBD) RemoveFromQosAlgorithmParams3(session *Session, self VBDRef, key string) (err error) {
+func (vbd) RemoveFromQosAlgorithmParams3(session *Session, self VBDRef, key string) (err error) {
 	method := "VBD.remove_from_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -748,7 +748,7 @@ func (vBD) RemoveFromQosAlgorithmParams3(session *Session, self VBDRef, key stri
 
 // AddToQosAlgorithmParams: Add the given key-value pair to the qos/algorithm_params field of the given VBD.
 // Version: rio
-func (vBD) AddToQosAlgorithmParams(session *Session, self VBDRef, key string, value string) (err error) {
+func (vbd) AddToQosAlgorithmParams(session *Session, self VBDRef, key string, value string) (err error) {
 	method := "VBD.add_to_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -772,7 +772,7 @@ func (vBD) AddToQosAlgorithmParams(session *Session, self VBDRef, key string, va
 
 // AddToQosAlgorithmParams4: Add the given key-value pair to the qos/algorithm_params field of the given VBD.
 // Version: rio
-func (vBD) AddToQosAlgorithmParams4(session *Session, self VBDRef, key string, value string) (err error) {
+func (vbd) AddToQosAlgorithmParams4(session *Session, self VBDRef, key string, value string) (err error) {
 	method := "VBD.add_to_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -796,7 +796,7 @@ func (vBD) AddToQosAlgorithmParams4(session *Session, self VBDRef, key string, v
 
 // SetQosAlgorithmParams: Set the qos/algorithm_params field of the given VBD.
 // Version: rio
-func (vBD) SetQosAlgorithmParams(session *Session, self VBDRef, value map[string]string) (err error) {
+func (vbd) SetQosAlgorithmParams(session *Session, self VBDRef, value map[string]string) (err error) {
 	method := "VBD.set_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -816,7 +816,7 @@ func (vBD) SetQosAlgorithmParams(session *Session, self VBDRef, value map[string
 
 // SetQosAlgorithmParams3: Set the qos/algorithm_params field of the given VBD.
 // Version: rio
-func (vBD) SetQosAlgorithmParams3(session *Session, self VBDRef, value map[string]string) (err error) {
+func (vbd) SetQosAlgorithmParams3(session *Session, self VBDRef, value map[string]string) (err error) {
 	method := "VBD.set_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -836,7 +836,7 @@ func (vBD) SetQosAlgorithmParams3(session *Session, self VBDRef, value map[strin
 
 // SetQosAlgorithmType: Set the qos/algorithm_type field of the given VBD.
 // Version: rio
-func (vBD) SetQosAlgorithmType(session *Session, self VBDRef, value string) (err error) {
+func (vbd) SetQosAlgorithmType(session *Session, self VBDRef, value string) (err error) {
 	method := "VBD.set_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -856,7 +856,7 @@ func (vBD) SetQosAlgorithmType(session *Session, self VBDRef, value string) (err
 
 // SetQosAlgorithmType3: Set the qos/algorithm_type field of the given VBD.
 // Version: rio
-func (vBD) SetQosAlgorithmType3(session *Session, self VBDRef, value string) (err error) {
+func (vbd) SetQosAlgorithmType3(session *Session, self VBDRef, value string) (err error) {
 	method := "VBD.set_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -876,7 +876,7 @@ func (vBD) SetQosAlgorithmType3(session *Session, self VBDRef, value string) (er
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VBD.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vBD) RemoveFromOtherConfig(session *Session, self VBDRef, key string) (err error) {
+func (vbd) RemoveFromOtherConfig(session *Session, self VBDRef, key string) (err error) {
 	method := "VBD.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -896,7 +896,7 @@ func (vBD) RemoveFromOtherConfig(session *Session, self VBDRef, key string) (err
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VBD.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vBD) RemoveFromOtherConfig3(session *Session, self VBDRef, key string) (err error) {
+func (vbd) RemoveFromOtherConfig3(session *Session, self VBDRef, key string) (err error) {
 	method := "VBD.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -916,7 +916,7 @@ func (vBD) RemoveFromOtherConfig3(session *Session, self VBDRef, key string) (er
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VBD.
 // Version: rio
-func (vBD) AddToOtherConfig(session *Session, self VBDRef, key string, value string) (err error) {
+func (vbd) AddToOtherConfig(session *Session, self VBDRef, key string, value string) (err error) {
 	method := "VBD.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -940,7 +940,7 @@ func (vBD) AddToOtherConfig(session *Session, self VBDRef, key string, value str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VBD.
 // Version: rio
-func (vBD) AddToOtherConfig4(session *Session, self VBDRef, key string, value string) (err error) {
+func (vbd) AddToOtherConfig4(session *Session, self VBDRef, key string, value string) (err error) {
 	method := "VBD.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -964,7 +964,7 @@ func (vBD) AddToOtherConfig4(session *Session, self VBDRef, key string, value st
 
 // SetOtherConfig: Set the other_config field of the given VBD.
 // Version: rio
-func (vBD) SetOtherConfig(session *Session, self VBDRef, value map[string]string) (err error) {
+func (vbd) SetOtherConfig(session *Session, self VBDRef, value map[string]string) (err error) {
 	method := "VBD.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -984,7 +984,7 @@ func (vBD) SetOtherConfig(session *Session, self VBDRef, value map[string]string
 
 // SetOtherConfig3: Set the other_config field of the given VBD.
 // Version: rio
-func (vBD) SetOtherConfig3(session *Session, self VBDRef, value map[string]string) (err error) {
+func (vbd) SetOtherConfig3(session *Session, self VBDRef, value map[string]string) (err error) {
 	method := "VBD.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1004,7 +1004,7 @@ func (vBD) SetOtherConfig3(session *Session, self VBDRef, value map[string]strin
 
 // SetUnpluggable: Set the unpluggable field of the given VBD.
 // Version: miami
-func (vBD) SetUnpluggable(session *Session, self VBDRef, value bool) (err error) {
+func (vbd) SetUnpluggable(session *Session, self VBDRef, value bool) (err error) {
 	method := "VBD.set_unpluggable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1024,7 +1024,7 @@ func (vBD) SetUnpluggable(session *Session, self VBDRef, value bool) (err error)
 
 // SetUnpluggable3: Set the unpluggable field of the given VBD.
 // Version: miami
-func (vBD) SetUnpluggable3(session *Session, self VBDRef, value bool) (err error) {
+func (vbd) SetUnpluggable3(session *Session, self VBDRef, value bool) (err error) {
 	method := "VBD.set_unpluggable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1044,7 +1044,7 @@ func (vBD) SetUnpluggable3(session *Session, self VBDRef, value bool) (err error
 
 // SetUnpluggable2: Set the unpluggable field of the given VBD.
 // Version: rio
-func (vBD) SetUnpluggable2(session *Session, self VBDRef) (err error) {
+func (vbd) SetUnpluggable2(session *Session, self VBDRef) (err error) {
 	method := "VBD.set_unpluggable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1060,7 +1060,7 @@ func (vBD) SetUnpluggable2(session *Session, self VBDRef) (err error) {
 
 // SetType: Set the type field of the given VBD.
 // Version: rio
-func (vBD) SetType(session *Session, self VBDRef, value VbdType) (err error) {
+func (vbd) SetType(session *Session, self VBDRef, value VbdType) (err error) {
 	method := "VBD.set_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1080,7 +1080,7 @@ func (vBD) SetType(session *Session, self VBDRef, value VbdType) (err error) {
 
 // SetType3: Set the type field of the given VBD.
 // Version: rio
-func (vBD) SetType3(session *Session, self VBDRef, value VbdType) (err error) {
+func (vbd) SetType3(session *Session, self VBDRef, value VbdType) (err error) {
 	method := "VBD.set_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1100,7 +1100,7 @@ func (vBD) SetType3(session *Session, self VBDRef, value VbdType) (err error) {
 
 // SetBootable: Set the bootable field of the given VBD.
 // Version: rio
-func (vBD) SetBootable(session *Session, self VBDRef, value bool) (err error) {
+func (vbd) SetBootable(session *Session, self VBDRef, value bool) (err error) {
 	method := "VBD.set_bootable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1120,7 +1120,7 @@ func (vBD) SetBootable(session *Session, self VBDRef, value bool) (err error) {
 
 // SetBootable3: Set the bootable field of the given VBD.
 // Version: rio
-func (vBD) SetBootable3(session *Session, self VBDRef, value bool) (err error) {
+func (vbd) SetBootable3(session *Session, self VBDRef, value bool) (err error) {
 	method := "VBD.set_bootable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1140,7 +1140,7 @@ func (vBD) SetBootable3(session *Session, self VBDRef, value bool) (err error) {
 
 // SetUserdevice: Set the userdevice field of the given VBD.
 // Version: rio
-func (vBD) SetUserdevice(session *Session, self VBDRef, value string) (err error) {
+func (vbd) SetUserdevice(session *Session, self VBDRef, value string) (err error) {
 	method := "VBD.set_userdevice"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1160,7 +1160,7 @@ func (vBD) SetUserdevice(session *Session, self VBDRef, value string) (err error
 
 // SetUserdevice3: Set the userdevice field of the given VBD.
 // Version: rio
-func (vBD) SetUserdevice3(session *Session, self VBDRef, value string) (err error) {
+func (vbd) SetUserdevice3(session *Session, self VBDRef, value string) (err error) {
 	method := "VBD.set_userdevice"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1180,7 +1180,7 @@ func (vBD) SetUserdevice3(session *Session, self VBDRef, value string) (err erro
 
 // GetMetrics: Get the metrics field of the given VBD.
 // Version: rio
-func (vBD) GetMetrics(session *Session, self VBDRef) (retval VBDMetricsRef, err error) {
+func (vbd) GetMetrics(session *Session, self VBDRef) (retval VBDMetricsRef, err error) {
 	method := "VBD.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1200,7 +1200,7 @@ func (vBD) GetMetrics(session *Session, self VBDRef) (retval VBDMetricsRef, err 
 
 // GetMetrics2: Get the metrics field of the given VBD.
 // Version: rio
-func (vBD) GetMetrics2(session *Session, self VBDRef) (retval VBDMetricsRef, err error) {
+func (vbd) GetMetrics2(session *Session, self VBDRef) (retval VBDMetricsRef, err error) {
 	method := "VBD.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1220,7 +1220,7 @@ func (vBD) GetMetrics2(session *Session, self VBDRef) (retval VBDMetricsRef, err
 
 // GetQosSupportedAlgorithms: Get the qos/supported_algorithms field of the given VBD.
 // Version: rio
-func (vBD) GetQosSupportedAlgorithms(session *Session, self VBDRef) (retval []string, err error) {
+func (vbd) GetQosSupportedAlgorithms(session *Session, self VBDRef) (retval []string, err error) {
 	method := "VBD.get_qos_supported_algorithms"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1240,7 +1240,7 @@ func (vBD) GetQosSupportedAlgorithms(session *Session, self VBDRef) (retval []st
 
 // GetQosSupportedAlgorithms2: Get the qos/supported_algorithms field of the given VBD.
 // Version: rio
-func (vBD) GetQosSupportedAlgorithms2(session *Session, self VBDRef) (retval []string, err error) {
+func (vbd) GetQosSupportedAlgorithms2(session *Session, self VBDRef) (retval []string, err error) {
 	method := "VBD.get_qos_supported_algorithms"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1260,7 +1260,7 @@ func (vBD) GetQosSupportedAlgorithms2(session *Session, self VBDRef) (retval []s
 
 // GetQosAlgorithmParams: Get the qos/algorithm_params field of the given VBD.
 // Version: rio
-func (vBD) GetQosAlgorithmParams(session *Session, self VBDRef) (retval map[string]string, err error) {
+func (vbd) GetQosAlgorithmParams(session *Session, self VBDRef) (retval map[string]string, err error) {
 	method := "VBD.get_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1280,7 +1280,7 @@ func (vBD) GetQosAlgorithmParams(session *Session, self VBDRef) (retval map[stri
 
 // GetQosAlgorithmParams2: Get the qos/algorithm_params field of the given VBD.
 // Version: rio
-func (vBD) GetQosAlgorithmParams2(session *Session, self VBDRef) (retval map[string]string, err error) {
+func (vbd) GetQosAlgorithmParams2(session *Session, self VBDRef) (retval map[string]string, err error) {
 	method := "VBD.get_qos_algorithm_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1300,7 +1300,7 @@ func (vBD) GetQosAlgorithmParams2(session *Session, self VBDRef) (retval map[str
 
 // GetQosAlgorithmType: Get the qos/algorithm_type field of the given VBD.
 // Version: rio
-func (vBD) GetQosAlgorithmType(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetQosAlgorithmType(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1320,7 +1320,7 @@ func (vBD) GetQosAlgorithmType(session *Session, self VBDRef) (retval string, er
 
 // GetQosAlgorithmType2: Get the qos/algorithm_type field of the given VBD.
 // Version: rio
-func (vBD) GetQosAlgorithmType2(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetQosAlgorithmType2(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_qos_algorithm_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1340,7 +1340,7 @@ func (vBD) GetQosAlgorithmType2(session *Session, self VBDRef) (retval string, e
 
 // GetRuntimeProperties: Get the runtime_properties field of the given VBD.
 // Version: rio
-func (vBD) GetRuntimeProperties(session *Session, self VBDRef) (retval map[string]string, err error) {
+func (vbd) GetRuntimeProperties(session *Session, self VBDRef) (retval map[string]string, err error) {
 	method := "VBD.get_runtime_properties"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1360,7 +1360,7 @@ func (vBD) GetRuntimeProperties(session *Session, self VBDRef) (retval map[strin
 
 // GetRuntimeProperties2: Get the runtime_properties field of the given VBD.
 // Version: rio
-func (vBD) GetRuntimeProperties2(session *Session, self VBDRef) (retval map[string]string, err error) {
+func (vbd) GetRuntimeProperties2(session *Session, self VBDRef) (retval map[string]string, err error) {
 	method := "VBD.get_runtime_properties"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1380,7 +1380,7 @@ func (vBD) GetRuntimeProperties2(session *Session, self VBDRef) (retval map[stri
 
 // GetStatusDetail: Get the status_detail field of the given VBD.
 // Version: rio
-func (vBD) GetStatusDetail(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetStatusDetail(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_status_detail"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1400,7 +1400,7 @@ func (vBD) GetStatusDetail(session *Session, self VBDRef) (retval string, err er
 
 // GetStatusDetail2: Get the status_detail field of the given VBD.
 // Version: rio
-func (vBD) GetStatusDetail2(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetStatusDetail2(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_status_detail"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1420,7 +1420,7 @@ func (vBD) GetStatusDetail2(session *Session, self VBDRef) (retval string, err e
 
 // GetStatusCode: Get the status_code field of the given VBD.
 // Version: rio
-func (vBD) GetStatusCode(session *Session, self VBDRef) (retval int, err error) {
+func (vbd) GetStatusCode(session *Session, self VBDRef) (retval int, err error) {
 	method := "VBD.get_status_code"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1440,7 +1440,7 @@ func (vBD) GetStatusCode(session *Session, self VBDRef) (retval int, err error) 
 
 // GetStatusCode2: Get the status_code field of the given VBD.
 // Version: rio
-func (vBD) GetStatusCode2(session *Session, self VBDRef) (retval int, err error) {
+func (vbd) GetStatusCode2(session *Session, self VBDRef) (retval int, err error) {
 	method := "VBD.get_status_code"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1460,7 +1460,7 @@ func (vBD) GetStatusCode2(session *Session, self VBDRef) (retval int, err error)
 
 // GetCurrentlyAttached: Get the currently_attached field of the given VBD.
 // Version: rio
-func (vBD) GetCurrentlyAttached(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetCurrentlyAttached(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1480,7 +1480,7 @@ func (vBD) GetCurrentlyAttached(session *Session, self VBDRef) (retval bool, err
 
 // GetCurrentlyAttached2: Get the currently_attached field of the given VBD.
 // Version: rio
-func (vBD) GetCurrentlyAttached2(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetCurrentlyAttached2(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1500,7 +1500,7 @@ func (vBD) GetCurrentlyAttached2(session *Session, self VBDRef) (retval bool, er
 
 // GetOtherConfig: Get the other_config field of the given VBD.
 // Version: rio
-func (vBD) GetOtherConfig(session *Session, self VBDRef) (retval map[string]string, err error) {
+func (vbd) GetOtherConfig(session *Session, self VBDRef) (retval map[string]string, err error) {
 	method := "VBD.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1520,7 +1520,7 @@ func (vBD) GetOtherConfig(session *Session, self VBDRef) (retval map[string]stri
 
 // GetOtherConfig2: Get the other_config field of the given VBD.
 // Version: rio
-func (vBD) GetOtherConfig2(session *Session, self VBDRef) (retval map[string]string, err error) {
+func (vbd) GetOtherConfig2(session *Session, self VBDRef) (retval map[string]string, err error) {
 	method := "VBD.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1540,7 +1540,7 @@ func (vBD) GetOtherConfig2(session *Session, self VBDRef) (retval map[string]str
 
 // GetEmpty: Get the empty field of the given VBD.
 // Version: rio
-func (vBD) GetEmpty(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetEmpty(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_empty"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1560,7 +1560,7 @@ func (vBD) GetEmpty(session *Session, self VBDRef) (retval bool, err error) {
 
 // GetEmpty2: Get the empty field of the given VBD.
 // Version: rio
-func (vBD) GetEmpty2(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetEmpty2(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_empty"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1580,7 +1580,7 @@ func (vBD) GetEmpty2(session *Session, self VBDRef) (retval bool, err error) {
 
 // GetStorageLock: Get the storage_lock field of the given VBD.
 // Version: rio
-func (vBD) GetStorageLock(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetStorageLock(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_storage_lock"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1600,7 +1600,7 @@ func (vBD) GetStorageLock(session *Session, self VBDRef) (retval bool, err error
 
 // GetStorageLock2: Get the storage_lock field of the given VBD.
 // Version: rio
-func (vBD) GetStorageLock2(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetStorageLock2(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_storage_lock"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1620,7 +1620,7 @@ func (vBD) GetStorageLock2(session *Session, self VBDRef) (retval bool, err erro
 
 // GetUnpluggable: Get the unpluggable field of the given VBD.
 // Version: rio
-func (vBD) GetUnpluggable(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetUnpluggable(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_unpluggable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1640,7 +1640,7 @@ func (vBD) GetUnpluggable(session *Session, self VBDRef) (retval bool, err error
 
 // GetUnpluggable2: Get the unpluggable field of the given VBD.
 // Version: rio
-func (vBD) GetUnpluggable2(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetUnpluggable2(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_unpluggable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1660,7 +1660,7 @@ func (vBD) GetUnpluggable2(session *Session, self VBDRef) (retval bool, err erro
 
 // GetType: Get the type field of the given VBD.
 // Version: rio
-func (vBD) GetType(session *Session, self VBDRef) (retval VbdType, err error) {
+func (vbd) GetType(session *Session, self VBDRef) (retval VbdType, err error) {
 	method := "VBD.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1680,7 +1680,7 @@ func (vBD) GetType(session *Session, self VBDRef) (retval VbdType, err error) {
 
 // GetType2: Get the type field of the given VBD.
 // Version: rio
-func (vBD) GetType2(session *Session, self VBDRef) (retval VbdType, err error) {
+func (vbd) GetType2(session *Session, self VBDRef) (retval VbdType, err error) {
 	method := "VBD.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1700,7 +1700,7 @@ func (vBD) GetType2(session *Session, self VBDRef) (retval VbdType, err error) {
 
 // GetMode: Get the mode field of the given VBD.
 // Version: rio
-func (vBD) GetMode(session *Session, self VBDRef) (retval VbdMode, err error) {
+func (vbd) GetMode(session *Session, self VBDRef) (retval VbdMode, err error) {
 	method := "VBD.get_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1720,7 +1720,7 @@ func (vBD) GetMode(session *Session, self VBDRef) (retval VbdMode, err error) {
 
 // GetMode2: Get the mode field of the given VBD.
 // Version: rio
-func (vBD) GetMode2(session *Session, self VBDRef) (retval VbdMode, err error) {
+func (vbd) GetMode2(session *Session, self VBDRef) (retval VbdMode, err error) {
 	method := "VBD.get_mode"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1740,7 +1740,7 @@ func (vBD) GetMode2(session *Session, self VBDRef) (retval VbdMode, err error) {
 
 // GetBootable: Get the bootable field of the given VBD.
 // Version: rio
-func (vBD) GetBootable(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetBootable(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_bootable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1760,7 +1760,7 @@ func (vBD) GetBootable(session *Session, self VBDRef) (retval bool, err error) {
 
 // GetBootable2: Get the bootable field of the given VBD.
 // Version: rio
-func (vBD) GetBootable2(session *Session, self VBDRef) (retval bool, err error) {
+func (vbd) GetBootable2(session *Session, self VBDRef) (retval bool, err error) {
 	method := "VBD.get_bootable"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1780,7 +1780,7 @@ func (vBD) GetBootable2(session *Session, self VBDRef) (retval bool, err error) 
 
 // GetUserdevice: Get the userdevice field of the given VBD.
 // Version: rio
-func (vBD) GetUserdevice(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetUserdevice(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_userdevice"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1800,7 +1800,7 @@ func (vBD) GetUserdevice(session *Session, self VBDRef) (retval string, err erro
 
 // GetUserdevice2: Get the userdevice field of the given VBD.
 // Version: rio
-func (vBD) GetUserdevice2(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetUserdevice2(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_userdevice"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1820,7 +1820,7 @@ func (vBD) GetUserdevice2(session *Session, self VBDRef) (retval string, err err
 
 // GetDevice: Get the device field of the given VBD.
 // Version: rio
-func (vBD) GetDevice(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetDevice(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1840,7 +1840,7 @@ func (vBD) GetDevice(session *Session, self VBDRef) (retval string, err error) {
 
 // GetDevice2: Get the device field of the given VBD.
 // Version: rio
-func (vBD) GetDevice2(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetDevice2(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1860,7 +1860,7 @@ func (vBD) GetDevice2(session *Session, self VBDRef) (retval string, err error) 
 
 // GetVDI: Get the VDI field of the given VBD.
 // Version: rio
-func (vBD) GetVDI(session *Session, self VBDRef) (retval VDIRef, err error) {
+func (vbd) GetVDI(session *Session, self VBDRef) (retval VDIRef, err error) {
 	method := "VBD.get_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1880,7 +1880,7 @@ func (vBD) GetVDI(session *Session, self VBDRef) (retval VDIRef, err error) {
 
 // GetVDI2: Get the VDI field of the given VBD.
 // Version: rio
-func (vBD) GetVDI2(session *Session, self VBDRef) (retval VDIRef, err error) {
+func (vbd) GetVDI2(session *Session, self VBDRef) (retval VDIRef, err error) {
 	method := "VBD.get_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1900,7 +1900,7 @@ func (vBD) GetVDI2(session *Session, self VBDRef) (retval VDIRef, err error) {
 
 // GetVM: Get the VM field of the given VBD.
 // Version: rio
-func (vBD) GetVM(session *Session, self VBDRef) (retval VMRef, err error) {
+func (vbd) GetVM(session *Session, self VBDRef) (retval VMRef, err error) {
 	method := "VBD.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1920,7 +1920,7 @@ func (vBD) GetVM(session *Session, self VBDRef) (retval VMRef, err error) {
 
 // GetVM2: Get the VM field of the given VBD.
 // Version: rio
-func (vBD) GetVM2(session *Session, self VBDRef) (retval VMRef, err error) {
+func (vbd) GetVM2(session *Session, self VBDRef) (retval VMRef, err error) {
 	method := "VBD.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1940,7 +1940,7 @@ func (vBD) GetVM2(session *Session, self VBDRef) (retval VMRef, err error) {
 
 // GetCurrentOperations: Get the current_operations field of the given VBD.
 // Version: rio
-func (vBD) GetCurrentOperations(session *Session, self VBDRef) (retval map[string]VbdOperations, err error) {
+func (vbd) GetCurrentOperations(session *Session, self VBDRef) (retval map[string]VbdOperations, err error) {
 	method := "VBD.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1960,7 +1960,7 @@ func (vBD) GetCurrentOperations(session *Session, self VBDRef) (retval map[strin
 
 // GetCurrentOperations2: Get the current_operations field of the given VBD.
 // Version: rio
-func (vBD) GetCurrentOperations2(session *Session, self VBDRef) (retval map[string]VbdOperations, err error) {
+func (vbd) GetCurrentOperations2(session *Session, self VBDRef) (retval map[string]VbdOperations, err error) {
 	method := "VBD.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1980,7 +1980,7 @@ func (vBD) GetCurrentOperations2(session *Session, self VBDRef) (retval map[stri
 
 // GetAllowedOperations: Get the allowed_operations field of the given VBD.
 // Version: rio
-func (vBD) GetAllowedOperations(session *Session, self VBDRef) (retval []VbdOperations, err error) {
+func (vbd) GetAllowedOperations(session *Session, self VBDRef) (retval []VbdOperations, err error) {
 	method := "VBD.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2000,7 +2000,7 @@ func (vBD) GetAllowedOperations(session *Session, self VBDRef) (retval []VbdOper
 
 // GetAllowedOperations2: Get the allowed_operations field of the given VBD.
 // Version: rio
-func (vBD) GetAllowedOperations2(session *Session, self VBDRef) (retval []VbdOperations, err error) {
+func (vbd) GetAllowedOperations2(session *Session, self VBDRef) (retval []VbdOperations, err error) {
 	method := "VBD.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2020,7 +2020,7 @@ func (vBD) GetAllowedOperations2(session *Session, self VBDRef) (retval []VbdOpe
 
 // GetUUID: Get the uuid field of the given VBD.
 // Version: rio
-func (vBD) GetUUID(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetUUID(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2040,7 +2040,7 @@ func (vBD) GetUUID(session *Session, self VBDRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VBD.
 // Version: rio
-func (vBD) GetUUID2(session *Session, self VBDRef) (retval string, err error) {
+func (vbd) GetUUID2(session *Session, self VBDRef) (retval string, err error) {
 	method := "VBD.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2060,7 +2060,7 @@ func (vBD) GetUUID2(session *Session, self VBDRef) (retval string, err error) {
 
 // Destroy: Destroy the specified VBD instance.
 // Version: rio
-func (vBD) Destroy(session *Session, self VBDRef) (err error) {
+func (vbd) Destroy(session *Session, self VBDRef) (err error) {
 	method := "VBD.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2076,7 +2076,7 @@ func (vBD) Destroy(session *Session, self VBDRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VBD instance.
 // Version: rio
-func (vBD) AsyncDestroy(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncDestroy(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2096,7 +2096,7 @@ func (vBD) AsyncDestroy(session *Session, self VBDRef) (retval TaskRef, err erro
 
 // Destroy2: Destroy the specified VBD instance.
 // Version: rio
-func (vBD) Destroy2(session *Session, self VBDRef) (err error) {
+func (vbd) Destroy2(session *Session, self VBDRef) (err error) {
 	method := "VBD.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2112,7 +2112,7 @@ func (vBD) Destroy2(session *Session, self VBDRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VBD instance.
 // Version: rio
-func (vBD) AsyncDestroy2(session *Session, self VBDRef) (retval TaskRef, err error) {
+func (vbd) AsyncDestroy2(session *Session, self VBDRef) (retval TaskRef, err error) {
 	method := "Async.VBD.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2132,7 +2132,7 @@ func (vBD) AsyncDestroy2(session *Session, self VBDRef) (retval TaskRef, err err
 
 // Create: Create a new VBD instance, and return its handle. The constructor args are: VM*, VDI*, device, userdevice*, bootable*, mode*, type*, unpluggable, empty*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params* (* = non-optional).
 // Version: rio
-func (vBD) Create(session *Session, args VBDRecord) (retval VBDRef, err error) {
+func (vbd) Create(session *Session, args VBDRecord) (retval VBDRef, err error) {
 	method := "VBD.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2152,7 +2152,7 @@ func (vBD) Create(session *Session, args VBDRecord) (retval VBDRef, err error) {
 
 // AsyncCreate: Create a new VBD instance, and return its handle. The constructor args are: VM*, VDI*, device, userdevice*, bootable*, mode*, type*, unpluggable, empty*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params* (* = non-optional).
 // Version: rio
-func (vBD) AsyncCreate(session *Session, args VBDRecord) (retval TaskRef, err error) {
+func (vbd) AsyncCreate(session *Session, args VBDRecord) (retval TaskRef, err error) {
 	method := "Async.VBD.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2172,7 +2172,7 @@ func (vBD) AsyncCreate(session *Session, args VBDRecord) (retval TaskRef, err er
 
 // Create2: Create a new VBD instance, and return its handle. The constructor args are: VM*, VDI*, device, userdevice*, bootable*, mode*, type*, unpluggable, empty*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params* (* = non-optional).
 // Version: rio
-func (vBD) Create2(session *Session, args VBDRecord) (retval VBDRef, err error) {
+func (vbd) Create2(session *Session, args VBDRecord) (retval VBDRef, err error) {
 	method := "VBD.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2192,7 +2192,7 @@ func (vBD) Create2(session *Session, args VBDRecord) (retval VBDRef, err error) 
 
 // AsyncCreate2: Create a new VBD instance, and return its handle. The constructor args are: VM*, VDI*, device, userdevice*, bootable*, mode*, type*, unpluggable, empty*, other_config*, currently_attached, qos_algorithm_type*, qos_algorithm_params* (* = non-optional).
 // Version: rio
-func (vBD) AsyncCreate2(session *Session, args VBDRecord) (retval TaskRef, err error) {
+func (vbd) AsyncCreate2(session *Session, args VBDRecord) (retval TaskRef, err error) {
 	method := "Async.VBD.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2212,17 +2212,17 @@ func (vBD) AsyncCreate2(session *Session, args VBDRecord) (retval TaskRef, err e
 
 // GetByUUID: Get a reference to the VBD instance with the specified UUID.
 // Version: rio
-func (vBD) GetByUUID(session *Session, uUID string) (retval VBDRef, err error) {
+func (vbd) GetByUUID(session *Session, uuid string) (retval VBDRef, err error) {
 	method := "VBD.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -2232,17 +2232,17 @@ func (vBD) GetByUUID(session *Session, uUID string) (retval VBDRef, err error) {
 
 // GetByUUID2: Get a reference to the VBD instance with the specified UUID.
 // Version: rio
-func (vBD) GetByUUID2(session *Session, uUID string) (retval VBDRef, err error) {
+func (vbd) GetByUUID2(session *Session, uuid string) (retval VBDRef, err error) {
 	method := "VBD.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -2252,7 +2252,7 @@ func (vBD) GetByUUID2(session *Session, uUID string) (retval VBDRef, err error) 
 
 // GetRecord: Get a record containing the current state of the given VBD.
 // Version: rio
-func (vBD) GetRecord(session *Session, self VBDRef) (retval VBDRecord, err error) {
+func (vbd) GetRecord(session *Session, self VBDRef) (retval VBDRecord, err error) {
 	method := "VBD.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2272,7 +2272,7 @@ func (vBD) GetRecord(session *Session, self VBDRef) (retval VBDRecord, err error
 
 // GetRecord2: Get a record containing the current state of the given VBD.
 // Version: rio
-func (vBD) GetRecord2(session *Session, self VBDRef) (retval VBDRecord, err error) {
+func (vbd) GetRecord2(session *Session, self VBDRef) (retval VBDRecord, err error) {
 	method := "VBD.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

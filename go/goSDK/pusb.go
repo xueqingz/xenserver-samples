@@ -38,13 +38,13 @@ type PUSBRecord struct {
 type PUSBRef string
 
 // A physical USB device
-type pUSB struct{}
+type pusb struct{}
 
-var PUSB pUSB
+var PUSB pusb
 
 // GetAllRecords: Return a map of PUSB references to PUSB records for all PUSBs known to the system.
 // Version: inverness
-func (pUSB) GetAllRecords(session *Session) (retval map[PUSBRef]PUSBRecord, err error) {
+func (pusb) GetAllRecords(session *Session) (retval map[PUSBRef]PUSBRecord, err error) {
 	method := "PUSB.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -60,7 +60,7 @@ func (pUSB) GetAllRecords(session *Session) (retval map[PUSBRef]PUSBRecord, err 
 
 // GetAllRecords1: Return a map of PUSB references to PUSB records for all PUSBs known to the system.
 // Version: inverness
-func (pUSB) GetAllRecords1(session *Session) (retval map[PUSBRef]PUSBRecord, err error) {
+func (pusb) GetAllRecords1(session *Session) (retval map[PUSBRef]PUSBRecord, err error) {
 	method := "PUSB.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -76,7 +76,7 @@ func (pUSB) GetAllRecords1(session *Session) (retval map[PUSBRef]PUSBRecord, err
 
 // GetAll: Return a list of all the PUSBs known to the system.
 // Version: inverness
-func (pUSB) GetAll(session *Session) (retval []PUSBRef, err error) {
+func (pusb) GetAll(session *Session) (retval []PUSBRef, err error) {
 	method := "PUSB.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -92,7 +92,7 @@ func (pUSB) GetAll(session *Session) (retval []PUSBRef, err error) {
 
 // GetAll1: Return a list of all the PUSBs known to the system.
 // Version: inverness
-func (pUSB) GetAll1(session *Session) (retval []PUSBRef, err error) {
+func (pusb) GetAll1(session *Session) (retval []PUSBRef, err error) {
 	method := "PUSB.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -108,7 +108,7 @@ func (pUSB) GetAll1(session *Session) (retval []PUSBRef, err error) {
 
 // SetPassthroughEnabled:
 // Version: inverness
-func (pUSB) SetPassthroughEnabled(session *Session, self PUSBRef, value bool) (err error) {
+func (pusb) SetPassthroughEnabled(session *Session, self PUSBRef, value bool) (err error) {
 	method := "PUSB.set_passthrough_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -128,7 +128,7 @@ func (pUSB) SetPassthroughEnabled(session *Session, self PUSBRef, value bool) (e
 
 // AsyncSetPassthroughEnabled:
 // Version: inverness
-func (pUSB) AsyncSetPassthroughEnabled(session *Session, self PUSBRef, value bool) (retval TaskRef, err error) {
+func (pusb) AsyncSetPassthroughEnabled(session *Session, self PUSBRef, value bool) (retval TaskRef, err error) {
 	method := "Async.PUSB.set_passthrough_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -152,7 +152,7 @@ func (pUSB) AsyncSetPassthroughEnabled(session *Session, self PUSBRef, value boo
 
 // SetPassthroughEnabled3:
 // Version: inverness
-func (pUSB) SetPassthroughEnabled3(session *Session, self PUSBRef, value bool) (err error) {
+func (pusb) SetPassthroughEnabled3(session *Session, self PUSBRef, value bool) (err error) {
 	method := "PUSB.set_passthrough_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -172,7 +172,7 @@ func (pUSB) SetPassthroughEnabled3(session *Session, self PUSBRef, value bool) (
 
 // AsyncSetPassthroughEnabled3:
 // Version: inverness
-func (pUSB) AsyncSetPassthroughEnabled3(session *Session, self PUSBRef, value bool) (retval TaskRef, err error) {
+func (pusb) AsyncSetPassthroughEnabled3(session *Session, self PUSBRef, value bool) (retval TaskRef, err error) {
 	method := "Async.PUSB.set_passthrough_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -196,7 +196,7 @@ func (pUSB) AsyncSetPassthroughEnabled3(session *Session, self PUSBRef, value bo
 
 // Scan:
 // Version: inverness
-func (pUSB) Scan(session *Session, host HostRef) (err error) {
+func (pusb) Scan(session *Session, host HostRef) (err error) {
 	method := "PUSB.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -212,7 +212,7 @@ func (pUSB) Scan(session *Session, host HostRef) (err error) {
 
 // AsyncScan:
 // Version: inverness
-func (pUSB) AsyncScan(session *Session, host HostRef) (retval TaskRef, err error) {
+func (pusb) AsyncScan(session *Session, host HostRef) (retval TaskRef, err error) {
 	method := "Async.PUSB.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -232,7 +232,7 @@ func (pUSB) AsyncScan(session *Session, host HostRef) (retval TaskRef, err error
 
 // Scan2:
 // Version: inverness
-func (pUSB) Scan2(session *Session, host HostRef) (err error) {
+func (pusb) Scan2(session *Session, host HostRef) (err error) {
 	method := "PUSB.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -248,7 +248,7 @@ func (pUSB) Scan2(session *Session, host HostRef) (err error) {
 
 // AsyncScan2:
 // Version: inverness
-func (pUSB) AsyncScan2(session *Session, host HostRef) (retval TaskRef, err error) {
+func (pusb) AsyncScan2(session *Session, host HostRef) (retval TaskRef, err error) {
 	method := "Async.PUSB.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -268,7 +268,7 @@ func (pUSB) AsyncScan2(session *Session, host HostRef) (retval TaskRef, err erro
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given PUSB.  If the key is not in that Map, then do nothing.
 // Version: inverness
-func (pUSB) RemoveFromOtherConfig(session *Session, self PUSBRef, key string) (err error) {
+func (pusb) RemoveFromOtherConfig(session *Session, self PUSBRef, key string) (err error) {
 	method := "PUSB.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -288,7 +288,7 @@ func (pUSB) RemoveFromOtherConfig(session *Session, self PUSBRef, key string) (e
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given PUSB.  If the key is not in that Map, then do nothing.
 // Version: inverness
-func (pUSB) RemoveFromOtherConfig3(session *Session, self PUSBRef, key string) (err error) {
+func (pusb) RemoveFromOtherConfig3(session *Session, self PUSBRef, key string) (err error) {
 	method := "PUSB.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -308,7 +308,7 @@ func (pUSB) RemoveFromOtherConfig3(session *Session, self PUSBRef, key string) (
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given PUSB.
 // Version: inverness
-func (pUSB) AddToOtherConfig(session *Session, self PUSBRef, key string, value string) (err error) {
+func (pusb) AddToOtherConfig(session *Session, self PUSBRef, key string, value string) (err error) {
 	method := "PUSB.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -332,7 +332,7 @@ func (pUSB) AddToOtherConfig(session *Session, self PUSBRef, key string, value s
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given PUSB.
 // Version: inverness
-func (pUSB) AddToOtherConfig4(session *Session, self PUSBRef, key string, value string) (err error) {
+func (pusb) AddToOtherConfig4(session *Session, self PUSBRef, key string, value string) (err error) {
 	method := "PUSB.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -356,7 +356,7 @@ func (pUSB) AddToOtherConfig4(session *Session, self PUSBRef, key string, value 
 
 // SetOtherConfig: Set the other_config field of the given PUSB.
 // Version: inverness
-func (pUSB) SetOtherConfig(session *Session, self PUSBRef, value map[string]string) (err error) {
+func (pusb) SetOtherConfig(session *Session, self PUSBRef, value map[string]string) (err error) {
 	method := "PUSB.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -376,7 +376,7 @@ func (pUSB) SetOtherConfig(session *Session, self PUSBRef, value map[string]stri
 
 // SetOtherConfig3: Set the other_config field of the given PUSB.
 // Version: inverness
-func (pUSB) SetOtherConfig3(session *Session, self PUSBRef, value map[string]string) (err error) {
+func (pusb) SetOtherConfig3(session *Session, self PUSBRef, value map[string]string) (err error) {
 	method := "PUSB.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -396,7 +396,7 @@ func (pUSB) SetOtherConfig3(session *Session, self PUSBRef, value map[string]str
 
 // GetSpeed: Get the speed field of the given PUSB.
 // Version: inverness
-func (pUSB) GetSpeed(session *Session, self PUSBRef) (retval float64, err error) {
+func (pusb) GetSpeed(session *Session, self PUSBRef) (retval float64, err error) {
 	method := "PUSB.get_speed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -416,7 +416,7 @@ func (pUSB) GetSpeed(session *Session, self PUSBRef) (retval float64, err error)
 
 // GetSpeed2: Get the speed field of the given PUSB.
 // Version: inverness
-func (pUSB) GetSpeed2(session *Session, self PUSBRef) (retval float64, err error) {
+func (pusb) GetSpeed2(session *Session, self PUSBRef) (retval float64, err error) {
 	method := "PUSB.get_speed"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -436,7 +436,7 @@ func (pUSB) GetSpeed2(session *Session, self PUSBRef) (retval float64, err error
 
 // GetOtherConfig: Get the other_config field of the given PUSB.
 // Version: inverness
-func (pUSB) GetOtherConfig(session *Session, self PUSBRef) (retval map[string]string, err error) {
+func (pusb) GetOtherConfig(session *Session, self PUSBRef) (retval map[string]string, err error) {
 	method := "PUSB.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -456,7 +456,7 @@ func (pUSB) GetOtherConfig(session *Session, self PUSBRef) (retval map[string]st
 
 // GetOtherConfig2: Get the other_config field of the given PUSB.
 // Version: inverness
-func (pUSB) GetOtherConfig2(session *Session, self PUSBRef) (retval map[string]string, err error) {
+func (pusb) GetOtherConfig2(session *Session, self PUSBRef) (retval map[string]string, err error) {
 	method := "PUSB.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -476,7 +476,7 @@ func (pUSB) GetOtherConfig2(session *Session, self PUSBRef) (retval map[string]s
 
 // GetPassthroughEnabled: Get the passthrough_enabled field of the given PUSB.
 // Version: inverness
-func (pUSB) GetPassthroughEnabled(session *Session, self PUSBRef) (retval bool, err error) {
+func (pusb) GetPassthroughEnabled(session *Session, self PUSBRef) (retval bool, err error) {
 	method := "PUSB.get_passthrough_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -496,7 +496,7 @@ func (pUSB) GetPassthroughEnabled(session *Session, self PUSBRef) (retval bool, 
 
 // GetPassthroughEnabled2: Get the passthrough_enabled field of the given PUSB.
 // Version: inverness
-func (pUSB) GetPassthroughEnabled2(session *Session, self PUSBRef) (retval bool, err error) {
+func (pusb) GetPassthroughEnabled2(session *Session, self PUSBRef) (retval bool, err error) {
 	method := "PUSB.get_passthrough_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -516,7 +516,7 @@ func (pUSB) GetPassthroughEnabled2(session *Session, self PUSBRef) (retval bool,
 
 // GetDescription: Get the description field of the given PUSB.
 // Version: inverness
-func (pUSB) GetDescription(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetDescription(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -536,7 +536,7 @@ func (pUSB) GetDescription(session *Session, self PUSBRef) (retval string, err e
 
 // GetDescription2: Get the description field of the given PUSB.
 // Version: inverness
-func (pUSB) GetDescription2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetDescription2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -556,7 +556,7 @@ func (pUSB) GetDescription2(session *Session, self PUSBRef) (retval string, err 
 
 // GetVersion: Get the version field of the given PUSB.
 // Version: inverness
-func (pUSB) GetVersion(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetVersion(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -576,7 +576,7 @@ func (pUSB) GetVersion(session *Session, self PUSBRef) (retval string, err error
 
 // GetVersion2: Get the version field of the given PUSB.
 // Version: inverness
-func (pUSB) GetVersion2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetVersion2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -596,7 +596,7 @@ func (pUSB) GetVersion2(session *Session, self PUSBRef) (retval string, err erro
 
 // GetSerial: Get the serial field of the given PUSB.
 // Version: inverness
-func (pUSB) GetSerial(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetSerial(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_serial"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -616,7 +616,7 @@ func (pUSB) GetSerial(session *Session, self PUSBRef) (retval string, err error)
 
 // GetSerial2: Get the serial field of the given PUSB.
 // Version: inverness
-func (pUSB) GetSerial2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetSerial2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_serial"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -636,7 +636,7 @@ func (pUSB) GetSerial2(session *Session, self PUSBRef) (retval string, err error
 
 // GetProductDesc: Get the product_desc field of the given PUSB.
 // Version: inverness
-func (pUSB) GetProductDesc(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetProductDesc(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_product_desc"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -656,7 +656,7 @@ func (pUSB) GetProductDesc(session *Session, self PUSBRef) (retval string, err e
 
 // GetProductDesc2: Get the product_desc field of the given PUSB.
 // Version: inverness
-func (pUSB) GetProductDesc2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetProductDesc2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_product_desc"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -676,7 +676,7 @@ func (pUSB) GetProductDesc2(session *Session, self PUSBRef) (retval string, err 
 
 // GetProductID: Get the product_id field of the given PUSB.
 // Version: inverness
-func (pUSB) GetProductID(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetProductID(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_product_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -696,7 +696,7 @@ func (pUSB) GetProductID(session *Session, self PUSBRef) (retval string, err err
 
 // GetProductID2: Get the product_id field of the given PUSB.
 // Version: inverness
-func (pUSB) GetProductID2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetProductID2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_product_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -716,7 +716,7 @@ func (pUSB) GetProductID2(session *Session, self PUSBRef) (retval string, err er
 
 // GetVendorDesc: Get the vendor_desc field of the given PUSB.
 // Version: inverness
-func (pUSB) GetVendorDesc(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetVendorDesc(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_vendor_desc"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -736,7 +736,7 @@ func (pUSB) GetVendorDesc(session *Session, self PUSBRef) (retval string, err er
 
 // GetVendorDesc2: Get the vendor_desc field of the given PUSB.
 // Version: inverness
-func (pUSB) GetVendorDesc2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetVendorDesc2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_vendor_desc"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -756,7 +756,7 @@ func (pUSB) GetVendorDesc2(session *Session, self PUSBRef) (retval string, err e
 
 // GetVendorID: Get the vendor_id field of the given PUSB.
 // Version: inverness
-func (pUSB) GetVendorID(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetVendorID(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_vendor_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -776,7 +776,7 @@ func (pUSB) GetVendorID(session *Session, self PUSBRef) (retval string, err erro
 
 // GetVendorID2: Get the vendor_id field of the given PUSB.
 // Version: inverness
-func (pUSB) GetVendorID2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetVendorID2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_vendor_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -796,7 +796,7 @@ func (pUSB) GetVendorID2(session *Session, self PUSBRef) (retval string, err err
 
 // GetPath: Get the path field of the given PUSB.
 // Version: inverness
-func (pUSB) GetPath(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetPath(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_path"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -816,7 +816,7 @@ func (pUSB) GetPath(session *Session, self PUSBRef) (retval string, err error) {
 
 // GetPath2: Get the path field of the given PUSB.
 // Version: inverness
-func (pUSB) GetPath2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetPath2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_path"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -836,7 +836,7 @@ func (pUSB) GetPath2(session *Session, self PUSBRef) (retval string, err error) 
 
 // GetHost: Get the host field of the given PUSB.
 // Version: inverness
-func (pUSB) GetHost(session *Session, self PUSBRef) (retval HostRef, err error) {
+func (pusb) GetHost(session *Session, self PUSBRef) (retval HostRef, err error) {
 	method := "PUSB.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -856,7 +856,7 @@ func (pUSB) GetHost(session *Session, self PUSBRef) (retval HostRef, err error) 
 
 // GetHost2: Get the host field of the given PUSB.
 // Version: inverness
-func (pUSB) GetHost2(session *Session, self PUSBRef) (retval HostRef, err error) {
+func (pusb) GetHost2(session *Session, self PUSBRef) (retval HostRef, err error) {
 	method := "PUSB.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -876,7 +876,7 @@ func (pUSB) GetHost2(session *Session, self PUSBRef) (retval HostRef, err error)
 
 // GetUSBGroup: Get the USB_group field of the given PUSB.
 // Version: inverness
-func (pUSB) GetUSBGroup(session *Session, self PUSBRef) (retval USBGroupRef, err error) {
+func (pusb) GetUSBGroup(session *Session, self PUSBRef) (retval USBGroupRef, err error) {
 	method := "PUSB.get_USB_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -896,7 +896,7 @@ func (pUSB) GetUSBGroup(session *Session, self PUSBRef) (retval USBGroupRef, err
 
 // GetUSBGroup2: Get the USB_group field of the given PUSB.
 // Version: inverness
-func (pUSB) GetUSBGroup2(session *Session, self PUSBRef) (retval USBGroupRef, err error) {
+func (pusb) GetUSBGroup2(session *Session, self PUSBRef) (retval USBGroupRef, err error) {
 	method := "PUSB.get_USB_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -916,7 +916,7 @@ func (pUSB) GetUSBGroup2(session *Session, self PUSBRef) (retval USBGroupRef, er
 
 // GetUUID: Get the uuid field of the given PUSB.
 // Version: inverness
-func (pUSB) GetUUID(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetUUID(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -936,7 +936,7 @@ func (pUSB) GetUUID(session *Session, self PUSBRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given PUSB.
 // Version: inverness
-func (pUSB) GetUUID2(session *Session, self PUSBRef) (retval string, err error) {
+func (pusb) GetUUID2(session *Session, self PUSBRef) (retval string, err error) {
 	method := "PUSB.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -956,17 +956,17 @@ func (pUSB) GetUUID2(session *Session, self PUSBRef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the PUSB instance with the specified UUID.
 // Version: inverness
-func (pUSB) GetByUUID(session *Session, uUID string) (retval PUSBRef, err error) {
+func (pusb) GetByUUID(session *Session, uuid string) (retval PUSBRef, err error) {
 	method := "PUSB.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -976,17 +976,17 @@ func (pUSB) GetByUUID(session *Session, uUID string) (retval PUSBRef, err error)
 
 // GetByUUID2: Get a reference to the PUSB instance with the specified UUID.
 // Version: inverness
-func (pUSB) GetByUUID2(session *Session, uUID string) (retval PUSBRef, err error) {
+func (pusb) GetByUUID2(session *Session, uuid string) (retval PUSBRef, err error) {
 	method := "PUSB.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -996,7 +996,7 @@ func (pUSB) GetByUUID2(session *Session, uUID string) (retval PUSBRef, err error
 
 // GetRecord: Get a record containing the current state of the given PUSB.
 // Version: inverness
-func (pUSB) GetRecord(session *Session, self PUSBRef) (retval PUSBRecord, err error) {
+func (pusb) GetRecord(session *Session, self PUSBRef) (retval PUSBRecord, err error) {
 	method := "PUSB.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1016,7 +1016,7 @@ func (pUSB) GetRecord(session *Session, self PUSBRef) (retval PUSBRecord, err er
 
 // GetRecord2: Get a record containing the current state of the given PUSB.
 // Version: inverness
-func (pUSB) GetRecord2(session *Session, self PUSBRef) (retval PUSBRecord, err error) {
+func (pusb) GetRecord2(session *Session, self PUSBRef) (retval PUSBRecord, err error) {
 	method := "PUSB.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

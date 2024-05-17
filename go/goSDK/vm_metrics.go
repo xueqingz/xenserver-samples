@@ -43,13 +43,13 @@ type VMMetricsRecord struct {
 type VMMetricsRef string
 
 // The metrics associated with a VM
-type vMMetrics struct{}
+type vmMetrics struct{}
 
-var VMMetrics vMMetrics
+var VMMetrics vmMetrics
 
 // GetAllRecords: Return a map of VM_metrics references to VM_metrics records for all VM_metrics instances known to the system.
 // Version: rio
-func (vMMetrics) GetAllRecords(session *Session) (retval map[VMMetricsRef]VMMetricsRecord, err error) {
+func (vmMetrics) GetAllRecords(session *Session) (retval map[VMMetricsRef]VMMetricsRecord, err error) {
 	method := "VM_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -65,7 +65,7 @@ func (vMMetrics) GetAllRecords(session *Session) (retval map[VMMetricsRef]VMMetr
 
 // GetAllRecords1: Return a map of VM_metrics references to VM_metrics records for all VM_metrics instances known to the system.
 // Version: rio
-func (vMMetrics) GetAllRecords1(session *Session) (retval map[VMMetricsRef]VMMetricsRecord, err error) {
+func (vmMetrics) GetAllRecords1(session *Session) (retval map[VMMetricsRef]VMMetricsRecord, err error) {
 	method := "VM_metrics.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -81,7 +81,7 @@ func (vMMetrics) GetAllRecords1(session *Session) (retval map[VMMetricsRef]VMMet
 
 // GetAll: Return a list of all the VM_metrics instances known to the system.
 // Version: rio
-func (vMMetrics) GetAll(session *Session) (retval []VMMetricsRef, err error) {
+func (vmMetrics) GetAll(session *Session) (retval []VMMetricsRef, err error) {
 	method := "VM_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -97,7 +97,7 @@ func (vMMetrics) GetAll(session *Session) (retval []VMMetricsRef, err error) {
 
 // GetAll1: Return a list of all the VM_metrics instances known to the system.
 // Version: rio
-func (vMMetrics) GetAll1(session *Session) (retval []VMMetricsRef, err error) {
+func (vmMetrics) GetAll1(session *Session) (retval []VMMetricsRef, err error) {
 	method := "VM_metrics.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -113,7 +113,7 @@ func (vMMetrics) GetAll1(session *Session) (retval []VMMetricsRef, err error) {
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VM_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vMMetrics) RemoveFromOtherConfig(session *Session, self VMMetricsRef, key string) (err error) {
+func (vmMetrics) RemoveFromOtherConfig(session *Session, self VMMetricsRef, key string) (err error) {
 	method := "VM_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -133,7 +133,7 @@ func (vMMetrics) RemoveFromOtherConfig(session *Session, self VMMetricsRef, key 
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VM_metrics.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vMMetrics) RemoveFromOtherConfig3(session *Session, self VMMetricsRef, key string) (err error) {
+func (vmMetrics) RemoveFromOtherConfig3(session *Session, self VMMetricsRef, key string) (err error) {
 	method := "VM_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -153,7 +153,7 @@ func (vMMetrics) RemoveFromOtherConfig3(session *Session, self VMMetricsRef, key
 
 // RemoveFromOtherConfig2: Remove the given key and its corresponding value from the other_config field of the given VM_metrics.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vMMetrics) RemoveFromOtherConfig2(session *Session, self VMMetricsRef) (err error) {
+func (vmMetrics) RemoveFromOtherConfig2(session *Session, self VMMetricsRef) (err error) {
 	method := "VM_metrics.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -169,7 +169,7 @@ func (vMMetrics) RemoveFromOtherConfig2(session *Session, self VMMetricsRef) (er
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VM_metrics.
 // Version: orlando
-func (vMMetrics) AddToOtherConfig(session *Session, self VMMetricsRef, key string, value string) (err error) {
+func (vmMetrics) AddToOtherConfig(session *Session, self VMMetricsRef, key string, value string) (err error) {
 	method := "VM_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -193,7 +193,7 @@ func (vMMetrics) AddToOtherConfig(session *Session, self VMMetricsRef, key strin
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VM_metrics.
 // Version: orlando
-func (vMMetrics) AddToOtherConfig4(session *Session, self VMMetricsRef, key string, value string) (err error) {
+func (vmMetrics) AddToOtherConfig4(session *Session, self VMMetricsRef, key string, value string) (err error) {
 	method := "VM_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -217,7 +217,7 @@ func (vMMetrics) AddToOtherConfig4(session *Session, self VMMetricsRef, key stri
 
 // AddToOtherConfig2: Add the given key-value pair to the other_config field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) AddToOtherConfig2(session *Session, self VMMetricsRef) (err error) {
+func (vmMetrics) AddToOtherConfig2(session *Session, self VMMetricsRef) (err error) {
 	method := "VM_metrics.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -233,7 +233,7 @@ func (vMMetrics) AddToOtherConfig2(session *Session, self VMMetricsRef) (err err
 
 // SetOtherConfig: Set the other_config field of the given VM_metrics.
 // Version: orlando
-func (vMMetrics) SetOtherConfig(session *Session, self VMMetricsRef, value map[string]string) (err error) {
+func (vmMetrics) SetOtherConfig(session *Session, self VMMetricsRef, value map[string]string) (err error) {
 	method := "VM_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -253,7 +253,7 @@ func (vMMetrics) SetOtherConfig(session *Session, self VMMetricsRef, value map[s
 
 // SetOtherConfig3: Set the other_config field of the given VM_metrics.
 // Version: orlando
-func (vMMetrics) SetOtherConfig3(session *Session, self VMMetricsRef, value map[string]string) (err error) {
+func (vmMetrics) SetOtherConfig3(session *Session, self VMMetricsRef, value map[string]string) (err error) {
 	method := "VM_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -273,7 +273,7 @@ func (vMMetrics) SetOtherConfig3(session *Session, self VMMetricsRef, value map[
 
 // SetOtherConfig2: Set the other_config field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) SetOtherConfig2(session *Session, self VMMetricsRef) (err error) {
+func (vmMetrics) SetOtherConfig2(session *Session, self VMMetricsRef) (err error) {
 	method := "VM_metrics.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -289,7 +289,7 @@ func (vMMetrics) SetOtherConfig2(session *Session, self VMMetricsRef) (err error
 
 // GetCurrentDomainType: Get the current_domain_type field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetCurrentDomainType(session *Session, self VMMetricsRef) (retval DomainType, err error) {
+func (vmMetrics) GetCurrentDomainType(session *Session, self VMMetricsRef) (retval DomainType, err error) {
 	method := "VM_metrics.get_current_domain_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -309,7 +309,7 @@ func (vMMetrics) GetCurrentDomainType(session *Session, self VMMetricsRef) (retv
 
 // GetCurrentDomainType2: Get the current_domain_type field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetCurrentDomainType2(session *Session, self VMMetricsRef) (retval DomainType, err error) {
+func (vmMetrics) GetCurrentDomainType2(session *Session, self VMMetricsRef) (retval DomainType, err error) {
 	method := "VM_metrics.get_current_domain_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -329,7 +329,7 @@ func (vMMetrics) GetCurrentDomainType2(session *Session, self VMMetricsRef) (ret
 
 // GetNomigrate: Get the nomigrate field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetNomigrate(session *Session, self VMMetricsRef) (retval bool, err error) {
+func (vmMetrics) GetNomigrate(session *Session, self VMMetricsRef) (retval bool, err error) {
 	method := "VM_metrics.get_nomigrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -349,7 +349,7 @@ func (vMMetrics) GetNomigrate(session *Session, self VMMetricsRef) (retval bool,
 
 // GetNomigrate2: Get the nomigrate field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetNomigrate2(session *Session, self VMMetricsRef) (retval bool, err error) {
+func (vmMetrics) GetNomigrate2(session *Session, self VMMetricsRef) (retval bool, err error) {
 	method := "VM_metrics.get_nomigrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -369,7 +369,7 @@ func (vMMetrics) GetNomigrate2(session *Session, self VMMetricsRef) (retval bool
 
 // GetNestedVirt: Get the nested_virt field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetNestedVirt(session *Session, self VMMetricsRef) (retval bool, err error) {
+func (vmMetrics) GetNestedVirt(session *Session, self VMMetricsRef) (retval bool, err error) {
 	method := "VM_metrics.get_nested_virt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -389,7 +389,7 @@ func (vMMetrics) GetNestedVirt(session *Session, self VMMetricsRef) (retval bool
 
 // GetNestedVirt2: Get the nested_virt field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetNestedVirt2(session *Session, self VMMetricsRef) (retval bool, err error) {
+func (vmMetrics) GetNestedVirt2(session *Session, self VMMetricsRef) (retval bool, err error) {
 	method := "VM_metrics.get_nested_virt"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -409,7 +409,7 @@ func (vMMetrics) GetNestedVirt2(session *Session, self VMMetricsRef) (retval boo
 
 // GetHvm: Get the hvm field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetHvm(session *Session, self VMMetricsRef) (retval bool, err error) {
+func (vmMetrics) GetHvm(session *Session, self VMMetricsRef) (retval bool, err error) {
 	method := "VM_metrics.get_hvm"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -429,7 +429,7 @@ func (vMMetrics) GetHvm(session *Session, self VMMetricsRef) (retval bool, err e
 
 // GetHvm2: Get the hvm field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetHvm2(session *Session, self VMMetricsRef) (retval bool, err error) {
+func (vmMetrics) GetHvm2(session *Session, self VMMetricsRef) (retval bool, err error) {
 	method := "VM_metrics.get_hvm"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -449,7 +449,7 @@ func (vMMetrics) GetHvm2(session *Session, self VMMetricsRef) (retval bool, err 
 
 // GetOtherConfig: Get the other_config field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetOtherConfig(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
+func (vmMetrics) GetOtherConfig(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
 	method := "VM_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -469,7 +469,7 @@ func (vMMetrics) GetOtherConfig(session *Session, self VMMetricsRef) (retval map
 
 // GetOtherConfig2: Get the other_config field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetOtherConfig2(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
+func (vmMetrics) GetOtherConfig2(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
 	method := "VM_metrics.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -489,7 +489,7 @@ func (vMMetrics) GetOtherConfig2(session *Session, self VMMetricsRef) (retval ma
 
 // GetLastUpdated: Get the last_updated field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetLastUpdated(session *Session, self VMMetricsRef) (retval time.Time, err error) {
+func (vmMetrics) GetLastUpdated(session *Session, self VMMetricsRef) (retval time.Time, err error) {
 	method := "VM_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -509,7 +509,7 @@ func (vMMetrics) GetLastUpdated(session *Session, self VMMetricsRef) (retval tim
 
 // GetLastUpdated2: Get the last_updated field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetLastUpdated2(session *Session, self VMMetricsRef) (retval time.Time, err error) {
+func (vmMetrics) GetLastUpdated2(session *Session, self VMMetricsRef) (retval time.Time, err error) {
 	method := "VM_metrics.get_last_updated"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -529,7 +529,7 @@ func (vMMetrics) GetLastUpdated2(session *Session, self VMMetricsRef) (retval ti
 
 // GetInstallTime: Get the install_time field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetInstallTime(session *Session, self VMMetricsRef) (retval time.Time, err error) {
+func (vmMetrics) GetInstallTime(session *Session, self VMMetricsRef) (retval time.Time, err error) {
 	method := "VM_metrics.get_install_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -549,7 +549,7 @@ func (vMMetrics) GetInstallTime(session *Session, self VMMetricsRef) (retval tim
 
 // GetInstallTime2: Get the install_time field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetInstallTime2(session *Session, self VMMetricsRef) (retval time.Time, err error) {
+func (vmMetrics) GetInstallTime2(session *Session, self VMMetricsRef) (retval time.Time, err error) {
 	method := "VM_metrics.get_install_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -569,7 +569,7 @@ func (vMMetrics) GetInstallTime2(session *Session, self VMMetricsRef) (retval ti
 
 // GetStartTime: Get the start_time field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetStartTime(session *Session, self VMMetricsRef) (retval time.Time, err error) {
+func (vmMetrics) GetStartTime(session *Session, self VMMetricsRef) (retval time.Time, err error) {
 	method := "VM_metrics.get_start_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -589,7 +589,7 @@ func (vMMetrics) GetStartTime(session *Session, self VMMetricsRef) (retval time.
 
 // GetStartTime2: Get the start_time field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetStartTime2(session *Session, self VMMetricsRef) (retval time.Time, err error) {
+func (vmMetrics) GetStartTime2(session *Session, self VMMetricsRef) (retval time.Time, err error) {
 	method := "VM_metrics.get_start_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -609,7 +609,7 @@ func (vMMetrics) GetStartTime2(session *Session, self VMMetricsRef) (retval time
 
 // GetState: Get the state field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetState(session *Session, self VMMetricsRef) (retval []string, err error) {
+func (vmMetrics) GetState(session *Session, self VMMetricsRef) (retval []string, err error) {
 	method := "VM_metrics.get_state"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -629,7 +629,7 @@ func (vMMetrics) GetState(session *Session, self VMMetricsRef) (retval []string,
 
 // GetState2: Get the state field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetState2(session *Session, self VMMetricsRef) (retval []string, err error) {
+func (vmMetrics) GetState2(session *Session, self VMMetricsRef) (retval []string, err error) {
 	method := "VM_metrics.get_state"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -649,7 +649,7 @@ func (vMMetrics) GetState2(session *Session, self VMMetricsRef) (retval []string
 
 // GetVCPUsFlags: Get the VCPUs/flags field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsFlags(session *Session, self VMMetricsRef) (retval map[int][]string, err error) {
+func (vmMetrics) GetVCPUsFlags(session *Session, self VMMetricsRef) (retval map[int][]string, err error) {
 	method := "VM_metrics.get_VCPUs_flags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -669,7 +669,7 @@ func (vMMetrics) GetVCPUsFlags(session *Session, self VMMetricsRef) (retval map[
 
 // GetVCPUsFlags2: Get the VCPUs/flags field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsFlags2(session *Session, self VMMetricsRef) (retval map[int][]string, err error) {
+func (vmMetrics) GetVCPUsFlags2(session *Session, self VMMetricsRef) (retval map[int][]string, err error) {
 	method := "VM_metrics.get_VCPUs_flags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -689,7 +689,7 @@ func (vMMetrics) GetVCPUsFlags2(session *Session, self VMMetricsRef) (retval map
 
 // GetVCPUsParams: Get the VCPUs/params field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsParams(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
+func (vmMetrics) GetVCPUsParams(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
 	method := "VM_metrics.get_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -709,7 +709,7 @@ func (vMMetrics) GetVCPUsParams(session *Session, self VMMetricsRef) (retval map
 
 // GetVCPUsParams2: Get the VCPUs/params field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsParams2(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
+func (vmMetrics) GetVCPUsParams2(session *Session, self VMMetricsRef) (retval map[string]string, err error) {
 	method := "VM_metrics.get_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -729,7 +729,7 @@ func (vMMetrics) GetVCPUsParams2(session *Session, self VMMetricsRef) (retval ma
 
 // GetVCPUsCPU: Get the VCPUs/CPU field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsCPU(session *Session, self VMMetricsRef) (retval map[int]int, err error) {
+func (vmMetrics) GetVCPUsCPU(session *Session, self VMMetricsRef) (retval map[int]int, err error) {
 	method := "VM_metrics.get_VCPUs_CPU"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -749,7 +749,7 @@ func (vMMetrics) GetVCPUsCPU(session *Session, self VMMetricsRef) (retval map[in
 
 // GetVCPUsCPU2: Get the VCPUs/CPU field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsCPU2(session *Session, self VMMetricsRef) (retval map[int]int, err error) {
+func (vmMetrics) GetVCPUsCPU2(session *Session, self VMMetricsRef) (retval map[int]int, err error) {
 	method := "VM_metrics.get_VCPUs_CPU"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -769,7 +769,7 @@ func (vMMetrics) GetVCPUsCPU2(session *Session, self VMMetricsRef) (retval map[i
 
 // GetVCPUsUtilisation: Get the VCPUs/utilisation field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsUtilisation(session *Session, self VMMetricsRef) (retval map[int]float64, err error) {
+func (vmMetrics) GetVCPUsUtilisation(session *Session, self VMMetricsRef) (retval map[int]float64, err error) {
 	method := "VM_metrics.get_VCPUs_utilisation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -789,7 +789,7 @@ func (vMMetrics) GetVCPUsUtilisation(session *Session, self VMMetricsRef) (retva
 
 // GetVCPUsUtilisation2: Get the VCPUs/utilisation field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsUtilisation2(session *Session, self VMMetricsRef) (retval map[int]float64, err error) {
+func (vmMetrics) GetVCPUsUtilisation2(session *Session, self VMMetricsRef) (retval map[int]float64, err error) {
 	method := "VM_metrics.get_VCPUs_utilisation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -809,7 +809,7 @@ func (vMMetrics) GetVCPUsUtilisation2(session *Session, self VMMetricsRef) (retv
 
 // GetVCPUsNumber: Get the VCPUs/number field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsNumber(session *Session, self VMMetricsRef) (retval int, err error) {
+func (vmMetrics) GetVCPUsNumber(session *Session, self VMMetricsRef) (retval int, err error) {
 	method := "VM_metrics.get_VCPUs_number"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -829,7 +829,7 @@ func (vMMetrics) GetVCPUsNumber(session *Session, self VMMetricsRef) (retval int
 
 // GetVCPUsNumber2: Get the VCPUs/number field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetVCPUsNumber2(session *Session, self VMMetricsRef) (retval int, err error) {
+func (vmMetrics) GetVCPUsNumber2(session *Session, self VMMetricsRef) (retval int, err error) {
 	method := "VM_metrics.get_VCPUs_number"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -849,7 +849,7 @@ func (vMMetrics) GetVCPUsNumber2(session *Session, self VMMetricsRef) (retval in
 
 // GetMemoryActual: Get the memory/actual field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetMemoryActual(session *Session, self VMMetricsRef) (retval int, err error) {
+func (vmMetrics) GetMemoryActual(session *Session, self VMMetricsRef) (retval int, err error) {
 	method := "VM_metrics.get_memory_actual"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -869,7 +869,7 @@ func (vMMetrics) GetMemoryActual(session *Session, self VMMetricsRef) (retval in
 
 // GetMemoryActual2: Get the memory/actual field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetMemoryActual2(session *Session, self VMMetricsRef) (retval int, err error) {
+func (vmMetrics) GetMemoryActual2(session *Session, self VMMetricsRef) (retval int, err error) {
 	method := "VM_metrics.get_memory_actual"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -889,7 +889,7 @@ func (vMMetrics) GetMemoryActual2(session *Session, self VMMetricsRef) (retval i
 
 // GetUUID: Get the uuid field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetUUID(session *Session, self VMMetricsRef) (retval string, err error) {
+func (vmMetrics) GetUUID(session *Session, self VMMetricsRef) (retval string, err error) {
 	method := "VM_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -909,7 +909,7 @@ func (vMMetrics) GetUUID(session *Session, self VMMetricsRef) (retval string, er
 
 // GetUUID2: Get the uuid field of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetUUID2(session *Session, self VMMetricsRef) (retval string, err error) {
+func (vmMetrics) GetUUID2(session *Session, self VMMetricsRef) (retval string, err error) {
 	method := "VM_metrics.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -929,17 +929,17 @@ func (vMMetrics) GetUUID2(session *Session, self VMMetricsRef) (retval string, e
 
 // GetByUUID: Get a reference to the VM_metrics instance with the specified UUID.
 // Version: rio
-func (vMMetrics) GetByUUID(session *Session, uUID string) (retval VMMetricsRef, err error) {
+func (vmMetrics) GetByUUID(session *Session, uuid string) (retval VMMetricsRef, err error) {
 	method := "VM_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -949,17 +949,17 @@ func (vMMetrics) GetByUUID(session *Session, uUID string) (retval VMMetricsRef, 
 
 // GetByUUID2: Get a reference to the VM_metrics instance with the specified UUID.
 // Version: rio
-func (vMMetrics) GetByUUID2(session *Session, uUID string) (retval VMMetricsRef, err error) {
+func (vmMetrics) GetByUUID2(session *Session, uuid string) (retval VMMetricsRef, err error) {
 	method := "VM_metrics.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -969,7 +969,7 @@ func (vMMetrics) GetByUUID2(session *Session, uUID string) (retval VMMetricsRef,
 
 // GetRecord: Get a record containing the current state of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetRecord(session *Session, self VMMetricsRef) (retval VMMetricsRecord, err error) {
+func (vmMetrics) GetRecord(session *Session, self VMMetricsRef) (retval VMMetricsRecord, err error) {
 	method := "VM_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -989,7 +989,7 @@ func (vMMetrics) GetRecord(session *Session, self VMMetricsRef) (retval VMMetric
 
 // GetRecord2: Get a record containing the current state of the given VM_metrics.
 // Version: rio
-func (vMMetrics) GetRecord2(session *Session, self VMMetricsRef) (retval VMMetricsRecord, err error) {
+func (vmMetrics) GetRecord2(session *Session, self VMMetricsRef) (retval VMMetricsRecord, err error) {
 	method := "VM_metrics.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

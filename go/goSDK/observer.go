@@ -1160,17 +1160,17 @@ func (observer) AsyncCreate2(session *Session, args ObserverRecord) (retval Task
 
 // GetByUUID: Get a reference to the Observer instance with the specified UUID.
 // Version: closed
-func (observer) GetByUUID(session *Session, uUID string) (retval ObserverRef, err error) {
+func (observer) GetByUUID(session *Session, uuid string) (retval ObserverRef, err error) {
 	method := "Observer.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1180,17 +1180,17 @@ func (observer) GetByUUID(session *Session, uUID string) (retval ObserverRef, er
 
 // GetByUUID2: Get a reference to the Observer instance with the specified UUID.
 // Version: closed
-func (observer) GetByUUID2(session *Session, uUID string) (retval ObserverRef, err error) {
+func (observer) GetByUUID2(session *Session, uuid string) (retval ObserverRef, err error) {
 	method := "Observer.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

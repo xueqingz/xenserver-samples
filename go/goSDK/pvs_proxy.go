@@ -20,13 +20,13 @@ type PVSProxyRecord struct {
 type PVSProxyRef string
 
 // a proxy connects a VM/VIF with a PVS site
-type pVSProxy struct{}
+type pvsProxy struct{}
 
-var PVSProxy pVSProxy
+var PVSProxy pvsProxy
 
 // GetAllRecords: Return a map of PVS_proxy references to PVS_proxy records for all PVS_proxys known to the system.
 // Version: ely
-func (pVSProxy) GetAllRecords(session *Session) (retval map[PVSProxyRef]PVSProxyRecord, err error) {
+func (pvsProxy) GetAllRecords(session *Session) (retval map[PVSProxyRef]PVSProxyRecord, err error) {
 	method := "PVS_proxy.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -42,7 +42,7 @@ func (pVSProxy) GetAllRecords(session *Session) (retval map[PVSProxyRef]PVSProxy
 
 // GetAllRecords1: Return a map of PVS_proxy references to PVS_proxy records for all PVS_proxys known to the system.
 // Version: ely
-func (pVSProxy) GetAllRecords1(session *Session) (retval map[PVSProxyRef]PVSProxyRecord, err error) {
+func (pvsProxy) GetAllRecords1(session *Session) (retval map[PVSProxyRef]PVSProxyRecord, err error) {
 	method := "PVS_proxy.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -58,7 +58,7 @@ func (pVSProxy) GetAllRecords1(session *Session) (retval map[PVSProxyRef]PVSProx
 
 // GetAll: Return a list of all the PVS_proxys known to the system.
 // Version: ely
-func (pVSProxy) GetAll(session *Session) (retval []PVSProxyRef, err error) {
+func (pvsProxy) GetAll(session *Session) (retval []PVSProxyRef, err error) {
 	method := "PVS_proxy.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -74,7 +74,7 @@ func (pVSProxy) GetAll(session *Session) (retval []PVSProxyRef, err error) {
 
 // GetAll1: Return a list of all the PVS_proxys known to the system.
 // Version: ely
-func (pVSProxy) GetAll1(session *Session) (retval []PVSProxyRef, err error) {
+func (pvsProxy) GetAll1(session *Session) (retval []PVSProxyRef, err error) {
 	method := "PVS_proxy.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -90,7 +90,7 @@ func (pVSProxy) GetAll1(session *Session) (retval []PVSProxyRef, err error) {
 
 // Destroy: remove (or switch off) a PVS proxy for this VM
 // Version: ely
-func (pVSProxy) Destroy(session *Session, self PVSProxyRef) (err error) {
+func (pvsProxy) Destroy(session *Session, self PVSProxyRef) (err error) {
 	method := "PVS_proxy.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -106,7 +106,7 @@ func (pVSProxy) Destroy(session *Session, self PVSProxyRef) (err error) {
 
 // AsyncDestroy: remove (or switch off) a PVS proxy for this VM
 // Version: ely
-func (pVSProxy) AsyncDestroy(session *Session, self PVSProxyRef) (retval TaskRef, err error) {
+func (pvsProxy) AsyncDestroy(session *Session, self PVSProxyRef) (retval TaskRef, err error) {
 	method := "Async.PVS_proxy.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -126,7 +126,7 @@ func (pVSProxy) AsyncDestroy(session *Session, self PVSProxyRef) (retval TaskRef
 
 // Destroy2: remove (or switch off) a PVS proxy for this VM
 // Version: ely
-func (pVSProxy) Destroy2(session *Session, self PVSProxyRef) (err error) {
+func (pvsProxy) Destroy2(session *Session, self PVSProxyRef) (err error) {
 	method := "PVS_proxy.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -142,7 +142,7 @@ func (pVSProxy) Destroy2(session *Session, self PVSProxyRef) (err error) {
 
 // AsyncDestroy2: remove (or switch off) a PVS proxy for this VM
 // Version: ely
-func (pVSProxy) AsyncDestroy2(session *Session, self PVSProxyRef) (retval TaskRef, err error) {
+func (pvsProxy) AsyncDestroy2(session *Session, self PVSProxyRef) (retval TaskRef, err error) {
 	method := "Async.PVS_proxy.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -162,7 +162,7 @@ func (pVSProxy) AsyncDestroy2(session *Session, self PVSProxyRef) (retval TaskRe
 
 // Create: Configure a VM/VIF to use a PVS proxy
 // Version: ely
-func (pVSProxy) Create(session *Session, site PVSSiteRef, vIF VIFRef) (retval PVSProxyRef, err error) {
+func (pvsProxy) Create(session *Session, site PVSSiteRef, vif VIFRef) (retval PVSProxyRef, err error) {
 	method := "PVS_proxy.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -172,11 +172,11 @@ func (pVSProxy) Create(session *Session, site PVSSiteRef, vIF VIFRef) (retval PV
 	if err != nil {
 		return
 	}
-	vIFArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vIF)
+	vifArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vif)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vIFArg)
+	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vifArg)
 	if err != nil {
 		return
 	}
@@ -186,7 +186,7 @@ func (pVSProxy) Create(session *Session, site PVSSiteRef, vIF VIFRef) (retval PV
 
 // AsyncCreate: Configure a VM/VIF to use a PVS proxy
 // Version: ely
-func (pVSProxy) AsyncCreate(session *Session, site PVSSiteRef, vIF VIFRef) (retval TaskRef, err error) {
+func (pvsProxy) AsyncCreate(session *Session, site PVSSiteRef, vif VIFRef) (retval TaskRef, err error) {
 	method := "Async.PVS_proxy.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -196,11 +196,11 @@ func (pVSProxy) AsyncCreate(session *Session, site PVSSiteRef, vIF VIFRef) (retv
 	if err != nil {
 		return
 	}
-	vIFArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vIF)
+	vifArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vif)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vIFArg)
+	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vifArg)
 	if err != nil {
 		return
 	}
@@ -210,7 +210,7 @@ func (pVSProxy) AsyncCreate(session *Session, site PVSSiteRef, vIF VIFRef) (retv
 
 // Create3: Configure a VM/VIF to use a PVS proxy
 // Version: ely
-func (pVSProxy) Create3(session *Session, site PVSSiteRef, vIF VIFRef) (retval PVSProxyRef, err error) {
+func (pvsProxy) Create3(session *Session, site PVSSiteRef, vif VIFRef) (retval PVSProxyRef, err error) {
 	method := "PVS_proxy.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -220,11 +220,11 @@ func (pVSProxy) Create3(session *Session, site PVSSiteRef, vIF VIFRef) (retval P
 	if err != nil {
 		return
 	}
-	vIFArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vIF)
+	vifArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vif)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vIFArg)
+	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vifArg)
 	if err != nil {
 		return
 	}
@@ -234,7 +234,7 @@ func (pVSProxy) Create3(session *Session, site PVSSiteRef, vIF VIFRef) (retval P
 
 // AsyncCreate3: Configure a VM/VIF to use a PVS proxy
 // Version: ely
-func (pVSProxy) AsyncCreate3(session *Session, site PVSSiteRef, vIF VIFRef) (retval TaskRef, err error) {
+func (pvsProxy) AsyncCreate3(session *Session, site PVSSiteRef, vif VIFRef) (retval TaskRef, err error) {
 	method := "Async.PVS_proxy.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -244,11 +244,11 @@ func (pVSProxy) AsyncCreate3(session *Session, site PVSSiteRef, vIF VIFRef) (ret
 	if err != nil {
 		return
 	}
-	vIFArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vIF)
+	vifArg, err := serializeVIFRef(fmt.Sprintf("%s(%s)", method, "VIF"), vif)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vIFArg)
+	result, err := session.client.sendCall(method, sessionIDArg, siteArg, vifArg)
 	if err != nil {
 		return
 	}
@@ -258,7 +258,7 @@ func (pVSProxy) AsyncCreate3(session *Session, site PVSSiteRef, vIF VIFRef) (ret
 
 // GetStatus: Get the status field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetStatus(session *Session, self PVSProxyRef) (retval PvsProxyStatus, err error) {
+func (pvsProxy) GetStatus(session *Session, self PVSProxyRef) (retval PvsProxyStatus, err error) {
 	method := "PVS_proxy.get_status"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -278,7 +278,7 @@ func (pVSProxy) GetStatus(session *Session, self PVSProxyRef) (retval PvsProxySt
 
 // GetStatus2: Get the status field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetStatus2(session *Session, self PVSProxyRef) (retval PvsProxyStatus, err error) {
+func (pvsProxy) GetStatus2(session *Session, self PVSProxyRef) (retval PvsProxyStatus, err error) {
 	method := "PVS_proxy.get_status"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -298,7 +298,7 @@ func (pVSProxy) GetStatus2(session *Session, self PVSProxyRef) (retval PvsProxyS
 
 // GetCurrentlyAttached: Get the currently_attached field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetCurrentlyAttached(session *Session, self PVSProxyRef) (retval bool, err error) {
+func (pvsProxy) GetCurrentlyAttached(session *Session, self PVSProxyRef) (retval bool, err error) {
 	method := "PVS_proxy.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -318,7 +318,7 @@ func (pVSProxy) GetCurrentlyAttached(session *Session, self PVSProxyRef) (retval
 
 // GetCurrentlyAttached2: Get the currently_attached field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetCurrentlyAttached2(session *Session, self PVSProxyRef) (retval bool, err error) {
+func (pvsProxy) GetCurrentlyAttached2(session *Session, self PVSProxyRef) (retval bool, err error) {
 	method := "PVS_proxy.get_currently_attached"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -338,7 +338,7 @@ func (pVSProxy) GetCurrentlyAttached2(session *Session, self PVSProxyRef) (retva
 
 // GetVIF: Get the VIF field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetVIF(session *Session, self PVSProxyRef) (retval VIFRef, err error) {
+func (pvsProxy) GetVIF(session *Session, self PVSProxyRef) (retval VIFRef, err error) {
 	method := "PVS_proxy.get_VIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -358,7 +358,7 @@ func (pVSProxy) GetVIF(session *Session, self PVSProxyRef) (retval VIFRef, err e
 
 // GetVIF2: Get the VIF field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetVIF2(session *Session, self PVSProxyRef) (retval VIFRef, err error) {
+func (pvsProxy) GetVIF2(session *Session, self PVSProxyRef) (retval VIFRef, err error) {
 	method := "PVS_proxy.get_VIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -378,7 +378,7 @@ func (pVSProxy) GetVIF2(session *Session, self PVSProxyRef) (retval VIFRef, err 
 
 // GetSite: Get the site field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetSite(session *Session, self PVSProxyRef) (retval PVSSiteRef, err error) {
+func (pvsProxy) GetSite(session *Session, self PVSProxyRef) (retval PVSSiteRef, err error) {
 	method := "PVS_proxy.get_site"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -398,7 +398,7 @@ func (pVSProxy) GetSite(session *Session, self PVSProxyRef) (retval PVSSiteRef, 
 
 // GetSite2: Get the site field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetSite2(session *Session, self PVSProxyRef) (retval PVSSiteRef, err error) {
+func (pvsProxy) GetSite2(session *Session, self PVSProxyRef) (retval PVSSiteRef, err error) {
 	method := "PVS_proxy.get_site"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -418,7 +418,7 @@ func (pVSProxy) GetSite2(session *Session, self PVSProxyRef) (retval PVSSiteRef,
 
 // GetUUID: Get the uuid field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetUUID(session *Session, self PVSProxyRef) (retval string, err error) {
+func (pvsProxy) GetUUID(session *Session, self PVSProxyRef) (retval string, err error) {
 	method := "PVS_proxy.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -438,7 +438,7 @@ func (pVSProxy) GetUUID(session *Session, self PVSProxyRef) (retval string, err 
 
 // GetUUID2: Get the uuid field of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetUUID2(session *Session, self PVSProxyRef) (retval string, err error) {
+func (pvsProxy) GetUUID2(session *Session, self PVSProxyRef) (retval string, err error) {
 	method := "PVS_proxy.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -458,17 +458,17 @@ func (pVSProxy) GetUUID2(session *Session, self PVSProxyRef) (retval string, err
 
 // GetByUUID: Get a reference to the PVS_proxy instance with the specified UUID.
 // Version: ely
-func (pVSProxy) GetByUUID(session *Session, uUID string) (retval PVSProxyRef, err error) {
+func (pvsProxy) GetByUUID(session *Session, uuid string) (retval PVSProxyRef, err error) {
 	method := "PVS_proxy.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -478,17 +478,17 @@ func (pVSProxy) GetByUUID(session *Session, uUID string) (retval PVSProxyRef, er
 
 // GetByUUID2: Get a reference to the PVS_proxy instance with the specified UUID.
 // Version: ely
-func (pVSProxy) GetByUUID2(session *Session, uUID string) (retval PVSProxyRef, err error) {
+func (pvsProxy) GetByUUID2(session *Session, uuid string) (retval PVSProxyRef, err error) {
 	method := "PVS_proxy.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -498,7 +498,7 @@ func (pVSProxy) GetByUUID2(session *Session, uUID string) (retval PVSProxyRef, e
 
 // GetRecord: Get a record containing the current state of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetRecord(session *Session, self PVSProxyRef) (retval PVSProxyRecord, err error) {
+func (pvsProxy) GetRecord(session *Session, self PVSProxyRef) (retval PVSProxyRecord, err error) {
 	method := "PVS_proxy.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -518,7 +518,7 @@ func (pVSProxy) GetRecord(session *Session, self PVSProxyRef) (retval PVSProxyRe
 
 // GetRecord2: Get a record containing the current state of the given PVS_proxy.
 // Version: ely
-func (pVSProxy) GetRecord2(session *Session, self PVSProxyRef) (retval PVSProxyRecord, err error) {
+func (pvsProxy) GetRecord2(session *Session, self PVSProxyRef) (retval PVSProxyRecord, err error) {
 	method := "PVS_proxy.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

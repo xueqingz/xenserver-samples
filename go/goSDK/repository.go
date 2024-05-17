@@ -930,17 +930,17 @@ func (repository) GetByNameLabel2(session *Session, label string) (retval []Repo
 
 // GetByUUID: Get a reference to the Repository instance with the specified UUID.
 // Version: 1.301.0
-func (repository) GetByUUID(session *Session, uUID string) (retval RepositoryRef, err error) {
+func (repository) GetByUUID(session *Session, uuid string) (retval RepositoryRef, err error) {
 	method := "Repository.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -950,17 +950,17 @@ func (repository) GetByUUID(session *Session, uUID string) (retval RepositoryRef
 
 // GetByUUID2: Get a reference to the Repository instance with the specified UUID.
 // Version: 1.301.0
-func (repository) GetByUUID2(session *Session, uUID string) (retval RepositoryRef, err error) {
+func (repository) GetByUUID2(session *Session, uuid string) (retval RepositoryRef, err error) {
 	method := "Repository.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

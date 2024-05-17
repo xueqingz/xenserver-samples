@@ -103,17 +103,17 @@ func (message) GetAllRecords1(session *Session) (retval map[MessageRef]MessageRe
 
 // GetByUUID:
 // Version: orlando
-func (message) GetByUUID(session *Session, uUID string) (retval MessageRef, err error) {
+func (message) GetByUUID(session *Session, uuid string) (retval MessageRef, err error) {
 	method := "message.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -123,17 +123,17 @@ func (message) GetByUUID(session *Session, uUID string) (retval MessageRef, err 
 
 // GetByUUID2:
 // Version: orlando
-func (message) GetByUUID2(session *Session, uUID string) (retval MessageRef, err error) {
+func (message) GetByUUID2(session *Session, uuid string) (retval MessageRef, err error) {
 	method := "message.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

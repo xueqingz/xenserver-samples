@@ -660,13 +660,13 @@ func (cluster) AsyncDestroy2(session *Session, self ClusterRef) (retval TaskRef,
 // INVALID_VALUE - The value given is invalid
 // PIF_ALLOWS_UNPLUG - The operation you requested cannot be performed because the specified PIF allows unplug.
 // REQUIRED_PIF_IS_UNPLUGGED - The operation you requested cannot be performed because the specified PIF is currently unplugged.
-func (cluster) Create(session *Session, pIF PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval ClusterRef, err error) {
+func (cluster) Create(session *Session, pif PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval ClusterRef, err error) {
 	method := "Cluster.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	pIFArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pIF)
+	pifArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pif)
 	if err != nil {
 		return
 	}
@@ -686,7 +686,7 @@ func (cluster) Create(session *Session, pIF PIFRef, clusterStack string, poolAut
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pIFArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
 	if err != nil {
 		return
 	}
@@ -702,13 +702,13 @@ func (cluster) Create(session *Session, pIF PIFRef, clusterStack string, poolAut
 // INVALID_VALUE - The value given is invalid
 // PIF_ALLOWS_UNPLUG - The operation you requested cannot be performed because the specified PIF allows unplug.
 // REQUIRED_PIF_IS_UNPLUGGED - The operation you requested cannot be performed because the specified PIF is currently unplugged.
-func (cluster) AsyncCreate(session *Session, pIF PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval TaskRef, err error) {
+func (cluster) AsyncCreate(session *Session, pif PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval TaskRef, err error) {
 	method := "Async.Cluster.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	pIFArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pIF)
+	pifArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pif)
 	if err != nil {
 		return
 	}
@@ -728,7 +728,7 @@ func (cluster) AsyncCreate(session *Session, pIF PIFRef, clusterStack string, po
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pIFArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
 	if err != nil {
 		return
 	}
@@ -744,13 +744,13 @@ func (cluster) AsyncCreate(session *Session, pIF PIFRef, clusterStack string, po
 // INVALID_VALUE - The value given is invalid
 // PIF_ALLOWS_UNPLUG - The operation you requested cannot be performed because the specified PIF allows unplug.
 // REQUIRED_PIF_IS_UNPLUGGED - The operation you requested cannot be performed because the specified PIF is currently unplugged.
-func (cluster) Create6(session *Session, pIF PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval ClusterRef, err error) {
+func (cluster) Create6(session *Session, pif PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval ClusterRef, err error) {
 	method := "Cluster.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	pIFArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pIF)
+	pifArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pif)
 	if err != nil {
 		return
 	}
@@ -770,7 +770,7 @@ func (cluster) Create6(session *Session, pIF PIFRef, clusterStack string, poolAu
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pIFArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
 	if err != nil {
 		return
 	}
@@ -786,13 +786,13 @@ func (cluster) Create6(session *Session, pIF PIFRef, clusterStack string, poolAu
 // INVALID_VALUE - The value given is invalid
 // PIF_ALLOWS_UNPLUG - The operation you requested cannot be performed because the specified PIF allows unplug.
 // REQUIRED_PIF_IS_UNPLUGGED - The operation you requested cannot be performed because the specified PIF is currently unplugged.
-func (cluster) AsyncCreate6(session *Session, pIF PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval TaskRef, err error) {
+func (cluster) AsyncCreate6(session *Session, pif PIFRef, clusterStack string, poolAutoJoin bool, tokenTimeout float64, tokenTimeoutCoefficient float64) (retval TaskRef, err error) {
 	method := "Async.Cluster.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	pIFArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pIF)
+	pifArg, err := serializePIFRef(fmt.Sprintf("%s(%s)", method, "PIF"), pif)
 	if err != nil {
 		return
 	}
@@ -812,7 +812,7 @@ func (cluster) AsyncCreate6(session *Session, pIF PIFRef, clusterStack string, p
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, pIFArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
+	result, err := session.client.sendCall(method, sessionIDArg, pifArg, clusterStackArg, poolAutoJoinArg, tokenTimeoutArg, tokenTimeoutCoefficientArg)
 	if err != nil {
 		return
 	}
@@ -1550,17 +1550,17 @@ func (cluster) GetUUID2(session *Session, self ClusterRef) (retval string, err e
 
 // GetByUUID: Get a reference to the Cluster instance with the specified UUID.
 // Version: lima
-func (cluster) GetByUUID(session *Session, uUID string) (retval ClusterRef, err error) {
+func (cluster) GetByUUID(session *Session, uuid string) (retval ClusterRef, err error) {
 	method := "Cluster.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1570,17 +1570,17 @@ func (cluster) GetByUUID(session *Session, uUID string) (retval ClusterRef, err 
 
 // GetByUUID2: Get a reference to the Cluster instance with the specified UUID.
 // Version: lima
-func (cluster) GetByUUID2(session *Session, uUID string) (retval ClusterRef, err error) {
+func (cluster) GetByUUID2(session *Session, uuid string) (retval ClusterRef, err error) {
 	method := "Cluster.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

@@ -20,13 +20,13 @@ type VLANRecord struct {
 type VLANRef string
 
 // A VLAN mux/demux
-type vLAN struct{}
+type vlan struct{}
 
-var VLAN vLAN
+var VLAN vlan
 
 // GetAllRecords: Return a map of VLAN references to VLAN records for all VLANs known to the system.
 // Version: miami
-func (vLAN) GetAllRecords(session *Session) (retval map[VLANRef]VLANRecord, err error) {
+func (vlan) GetAllRecords(session *Session) (retval map[VLANRef]VLANRecord, err error) {
 	method := "VLAN.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -42,7 +42,7 @@ func (vLAN) GetAllRecords(session *Session) (retval map[VLANRef]VLANRecord, err 
 
 // GetAllRecords1: Return a map of VLAN references to VLAN records for all VLANs known to the system.
 // Version: miami
-func (vLAN) GetAllRecords1(session *Session) (retval map[VLANRef]VLANRecord, err error) {
+func (vlan) GetAllRecords1(session *Session) (retval map[VLANRef]VLANRecord, err error) {
 	method := "VLAN.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -58,7 +58,7 @@ func (vLAN) GetAllRecords1(session *Session) (retval map[VLANRef]VLANRecord, err
 
 // GetAll: Return a list of all the VLANs known to the system.
 // Version: miami
-func (vLAN) GetAll(session *Session) (retval []VLANRef, err error) {
+func (vlan) GetAll(session *Session) (retval []VLANRef, err error) {
 	method := "VLAN.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -74,7 +74,7 @@ func (vLAN) GetAll(session *Session) (retval []VLANRef, err error) {
 
 // GetAll1: Return a list of all the VLANs known to the system.
 // Version: miami
-func (vLAN) GetAll1(session *Session) (retval []VLANRef, err error) {
+func (vlan) GetAll1(session *Session) (retval []VLANRef, err error) {
 	method := "VLAN.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -90,7 +90,7 @@ func (vLAN) GetAll1(session *Session) (retval []VLANRef, err error) {
 
 // Destroy: Destroy a VLAN mux/demuxer
 // Version: miami
-func (vLAN) Destroy(session *Session, self VLANRef) (err error) {
+func (vlan) Destroy(session *Session, self VLANRef) (err error) {
 	method := "VLAN.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -106,7 +106,7 @@ func (vLAN) Destroy(session *Session, self VLANRef) (err error) {
 
 // AsyncDestroy: Destroy a VLAN mux/demuxer
 // Version: miami
-func (vLAN) AsyncDestroy(session *Session, self VLANRef) (retval TaskRef, err error) {
+func (vlan) AsyncDestroy(session *Session, self VLANRef) (retval TaskRef, err error) {
 	method := "Async.VLAN.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -126,7 +126,7 @@ func (vLAN) AsyncDestroy(session *Session, self VLANRef) (retval TaskRef, err er
 
 // Destroy2: Destroy a VLAN mux/demuxer
 // Version: miami
-func (vLAN) Destroy2(session *Session, self VLANRef) (err error) {
+func (vlan) Destroy2(session *Session, self VLANRef) (err error) {
 	method := "VLAN.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -142,7 +142,7 @@ func (vLAN) Destroy2(session *Session, self VLANRef) (err error) {
 
 // AsyncDestroy2: Destroy a VLAN mux/demuxer
 // Version: miami
-func (vLAN) AsyncDestroy2(session *Session, self VLANRef) (retval TaskRef, err error) {
+func (vlan) AsyncDestroy2(session *Session, self VLANRef) (retval TaskRef, err error) {
 	method := "Async.VLAN.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -162,7 +162,7 @@ func (vLAN) AsyncDestroy2(session *Session, self VLANRef) (retval TaskRef, err e
 
 // Create: Create a VLAN mux/demuxer
 // Version: miami
-func (vLAN) Create(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval VLANRef, err error) {
+func (vlan) Create(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval VLANRef, err error) {
 	method := "VLAN.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -190,7 +190,7 @@ func (vLAN) Create(session *Session, taggedPIF PIFRef, tag int, network NetworkR
 
 // AsyncCreate: Create a VLAN mux/demuxer
 // Version: miami
-func (vLAN) AsyncCreate(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval TaskRef, err error) {
+func (vlan) AsyncCreate(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval TaskRef, err error) {
 	method := "Async.VLAN.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -218,7 +218,7 @@ func (vLAN) AsyncCreate(session *Session, taggedPIF PIFRef, tag int, network Net
 
 // Create4: Create a VLAN mux/demuxer
 // Version: miami
-func (vLAN) Create4(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval VLANRef, err error) {
+func (vlan) Create4(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval VLANRef, err error) {
 	method := "VLAN.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -246,7 +246,7 @@ func (vLAN) Create4(session *Session, taggedPIF PIFRef, tag int, network Network
 
 // AsyncCreate4: Create a VLAN mux/demuxer
 // Version: miami
-func (vLAN) AsyncCreate4(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval TaskRef, err error) {
+func (vlan) AsyncCreate4(session *Session, taggedPIF PIFRef, tag int, network NetworkRef) (retval TaskRef, err error) {
 	method := "Async.VLAN.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -274,7 +274,7 @@ func (vLAN) AsyncCreate4(session *Session, taggedPIF PIFRef, tag int, network Ne
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VLAN.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vLAN) RemoveFromOtherConfig(session *Session, self VLANRef, key string) (err error) {
+func (vlan) RemoveFromOtherConfig(session *Session, self VLANRef, key string) (err error) {
 	method := "VLAN.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -294,7 +294,7 @@ func (vLAN) RemoveFromOtherConfig(session *Session, self VLANRef, key string) (e
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VLAN.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vLAN) RemoveFromOtherConfig3(session *Session, self VLANRef, key string) (err error) {
+func (vlan) RemoveFromOtherConfig3(session *Session, self VLANRef, key string) (err error) {
 	method := "VLAN.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -314,7 +314,7 @@ func (vLAN) RemoveFromOtherConfig3(session *Session, self VLANRef, key string) (
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VLAN.
 // Version: miami
-func (vLAN) AddToOtherConfig(session *Session, self VLANRef, key string, value string) (err error) {
+func (vlan) AddToOtherConfig(session *Session, self VLANRef, key string, value string) (err error) {
 	method := "VLAN.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -338,7 +338,7 @@ func (vLAN) AddToOtherConfig(session *Session, self VLANRef, key string, value s
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VLAN.
 // Version: miami
-func (vLAN) AddToOtherConfig4(session *Session, self VLANRef, key string, value string) (err error) {
+func (vlan) AddToOtherConfig4(session *Session, self VLANRef, key string, value string) (err error) {
 	method := "VLAN.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -362,7 +362,7 @@ func (vLAN) AddToOtherConfig4(session *Session, self VLANRef, key string, value 
 
 // SetOtherConfig: Set the other_config field of the given VLAN.
 // Version: miami
-func (vLAN) SetOtherConfig(session *Session, self VLANRef, value map[string]string) (err error) {
+func (vlan) SetOtherConfig(session *Session, self VLANRef, value map[string]string) (err error) {
 	method := "VLAN.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -382,7 +382,7 @@ func (vLAN) SetOtherConfig(session *Session, self VLANRef, value map[string]stri
 
 // SetOtherConfig3: Set the other_config field of the given VLAN.
 // Version: miami
-func (vLAN) SetOtherConfig3(session *Session, self VLANRef, value map[string]string) (err error) {
+func (vlan) SetOtherConfig3(session *Session, self VLANRef, value map[string]string) (err error) {
 	method := "VLAN.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -402,7 +402,7 @@ func (vLAN) SetOtherConfig3(session *Session, self VLANRef, value map[string]str
 
 // GetOtherConfig: Get the other_config field of the given VLAN.
 // Version: miami
-func (vLAN) GetOtherConfig(session *Session, self VLANRef) (retval map[string]string, err error) {
+func (vlan) GetOtherConfig(session *Session, self VLANRef) (retval map[string]string, err error) {
 	method := "VLAN.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -422,7 +422,7 @@ func (vLAN) GetOtherConfig(session *Session, self VLANRef) (retval map[string]st
 
 // GetOtherConfig2: Get the other_config field of the given VLAN.
 // Version: miami
-func (vLAN) GetOtherConfig2(session *Session, self VLANRef) (retval map[string]string, err error) {
+func (vlan) GetOtherConfig2(session *Session, self VLANRef) (retval map[string]string, err error) {
 	method := "VLAN.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -442,7 +442,7 @@ func (vLAN) GetOtherConfig2(session *Session, self VLANRef) (retval map[string]s
 
 // GetTag: Get the tag field of the given VLAN.
 // Version: miami
-func (vLAN) GetTag(session *Session, self VLANRef) (retval int, err error) {
+func (vlan) GetTag(session *Session, self VLANRef) (retval int, err error) {
 	method := "VLAN.get_tag"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -462,7 +462,7 @@ func (vLAN) GetTag(session *Session, self VLANRef) (retval int, err error) {
 
 // GetTag2: Get the tag field of the given VLAN.
 // Version: miami
-func (vLAN) GetTag2(session *Session, self VLANRef) (retval int, err error) {
+func (vlan) GetTag2(session *Session, self VLANRef) (retval int, err error) {
 	method := "VLAN.get_tag"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -482,7 +482,7 @@ func (vLAN) GetTag2(session *Session, self VLANRef) (retval int, err error) {
 
 // GetUntaggedPIF: Get the untagged_PIF field of the given VLAN.
 // Version: miami
-func (vLAN) GetUntaggedPIF(session *Session, self VLANRef) (retval PIFRef, err error) {
+func (vlan) GetUntaggedPIF(session *Session, self VLANRef) (retval PIFRef, err error) {
 	method := "VLAN.get_untagged_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -502,7 +502,7 @@ func (vLAN) GetUntaggedPIF(session *Session, self VLANRef) (retval PIFRef, err e
 
 // GetUntaggedPIF2: Get the untagged_PIF field of the given VLAN.
 // Version: miami
-func (vLAN) GetUntaggedPIF2(session *Session, self VLANRef) (retval PIFRef, err error) {
+func (vlan) GetUntaggedPIF2(session *Session, self VLANRef) (retval PIFRef, err error) {
 	method := "VLAN.get_untagged_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -522,7 +522,7 @@ func (vLAN) GetUntaggedPIF2(session *Session, self VLANRef) (retval PIFRef, err 
 
 // GetTaggedPIF: Get the tagged_PIF field of the given VLAN.
 // Version: miami
-func (vLAN) GetTaggedPIF(session *Session, self VLANRef) (retval PIFRef, err error) {
+func (vlan) GetTaggedPIF(session *Session, self VLANRef) (retval PIFRef, err error) {
 	method := "VLAN.get_tagged_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -542,7 +542,7 @@ func (vLAN) GetTaggedPIF(session *Session, self VLANRef) (retval PIFRef, err err
 
 // GetTaggedPIF2: Get the tagged_PIF field of the given VLAN.
 // Version: miami
-func (vLAN) GetTaggedPIF2(session *Session, self VLANRef) (retval PIFRef, err error) {
+func (vlan) GetTaggedPIF2(session *Session, self VLANRef) (retval PIFRef, err error) {
 	method := "VLAN.get_tagged_PIF"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -562,7 +562,7 @@ func (vLAN) GetTaggedPIF2(session *Session, self VLANRef) (retval PIFRef, err er
 
 // GetUUID: Get the uuid field of the given VLAN.
 // Version: miami
-func (vLAN) GetUUID(session *Session, self VLANRef) (retval string, err error) {
+func (vlan) GetUUID(session *Session, self VLANRef) (retval string, err error) {
 	method := "VLAN.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -582,7 +582,7 @@ func (vLAN) GetUUID(session *Session, self VLANRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VLAN.
 // Version: miami
-func (vLAN) GetUUID2(session *Session, self VLANRef) (retval string, err error) {
+func (vlan) GetUUID2(session *Session, self VLANRef) (retval string, err error) {
 	method := "VLAN.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -602,17 +602,17 @@ func (vLAN) GetUUID2(session *Session, self VLANRef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the VLAN instance with the specified UUID.
 // Version: miami
-func (vLAN) GetByUUID(session *Session, uUID string) (retval VLANRef, err error) {
+func (vlan) GetByUUID(session *Session, uuid string) (retval VLANRef, err error) {
 	method := "VLAN.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -622,17 +622,17 @@ func (vLAN) GetByUUID(session *Session, uUID string) (retval VLANRef, err error)
 
 // GetByUUID2: Get a reference to the VLAN instance with the specified UUID.
 // Version: miami
-func (vLAN) GetByUUID2(session *Session, uUID string) (retval VLANRef, err error) {
+func (vlan) GetByUUID2(session *Session, uuid string) (retval VLANRef, err error) {
 	method := "VLAN.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -642,7 +642,7 @@ func (vLAN) GetByUUID2(session *Session, uUID string) (retval VLANRef, err error
 
 // GetRecord: Get a record containing the current state of the given VLAN.
 // Version: miami
-func (vLAN) GetRecord(session *Session, self VLANRef) (retval VLANRecord, err error) {
+func (vlan) GetRecord(session *Session, self VLANRef) (retval VLANRecord, err error) {
 	method := "VLAN.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -662,7 +662,7 @@ func (vLAN) GetRecord(session *Session, self VLANRef) (retval VLANRecord, err er
 
 // GetRecord2: Get a record containing the current state of the given VLAN.
 // Version: miami
-func (vLAN) GetRecord2(session *Session, self VLANRef) (retval VLANRecord, err error) {
+func (vlan) GetRecord2(session *Session, self VLANRef) (retval VLANRecord, err error) {
 	method := "VLAN.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

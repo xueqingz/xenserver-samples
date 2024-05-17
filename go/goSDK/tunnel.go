@@ -906,17 +906,17 @@ func (tunnel) GetUUID2(session *Session, self TunnelRef) (retval string, err err
 
 // GetByUUID: Get a reference to the tunnel instance with the specified UUID.
 // Version: cowley
-func (tunnel) GetByUUID(session *Session, uUID string) (retval TunnelRef, err error) {
+func (tunnel) GetByUUID(session *Session, uuid string) (retval TunnelRef, err error) {
 	method := "tunnel.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -926,17 +926,17 @@ func (tunnel) GetByUUID(session *Session, uUID string) (retval TunnelRef, err er
 
 // GetByUUID2: Get a reference to the tunnel instance with the specified UUID.
 // Version: cowley
-func (tunnel) GetByUUID2(session *Session, uUID string) (retval TunnelRef, err error) {
+func (tunnel) GetByUUID2(session *Session, uuid string) (retval TunnelRef, err error) {
 	method := "tunnel.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

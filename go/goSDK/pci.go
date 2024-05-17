@@ -32,13 +32,13 @@ type PCIRecord struct {
 type PCIRef string
 
 // A PCI device
-type pCI struct{}
+type pci struct{}
 
-var PCI pCI
+var PCI pci
 
 // GetAllRecords: Return a map of PCI references to PCI records for all PCIs known to the system.
 // Version: boston
-func (pCI) GetAllRecords(session *Session) (retval map[PCIRef]PCIRecord, err error) {
+func (pci) GetAllRecords(session *Session) (retval map[PCIRef]PCIRecord, err error) {
 	method := "PCI.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -54,7 +54,7 @@ func (pCI) GetAllRecords(session *Session) (retval map[PCIRef]PCIRecord, err err
 
 // GetAllRecords1: Return a map of PCI references to PCI records for all PCIs known to the system.
 // Version: boston
-func (pCI) GetAllRecords1(session *Session) (retval map[PCIRef]PCIRecord, err error) {
+func (pci) GetAllRecords1(session *Session) (retval map[PCIRef]PCIRecord, err error) {
 	method := "PCI.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -70,7 +70,7 @@ func (pCI) GetAllRecords1(session *Session) (retval map[PCIRef]PCIRecord, err er
 
 // GetAll: Return a list of all the PCIs known to the system.
 // Version: boston
-func (pCI) GetAll(session *Session) (retval []PCIRef, err error) {
+func (pci) GetAll(session *Session) (retval []PCIRef, err error) {
 	method := "PCI.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -86,7 +86,7 @@ func (pCI) GetAll(session *Session) (retval []PCIRef, err error) {
 
 // GetAll1: Return a list of all the PCIs known to the system.
 // Version: boston
-func (pCI) GetAll1(session *Session) (retval []PCIRef, err error) {
+func (pci) GetAll1(session *Session) (retval []PCIRef, err error) {
 	method := "PCI.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -102,7 +102,7 @@ func (pCI) GetAll1(session *Session) (retval []PCIRef, err error) {
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given PCI.  If the key is not in that Map, then do nothing.
 // Version: boston
-func (pCI) RemoveFromOtherConfig(session *Session, self PCIRef, key string) (err error) {
+func (pci) RemoveFromOtherConfig(session *Session, self PCIRef, key string) (err error) {
 	method := "PCI.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -122,7 +122,7 @@ func (pCI) RemoveFromOtherConfig(session *Session, self PCIRef, key string) (err
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given PCI.  If the key is not in that Map, then do nothing.
 // Version: boston
-func (pCI) RemoveFromOtherConfig3(session *Session, self PCIRef, key string) (err error) {
+func (pci) RemoveFromOtherConfig3(session *Session, self PCIRef, key string) (err error) {
 	method := "PCI.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -142,7 +142,7 @@ func (pCI) RemoveFromOtherConfig3(session *Session, self PCIRef, key string) (er
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given PCI.
 // Version: boston
-func (pCI) AddToOtherConfig(session *Session, self PCIRef, key string, value string) (err error) {
+func (pci) AddToOtherConfig(session *Session, self PCIRef, key string, value string) (err error) {
 	method := "PCI.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -166,7 +166,7 @@ func (pCI) AddToOtherConfig(session *Session, self PCIRef, key string, value str
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given PCI.
 // Version: boston
-func (pCI) AddToOtherConfig4(session *Session, self PCIRef, key string, value string) (err error) {
+func (pci) AddToOtherConfig4(session *Session, self PCIRef, key string, value string) (err error) {
 	method := "PCI.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -190,7 +190,7 @@ func (pCI) AddToOtherConfig4(session *Session, self PCIRef, key string, value st
 
 // SetOtherConfig: Set the other_config field of the given PCI.
 // Version: boston
-func (pCI) SetOtherConfig(session *Session, self PCIRef, value map[string]string) (err error) {
+func (pci) SetOtherConfig(session *Session, self PCIRef, value map[string]string) (err error) {
 	method := "PCI.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -210,7 +210,7 @@ func (pCI) SetOtherConfig(session *Session, self PCIRef, value map[string]string
 
 // SetOtherConfig3: Set the other_config field of the given PCI.
 // Version: boston
-func (pCI) SetOtherConfig3(session *Session, self PCIRef, value map[string]string) (err error) {
+func (pci) SetOtherConfig3(session *Session, self PCIRef, value map[string]string) (err error) {
 	method := "PCI.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -230,7 +230,7 @@ func (pCI) SetOtherConfig3(session *Session, self PCIRef, value map[string]strin
 
 // GetDriverName: Get the driver_name field of the given PCI.
 // Version: boston
-func (pCI) GetDriverName(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetDriverName(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_driver_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -250,7 +250,7 @@ func (pCI) GetDriverName(session *Session, self PCIRef) (retval string, err erro
 
 // GetDriverName2: Get the driver_name field of the given PCI.
 // Version: boston
-func (pCI) GetDriverName2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetDriverName2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_driver_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -270,7 +270,7 @@ func (pCI) GetDriverName2(session *Session, self PCIRef) (retval string, err err
 
 // GetSubsystemDeviceName: Get the subsystem_device_name field of the given PCI.
 // Version: boston
-func (pCI) GetSubsystemDeviceName(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetSubsystemDeviceName(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_subsystem_device_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -290,7 +290,7 @@ func (pCI) GetSubsystemDeviceName(session *Session, self PCIRef) (retval string,
 
 // GetSubsystemDeviceName2: Get the subsystem_device_name field of the given PCI.
 // Version: boston
-func (pCI) GetSubsystemDeviceName2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetSubsystemDeviceName2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_subsystem_device_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -310,7 +310,7 @@ func (pCI) GetSubsystemDeviceName2(session *Session, self PCIRef) (retval string
 
 // GetSubsystemVendorName: Get the subsystem_vendor_name field of the given PCI.
 // Version: boston
-func (pCI) GetSubsystemVendorName(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetSubsystemVendorName(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_subsystem_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -330,7 +330,7 @@ func (pCI) GetSubsystemVendorName(session *Session, self PCIRef) (retval string,
 
 // GetSubsystemVendorName2: Get the subsystem_vendor_name field of the given PCI.
 // Version: boston
-func (pCI) GetSubsystemVendorName2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetSubsystemVendorName2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_subsystem_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -350,7 +350,7 @@ func (pCI) GetSubsystemVendorName2(session *Session, self PCIRef) (retval string
 
 // GetOtherConfig: Get the other_config field of the given PCI.
 // Version: boston
-func (pCI) GetOtherConfig(session *Session, self PCIRef) (retval map[string]string, err error) {
+func (pci) GetOtherConfig(session *Session, self PCIRef) (retval map[string]string, err error) {
 	method := "PCI.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -370,7 +370,7 @@ func (pCI) GetOtherConfig(session *Session, self PCIRef) (retval map[string]stri
 
 // GetOtherConfig2: Get the other_config field of the given PCI.
 // Version: boston
-func (pCI) GetOtherConfig2(session *Session, self PCIRef) (retval map[string]string, err error) {
+func (pci) GetOtherConfig2(session *Session, self PCIRef) (retval map[string]string, err error) {
 	method := "PCI.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -390,7 +390,7 @@ func (pCI) GetOtherConfig2(session *Session, self PCIRef) (retval map[string]str
 
 // GetDependencies: Get the dependencies field of the given PCI.
 // Version: boston
-func (pCI) GetDependencies(session *Session, self PCIRef) (retval []PCIRef, err error) {
+func (pci) GetDependencies(session *Session, self PCIRef) (retval []PCIRef, err error) {
 	method := "PCI.get_dependencies"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -410,7 +410,7 @@ func (pCI) GetDependencies(session *Session, self PCIRef) (retval []PCIRef, err 
 
 // GetDependencies2: Get the dependencies field of the given PCI.
 // Version: boston
-func (pCI) GetDependencies2(session *Session, self PCIRef) (retval []PCIRef, err error) {
+func (pci) GetDependencies2(session *Session, self PCIRef) (retval []PCIRef, err error) {
 	method := "PCI.get_dependencies"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -430,7 +430,7 @@ func (pCI) GetDependencies2(session *Session, self PCIRef) (retval []PCIRef, err
 
 // GetPciID: Get the pci_id field of the given PCI.
 // Version: boston
-func (pCI) GetPciID(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetPciID(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_pci_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -450,7 +450,7 @@ func (pCI) GetPciID(session *Session, self PCIRef) (retval string, err error) {
 
 // GetPciID2: Get the pci_id field of the given PCI.
 // Version: boston
-func (pCI) GetPciID2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetPciID2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_pci_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -470,7 +470,7 @@ func (pCI) GetPciID2(session *Session, self PCIRef) (retval string, err error) {
 
 // GetHost: Get the host field of the given PCI.
 // Version: boston
-func (pCI) GetHost(session *Session, self PCIRef) (retval HostRef, err error) {
+func (pci) GetHost(session *Session, self PCIRef) (retval HostRef, err error) {
 	method := "PCI.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -490,7 +490,7 @@ func (pCI) GetHost(session *Session, self PCIRef) (retval HostRef, err error) {
 
 // GetHost2: Get the host field of the given PCI.
 // Version: boston
-func (pCI) GetHost2(session *Session, self PCIRef) (retval HostRef, err error) {
+func (pci) GetHost2(session *Session, self PCIRef) (retval HostRef, err error) {
 	method := "PCI.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -510,7 +510,7 @@ func (pCI) GetHost2(session *Session, self PCIRef) (retval HostRef, err error) {
 
 // GetDeviceName: Get the device_name field of the given PCI.
 // Version: boston
-func (pCI) GetDeviceName(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetDeviceName(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_device_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -530,7 +530,7 @@ func (pCI) GetDeviceName(session *Session, self PCIRef) (retval string, err erro
 
 // GetDeviceName2: Get the device_name field of the given PCI.
 // Version: boston
-func (pCI) GetDeviceName2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetDeviceName2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_device_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -550,7 +550,7 @@ func (pCI) GetDeviceName2(session *Session, self PCIRef) (retval string, err err
 
 // GetVendorName: Get the vendor_name field of the given PCI.
 // Version: boston
-func (pCI) GetVendorName(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetVendorName(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -570,7 +570,7 @@ func (pCI) GetVendorName(session *Session, self PCIRef) (retval string, err erro
 
 // GetVendorName2: Get the vendor_name field of the given PCI.
 // Version: boston
-func (pCI) GetVendorName2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetVendorName2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -590,7 +590,7 @@ func (pCI) GetVendorName2(session *Session, self PCIRef) (retval string, err err
 
 // GetClassName: Get the class_name field of the given PCI.
 // Version: boston
-func (pCI) GetClassName(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetClassName(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_class_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -610,7 +610,7 @@ func (pCI) GetClassName(session *Session, self PCIRef) (retval string, err error
 
 // GetClassName2: Get the class_name field of the given PCI.
 // Version: boston
-func (pCI) GetClassName2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetClassName2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_class_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -630,7 +630,7 @@ func (pCI) GetClassName2(session *Session, self PCIRef) (retval string, err erro
 
 // GetUUID: Get the uuid field of the given PCI.
 // Version: boston
-func (pCI) GetUUID(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetUUID(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -650,7 +650,7 @@ func (pCI) GetUUID(session *Session, self PCIRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given PCI.
 // Version: boston
-func (pCI) GetUUID2(session *Session, self PCIRef) (retval string, err error) {
+func (pci) GetUUID2(session *Session, self PCIRef) (retval string, err error) {
 	method := "PCI.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -670,17 +670,17 @@ func (pCI) GetUUID2(session *Session, self PCIRef) (retval string, err error) {
 
 // GetByUUID: Get a reference to the PCI instance with the specified UUID.
 // Version: boston
-func (pCI) GetByUUID(session *Session, uUID string) (retval PCIRef, err error) {
+func (pci) GetByUUID(session *Session, uuid string) (retval PCIRef, err error) {
 	method := "PCI.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -690,17 +690,17 @@ func (pCI) GetByUUID(session *Session, uUID string) (retval PCIRef, err error) {
 
 // GetByUUID2: Get a reference to the PCI instance with the specified UUID.
 // Version: boston
-func (pCI) GetByUUID2(session *Session, uUID string) (retval PCIRef, err error) {
+func (pci) GetByUUID2(session *Session, uuid string) (retval PCIRef, err error) {
 	method := "PCI.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -710,7 +710,7 @@ func (pCI) GetByUUID2(session *Session, uUID string) (retval PCIRef, err error) 
 
 // GetRecord: Get a record containing the current state of the given PCI.
 // Version: boston
-func (pCI) GetRecord(session *Session, self PCIRef) (retval PCIRecord, err error) {
+func (pci) GetRecord(session *Session, self PCIRef) (retval PCIRecord, err error) {
 	method := "PCI.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -730,7 +730,7 @@ func (pCI) GetRecord(session *Session, self PCIRef) (retval PCIRecord, err error
 
 // GetRecord2: Get a record containing the current state of the given PCI.
 // Version: boston
-func (pCI) GetRecord2(session *Session, self PCIRef) (retval PCIRecord, err error) {
+func (pci) GetRecord2(session *Session, self PCIRef) (retval PCIRecord, err error) {
 	method := "PCI.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

@@ -52,13 +52,13 @@ type SRRecord struct {
 type SRRef string
 
 // A storage repository
-type sR struct{}
+type sr struct{}
 
-var SR sR
+var SR sr
 
 // GetAllRecords: Return a map of SR references to SR records for all SRs known to the system.
 // Version: rio
-func (sR) GetAllRecords(session *Session) (retval map[SRRef]SRRecord, err error) {
+func (sr) GetAllRecords(session *Session) (retval map[SRRef]SRRecord, err error) {
 	method := "SR.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -74,7 +74,7 @@ func (sR) GetAllRecords(session *Session) (retval map[SRRef]SRRecord, err error)
 
 // GetAllRecords1: Return a map of SR references to SR records for all SRs known to the system.
 // Version: rio
-func (sR) GetAllRecords1(session *Session) (retval map[SRRef]SRRecord, err error) {
+func (sr) GetAllRecords1(session *Session) (retval map[SRRef]SRRecord, err error) {
 	method := "SR.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -90,7 +90,7 @@ func (sR) GetAllRecords1(session *Session) (retval map[SRRef]SRRecord, err error
 
 // GetAll: Return a list of all the SRs known to the system.
 // Version: rio
-func (sR) GetAll(session *Session) (retval []SRRef, err error) {
+func (sr) GetAll(session *Session) (retval []SRRef, err error) {
 	method := "SR.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -106,7 +106,7 @@ func (sR) GetAll(session *Session) (retval []SRRef, err error) {
 
 // GetAll1: Return a list of all the SRs known to the system.
 // Version: rio
-func (sR) GetAll1(session *Session) (retval []SRRef, err error) {
+func (sr) GetAll1(session *Session) (retval []SRRef, err error) {
 	method := "SR.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -122,7 +122,7 @@ func (sR) GetAll1(session *Session) (retval []SRRef, err error) {
 
 // ForgetDataSourceArchives: Forget the recorded statistics related to the specified data source
 // Version: dundee
-func (sR) ForgetDataSourceArchives(session *Session, sr SRRef, dataSource string) (err error) {
+func (sr) ForgetDataSourceArchives(session *Session, sr SRRef, dataSource string) (err error) {
 	method := "SR.forget_data_source_archives"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -142,7 +142,7 @@ func (sR) ForgetDataSourceArchives(session *Session, sr SRRef, dataSource string
 
 // ForgetDataSourceArchives3: Forget the recorded statistics related to the specified data source
 // Version: dundee
-func (sR) ForgetDataSourceArchives3(session *Session, sr SRRef, dataSource string) (err error) {
+func (sr) ForgetDataSourceArchives3(session *Session, sr SRRef, dataSource string) (err error) {
 	method := "SR.forget_data_source_archives"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -162,7 +162,7 @@ func (sR) ForgetDataSourceArchives3(session *Session, sr SRRef, dataSource strin
 
 // QueryDataSource: Query the latest value of the specified data source
 // Version: dundee
-func (sR) QueryDataSource(session *Session, sr SRRef, dataSource string) (retval float64, err error) {
+func (sr) QueryDataSource(session *Session, sr SRRef, dataSource string) (retval float64, err error) {
 	method := "SR.query_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -186,7 +186,7 @@ func (sR) QueryDataSource(session *Session, sr SRRef, dataSource string) (retval
 
 // QueryDataSource3: Query the latest value of the specified data source
 // Version: dundee
-func (sR) QueryDataSource3(session *Session, sr SRRef, dataSource string) (retval float64, err error) {
+func (sr) QueryDataSource3(session *Session, sr SRRef, dataSource string) (retval float64, err error) {
 	method := "SR.query_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -210,7 +210,7 @@ func (sR) QueryDataSource3(session *Session, sr SRRef, dataSource string) (retva
 
 // RecordDataSource: Start recording the specified data source
 // Version: dundee
-func (sR) RecordDataSource(session *Session, sr SRRef, dataSource string) (err error) {
+func (sr) RecordDataSource(session *Session, sr SRRef, dataSource string) (err error) {
 	method := "SR.record_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -230,7 +230,7 @@ func (sR) RecordDataSource(session *Session, sr SRRef, dataSource string) (err e
 
 // RecordDataSource3: Start recording the specified data source
 // Version: dundee
-func (sR) RecordDataSource3(session *Session, sr SRRef, dataSource string) (err error) {
+func (sr) RecordDataSource3(session *Session, sr SRRef, dataSource string) (err error) {
 	method := "SR.record_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -250,7 +250,7 @@ func (sR) RecordDataSource3(session *Session, sr SRRef, dataSource string) (err 
 
 // GetDataSources:
 // Version: dundee
-func (sR) GetDataSources(session *Session, sr SRRef) (retval []DataSourceRecord, err error) {
+func (sr) GetDataSources(session *Session, sr SRRef) (retval []DataSourceRecord, err error) {
 	method := "SR.get_data_sources"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -270,7 +270,7 @@ func (sR) GetDataSources(session *Session, sr SRRef) (retval []DataSourceRecord,
 
 // GetDataSources2:
 // Version: dundee
-func (sR) GetDataSources2(session *Session, sr SRRef) (retval []DataSourceRecord, err error) {
+func (sr) GetDataSources2(session *Session, sr SRRef) (retval []DataSourceRecord, err error) {
 	method := "SR.get_data_sources"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -290,7 +290,7 @@ func (sR) GetDataSources2(session *Session, sr SRRef) (retval []DataSourceRecord
 
 // DisableDatabaseReplication:
 // Version: boston
-func (sR) DisableDatabaseReplication(session *Session, sr SRRef) (err error) {
+func (sr) DisableDatabaseReplication(session *Session, sr SRRef) (err error) {
 	method := "SR.disable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -306,7 +306,7 @@ func (sR) DisableDatabaseReplication(session *Session, sr SRRef) (err error) {
 
 // AsyncDisableDatabaseReplication:
 // Version: boston
-func (sR) AsyncDisableDatabaseReplication(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncDisableDatabaseReplication(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.disable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -326,7 +326,7 @@ func (sR) AsyncDisableDatabaseReplication(session *Session, sr SRRef) (retval Ta
 
 // DisableDatabaseReplication2:
 // Version: boston
-func (sR) DisableDatabaseReplication2(session *Session, sr SRRef) (err error) {
+func (sr) DisableDatabaseReplication2(session *Session, sr SRRef) (err error) {
 	method := "SR.disable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -342,7 +342,7 @@ func (sR) DisableDatabaseReplication2(session *Session, sr SRRef) (err error) {
 
 // AsyncDisableDatabaseReplication2:
 // Version: boston
-func (sR) AsyncDisableDatabaseReplication2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncDisableDatabaseReplication2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.disable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -362,7 +362,7 @@ func (sR) AsyncDisableDatabaseReplication2(session *Session, sr SRRef) (retval T
 
 // EnableDatabaseReplication:
 // Version: boston
-func (sR) EnableDatabaseReplication(session *Session, sr SRRef) (err error) {
+func (sr) EnableDatabaseReplication(session *Session, sr SRRef) (err error) {
 	method := "SR.enable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -378,7 +378,7 @@ func (sR) EnableDatabaseReplication(session *Session, sr SRRef) (err error) {
 
 // AsyncEnableDatabaseReplication:
 // Version: boston
-func (sR) AsyncEnableDatabaseReplication(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncEnableDatabaseReplication(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.enable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -398,7 +398,7 @@ func (sR) AsyncEnableDatabaseReplication(session *Session, sr SRRef) (retval Tas
 
 // EnableDatabaseReplication2:
 // Version: boston
-func (sR) EnableDatabaseReplication2(session *Session, sr SRRef) (err error) {
+func (sr) EnableDatabaseReplication2(session *Session, sr SRRef) (err error) {
 	method := "SR.enable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -414,7 +414,7 @@ func (sR) EnableDatabaseReplication2(session *Session, sr SRRef) (err error) {
 
 // AsyncEnableDatabaseReplication2:
 // Version: boston
-func (sR) AsyncEnableDatabaseReplication2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncEnableDatabaseReplication2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.enable_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -434,7 +434,7 @@ func (sR) AsyncEnableDatabaseReplication2(session *Session, sr SRRef) (retval Ta
 
 // AssertSupportsDatabaseReplication: Returns successfully if the given SR supports database replication. Otherwise returns an error to explain why not.
 // Version: boston
-func (sR) AssertSupportsDatabaseReplication(session *Session, sr SRRef) (err error) {
+func (sr) AssertSupportsDatabaseReplication(session *Session, sr SRRef) (err error) {
 	method := "SR.assert_supports_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -450,7 +450,7 @@ func (sR) AssertSupportsDatabaseReplication(session *Session, sr SRRef) (err err
 
 // AsyncAssertSupportsDatabaseReplication: Returns successfully if the given SR supports database replication. Otherwise returns an error to explain why not.
 // Version: boston
-func (sR) AsyncAssertSupportsDatabaseReplication(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncAssertSupportsDatabaseReplication(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.assert_supports_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -470,7 +470,7 @@ func (sR) AsyncAssertSupportsDatabaseReplication(session *Session, sr SRRef) (re
 
 // AssertSupportsDatabaseReplication2: Returns successfully if the given SR supports database replication. Otherwise returns an error to explain why not.
 // Version: boston
-func (sR) AssertSupportsDatabaseReplication2(session *Session, sr SRRef) (err error) {
+func (sr) AssertSupportsDatabaseReplication2(session *Session, sr SRRef) (err error) {
 	method := "SR.assert_supports_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -486,7 +486,7 @@ func (sR) AssertSupportsDatabaseReplication2(session *Session, sr SRRef) (err er
 
 // AsyncAssertSupportsDatabaseReplication2: Returns successfully if the given SR supports database replication. Otherwise returns an error to explain why not.
 // Version: boston
-func (sR) AsyncAssertSupportsDatabaseReplication2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncAssertSupportsDatabaseReplication2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.assert_supports_database_replication"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -506,7 +506,7 @@ func (sR) AsyncAssertSupportsDatabaseReplication2(session *Session, sr SRRef) (r
 
 // AssertCanHostHaStatefile: Returns successfully if the given SR can host an HA statefile. Otherwise returns an error to explain why not
 // Version: orlando
-func (sR) AssertCanHostHaStatefile(session *Session, sr SRRef) (err error) {
+func (sr) AssertCanHostHaStatefile(session *Session, sr SRRef) (err error) {
 	method := "SR.assert_can_host_ha_statefile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -522,7 +522,7 @@ func (sR) AssertCanHostHaStatefile(session *Session, sr SRRef) (err error) {
 
 // AsyncAssertCanHostHaStatefile: Returns successfully if the given SR can host an HA statefile. Otherwise returns an error to explain why not
 // Version: orlando
-func (sR) AsyncAssertCanHostHaStatefile(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncAssertCanHostHaStatefile(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.assert_can_host_ha_statefile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -542,7 +542,7 @@ func (sR) AsyncAssertCanHostHaStatefile(session *Session, sr SRRef) (retval Task
 
 // AssertCanHostHaStatefile2: Returns successfully if the given SR can host an HA statefile. Otherwise returns an error to explain why not
 // Version: orlando
-func (sR) AssertCanHostHaStatefile2(session *Session, sr SRRef) (err error) {
+func (sr) AssertCanHostHaStatefile2(session *Session, sr SRRef) (err error) {
 	method := "SR.assert_can_host_ha_statefile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -558,7 +558,7 @@ func (sR) AssertCanHostHaStatefile2(session *Session, sr SRRef) (err error) {
 
 // AsyncAssertCanHostHaStatefile2: Returns successfully if the given SR can host an HA statefile. Otherwise returns an error to explain why not
 // Version: orlando
-func (sR) AsyncAssertCanHostHaStatefile2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncAssertCanHostHaStatefile2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.assert_can_host_ha_statefile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -578,7 +578,7 @@ func (sR) AsyncAssertCanHostHaStatefile2(session *Session, sr SRRef) (retval Tas
 
 // SetPhysicalSize: Sets the SR&apos;s physical_size field
 // Version: miami
-func (sR) SetPhysicalSize(session *Session, self SRRef, value int) (err error) {
+func (sr) SetPhysicalSize(session *Session, self SRRef, value int) (err error) {
 	method := "SR.set_physical_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -598,7 +598,7 @@ func (sR) SetPhysicalSize(session *Session, self SRRef, value int) (err error) {
 
 // SetPhysicalSize3: Sets the SR&apos;s physical_size field
 // Version: miami
-func (sR) SetPhysicalSize3(session *Session, self SRRef, value int) (err error) {
+func (sr) SetPhysicalSize3(session *Session, self SRRef, value int) (err error) {
 	method := "SR.set_physical_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -618,7 +618,7 @@ func (sR) SetPhysicalSize3(session *Session, self SRRef, value int) (err error) 
 
 // CreateNewBlob: Create a placeholder for a named binary blob of data that is associated with this SR
 // Version: tampa
-func (sR) CreateNewBlob(session *Session, sr SRRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
+func (sr) CreateNewBlob(session *Session, sr SRRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
 	method := "SR.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -650,7 +650,7 @@ func (sR) CreateNewBlob(session *Session, sr SRRef, name string, mimeType string
 
 // AsyncCreateNewBlob: Create a placeholder for a named binary blob of data that is associated with this SR
 // Version: tampa
-func (sR) AsyncCreateNewBlob(session *Session, sr SRRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
+func (sr) AsyncCreateNewBlob(session *Session, sr SRRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
 	method := "Async.SR.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -682,7 +682,7 @@ func (sR) AsyncCreateNewBlob(session *Session, sr SRRef, name string, mimeType s
 
 // CreateNewBlob5: Create a placeholder for a named binary blob of data that is associated with this SR
 // Version: tampa
-func (sR) CreateNewBlob5(session *Session, sr SRRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
+func (sr) CreateNewBlob5(session *Session, sr SRRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
 	method := "SR.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -714,7 +714,7 @@ func (sR) CreateNewBlob5(session *Session, sr SRRef, name string, mimeType strin
 
 // AsyncCreateNewBlob5: Create a placeholder for a named binary blob of data that is associated with this SR
 // Version: tampa
-func (sR) AsyncCreateNewBlob5(session *Session, sr SRRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
+func (sr) AsyncCreateNewBlob5(session *Session, sr SRRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
 	method := "Async.SR.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -746,7 +746,7 @@ func (sR) AsyncCreateNewBlob5(session *Session, sr SRRef, name string, mimeType 
 
 // CreateNewBlob4: Create a placeholder for a named binary blob of data that is associated with this SR
 // Version: orlando
-func (sR) CreateNewBlob4(session *Session, sr SRRef, name string, mimeType string) (retval BlobRef, err error) {
+func (sr) CreateNewBlob4(session *Session, sr SRRef, name string, mimeType string) (retval BlobRef, err error) {
 	method := "SR.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -774,7 +774,7 @@ func (sR) CreateNewBlob4(session *Session, sr SRRef, name string, mimeType strin
 
 // AsyncCreateNewBlob4: Create a placeholder for a named binary blob of data that is associated with this SR
 // Version: orlando
-func (sR) AsyncCreateNewBlob4(session *Session, sr SRRef, name string, mimeType string) (retval TaskRef, err error) {
+func (sr) AsyncCreateNewBlob4(session *Session, sr SRRef, name string, mimeType string) (retval TaskRef, err error) {
 	method := "Async.SR.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -802,7 +802,7 @@ func (sR) AsyncCreateNewBlob4(session *Session, sr SRRef, name string, mimeType 
 
 // SetNameDescription: Set the name description of the SR
 // Version: rio
-func (sR) SetNameDescription(session *Session, sr SRRef, value string) (err error) {
+func (sr) SetNameDescription(session *Session, sr SRRef, value string) (err error) {
 	method := "SR.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -822,7 +822,7 @@ func (sR) SetNameDescription(session *Session, sr SRRef, value string) (err erro
 
 // AsyncSetNameDescription: Set the name description of the SR
 // Version: rio
-func (sR) AsyncSetNameDescription(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
+func (sr) AsyncSetNameDescription(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
 	method := "Async.SR.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -846,7 +846,7 @@ func (sR) AsyncSetNameDescription(session *Session, sr SRRef, value string) (ret
 
 // SetNameDescription3: Set the name description of the SR
 // Version: rio
-func (sR) SetNameDescription3(session *Session, sr SRRef, value string) (err error) {
+func (sr) SetNameDescription3(session *Session, sr SRRef, value string) (err error) {
 	method := "SR.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -866,7 +866,7 @@ func (sR) SetNameDescription3(session *Session, sr SRRef, value string) (err err
 
 // AsyncSetNameDescription3: Set the name description of the SR
 // Version: rio
-func (sR) AsyncSetNameDescription3(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
+func (sr) AsyncSetNameDescription3(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
 	method := "Async.SR.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -890,7 +890,7 @@ func (sR) AsyncSetNameDescription3(session *Session, sr SRRef, value string) (re
 
 // SetNameLabel: Set the name label of the SR
 // Version: rio
-func (sR) SetNameLabel(session *Session, sr SRRef, value string) (err error) {
+func (sr) SetNameLabel(session *Session, sr SRRef, value string) (err error) {
 	method := "SR.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -910,7 +910,7 @@ func (sR) SetNameLabel(session *Session, sr SRRef, value string) (err error) {
 
 // AsyncSetNameLabel: Set the name label of the SR
 // Version: rio
-func (sR) AsyncSetNameLabel(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
+func (sr) AsyncSetNameLabel(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
 	method := "Async.SR.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -934,7 +934,7 @@ func (sR) AsyncSetNameLabel(session *Session, sr SRRef, value string) (retval Ta
 
 // SetNameLabel3: Set the name label of the SR
 // Version: rio
-func (sR) SetNameLabel3(session *Session, sr SRRef, value string) (err error) {
+func (sr) SetNameLabel3(session *Session, sr SRRef, value string) (err error) {
 	method := "SR.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -954,7 +954,7 @@ func (sR) SetNameLabel3(session *Session, sr SRRef, value string) (err error) {
 
 // AsyncSetNameLabel3: Set the name label of the SR
 // Version: rio
-func (sR) AsyncSetNameLabel3(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
+func (sr) AsyncSetNameLabel3(session *Session, sr SRRef, value string) (retval TaskRef, err error) {
 	method := "Async.SR.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -978,7 +978,7 @@ func (sR) AsyncSetNameLabel3(session *Session, sr SRRef, value string) (retval T
 
 // SetShared: Sets the shared flag on the SR
 // Version: rio
-func (sR) SetShared(session *Session, sr SRRef, value bool) (err error) {
+func (sr) SetShared(session *Session, sr SRRef, value bool) (err error) {
 	method := "SR.set_shared"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -998,7 +998,7 @@ func (sR) SetShared(session *Session, sr SRRef, value bool) (err error) {
 
 // AsyncSetShared: Sets the shared flag on the SR
 // Version: rio
-func (sR) AsyncSetShared(session *Session, sr SRRef, value bool) (retval TaskRef, err error) {
+func (sr) AsyncSetShared(session *Session, sr SRRef, value bool) (retval TaskRef, err error) {
 	method := "Async.SR.set_shared"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1022,7 +1022,7 @@ func (sR) AsyncSetShared(session *Session, sr SRRef, value bool) (retval TaskRef
 
 // SetShared3: Sets the shared flag on the SR
 // Version: rio
-func (sR) SetShared3(session *Session, sr SRRef, value bool) (err error) {
+func (sr) SetShared3(session *Session, sr SRRef, value bool) (err error) {
 	method := "SR.set_shared"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1042,7 +1042,7 @@ func (sR) SetShared3(session *Session, sr SRRef, value bool) (err error) {
 
 // AsyncSetShared3: Sets the shared flag on the SR
 // Version: rio
-func (sR) AsyncSetShared3(session *Session, sr SRRef, value bool) (retval TaskRef, err error) {
+func (sr) AsyncSetShared3(session *Session, sr SRRef, value bool) (retval TaskRef, err error) {
 	method := "Async.SR.set_shared"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1066,7 +1066,7 @@ func (sR) AsyncSetShared3(session *Session, sr SRRef, value bool) (retval TaskRe
 
 // ProbeExt: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: kolkata
-func (sR) ProbeExt(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval []ProbeResultRecord, err error) {
+func (sr) ProbeExt(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval []ProbeResultRecord, err error) {
 	method := "SR.probe_ext"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1098,7 +1098,7 @@ func (sR) ProbeExt(session *Session, host HostRef, deviceConfig map[string]strin
 
 // AsyncProbeExt: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: kolkata
-func (sR) AsyncProbeExt(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncProbeExt(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.probe_ext"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1130,7 +1130,7 @@ func (sR) AsyncProbeExt(session *Session, host HostRef, deviceConfig map[string]
 
 // ProbeExt5: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: kolkata
-func (sR) ProbeExt5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval []ProbeResultRecord, err error) {
+func (sr) ProbeExt5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval []ProbeResultRecord, err error) {
 	method := "SR.probe_ext"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1162,7 +1162,7 @@ func (sR) ProbeExt5(session *Session, host HostRef, deviceConfig map[string]stri
 
 // AsyncProbeExt5: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: kolkata
-func (sR) AsyncProbeExt5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncProbeExt5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.probe_ext"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1194,7 +1194,7 @@ func (sR) AsyncProbeExt5(session *Session, host HostRef, deviceConfig map[string
 
 // Probe: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: miami
-func (sR) Probe(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval string, err error) {
+func (sr) Probe(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval string, err error) {
 	method := "SR.probe"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1226,7 +1226,7 @@ func (sR) Probe(session *Session, host HostRef, deviceConfig map[string]string, 
 
 // AsyncProbe: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: miami
-func (sR) AsyncProbe(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncProbe(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.probe"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1258,7 +1258,7 @@ func (sR) AsyncProbe(session *Session, host HostRef, deviceConfig map[string]str
 
 // Probe5: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: miami
-func (sR) Probe5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval string, err error) {
+func (sr) Probe5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval string, err error) {
 	method := "SR.probe"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1290,7 +1290,7 @@ func (sR) Probe5(session *Session, host HostRef, deviceConfig map[string]string,
 
 // AsyncProbe5: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: miami
-func (sR) AsyncProbe5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncProbe5(session *Session, host HostRef, deviceConfig map[string]string, typeKey string, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.probe"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1322,7 +1322,7 @@ func (sR) AsyncProbe5(session *Session, host HostRef, deviceConfig map[string]st
 
 // Probe3: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: rio
-func (sR) Probe3(session *Session, host HostRef, deviceConfig map[string]string) (retval string, err error) {
+func (sr) Probe3(session *Session, host HostRef, deviceConfig map[string]string) (retval string, err error) {
 	method := "SR.probe"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1346,7 +1346,7 @@ func (sR) Probe3(session *Session, host HostRef, deviceConfig map[string]string)
 
 // AsyncProbe3: Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
 // Version: rio
-func (sR) AsyncProbe3(session *Session, host HostRef, deviceConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncProbe3(session *Session, host HostRef, deviceConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.probe"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1370,7 +1370,7 @@ func (sR) AsyncProbe3(session *Session, host HostRef, deviceConfig map[string]st
 
 // Scan: Refreshes the list of VDIs associated with an SR
 // Version: rio
-func (sR) Scan(session *Session, sr SRRef) (err error) {
+func (sr) Scan(session *Session, sr SRRef) (err error) {
 	method := "SR.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1386,7 +1386,7 @@ func (sR) Scan(session *Session, sr SRRef) (err error) {
 
 // AsyncScan: Refreshes the list of VDIs associated with an SR
 // Version: rio
-func (sR) AsyncScan(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncScan(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1406,7 +1406,7 @@ func (sR) AsyncScan(session *Session, sr SRRef) (retval TaskRef, err error) {
 
 // Scan2: Refreshes the list of VDIs associated with an SR
 // Version: rio
-func (sR) Scan2(session *Session, sr SRRef) (err error) {
+func (sr) Scan2(session *Session, sr SRRef) (err error) {
 	method := "SR.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1422,7 +1422,7 @@ func (sR) Scan2(session *Session, sr SRRef) (err error) {
 
 // AsyncScan2: Refreshes the list of VDIs associated with an SR
 // Version: rio
-func (sR) AsyncScan2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncScan2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.scan"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1442,7 +1442,7 @@ func (sR) AsyncScan2(session *Session, sr SRRef) (retval TaskRef, err error) {
 
 // GetSupportedTypes: Return a set of all the SR types supported by the system
 // Version: rio
-func (sR) GetSupportedTypes(session *Session) (retval []string, err error) {
+func (sr) GetSupportedTypes(session *Session) (retval []string, err error) {
 	method := "SR.get_supported_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1458,7 +1458,7 @@ func (sR) GetSupportedTypes(session *Session) (retval []string, err error) {
 
 // GetSupportedTypes1: Return a set of all the SR types supported by the system
 // Version: rio
-func (sR) GetSupportedTypes1(session *Session) (retval []string, err error) {
+func (sr) GetSupportedTypes1(session *Session) (retval []string, err error) {
 	method := "SR.get_supported_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1474,7 +1474,7 @@ func (sR) GetSupportedTypes1(session *Session) (retval []string, err error) {
 
 // Update: Refresh the fields on the SR object
 // Version: symc
-func (sR) Update(session *Session, sr SRRef) (err error) {
+func (sr) Update(session *Session, sr SRRef) (err error) {
 	method := "SR.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1490,7 +1490,7 @@ func (sR) Update(session *Session, sr SRRef) (err error) {
 
 // AsyncUpdate: Refresh the fields on the SR object
 // Version: symc
-func (sR) AsyncUpdate(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncUpdate(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1510,7 +1510,7 @@ func (sR) AsyncUpdate(session *Session, sr SRRef) (retval TaskRef, err error) {
 
 // Update2: Refresh the fields on the SR object
 // Version: symc
-func (sR) Update2(session *Session, sr SRRef) (err error) {
+func (sr) Update2(session *Session, sr SRRef) (err error) {
 	method := "SR.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1526,7 +1526,7 @@ func (sR) Update2(session *Session, sr SRRef) (err error) {
 
 // AsyncUpdate2: Refresh the fields on the SR object
 // Version: symc
-func (sR) AsyncUpdate2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncUpdate2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.update"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1549,7 +1549,7 @@ func (sR) AsyncUpdate2(session *Session, sr SRRef) (retval TaskRef, err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) Forget(session *Session, sr SRRef) (err error) {
+func (sr) Forget(session *Session, sr SRRef) (err error) {
 	method := "SR.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1568,7 +1568,7 @@ func (sR) Forget(session *Session, sr SRRef) (err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) AsyncForget(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncForget(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1591,7 +1591,7 @@ func (sR) AsyncForget(session *Session, sr SRRef) (retval TaskRef, err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) Forget2(session *Session, sr SRRef) (err error) {
+func (sr) Forget2(session *Session, sr SRRef) (err error) {
 	method := "SR.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1610,7 +1610,7 @@ func (sR) Forget2(session *Session, sr SRRef) (err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) AsyncForget2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncForget2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.forget"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1633,7 +1633,7 @@ func (sR) AsyncForget2(session *Session, sr SRRef) (retval TaskRef, err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) Destroy(session *Session, sr SRRef) (err error) {
+func (sr) Destroy(session *Session, sr SRRef) (err error) {
 	method := "SR.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1652,7 +1652,7 @@ func (sR) Destroy(session *Session, sr SRRef) (err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) AsyncDestroy(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncDestroy(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1675,7 +1675,7 @@ func (sR) AsyncDestroy(session *Session, sr SRRef) (retval TaskRef, err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) Destroy2(session *Session, sr SRRef) (err error) {
+func (sr) Destroy2(session *Session, sr SRRef) (err error) {
 	method := "SR.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1694,7 +1694,7 @@ func (sR) Destroy2(session *Session, sr SRRef) (err error) {
 //
 // Errors:
 // SR_HAS_PBD - The SR is still connected to a host via a PBD. It cannot be destroyed or forgotten.
-func (sR) AsyncDestroy2(session *Session, sr SRRef) (retval TaskRef, err error) {
+func (sr) AsyncDestroy2(session *Session, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.SR.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1714,7 +1714,7 @@ func (sR) AsyncDestroy2(session *Session, sr SRRef) (retval TaskRef, err error) 
 
 // Make: Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
 // Version: miami
-func (sR) Make(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval string, err error) {
+func (sr) Make(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval string, err error) {
 	method := "SR.make"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1762,7 +1762,7 @@ func (sR) Make(session *Session, host HostRef, deviceConfig map[string]string, p
 
 // AsyncMake: Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
 // Version: miami
-func (sR) AsyncMake(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncMake(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.make"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1810,7 +1810,7 @@ func (sR) AsyncMake(session *Session, host HostRef, deviceConfig map[string]stri
 
 // Make9: Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
 // Version: miami
-func (sR) Make9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval string, err error) {
+func (sr) Make9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval string, err error) {
 	method := "SR.make"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1858,7 +1858,7 @@ func (sR) Make9(session *Session, host HostRef, deviceConfig map[string]string, 
 
 // AsyncMake9: Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
 // Version: miami
-func (sR) AsyncMake9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncMake9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.make"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1906,7 +1906,7 @@ func (sR) AsyncMake9(session *Session, host HostRef, deviceConfig map[string]str
 
 // Make8: Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
 // Version: rio
-func (sR) Make8(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string) (retval string, err error) {
+func (sr) Make8(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string) (retval string, err error) {
 	method := "SR.make"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1950,7 +1950,7 @@ func (sR) Make8(session *Session, host HostRef, deviceConfig map[string]string, 
 
 // AsyncMake8: Create a new Storage Repository on disk. This call is deprecated: use SR.create instead.
 // Version: rio
-func (sR) AsyncMake8(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string) (retval TaskRef, err error) {
+func (sr) AsyncMake8(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string) (retval TaskRef, err error) {
 	method := "Async.SR.make"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1994,13 +1994,13 @@ func (sR) AsyncMake8(session *Session, host HostRef, deviceConfig map[string]str
 
 // Introduce: Introduce a new Storage Repository into the managed system
 // Version: miami
-func (sR) Introduce(session *Session, uUID string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
+func (sr) Introduce(session *Session, uuid string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
 	method := "SR.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2028,7 +2028,7 @@ func (sR) Introduce(session *Session, uUID string, nameLabel string, nameDescrip
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
 	if err != nil {
 		return
 	}
@@ -2038,13 +2038,13 @@ func (sR) Introduce(session *Session, uUID string, nameLabel string, nameDescrip
 
 // AsyncIntroduce: Introduce a new Storage Repository into the managed system
 // Version: miami
-func (sR) AsyncIntroduce(session *Session, uUID string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncIntroduce(session *Session, uuid string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2072,7 +2072,7 @@ func (sR) AsyncIntroduce(session *Session, uUID string, nameLabel string, nameDe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
 	if err != nil {
 		return
 	}
@@ -2082,13 +2082,13 @@ func (sR) AsyncIntroduce(session *Session, uUID string, nameLabel string, nameDe
 
 // Introduce8: Introduce a new Storage Repository into the managed system
 // Version: miami
-func (sR) Introduce8(session *Session, uUID string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
+func (sr) Introduce8(session *Session, uuid string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
 	method := "SR.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2116,7 +2116,7 @@ func (sR) Introduce8(session *Session, uUID string, nameLabel string, nameDescri
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
 	if err != nil {
 		return
 	}
@@ -2126,13 +2126,13 @@ func (sR) Introduce8(session *Session, uUID string, nameLabel string, nameDescri
 
 // AsyncIntroduce8: Introduce a new Storage Repository into the managed system
 // Version: miami
-func (sR) AsyncIntroduce8(session *Session, uUID string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncIntroduce8(session *Session, uuid string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2160,7 +2160,7 @@ func (sR) AsyncIntroduce8(session *Session, uUID string, nameLabel string, nameD
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg, smConfigArg)
 	if err != nil {
 		return
 	}
@@ -2170,13 +2170,13 @@ func (sR) AsyncIntroduce8(session *Session, uUID string, nameLabel string, nameD
 
 // Introduce7: Introduce a new Storage Repository into the managed system
 // Version: rio
-func (sR) Introduce7(session *Session, uUID string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval SRRef, err error) {
+func (sr) Introduce7(session *Session, uuid string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval SRRef, err error) {
 	method := "SR.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2200,7 +2200,7 @@ func (sR) Introduce7(session *Session, uUID string, nameLabel string, nameDescri
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg)
 	if err != nil {
 		return
 	}
@@ -2210,13 +2210,13 @@ func (sR) Introduce7(session *Session, uUID string, nameLabel string, nameDescri
 
 // AsyncIntroduce7: Introduce a new Storage Repository into the managed system
 // Version: rio
-func (sR) AsyncIntroduce7(session *Session, uUID string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval TaskRef, err error) {
+func (sr) AsyncIntroduce7(session *Session, uuid string, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval TaskRef, err error) {
 	method := "Async.SR.introduce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
@@ -2240,7 +2240,7 @@ func (sR) AsyncIntroduce7(session *Session, uUID string, nameLabel string, nameD
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg, nameLabelArg, nameDescriptionArg, typeKeyArg, contentTypeArg, sharedArg)
 	if err != nil {
 		return
 	}
@@ -2253,7 +2253,7 @@ func (sR) AsyncIntroduce7(session *Session, uUID string, nameLabel string, nameD
 //
 // Errors:
 // SR_UNKNOWN_DRIVER - The SR could not be connected because the driver was not recognised.
-func (sR) Create(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
+func (sr) Create(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
 	method := "SR.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2308,7 +2308,7 @@ func (sR) Create(session *Session, host HostRef, deviceConfig map[string]string,
 //
 // Errors:
 // SR_UNKNOWN_DRIVER - The SR could not be connected because the driver was not recognised.
-func (sR) AsyncCreate(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncCreate(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2363,7 +2363,7 @@ func (sR) AsyncCreate(session *Session, host HostRef, deviceConfig map[string]st
 //
 // Errors:
 // SR_UNKNOWN_DRIVER - The SR could not be connected because the driver was not recognised.
-func (sR) Create10(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
+func (sr) Create10(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval SRRef, err error) {
 	method := "SR.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2418,7 +2418,7 @@ func (sR) Create10(session *Session, host HostRef, deviceConfig map[string]strin
 //
 // Errors:
 // SR_UNKNOWN_DRIVER - The SR could not be connected because the driver was not recognised.
-func (sR) AsyncCreate10(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
+func (sr) AsyncCreate10(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool, smConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.SR.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2473,7 +2473,7 @@ func (sR) AsyncCreate10(session *Session, host HostRef, deviceConfig map[string]
 //
 // Errors:
 // SR_UNKNOWN_DRIVER - The SR could not be connected because the driver was not recognised.
-func (sR) Create9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval SRRef, err error) {
+func (sr) Create9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval SRRef, err error) {
 	method := "SR.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2524,7 +2524,7 @@ func (sR) Create9(session *Session, host HostRef, deviceConfig map[string]string
 //
 // Errors:
 // SR_UNKNOWN_DRIVER - The SR could not be connected because the driver was not recognised.
-func (sR) AsyncCreate9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval TaskRef, err error) {
+func (sr) AsyncCreate9(session *Session, host HostRef, deviceConfig map[string]string, physicalSize int, nameLabel string, nameDescription string, typeKey string, contentType string, shared bool) (retval TaskRef, err error) {
 	method := "Async.SR.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2572,7 +2572,7 @@ func (sR) AsyncCreate9(session *Session, host HostRef, deviceConfig map[string]s
 
 // RemoveFromSmConfig: Remove the given key and its corresponding value from the sm_config field of the given SR.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (sR) RemoveFromSmConfig(session *Session, self SRRef, key string) (err error) {
+func (sr) RemoveFromSmConfig(session *Session, self SRRef, key string) (err error) {
 	method := "SR.remove_from_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2592,7 +2592,7 @@ func (sR) RemoveFromSmConfig(session *Session, self SRRef, key string) (err erro
 
 // RemoveFromSmConfig3: Remove the given key and its corresponding value from the sm_config field of the given SR.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (sR) RemoveFromSmConfig3(session *Session, self SRRef, key string) (err error) {
+func (sr) RemoveFromSmConfig3(session *Session, self SRRef, key string) (err error) {
 	method := "SR.remove_from_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2612,7 +2612,7 @@ func (sR) RemoveFromSmConfig3(session *Session, self SRRef, key string) (err err
 
 // RemoveFromSmConfig2: Remove the given key and its corresponding value from the sm_config field of the given SR.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (sR) RemoveFromSmConfig2(session *Session, self SRRef) (err error) {
+func (sr) RemoveFromSmConfig2(session *Session, self SRRef) (err error) {
 	method := "SR.remove_from_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2628,7 +2628,7 @@ func (sR) RemoveFromSmConfig2(session *Session, self SRRef) (err error) {
 
 // AddToSmConfig: Add the given key-value pair to the sm_config field of the given SR.
 // Version: miami
-func (sR) AddToSmConfig(session *Session, self SRRef, key string, value string) (err error) {
+func (sr) AddToSmConfig(session *Session, self SRRef, key string, value string) (err error) {
 	method := "SR.add_to_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2652,7 +2652,7 @@ func (sR) AddToSmConfig(session *Session, self SRRef, key string, value string) 
 
 // AddToSmConfig4: Add the given key-value pair to the sm_config field of the given SR.
 // Version: miami
-func (sR) AddToSmConfig4(session *Session, self SRRef, key string, value string) (err error) {
+func (sr) AddToSmConfig4(session *Session, self SRRef, key string, value string) (err error) {
 	method := "SR.add_to_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2676,7 +2676,7 @@ func (sR) AddToSmConfig4(session *Session, self SRRef, key string, value string)
 
 // AddToSmConfig2: Add the given key-value pair to the sm_config field of the given SR.
 // Version: rio
-func (sR) AddToSmConfig2(session *Session, self SRRef) (err error) {
+func (sr) AddToSmConfig2(session *Session, self SRRef) (err error) {
 	method := "SR.add_to_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2692,7 +2692,7 @@ func (sR) AddToSmConfig2(session *Session, self SRRef) (err error) {
 
 // SetSmConfig: Set the sm_config field of the given SR.
 // Version: miami
-func (sR) SetSmConfig(session *Session, self SRRef, value map[string]string) (err error) {
+func (sr) SetSmConfig(session *Session, self SRRef, value map[string]string) (err error) {
 	method := "SR.set_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2712,7 +2712,7 @@ func (sR) SetSmConfig(session *Session, self SRRef, value map[string]string) (er
 
 // SetSmConfig3: Set the sm_config field of the given SR.
 // Version: miami
-func (sR) SetSmConfig3(session *Session, self SRRef, value map[string]string) (err error) {
+func (sr) SetSmConfig3(session *Session, self SRRef, value map[string]string) (err error) {
 	method := "SR.set_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2732,7 +2732,7 @@ func (sR) SetSmConfig3(session *Session, self SRRef, value map[string]string) (e
 
 // SetSmConfig2: Set the sm_config field of the given SR.
 // Version: rio
-func (sR) SetSmConfig2(session *Session, self SRRef) (err error) {
+func (sr) SetSmConfig2(session *Session, self SRRef) (err error) {
 	method := "SR.set_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2748,7 +2748,7 @@ func (sR) SetSmConfig2(session *Session, self SRRef) (err error) {
 
 // RemoveTags: Remove the given value from the tags field of the given SR.  If the value is not in that Set, then do nothing.
 // Version: orlando
-func (sR) RemoveTags(session *Session, self SRRef, value string) (err error) {
+func (sr) RemoveTags(session *Session, self SRRef, value string) (err error) {
 	method := "SR.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2768,7 +2768,7 @@ func (sR) RemoveTags(session *Session, self SRRef, value string) (err error) {
 
 // RemoveTags3: Remove the given value from the tags field of the given SR.  If the value is not in that Set, then do nothing.
 // Version: orlando
-func (sR) RemoveTags3(session *Session, self SRRef, value string) (err error) {
+func (sr) RemoveTags3(session *Session, self SRRef, value string) (err error) {
 	method := "SR.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2788,7 +2788,7 @@ func (sR) RemoveTags3(session *Session, self SRRef, value string) (err error) {
 
 // RemoveTags2: Remove the given value from the tags field of the given SR.  If the value is not in that Set, then do nothing.
 // Version: rio
-func (sR) RemoveTags2(session *Session, self SRRef) (err error) {
+func (sr) RemoveTags2(session *Session, self SRRef) (err error) {
 	method := "SR.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2804,7 +2804,7 @@ func (sR) RemoveTags2(session *Session, self SRRef) (err error) {
 
 // AddTags: Add the given value to the tags field of the given SR.  If the value is already in that Set, then do nothing.
 // Version: orlando
-func (sR) AddTags(session *Session, self SRRef, value string) (err error) {
+func (sr) AddTags(session *Session, self SRRef, value string) (err error) {
 	method := "SR.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2824,7 +2824,7 @@ func (sR) AddTags(session *Session, self SRRef, value string) (err error) {
 
 // AddTags3: Add the given value to the tags field of the given SR.  If the value is already in that Set, then do nothing.
 // Version: orlando
-func (sR) AddTags3(session *Session, self SRRef, value string) (err error) {
+func (sr) AddTags3(session *Session, self SRRef, value string) (err error) {
 	method := "SR.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2844,7 +2844,7 @@ func (sR) AddTags3(session *Session, self SRRef, value string) (err error) {
 
 // AddTags2: Add the given value to the tags field of the given SR.  If the value is already in that Set, then do nothing.
 // Version: rio
-func (sR) AddTags2(session *Session, self SRRef) (err error) {
+func (sr) AddTags2(session *Session, self SRRef) (err error) {
 	method := "SR.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2860,7 +2860,7 @@ func (sR) AddTags2(session *Session, self SRRef) (err error) {
 
 // SetTags: Set the tags field of the given SR.
 // Version: orlando
-func (sR) SetTags(session *Session, self SRRef, value []string) (err error) {
+func (sr) SetTags(session *Session, self SRRef, value []string) (err error) {
 	method := "SR.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2880,7 +2880,7 @@ func (sR) SetTags(session *Session, self SRRef, value []string) (err error) {
 
 // SetTags3: Set the tags field of the given SR.
 // Version: orlando
-func (sR) SetTags3(session *Session, self SRRef, value []string) (err error) {
+func (sr) SetTags3(session *Session, self SRRef, value []string) (err error) {
 	method := "SR.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2900,7 +2900,7 @@ func (sR) SetTags3(session *Session, self SRRef, value []string) (err error) {
 
 // SetTags2: Set the tags field of the given SR.
 // Version: rio
-func (sR) SetTags2(session *Session, self SRRef) (err error) {
+func (sr) SetTags2(session *Session, self SRRef) (err error) {
 	method := "SR.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2916,7 +2916,7 @@ func (sR) SetTags2(session *Session, self SRRef) (err error) {
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given SR.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (sR) RemoveFromOtherConfig(session *Session, self SRRef, key string) (err error) {
+func (sr) RemoveFromOtherConfig(session *Session, self SRRef, key string) (err error) {
 	method := "SR.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2936,7 +2936,7 @@ func (sR) RemoveFromOtherConfig(session *Session, self SRRef, key string) (err e
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given SR.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (sR) RemoveFromOtherConfig3(session *Session, self SRRef, key string) (err error) {
+func (sr) RemoveFromOtherConfig3(session *Session, self SRRef, key string) (err error) {
 	method := "SR.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2956,7 +2956,7 @@ func (sR) RemoveFromOtherConfig3(session *Session, self SRRef, key string) (err 
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given SR.
 // Version: rio
-func (sR) AddToOtherConfig(session *Session, self SRRef, key string, value string) (err error) {
+func (sr) AddToOtherConfig(session *Session, self SRRef, key string, value string) (err error) {
 	method := "SR.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2980,7 +2980,7 @@ func (sR) AddToOtherConfig(session *Session, self SRRef, key string, value strin
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given SR.
 // Version: rio
-func (sR) AddToOtherConfig4(session *Session, self SRRef, key string, value string) (err error) {
+func (sr) AddToOtherConfig4(session *Session, self SRRef, key string, value string) (err error) {
 	method := "SR.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3004,7 +3004,7 @@ func (sR) AddToOtherConfig4(session *Session, self SRRef, key string, value stri
 
 // SetOtherConfig: Set the other_config field of the given SR.
 // Version: rio
-func (sR) SetOtherConfig(session *Session, self SRRef, value map[string]string) (err error) {
+func (sr) SetOtherConfig(session *Session, self SRRef, value map[string]string) (err error) {
 	method := "SR.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3024,7 +3024,7 @@ func (sR) SetOtherConfig(session *Session, self SRRef, value map[string]string) 
 
 // SetOtherConfig3: Set the other_config field of the given SR.
 // Version: rio
-func (sR) SetOtherConfig3(session *Session, self SRRef, value map[string]string) (err error) {
+func (sr) SetOtherConfig3(session *Session, self SRRef, value map[string]string) (err error) {
 	method := "SR.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3044,7 +3044,7 @@ func (sR) SetOtherConfig3(session *Session, self SRRef, value map[string]string)
 
 // GetIsToolsSr: Get the is_tools_sr field of the given SR.
 // Version: rio
-func (sR) GetIsToolsSr(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetIsToolsSr(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_is_tools_sr"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3064,7 +3064,7 @@ func (sR) GetIsToolsSr(session *Session, self SRRef) (retval bool, err error) {
 
 // GetIsToolsSr2: Get the is_tools_sr field of the given SR.
 // Version: rio
-func (sR) GetIsToolsSr2(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetIsToolsSr2(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_is_tools_sr"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3084,7 +3084,7 @@ func (sR) GetIsToolsSr2(session *Session, self SRRef) (retval bool, err error) {
 
 // GetClustered: Get the clustered field of the given SR.
 // Version: rio
-func (sR) GetClustered(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetClustered(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_clustered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3104,7 +3104,7 @@ func (sR) GetClustered(session *Session, self SRRef) (retval bool, err error) {
 
 // GetClustered2: Get the clustered field of the given SR.
 // Version: rio
-func (sR) GetClustered2(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetClustered2(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_clustered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3124,7 +3124,7 @@ func (sR) GetClustered2(session *Session, self SRRef) (retval bool, err error) {
 
 // GetIntroducedBy: Get the introduced_by field of the given SR.
 // Version: rio
-func (sR) GetIntroducedBy(session *Session, self SRRef) (retval DRTaskRef, err error) {
+func (sr) GetIntroducedBy(session *Session, self SRRef) (retval DRTaskRef, err error) {
 	method := "SR.get_introduced_by"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3144,7 +3144,7 @@ func (sR) GetIntroducedBy(session *Session, self SRRef) (retval DRTaskRef, err e
 
 // GetIntroducedBy2: Get the introduced_by field of the given SR.
 // Version: rio
-func (sR) GetIntroducedBy2(session *Session, self SRRef) (retval DRTaskRef, err error) {
+func (sr) GetIntroducedBy2(session *Session, self SRRef) (retval DRTaskRef, err error) {
 	method := "SR.get_introduced_by"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3164,7 +3164,7 @@ func (sR) GetIntroducedBy2(session *Session, self SRRef) (retval DRTaskRef, err 
 
 // GetLocalCacheEnabled: Get the local_cache_enabled field of the given SR.
 // Version: rio
-func (sR) GetLocalCacheEnabled(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetLocalCacheEnabled(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_local_cache_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3184,7 +3184,7 @@ func (sR) GetLocalCacheEnabled(session *Session, self SRRef) (retval bool, err e
 
 // GetLocalCacheEnabled2: Get the local_cache_enabled field of the given SR.
 // Version: rio
-func (sR) GetLocalCacheEnabled2(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetLocalCacheEnabled2(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_local_cache_enabled"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3204,7 +3204,7 @@ func (sR) GetLocalCacheEnabled2(session *Session, self SRRef) (retval bool, err 
 
 // GetBlobs: Get the blobs field of the given SR.
 // Version: rio
-func (sR) GetBlobs(session *Session, self SRRef) (retval map[string]BlobRef, err error) {
+func (sr) GetBlobs(session *Session, self SRRef) (retval map[string]BlobRef, err error) {
 	method := "SR.get_blobs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3224,7 +3224,7 @@ func (sR) GetBlobs(session *Session, self SRRef) (retval map[string]BlobRef, err
 
 // GetBlobs2: Get the blobs field of the given SR.
 // Version: rio
-func (sR) GetBlobs2(session *Session, self SRRef) (retval map[string]BlobRef, err error) {
+func (sr) GetBlobs2(session *Session, self SRRef) (retval map[string]BlobRef, err error) {
 	method := "SR.get_blobs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3244,7 +3244,7 @@ func (sR) GetBlobs2(session *Session, self SRRef) (retval map[string]BlobRef, er
 
 // GetSmConfig: Get the sm_config field of the given SR.
 // Version: rio
-func (sR) GetSmConfig(session *Session, self SRRef) (retval map[string]string, err error) {
+func (sr) GetSmConfig(session *Session, self SRRef) (retval map[string]string, err error) {
 	method := "SR.get_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3264,7 +3264,7 @@ func (sR) GetSmConfig(session *Session, self SRRef) (retval map[string]string, e
 
 // GetSmConfig2: Get the sm_config field of the given SR.
 // Version: rio
-func (sR) GetSmConfig2(session *Session, self SRRef) (retval map[string]string, err error) {
+func (sr) GetSmConfig2(session *Session, self SRRef) (retval map[string]string, err error) {
 	method := "SR.get_sm_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3284,7 +3284,7 @@ func (sR) GetSmConfig2(session *Session, self SRRef) (retval map[string]string, 
 
 // GetTags: Get the tags field of the given SR.
 // Version: rio
-func (sR) GetTags(session *Session, self SRRef) (retval []string, err error) {
+func (sr) GetTags(session *Session, self SRRef) (retval []string, err error) {
 	method := "SR.get_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3304,7 +3304,7 @@ func (sR) GetTags(session *Session, self SRRef) (retval []string, err error) {
 
 // GetTags2: Get the tags field of the given SR.
 // Version: rio
-func (sR) GetTags2(session *Session, self SRRef) (retval []string, err error) {
+func (sr) GetTags2(session *Session, self SRRef) (retval []string, err error) {
 	method := "SR.get_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3324,7 +3324,7 @@ func (sR) GetTags2(session *Session, self SRRef) (retval []string, err error) {
 
 // GetOtherConfig: Get the other_config field of the given SR.
 // Version: rio
-func (sR) GetOtherConfig(session *Session, self SRRef) (retval map[string]string, err error) {
+func (sr) GetOtherConfig(session *Session, self SRRef) (retval map[string]string, err error) {
 	method := "SR.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3344,7 +3344,7 @@ func (sR) GetOtherConfig(session *Session, self SRRef) (retval map[string]string
 
 // GetOtherConfig2: Get the other_config field of the given SR.
 // Version: rio
-func (sR) GetOtherConfig2(session *Session, self SRRef) (retval map[string]string, err error) {
+func (sr) GetOtherConfig2(session *Session, self SRRef) (retval map[string]string, err error) {
 	method := "SR.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3364,7 +3364,7 @@ func (sR) GetOtherConfig2(session *Session, self SRRef) (retval map[string]strin
 
 // GetShared: Get the shared field of the given SR.
 // Version: rio
-func (sR) GetShared(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetShared(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_shared"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3384,7 +3384,7 @@ func (sR) GetShared(session *Session, self SRRef) (retval bool, err error) {
 
 // GetShared2: Get the shared field of the given SR.
 // Version: rio
-func (sR) GetShared2(session *Session, self SRRef) (retval bool, err error) {
+func (sr) GetShared2(session *Session, self SRRef) (retval bool, err error) {
 	method := "SR.get_shared"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3404,7 +3404,7 @@ func (sR) GetShared2(session *Session, self SRRef) (retval bool, err error) {
 
 // GetContentType: Get the content_type field of the given SR.
 // Version: rio
-func (sR) GetContentType(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetContentType(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_content_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3424,7 +3424,7 @@ func (sR) GetContentType(session *Session, self SRRef) (retval string, err error
 
 // GetContentType2: Get the content_type field of the given SR.
 // Version: rio
-func (sR) GetContentType2(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetContentType2(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_content_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3444,7 +3444,7 @@ func (sR) GetContentType2(session *Session, self SRRef) (retval string, err erro
 
 // GetType: Get the type field of the given SR.
 // Version: rio
-func (sR) GetType(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetType(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3464,7 +3464,7 @@ func (sR) GetType(session *Session, self SRRef) (retval string, err error) {
 
 // GetType2: Get the type field of the given SR.
 // Version: rio
-func (sR) GetType2(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetType2(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3484,7 +3484,7 @@ func (sR) GetType2(session *Session, self SRRef) (retval string, err error) {
 
 // GetPhysicalSize: Get the physical_size field of the given SR.
 // Version: rio
-func (sR) GetPhysicalSize(session *Session, self SRRef) (retval int, err error) {
+func (sr) GetPhysicalSize(session *Session, self SRRef) (retval int, err error) {
 	method := "SR.get_physical_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3504,7 +3504,7 @@ func (sR) GetPhysicalSize(session *Session, self SRRef) (retval int, err error) 
 
 // GetPhysicalSize2: Get the physical_size field of the given SR.
 // Version: rio
-func (sR) GetPhysicalSize2(session *Session, self SRRef) (retval int, err error) {
+func (sr) GetPhysicalSize2(session *Session, self SRRef) (retval int, err error) {
 	method := "SR.get_physical_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3524,7 +3524,7 @@ func (sR) GetPhysicalSize2(session *Session, self SRRef) (retval int, err error)
 
 // GetPhysicalUtilisation: Get the physical_utilisation field of the given SR.
 // Version: rio
-func (sR) GetPhysicalUtilisation(session *Session, self SRRef) (retval int, err error) {
+func (sr) GetPhysicalUtilisation(session *Session, self SRRef) (retval int, err error) {
 	method := "SR.get_physical_utilisation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3544,7 +3544,7 @@ func (sR) GetPhysicalUtilisation(session *Session, self SRRef) (retval int, err 
 
 // GetPhysicalUtilisation2: Get the physical_utilisation field of the given SR.
 // Version: rio
-func (sR) GetPhysicalUtilisation2(session *Session, self SRRef) (retval int, err error) {
+func (sr) GetPhysicalUtilisation2(session *Session, self SRRef) (retval int, err error) {
 	method := "SR.get_physical_utilisation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3564,7 +3564,7 @@ func (sR) GetPhysicalUtilisation2(session *Session, self SRRef) (retval int, err
 
 // GetVirtualAllocation: Get the virtual_allocation field of the given SR.
 // Version: rio
-func (sR) GetVirtualAllocation(session *Session, self SRRef) (retval int, err error) {
+func (sr) GetVirtualAllocation(session *Session, self SRRef) (retval int, err error) {
 	method := "SR.get_virtual_allocation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3584,7 +3584,7 @@ func (sR) GetVirtualAllocation(session *Session, self SRRef) (retval int, err er
 
 // GetVirtualAllocation2: Get the virtual_allocation field of the given SR.
 // Version: rio
-func (sR) GetVirtualAllocation2(session *Session, self SRRef) (retval int, err error) {
+func (sr) GetVirtualAllocation2(session *Session, self SRRef) (retval int, err error) {
 	method := "SR.get_virtual_allocation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3604,7 +3604,7 @@ func (sR) GetVirtualAllocation2(session *Session, self SRRef) (retval int, err e
 
 // GetPBDs: Get the PBDs field of the given SR.
 // Version: rio
-func (sR) GetPBDs(session *Session, self SRRef) (retval []PBDRef, err error) {
+func (sr) GetPBDs(session *Session, self SRRef) (retval []PBDRef, err error) {
 	method := "SR.get_PBDs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3624,7 +3624,7 @@ func (sR) GetPBDs(session *Session, self SRRef) (retval []PBDRef, err error) {
 
 // GetPBDs2: Get the PBDs field of the given SR.
 // Version: rio
-func (sR) GetPBDs2(session *Session, self SRRef) (retval []PBDRef, err error) {
+func (sr) GetPBDs2(session *Session, self SRRef) (retval []PBDRef, err error) {
 	method := "SR.get_PBDs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3644,7 +3644,7 @@ func (sR) GetPBDs2(session *Session, self SRRef) (retval []PBDRef, err error) {
 
 // GetVDIs: Get the VDIs field of the given SR.
 // Version: rio
-func (sR) GetVDIs(session *Session, self SRRef) (retval []VDIRef, err error) {
+func (sr) GetVDIs(session *Session, self SRRef) (retval []VDIRef, err error) {
 	method := "SR.get_VDIs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3664,7 +3664,7 @@ func (sR) GetVDIs(session *Session, self SRRef) (retval []VDIRef, err error) {
 
 // GetVDIs2: Get the VDIs field of the given SR.
 // Version: rio
-func (sR) GetVDIs2(session *Session, self SRRef) (retval []VDIRef, err error) {
+func (sr) GetVDIs2(session *Session, self SRRef) (retval []VDIRef, err error) {
 	method := "SR.get_VDIs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3684,7 +3684,7 @@ func (sR) GetVDIs2(session *Session, self SRRef) (retval []VDIRef, err error) {
 
 // GetCurrentOperations: Get the current_operations field of the given SR.
 // Version: rio
-func (sR) GetCurrentOperations(session *Session, self SRRef) (retval map[string]StorageOperations, err error) {
+func (sr) GetCurrentOperations(session *Session, self SRRef) (retval map[string]StorageOperations, err error) {
 	method := "SR.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3704,7 +3704,7 @@ func (sR) GetCurrentOperations(session *Session, self SRRef) (retval map[string]
 
 // GetCurrentOperations2: Get the current_operations field of the given SR.
 // Version: rio
-func (sR) GetCurrentOperations2(session *Session, self SRRef) (retval map[string]StorageOperations, err error) {
+func (sr) GetCurrentOperations2(session *Session, self SRRef) (retval map[string]StorageOperations, err error) {
 	method := "SR.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3724,7 +3724,7 @@ func (sR) GetCurrentOperations2(session *Session, self SRRef) (retval map[string
 
 // GetAllowedOperations: Get the allowed_operations field of the given SR.
 // Version: rio
-func (sR) GetAllowedOperations(session *Session, self SRRef) (retval []StorageOperations, err error) {
+func (sr) GetAllowedOperations(session *Session, self SRRef) (retval []StorageOperations, err error) {
 	method := "SR.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3744,7 +3744,7 @@ func (sR) GetAllowedOperations(session *Session, self SRRef) (retval []StorageOp
 
 // GetAllowedOperations2: Get the allowed_operations field of the given SR.
 // Version: rio
-func (sR) GetAllowedOperations2(session *Session, self SRRef) (retval []StorageOperations, err error) {
+func (sr) GetAllowedOperations2(session *Session, self SRRef) (retval []StorageOperations, err error) {
 	method := "SR.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3764,7 +3764,7 @@ func (sR) GetAllowedOperations2(session *Session, self SRRef) (retval []StorageO
 
 // GetNameDescription: Get the name/description field of the given SR.
 // Version: rio
-func (sR) GetNameDescription(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetNameDescription(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3784,7 +3784,7 @@ func (sR) GetNameDescription(session *Session, self SRRef) (retval string, err e
 
 // GetNameDescription2: Get the name/description field of the given SR.
 // Version: rio
-func (sR) GetNameDescription2(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetNameDescription2(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3804,7 +3804,7 @@ func (sR) GetNameDescription2(session *Session, self SRRef) (retval string, err 
 
 // GetNameLabel: Get the name/label field of the given SR.
 // Version: rio
-func (sR) GetNameLabel(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetNameLabel(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3824,7 +3824,7 @@ func (sR) GetNameLabel(session *Session, self SRRef) (retval string, err error) 
 
 // GetNameLabel2: Get the name/label field of the given SR.
 // Version: rio
-func (sR) GetNameLabel2(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetNameLabel2(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3844,7 +3844,7 @@ func (sR) GetNameLabel2(session *Session, self SRRef) (retval string, err error)
 
 // GetUUID: Get the uuid field of the given SR.
 // Version: rio
-func (sR) GetUUID(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetUUID(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3864,7 +3864,7 @@ func (sR) GetUUID(session *Session, self SRRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given SR.
 // Version: rio
-func (sR) GetUUID2(session *Session, self SRRef) (retval string, err error) {
+func (sr) GetUUID2(session *Session, self SRRef) (retval string, err error) {
 	method := "SR.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3884,7 +3884,7 @@ func (sR) GetUUID2(session *Session, self SRRef) (retval string, err error) {
 
 // GetByNameLabel: Get all the SR instances with the given label.
 // Version: rio
-func (sR) GetByNameLabel(session *Session, label string) (retval []SRRef, err error) {
+func (sr) GetByNameLabel(session *Session, label string) (retval []SRRef, err error) {
 	method := "SR.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3904,7 +3904,7 @@ func (sR) GetByNameLabel(session *Session, label string) (retval []SRRef, err er
 
 // GetByNameLabel2: Get all the SR instances with the given label.
 // Version: rio
-func (sR) GetByNameLabel2(session *Session, label string) (retval []SRRef, err error) {
+func (sr) GetByNameLabel2(session *Session, label string) (retval []SRRef, err error) {
 	method := "SR.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3924,17 +3924,17 @@ func (sR) GetByNameLabel2(session *Session, label string) (retval []SRRef, err e
 
 // GetByUUID: Get a reference to the SR instance with the specified UUID.
 // Version: rio
-func (sR) GetByUUID(session *Session, uUID string) (retval SRRef, err error) {
+func (sr) GetByUUID(session *Session, uuid string) (retval SRRef, err error) {
 	method := "SR.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -3944,17 +3944,17 @@ func (sR) GetByUUID(session *Session, uUID string) (retval SRRef, err error) {
 
 // GetByUUID2: Get a reference to the SR instance with the specified UUID.
 // Version: rio
-func (sR) GetByUUID2(session *Session, uUID string) (retval SRRef, err error) {
+func (sr) GetByUUID2(session *Session, uuid string) (retval SRRef, err error) {
 	method := "SR.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -3964,7 +3964,7 @@ func (sR) GetByUUID2(session *Session, uUID string) (retval SRRef, err error) {
 
 // GetRecord: Get a record containing the current state of the given SR.
 // Version: rio
-func (sR) GetRecord(session *Session, self SRRef) (retval SRRecord, err error) {
+func (sr) GetRecord(session *Session, self SRRef) (retval SRRecord, err error) {
 	method := "SR.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3984,7 +3984,7 @@ func (sR) GetRecord(session *Session, self SRRef) (retval SRRecord, err error) {
 
 // GetRecord2: Get a record containing the current state of the given SR.
 // Version: rio
-func (sR) GetRecord2(session *Session, self SRRef) (retval SRRecord, err error) {
+func (sr) GetRecord2(session *Session, self SRRef) (retval SRRecord, err error) {
 	method := "SR.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

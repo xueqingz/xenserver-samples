@@ -538,17 +538,17 @@ func (networkSriov) GetUUID2(session *Session, self NetworkSriovRef) (retval str
 
 // GetByUUID: Get a reference to the network_sriov instance with the specified UUID.
 // Version: kolkata
-func (networkSriov) GetByUUID(session *Session, uUID string) (retval NetworkSriovRef, err error) {
+func (networkSriov) GetByUUID(session *Session, uuid string) (retval NetworkSriovRef, err error) {
 	method := "network_sriov.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -558,17 +558,17 @@ func (networkSriov) GetByUUID(session *Session, uUID string) (retval NetworkSrio
 
 // GetByUUID2: Get a reference to the network_sriov instance with the specified UUID.
 // Version: kolkata
-func (networkSriov) GetByUUID2(session *Session, uUID string) (retval NetworkSriovRef, err error) {
+func (networkSriov) GetByUUID2(session *Session, uuid string) (retval NetworkSriovRef, err error) {
 	method := "network_sriov.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

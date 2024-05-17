@@ -42,13 +42,13 @@ type VGPUTypeRecord struct {
 type VGPUTypeRef string
 
 // A type of virtual GPU
-type vGPUType struct{}
+type vgpuType struct{}
 
-var VGPUType vGPUType
+var VGPUType vgpuType
 
 // GetAllRecords: Return a map of VGPU_type references to VGPU_type records for all VGPU_types known to the system.
 // Version: vgpu-tech-preview
-func (vGPUType) GetAllRecords(session *Session) (retval map[VGPUTypeRef]VGPUTypeRecord, err error) {
+func (vgpuType) GetAllRecords(session *Session) (retval map[VGPUTypeRef]VGPUTypeRecord, err error) {
 	method := "VGPU_type.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -64,7 +64,7 @@ func (vGPUType) GetAllRecords(session *Session) (retval map[VGPUTypeRef]VGPUType
 
 // GetAllRecords1: Return a map of VGPU_type references to VGPU_type records for all VGPU_types known to the system.
 // Version: vgpu-tech-preview
-func (vGPUType) GetAllRecords1(session *Session) (retval map[VGPUTypeRef]VGPUTypeRecord, err error) {
+func (vgpuType) GetAllRecords1(session *Session) (retval map[VGPUTypeRef]VGPUTypeRecord, err error) {
 	method := "VGPU_type.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -80,7 +80,7 @@ func (vGPUType) GetAllRecords1(session *Session) (retval map[VGPUTypeRef]VGPUTyp
 
 // GetAll: Return a list of all the VGPU_types known to the system.
 // Version: vgpu-tech-preview
-func (vGPUType) GetAll(session *Session) (retval []VGPUTypeRef, err error) {
+func (vgpuType) GetAll(session *Session) (retval []VGPUTypeRef, err error) {
 	method := "VGPU_type.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -96,7 +96,7 @@ func (vGPUType) GetAll(session *Session) (retval []VGPUTypeRef, err error) {
 
 // GetAll1: Return a list of all the VGPU_types known to the system.
 // Version: vgpu-tech-preview
-func (vGPUType) GetAll1(session *Session) (retval []VGPUTypeRef, err error) {
+func (vgpuType) GetAll1(session *Session) (retval []VGPUTypeRef, err error) {
 	method := "VGPU_type.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -112,7 +112,7 @@ func (vGPUType) GetAll1(session *Session) (retval []VGPUTypeRef, err error) {
 
 // GetCompatibleTypesInVM: Get the compatible_types_in_vm field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetCompatibleTypesInVM(session *Session, self VGPUTypeRef) (retval []VGPUTypeRef, err error) {
+func (vgpuType) GetCompatibleTypesInVM(session *Session, self VGPUTypeRef) (retval []VGPUTypeRef, err error) {
 	method := "VGPU_type.get_compatible_types_in_vm"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -132,7 +132,7 @@ func (vGPUType) GetCompatibleTypesInVM(session *Session, self VGPUTypeRef) (retv
 
 // GetCompatibleTypesInVM2: Get the compatible_types_in_vm field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetCompatibleTypesInVM2(session *Session, self VGPUTypeRef) (retval []VGPUTypeRef, err error) {
+func (vgpuType) GetCompatibleTypesInVM2(session *Session, self VGPUTypeRef) (retval []VGPUTypeRef, err error) {
 	method := "VGPU_type.get_compatible_types_in_vm"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -152,7 +152,7 @@ func (vGPUType) GetCompatibleTypesInVM2(session *Session, self VGPUTypeRef) (ret
 
 // GetExperimental: Get the experimental field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetExperimental(session *Session, self VGPUTypeRef) (retval bool, err error) {
+func (vgpuType) GetExperimental(session *Session, self VGPUTypeRef) (retval bool, err error) {
 	method := "VGPU_type.get_experimental"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -172,7 +172,7 @@ func (vGPUType) GetExperimental(session *Session, self VGPUTypeRef) (retval bool
 
 // GetExperimental2: Get the experimental field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetExperimental2(session *Session, self VGPUTypeRef) (retval bool, err error) {
+func (vgpuType) GetExperimental2(session *Session, self VGPUTypeRef) (retval bool, err error) {
 	method := "VGPU_type.get_experimental"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -192,7 +192,7 @@ func (vGPUType) GetExperimental2(session *Session, self VGPUTypeRef) (retval boo
 
 // GetIdentifier: Get the identifier field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetIdentifier(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetIdentifier(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_identifier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -212,7 +212,7 @@ func (vGPUType) GetIdentifier(session *Session, self VGPUTypeRef) (retval string
 
 // GetIdentifier2: Get the identifier field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetIdentifier2(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetIdentifier2(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_identifier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -232,7 +232,7 @@ func (vGPUType) GetIdentifier2(session *Session, self VGPUTypeRef) (retval strin
 
 // GetImplementation: Get the implementation field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetImplementation(session *Session, self VGPUTypeRef) (retval VgpuTypeImplementation, err error) {
+func (vgpuType) GetImplementation(session *Session, self VGPUTypeRef) (retval VgpuTypeImplementation, err error) {
 	method := "VGPU_type.get_implementation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -252,7 +252,7 @@ func (vGPUType) GetImplementation(session *Session, self VGPUTypeRef) (retval Vg
 
 // GetImplementation2: Get the implementation field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetImplementation2(session *Session, self VGPUTypeRef) (retval VgpuTypeImplementation, err error) {
+func (vgpuType) GetImplementation2(session *Session, self VGPUTypeRef) (retval VgpuTypeImplementation, err error) {
 	method := "VGPU_type.get_implementation"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -272,7 +272,7 @@ func (vGPUType) GetImplementation2(session *Session, self VGPUTypeRef) (retval V
 
 // GetEnabledOnGPUGroups: Get the enabled_on_GPU_groups field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetEnabledOnGPUGroups(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
+func (vgpuType) GetEnabledOnGPUGroups(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
 	method := "VGPU_type.get_enabled_on_GPU_groups"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -292,7 +292,7 @@ func (vGPUType) GetEnabledOnGPUGroups(session *Session, self VGPUTypeRef) (retva
 
 // GetEnabledOnGPUGroups2: Get the enabled_on_GPU_groups field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetEnabledOnGPUGroups2(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
+func (vgpuType) GetEnabledOnGPUGroups2(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
 	method := "VGPU_type.get_enabled_on_GPU_groups"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -312,7 +312,7 @@ func (vGPUType) GetEnabledOnGPUGroups2(session *Session, self VGPUTypeRef) (retv
 
 // GetSupportedOnGPUGroups: Get the supported_on_GPU_groups field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetSupportedOnGPUGroups(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
+func (vgpuType) GetSupportedOnGPUGroups(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
 	method := "VGPU_type.get_supported_on_GPU_groups"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -332,7 +332,7 @@ func (vGPUType) GetSupportedOnGPUGroups(session *Session, self VGPUTypeRef) (ret
 
 // GetSupportedOnGPUGroups2: Get the supported_on_GPU_groups field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetSupportedOnGPUGroups2(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
+func (vgpuType) GetSupportedOnGPUGroups2(session *Session, self VGPUTypeRef) (retval []GPUGroupRef, err error) {
 	method := "VGPU_type.get_supported_on_GPU_groups"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -352,7 +352,7 @@ func (vGPUType) GetSupportedOnGPUGroups2(session *Session, self VGPUTypeRef) (re
 
 // GetVGPUs: Get the VGPUs field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetVGPUs(session *Session, self VGPUTypeRef) (retval []VGPURef, err error) {
+func (vgpuType) GetVGPUs(session *Session, self VGPUTypeRef) (retval []VGPURef, err error) {
 	method := "VGPU_type.get_VGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -372,7 +372,7 @@ func (vGPUType) GetVGPUs(session *Session, self VGPUTypeRef) (retval []VGPURef, 
 
 // GetVGPUs2: Get the VGPUs field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetVGPUs2(session *Session, self VGPUTypeRef) (retval []VGPURef, err error) {
+func (vgpuType) GetVGPUs2(session *Session, self VGPUTypeRef) (retval []VGPURef, err error) {
 	method := "VGPU_type.get_VGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -392,7 +392,7 @@ func (vGPUType) GetVGPUs2(session *Session, self VGPUTypeRef) (retval []VGPURef,
 
 // GetEnabledOnPGPUs: Get the enabled_on_PGPUs field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetEnabledOnPGPUs(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
+func (vgpuType) GetEnabledOnPGPUs(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
 	method := "VGPU_type.get_enabled_on_PGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -412,7 +412,7 @@ func (vGPUType) GetEnabledOnPGPUs(session *Session, self VGPUTypeRef) (retval []
 
 // GetEnabledOnPGPUs2: Get the enabled_on_PGPUs field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetEnabledOnPGPUs2(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
+func (vgpuType) GetEnabledOnPGPUs2(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
 	method := "VGPU_type.get_enabled_on_PGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -432,7 +432,7 @@ func (vGPUType) GetEnabledOnPGPUs2(session *Session, self VGPUTypeRef) (retval [
 
 // GetSupportedOnPGPUs: Get the supported_on_PGPUs field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetSupportedOnPGPUs(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
+func (vgpuType) GetSupportedOnPGPUs(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
 	method := "VGPU_type.get_supported_on_PGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -452,7 +452,7 @@ func (vGPUType) GetSupportedOnPGPUs(session *Session, self VGPUTypeRef) (retval 
 
 // GetSupportedOnPGPUs2: Get the supported_on_PGPUs field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetSupportedOnPGPUs2(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
+func (vgpuType) GetSupportedOnPGPUs2(session *Session, self VGPUTypeRef) (retval []PGPURef, err error) {
 	method := "VGPU_type.get_supported_on_PGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -472,7 +472,7 @@ func (vGPUType) GetSupportedOnPGPUs2(session *Session, self VGPUTypeRef) (retval
 
 // GetMaxResolutionY: Get the max_resolution_y field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetMaxResolutionY(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetMaxResolutionY(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_max_resolution_y"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -492,7 +492,7 @@ func (vGPUType) GetMaxResolutionY(session *Session, self VGPUTypeRef) (retval in
 
 // GetMaxResolutionY2: Get the max_resolution_y field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetMaxResolutionY2(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetMaxResolutionY2(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_max_resolution_y"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -512,7 +512,7 @@ func (vGPUType) GetMaxResolutionY2(session *Session, self VGPUTypeRef) (retval i
 
 // GetMaxResolutionX: Get the max_resolution_x field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetMaxResolutionX(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetMaxResolutionX(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_max_resolution_x"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -532,7 +532,7 @@ func (vGPUType) GetMaxResolutionX(session *Session, self VGPUTypeRef) (retval in
 
 // GetMaxResolutionX2: Get the max_resolution_x field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetMaxResolutionX2(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetMaxResolutionX2(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_max_resolution_x"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -552,7 +552,7 @@ func (vGPUType) GetMaxResolutionX2(session *Session, self VGPUTypeRef) (retval i
 
 // GetMaxHeads: Get the max_heads field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetMaxHeads(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetMaxHeads(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_max_heads"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -572,7 +572,7 @@ func (vGPUType) GetMaxHeads(session *Session, self VGPUTypeRef) (retval int, err
 
 // GetMaxHeads2: Get the max_heads field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetMaxHeads2(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetMaxHeads2(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_max_heads"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -592,7 +592,7 @@ func (vGPUType) GetMaxHeads2(session *Session, self VGPUTypeRef) (retval int, er
 
 // GetFramebufferSize: Get the framebuffer_size field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetFramebufferSize(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetFramebufferSize(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_framebuffer_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -612,7 +612,7 @@ func (vGPUType) GetFramebufferSize(session *Session, self VGPUTypeRef) (retval i
 
 // GetFramebufferSize2: Get the framebuffer_size field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetFramebufferSize2(session *Session, self VGPUTypeRef) (retval int, err error) {
+func (vgpuType) GetFramebufferSize2(session *Session, self VGPUTypeRef) (retval int, err error) {
 	method := "VGPU_type.get_framebuffer_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -632,7 +632,7 @@ func (vGPUType) GetFramebufferSize2(session *Session, self VGPUTypeRef) (retval 
 
 // GetModelName: Get the model_name field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetModelName(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetModelName(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_model_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -652,7 +652,7 @@ func (vGPUType) GetModelName(session *Session, self VGPUTypeRef) (retval string,
 
 // GetModelName2: Get the model_name field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetModelName2(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetModelName2(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_model_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -672,7 +672,7 @@ func (vGPUType) GetModelName2(session *Session, self VGPUTypeRef) (retval string
 
 // GetVendorName: Get the vendor_name field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetVendorName(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetVendorName(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -692,7 +692,7 @@ func (vGPUType) GetVendorName(session *Session, self VGPUTypeRef) (retval string
 
 // GetVendorName2: Get the vendor_name field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetVendorName2(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetVendorName2(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_vendor_name"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -712,7 +712,7 @@ func (vGPUType) GetVendorName2(session *Session, self VGPUTypeRef) (retval strin
 
 // GetUUID: Get the uuid field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetUUID(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetUUID(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -732,7 +732,7 @@ func (vGPUType) GetUUID(session *Session, self VGPUTypeRef) (retval string, err 
 
 // GetUUID2: Get the uuid field of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetUUID2(session *Session, self VGPUTypeRef) (retval string, err error) {
+func (vgpuType) GetUUID2(session *Session, self VGPUTypeRef) (retval string, err error) {
 	method := "VGPU_type.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -752,17 +752,17 @@ func (vGPUType) GetUUID2(session *Session, self VGPUTypeRef) (retval string, err
 
 // GetByUUID: Get a reference to the VGPU_type instance with the specified UUID.
 // Version: vgpu-tech-preview
-func (vGPUType) GetByUUID(session *Session, uUID string) (retval VGPUTypeRef, err error) {
+func (vgpuType) GetByUUID(session *Session, uuid string) (retval VGPUTypeRef, err error) {
 	method := "VGPU_type.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -772,17 +772,17 @@ func (vGPUType) GetByUUID(session *Session, uUID string) (retval VGPUTypeRef, er
 
 // GetByUUID2: Get a reference to the VGPU_type instance with the specified UUID.
 // Version: vgpu-tech-preview
-func (vGPUType) GetByUUID2(session *Session, uUID string) (retval VGPUTypeRef, err error) {
+func (vgpuType) GetByUUID2(session *Session, uuid string) (retval VGPUTypeRef, err error) {
 	method := "VGPU_type.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -792,7 +792,7 @@ func (vGPUType) GetByUUID2(session *Session, uUID string) (retval VGPUTypeRef, e
 
 // GetRecord: Get a record containing the current state of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetRecord(session *Session, self VGPUTypeRef) (retval VGPUTypeRecord, err error) {
+func (vgpuType) GetRecord(session *Session, self VGPUTypeRef) (retval VGPUTypeRecord, err error) {
 	method := "VGPU_type.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -812,7 +812,7 @@ func (vGPUType) GetRecord(session *Session, self VGPUTypeRef) (retval VGPUTypeRe
 
 // GetRecord2: Get a record containing the current state of the given VGPU_type.
 // Version: vgpu-tech-preview
-func (vGPUType) GetRecord2(session *Session, self VGPUTypeRef) (retval VGPUTypeRecord, err error) {
+func (vgpuType) GetRecord2(session *Session, self VGPUTypeRef) (retval VGPUTypeRecord, err error) {
 	method := "VGPU_type.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

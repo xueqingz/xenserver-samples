@@ -375,17 +375,17 @@ func (certificate) GetUUID2(session *Session, self CertificateRef) (retval strin
 
 // GetByUUID: Get a reference to the Certificate instance with the specified UUID.
 // Version: stockholm
-func (certificate) GetByUUID(session *Session, uUID string) (retval CertificateRef, err error) {
+func (certificate) GetByUUID(session *Session, uuid string) (retval CertificateRef, err error) {
 	method := "Certificate.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -395,17 +395,17 @@ func (certificate) GetByUUID(session *Session, uUID string) (retval CertificateR
 
 // GetByUUID2: Get a reference to the Certificate instance with the specified UUID.
 // Version: stockholm
-func (certificate) GetByUUID2(session *Session, uUID string) (retval CertificateRef, err error) {
+func (certificate) GetByUUID2(session *Session, uuid string) (retval CertificateRef, err error) {
 	method := "Certificate.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

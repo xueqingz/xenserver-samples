@@ -191,13 +191,13 @@ type VMRecord struct {
 type VMRef string
 
 // A virtual machine (or &apos;guest&apos;).
-type vM struct{}
+type vm struct{}
 
-var VM vM
+var VM vm
 
 // GetAllRecords: Return a map of VM references to VM records for all VMs known to the system.
 // Version: rio
-func (vM) GetAllRecords(session *Session) (retval map[VMRef]VMRecord, err error) {
+func (vm) GetAllRecords(session *Session) (retval map[VMRef]VMRecord, err error) {
 	method := "VM.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -213,7 +213,7 @@ func (vM) GetAllRecords(session *Session) (retval map[VMRef]VMRecord, err error)
 
 // GetAllRecords1: Return a map of VM references to VM records for all VMs known to the system.
 // Version: rio
-func (vM) GetAllRecords1(session *Session) (retval map[VMRef]VMRecord, err error) {
+func (vm) GetAllRecords1(session *Session) (retval map[VMRef]VMRecord, err error) {
 	method := "VM.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -229,7 +229,7 @@ func (vM) GetAllRecords1(session *Session) (retval map[VMRef]VMRecord, err error
 
 // GetAll: Return a list of all the VMs known to the system.
 // Version: rio
-func (vM) GetAll(session *Session) (retval []VMRef, err error) {
+func (vm) GetAll(session *Session) (retval []VMRef, err error) {
 	method := "VM.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -245,7 +245,7 @@ func (vM) GetAll(session *Session) (retval []VMRef, err error) {
 
 // GetAll1: Return a list of all the VMs known to the system.
 // Version: rio
-func (vM) GetAll1(session *Session) (retval []VMRef, err error) {
+func (vm) GetAll1(session *Session) (retval []VMRef, err error) {
 	method := "VM.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -268,7 +268,7 @@ func (vM) GetAll1(session *Session) (retval []VMRef, err error) {
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) RestartDeviceModels(session *Session, self VMRef) (err error) {
+func (vm) RestartDeviceModels(session *Session, self VMRef) (err error) {
 	method := "VM.restart_device_models"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -291,7 +291,7 @@ func (vM) RestartDeviceModels(session *Session, self VMRef) (err error) {
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncRestartDeviceModels(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncRestartDeviceModels(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.restart_device_models"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -318,7 +318,7 @@ func (vM) AsyncRestartDeviceModels(session *Session, self VMRef) (retval TaskRef
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) RestartDeviceModels2(session *Session, self VMRef) (err error) {
+func (vm) RestartDeviceModels2(session *Session, self VMRef) (err error) {
 	method := "VM.restart_device_models"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -341,7 +341,7 @@ func (vM) RestartDeviceModels2(session *Session, self VMRef) (err error) {
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncRestartDeviceModels2(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncRestartDeviceModels2(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.restart_device_models"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -361,7 +361,7 @@ func (vM) AsyncRestartDeviceModels2(session *Session, self VMRef) (retval TaskRe
 
 // SetHVMBootPolicy: Set the VM.HVM_boot_policy field of the given VM, which will take effect when it is next started
 // Version: rio
-func (vM) SetHVMBootPolicy(session *Session, self VMRef, value string) (err error) {
+func (vm) SetHVMBootPolicy(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_HVM_boot_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -381,7 +381,7 @@ func (vM) SetHVMBootPolicy(session *Session, self VMRef, value string) (err erro
 
 // SetHVMBootPolicy3: Set the VM.HVM_boot_policy field of the given VM, which will take effect when it is next started
 // Version: rio
-func (vM) SetHVMBootPolicy3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetHVMBootPolicy3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_HVM_boot_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -401,7 +401,7 @@ func (vM) SetHVMBootPolicy3(session *Session, self VMRef, value string) (err err
 
 // SetDomainType: Set the VM.domain_type field of the given VM, which will take effect when it is next started
 // Version: kolkata
-func (vM) SetDomainType(session *Session, self VMRef, value DomainType) (err error) {
+func (vm) SetDomainType(session *Session, self VMRef, value DomainType) (err error) {
 	method := "VM.set_domain_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -421,7 +421,7 @@ func (vM) SetDomainType(session *Session, self VMRef, value DomainType) (err err
 
 // SetDomainType3: Set the VM.domain_type field of the given VM, which will take effect when it is next started
 // Version: kolkata
-func (vM) SetDomainType3(session *Session, self VMRef, value DomainType) (err error) {
+func (vm) SetDomainType3(session *Session, self VMRef, value DomainType) (err error) {
 	method := "VM.set_domain_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -441,7 +441,7 @@ func (vM) SetDomainType3(session *Session, self VMRef, value DomainType) (err er
 
 // SetActionsAfterCrash: Sets the actions_after_crash parameter
 // Version: rio
-func (vM) SetActionsAfterCrash(session *Session, self VMRef, value OnCrashBehaviour) (err error) {
+func (vm) SetActionsAfterCrash(session *Session, self VMRef, value OnCrashBehaviour) (err error) {
 	method := "VM.set_actions_after_crash"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -461,7 +461,7 @@ func (vM) SetActionsAfterCrash(session *Session, self VMRef, value OnCrashBehavi
 
 // AsyncSetActionsAfterCrash: Sets the actions_after_crash parameter
 // Version: rio
-func (vM) AsyncSetActionsAfterCrash(session *Session, self VMRef, value OnCrashBehaviour) (retval TaskRef, err error) {
+func (vm) AsyncSetActionsAfterCrash(session *Session, self VMRef, value OnCrashBehaviour) (retval TaskRef, err error) {
 	method := "Async.VM.set_actions_after_crash"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -485,7 +485,7 @@ func (vM) AsyncSetActionsAfterCrash(session *Session, self VMRef, value OnCrashB
 
 // SetActionsAfterCrash3: Sets the actions_after_crash parameter
 // Version: rio
-func (vM) SetActionsAfterCrash3(session *Session, self VMRef, value OnCrashBehaviour) (err error) {
+func (vm) SetActionsAfterCrash3(session *Session, self VMRef, value OnCrashBehaviour) (err error) {
 	method := "VM.set_actions_after_crash"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -505,7 +505,7 @@ func (vM) SetActionsAfterCrash3(session *Session, self VMRef, value OnCrashBehav
 
 // AsyncSetActionsAfterCrash3: Sets the actions_after_crash parameter
 // Version: rio
-func (vM) AsyncSetActionsAfterCrash3(session *Session, self VMRef, value OnCrashBehaviour) (retval TaskRef, err error) {
+func (vm) AsyncSetActionsAfterCrash3(session *Session, self VMRef, value OnCrashBehaviour) (retval TaskRef, err error) {
 	method := "Async.VM.set_actions_after_crash"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -529,13 +529,13 @@ func (vM) AsyncSetActionsAfterCrash3(session *Session, self VMRef, value OnCrash
 
 // Import: Import an XVA from a URI
 // Version: dundee
-func (vM) Import(session *Session, uRL string, sr SRRef, fullRestore bool, force bool) (retval []VMRef, err error) {
+func (vm) Import(session *Session, url string, sr SRRef, fullRestore bool, force bool) (retval []VMRef, err error) {
 	method := "VM.import"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -551,7 +551,7 @@ func (vM) Import(session *Session, uRL string, sr SRRef, fullRestore bool, force
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uRLArg, srArg, fullRestoreArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, urlArg, srArg, fullRestoreArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -561,13 +561,13 @@ func (vM) Import(session *Session, uRL string, sr SRRef, fullRestore bool, force
 
 // AsyncImport: Import an XVA from a URI
 // Version: dundee
-func (vM) AsyncImport(session *Session, uRL string, sr SRRef, fullRestore bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncImport(session *Session, url string, sr SRRef, fullRestore bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.import"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -583,7 +583,7 @@ func (vM) AsyncImport(session *Session, uRL string, sr SRRef, fullRestore bool, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uRLArg, srArg, fullRestoreArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, urlArg, srArg, fullRestoreArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -593,13 +593,13 @@ func (vM) AsyncImport(session *Session, uRL string, sr SRRef, fullRestore bool, 
 
 // Import5: Import an XVA from a URI
 // Version: dundee
-func (vM) Import5(session *Session, uRL string, sr SRRef, fullRestore bool, force bool) (retval []VMRef, err error) {
+func (vm) Import5(session *Session, url string, sr SRRef, fullRestore bool, force bool) (retval []VMRef, err error) {
 	method := "VM.import"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -615,7 +615,7 @@ func (vM) Import5(session *Session, uRL string, sr SRRef, fullRestore bool, forc
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uRLArg, srArg, fullRestoreArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, urlArg, srArg, fullRestoreArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -625,13 +625,13 @@ func (vM) Import5(session *Session, uRL string, sr SRRef, fullRestore bool, forc
 
 // AsyncImport5: Import an XVA from a URI
 // Version: dundee
-func (vM) AsyncImport5(session *Session, uRL string, sr SRRef, fullRestore bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncImport5(session *Session, url string, sr SRRef, fullRestore bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.import"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -647,7 +647,7 @@ func (vM) AsyncImport5(session *Session, uRL string, sr SRRef, fullRestore bool,
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uRLArg, srArg, fullRestoreArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, urlArg, srArg, fullRestoreArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -657,7 +657,7 @@ func (vM) AsyncImport5(session *Session, uRL string, sr SRRef, fullRestore bool,
 
 // SetHasVendorDevice: Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
 // Version: dundee
-func (vM) SetHasVendorDevice(session *Session, self VMRef, value bool) (err error) {
+func (vm) SetHasVendorDevice(session *Session, self VMRef, value bool) (err error) {
 	method := "VM.set_has_vendor_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -677,7 +677,7 @@ func (vM) SetHasVendorDevice(session *Session, self VMRef, value bool) (err erro
 
 // AsyncSetHasVendorDevice: Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
 // Version: dundee
-func (vM) AsyncSetHasVendorDevice(session *Session, self VMRef, value bool) (retval TaskRef, err error) {
+func (vm) AsyncSetHasVendorDevice(session *Session, self VMRef, value bool) (retval TaskRef, err error) {
 	method := "Async.VM.set_has_vendor_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -701,7 +701,7 @@ func (vM) AsyncSetHasVendorDevice(session *Session, self VMRef, value bool) (ret
 
 // SetHasVendorDevice3: Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
 // Version: dundee
-func (vM) SetHasVendorDevice3(session *Session, self VMRef, value bool) (err error) {
+func (vm) SetHasVendorDevice3(session *Session, self VMRef, value bool) (err error) {
 	method := "VM.set_has_vendor_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -721,7 +721,7 @@ func (vM) SetHasVendorDevice3(session *Session, self VMRef, value bool) (err err
 
 // AsyncSetHasVendorDevice3: Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
 // Version: dundee
-func (vM) AsyncSetHasVendorDevice3(session *Session, self VMRef, value bool) (retval TaskRef, err error) {
+func (vm) AsyncSetHasVendorDevice3(session *Session, self VMRef, value bool) (retval TaskRef, err error) {
 	method := "Async.VM.set_has_vendor_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -745,13 +745,13 @@ func (vM) AsyncSetHasVendorDevice3(session *Session, self VMRef, value bool) (re
 
 // CallPlugin: Call an API plugin on this vm
 // Version: cream
-func (vM) CallPlugin(session *Session, vM VMRef, plugin string, fn string, args map[string]string) (retval string, err error) {
+func (vm) CallPlugin(session *Session, vm VMRef, plugin string, fn string, args map[string]string) (retval string, err error) {
 	method := "VM.call_plugin"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -767,7 +767,7 @@ func (vM) CallPlugin(session *Session, vM VMRef, plugin string, fn string, args 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, pluginArg, fnArg, argsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, pluginArg, fnArg, argsArg)
 	if err != nil {
 		return
 	}
@@ -777,13 +777,13 @@ func (vM) CallPlugin(session *Session, vM VMRef, plugin string, fn string, args 
 
 // AsyncCallPlugin: Call an API plugin on this vm
 // Version: cream
-func (vM) AsyncCallPlugin(session *Session, vM VMRef, plugin string, fn string, args map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncCallPlugin(session *Session, vm VMRef, plugin string, fn string, args map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.call_plugin"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -799,7 +799,7 @@ func (vM) AsyncCallPlugin(session *Session, vM VMRef, plugin string, fn string, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, pluginArg, fnArg, argsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, pluginArg, fnArg, argsArg)
 	if err != nil {
 		return
 	}
@@ -809,13 +809,13 @@ func (vM) AsyncCallPlugin(session *Session, vM VMRef, plugin string, fn string, 
 
 // CallPlugin5: Call an API plugin on this vm
 // Version: cream
-func (vM) CallPlugin5(session *Session, vM VMRef, plugin string, fn string, args map[string]string) (retval string, err error) {
+func (vm) CallPlugin5(session *Session, vm VMRef, plugin string, fn string, args map[string]string) (retval string, err error) {
 	method := "VM.call_plugin"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -831,7 +831,7 @@ func (vM) CallPlugin5(session *Session, vM VMRef, plugin string, fn string, args
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, pluginArg, fnArg, argsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, pluginArg, fnArg, argsArg)
 	if err != nil {
 		return
 	}
@@ -841,13 +841,13 @@ func (vM) CallPlugin5(session *Session, vM VMRef, plugin string, fn string, args
 
 // AsyncCallPlugin5: Call an API plugin on this vm
 // Version: cream
-func (vM) AsyncCallPlugin5(session *Session, vM VMRef, plugin string, fn string, args map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncCallPlugin5(session *Session, vm VMRef, plugin string, fn string, args map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.call_plugin"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -863,7 +863,7 @@ func (vM) AsyncCallPlugin5(session *Session, vM VMRef, plugin string, fn string,
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, pluginArg, fnArg, argsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, pluginArg, fnArg, argsArg)
 	if err != nil {
 		return
 	}
@@ -873,7 +873,7 @@ func (vM) AsyncCallPlugin5(session *Session, vM VMRef, plugin string, fn string,
 
 // QueryServices: Query the system services advertised by this VM and register them. This can only be applied to a system domain.
 // Version: tampa
-func (vM) QueryServices(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) QueryServices(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.query_services"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -893,7 +893,7 @@ func (vM) QueryServices(session *Session, self VMRef) (retval map[string]string,
 
 // AsyncQueryServices: Query the system services advertised by this VM and register them. This can only be applied to a system domain.
 // Version: tampa
-func (vM) AsyncQueryServices(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncQueryServices(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.query_services"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -913,7 +913,7 @@ func (vM) AsyncQueryServices(session *Session, self VMRef) (retval TaskRef, err 
 
 // QueryServices2: Query the system services advertised by this VM and register them. This can only be applied to a system domain.
 // Version: tampa
-func (vM) QueryServices2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) QueryServices2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.query_services"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -933,7 +933,7 @@ func (vM) QueryServices2(session *Session, self VMRef) (retval map[string]string
 
 // AsyncQueryServices2: Query the system services advertised by this VM and register them. This can only be applied to a system domain.
 // Version: tampa
-func (vM) AsyncQueryServices2(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncQueryServices2(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.query_services"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -953,7 +953,7 @@ func (vM) AsyncQueryServices2(session *Session, self VMRef) (retval TaskRef, err
 
 // SetAppliance: Assign this VM to an appliance.
 // Version: boston
-func (vM) SetAppliance(session *Session, self VMRef, value VMApplianceRef) (err error) {
+func (vm) SetAppliance(session *Session, self VMRef, value VMApplianceRef) (err error) {
 	method := "VM.set_appliance"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -973,7 +973,7 @@ func (vM) SetAppliance(session *Session, self VMRef, value VMApplianceRef) (err 
 
 // AsyncSetAppliance: Assign this VM to an appliance.
 // Version: boston
-func (vM) AsyncSetAppliance(session *Session, self VMRef, value VMApplianceRef) (retval TaskRef, err error) {
+func (vm) AsyncSetAppliance(session *Session, self VMRef, value VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM.set_appliance"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -997,7 +997,7 @@ func (vM) AsyncSetAppliance(session *Session, self VMRef, value VMApplianceRef) 
 
 // SetAppliance3: Assign this VM to an appliance.
 // Version: boston
-func (vM) SetAppliance3(session *Session, self VMRef, value VMApplianceRef) (err error) {
+func (vm) SetAppliance3(session *Session, self VMRef, value VMApplianceRef) (err error) {
 	method := "VM.set_appliance"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1017,7 +1017,7 @@ func (vM) SetAppliance3(session *Session, self VMRef, value VMApplianceRef) (err
 
 // AsyncSetAppliance3: Assign this VM to an appliance.
 // Version: boston
-func (vM) AsyncSetAppliance3(session *Session, self VMRef, value VMApplianceRef) (retval TaskRef, err error) {
+func (vm) AsyncSetAppliance3(session *Session, self VMRef, value VMApplianceRef) (retval TaskRef, err error) {
 	method := "Async.VM.set_appliance"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1041,7 +1041,7 @@ func (vM) AsyncSetAppliance3(session *Session, self VMRef, value VMApplianceRef)
 
 // ImportConvert: Import using a conversion service.
 // Version: tampa
-func (vM) ImportConvert(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (err error) {
+func (vm) ImportConvert(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (err error) {
 	method := "VM.import_convert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1073,7 +1073,7 @@ func (vM) ImportConvert(session *Session, typeKey string, username string, passw
 
 // AsyncImportConvert: Import using a conversion service.
 // Version: tampa
-func (vM) AsyncImportConvert(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncImportConvert(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.import_convert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1109,7 +1109,7 @@ func (vM) AsyncImportConvert(session *Session, typeKey string, username string, 
 
 // ImportConvert6: Import using a conversion service.
 // Version: tampa
-func (vM) ImportConvert6(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (err error) {
+func (vm) ImportConvert6(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (err error) {
 	method := "VM.import_convert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1141,7 +1141,7 @@ func (vM) ImportConvert6(session *Session, typeKey string, username string, pass
 
 // AsyncImportConvert6: Import using a conversion service.
 // Version: tampa
-func (vM) AsyncImportConvert6(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncImportConvert6(session *Session, typeKey string, username string, password string, sr SRRef, remoteConfig map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.import_convert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1177,7 +1177,7 @@ func (vM) AsyncImportConvert6(session *Session, typeKey string, username string,
 
 // Recover: Recover the VM
 // Version: boston
-func (vM) Recover(session *Session, self VMRef, sessionTo SessionRef, force bool) (err error) {
+func (vm) Recover(session *Session, self VMRef, sessionTo SessionRef, force bool) (err error) {
 	method := "VM.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1201,7 +1201,7 @@ func (vM) Recover(session *Session, self VMRef, sessionTo SessionRef, force bool
 
 // AsyncRecover: Recover the VM
 // Version: boston
-func (vM) AsyncRecover(session *Session, self VMRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
+func (vm) AsyncRecover(session *Session, self VMRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1229,7 +1229,7 @@ func (vM) AsyncRecover(session *Session, self VMRef, sessionTo SessionRef, force
 
 // Recover4: Recover the VM
 // Version: boston
-func (vM) Recover4(session *Session, self VMRef, sessionTo SessionRef, force bool) (err error) {
+func (vm) Recover4(session *Session, self VMRef, sessionTo SessionRef, force bool) (err error) {
 	method := "VM.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1253,7 +1253,7 @@ func (vM) Recover4(session *Session, self VMRef, sessionTo SessionRef, force boo
 
 // AsyncRecover4: Recover the VM
 // Version: boston
-func (vM) AsyncRecover4(session *Session, self VMRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
+func (vm) AsyncRecover4(session *Session, self VMRef, sessionTo SessionRef, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.recover"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1281,7 +1281,7 @@ func (vM) AsyncRecover4(session *Session, self VMRef, sessionTo SessionRef, forc
 
 // GetSRsRequiredForRecovery: List all the SR&apos;s that are required for the VM to be recovered
 // Version: creedence
-func (vM) GetSRsRequiredForRecovery(session *Session, self VMRef, sessionTo SessionRef) (retval []SRRef, err error) {
+func (vm) GetSRsRequiredForRecovery(session *Session, self VMRef, sessionTo SessionRef) (retval []SRRef, err error) {
 	method := "VM.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1305,7 +1305,7 @@ func (vM) GetSRsRequiredForRecovery(session *Session, self VMRef, sessionTo Sess
 
 // AsyncGetSRsRequiredForRecovery: List all the SR&apos;s that are required for the VM to be recovered
 // Version: creedence
-func (vM) AsyncGetSRsRequiredForRecovery(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vm) AsyncGetSRsRequiredForRecovery(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1329,7 +1329,7 @@ func (vM) AsyncGetSRsRequiredForRecovery(session *Session, self VMRef, sessionTo
 
 // GetSRsRequiredForRecovery3: List all the SR&apos;s that are required for the VM to be recovered
 // Version: creedence
-func (vM) GetSRsRequiredForRecovery3(session *Session, self VMRef, sessionTo SessionRef) (retval []SRRef, err error) {
+func (vm) GetSRsRequiredForRecovery3(session *Session, self VMRef, sessionTo SessionRef) (retval []SRRef, err error) {
 	method := "VM.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1353,7 +1353,7 @@ func (vM) GetSRsRequiredForRecovery3(session *Session, self VMRef, sessionTo Ses
 
 // AsyncGetSRsRequiredForRecovery3: List all the SR&apos;s that are required for the VM to be recovered
 // Version: creedence
-func (vM) AsyncGetSRsRequiredForRecovery3(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vm) AsyncGetSRsRequiredForRecovery3(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM.get_SRs_required_for_recovery"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1381,7 +1381,7 @@ func (vM) AsyncGetSRsRequiredForRecovery3(session *Session, self VMRef, sessionT
 // Errors:
 // VM_IS_PART_OF_AN_APPLIANCE - This operation is not allowed as the VM is part of an appliance.
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vM) AssertCanBeRecovered(session *Session, self VMRef, sessionTo SessionRef) (err error) {
+func (vm) AssertCanBeRecovered(session *Session, self VMRef, sessionTo SessionRef) (err error) {
 	method := "VM.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1405,7 +1405,7 @@ func (vM) AssertCanBeRecovered(session *Session, self VMRef, sessionTo SessionRe
 // Errors:
 // VM_IS_PART_OF_AN_APPLIANCE - This operation is not allowed as the VM is part of an appliance.
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vM) AsyncAssertCanBeRecovered(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertCanBeRecovered(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1433,7 +1433,7 @@ func (vM) AsyncAssertCanBeRecovered(session *Session, self VMRef, sessionTo Sess
 // Errors:
 // VM_IS_PART_OF_AN_APPLIANCE - This operation is not allowed as the VM is part of an appliance.
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vM) AssertCanBeRecovered3(session *Session, self VMRef, sessionTo SessionRef) (err error) {
+func (vm) AssertCanBeRecovered3(session *Session, self VMRef, sessionTo SessionRef) (err error) {
 	method := "VM.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1457,7 +1457,7 @@ func (vM) AssertCanBeRecovered3(session *Session, self VMRef, sessionTo SessionR
 // Errors:
 // VM_IS_PART_OF_AN_APPLIANCE - This operation is not allowed as the VM is part of an appliance.
 // VM_REQUIRES_SR - You attempted to run a VM on a host which doesn&apos;t have access to an SR needed by the VM. The VM has at least one VBD attached to a VDI in the SR.
-func (vM) AsyncAssertCanBeRecovered3(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertCanBeRecovered3(session *Session, self VMRef, sessionTo SessionRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_can_be_recovered"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1481,7 +1481,7 @@ func (vM) AsyncAssertCanBeRecovered3(session *Session, self VMRef, sessionTo Ses
 
 // SetSuspendVDI: Set this VM&apos;s suspend VDI, which must be indentical to its current one
 // Version: boston
-func (vM) SetSuspendVDI(session *Session, self VMRef, value VDIRef) (err error) {
+func (vm) SetSuspendVDI(session *Session, self VMRef, value VDIRef) (err error) {
 	method := "VM.set_suspend_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1501,7 +1501,7 @@ func (vM) SetSuspendVDI(session *Session, self VMRef, value VDIRef) (err error) 
 
 // AsyncSetSuspendVDI: Set this VM&apos;s suspend VDI, which must be indentical to its current one
 // Version: boston
-func (vM) AsyncSetSuspendVDI(session *Session, self VMRef, value VDIRef) (retval TaskRef, err error) {
+func (vm) AsyncSetSuspendVDI(session *Session, self VMRef, value VDIRef) (retval TaskRef, err error) {
 	method := "Async.VM.set_suspend_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1525,7 +1525,7 @@ func (vM) AsyncSetSuspendVDI(session *Session, self VMRef, value VDIRef) (retval
 
 // SetSuspendVDI3: Set this VM&apos;s suspend VDI, which must be indentical to its current one
 // Version: boston
-func (vM) SetSuspendVDI3(session *Session, self VMRef, value VDIRef) (err error) {
+func (vm) SetSuspendVDI3(session *Session, self VMRef, value VDIRef) (err error) {
 	method := "VM.set_suspend_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1545,7 +1545,7 @@ func (vM) SetSuspendVDI3(session *Session, self VMRef, value VDIRef) (err error)
 
 // AsyncSetSuspendVDI3: Set this VM&apos;s suspend VDI, which must be indentical to its current one
 // Version: boston
-func (vM) AsyncSetSuspendVDI3(session *Session, self VMRef, value VDIRef) (retval TaskRef, err error) {
+func (vm) AsyncSetSuspendVDI3(session *Session, self VMRef, value VDIRef) (retval TaskRef, err error) {
 	method := "Async.VM.set_suspend_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1569,7 +1569,7 @@ func (vM) AsyncSetSuspendVDI3(session *Session, self VMRef, value VDIRef) (retva
 
 // SetOrder: Set this VM&apos;s boot order
 // Version: boston
-func (vM) SetOrder(session *Session, self VMRef, value int) (err error) {
+func (vm) SetOrder(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_order"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1589,7 +1589,7 @@ func (vM) SetOrder(session *Session, self VMRef, value int) (err error) {
 
 // AsyncSetOrder: Set this VM&apos;s boot order
 // Version: boston
-func (vM) AsyncSetOrder(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetOrder(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_order"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1613,7 +1613,7 @@ func (vM) AsyncSetOrder(session *Session, self VMRef, value int) (retval TaskRef
 
 // SetOrder3: Set this VM&apos;s boot order
 // Version: boston
-func (vM) SetOrder3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetOrder3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_order"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1633,7 +1633,7 @@ func (vM) SetOrder3(session *Session, self VMRef, value int) (err error) {
 
 // AsyncSetOrder3: Set this VM&apos;s boot order
 // Version: boston
-func (vM) AsyncSetOrder3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetOrder3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_order"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1657,7 +1657,7 @@ func (vM) AsyncSetOrder3(session *Session, self VMRef, value int) (retval TaskRe
 
 // SetShutdownDelay: Set this VM&apos;s shutdown delay in seconds
 // Version: boston
-func (vM) SetShutdownDelay(session *Session, self VMRef, value int) (err error) {
+func (vm) SetShutdownDelay(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_shutdown_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1677,7 +1677,7 @@ func (vM) SetShutdownDelay(session *Session, self VMRef, value int) (err error) 
 
 // AsyncSetShutdownDelay: Set this VM&apos;s shutdown delay in seconds
 // Version: boston
-func (vM) AsyncSetShutdownDelay(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetShutdownDelay(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_shutdown_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1701,7 +1701,7 @@ func (vM) AsyncSetShutdownDelay(session *Session, self VMRef, value int) (retval
 
 // SetShutdownDelay3: Set this VM&apos;s shutdown delay in seconds
 // Version: boston
-func (vM) SetShutdownDelay3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetShutdownDelay3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_shutdown_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1721,7 +1721,7 @@ func (vM) SetShutdownDelay3(session *Session, self VMRef, value int) (err error)
 
 // AsyncSetShutdownDelay3: Set this VM&apos;s shutdown delay in seconds
 // Version: boston
-func (vM) AsyncSetShutdownDelay3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetShutdownDelay3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_shutdown_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1745,7 +1745,7 @@ func (vM) AsyncSetShutdownDelay3(session *Session, self VMRef, value int) (retva
 
 // SetStartDelay: Set this VM&apos;s start delay in seconds
 // Version: boston
-func (vM) SetStartDelay(session *Session, self VMRef, value int) (err error) {
+func (vm) SetStartDelay(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_start_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1765,7 +1765,7 @@ func (vM) SetStartDelay(session *Session, self VMRef, value int) (err error) {
 
 // AsyncSetStartDelay: Set this VM&apos;s start delay in seconds
 // Version: boston
-func (vM) AsyncSetStartDelay(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetStartDelay(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_start_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1789,7 +1789,7 @@ func (vM) AsyncSetStartDelay(session *Session, self VMRef, value int) (retval Ta
 
 // SetStartDelay3: Set this VM&apos;s start delay in seconds
 // Version: boston
-func (vM) SetStartDelay3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetStartDelay3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_start_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1809,7 +1809,7 @@ func (vM) SetStartDelay3(session *Session, self VMRef, value int) (err error) {
 
 // AsyncSetStartDelay3: Set this VM&apos;s start delay in seconds
 // Version: boston
-func (vM) AsyncSetStartDelay3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetStartDelay3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_start_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1833,7 +1833,7 @@ func (vM) AsyncSetStartDelay3(session *Session, self VMRef, value int) (retval T
 
 // SetSnapshotSchedule: Set the value of the snapshot schedule field
 // Version: falcon
-func (vM) SetSnapshotSchedule(session *Session, self VMRef, value VMSSRef) (err error) {
+func (vm) SetSnapshotSchedule(session *Session, self VMRef, value VMSSRef) (err error) {
 	method := "VM.set_snapshot_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1853,7 +1853,7 @@ func (vM) SetSnapshotSchedule(session *Session, self VMRef, value VMSSRef) (err 
 
 // SetSnapshotSchedule3: Set the value of the snapshot schedule field
 // Version: falcon
-func (vM) SetSnapshotSchedule3(session *Session, self VMRef, value VMSSRef) (err error) {
+func (vm) SetSnapshotSchedule3(session *Session, self VMRef, value VMSSRef) (err error) {
 	method := "VM.set_snapshot_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1873,7 +1873,7 @@ func (vM) SetSnapshotSchedule3(session *Session, self VMRef, value VMSSRef) (err
 
 // SetProtectionPolicy: Set the value of the protection_policy field
 // Version: cowley
-func (vM) SetProtectionPolicy(session *Session, self VMRef, value VMPPRef) (err error) {
+func (vm) SetProtectionPolicy(session *Session, self VMRef, value VMPPRef) (err error) {
 	method := "VM.set_protection_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1893,7 +1893,7 @@ func (vM) SetProtectionPolicy(session *Session, self VMRef, value VMPPRef) (err 
 
 // SetProtectionPolicy3: Set the value of the protection_policy field
 // Version: cowley
-func (vM) SetProtectionPolicy3(session *Session, self VMRef, value VMPPRef) (err error) {
+func (vm) SetProtectionPolicy3(session *Session, self VMRef, value VMPPRef) (err error) {
 	method := "VM.set_protection_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1913,13 +1913,13 @@ func (vM) SetProtectionPolicy3(session *Session, self VMRef, value VMPPRef) (err
 
 // CopyBiosStrings: Copy the BIOS strings from the given host to this VM
 // Version: midnight-ride
-func (vM) CopyBiosStrings(session *Session, vM VMRef, host HostRef) (err error) {
+func (vm) CopyBiosStrings(session *Session, vm VMRef, host HostRef) (err error) {
 	method := "VM.copy_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -1927,19 +1927,19 @@ func (vM) CopyBiosStrings(session *Session, vM VMRef, host HostRef) (err error) 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg)
 	return
 }
 
 // AsyncCopyBiosStrings: Copy the BIOS strings from the given host to this VM
 // Version: midnight-ride
-func (vM) AsyncCopyBiosStrings(session *Session, vM VMRef, host HostRef) (retval TaskRef, err error) {
+func (vm) AsyncCopyBiosStrings(session *Session, vm VMRef, host HostRef) (retval TaskRef, err error) {
 	method := "Async.VM.copy_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -1947,7 +1947,7 @@ func (vM) AsyncCopyBiosStrings(session *Session, vM VMRef, host HostRef) (retval
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg)
 	if err != nil {
 		return
 	}
@@ -1957,13 +1957,13 @@ func (vM) AsyncCopyBiosStrings(session *Session, vM VMRef, host HostRef) (retval
 
 // CopyBiosStrings3: Copy the BIOS strings from the given host to this VM
 // Version: midnight-ride
-func (vM) CopyBiosStrings3(session *Session, vM VMRef, host HostRef) (err error) {
+func (vm) CopyBiosStrings3(session *Session, vm VMRef, host HostRef) (err error) {
 	method := "VM.copy_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -1971,19 +1971,19 @@ func (vM) CopyBiosStrings3(session *Session, vM VMRef, host HostRef) (err error)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg)
 	return
 }
 
 // AsyncCopyBiosStrings3: Copy the BIOS strings from the given host to this VM
 // Version: midnight-ride
-func (vM) AsyncCopyBiosStrings3(session *Session, vM VMRef, host HostRef) (retval TaskRef, err error) {
+func (vm) AsyncCopyBiosStrings3(session *Session, vm VMRef, host HostRef) (retval TaskRef, err error) {
 	method := "Async.VM.copy_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -1991,7 +1991,7 @@ func (vM) AsyncCopyBiosStrings3(session *Session, vM VMRef, host HostRef) (retva
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg)
 	if err != nil {
 		return
 	}
@@ -2005,7 +2005,7 @@ func (vM) AsyncCopyBiosStrings3(session *Session, vM VMRef, host HostRef) (retva
 // Errors:
 // VM_BIOS_STRINGS_ALREADY_SET - The BIOS strings for this VM have already been set and cannot be changed.
 // INVALID_VALUE - The value given is invalid
-func (vM) SetBiosStrings(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetBiosStrings(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2029,7 +2029,7 @@ func (vM) SetBiosStrings(session *Session, self VMRef, value map[string]string) 
 // Errors:
 // VM_BIOS_STRINGS_ALREADY_SET - The BIOS strings for this VM have already been set and cannot be changed.
 // INVALID_VALUE - The value given is invalid
-func (vM) AsyncSetBiosStrings(session *Session, self VMRef, value map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncSetBiosStrings(session *Session, self VMRef, value map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.set_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2057,7 +2057,7 @@ func (vM) AsyncSetBiosStrings(session *Session, self VMRef, value map[string]str
 // Errors:
 // VM_BIOS_STRINGS_ALREADY_SET - The BIOS strings for this VM have already been set and cannot be changed.
 // INVALID_VALUE - The value given is invalid
-func (vM) SetBiosStrings3(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetBiosStrings3(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2081,7 +2081,7 @@ func (vM) SetBiosStrings3(session *Session, self VMRef, value map[string]string)
 // Errors:
 // VM_BIOS_STRINGS_ALREADY_SET - The BIOS strings for this VM have already been set and cannot be changed.
 // INVALID_VALUE - The value given is invalid
-func (vM) AsyncSetBiosStrings3(session *Session, self VMRef, value map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncSetBiosStrings3(session *Session, self VMRef, value map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.set_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2105,17 +2105,17 @@ func (vM) AsyncSetBiosStrings3(session *Session, self VMRef, value map[string]st
 
 // RetrieveWlbRecommendations: Returns mapping of hosts to ratings, indicating the suitability of starting the VM at that location according to wlb. Rating is replaced with an error if the VM cannot boot there.
 // Version: george
-func (vM) RetrieveWlbRecommendations(session *Session, vM VMRef) (retval map[HostRef][]string, err error) {
+func (vm) RetrieveWlbRecommendations(session *Session, vm VMRef) (retval map[HostRef][]string, err error) {
 	method := "VM.retrieve_wlb_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2125,17 +2125,17 @@ func (vM) RetrieveWlbRecommendations(session *Session, vM VMRef) (retval map[Hos
 
 // AsyncRetrieveWlbRecommendations: Returns mapping of hosts to ratings, indicating the suitability of starting the VM at that location according to wlb. Rating is replaced with an error if the VM cannot boot there.
 // Version: george
-func (vM) AsyncRetrieveWlbRecommendations(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncRetrieveWlbRecommendations(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.retrieve_wlb_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2145,17 +2145,17 @@ func (vM) AsyncRetrieveWlbRecommendations(session *Session, vM VMRef) (retval Ta
 
 // RetrieveWlbRecommendations2: Returns mapping of hosts to ratings, indicating the suitability of starting the VM at that location according to wlb. Rating is replaced with an error if the VM cannot boot there.
 // Version: george
-func (vM) RetrieveWlbRecommendations2(session *Session, vM VMRef) (retval map[HostRef][]string, err error) {
+func (vm) RetrieveWlbRecommendations2(session *Session, vm VMRef) (retval map[HostRef][]string, err error) {
 	method := "VM.retrieve_wlb_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2165,17 +2165,17 @@ func (vM) RetrieveWlbRecommendations2(session *Session, vM VMRef) (retval map[Ho
 
 // AsyncRetrieveWlbRecommendations2: Returns mapping of hosts to ratings, indicating the suitability of starting the VM at that location according to wlb. Rating is replaced with an error if the VM cannot boot there.
 // Version: george
-func (vM) AsyncRetrieveWlbRecommendations2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncRetrieveWlbRecommendations2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.retrieve_wlb_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2185,7 +2185,7 @@ func (vM) AsyncRetrieveWlbRecommendations2(session *Session, vM VMRef) (retval T
 
 // AssertAgile: Returns an error if the VM is not considered agile e.g. because it is tied to a resource local to a host
 // Version: orlando
-func (vM) AssertAgile(session *Session, self VMRef) (err error) {
+func (vm) AssertAgile(session *Session, self VMRef) (err error) {
 	method := "VM.assert_agile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2201,7 +2201,7 @@ func (vM) AssertAgile(session *Session, self VMRef) (err error) {
 
 // AsyncAssertAgile: Returns an error if the VM is not considered agile e.g. because it is tied to a resource local to a host
 // Version: orlando
-func (vM) AsyncAssertAgile(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertAgile(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_agile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2221,7 +2221,7 @@ func (vM) AsyncAssertAgile(session *Session, self VMRef) (retval TaskRef, err er
 
 // AssertAgile2: Returns an error if the VM is not considered agile e.g. because it is tied to a resource local to a host
 // Version: orlando
-func (vM) AssertAgile2(session *Session, self VMRef) (err error) {
+func (vm) AssertAgile2(session *Session, self VMRef) (err error) {
 	method := "VM.assert_agile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2237,7 +2237,7 @@ func (vM) AssertAgile2(session *Session, self VMRef) (err error) {
 
 // AsyncAssertAgile2: Returns an error if the VM is not considered agile e.g. because it is tied to a resource local to a host
 // Version: orlando
-func (vM) AsyncAssertAgile2(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertAgile2(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_agile"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2257,13 +2257,13 @@ func (vM) AsyncAssertAgile2(session *Session, self VMRef) (retval TaskRef, err e
 
 // CreateNewBlob: Create a placeholder for a named binary blob of data that is associated with this VM
 // Version: tampa
-func (vM) CreateNewBlob(session *Session, vM VMRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
+func (vm) CreateNewBlob(session *Session, vm VMRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
 	method := "VM.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -2279,7 +2279,7 @@ func (vM) CreateNewBlob(session *Session, vM VMRef, name string, mimeType string
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, nameArg, mimeTypeArg, publicArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, nameArg, mimeTypeArg, publicArg)
 	if err != nil {
 		return
 	}
@@ -2289,13 +2289,13 @@ func (vM) CreateNewBlob(session *Session, vM VMRef, name string, mimeType string
 
 // AsyncCreateNewBlob: Create a placeholder for a named binary blob of data that is associated with this VM
 // Version: tampa
-func (vM) AsyncCreateNewBlob(session *Session, vM VMRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
+func (vm) AsyncCreateNewBlob(session *Session, vm VMRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
 	method := "Async.VM.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -2311,7 +2311,7 @@ func (vM) AsyncCreateNewBlob(session *Session, vM VMRef, name string, mimeType s
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, nameArg, mimeTypeArg, publicArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, nameArg, mimeTypeArg, publicArg)
 	if err != nil {
 		return
 	}
@@ -2321,13 +2321,13 @@ func (vM) AsyncCreateNewBlob(session *Session, vM VMRef, name string, mimeType s
 
 // CreateNewBlob5: Create a placeholder for a named binary blob of data that is associated with this VM
 // Version: tampa
-func (vM) CreateNewBlob5(session *Session, vM VMRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
+func (vm) CreateNewBlob5(session *Session, vm VMRef, name string, mimeType string, public bool) (retval BlobRef, err error) {
 	method := "VM.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -2343,7 +2343,7 @@ func (vM) CreateNewBlob5(session *Session, vM VMRef, name string, mimeType strin
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, nameArg, mimeTypeArg, publicArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, nameArg, mimeTypeArg, publicArg)
 	if err != nil {
 		return
 	}
@@ -2353,13 +2353,13 @@ func (vM) CreateNewBlob5(session *Session, vM VMRef, name string, mimeType strin
 
 // AsyncCreateNewBlob5: Create a placeholder for a named binary blob of data that is associated with this VM
 // Version: tampa
-func (vM) AsyncCreateNewBlob5(session *Session, vM VMRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
+func (vm) AsyncCreateNewBlob5(session *Session, vm VMRef, name string, mimeType string, public bool) (retval TaskRef, err error) {
 	method := "Async.VM.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -2375,7 +2375,7 @@ func (vM) AsyncCreateNewBlob5(session *Session, vM VMRef, name string, mimeType 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, nameArg, mimeTypeArg, publicArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, nameArg, mimeTypeArg, publicArg)
 	if err != nil {
 		return
 	}
@@ -2385,13 +2385,13 @@ func (vM) AsyncCreateNewBlob5(session *Session, vM VMRef, name string, mimeType 
 
 // CreateNewBlob4: Create a placeholder for a named binary blob of data that is associated with this VM
 // Version: orlando
-func (vM) CreateNewBlob4(session *Session, vM VMRef, name string, mimeType string) (retval BlobRef, err error) {
+func (vm) CreateNewBlob4(session *Session, vm VMRef, name string, mimeType string) (retval BlobRef, err error) {
 	method := "VM.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -2403,7 +2403,7 @@ func (vM) CreateNewBlob4(session *Session, vM VMRef, name string, mimeType strin
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, nameArg, mimeTypeArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, nameArg, mimeTypeArg)
 	if err != nil {
 		return
 	}
@@ -2413,13 +2413,13 @@ func (vM) CreateNewBlob4(session *Session, vM VMRef, name string, mimeType strin
 
 // AsyncCreateNewBlob4: Create a placeholder for a named binary blob of data that is associated with this VM
 // Version: orlando
-func (vM) AsyncCreateNewBlob4(session *Session, vM VMRef, name string, mimeType string) (retval TaskRef, err error) {
+func (vm) AsyncCreateNewBlob4(session *Session, vm VMRef, name string, mimeType string) (retval TaskRef, err error) {
 	method := "Async.VM.create_new_blob"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -2431,7 +2431,7 @@ func (vM) AsyncCreateNewBlob4(session *Session, vM VMRef, name string, mimeType 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, nameArg, mimeTypeArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, nameArg, mimeTypeArg)
 	if err != nil {
 		return
 	}
@@ -2462,7 +2462,7 @@ func (vM) AsyncCreateNewBlob4(session *Session, vM VMRef, name string, mimeType 
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VALUE_NOT_SUPPORTED - You attempted to set a value that is not supported by this implementation. The fully-qualified field name and the value that you tried to set are returned. Also returned is a developer-only diagnostic reason.
 // VM_INCOMPATIBLE_WITH_THIS_HOST - The VM is incompatible with the CPU features of this host.
-func (vM) AssertCanBootHere(session *Session, self VMRef, host HostRef) (err error) {
+func (vm) AssertCanBootHere(session *Session, self VMRef, host HostRef) (err error) {
 	method := "VM.assert_can_boot_here"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2503,7 +2503,7 @@ func (vM) AssertCanBootHere(session *Session, self VMRef, host HostRef) (err err
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VALUE_NOT_SUPPORTED - You attempted to set a value that is not supported by this implementation. The fully-qualified field name and the value that you tried to set are returned. Also returned is a developer-only diagnostic reason.
 // VM_INCOMPATIBLE_WITH_THIS_HOST - The VM is incompatible with the CPU features of this host.
-func (vM) AsyncAssertCanBootHere(session *Session, self VMRef, host HostRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertCanBootHere(session *Session, self VMRef, host HostRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_can_boot_here"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2548,7 +2548,7 @@ func (vM) AsyncAssertCanBootHere(session *Session, self VMRef, host HostRef) (re
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VALUE_NOT_SUPPORTED - You attempted to set a value that is not supported by this implementation. The fully-qualified field name and the value that you tried to set are returned. Also returned is a developer-only diagnostic reason.
 // VM_INCOMPATIBLE_WITH_THIS_HOST - The VM is incompatible with the CPU features of this host.
-func (vM) AssertCanBootHere3(session *Session, self VMRef, host HostRef) (err error) {
+func (vm) AssertCanBootHere3(session *Session, self VMRef, host HostRef) (err error) {
 	method := "VM.assert_can_boot_here"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2589,7 +2589,7 @@ func (vM) AssertCanBootHere3(session *Session, self VMRef, host HostRef) (err er
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VALUE_NOT_SUPPORTED - You attempted to set a value that is not supported by this implementation. The fully-qualified field name and the value that you tried to set are returned. Also returned is a developer-only diagnostic reason.
 // VM_INCOMPATIBLE_WITH_THIS_HOST - The VM is incompatible with the CPU features of this host.
-func (vM) AsyncAssertCanBootHere3(session *Session, self VMRef, host HostRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertCanBootHere3(session *Session, self VMRef, host HostRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_can_boot_here"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2613,17 +2613,17 @@ func (vM) AsyncAssertCanBootHere3(session *Session, self VMRef, host HostRef) (r
 
 // GetPossibleHosts: Return the list of hosts on which this VM may run.
 // Version: rio
-func (vM) GetPossibleHosts(session *Session, vM VMRef) (retval []HostRef, err error) {
+func (vm) GetPossibleHosts(session *Session, vm VMRef) (retval []HostRef, err error) {
 	method := "VM.get_possible_hosts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2633,17 +2633,17 @@ func (vM) GetPossibleHosts(session *Session, vM VMRef) (retval []HostRef, err er
 
 // AsyncGetPossibleHosts: Return the list of hosts on which this VM may run.
 // Version: rio
-func (vM) AsyncGetPossibleHosts(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncGetPossibleHosts(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.get_possible_hosts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2653,17 +2653,17 @@ func (vM) AsyncGetPossibleHosts(session *Session, vM VMRef) (retval TaskRef, err
 
 // GetPossibleHosts2: Return the list of hosts on which this VM may run.
 // Version: rio
-func (vM) GetPossibleHosts2(session *Session, vM VMRef) (retval []HostRef, err error) {
+func (vm) GetPossibleHosts2(session *Session, vm VMRef) (retval []HostRef, err error) {
 	method := "VM.get_possible_hosts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2673,17 +2673,17 @@ func (vM) GetPossibleHosts2(session *Session, vM VMRef) (retval []HostRef, err e
 
 // AsyncGetPossibleHosts2: Return the list of hosts on which this VM may run.
 // Version: rio
-func (vM) AsyncGetPossibleHosts2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncGetPossibleHosts2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.get_possible_hosts"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2693,17 +2693,17 @@ func (vM) AsyncGetPossibleHosts2(session *Session, vM VMRef) (retval TaskRef, er
 
 // GetAllowedVIFDevices: Returns a list of the allowed values that a VIF device field can take
 // Version: rio
-func (vM) GetAllowedVIFDevices(session *Session, vM VMRef) (retval []string, err error) {
+func (vm) GetAllowedVIFDevices(session *Session, vm VMRef) (retval []string, err error) {
 	method := "VM.get_allowed_VIF_devices"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2713,17 +2713,17 @@ func (vM) GetAllowedVIFDevices(session *Session, vM VMRef) (retval []string, err
 
 // GetAllowedVIFDevices2: Returns a list of the allowed values that a VIF device field can take
 // Version: rio
-func (vM) GetAllowedVIFDevices2(session *Session, vM VMRef) (retval []string, err error) {
+func (vm) GetAllowedVIFDevices2(session *Session, vm VMRef) (retval []string, err error) {
 	method := "VM.get_allowed_VIF_devices"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2733,17 +2733,17 @@ func (vM) GetAllowedVIFDevices2(session *Session, vM VMRef) (retval []string, er
 
 // GetAllowedVBDDevices: Returns a list of the allowed values that a VBD device field can take
 // Version: rio
-func (vM) GetAllowedVBDDevices(session *Session, vM VMRef) (retval []string, err error) {
+func (vm) GetAllowedVBDDevices(session *Session, vm VMRef) (retval []string, err error) {
 	method := "VM.get_allowed_VBD_devices"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2753,17 +2753,17 @@ func (vM) GetAllowedVBDDevices(session *Session, vM VMRef) (retval []string, err
 
 // GetAllowedVBDDevices2: Returns a list of the allowed values that a VBD device field can take
 // Version: rio
-func (vM) GetAllowedVBDDevices2(session *Session, vM VMRef) (retval []string, err error) {
+func (vm) GetAllowedVBDDevices2(session *Session, vm VMRef) (retval []string, err error) {
 	method := "VM.get_allowed_VBD_devices"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -2773,7 +2773,7 @@ func (vM) GetAllowedVBDDevices2(session *Session, vM VMRef) (retval []string, er
 
 // UpdateAllowedOperations: Recomputes the list of acceptable operations
 // Version: rio
-func (vM) UpdateAllowedOperations(session *Session, self VMRef) (err error) {
+func (vm) UpdateAllowedOperations(session *Session, self VMRef) (err error) {
 	method := "VM.update_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2789,7 +2789,7 @@ func (vM) UpdateAllowedOperations(session *Session, self VMRef) (err error) {
 
 // AsyncUpdateAllowedOperations: Recomputes the list of acceptable operations
 // Version: rio
-func (vM) AsyncUpdateAllowedOperations(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncUpdateAllowedOperations(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.update_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2809,7 +2809,7 @@ func (vM) AsyncUpdateAllowedOperations(session *Session, self VMRef) (retval Tas
 
 // UpdateAllowedOperations2: Recomputes the list of acceptable operations
 // Version: rio
-func (vM) UpdateAllowedOperations2(session *Session, self VMRef) (err error) {
+func (vm) UpdateAllowedOperations2(session *Session, self VMRef) (err error) {
 	method := "VM.update_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2825,7 +2825,7 @@ func (vM) UpdateAllowedOperations2(session *Session, self VMRef) (err error) {
 
 // AsyncUpdateAllowedOperations2: Recomputes the list of acceptable operations
 // Version: rio
-func (vM) AsyncUpdateAllowedOperations2(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncUpdateAllowedOperations2(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.update_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2845,7 +2845,7 @@ func (vM) AsyncUpdateAllowedOperations2(session *Session, self VMRef) (retval Ta
 
 // AssertOperationValid: Check to see whether this operation is acceptable in the current state of the system, raising an error if the operation is invalid for some reason
 // Version: rio
-func (vM) AssertOperationValid(session *Session, self VMRef, op VMOperations) (err error) {
+func (vm) AssertOperationValid(session *Session, self VMRef, op VMOperations) (err error) {
 	method := "VM.assert_operation_valid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2865,7 +2865,7 @@ func (vM) AssertOperationValid(session *Session, self VMRef, op VMOperations) (e
 
 // AsyncAssertOperationValid: Check to see whether this operation is acceptable in the current state of the system, raising an error if the operation is invalid for some reason
 // Version: rio
-func (vM) AsyncAssertOperationValid(session *Session, self VMRef, op VMOperations) (retval TaskRef, err error) {
+func (vm) AsyncAssertOperationValid(session *Session, self VMRef, op VMOperations) (retval TaskRef, err error) {
 	method := "Async.VM.assert_operation_valid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2889,7 +2889,7 @@ func (vM) AsyncAssertOperationValid(session *Session, self VMRef, op VMOperation
 
 // AssertOperationValid3: Check to see whether this operation is acceptable in the current state of the system, raising an error if the operation is invalid for some reason
 // Version: rio
-func (vM) AssertOperationValid3(session *Session, self VMRef, op VMOperations) (err error) {
+func (vm) AssertOperationValid3(session *Session, self VMRef, op VMOperations) (err error) {
 	method := "VM.assert_operation_valid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2909,7 +2909,7 @@ func (vM) AssertOperationValid3(session *Session, self VMRef, op VMOperations) (
 
 // AsyncAssertOperationValid3: Check to see whether this operation is acceptable in the current state of the system, raising an error if the operation is invalid for some reason
 // Version: rio
-func (vM) AsyncAssertOperationValid3(session *Session, self VMRef, op VMOperations) (retval TaskRef, err error) {
+func (vm) AsyncAssertOperationValid3(session *Session, self VMRef, op VMOperations) (retval TaskRef, err error) {
 	method := "Async.VM.assert_operation_valid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2933,7 +2933,7 @@ func (vM) AsyncAssertOperationValid3(session *Session, self VMRef, op VMOperatio
 
 // ForgetDataSourceArchives: Forget the recorded statistics related to the specified data source
 // Version: orlando
-func (vM) ForgetDataSourceArchives(session *Session, self VMRef, dataSource string) (err error) {
+func (vm) ForgetDataSourceArchives(session *Session, self VMRef, dataSource string) (err error) {
 	method := "VM.forget_data_source_archives"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2953,7 +2953,7 @@ func (vM) ForgetDataSourceArchives(session *Session, self VMRef, dataSource stri
 
 // ForgetDataSourceArchives3: Forget the recorded statistics related to the specified data source
 // Version: orlando
-func (vM) ForgetDataSourceArchives3(session *Session, self VMRef, dataSource string) (err error) {
+func (vm) ForgetDataSourceArchives3(session *Session, self VMRef, dataSource string) (err error) {
 	method := "VM.forget_data_source_archives"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2973,7 +2973,7 @@ func (vM) ForgetDataSourceArchives3(session *Session, self VMRef, dataSource str
 
 // QueryDataSource: Query the latest value of the specified data source
 // Version: orlando
-func (vM) QueryDataSource(session *Session, self VMRef, dataSource string) (retval float64, err error) {
+func (vm) QueryDataSource(session *Session, self VMRef, dataSource string) (retval float64, err error) {
 	method := "VM.query_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -2997,7 +2997,7 @@ func (vM) QueryDataSource(session *Session, self VMRef, dataSource string) (retv
 
 // QueryDataSource3: Query the latest value of the specified data source
 // Version: orlando
-func (vM) QueryDataSource3(session *Session, self VMRef, dataSource string) (retval float64, err error) {
+func (vm) QueryDataSource3(session *Session, self VMRef, dataSource string) (retval float64, err error) {
 	method := "VM.query_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3021,7 +3021,7 @@ func (vM) QueryDataSource3(session *Session, self VMRef, dataSource string) (ret
 
 // RecordDataSource: Start recording the specified data source
 // Version: orlando
-func (vM) RecordDataSource(session *Session, self VMRef, dataSource string) (err error) {
+func (vm) RecordDataSource(session *Session, self VMRef, dataSource string) (err error) {
 	method := "VM.record_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3041,7 +3041,7 @@ func (vM) RecordDataSource(session *Session, self VMRef, dataSource string) (err
 
 // RecordDataSource3: Start recording the specified data source
 // Version: orlando
-func (vM) RecordDataSource3(session *Session, self VMRef, dataSource string) (err error) {
+func (vm) RecordDataSource3(session *Session, self VMRef, dataSource string) (err error) {
 	method := "VM.record_data_source"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3061,7 +3061,7 @@ func (vM) RecordDataSource3(session *Session, self VMRef, dataSource string) (er
 
 // GetDataSources:
 // Version: orlando
-func (vM) GetDataSources(session *Session, self VMRef) (retval []DataSourceRecord, err error) {
+func (vm) GetDataSources(session *Session, self VMRef) (retval []DataSourceRecord, err error) {
 	method := "VM.get_data_sources"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3081,7 +3081,7 @@ func (vM) GetDataSources(session *Session, self VMRef) (retval []DataSourceRecor
 
 // GetDataSources2:
 // Version: orlando
-func (vM) GetDataSources2(session *Session, self VMRef) (retval []DataSourceRecord, err error) {
+func (vm) GetDataSources2(session *Session, self VMRef) (retval []DataSourceRecord, err error) {
 	method := "VM.get_data_sources"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3101,7 +3101,7 @@ func (vM) GetDataSources2(session *Session, self VMRef) (retval []DataSourceReco
 
 // GetBootRecord: Returns a record describing the VM&apos;s dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
 // Version: rio
-func (vM) GetBootRecord(session *Session, self VMRef) (retval VMRecord, err error) {
+func (vm) GetBootRecord(session *Session, self VMRef) (retval VMRecord, err error) {
 	method := "VM.get_boot_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3121,7 +3121,7 @@ func (vM) GetBootRecord(session *Session, self VMRef) (retval VMRecord, err erro
 
 // GetBootRecord2: Returns a record describing the VM&apos;s dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
 // Version: rio
-func (vM) GetBootRecord2(session *Session, self VMRef) (retval VMRecord, err error) {
+func (vm) GetBootRecord2(session *Session, self VMRef) (retval VMRecord, err error) {
 	method := "VM.get_boot_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3144,13 +3144,13 @@ func (vM) GetBootRecord2(session *Session, self VMRef) (retval VMRecord, err err
 //
 // Errors:
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AssertCanMigrate(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (err error) {
+func (vm) AssertCanMigrate(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (err error) {
 	method := "VM.assert_can_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3178,7 +3178,7 @@ func (vM) AssertCanMigrate(session *Session, vM VMRef, dest map[string]string, l
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	return
 }
 
@@ -3187,13 +3187,13 @@ func (vM) AssertCanMigrate(session *Session, vM VMRef, dest map[string]string, l
 //
 // Errors:
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncAssertCanMigrate(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertCanMigrate(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_can_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3221,7 +3221,7 @@ func (vM) AsyncAssertCanMigrate(session *Session, vM VMRef, dest map[string]stri
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	if err != nil {
 		return
 	}
@@ -3234,13 +3234,13 @@ func (vM) AsyncAssertCanMigrate(session *Session, vM VMRef, dest map[string]stri
 //
 // Errors:
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AssertCanMigrate8(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (err error) {
+func (vm) AssertCanMigrate8(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (err error) {
 	method := "VM.assert_can_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3268,7 +3268,7 @@ func (vM) AssertCanMigrate8(session *Session, vM VMRef, dest map[string]string, 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	return
 }
 
@@ -3277,13 +3277,13 @@ func (vM) AssertCanMigrate8(session *Session, vM VMRef, dest map[string]string, 
 //
 // Errors:
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncAssertCanMigrate8(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
+func (vm) AsyncAssertCanMigrate8(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
 	method := "Async.VM.assert_can_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3311,7 +3311,7 @@ func (vM) AsyncAssertCanMigrate8(session *Session, vM VMRef, dest map[string]str
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	if err != nil {
 		return
 	}
@@ -3324,13 +3324,13 @@ func (vM) AsyncAssertCanMigrate8(session *Session, vM VMRef, dest map[string]str
 //
 // Errors:
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AssertCanMigrate7(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (err error) {
+func (vm) AssertCanMigrate7(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (err error) {
 	method := "VM.assert_can_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3354,7 +3354,7 @@ func (vM) AssertCanMigrate7(session *Session, vM VMRef, dest map[string]string, 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
 	return
 }
 
@@ -3363,13 +3363,13 @@ func (vM) AssertCanMigrate7(session *Session, vM VMRef, dest map[string]string, 
 //
 // Errors:
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncAssertCanMigrate7(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncAssertCanMigrate7(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.assert_can_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3393,7 +3393,7 @@ func (vM) AsyncAssertCanMigrate7(session *Session, vM VMRef, dest map[string]str
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -3407,13 +3407,13 @@ func (vM) AsyncAssertCanMigrate7(session *Session, vM VMRef, dest map[string]str
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) MigrateSend(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval VMRef, err error) {
+func (vm) MigrateSend(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval VMRef, err error) {
 	method := "VM.migrate_send"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3441,7 +3441,7 @@ func (vM) MigrateSend(session *Session, vM VMRef, dest map[string]string, live b
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	if err != nil {
 		return
 	}
@@ -3455,13 +3455,13 @@ func (vM) MigrateSend(session *Session, vM VMRef, dest map[string]string, live b
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncMigrateSend(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
+func (vm) AsyncMigrateSend(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
 	method := "Async.VM.migrate_send"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3489,7 +3489,7 @@ func (vM) AsyncMigrateSend(session *Session, vM VMRef, dest map[string]string, l
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	if err != nil {
 		return
 	}
@@ -3503,13 +3503,13 @@ func (vM) AsyncMigrateSend(session *Session, vM VMRef, dest map[string]string, l
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) MigrateSend8(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval VMRef, err error) {
+func (vm) MigrateSend8(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval VMRef, err error) {
 	method := "VM.migrate_send"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3537,7 +3537,7 @@ func (vM) MigrateSend8(session *Session, vM VMRef, dest map[string]string, live 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	if err != nil {
 		return
 	}
@@ -3551,13 +3551,13 @@ func (vM) MigrateSend8(session *Session, vM VMRef, dest map[string]string, live 
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncMigrateSend8(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
+func (vm) AsyncMigrateSend8(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string, vgpuMap map[VGPURef]GPUGroupRef) (retval TaskRef, err error) {
 	method := "Async.VM.migrate_send"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3585,7 +3585,7 @@ func (vM) AsyncMigrateSend8(session *Session, vM VMRef, dest map[string]string, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg, vgpuMapArg)
 	if err != nil {
 		return
 	}
@@ -3599,13 +3599,13 @@ func (vM) AsyncMigrateSend8(session *Session, vM VMRef, dest map[string]string, 
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) MigrateSend7(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (retval VMRef, err error) {
+func (vm) MigrateSend7(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (retval VMRef, err error) {
 	method := "VM.migrate_send"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3629,7 +3629,7 @@ func (vM) MigrateSend7(session *Session, vM VMRef, dest map[string]string, live 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -3643,13 +3643,13 @@ func (vM) MigrateSend7(session *Session, vM VMRef, dest map[string]string, live 
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncMigrateSend7(session *Session, vM VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncMigrateSend7(session *Session, vm VMRef, dest map[string]string, live bool, vdiMap map[VDIRef]SRRef, vifMap map[VIFRef]NetworkRef, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.migrate_send"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3673,7 +3673,7 @@ func (vM) AsyncMigrateSend7(session *Session, vM VMRef, dest map[string]string, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, destArg, liveArg, vdiMapArg, vifMapArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -3683,7 +3683,7 @@ func (vM) AsyncMigrateSend7(session *Session, vM VMRef, dest map[string]string, 
 
 // MaximiseMemory: Returns the maximum amount of guest memory which will fit, together with overheads, in the supplied amount of physical memory. If &apos;exact&apos; is true then an exact calculation is performed using the VM&apos;s current settings. If &apos;exact&apos; is false then a more conservative approximation is used
 // Version: miami
-func (vM) MaximiseMemory(session *Session, self VMRef, total int, approximate bool) (retval int, err error) {
+func (vm) MaximiseMemory(session *Session, self VMRef, total int, approximate bool) (retval int, err error) {
 	method := "VM.maximise_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3711,7 +3711,7 @@ func (vM) MaximiseMemory(session *Session, self VMRef, total int, approximate bo
 
 // AsyncMaximiseMemory: Returns the maximum amount of guest memory which will fit, together with overheads, in the supplied amount of physical memory. If &apos;exact&apos; is true then an exact calculation is performed using the VM&apos;s current settings. If &apos;exact&apos; is false then a more conservative approximation is used
 // Version: miami
-func (vM) AsyncMaximiseMemory(session *Session, self VMRef, total int, approximate bool) (retval TaskRef, err error) {
+func (vm) AsyncMaximiseMemory(session *Session, self VMRef, total int, approximate bool) (retval TaskRef, err error) {
 	method := "Async.VM.maximise_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3739,7 +3739,7 @@ func (vM) AsyncMaximiseMemory(session *Session, self VMRef, total int, approxima
 
 // MaximiseMemory4: Returns the maximum amount of guest memory which will fit, together with overheads, in the supplied amount of physical memory. If &apos;exact&apos; is true then an exact calculation is performed using the VM&apos;s current settings. If &apos;exact&apos; is false then a more conservative approximation is used
 // Version: miami
-func (vM) MaximiseMemory4(session *Session, self VMRef, total int, approximate bool) (retval int, err error) {
+func (vm) MaximiseMemory4(session *Session, self VMRef, total int, approximate bool) (retval int, err error) {
 	method := "VM.maximise_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3767,7 +3767,7 @@ func (vM) MaximiseMemory4(session *Session, self VMRef, total int, approximate b
 
 // AsyncMaximiseMemory4: Returns the maximum amount of guest memory which will fit, together with overheads, in the supplied amount of physical memory. If &apos;exact&apos; is true then an exact calculation is performed using the VM&apos;s current settings. If &apos;exact&apos; is false then a more conservative approximation is used
 // Version: miami
-func (vM) AsyncMaximiseMemory4(session *Session, self VMRef, total int, approximate bool) (retval TaskRef, err error) {
+func (vm) AsyncMaximiseMemory4(session *Session, self VMRef, total int, approximate bool) (retval TaskRef, err error) {
 	method := "Async.VM.maximise_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -3798,13 +3798,13 @@ func (vM) AsyncMaximiseMemory4(session *Session, self VMRef, total int, approxim
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) SendTrigger(session *Session, vM VMRef, trigger string) (err error) {
+func (vm) SendTrigger(session *Session, vm VMRef, trigger string) (err error) {
 	method := "VM.send_trigger"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3812,7 +3812,7 @@ func (vM) SendTrigger(session *Session, vM VMRef, trigger string) (err error) {
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, triggerArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, triggerArg)
 	return
 }
 
@@ -3821,13 +3821,13 @@ func (vM) SendTrigger(session *Session, vM VMRef, trigger string) (err error) {
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncSendTrigger(session *Session, vM VMRef, trigger string) (retval TaskRef, err error) {
+func (vm) AsyncSendTrigger(session *Session, vm VMRef, trigger string) (retval TaskRef, err error) {
 	method := "Async.VM.send_trigger"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3835,7 +3835,7 @@ func (vM) AsyncSendTrigger(session *Session, vM VMRef, trigger string) (retval T
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, triggerArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, triggerArg)
 	if err != nil {
 		return
 	}
@@ -3848,13 +3848,13 @@ func (vM) AsyncSendTrigger(session *Session, vM VMRef, trigger string) (retval T
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) SendTrigger3(session *Session, vM VMRef, trigger string) (err error) {
+func (vm) SendTrigger3(session *Session, vm VMRef, trigger string) (err error) {
 	method := "VM.send_trigger"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3862,7 +3862,7 @@ func (vM) SendTrigger3(session *Session, vM VMRef, trigger string) (err error) {
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, triggerArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, triggerArg)
 	return
 }
 
@@ -3871,13 +3871,13 @@ func (vM) SendTrigger3(session *Session, vM VMRef, trigger string) (err error) {
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncSendTrigger3(session *Session, vM VMRef, trigger string) (retval TaskRef, err error) {
+func (vm) AsyncSendTrigger3(session *Session, vm VMRef, trigger string) (retval TaskRef, err error) {
 	method := "Async.VM.send_trigger"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3885,7 +3885,7 @@ func (vM) AsyncSendTrigger3(session *Session, vM VMRef, trigger string) (retval 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, triggerArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, triggerArg)
 	if err != nil {
 		return
 	}
@@ -3898,13 +3898,13 @@ func (vM) AsyncSendTrigger3(session *Session, vM VMRef, trigger string) (retval 
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) SendSysrq(session *Session, vM VMRef, key string) (err error) {
+func (vm) SendSysrq(session *Session, vm VMRef, key string) (err error) {
 	method := "VM.send_sysrq"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3912,7 +3912,7 @@ func (vM) SendSysrq(session *Session, vM VMRef, key string) (err error) {
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, keyArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, keyArg)
 	return
 }
 
@@ -3921,13 +3921,13 @@ func (vM) SendSysrq(session *Session, vM VMRef, key string) (err error) {
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncSendSysrq(session *Session, vM VMRef, key string) (retval TaskRef, err error) {
+func (vm) AsyncSendSysrq(session *Session, vm VMRef, key string) (retval TaskRef, err error) {
 	method := "Async.VM.send_sysrq"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3935,7 +3935,7 @@ func (vM) AsyncSendSysrq(session *Session, vM VMRef, key string) (retval TaskRef
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, keyArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, keyArg)
 	if err != nil {
 		return
 	}
@@ -3948,13 +3948,13 @@ func (vM) AsyncSendSysrq(session *Session, vM VMRef, key string) (retval TaskRef
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) SendSysrq3(session *Session, vM VMRef, key string) (err error) {
+func (vm) SendSysrq3(session *Session, vm VMRef, key string) (err error) {
 	method := "VM.send_sysrq"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3962,7 +3962,7 @@ func (vM) SendSysrq3(session *Session, vM VMRef, key string) (err error) {
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, keyArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, keyArg)
 	return
 }
 
@@ -3971,13 +3971,13 @@ func (vM) SendSysrq3(session *Session, vM VMRef, key string) (err error) {
 //
 // Errors:
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncSendSysrq3(session *Session, vM VMRef, key string) (retval TaskRef, err error) {
+func (vm) AsyncSendSysrq3(session *Session, vm VMRef, key string) (retval TaskRef, err error) {
 	method := "Async.VM.send_sysrq"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -3985,7 +3985,7 @@ func (vM) AsyncSendSysrq3(session *Session, vM VMRef, key string) (retval TaskRe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, keyArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, keyArg)
 	if err != nil {
 		return
 	}
@@ -3995,7 +3995,7 @@ func (vM) AsyncSendSysrq3(session *Session, vM VMRef, key string) (retval TaskRe
 
 // SetVCPUsAtStartup: Set the number of startup VCPUs for a halted VM
 // Version: midnight-ride
-func (vM) SetVCPUsAtStartup(session *Session, self VMRef, value int) (err error) {
+func (vm) SetVCPUsAtStartup(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_VCPUs_at_startup"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4015,7 +4015,7 @@ func (vM) SetVCPUsAtStartup(session *Session, self VMRef, value int) (err error)
 
 // SetVCPUsAtStartup3: Set the number of startup VCPUs for a halted VM
 // Version: midnight-ride
-func (vM) SetVCPUsAtStartup3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetVCPUsAtStartup3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_VCPUs_at_startup"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4035,7 +4035,7 @@ func (vM) SetVCPUsAtStartup3(session *Session, self VMRef, value int) (err error
 
 // SetVCPUsMax: Set the maximum number of VCPUs for a halted VM
 // Version: midnight-ride
-func (vM) SetVCPUsMax(session *Session, self VMRef, value int) (err error) {
+func (vm) SetVCPUsMax(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_VCPUs_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4055,7 +4055,7 @@ func (vM) SetVCPUsMax(session *Session, self VMRef, value int) (err error) {
 
 // SetVCPUsMax3: Set the maximum number of VCPUs for a halted VM
 // Version: midnight-ride
-func (vM) SetVCPUsMax3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetVCPUsMax3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_VCPUs_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4075,7 +4075,7 @@ func (vM) SetVCPUsMax3(session *Session, self VMRef, value int) (err error) {
 
 // SetShadowMultiplierLive: Set the shadow memory multiplier on a running VM
 // Version: rio
-func (vM) SetShadowMultiplierLive(session *Session, self VMRef, multiplier float64) (err error) {
+func (vm) SetShadowMultiplierLive(session *Session, self VMRef, multiplier float64) (err error) {
 	method := "VM.set_shadow_multiplier_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4095,7 +4095,7 @@ func (vM) SetShadowMultiplierLive(session *Session, self VMRef, multiplier float
 
 // AsyncSetShadowMultiplierLive: Set the shadow memory multiplier on a running VM
 // Version: rio
-func (vM) AsyncSetShadowMultiplierLive(session *Session, self VMRef, multiplier float64) (retval TaskRef, err error) {
+func (vm) AsyncSetShadowMultiplierLive(session *Session, self VMRef, multiplier float64) (retval TaskRef, err error) {
 	method := "Async.VM.set_shadow_multiplier_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4119,7 +4119,7 @@ func (vM) AsyncSetShadowMultiplierLive(session *Session, self VMRef, multiplier 
 
 // SetShadowMultiplierLive3: Set the shadow memory multiplier on a running VM
 // Version: rio
-func (vM) SetShadowMultiplierLive3(session *Session, self VMRef, multiplier float64) (err error) {
+func (vm) SetShadowMultiplierLive3(session *Session, self VMRef, multiplier float64) (err error) {
 	method := "VM.set_shadow_multiplier_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4139,7 +4139,7 @@ func (vM) SetShadowMultiplierLive3(session *Session, self VMRef, multiplier floa
 
 // AsyncSetShadowMultiplierLive3: Set the shadow memory multiplier on a running VM
 // Version: rio
-func (vM) AsyncSetShadowMultiplierLive3(session *Session, self VMRef, multiplier float64) (retval TaskRef, err error) {
+func (vm) AsyncSetShadowMultiplierLive3(session *Session, self VMRef, multiplier float64) (retval TaskRef, err error) {
 	method := "Async.VM.set_shadow_multiplier_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4163,7 +4163,7 @@ func (vM) AsyncSetShadowMultiplierLive3(session *Session, self VMRef, multiplier
 
 // SetHVMShadowMultiplier: Set the shadow memory multiplier on a halted VM
 // Version: midnight-ride
-func (vM) SetHVMShadowMultiplier(session *Session, self VMRef, value float64) (err error) {
+func (vm) SetHVMShadowMultiplier(session *Session, self VMRef, value float64) (err error) {
 	method := "VM.set_HVM_shadow_multiplier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4183,7 +4183,7 @@ func (vM) SetHVMShadowMultiplier(session *Session, self VMRef, value float64) (e
 
 // SetHVMShadowMultiplier3: Set the shadow memory multiplier on a halted VM
 // Version: midnight-ride
-func (vM) SetHVMShadowMultiplier3(session *Session, self VMRef, value float64) (err error) {
+func (vm) SetHVMShadowMultiplier3(session *Session, self VMRef, value float64) (err error) {
 	method := "VM.set_HVM_shadow_multiplier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4203,7 +4203,7 @@ func (vM) SetHVMShadowMultiplier3(session *Session, self VMRef, value float64) (
 
 // GetCooperative: Return true if the VM is currently &apos;co-operative&apos; i.e. is expected to reach a balloon target and actually has done
 // Version: midnight-ride
-func (vM) GetCooperative(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetCooperative(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_cooperative"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4223,7 +4223,7 @@ func (vM) GetCooperative(session *Session, self VMRef) (retval bool, err error) 
 
 // AsyncGetCooperative: Return true if the VM is currently &apos;co-operative&apos; i.e. is expected to reach a balloon target and actually has done
 // Version: midnight-ride
-func (vM) AsyncGetCooperative(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncGetCooperative(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.get_cooperative"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4243,7 +4243,7 @@ func (vM) AsyncGetCooperative(session *Session, self VMRef) (retval TaskRef, err
 
 // GetCooperative2: Return true if the VM is currently &apos;co-operative&apos; i.e. is expected to reach a balloon target and actually has done
 // Version: midnight-ride
-func (vM) GetCooperative2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetCooperative2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_cooperative"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4263,7 +4263,7 @@ func (vM) GetCooperative2(session *Session, self VMRef) (retval bool, err error)
 
 // AsyncGetCooperative2: Return true if the VM is currently &apos;co-operative&apos; i.e. is expected to reach a balloon target and actually has done
 // Version: midnight-ride
-func (vM) AsyncGetCooperative2(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncGetCooperative2(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.get_cooperative"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4283,7 +4283,7 @@ func (vM) AsyncGetCooperative2(session *Session, self VMRef) (retval TaskRef, er
 
 // WaitMemoryTargetLive: Wait for a running VM to reach its current memory target
 // Version: orlando
-func (vM) WaitMemoryTargetLive(session *Session, self VMRef) (err error) {
+func (vm) WaitMemoryTargetLive(session *Session, self VMRef) (err error) {
 	method := "VM.wait_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4299,7 +4299,7 @@ func (vM) WaitMemoryTargetLive(session *Session, self VMRef) (err error) {
 
 // AsyncWaitMemoryTargetLive: Wait for a running VM to reach its current memory target
 // Version: orlando
-func (vM) AsyncWaitMemoryTargetLive(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncWaitMemoryTargetLive(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.wait_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4319,7 +4319,7 @@ func (vM) AsyncWaitMemoryTargetLive(session *Session, self VMRef) (retval TaskRe
 
 // WaitMemoryTargetLive2: Wait for a running VM to reach its current memory target
 // Version: orlando
-func (vM) WaitMemoryTargetLive2(session *Session, self VMRef) (err error) {
+func (vm) WaitMemoryTargetLive2(session *Session, self VMRef) (err error) {
 	method := "VM.wait_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4335,7 +4335,7 @@ func (vM) WaitMemoryTargetLive2(session *Session, self VMRef) (err error) {
 
 // AsyncWaitMemoryTargetLive2: Wait for a running VM to reach its current memory target
 // Version: orlando
-func (vM) AsyncWaitMemoryTargetLive2(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncWaitMemoryTargetLive2(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.wait_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4355,7 +4355,7 @@ func (vM) AsyncWaitMemoryTargetLive2(session *Session, self VMRef) (retval TaskR
 
 // SetMemoryTargetLive: Set the memory target for a running VM
 // Version: rio
-func (vM) SetMemoryTargetLive(session *Session, self VMRef, target int) (err error) {
+func (vm) SetMemoryTargetLive(session *Session, self VMRef, target int) (err error) {
 	method := "VM.set_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4375,7 +4375,7 @@ func (vM) SetMemoryTargetLive(session *Session, self VMRef, target int) (err err
 
 // AsyncSetMemoryTargetLive: Set the memory target for a running VM
 // Version: rio
-func (vM) AsyncSetMemoryTargetLive(session *Session, self VMRef, target int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryTargetLive(session *Session, self VMRef, target int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4399,7 +4399,7 @@ func (vM) AsyncSetMemoryTargetLive(session *Session, self VMRef, target int) (re
 
 // SetMemoryTargetLive3: Set the memory target for a running VM
 // Version: rio
-func (vM) SetMemoryTargetLive3(session *Session, self VMRef, target int) (err error) {
+func (vm) SetMemoryTargetLive3(session *Session, self VMRef, target int) (err error) {
 	method := "VM.set_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4419,7 +4419,7 @@ func (vM) SetMemoryTargetLive3(session *Session, self VMRef, target int) (err er
 
 // AsyncSetMemoryTargetLive3: Set the memory target for a running VM
 // Version: rio
-func (vM) AsyncSetMemoryTargetLive3(session *Session, self VMRef, target int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryTargetLive3(session *Session, self VMRef, target int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_target_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4443,7 +4443,7 @@ func (vM) AsyncSetMemoryTargetLive3(session *Session, self VMRef, target int) (r
 
 // SetMemory: Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
 // Version: ely
-func (vM) SetMemory(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemory(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4463,7 +4463,7 @@ func (vM) SetMemory(session *Session, self VMRef, value int) (err error) {
 
 // AsyncSetMemory: Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
 // Version: ely
-func (vM) AsyncSetMemory(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemory(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4487,7 +4487,7 @@ func (vM) AsyncSetMemory(session *Session, self VMRef, value int) (retval TaskRe
 
 // SetMemory3: Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
 // Version: ely
-func (vM) SetMemory3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemory3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4507,7 +4507,7 @@ func (vM) SetMemory3(session *Session, self VMRef, value int) (err error) {
 
 // AsyncSetMemory3: Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
 // Version: ely
-func (vM) AsyncSetMemory3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemory3(session *Session, self VMRef, value int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4531,7 +4531,7 @@ func (vM) AsyncSetMemory3(session *Session, self VMRef, value int) (retval TaskR
 
 // SetMemoryLimits: Set the memory limits of this VM.
 // Version: midnight-ride
-func (vM) SetMemoryLimits(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (err error) {
+func (vm) SetMemoryLimits(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (err error) {
 	method := "VM.set_memory_limits"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4563,7 +4563,7 @@ func (vM) SetMemoryLimits(session *Session, self VMRef, staticMin int, staticMax
 
 // AsyncSetMemoryLimits: Set the memory limits of this VM.
 // Version: midnight-ride
-func (vM) AsyncSetMemoryLimits(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryLimits(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_limits"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4599,7 +4599,7 @@ func (vM) AsyncSetMemoryLimits(session *Session, self VMRef, staticMin int, stat
 
 // SetMemoryLimits6: Set the memory limits of this VM.
 // Version: midnight-ride
-func (vM) SetMemoryLimits6(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (err error) {
+func (vm) SetMemoryLimits6(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (err error) {
 	method := "VM.set_memory_limits"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4631,7 +4631,7 @@ func (vM) SetMemoryLimits6(session *Session, self VMRef, staticMin int, staticMa
 
 // AsyncSetMemoryLimits6: Set the memory limits of this VM.
 // Version: midnight-ride
-func (vM) AsyncSetMemoryLimits6(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryLimits6(session *Session, self VMRef, staticMin int, staticMax int, dynamicMin int, dynamicMax int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_limits"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4667,7 +4667,7 @@ func (vM) AsyncSetMemoryLimits6(session *Session, self VMRef, staticMin int, sta
 
 // SetMemoryStaticRange: Set the static (ie boot-time) range of virtual memory that the VM is allowed to use.
 // Version: midnight-ride
-func (vM) SetMemoryStaticRange(session *Session, self VMRef, min int, max int) (err error) {
+func (vm) SetMemoryStaticRange(session *Session, self VMRef, min int, max int) (err error) {
 	method := "VM.set_memory_static_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4691,7 +4691,7 @@ func (vM) SetMemoryStaticRange(session *Session, self VMRef, min int, max int) (
 
 // AsyncSetMemoryStaticRange: Set the static (ie boot-time) range of virtual memory that the VM is allowed to use.
 // Version: midnight-ride
-func (vM) AsyncSetMemoryStaticRange(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryStaticRange(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_static_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4719,7 +4719,7 @@ func (vM) AsyncSetMemoryStaticRange(session *Session, self VMRef, min int, max i
 
 // SetMemoryStaticRange4: Set the static (ie boot-time) range of virtual memory that the VM is allowed to use.
 // Version: midnight-ride
-func (vM) SetMemoryStaticRange4(session *Session, self VMRef, min int, max int) (err error) {
+func (vm) SetMemoryStaticRange4(session *Session, self VMRef, min int, max int) (err error) {
 	method := "VM.set_memory_static_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4743,7 +4743,7 @@ func (vM) SetMemoryStaticRange4(session *Session, self VMRef, min int, max int) 
 
 // AsyncSetMemoryStaticRange4: Set the static (ie boot-time) range of virtual memory that the VM is allowed to use.
 // Version: midnight-ride
-func (vM) AsyncSetMemoryStaticRange4(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryStaticRange4(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_static_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4771,7 +4771,7 @@ func (vM) AsyncSetMemoryStaticRange4(session *Session, self VMRef, min int, max 
 
 // SetMemoryStaticMin: Set the value of the memory_static_min field
 // Version: midnight-ride
-func (vM) SetMemoryStaticMin(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryStaticMin(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_static_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4791,7 +4791,7 @@ func (vM) SetMemoryStaticMin(session *Session, self VMRef, value int) (err error
 
 // SetMemoryStaticMin3: Set the value of the memory_static_min field
 // Version: midnight-ride
-func (vM) SetMemoryStaticMin3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryStaticMin3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_static_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4814,7 +4814,7 @@ func (vM) SetMemoryStaticMin3(session *Session, self VMRef, value int) (err erro
 //
 // Errors:
 // HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN - This operation cannot be performed because it would invalidate VM failover planning such that the system would be unable to guarantee to restart protected VMs after a Host failure.
-func (vM) SetMemoryStaticMax(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryStaticMax(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_static_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4837,7 +4837,7 @@ func (vM) SetMemoryStaticMax(session *Session, self VMRef, value int) (err error
 //
 // Errors:
 // HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN - This operation cannot be performed because it would invalidate VM failover planning such that the system would be unable to guarantee to restart protected VMs after a Host failure.
-func (vM) SetMemoryStaticMax3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryStaticMax3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_static_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4857,7 +4857,7 @@ func (vM) SetMemoryStaticMax3(session *Session, self VMRef, value int) (err erro
 
 // SetMemoryDynamicRange: Set the minimum and maximum amounts of physical memory the VM is allowed to use.
 // Version: midnight-ride
-func (vM) SetMemoryDynamicRange(session *Session, self VMRef, min int, max int) (err error) {
+func (vm) SetMemoryDynamicRange(session *Session, self VMRef, min int, max int) (err error) {
 	method := "VM.set_memory_dynamic_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4881,7 +4881,7 @@ func (vM) SetMemoryDynamicRange(session *Session, self VMRef, min int, max int) 
 
 // AsyncSetMemoryDynamicRange: Set the minimum and maximum amounts of physical memory the VM is allowed to use.
 // Version: midnight-ride
-func (vM) AsyncSetMemoryDynamicRange(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryDynamicRange(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_dynamic_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4909,7 +4909,7 @@ func (vM) AsyncSetMemoryDynamicRange(session *Session, self VMRef, min int, max 
 
 // SetMemoryDynamicRange4: Set the minimum and maximum amounts of physical memory the VM is allowed to use.
 // Version: midnight-ride
-func (vM) SetMemoryDynamicRange4(session *Session, self VMRef, min int, max int) (err error) {
+func (vm) SetMemoryDynamicRange4(session *Session, self VMRef, min int, max int) (err error) {
 	method := "VM.set_memory_dynamic_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4933,7 +4933,7 @@ func (vM) SetMemoryDynamicRange4(session *Session, self VMRef, min int, max int)
 
 // AsyncSetMemoryDynamicRange4: Set the minimum and maximum amounts of physical memory the VM is allowed to use.
 // Version: midnight-ride
-func (vM) AsyncSetMemoryDynamicRange4(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
+func (vm) AsyncSetMemoryDynamicRange4(session *Session, self VMRef, min int, max int) (retval TaskRef, err error) {
 	method := "Async.VM.set_memory_dynamic_range"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4961,7 +4961,7 @@ func (vM) AsyncSetMemoryDynamicRange4(session *Session, self VMRef, min int, max
 
 // SetMemoryDynamicMin: Set the value of the memory_dynamic_min field
 // Version: midnight-ride
-func (vM) SetMemoryDynamicMin(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryDynamicMin(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_dynamic_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -4981,7 +4981,7 @@ func (vM) SetMemoryDynamicMin(session *Session, self VMRef, value int) (err erro
 
 // SetMemoryDynamicMin3: Set the value of the memory_dynamic_min field
 // Version: midnight-ride
-func (vM) SetMemoryDynamicMin3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryDynamicMin3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_dynamic_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5001,7 +5001,7 @@ func (vM) SetMemoryDynamicMin3(session *Session, self VMRef, value int) (err err
 
 // SetMemoryDynamicMax: Set the value of the memory_dynamic_max field
 // Version: midnight-ride
-func (vM) SetMemoryDynamicMax(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryDynamicMax(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_dynamic_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5021,7 +5021,7 @@ func (vM) SetMemoryDynamicMax(session *Session, self VMRef, value int) (err erro
 
 // SetMemoryDynamicMax3: Set the value of the memory_dynamic_max field
 // Version: midnight-ride
-func (vM) SetMemoryDynamicMax3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetMemoryDynamicMax3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_memory_dynamic_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5041,17 +5041,17 @@ func (vM) SetMemoryDynamicMax3(session *Session, self VMRef, value int) (err err
 
 // ComputeMemoryOverhead: Computes the virtualization memory overhead of a VM.
 // Version: midnight-ride
-func (vM) ComputeMemoryOverhead(session *Session, vM VMRef) (retval int, err error) {
+func (vm) ComputeMemoryOverhead(session *Session, vm VMRef) (retval int, err error) {
 	method := "VM.compute_memory_overhead"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -5061,17 +5061,17 @@ func (vM) ComputeMemoryOverhead(session *Session, vM VMRef) (retval int, err err
 
 // AsyncComputeMemoryOverhead: Computes the virtualization memory overhead of a VM.
 // Version: midnight-ride
-func (vM) AsyncComputeMemoryOverhead(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncComputeMemoryOverhead(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.compute_memory_overhead"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -5081,17 +5081,17 @@ func (vM) AsyncComputeMemoryOverhead(session *Session, vM VMRef) (retval TaskRef
 
 // ComputeMemoryOverhead2: Computes the virtualization memory overhead of a VM.
 // Version: midnight-ride
-func (vM) ComputeMemoryOverhead2(session *Session, vM VMRef) (retval int, err error) {
+func (vm) ComputeMemoryOverhead2(session *Session, vm VMRef) (retval int, err error) {
 	method := "VM.compute_memory_overhead"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -5101,17 +5101,17 @@ func (vM) ComputeMemoryOverhead2(session *Session, vM VMRef) (retval int, err er
 
 // AsyncComputeMemoryOverhead2: Computes the virtualization memory overhead of a VM.
 // Version: midnight-ride
-func (vM) AsyncComputeMemoryOverhead2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncComputeMemoryOverhead2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.compute_memory_overhead"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -5121,7 +5121,7 @@ func (vM) AsyncComputeMemoryOverhead2(session *Session, vM VMRef) (retval TaskRe
 
 // SetHaAlwaysRun: Set the value of the ha_always_run
 // Version: orlando
-func (vM) SetHaAlwaysRun(session *Session, self VMRef, value bool) (err error) {
+func (vm) SetHaAlwaysRun(session *Session, self VMRef, value bool) (err error) {
 	method := "VM.set_ha_always_run"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5141,7 +5141,7 @@ func (vM) SetHaAlwaysRun(session *Session, self VMRef, value bool) (err error) {
 
 // SetHaAlwaysRun3: Set the value of the ha_always_run
 // Version: orlando
-func (vM) SetHaAlwaysRun3(session *Session, self VMRef, value bool) (err error) {
+func (vm) SetHaAlwaysRun3(session *Session, self VMRef, value bool) (err error) {
 	method := "VM.set_ha_always_run"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5161,7 +5161,7 @@ func (vM) SetHaAlwaysRun3(session *Session, self VMRef, value bool) (err error) 
 
 // SetHaRestartPriority: Set the value of the ha_restart_priority field
 // Version: orlando
-func (vM) SetHaRestartPriority(session *Session, self VMRef, value string) (err error) {
+func (vm) SetHaRestartPriority(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_ha_restart_priority"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5181,7 +5181,7 @@ func (vM) SetHaRestartPriority(session *Session, self VMRef, value string) (err 
 
 // SetHaRestartPriority3: Set the value of the ha_restart_priority field
 // Version: orlando
-func (vM) SetHaRestartPriority3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetHaRestartPriority3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_ha_restart_priority"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5201,7 +5201,7 @@ func (vM) SetHaRestartPriority3(session *Session, self VMRef, value string) (err
 
 // RemoveFromNVRAM:
 // Version: naples
-func (vM) RemoveFromNVRAM(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromNVRAM(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5221,7 +5221,7 @@ func (vM) RemoveFromNVRAM(session *Session, self VMRef, key string) (err error) 
 
 // RemoveFromNVRAM3:
 // Version: naples
-func (vM) RemoveFromNVRAM3(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromNVRAM3(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5241,7 +5241,7 @@ func (vM) RemoveFromNVRAM3(session *Session, self VMRef, key string) (err error)
 
 // AddToNVRAM:
 // Version: naples
-func (vM) AddToNVRAM(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToNVRAM(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5265,7 +5265,7 @@ func (vM) AddToNVRAM(session *Session, self VMRef, key string, value string) (er
 
 // AddToNVRAM4:
 // Version: naples
-func (vM) AddToNVRAM4(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToNVRAM4(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5289,7 +5289,7 @@ func (vM) AddToNVRAM4(session *Session, self VMRef, key string, value string) (e
 
 // SetNVRAM:
 // Version: naples
-func (vM) SetNVRAM(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetNVRAM(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5309,7 +5309,7 @@ func (vM) SetNVRAM(session *Session, self VMRef, value map[string]string) (err e
 
 // SetNVRAM3:
 // Version: naples
-func (vM) SetNVRAM3(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetNVRAM3(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5329,7 +5329,7 @@ func (vM) SetNVRAM3(session *Session, self VMRef, value map[string]string) (err 
 
 // AddToVCPUsParamsLive: Add the given key-value pair to VM.VCPUs_params, and apply that value on the running VM
 // Version: rio
-func (vM) AddToVCPUsParamsLive(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToVCPUsParamsLive(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_VCPUs_params_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5353,7 +5353,7 @@ func (vM) AddToVCPUsParamsLive(session *Session, self VMRef, key string, value s
 
 // AsyncAddToVCPUsParamsLive: Add the given key-value pair to VM.VCPUs_params, and apply that value on the running VM
 // Version: rio
-func (vM) AsyncAddToVCPUsParamsLive(session *Session, self VMRef, key string, value string) (retval TaskRef, err error) {
+func (vm) AsyncAddToVCPUsParamsLive(session *Session, self VMRef, key string, value string) (retval TaskRef, err error) {
 	method := "Async.VM.add_to_VCPUs_params_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5381,7 +5381,7 @@ func (vM) AsyncAddToVCPUsParamsLive(session *Session, self VMRef, key string, va
 
 // AddToVCPUsParamsLive4: Add the given key-value pair to VM.VCPUs_params, and apply that value on the running VM
 // Version: rio
-func (vM) AddToVCPUsParamsLive4(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToVCPUsParamsLive4(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_VCPUs_params_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5405,7 +5405,7 @@ func (vM) AddToVCPUsParamsLive4(session *Session, self VMRef, key string, value 
 
 // AsyncAddToVCPUsParamsLive4: Add the given key-value pair to VM.VCPUs_params, and apply that value on the running VM
 // Version: rio
-func (vM) AsyncAddToVCPUsParamsLive4(session *Session, self VMRef, key string, value string) (retval TaskRef, err error) {
+func (vm) AsyncAddToVCPUsParamsLive4(session *Session, self VMRef, key string, value string) (retval TaskRef, err error) {
 	method := "Async.VM.add_to_VCPUs_params_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5437,7 +5437,7 @@ func (vM) AsyncAddToVCPUsParamsLive4(session *Session, self VMRef, key string, v
 // Errors:
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) SetVCPUsNumberLive(session *Session, self VMRef, nvcpu int) (err error) {
+func (vm) SetVCPUsNumberLive(session *Session, self VMRef, nvcpu int) (err error) {
 	method := "VM.set_VCPUs_number_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5461,7 +5461,7 @@ func (vM) SetVCPUsNumberLive(session *Session, self VMRef, nvcpu int) (err error
 // Errors:
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncSetVCPUsNumberLive(session *Session, self VMRef, nvcpu int) (retval TaskRef, err error) {
+func (vm) AsyncSetVCPUsNumberLive(session *Session, self VMRef, nvcpu int) (retval TaskRef, err error) {
 	method := "Async.VM.set_VCPUs_number_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5489,7 +5489,7 @@ func (vM) AsyncSetVCPUsNumberLive(session *Session, self VMRef, nvcpu int) (retv
 // Errors:
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) SetVCPUsNumberLive3(session *Session, self VMRef, nvcpu int) (err error) {
+func (vm) SetVCPUsNumberLive3(session *Session, self VMRef, nvcpu int) (err error) {
 	method := "VM.set_VCPUs_number_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5513,7 +5513,7 @@ func (vM) SetVCPUsNumberLive3(session *Session, self VMRef, nvcpu int) (err erro
 // Errors:
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncSetVCPUsNumberLive3(session *Session, self VMRef, nvcpu int) (retval TaskRef, err error) {
+func (vm) AsyncSetVCPUsNumberLive3(session *Session, self VMRef, nvcpu int) (retval TaskRef, err error) {
 	method := "Async.VM.set_VCPUs_number_live"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -5544,13 +5544,13 @@ func (vM) AsyncSetVCPUsNumberLive3(session *Session, self VMRef, nvcpu int) (ret
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) PoolMigrate(session *Session, vM VMRef, host HostRef, options map[string]string) (err error) {
+func (vm) PoolMigrate(session *Session, vm VMRef, host HostRef, options map[string]string) (err error) {
 	method := "VM.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5562,7 +5562,7 @@ func (vM) PoolMigrate(session *Session, vM VMRef, host HostRef, options map[stri
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg, optionsArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg, optionsArg)
 	return
 }
 
@@ -5575,13 +5575,13 @@ func (vM) PoolMigrate(session *Session, vM VMRef, host HostRef, options map[stri
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncPoolMigrate(session *Session, vM VMRef, host HostRef, options map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncPoolMigrate(session *Session, vm VMRef, host HostRef, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5593,7 +5593,7 @@ func (vM) AsyncPoolMigrate(session *Session, vM VMRef, host HostRef, options map
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -5610,13 +5610,13 @@ func (vM) AsyncPoolMigrate(session *Session, vM VMRef, host HostRef, options map
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) PoolMigrate4(session *Session, vM VMRef, host HostRef, options map[string]string) (err error) {
+func (vm) PoolMigrate4(session *Session, vm VMRef, host HostRef, options map[string]string) (err error) {
 	method := "VM.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5628,7 +5628,7 @@ func (vM) PoolMigrate4(session *Session, vM VMRef, host HostRef, options map[str
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg, optionsArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg, optionsArg)
 	return
 }
 
@@ -5641,13 +5641,13 @@ func (vM) PoolMigrate4(session *Session, vM VMRef, host HostRef, options map[str
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
-func (vM) AsyncPoolMigrate4(session *Session, vM VMRef, host HostRef, options map[string]string) (retval TaskRef, err error) {
+func (vm) AsyncPoolMigrate4(session *Session, vm VMRef, host HostRef, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.VM.pool_migrate"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5659,7 +5659,7 @@ func (vM) AsyncPoolMigrate4(session *Session, vM VMRef, host HostRef, options ma
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -5674,13 +5674,13 @@ func (vM) AsyncPoolMigrate4(session *Session, vM VMRef, host HostRef, options ma
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) ResumeOn(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (err error) {
+func (vm) ResumeOn(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (err error) {
 	method := "VM.resume_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5696,7 +5696,7 @@ func (vM) ResumeOn(session *Session, vM VMRef, host HostRef, startPaused bool, f
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	return
 }
 
@@ -5707,13 +5707,13 @@ func (vM) ResumeOn(session *Session, vM VMRef, host HostRef, startPaused bool, f
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncResumeOn(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncResumeOn(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.resume_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5729,7 +5729,7 @@ func (vM) AsyncResumeOn(session *Session, vM VMRef, host HostRef, startPaused bo
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -5744,13 +5744,13 @@ func (vM) AsyncResumeOn(session *Session, vM VMRef, host HostRef, startPaused bo
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) ResumeOn5(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (err error) {
+func (vm) ResumeOn5(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (err error) {
 	method := "VM.resume_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5766,7 +5766,7 @@ func (vM) ResumeOn5(session *Session, vM VMRef, host HostRef, startPaused bool, 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	return
 }
 
@@ -5777,13 +5777,13 @@ func (vM) ResumeOn5(session *Session, vM VMRef, host HostRef, startPaused bool, 
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncResumeOn5(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncResumeOn5(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.resume_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5799,7 +5799,7 @@ func (vM) AsyncResumeOn5(session *Session, vM VMRef, host HostRef, startPaused b
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -5814,13 +5814,13 @@ func (vM) AsyncResumeOn5(session *Session, vM VMRef, host HostRef, startPaused b
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Resume(session *Session, vM VMRef, startPaused bool, force bool) (err error) {
+func (vm) Resume(session *Session, vm VMRef, startPaused bool, force bool) (err error) {
 	method := "VM.resume"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5832,7 +5832,7 @@ func (vM) Resume(session *Session, vM VMRef, startPaused bool, force bool) (err 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	return
 }
 
@@ -5843,13 +5843,13 @@ func (vM) Resume(session *Session, vM VMRef, startPaused bool, force bool) (err 
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncResume(session *Session, vM VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncResume(session *Session, vm VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.resume"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5861,7 +5861,7 @@ func (vM) AsyncResume(session *Session, vM VMRef, startPaused bool, force bool) 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -5876,13 +5876,13 @@ func (vM) AsyncResume(session *Session, vM VMRef, startPaused bool, force bool) 
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Resume4(session *Session, vM VMRef, startPaused bool, force bool) (err error) {
+func (vm) Resume4(session *Session, vm VMRef, startPaused bool, force bool) (err error) {
 	method := "VM.resume"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5894,7 +5894,7 @@ func (vM) Resume4(session *Session, vM VMRef, startPaused bool, force bool) (err
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	return
 }
 
@@ -5905,13 +5905,13 @@ func (vM) Resume4(session *Session, vM VMRef, startPaused bool, force bool) (err
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncResume4(session *Session, vM VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncResume4(session *Session, vm VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.resume"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -5923,7 +5923,7 @@ func (vM) AsyncResume4(session *Session, vM VMRef, startPaused bool, force bool)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -5939,17 +5939,17 @@ func (vM) AsyncResume4(session *Session, vM VMRef, startPaused bool, force bool)
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Suspend(session *Session, vM VMRef) (err error) {
+func (vm) Suspend(session *Session, vm VMRef) (err error) {
 	method := "VM.suspend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -5961,17 +5961,17 @@ func (vM) Suspend(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncSuspend(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncSuspend(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.suspend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -5987,17 +5987,17 @@ func (vM) AsyncSuspend(session *Session, vM VMRef) (retval TaskRef, err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Suspend2(session *Session, vM VMRef) (err error) {
+func (vm) Suspend2(session *Session, vm VMRef) (err error) {
 	method := "VM.suspend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6009,17 +6009,17 @@ func (vM) Suspend2(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncSuspend2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncSuspend2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.suspend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6035,17 +6035,17 @@ func (vM) AsyncSuspend2(session *Session, vM VMRef) (retval TaskRef, err error) 
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) HardReboot(session *Session, vM VMRef) (err error) {
+func (vm) HardReboot(session *Session, vm VMRef) (err error) {
 	method := "VM.hard_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6057,17 +6057,17 @@ func (vM) HardReboot(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncHardReboot(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncHardReboot(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.hard_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6083,17 +6083,17 @@ func (vM) AsyncHardReboot(session *Session, vM VMRef) (retval TaskRef, err error
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) HardReboot2(session *Session, vM VMRef) (err error) {
+func (vm) HardReboot2(session *Session, vm VMRef) (err error) {
 	method := "VM.hard_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6105,17 +6105,17 @@ func (vM) HardReboot2(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncHardReboot2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncHardReboot2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.hard_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6125,33 +6125,33 @@ func (vM) AsyncHardReboot2(session *Session, vM VMRef) (retval TaskRef, err erro
 
 // PowerStateReset: Reset the power-state of the VM to halted in the database only. (Used to recover from slave failures in pooling scenarios by resetting the power-states of VMs running on dead slaves to halted.) This is a potentially dangerous operation; use with care.
 // Version: rio
-func (vM) PowerStateReset(session *Session, vM VMRef) (err error) {
+func (vm) PowerStateReset(session *Session, vm VMRef) (err error) {
 	method := "VM.power_state_reset"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
 // AsyncPowerStateReset: Reset the power-state of the VM to halted in the database only. (Used to recover from slave failures in pooling scenarios by resetting the power-states of VMs running on dead slaves to halted.) This is a potentially dangerous operation; use with care.
 // Version: rio
-func (vM) AsyncPowerStateReset(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncPowerStateReset(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.power_state_reset"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6161,33 +6161,33 @@ func (vM) AsyncPowerStateReset(session *Session, vM VMRef) (retval TaskRef, err 
 
 // PowerStateReset2: Reset the power-state of the VM to halted in the database only. (Used to recover from slave failures in pooling scenarios by resetting the power-states of VMs running on dead slaves to halted.) This is a potentially dangerous operation; use with care.
 // Version: rio
-func (vM) PowerStateReset2(session *Session, vM VMRef) (err error) {
+func (vm) PowerStateReset2(session *Session, vm VMRef) (err error) {
 	method := "VM.power_state_reset"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
 // AsyncPowerStateReset2: Reset the power-state of the VM to halted in the database only. (Used to recover from slave failures in pooling scenarios by resetting the power-states of VMs running on dead slaves to halted.) This is a potentially dangerous operation; use with care.
 // Version: rio
-func (vM) AsyncPowerStateReset2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncPowerStateReset2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.power_state_reset"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6203,17 +6203,17 @@ func (vM) AsyncPowerStateReset2(session *Session, vM VMRef) (retval TaskRef, err
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) HardShutdown(session *Session, vM VMRef) (err error) {
+func (vm) HardShutdown(session *Session, vm VMRef) (err error) {
 	method := "VM.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6225,17 +6225,17 @@ func (vM) HardShutdown(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncHardShutdown(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncHardShutdown(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6251,17 +6251,17 @@ func (vM) AsyncHardShutdown(session *Session, vM VMRef) (retval TaskRef, err err
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) HardShutdown2(session *Session, vM VMRef) (err error) {
+func (vm) HardShutdown2(session *Session, vm VMRef) (err error) {
 	method := "VM.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6273,17 +6273,17 @@ func (vM) HardShutdown2(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncHardShutdown2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncHardShutdown2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.hard_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6299,17 +6299,17 @@ func (vM) AsyncHardShutdown2(session *Session, vM VMRef) (retval TaskRef, err er
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) CleanReboot(session *Session, vM VMRef) (err error) {
+func (vm) CleanReboot(session *Session, vm VMRef) (err error) {
 	method := "VM.clean_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6321,17 +6321,17 @@ func (vM) CleanReboot(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncCleanReboot(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncCleanReboot(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.clean_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6347,17 +6347,17 @@ func (vM) AsyncCleanReboot(session *Session, vM VMRef) (retval TaskRef, err erro
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) CleanReboot2(session *Session, vM VMRef) (err error) {
+func (vm) CleanReboot2(session *Session, vm VMRef) (err error) {
 	method := "VM.clean_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6369,17 +6369,17 @@ func (vM) CleanReboot2(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncCleanReboot2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncCleanReboot2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.clean_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6395,17 +6395,17 @@ func (vM) AsyncCleanReboot2(session *Session, vM VMRef) (retval TaskRef, err err
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Shutdown(session *Session, vM VMRef) (err error) {
+func (vm) Shutdown(session *Session, vm VMRef) (err error) {
 	method := "VM.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6417,17 +6417,17 @@ func (vM) Shutdown(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncShutdown(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncShutdown(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6443,17 +6443,17 @@ func (vM) AsyncShutdown(session *Session, vM VMRef) (retval TaskRef, err error) 
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Shutdown2(session *Session, vM VMRef) (err error) {
+func (vm) Shutdown2(session *Session, vm VMRef) (err error) {
 	method := "VM.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6465,17 +6465,17 @@ func (vM) Shutdown2(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncShutdown2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncShutdown2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6491,17 +6491,17 @@ func (vM) AsyncShutdown2(session *Session, vM VMRef) (retval TaskRef, err error)
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) CleanShutdown(session *Session, vM VMRef) (err error) {
+func (vm) CleanShutdown(session *Session, vm VMRef) (err error) {
 	method := "VM.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6513,17 +6513,17 @@ func (vM) CleanShutdown(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncCleanShutdown(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncCleanShutdown(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6539,17 +6539,17 @@ func (vM) AsyncCleanShutdown(session *Session, vM VMRef) (retval TaskRef, err er
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) CleanShutdown2(session *Session, vM VMRef) (err error) {
+func (vm) CleanShutdown2(session *Session, vm VMRef) (err error) {
 	method := "VM.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6561,17 +6561,17 @@ func (vM) CleanShutdown2(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncCleanShutdown2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncCleanShutdown2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.clean_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6586,17 +6586,17 @@ func (vM) AsyncCleanShutdown2(session *Session, vM VMRef) (retval TaskRef, err e
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Unpause(session *Session, vM VMRef) (err error) {
+func (vm) Unpause(session *Session, vm VMRef) (err error) {
 	method := "VM.unpause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6607,17 +6607,17 @@ func (vM) Unpause(session *Session, vM VMRef) (err error) {
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncUnpause(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncUnpause(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.unpause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6632,17 +6632,17 @@ func (vM) AsyncUnpause(session *Session, vM VMRef) (retval TaskRef, err error) {
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Unpause2(session *Session, vM VMRef) (err error) {
+func (vm) Unpause2(session *Session, vm VMRef) (err error) {
 	method := "VM.unpause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6653,17 +6653,17 @@ func (vM) Unpause2(session *Session, vM VMRef) (err error) {
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncUnpause2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncUnpause2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.unpause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6679,17 +6679,17 @@ func (vM) AsyncUnpause2(session *Session, vM VMRef) (retval TaskRef, err error) 
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Pause(session *Session, vM VMRef) (err error) {
+func (vm) Pause(session *Session, vm VMRef) (err error) {
 	method := "VM.pause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6701,17 +6701,17 @@ func (vM) Pause(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncPause(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncPause(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.pause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6727,17 +6727,17 @@ func (vM) AsyncPause(session *Session, vM VMRef) (retval TaskRef, err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) Pause2(session *Session, vM VMRef) (err error) {
+func (vm) Pause2(session *Session, vm VMRef) (err error) {
 	method := "VM.pause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -6749,17 +6749,17 @@ func (vM) Pause2(session *Session, vM VMRef) (err error) {
 // OTHER_OPERATION_IN_PROGRESS - Another operation involving the object is currently in progress
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_IS_TEMPLATE - The operation attempted is not valid for a template VM
-func (vM) AsyncPause2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncPause2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.pause"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -6777,13 +6777,13 @@ func (vM) AsyncPause2(session *Session, vM VMRef) (retval TaskRef, err error) {
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // BOOTLOADER_FAILED - The bootloader returned an error
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
-func (vM) StartOn(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (err error) {
+func (vm) StartOn(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (err error) {
 	method := "VM.start_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -6799,7 +6799,7 @@ func (vM) StartOn(session *Session, vM VMRef, host HostRef, startPaused bool, fo
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	return
 }
 
@@ -6813,13 +6813,13 @@ func (vM) StartOn(session *Session, vM VMRef, host HostRef, startPaused bool, fo
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // BOOTLOADER_FAILED - The bootloader returned an error
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
-func (vM) AsyncStartOn(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncStartOn(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.start_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -6835,7 +6835,7 @@ func (vM) AsyncStartOn(session *Session, vM VMRef, host HostRef, startPaused boo
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -6853,13 +6853,13 @@ func (vM) AsyncStartOn(session *Session, vM VMRef, host HostRef, startPaused boo
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // BOOTLOADER_FAILED - The bootloader returned an error
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
-func (vM) StartOn5(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (err error) {
+func (vm) StartOn5(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (err error) {
 	method := "VM.start_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -6875,7 +6875,7 @@ func (vM) StartOn5(session *Session, vM VMRef, host HostRef, startPaused bool, f
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	return
 }
 
@@ -6889,13 +6889,13 @@ func (vM) StartOn5(session *Session, vM VMRef, host HostRef, startPaused bool, f
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // BOOTLOADER_FAILED - The bootloader returned an error
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
-func (vM) AsyncStartOn5(session *Session, vM VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncStartOn5(session *Session, vm VMRef, host HostRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.start_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -6911,7 +6911,7 @@ func (vM) AsyncStartOn5(session *Session, vM VMRef, host HostRef, startPaused bo
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, hostArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, hostArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -6932,13 +6932,13 @@ func (vM) AsyncStartOn5(session *Session, vM VMRef, host HostRef, startPaused bo
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
 // NO_HOSTS_AVAILABLE - There were no servers available to complete the specified operation.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Start(session *Session, vM VMRef, startPaused bool, force bool) (err error) {
+func (vm) Start(session *Session, vm VMRef, startPaused bool, force bool) (err error) {
 	method := "VM.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -6950,7 +6950,7 @@ func (vM) Start(session *Session, vM VMRef, startPaused bool, force bool) (err e
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	return
 }
 
@@ -6967,13 +6967,13 @@ func (vM) Start(session *Session, vM VMRef, startPaused bool, force bool) (err e
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
 // NO_HOSTS_AVAILABLE - There were no servers available to complete the specified operation.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncStart(session *Session, vM VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncStart(session *Session, vm VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -6985,7 +6985,7 @@ func (vM) AsyncStart(session *Session, vM VMRef, startPaused bool, force bool) (
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -7006,13 +7006,13 @@ func (vM) AsyncStart(session *Session, vM VMRef, startPaused bool, force bool) (
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
 // NO_HOSTS_AVAILABLE - There were no servers available to complete the specified operation.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Start4(session *Session, vM VMRef, startPaused bool, force bool) (err error) {
+func (vm) Start4(session *Session, vm VMRef, startPaused bool, force bool) (err error) {
 	method := "VM.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7024,7 +7024,7 @@ func (vM) Start4(session *Session, vM VMRef, startPaused bool, force bool) (err 
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	return
 }
 
@@ -7041,13 +7041,13 @@ func (vM) Start4(session *Session, vM VMRef, startPaused bool, force bool) (err 
 // UNKNOWN_BOOTLOADER - The requested bootloader is unknown
 // NO_HOSTS_AVAILABLE - There were no servers available to complete the specified operation.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncStart4(session *Session, vM VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
+func (vm) AsyncStart4(session *Session, vm VMRef, startPaused bool, force bool) (retval TaskRef, err error) {
 	method := "Async.VM.start"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7059,7 +7059,7 @@ func (vM) AsyncStart4(session *Session, vM VMRef, startPaused bool, force bool) 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, startPausedArg, forceArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, startPausedArg, forceArg)
 	if err != nil {
 		return
 	}
@@ -7075,17 +7075,17 @@ func (vM) AsyncStart4(session *Session, vM VMRef, startPaused bool, force bool) 
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Provision(session *Session, vM VMRef) (err error) {
+func (vm) Provision(session *Session, vm VMRef) (err error) {
 	method := "VM.provision"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -7097,17 +7097,17 @@ func (vM) Provision(session *Session, vM VMRef) (err error) {
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncProvision(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncProvision(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.provision"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -7123,17 +7123,17 @@ func (vM) AsyncProvision(session *Session, vM VMRef) (retval TaskRef, err error)
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Provision2(session *Session, vM VMRef) (err error) {
+func (vm) Provision2(session *Session, vm VMRef) (err error) {
 	method := "VM.provision"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, vMArg)
+	_, err = session.client.sendCall(method, sessionIDArg, vmArg)
 	return
 }
 
@@ -7145,17 +7145,17 @@ func (vM) Provision2(session *Session, vM VMRef) (err error) {
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncProvision2(session *Session, vM VMRef) (retval TaskRef, err error) {
+func (vm) AsyncProvision2(session *Session, vm VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.provision"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg)
 	if err != nil {
 		return
 	}
@@ -7172,13 +7172,13 @@ func (vM) AsyncProvision2(session *Session, vM VMRef) (retval TaskRef, err error
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_CHECKPOINT_SUSPEND_FAILED - An error occured while saving the memory image of the specified virtual machine
 // VM_CHECKPOINT_RESUME_FAILED - An error occured while restoring the memory image of the specified virtual machine
-func (vM) Checkpoint(session *Session, vM VMRef, newName string) (retval VMRef, err error) {
+func (vm) Checkpoint(session *Session, vm VMRef, newName string) (retval VMRef, err error) {
 	method := "VM.checkpoint"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7186,7 +7186,7 @@ func (vM) Checkpoint(session *Session, vM VMRef, newName string) (retval VMRef, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7203,13 +7203,13 @@ func (vM) Checkpoint(session *Session, vM VMRef, newName string) (retval VMRef, 
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_CHECKPOINT_SUSPEND_FAILED - An error occured while saving the memory image of the specified virtual machine
 // VM_CHECKPOINT_RESUME_FAILED - An error occured while restoring the memory image of the specified virtual machine
-func (vM) AsyncCheckpoint(session *Session, vM VMRef, newName string) (retval TaskRef, err error) {
+func (vm) AsyncCheckpoint(session *Session, vm VMRef, newName string) (retval TaskRef, err error) {
 	method := "Async.VM.checkpoint"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7217,7 +7217,7 @@ func (vM) AsyncCheckpoint(session *Session, vM VMRef, newName string) (retval Ta
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7234,13 +7234,13 @@ func (vM) AsyncCheckpoint(session *Session, vM VMRef, newName string) (retval Ta
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_CHECKPOINT_SUSPEND_FAILED - An error occured while saving the memory image of the specified virtual machine
 // VM_CHECKPOINT_RESUME_FAILED - An error occured while restoring the memory image of the specified virtual machine
-func (vM) Checkpoint3(session *Session, vM VMRef, newName string) (retval VMRef, err error) {
+func (vm) Checkpoint3(session *Session, vm VMRef, newName string) (retval VMRef, err error) {
 	method := "VM.checkpoint"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7248,7 +7248,7 @@ func (vM) Checkpoint3(session *Session, vM VMRef, newName string) (retval VMRef,
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7265,13 +7265,13 @@ func (vM) Checkpoint3(session *Session, vM VMRef, newName string) (retval VMRef,
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // VM_CHECKPOINT_SUSPEND_FAILED - An error occured while saving the memory image of the specified virtual machine
 // VM_CHECKPOINT_RESUME_FAILED - An error occured while restoring the memory image of the specified virtual machine
-func (vM) AsyncCheckpoint3(session *Session, vM VMRef, newName string) (retval TaskRef, err error) {
+func (vm) AsyncCheckpoint3(session *Session, vm VMRef, newName string) (retval TaskRef, err error) {
 	method := "Async.VM.checkpoint"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7279,7 +7279,7 @@ func (vM) AsyncCheckpoint3(session *Session, vM VMRef, newName string) (retval T
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7295,7 +7295,7 @@ func (vM) AsyncCheckpoint3(session *Session, vM VMRef, newName string) (retval T
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // VM_REVERT_FAILED - An error occured while reverting the specified virtual machine to the specified snapshot
-func (vM) Revert(session *Session, snapshot VMRef) (err error) {
+func (vm) Revert(session *Session, snapshot VMRef) (err error) {
 	method := "VM.revert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -7317,7 +7317,7 @@ func (vM) Revert(session *Session, snapshot VMRef) (err error) {
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // VM_REVERT_FAILED - An error occured while reverting the specified virtual machine to the specified snapshot
-func (vM) AsyncRevert(session *Session, snapshot VMRef) (retval TaskRef, err error) {
+func (vm) AsyncRevert(session *Session, snapshot VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.revert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -7343,7 +7343,7 @@ func (vM) AsyncRevert(session *Session, snapshot VMRef) (retval TaskRef, err err
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // VM_REVERT_FAILED - An error occured while reverting the specified virtual machine to the specified snapshot
-func (vM) Revert2(session *Session, snapshot VMRef) (err error) {
+func (vm) Revert2(session *Session, snapshot VMRef) (err error) {
 	method := "VM.revert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -7365,7 +7365,7 @@ func (vM) Revert2(session *Session, snapshot VMRef) (err error) {
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // VM_REVERT_FAILED - An error occured while reverting the specified virtual machine to the specified snapshot
-func (vM) AsyncRevert2(session *Session, snapshot VMRef) (retval TaskRef, err error) {
+func (vm) AsyncRevert2(session *Session, snapshot VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.revert"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -7391,13 +7391,13 @@ func (vM) AsyncRevert2(session *Session, snapshot VMRef) (retval TaskRef, err er
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Copy(session *Session, vM VMRef, newName string, sr SRRef) (retval VMRef, err error) {
+func (vm) Copy(session *Session, vm VMRef, newName string, sr SRRef) (retval VMRef, err error) {
 	method := "VM.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7409,7 +7409,7 @@ func (vM) Copy(session *Session, vM VMRef, newName string, sr SRRef) (retval VMR
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, srArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, srArg)
 	if err != nil {
 		return
 	}
@@ -7425,13 +7425,13 @@ func (vM) Copy(session *Session, vM VMRef, newName string, sr SRRef) (retval VMR
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncCopy(session *Session, vM VMRef, newName string, sr SRRef) (retval TaskRef, err error) {
+func (vm) AsyncCopy(session *Session, vm VMRef, newName string, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.VM.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7443,7 +7443,7 @@ func (vM) AsyncCopy(session *Session, vM VMRef, newName string, sr SRRef) (retva
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, srArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, srArg)
 	if err != nil {
 		return
 	}
@@ -7459,13 +7459,13 @@ func (vM) AsyncCopy(session *Session, vM VMRef, newName string, sr SRRef) (retva
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Copy4(session *Session, vM VMRef, newName string, sr SRRef) (retval VMRef, err error) {
+func (vm) Copy4(session *Session, vm VMRef, newName string, sr SRRef) (retval VMRef, err error) {
 	method := "VM.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7477,7 +7477,7 @@ func (vM) Copy4(session *Session, vM VMRef, newName string, sr SRRef) (retval VM
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, srArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, srArg)
 	if err != nil {
 		return
 	}
@@ -7493,13 +7493,13 @@ func (vM) Copy4(session *Session, vM VMRef, newName string, sr SRRef) (retval VM
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncCopy4(session *Session, vM VMRef, newName string, sr SRRef) (retval TaskRef, err error) {
+func (vm) AsyncCopy4(session *Session, vm VMRef, newName string, sr SRRef) (retval TaskRef, err error) {
 	method := "Async.VM.copy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7511,7 +7511,7 @@ func (vM) AsyncCopy4(session *Session, vM VMRef, newName string, sr SRRef) (retv
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, srArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, srArg)
 	if err != nil {
 		return
 	}
@@ -7527,13 +7527,13 @@ func (vM) AsyncCopy4(session *Session, vM VMRef, newName string, sr SRRef) (retv
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Clone(session *Session, vM VMRef, newName string) (retval VMRef, err error) {
+func (vm) Clone(session *Session, vm VMRef, newName string) (retval VMRef, err error) {
 	method := "VM.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7541,7 +7541,7 @@ func (vM) Clone(session *Session, vM VMRef, newName string) (retval VMRef, err e
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7557,13 +7557,13 @@ func (vM) Clone(session *Session, vM VMRef, newName string) (retval VMRef, err e
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncClone(session *Session, vM VMRef, newName string) (retval TaskRef, err error) {
+func (vm) AsyncClone(session *Session, vm VMRef, newName string) (retval TaskRef, err error) {
 	method := "Async.VM.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7571,7 +7571,7 @@ func (vM) AsyncClone(session *Session, vM VMRef, newName string) (retval TaskRef
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7587,13 +7587,13 @@ func (vM) AsyncClone(session *Session, vM VMRef, newName string) (retval TaskRef
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) Clone3(session *Session, vM VMRef, newName string) (retval VMRef, err error) {
+func (vm) Clone3(session *Session, vm VMRef, newName string) (retval VMRef, err error) {
 	method := "VM.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7601,7 +7601,7 @@ func (vM) Clone3(session *Session, vM VMRef, newName string) (retval VMRef, err 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7617,13 +7617,13 @@ func (vM) Clone3(session *Session, vM VMRef, newName string) (retval VMRef, err 
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
 // LICENCE_RESTRICTION - This operation is not allowed because your license lacks a needed feature. Please contact your support representative.
-func (vM) AsyncClone3(session *Session, vM VMRef, newName string) (retval TaskRef, err error) {
+func (vm) AsyncClone3(session *Session, vm VMRef, newName string) (retval TaskRef, err error) {
 	method := "Async.VM.clone"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7631,7 +7631,7 @@ func (vM) AsyncClone3(session *Session, vM VMRef, newName string) (retval TaskRe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7650,13 +7650,13 @@ func (vM) AsyncClone3(session *Session, vM VMRef, newName string) (retval TaskRe
 // VM_SNAPSHOT_WITH_QUIESCE_TIMEOUT - The VSS plug-in has timed out
 // VM_SNAPSHOT_WITH_QUIESCE_PLUGIN_DEOS_NOT_RESPOND - The VSS plug-in cannot be contacted
 // VM_SNAPSHOT_WITH_QUIESCE_NOT_SUPPORTED - The VSS plug-in is not installed on this virtual machine
-func (vM) SnapshotWithQuiesce(session *Session, vM VMRef, newName string) (retval VMRef, err error) {
+func (vm) SnapshotWithQuiesce(session *Session, vm VMRef, newName string) (retval VMRef, err error) {
 	method := "VM.snapshot_with_quiesce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7664,7 +7664,7 @@ func (vM) SnapshotWithQuiesce(session *Session, vM VMRef, newName string) (retva
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7683,13 +7683,13 @@ func (vM) SnapshotWithQuiesce(session *Session, vM VMRef, newName string) (retva
 // VM_SNAPSHOT_WITH_QUIESCE_TIMEOUT - The VSS plug-in has timed out
 // VM_SNAPSHOT_WITH_QUIESCE_PLUGIN_DEOS_NOT_RESPOND - The VSS plug-in cannot be contacted
 // VM_SNAPSHOT_WITH_QUIESCE_NOT_SUPPORTED - The VSS plug-in is not installed on this virtual machine
-func (vM) AsyncSnapshotWithQuiesce(session *Session, vM VMRef, newName string) (retval TaskRef, err error) {
+func (vm) AsyncSnapshotWithQuiesce(session *Session, vm VMRef, newName string) (retval TaskRef, err error) {
 	method := "Async.VM.snapshot_with_quiesce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7697,7 +7697,7 @@ func (vM) AsyncSnapshotWithQuiesce(session *Session, vM VMRef, newName string) (
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7716,13 +7716,13 @@ func (vM) AsyncSnapshotWithQuiesce(session *Session, vM VMRef, newName string) (
 // VM_SNAPSHOT_WITH_QUIESCE_TIMEOUT - The VSS plug-in has timed out
 // VM_SNAPSHOT_WITH_QUIESCE_PLUGIN_DEOS_NOT_RESPOND - The VSS plug-in cannot be contacted
 // VM_SNAPSHOT_WITH_QUIESCE_NOT_SUPPORTED - The VSS plug-in is not installed on this virtual machine
-func (vM) SnapshotWithQuiesce3(session *Session, vM VMRef, newName string) (retval VMRef, err error) {
+func (vm) SnapshotWithQuiesce3(session *Session, vm VMRef, newName string) (retval VMRef, err error) {
 	method := "VM.snapshot_with_quiesce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7730,7 +7730,7 @@ func (vM) SnapshotWithQuiesce3(session *Session, vM VMRef, newName string) (retv
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7749,13 +7749,13 @@ func (vM) SnapshotWithQuiesce3(session *Session, vM VMRef, newName string) (retv
 // VM_SNAPSHOT_WITH_QUIESCE_TIMEOUT - The VSS plug-in has timed out
 // VM_SNAPSHOT_WITH_QUIESCE_PLUGIN_DEOS_NOT_RESPOND - The VSS plug-in cannot be contacted
 // VM_SNAPSHOT_WITH_QUIESCE_NOT_SUPPORTED - The VSS plug-in is not installed on this virtual machine
-func (vM) AsyncSnapshotWithQuiesce3(session *Session, vM VMRef, newName string) (retval TaskRef, err error) {
+func (vm) AsyncSnapshotWithQuiesce3(session *Session, vm VMRef, newName string) (retval TaskRef, err error) {
 	method := "Async.VM.snapshot_with_quiesce"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7763,7 +7763,7 @@ func (vM) AsyncSnapshotWithQuiesce3(session *Session, vM VMRef, newName string) 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7778,13 +7778,13 @@ func (vM) AsyncSnapshotWithQuiesce3(session *Session, vM VMRef, newName string) 
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (vM) Snapshot(session *Session, vM VMRef, newName string, ignoreVdis []VDIRef) (retval VMRef, err error) {
+func (vm) Snapshot(session *Session, vm VMRef, newName string, ignoreVdis []VDIRef) (retval VMRef, err error) {
 	method := "VM.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7796,7 +7796,7 @@ func (vM) Snapshot(session *Session, vM VMRef, newName string, ignoreVdis []VDIR
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, ignoreVdisArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, ignoreVdisArg)
 	if err != nil {
 		return
 	}
@@ -7811,13 +7811,13 @@ func (vM) Snapshot(session *Session, vM VMRef, newName string, ignoreVdis []VDIR
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (vM) AsyncSnapshot(session *Session, vM VMRef, newName string, ignoreVdis []VDIRef) (retval TaskRef, err error) {
+func (vm) AsyncSnapshot(session *Session, vm VMRef, newName string, ignoreVdis []VDIRef) (retval TaskRef, err error) {
 	method := "Async.VM.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7829,7 +7829,7 @@ func (vM) AsyncSnapshot(session *Session, vM VMRef, newName string, ignoreVdis [
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, ignoreVdisArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, ignoreVdisArg)
 	if err != nil {
 		return
 	}
@@ -7844,13 +7844,13 @@ func (vM) AsyncSnapshot(session *Session, vM VMRef, newName string, ignoreVdis [
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (vM) Snapshot4(session *Session, vM VMRef, newName string, ignoreVdis []VDIRef) (retval VMRef, err error) {
+func (vm) Snapshot4(session *Session, vm VMRef, newName string, ignoreVdis []VDIRef) (retval VMRef, err error) {
 	method := "VM.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7862,7 +7862,7 @@ func (vM) Snapshot4(session *Session, vM VMRef, newName string, ignoreVdis []VDI
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, ignoreVdisArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, ignoreVdisArg)
 	if err != nil {
 		return
 	}
@@ -7877,13 +7877,13 @@ func (vM) Snapshot4(session *Session, vM VMRef, newName string, ignoreVdis []VDI
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (vM) AsyncSnapshot4(session *Session, vM VMRef, newName string, ignoreVdis []VDIRef) (retval TaskRef, err error) {
+func (vm) AsyncSnapshot4(session *Session, vm VMRef, newName string, ignoreVdis []VDIRef) (retval TaskRef, err error) {
 	method := "Async.VM.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7895,7 +7895,7 @@ func (vM) AsyncSnapshot4(session *Session, vM VMRef, newName string, ignoreVdis 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg, ignoreVdisArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg, ignoreVdisArg)
 	if err != nil {
 		return
 	}
@@ -7910,13 +7910,13 @@ func (vM) AsyncSnapshot4(session *Session, vM VMRef, newName string, ignoreVdis 
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (vM) Snapshot3(session *Session, vM VMRef, newName string) (retval VMRef, err error) {
+func (vm) Snapshot3(session *Session, vm VMRef, newName string) (retval VMRef, err error) {
 	method := "VM.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7924,7 +7924,7 @@ func (vM) Snapshot3(session *Session, vM VMRef, newName string) (retval VMRef, e
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7939,13 +7939,13 @@ func (vM) Snapshot3(session *Session, vM VMRef, newName string) (retval VMRef, e
 // VM_BAD_POWER_STATE - You attempted an operation on a VM that was not in an appropriate power state at the time; for example, you attempted to start a VM that was already running. The parameters returned are the VM&apos;s handle, and the expected and actual VM state at the time of the call.
 // SR_FULL - The SR is full. Requested new size exceeds the maximum size
 // OPERATION_NOT_ALLOWED - You attempted an operation that was not allowed.
-func (vM) AsyncSnapshot3(session *Session, vM VMRef, newName string) (retval TaskRef, err error) {
+func (vm) AsyncSnapshot3(session *Session, vm VMRef, newName string) (retval TaskRef, err error) {
 	method := "Async.VM.snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vm"), vm)
 	if err != nil {
 		return
 	}
@@ -7953,7 +7953,7 @@ func (vM) AsyncSnapshot3(session *Session, vM VMRef, newName string) (retval Tas
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, newNameArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, newNameArg)
 	if err != nil {
 		return
 	}
@@ -7963,7 +7963,7 @@ func (vM) AsyncSnapshot3(session *Session, vM VMRef, newName string) (retval Tas
 
 // SetHardwarePlatformVersion: Set the hardware_platform_version field of the given VM.
 // Version: cream
-func (vM) SetHardwarePlatformVersion(session *Session, self VMRef, value int) (err error) {
+func (vm) SetHardwarePlatformVersion(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_hardware_platform_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -7983,7 +7983,7 @@ func (vM) SetHardwarePlatformVersion(session *Session, self VMRef, value int) (e
 
 // SetHardwarePlatformVersion3: Set the hardware_platform_version field of the given VM.
 // Version: cream
-func (vM) SetHardwarePlatformVersion3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetHardwarePlatformVersion3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_hardware_platform_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8003,7 +8003,7 @@ func (vM) SetHardwarePlatformVersion3(session *Session, self VMRef, value int) (
 
 // SetHardwarePlatformVersion2: Set the hardware_platform_version field of the given VM.
 // Version: rio
-func (vM) SetHardwarePlatformVersion2(session *Session, self VMRef) (err error) {
+func (vm) SetHardwarePlatformVersion2(session *Session, self VMRef) (err error) {
 	method := "VM.set_hardware_platform_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8019,7 +8019,7 @@ func (vM) SetHardwarePlatformVersion2(session *Session, self VMRef) (err error) 
 
 // SetSuspendSR: Set the suspend_SR field of the given VM.
 // Version: boston
-func (vM) SetSuspendSR(session *Session, self VMRef, value SRRef) (err error) {
+func (vm) SetSuspendSR(session *Session, self VMRef, value SRRef) (err error) {
 	method := "VM.set_suspend_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8039,7 +8039,7 @@ func (vM) SetSuspendSR(session *Session, self VMRef, value SRRef) (err error) {
 
 // SetSuspendSR3: Set the suspend_SR field of the given VM.
 // Version: boston
-func (vM) SetSuspendSR3(session *Session, self VMRef, value SRRef) (err error) {
+func (vm) SetSuspendSR3(session *Session, self VMRef, value SRRef) (err error) {
 	method := "VM.set_suspend_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8059,7 +8059,7 @@ func (vM) SetSuspendSR3(session *Session, self VMRef, value SRRef) (err error) {
 
 // SetSuspendSR2: Set the suspend_SR field of the given VM.
 // Version: rio
-func (vM) SetSuspendSR2(session *Session, self VMRef) (err error) {
+func (vm) SetSuspendSR2(session *Session, self VMRef) (err error) {
 	method := "VM.set_suspend_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8075,7 +8075,7 @@ func (vM) SetSuspendSR2(session *Session, self VMRef) (err error) {
 
 // RemoveFromBlockedOperations: Remove the given key and its corresponding value from the blocked_operations field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vM) RemoveFromBlockedOperations(session *Session, self VMRef, key VMOperations) (err error) {
+func (vm) RemoveFromBlockedOperations(session *Session, self VMRef, key VMOperations) (err error) {
 	method := "VM.remove_from_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8095,7 +8095,7 @@ func (vM) RemoveFromBlockedOperations(session *Session, self VMRef, key VMOperat
 
 // RemoveFromBlockedOperations3: Remove the given key and its corresponding value from the blocked_operations field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: orlando
-func (vM) RemoveFromBlockedOperations3(session *Session, self VMRef, key VMOperations) (err error) {
+func (vm) RemoveFromBlockedOperations3(session *Session, self VMRef, key VMOperations) (err error) {
 	method := "VM.remove_from_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8115,7 +8115,7 @@ func (vM) RemoveFromBlockedOperations3(session *Session, self VMRef, key VMOpera
 
 // RemoveFromBlockedOperations2: Remove the given key and its corresponding value from the blocked_operations field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromBlockedOperations2(session *Session, self VMRef) (err error) {
+func (vm) RemoveFromBlockedOperations2(session *Session, self VMRef) (err error) {
 	method := "VM.remove_from_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8131,7 +8131,7 @@ func (vM) RemoveFromBlockedOperations2(session *Session, self VMRef) (err error)
 
 // AddToBlockedOperations: Add the given key-value pair to the blocked_operations field of the given VM.
 // Version: orlando
-func (vM) AddToBlockedOperations(session *Session, self VMRef, key VMOperations, value string) (err error) {
+func (vm) AddToBlockedOperations(session *Session, self VMRef, key VMOperations, value string) (err error) {
 	method := "VM.add_to_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8155,7 +8155,7 @@ func (vM) AddToBlockedOperations(session *Session, self VMRef, key VMOperations,
 
 // AddToBlockedOperations4: Add the given key-value pair to the blocked_operations field of the given VM.
 // Version: orlando
-func (vM) AddToBlockedOperations4(session *Session, self VMRef, key VMOperations, value string) (err error) {
+func (vm) AddToBlockedOperations4(session *Session, self VMRef, key VMOperations, value string) (err error) {
 	method := "VM.add_to_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8179,7 +8179,7 @@ func (vM) AddToBlockedOperations4(session *Session, self VMRef, key VMOperations
 
 // AddToBlockedOperations2: Add the given key-value pair to the blocked_operations field of the given VM.
 // Version: rio
-func (vM) AddToBlockedOperations2(session *Session, self VMRef) (err error) {
+func (vm) AddToBlockedOperations2(session *Session, self VMRef) (err error) {
 	method := "VM.add_to_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8195,7 +8195,7 @@ func (vM) AddToBlockedOperations2(session *Session, self VMRef) (err error) {
 
 // SetBlockedOperations: Set the blocked_operations field of the given VM.
 // Version: orlando
-func (vM) SetBlockedOperations(session *Session, self VMRef, value map[VMOperations]string) (err error) {
+func (vm) SetBlockedOperations(session *Session, self VMRef, value map[VMOperations]string) (err error) {
 	method := "VM.set_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8215,7 +8215,7 @@ func (vM) SetBlockedOperations(session *Session, self VMRef, value map[VMOperati
 
 // SetBlockedOperations3: Set the blocked_operations field of the given VM.
 // Version: orlando
-func (vM) SetBlockedOperations3(session *Session, self VMRef, value map[VMOperations]string) (err error) {
+func (vm) SetBlockedOperations3(session *Session, self VMRef, value map[VMOperations]string) (err error) {
 	method := "VM.set_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8235,7 +8235,7 @@ func (vM) SetBlockedOperations3(session *Session, self VMRef, value map[VMOperat
 
 // SetBlockedOperations2: Set the blocked_operations field of the given VM.
 // Version: rio
-func (vM) SetBlockedOperations2(session *Session, self VMRef) (err error) {
+func (vm) SetBlockedOperations2(session *Session, self VMRef) (err error) {
 	method := "VM.set_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8251,7 +8251,7 @@ func (vM) SetBlockedOperations2(session *Session, self VMRef) (err error) {
 
 // RemoveTags: Remove the given value from the tags field of the given VM.  If the value is not in that Set, then do nothing.
 // Version: orlando
-func (vM) RemoveTags(session *Session, self VMRef, value string) (err error) {
+func (vm) RemoveTags(session *Session, self VMRef, value string) (err error) {
 	method := "VM.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8271,7 +8271,7 @@ func (vM) RemoveTags(session *Session, self VMRef, value string) (err error) {
 
 // RemoveTags3: Remove the given value from the tags field of the given VM.  If the value is not in that Set, then do nothing.
 // Version: orlando
-func (vM) RemoveTags3(session *Session, self VMRef, value string) (err error) {
+func (vm) RemoveTags3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8291,7 +8291,7 @@ func (vM) RemoveTags3(session *Session, self VMRef, value string) (err error) {
 
 // RemoveTags2: Remove the given value from the tags field of the given VM.  If the value is not in that Set, then do nothing.
 // Version: rio
-func (vM) RemoveTags2(session *Session, self VMRef) (err error) {
+func (vm) RemoveTags2(session *Session, self VMRef) (err error) {
 	method := "VM.remove_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8307,7 +8307,7 @@ func (vM) RemoveTags2(session *Session, self VMRef) (err error) {
 
 // AddTags: Add the given value to the tags field of the given VM.  If the value is already in that Set, then do nothing.
 // Version: orlando
-func (vM) AddTags(session *Session, self VMRef, value string) (err error) {
+func (vm) AddTags(session *Session, self VMRef, value string) (err error) {
 	method := "VM.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8327,7 +8327,7 @@ func (vM) AddTags(session *Session, self VMRef, value string) (err error) {
 
 // AddTags3: Add the given value to the tags field of the given VM.  If the value is already in that Set, then do nothing.
 // Version: orlando
-func (vM) AddTags3(session *Session, self VMRef, value string) (err error) {
+func (vm) AddTags3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8347,7 +8347,7 @@ func (vM) AddTags3(session *Session, self VMRef, value string) (err error) {
 
 // AddTags2: Add the given value to the tags field of the given VM.  If the value is already in that Set, then do nothing.
 // Version: rio
-func (vM) AddTags2(session *Session, self VMRef) (err error) {
+func (vm) AddTags2(session *Session, self VMRef) (err error) {
 	method := "VM.add_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8363,7 +8363,7 @@ func (vM) AddTags2(session *Session, self VMRef) (err error) {
 
 // SetTags: Set the tags field of the given VM.
 // Version: orlando
-func (vM) SetTags(session *Session, self VMRef, value []string) (err error) {
+func (vm) SetTags(session *Session, self VMRef, value []string) (err error) {
 	method := "VM.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8383,7 +8383,7 @@ func (vM) SetTags(session *Session, self VMRef, value []string) (err error) {
 
 // SetTags3: Set the tags field of the given VM.
 // Version: orlando
-func (vM) SetTags3(session *Session, self VMRef, value []string) (err error) {
+func (vm) SetTags3(session *Session, self VMRef, value []string) (err error) {
 	method := "VM.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8403,7 +8403,7 @@ func (vM) SetTags3(session *Session, self VMRef, value []string) (err error) {
 
 // SetTags2: Set the tags field of the given VM.
 // Version: rio
-func (vM) SetTags2(session *Session, self VMRef) (err error) {
+func (vm) SetTags2(session *Session, self VMRef) (err error) {
 	method := "VM.set_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8419,7 +8419,7 @@ func (vM) SetTags2(session *Session, self VMRef) (err error) {
 
 // RemoveFromXenstoreData: Remove the given key and its corresponding value from the xenstore_data field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vM) RemoveFromXenstoreData(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromXenstoreData(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8439,7 +8439,7 @@ func (vM) RemoveFromXenstoreData(session *Session, self VMRef, key string) (err 
 
 // RemoveFromXenstoreData3: Remove the given key and its corresponding value from the xenstore_data field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: miami
-func (vM) RemoveFromXenstoreData3(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromXenstoreData3(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8459,7 +8459,7 @@ func (vM) RemoveFromXenstoreData3(session *Session, self VMRef, key string) (err
 
 // RemoveFromXenstoreData2: Remove the given key and its corresponding value from the xenstore_data field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromXenstoreData2(session *Session, self VMRef) (err error) {
+func (vm) RemoveFromXenstoreData2(session *Session, self VMRef) (err error) {
 	method := "VM.remove_from_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8475,7 +8475,7 @@ func (vM) RemoveFromXenstoreData2(session *Session, self VMRef) (err error) {
 
 // AddToXenstoreData: Add the given key-value pair to the xenstore_data field of the given VM.
 // Version: miami
-func (vM) AddToXenstoreData(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToXenstoreData(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8499,7 +8499,7 @@ func (vM) AddToXenstoreData(session *Session, self VMRef, key string, value stri
 
 // AddToXenstoreData4: Add the given key-value pair to the xenstore_data field of the given VM.
 // Version: miami
-func (vM) AddToXenstoreData4(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToXenstoreData4(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8523,7 +8523,7 @@ func (vM) AddToXenstoreData4(session *Session, self VMRef, key string, value str
 
 // AddToXenstoreData2: Add the given key-value pair to the xenstore_data field of the given VM.
 // Version: rio
-func (vM) AddToXenstoreData2(session *Session, self VMRef) (err error) {
+func (vm) AddToXenstoreData2(session *Session, self VMRef) (err error) {
 	method := "VM.add_to_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8539,7 +8539,7 @@ func (vM) AddToXenstoreData2(session *Session, self VMRef) (err error) {
 
 // SetXenstoreData: Set the xenstore_data field of the given VM.
 // Version: miami
-func (vM) SetXenstoreData(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetXenstoreData(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8559,7 +8559,7 @@ func (vM) SetXenstoreData(session *Session, self VMRef, value map[string]string)
 
 // SetXenstoreData3: Set the xenstore_data field of the given VM.
 // Version: miami
-func (vM) SetXenstoreData3(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetXenstoreData3(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8579,7 +8579,7 @@ func (vM) SetXenstoreData3(session *Session, self VMRef, value map[string]string
 
 // SetXenstoreData2: Set the xenstore_data field of the given VM.
 // Version: rio
-func (vM) SetXenstoreData2(session *Session, self VMRef) (err error) {
+func (vm) SetXenstoreData2(session *Session, self VMRef) (err error) {
 	method := "VM.set_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8595,7 +8595,7 @@ func (vM) SetXenstoreData2(session *Session, self VMRef) (err error) {
 
 // SetRecommendations: Set the recommendations field of the given VM.
 // Version: rio
-func (vM) SetRecommendations(session *Session, self VMRef, value string) (err error) {
+func (vm) SetRecommendations(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8615,7 +8615,7 @@ func (vM) SetRecommendations(session *Session, self VMRef, value string) (err er
 
 // SetRecommendations3: Set the recommendations field of the given VM.
 // Version: rio
-func (vM) SetRecommendations3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetRecommendations3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8635,7 +8635,7 @@ func (vM) SetRecommendations3(session *Session, self VMRef, value string) (err e
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromOtherConfig(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromOtherConfig(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8655,7 +8655,7 @@ func (vM) RemoveFromOtherConfig(session *Session, self VMRef, key string) (err e
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromOtherConfig3(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromOtherConfig3(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8675,7 +8675,7 @@ func (vM) RemoveFromOtherConfig3(session *Session, self VMRef, key string) (err 
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given VM.
 // Version: rio
-func (vM) AddToOtherConfig(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToOtherConfig(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8699,7 +8699,7 @@ func (vM) AddToOtherConfig(session *Session, self VMRef, key string, value strin
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given VM.
 // Version: rio
-func (vM) AddToOtherConfig4(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToOtherConfig4(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8723,7 +8723,7 @@ func (vM) AddToOtherConfig4(session *Session, self VMRef, key string, value stri
 
 // SetOtherConfig: Set the other_config field of the given VM.
 // Version: rio
-func (vM) SetOtherConfig(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetOtherConfig(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8743,7 +8743,7 @@ func (vM) SetOtherConfig(session *Session, self VMRef, value map[string]string) 
 
 // SetOtherConfig3: Set the other_config field of the given VM.
 // Version: rio
-func (vM) SetOtherConfig3(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetOtherConfig3(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8763,7 +8763,7 @@ func (vM) SetOtherConfig3(session *Session, self VMRef, value map[string]string)
 
 // SetPCIBus: Set the PCI_bus field of the given VM.
 // Version: rio
-func (vM) SetPCIBus(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPCIBus(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PCI_bus"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8783,7 +8783,7 @@ func (vM) SetPCIBus(session *Session, self VMRef, value string) (err error) {
 
 // SetPCIBus3: Set the PCI_bus field of the given VM.
 // Version: rio
-func (vM) SetPCIBus3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPCIBus3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PCI_bus"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8803,7 +8803,7 @@ func (vM) SetPCIBus3(session *Session, self VMRef, value string) (err error) {
 
 // RemoveFromPlatform: Remove the given key and its corresponding value from the platform field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromPlatform(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromPlatform(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8823,7 +8823,7 @@ func (vM) RemoveFromPlatform(session *Session, self VMRef, key string) (err erro
 
 // RemoveFromPlatform3: Remove the given key and its corresponding value from the platform field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromPlatform3(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromPlatform3(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8843,7 +8843,7 @@ func (vM) RemoveFromPlatform3(session *Session, self VMRef, key string) (err err
 
 // AddToPlatform: Add the given key-value pair to the platform field of the given VM.
 // Version: rio
-func (vM) AddToPlatform(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToPlatform(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8867,7 +8867,7 @@ func (vM) AddToPlatform(session *Session, self VMRef, key string, value string) 
 
 // AddToPlatform4: Add the given key-value pair to the platform field of the given VM.
 // Version: rio
-func (vM) AddToPlatform4(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToPlatform4(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8891,7 +8891,7 @@ func (vM) AddToPlatform4(session *Session, self VMRef, key string, value string)
 
 // SetPlatform: Set the platform field of the given VM.
 // Version: rio
-func (vM) SetPlatform(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetPlatform(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8911,7 +8911,7 @@ func (vM) SetPlatform(session *Session, self VMRef, value map[string]string) (er
 
 // SetPlatform3: Set the platform field of the given VM.
 // Version: rio
-func (vM) SetPlatform3(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetPlatform3(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8931,7 +8931,7 @@ func (vM) SetPlatform3(session *Session, self VMRef, value map[string]string) (e
 
 // RemoveFromHVMBootParams: Remove the given key and its corresponding value from the HVM/boot_params field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromHVMBootParams(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromHVMBootParams(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8951,7 +8951,7 @@ func (vM) RemoveFromHVMBootParams(session *Session, self VMRef, key string) (err
 
 // RemoveFromHVMBootParams3: Remove the given key and its corresponding value from the HVM/boot_params field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromHVMBootParams3(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromHVMBootParams3(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8971,7 +8971,7 @@ func (vM) RemoveFromHVMBootParams3(session *Session, self VMRef, key string) (er
 
 // AddToHVMBootParams: Add the given key-value pair to the HVM/boot_params field of the given VM.
 // Version: rio
-func (vM) AddToHVMBootParams(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToHVMBootParams(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -8995,7 +8995,7 @@ func (vM) AddToHVMBootParams(session *Session, self VMRef, key string, value str
 
 // AddToHVMBootParams4: Add the given key-value pair to the HVM/boot_params field of the given VM.
 // Version: rio
-func (vM) AddToHVMBootParams4(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToHVMBootParams4(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9019,7 +9019,7 @@ func (vM) AddToHVMBootParams4(session *Session, self VMRef, key string, value st
 
 // SetHVMBootParams: Set the HVM/boot_params field of the given VM.
 // Version: rio
-func (vM) SetHVMBootParams(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetHVMBootParams(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9039,7 +9039,7 @@ func (vM) SetHVMBootParams(session *Session, self VMRef, value map[string]string
 
 // SetHVMBootParams3: Set the HVM/boot_params field of the given VM.
 // Version: rio
-func (vM) SetHVMBootParams3(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetHVMBootParams3(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9059,7 +9059,7 @@ func (vM) SetHVMBootParams3(session *Session, self VMRef, value map[string]strin
 
 // SetPVLegacyArgs: Set the PV/legacy_args field of the given VM.
 // Version: rio
-func (vM) SetPVLegacyArgs(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVLegacyArgs(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_legacy_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9079,7 +9079,7 @@ func (vM) SetPVLegacyArgs(session *Session, self VMRef, value string) (err error
 
 // SetPVLegacyArgs3: Set the PV/legacy_args field of the given VM.
 // Version: rio
-func (vM) SetPVLegacyArgs3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVLegacyArgs3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_legacy_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9099,7 +9099,7 @@ func (vM) SetPVLegacyArgs3(session *Session, self VMRef, value string) (err erro
 
 // SetPVBootloaderArgs: Set the PV/bootloader_args field of the given VM.
 // Version: rio
-func (vM) SetPVBootloaderArgs(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVBootloaderArgs(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_bootloader_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9119,7 +9119,7 @@ func (vM) SetPVBootloaderArgs(session *Session, self VMRef, value string) (err e
 
 // SetPVBootloaderArgs3: Set the PV/bootloader_args field of the given VM.
 // Version: rio
-func (vM) SetPVBootloaderArgs3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVBootloaderArgs3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_bootloader_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9139,7 +9139,7 @@ func (vM) SetPVBootloaderArgs3(session *Session, self VMRef, value string) (err 
 
 // SetPVArgs: Set the PV/args field of the given VM.
 // Version: rio
-func (vM) SetPVArgs(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVArgs(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9159,7 +9159,7 @@ func (vM) SetPVArgs(session *Session, self VMRef, value string) (err error) {
 
 // SetPVArgs3: Set the PV/args field of the given VM.
 // Version: rio
-func (vM) SetPVArgs3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVArgs3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9179,7 +9179,7 @@ func (vM) SetPVArgs3(session *Session, self VMRef, value string) (err error) {
 
 // SetPVRamdisk: Set the PV/ramdisk field of the given VM.
 // Version: rio
-func (vM) SetPVRamdisk(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVRamdisk(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_ramdisk"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9199,7 +9199,7 @@ func (vM) SetPVRamdisk(session *Session, self VMRef, value string) (err error) {
 
 // SetPVRamdisk3: Set the PV/ramdisk field of the given VM.
 // Version: rio
-func (vM) SetPVRamdisk3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVRamdisk3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_ramdisk"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9219,7 +9219,7 @@ func (vM) SetPVRamdisk3(session *Session, self VMRef, value string) (err error) 
 
 // SetPVKernel: Set the PV/kernel field of the given VM.
 // Version: rio
-func (vM) SetPVKernel(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVKernel(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_kernel"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9239,7 +9239,7 @@ func (vM) SetPVKernel(session *Session, self VMRef, value string) (err error) {
 
 // SetPVKernel3: Set the PV/kernel field of the given VM.
 // Version: rio
-func (vM) SetPVKernel3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVKernel3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_kernel"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9259,7 +9259,7 @@ func (vM) SetPVKernel3(session *Session, self VMRef, value string) (err error) {
 
 // SetPVBootloader: Set the PV/bootloader field of the given VM.
 // Version: rio
-func (vM) SetPVBootloader(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVBootloader(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_bootloader"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9279,7 +9279,7 @@ func (vM) SetPVBootloader(session *Session, self VMRef, value string) (err error
 
 // SetPVBootloader3: Set the PV/bootloader field of the given VM.
 // Version: rio
-func (vM) SetPVBootloader3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetPVBootloader3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_PV_bootloader"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9299,7 +9299,7 @@ func (vM) SetPVBootloader3(session *Session, self VMRef, value string) (err erro
 
 // SetActionsAfterReboot: Set the actions/after_reboot field of the given VM.
 // Version: rio
-func (vM) SetActionsAfterReboot(session *Session, self VMRef, value OnNormalExit) (err error) {
+func (vm) SetActionsAfterReboot(session *Session, self VMRef, value OnNormalExit) (err error) {
 	method := "VM.set_actions_after_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9319,7 +9319,7 @@ func (vM) SetActionsAfterReboot(session *Session, self VMRef, value OnNormalExit
 
 // SetActionsAfterReboot3: Set the actions/after_reboot field of the given VM.
 // Version: rio
-func (vM) SetActionsAfterReboot3(session *Session, self VMRef, value OnNormalExit) (err error) {
+func (vm) SetActionsAfterReboot3(session *Session, self VMRef, value OnNormalExit) (err error) {
 	method := "VM.set_actions_after_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9339,7 +9339,7 @@ func (vM) SetActionsAfterReboot3(session *Session, self VMRef, value OnNormalExi
 
 // SetActionsAfterShutdown: Set the actions/after_shutdown field of the given VM.
 // Version: rio
-func (vM) SetActionsAfterShutdown(session *Session, self VMRef, value OnNormalExit) (err error) {
+func (vm) SetActionsAfterShutdown(session *Session, self VMRef, value OnNormalExit) (err error) {
 	method := "VM.set_actions_after_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9359,7 +9359,7 @@ func (vM) SetActionsAfterShutdown(session *Session, self VMRef, value OnNormalEx
 
 // SetActionsAfterShutdown3: Set the actions/after_shutdown field of the given VM.
 // Version: rio
-func (vM) SetActionsAfterShutdown3(session *Session, self VMRef, value OnNormalExit) (err error) {
+func (vm) SetActionsAfterShutdown3(session *Session, self VMRef, value OnNormalExit) (err error) {
 	method := "VM.set_actions_after_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9379,7 +9379,7 @@ func (vM) SetActionsAfterShutdown3(session *Session, self VMRef, value OnNormalE
 
 // SetActionsAfterSoftreboot: Set the actions/after_softreboot field of the given VM.
 // Version: rio
-func (vM) SetActionsAfterSoftreboot(session *Session, self VMRef, value OnSoftrebootBehavior) (err error) {
+func (vm) SetActionsAfterSoftreboot(session *Session, self VMRef, value OnSoftrebootBehavior) (err error) {
 	method := "VM.set_actions_after_softreboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9399,7 +9399,7 @@ func (vM) SetActionsAfterSoftreboot(session *Session, self VMRef, value OnSoftre
 
 // SetActionsAfterSoftreboot3: Set the actions/after_softreboot field of the given VM.
 // Version: rio
-func (vM) SetActionsAfterSoftreboot3(session *Session, self VMRef, value OnSoftrebootBehavior) (err error) {
+func (vm) SetActionsAfterSoftreboot3(session *Session, self VMRef, value OnSoftrebootBehavior) (err error) {
 	method := "VM.set_actions_after_softreboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9419,7 +9419,7 @@ func (vM) SetActionsAfterSoftreboot3(session *Session, self VMRef, value OnSoftr
 
 // SetActionsAfterSoftreboot2: Set the actions/after_softreboot field of the given VM.
 // Version: closed
-func (vM) SetActionsAfterSoftreboot2(session *Session, value OnSoftrebootBehavior) (err error) {
+func (vm) SetActionsAfterSoftreboot2(session *Session, value OnSoftrebootBehavior) (err error) {
 	method := "VM.set_actions_after_softreboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9435,7 +9435,7 @@ func (vM) SetActionsAfterSoftreboot2(session *Session, value OnSoftrebootBehavio
 
 // RemoveFromVCPUsParams: Remove the given key and its corresponding value from the VCPUs/params field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromVCPUsParams(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromVCPUsParams(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9455,7 +9455,7 @@ func (vM) RemoveFromVCPUsParams(session *Session, self VMRef, key string) (err e
 
 // RemoveFromVCPUsParams3: Remove the given key and its corresponding value from the VCPUs/params field of the given VM.  If the key is not in that Map, then do nothing.
 // Version: rio
-func (vM) RemoveFromVCPUsParams3(session *Session, self VMRef, key string) (err error) {
+func (vm) RemoveFromVCPUsParams3(session *Session, self VMRef, key string) (err error) {
 	method := "VM.remove_from_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9475,7 +9475,7 @@ func (vM) RemoveFromVCPUsParams3(session *Session, self VMRef, key string) (err 
 
 // AddToVCPUsParams: Add the given key-value pair to the VCPUs/params field of the given VM.
 // Version: rio
-func (vM) AddToVCPUsParams(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToVCPUsParams(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9499,7 +9499,7 @@ func (vM) AddToVCPUsParams(session *Session, self VMRef, key string, value strin
 
 // AddToVCPUsParams4: Add the given key-value pair to the VCPUs/params field of the given VM.
 // Version: rio
-func (vM) AddToVCPUsParams4(session *Session, self VMRef, key string, value string) (err error) {
+func (vm) AddToVCPUsParams4(session *Session, self VMRef, key string, value string) (err error) {
 	method := "VM.add_to_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9523,7 +9523,7 @@ func (vM) AddToVCPUsParams4(session *Session, self VMRef, key string, value stri
 
 // SetVCPUsParams: Set the VCPUs/params field of the given VM.
 // Version: rio
-func (vM) SetVCPUsParams(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetVCPUsParams(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9543,7 +9543,7 @@ func (vM) SetVCPUsParams(session *Session, self VMRef, value map[string]string) 
 
 // SetVCPUsParams3: Set the VCPUs/params field of the given VM.
 // Version: rio
-func (vM) SetVCPUsParams3(session *Session, self VMRef, value map[string]string) (err error) {
+func (vm) SetVCPUsParams3(session *Session, self VMRef, value map[string]string) (err error) {
 	method := "VM.set_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9563,7 +9563,7 @@ func (vM) SetVCPUsParams3(session *Session, self VMRef, value map[string]string)
 
 // SetAffinity: Set the affinity field of the given VM.
 // Version: rio
-func (vM) SetAffinity(session *Session, self VMRef, value HostRef) (err error) {
+func (vm) SetAffinity(session *Session, self VMRef, value HostRef) (err error) {
 	method := "VM.set_affinity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9583,7 +9583,7 @@ func (vM) SetAffinity(session *Session, self VMRef, value HostRef) (err error) {
 
 // SetAffinity3: Set the affinity field of the given VM.
 // Version: rio
-func (vM) SetAffinity3(session *Session, self VMRef, value HostRef) (err error) {
+func (vm) SetAffinity3(session *Session, self VMRef, value HostRef) (err error) {
 	method := "VM.set_affinity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9603,7 +9603,7 @@ func (vM) SetAffinity3(session *Session, self VMRef, value HostRef) (err error) 
 
 // SetIsATemplate: Set the is_a_template field of the given VM.
 // Version: rio
-func (vM) SetIsATemplate(session *Session, self VMRef, value bool) (err error) {
+func (vm) SetIsATemplate(session *Session, self VMRef, value bool) (err error) {
 	method := "VM.set_is_a_template"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9623,7 +9623,7 @@ func (vM) SetIsATemplate(session *Session, self VMRef, value bool) (err error) {
 
 // SetIsATemplate3: Set the is_a_template field of the given VM.
 // Version: rio
-func (vM) SetIsATemplate3(session *Session, self VMRef, value bool) (err error) {
+func (vm) SetIsATemplate3(session *Session, self VMRef, value bool) (err error) {
 	method := "VM.set_is_a_template"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9643,7 +9643,7 @@ func (vM) SetIsATemplate3(session *Session, self VMRef, value bool) (err error) 
 
 // SetUserVersion: Set the user_version field of the given VM.
 // Version: rio
-func (vM) SetUserVersion(session *Session, self VMRef, value int) (err error) {
+func (vm) SetUserVersion(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_user_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9663,7 +9663,7 @@ func (vM) SetUserVersion(session *Session, self VMRef, value int) (err error) {
 
 // SetUserVersion3: Set the user_version field of the given VM.
 // Version: rio
-func (vM) SetUserVersion3(session *Session, self VMRef, value int) (err error) {
+func (vm) SetUserVersion3(session *Session, self VMRef, value int) (err error) {
 	method := "VM.set_user_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9683,7 +9683,7 @@ func (vM) SetUserVersion3(session *Session, self VMRef, value int) (err error) {
 
 // SetNameDescription: Set the name/description field of the given VM.
 // Version: rio
-func (vM) SetNameDescription(session *Session, self VMRef, value string) (err error) {
+func (vm) SetNameDescription(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9703,7 +9703,7 @@ func (vM) SetNameDescription(session *Session, self VMRef, value string) (err er
 
 // SetNameDescription3: Set the name/description field of the given VM.
 // Version: rio
-func (vM) SetNameDescription3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetNameDescription3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9723,7 +9723,7 @@ func (vM) SetNameDescription3(session *Session, self VMRef, value string) (err e
 
 // SetNameLabel: Set the name/label field of the given VM.
 // Version: rio
-func (vM) SetNameLabel(session *Session, self VMRef, value string) (err error) {
+func (vm) SetNameLabel(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9743,7 +9743,7 @@ func (vM) SetNameLabel(session *Session, self VMRef, value string) (err error) {
 
 // SetNameLabel3: Set the name/label field of the given VM.
 // Version: rio
-func (vM) SetNameLabel3(session *Session, self VMRef, value string) (err error) {
+func (vm) SetNameLabel3(session *Session, self VMRef, value string) (err error) {
 	method := "VM.set_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9763,7 +9763,7 @@ func (vM) SetNameLabel3(session *Session, self VMRef, value string) (err error) 
 
 // GetPendingGuidancesFull: Get the pending_guidances_full field of the given VM.
 // Version: rio
-func (vM) GetPendingGuidancesFull(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
+func (vm) GetPendingGuidancesFull(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
 	method := "VM.get_pending_guidances_full"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9783,7 +9783,7 @@ func (vM) GetPendingGuidancesFull(session *Session, self VMRef) (retval []Update
 
 // GetPendingGuidancesFull2: Get the pending_guidances_full field of the given VM.
 // Version: rio
-func (vM) GetPendingGuidancesFull2(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
+func (vm) GetPendingGuidancesFull2(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
 	method := "VM.get_pending_guidances_full"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9803,7 +9803,7 @@ func (vM) GetPendingGuidancesFull2(session *Session, self VMRef) (retval []Updat
 
 // GetPendingGuidancesRecommended: Get the pending_guidances_recommended field of the given VM.
 // Version: rio
-func (vM) GetPendingGuidancesRecommended(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
+func (vm) GetPendingGuidancesRecommended(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
 	method := "VM.get_pending_guidances_recommended"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9823,7 +9823,7 @@ func (vM) GetPendingGuidancesRecommended(session *Session, self VMRef) (retval [
 
 // GetPendingGuidancesRecommended2: Get the pending_guidances_recommended field of the given VM.
 // Version: rio
-func (vM) GetPendingGuidancesRecommended2(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
+func (vm) GetPendingGuidancesRecommended2(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
 	method := "VM.get_pending_guidances_recommended"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9843,7 +9843,7 @@ func (vM) GetPendingGuidancesRecommended2(session *Session, self VMRef) (retval 
 
 // GetPendingGuidances: Get the pending_guidances field of the given VM.
 // Version: rio
-func (vM) GetPendingGuidances(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
+func (vm) GetPendingGuidances(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
 	method := "VM.get_pending_guidances"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9863,7 +9863,7 @@ func (vM) GetPendingGuidances(session *Session, self VMRef) (retval []UpdateGuid
 
 // GetPendingGuidances2: Get the pending_guidances field of the given VM.
 // Version: rio
-func (vM) GetPendingGuidances2(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
+func (vm) GetPendingGuidances2(session *Session, self VMRef) (retval []UpdateGuidances, err error) {
 	method := "VM.get_pending_guidances"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9883,7 +9883,7 @@ func (vM) GetPendingGuidances2(session *Session, self VMRef) (retval []UpdateGui
 
 // GetNVRAM: Get the NVRAM field of the given VM.
 // Version: rio
-func (vM) GetNVRAM(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetNVRAM(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9903,7 +9903,7 @@ func (vM) GetNVRAM(session *Session, self VMRef) (retval map[string]string, err 
 
 // GetNVRAM2: Get the NVRAM field of the given VM.
 // Version: rio
-func (vM) GetNVRAM2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetNVRAM2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_NVRAM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9923,7 +9923,7 @@ func (vM) GetNVRAM2(session *Session, self VMRef) (retval map[string]string, err
 
 // GetDomainType: Get the domain_type field of the given VM.
 // Version: rio
-func (vM) GetDomainType(session *Session, self VMRef) (retval DomainType, err error) {
+func (vm) GetDomainType(session *Session, self VMRef) (retval DomainType, err error) {
 	method := "VM.get_domain_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9943,7 +9943,7 @@ func (vM) GetDomainType(session *Session, self VMRef) (retval DomainType, err er
 
 // GetDomainType2: Get the domain_type field of the given VM.
 // Version: rio
-func (vM) GetDomainType2(session *Session, self VMRef) (retval DomainType, err error) {
+func (vm) GetDomainType2(session *Session, self VMRef) (retval DomainType, err error) {
 	method := "VM.get_domain_type"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9963,7 +9963,7 @@ func (vM) GetDomainType2(session *Session, self VMRef) (retval DomainType, err e
 
 // GetReferenceLabel: Get the reference_label field of the given VM.
 // Version: rio
-func (vM) GetReferenceLabel(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetReferenceLabel(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_reference_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -9983,7 +9983,7 @@ func (vM) GetReferenceLabel(session *Session, self VMRef) (retval string, err er
 
 // GetReferenceLabel2: Get the reference_label field of the given VM.
 // Version: rio
-func (vM) GetReferenceLabel2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetReferenceLabel2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_reference_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10003,7 +10003,7 @@ func (vM) GetReferenceLabel2(session *Session, self VMRef) (retval string, err e
 
 // GetRequiresReboot: Get the requires_reboot field of the given VM.
 // Version: rio
-func (vM) GetRequiresReboot(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetRequiresReboot(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_requires_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10023,7 +10023,7 @@ func (vM) GetRequiresReboot(session *Session, self VMRef) (retval bool, err erro
 
 // GetRequiresReboot2: Get the requires_reboot field of the given VM.
 // Version: rio
-func (vM) GetRequiresReboot2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetRequiresReboot2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_requires_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10043,7 +10043,7 @@ func (vM) GetRequiresReboot2(session *Session, self VMRef) (retval bool, err err
 
 // GetHasVendorDevice: Get the has_vendor_device field of the given VM.
 // Version: rio
-func (vM) GetHasVendorDevice(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetHasVendorDevice(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_has_vendor_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10063,7 +10063,7 @@ func (vM) GetHasVendorDevice(session *Session, self VMRef) (retval bool, err err
 
 // GetHasVendorDevice2: Get the has_vendor_device field of the given VM.
 // Version: rio
-func (vM) GetHasVendorDevice2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetHasVendorDevice2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_has_vendor_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10083,7 +10083,7 @@ func (vM) GetHasVendorDevice2(session *Session, self VMRef) (retval bool, err er
 
 // GetHardwarePlatformVersion: Get the hardware_platform_version field of the given VM.
 // Version: rio
-func (vM) GetHardwarePlatformVersion(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetHardwarePlatformVersion(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_hardware_platform_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10103,7 +10103,7 @@ func (vM) GetHardwarePlatformVersion(session *Session, self VMRef) (retval int, 
 
 // GetHardwarePlatformVersion2: Get the hardware_platform_version field of the given VM.
 // Version: rio
-func (vM) GetHardwarePlatformVersion2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetHardwarePlatformVersion2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_hardware_platform_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10123,7 +10123,7 @@ func (vM) GetHardwarePlatformVersion2(session *Session, self VMRef) (retval int,
 
 // GetGenerationID: Get the generation_id field of the given VM.
 // Version: rio
-func (vM) GetGenerationID(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetGenerationID(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_generation_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10143,7 +10143,7 @@ func (vM) GetGenerationID(session *Session, self VMRef) (retval string, err erro
 
 // GetGenerationID2: Get the generation_id field of the given VM.
 // Version: rio
-func (vM) GetGenerationID2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetGenerationID2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_generation_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10163,7 +10163,7 @@ func (vM) GetGenerationID2(session *Session, self VMRef) (retval string, err err
 
 // GetVersion: Get the version field of the given VM.
 // Version: rio
-func (vM) GetVersion(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetVersion(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10183,7 +10183,7 @@ func (vM) GetVersion(session *Session, self VMRef) (retval int, err error) {
 
 // GetVersion2: Get the version field of the given VM.
 // Version: rio
-func (vM) GetVersion2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetVersion2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10203,7 +10203,7 @@ func (vM) GetVersion2(session *Session, self VMRef) (retval int, err error) {
 
 // GetSuspendSR: Get the suspend_SR field of the given VM.
 // Version: rio
-func (vM) GetSuspendSR(session *Session, self VMRef) (retval SRRef, err error) {
+func (vm) GetSuspendSR(session *Session, self VMRef) (retval SRRef, err error) {
 	method := "VM.get_suspend_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10223,7 +10223,7 @@ func (vM) GetSuspendSR(session *Session, self VMRef) (retval SRRef, err error) {
 
 // GetSuspendSR2: Get the suspend_SR field of the given VM.
 // Version: rio
-func (vM) GetSuspendSR2(session *Session, self VMRef) (retval SRRef, err error) {
+func (vm) GetSuspendSR2(session *Session, self VMRef) (retval SRRef, err error) {
 	method := "VM.get_suspend_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10243,7 +10243,7 @@ func (vM) GetSuspendSR2(session *Session, self VMRef) (retval SRRef, err error) 
 
 // GetAttachedPCIs: Get the attached_PCIs field of the given VM.
 // Version: rio
-func (vM) GetAttachedPCIs(session *Session, self VMRef) (retval []PCIRef, err error) {
+func (vm) GetAttachedPCIs(session *Session, self VMRef) (retval []PCIRef, err error) {
 	method := "VM.get_attached_PCIs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10263,7 +10263,7 @@ func (vM) GetAttachedPCIs(session *Session, self VMRef) (retval []PCIRef, err er
 
 // GetAttachedPCIs2: Get the attached_PCIs field of the given VM.
 // Version: rio
-func (vM) GetAttachedPCIs2(session *Session, self VMRef) (retval []PCIRef, err error) {
+func (vm) GetAttachedPCIs2(session *Session, self VMRef) (retval []PCIRef, err error) {
 	method := "VM.get_attached_PCIs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10283,7 +10283,7 @@ func (vM) GetAttachedPCIs2(session *Session, self VMRef) (retval []PCIRef, err e
 
 // GetVGPUs: Get the VGPUs field of the given VM.
 // Version: rio
-func (vM) GetVGPUs(session *Session, self VMRef) (retval []VGPURef, err error) {
+func (vm) GetVGPUs(session *Session, self VMRef) (retval []VGPURef, err error) {
 	method := "VM.get_VGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10303,7 +10303,7 @@ func (vM) GetVGPUs(session *Session, self VMRef) (retval []VGPURef, err error) {
 
 // GetVGPUs2: Get the VGPUs field of the given VM.
 // Version: rio
-func (vM) GetVGPUs2(session *Session, self VMRef) (retval []VGPURef, err error) {
+func (vm) GetVGPUs2(session *Session, self VMRef) (retval []VGPURef, err error) {
 	method := "VM.get_VGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10323,7 +10323,7 @@ func (vM) GetVGPUs2(session *Session, self VMRef) (retval []VGPURef, err error) 
 
 // GetOrder: Get the order field of the given VM.
 // Version: rio
-func (vM) GetOrder(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetOrder(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_order"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10343,7 +10343,7 @@ func (vM) GetOrder(session *Session, self VMRef) (retval int, err error) {
 
 // GetOrder2: Get the order field of the given VM.
 // Version: rio
-func (vM) GetOrder2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetOrder2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_order"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10363,7 +10363,7 @@ func (vM) GetOrder2(session *Session, self VMRef) (retval int, err error) {
 
 // GetShutdownDelay: Get the shutdown_delay field of the given VM.
 // Version: rio
-func (vM) GetShutdownDelay(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetShutdownDelay(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_shutdown_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10383,7 +10383,7 @@ func (vM) GetShutdownDelay(session *Session, self VMRef) (retval int, err error)
 
 // GetShutdownDelay2: Get the shutdown_delay field of the given VM.
 // Version: rio
-func (vM) GetShutdownDelay2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetShutdownDelay2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_shutdown_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10403,7 +10403,7 @@ func (vM) GetShutdownDelay2(session *Session, self VMRef) (retval int, err error
 
 // GetStartDelay: Get the start_delay field of the given VM.
 // Version: rio
-func (vM) GetStartDelay(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetStartDelay(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_start_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10423,7 +10423,7 @@ func (vM) GetStartDelay(session *Session, self VMRef) (retval int, err error) {
 
 // GetStartDelay2: Get the start_delay field of the given VM.
 // Version: rio
-func (vM) GetStartDelay2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetStartDelay2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_start_delay"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10443,7 +10443,7 @@ func (vM) GetStartDelay2(session *Session, self VMRef) (retval int, err error) {
 
 // GetAppliance: Get the appliance field of the given VM.
 // Version: rio
-func (vM) GetAppliance(session *Session, self VMRef) (retval VMApplianceRef, err error) {
+func (vm) GetAppliance(session *Session, self VMRef) (retval VMApplianceRef, err error) {
 	method := "VM.get_appliance"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10463,7 +10463,7 @@ func (vM) GetAppliance(session *Session, self VMRef) (retval VMApplianceRef, err
 
 // GetAppliance2: Get the appliance field of the given VM.
 // Version: rio
-func (vM) GetAppliance2(session *Session, self VMRef) (retval VMApplianceRef, err error) {
+func (vm) GetAppliance2(session *Session, self VMRef) (retval VMApplianceRef, err error) {
 	method := "VM.get_appliance"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10483,7 +10483,7 @@ func (vM) GetAppliance2(session *Session, self VMRef) (retval VMApplianceRef, er
 
 // GetIsVmssSnapshot: Get the is_vmss_snapshot field of the given VM.
 // Version: rio
-func (vM) GetIsVmssSnapshot(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsVmssSnapshot(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_vmss_snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10503,7 +10503,7 @@ func (vM) GetIsVmssSnapshot(session *Session, self VMRef) (retval bool, err erro
 
 // GetIsVmssSnapshot2: Get the is_vmss_snapshot field of the given VM.
 // Version: rio
-func (vM) GetIsVmssSnapshot2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsVmssSnapshot2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_vmss_snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10523,7 +10523,7 @@ func (vM) GetIsVmssSnapshot2(session *Session, self VMRef) (retval bool, err err
 
 // GetSnapshotSchedule: Get the snapshot_schedule field of the given VM.
 // Version: rio
-func (vM) GetSnapshotSchedule(session *Session, self VMRef) (retval VMSSRef, err error) {
+func (vm) GetSnapshotSchedule(session *Session, self VMRef) (retval VMSSRef, err error) {
 	method := "VM.get_snapshot_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10543,7 +10543,7 @@ func (vM) GetSnapshotSchedule(session *Session, self VMRef) (retval VMSSRef, err
 
 // GetSnapshotSchedule2: Get the snapshot_schedule field of the given VM.
 // Version: rio
-func (vM) GetSnapshotSchedule2(session *Session, self VMRef) (retval VMSSRef, err error) {
+func (vm) GetSnapshotSchedule2(session *Session, self VMRef) (retval VMSSRef, err error) {
 	method := "VM.get_snapshot_schedule"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10563,7 +10563,7 @@ func (vM) GetSnapshotSchedule2(session *Session, self VMRef) (retval VMSSRef, er
 
 // GetIsSnapshotFromVmpp: Get the is_snapshot_from_vmpp field of the given VM.
 // Version: rio
-func (vM) GetIsSnapshotFromVmpp(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsSnapshotFromVmpp(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_snapshot_from_vmpp"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10583,7 +10583,7 @@ func (vM) GetIsSnapshotFromVmpp(session *Session, self VMRef) (retval bool, err 
 
 // GetIsSnapshotFromVmpp2: Get the is_snapshot_from_vmpp field of the given VM.
 // Version: rio
-func (vM) GetIsSnapshotFromVmpp2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsSnapshotFromVmpp2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_snapshot_from_vmpp"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10603,7 +10603,7 @@ func (vM) GetIsSnapshotFromVmpp2(session *Session, self VMRef) (retval bool, err
 
 // GetProtectionPolicy: Get the protection_policy field of the given VM.
 // Version: rio
-func (vM) GetProtectionPolicy(session *Session, self VMRef) (retval VMPPRef, err error) {
+func (vm) GetProtectionPolicy(session *Session, self VMRef) (retval VMPPRef, err error) {
 	method := "VM.get_protection_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10623,7 +10623,7 @@ func (vM) GetProtectionPolicy(session *Session, self VMRef) (retval VMPPRef, err
 
 // GetProtectionPolicy2: Get the protection_policy field of the given VM.
 // Version: rio
-func (vM) GetProtectionPolicy2(session *Session, self VMRef) (retval VMPPRef, err error) {
+func (vm) GetProtectionPolicy2(session *Session, self VMRef) (retval VMPPRef, err error) {
 	method := "VM.get_protection_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10643,7 +10643,7 @@ func (vM) GetProtectionPolicy2(session *Session, self VMRef) (retval VMPPRef, er
 
 // GetBiosStrings: Get the bios_strings field of the given VM.
 // Version: rio
-func (vM) GetBiosStrings(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetBiosStrings(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10663,7 +10663,7 @@ func (vM) GetBiosStrings(session *Session, self VMRef) (retval map[string]string
 
 // GetBiosStrings2: Get the bios_strings field of the given VM.
 // Version: rio
-func (vM) GetBiosStrings2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetBiosStrings2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_bios_strings"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10683,7 +10683,7 @@ func (vM) GetBiosStrings2(session *Session, self VMRef) (retval map[string]strin
 
 // GetChildren: Get the children field of the given VM.
 // Version: rio
-func (vM) GetChildren(session *Session, self VMRef) (retval []VMRef, err error) {
+func (vm) GetChildren(session *Session, self VMRef) (retval []VMRef, err error) {
 	method := "VM.get_children"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10703,7 +10703,7 @@ func (vM) GetChildren(session *Session, self VMRef) (retval []VMRef, err error) 
 
 // GetChildren2: Get the children field of the given VM.
 // Version: rio
-func (vM) GetChildren2(session *Session, self VMRef) (retval []VMRef, err error) {
+func (vm) GetChildren2(session *Session, self VMRef) (retval []VMRef, err error) {
 	method := "VM.get_children"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10723,7 +10723,7 @@ func (vM) GetChildren2(session *Session, self VMRef) (retval []VMRef, err error)
 
 // GetParent: Get the parent field of the given VM.
 // Version: rio
-func (vM) GetParent(session *Session, self VMRef) (retval VMRef, err error) {
+func (vm) GetParent(session *Session, self VMRef) (retval VMRef, err error) {
 	method := "VM.get_parent"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10743,7 +10743,7 @@ func (vM) GetParent(session *Session, self VMRef) (retval VMRef, err error) {
 
 // GetParent2: Get the parent field of the given VM.
 // Version: rio
-func (vM) GetParent2(session *Session, self VMRef) (retval VMRef, err error) {
+func (vm) GetParent2(session *Session, self VMRef) (retval VMRef, err error) {
 	method := "VM.get_parent"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10763,7 +10763,7 @@ func (vM) GetParent2(session *Session, self VMRef) (retval VMRef, err error) {
 
 // GetSnapshotMetadata: Get the snapshot_metadata field of the given VM.
 // Version: rio
-func (vM) GetSnapshotMetadata(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetSnapshotMetadata(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_snapshot_metadata"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10783,7 +10783,7 @@ func (vM) GetSnapshotMetadata(session *Session, self VMRef) (retval string, err 
 
 // GetSnapshotMetadata2: Get the snapshot_metadata field of the given VM.
 // Version: rio
-func (vM) GetSnapshotMetadata2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetSnapshotMetadata2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_snapshot_metadata"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10803,7 +10803,7 @@ func (vM) GetSnapshotMetadata2(session *Session, self VMRef) (retval string, err
 
 // GetSnapshotInfo: Get the snapshot_info field of the given VM.
 // Version: rio
-func (vM) GetSnapshotInfo(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetSnapshotInfo(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_snapshot_info"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10823,7 +10823,7 @@ func (vM) GetSnapshotInfo(session *Session, self VMRef) (retval map[string]strin
 
 // GetSnapshotInfo2: Get the snapshot_info field of the given VM.
 // Version: rio
-func (vM) GetSnapshotInfo2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetSnapshotInfo2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_snapshot_info"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10843,7 +10843,7 @@ func (vM) GetSnapshotInfo2(session *Session, self VMRef) (retval map[string]stri
 
 // GetBlockedOperations: Get the blocked_operations field of the given VM.
 // Version: rio
-func (vM) GetBlockedOperations(session *Session, self VMRef) (retval map[VMOperations]string, err error) {
+func (vm) GetBlockedOperations(session *Session, self VMRef) (retval map[VMOperations]string, err error) {
 	method := "VM.get_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10863,7 +10863,7 @@ func (vM) GetBlockedOperations(session *Session, self VMRef) (retval map[VMOpera
 
 // GetBlockedOperations2: Get the blocked_operations field of the given VM.
 // Version: rio
-func (vM) GetBlockedOperations2(session *Session, self VMRef) (retval map[VMOperations]string, err error) {
+func (vm) GetBlockedOperations2(session *Session, self VMRef) (retval map[VMOperations]string, err error) {
 	method := "VM.get_blocked_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10883,7 +10883,7 @@ func (vM) GetBlockedOperations2(session *Session, self VMRef) (retval map[VMOper
 
 // GetTags: Get the tags field of the given VM.
 // Version: rio
-func (vM) GetTags(session *Session, self VMRef) (retval []string, err error) {
+func (vm) GetTags(session *Session, self VMRef) (retval []string, err error) {
 	method := "VM.get_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10903,7 +10903,7 @@ func (vM) GetTags(session *Session, self VMRef) (retval []string, err error) {
 
 // GetTags2: Get the tags field of the given VM.
 // Version: rio
-func (vM) GetTags2(session *Session, self VMRef) (retval []string, err error) {
+func (vm) GetTags2(session *Session, self VMRef) (retval []string, err error) {
 	method := "VM.get_tags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10923,7 +10923,7 @@ func (vM) GetTags2(session *Session, self VMRef) (retval []string, err error) {
 
 // GetBlobs: Get the blobs field of the given VM.
 // Version: rio
-func (vM) GetBlobs(session *Session, self VMRef) (retval map[string]BlobRef, err error) {
+func (vm) GetBlobs(session *Session, self VMRef) (retval map[string]BlobRef, err error) {
 	method := "VM.get_blobs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10943,7 +10943,7 @@ func (vM) GetBlobs(session *Session, self VMRef) (retval map[string]BlobRef, err
 
 // GetBlobs2: Get the blobs field of the given VM.
 // Version: rio
-func (vM) GetBlobs2(session *Session, self VMRef) (retval map[string]BlobRef, err error) {
+func (vm) GetBlobs2(session *Session, self VMRef) (retval map[string]BlobRef, err error) {
 	method := "VM.get_blobs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10963,7 +10963,7 @@ func (vM) GetBlobs2(session *Session, self VMRef) (retval map[string]BlobRef, er
 
 // GetTransportableSnapshotID: Get the transportable_snapshot_id field of the given VM.
 // Version: rio
-func (vM) GetTransportableSnapshotID(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetTransportableSnapshotID(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_transportable_snapshot_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -10983,7 +10983,7 @@ func (vM) GetTransportableSnapshotID(session *Session, self VMRef) (retval strin
 
 // GetTransportableSnapshotID2: Get the transportable_snapshot_id field of the given VM.
 // Version: rio
-func (vM) GetTransportableSnapshotID2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetTransportableSnapshotID2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_transportable_snapshot_id"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11003,7 +11003,7 @@ func (vM) GetTransportableSnapshotID2(session *Session, self VMRef) (retval stri
 
 // GetSnapshotTime: Get the snapshot_time field of the given VM.
 // Version: rio
-func (vM) GetSnapshotTime(session *Session, self VMRef) (retval time.Time, err error) {
+func (vm) GetSnapshotTime(session *Session, self VMRef) (retval time.Time, err error) {
 	method := "VM.get_snapshot_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11023,7 +11023,7 @@ func (vM) GetSnapshotTime(session *Session, self VMRef) (retval time.Time, err e
 
 // GetSnapshotTime2: Get the snapshot_time field of the given VM.
 // Version: rio
-func (vM) GetSnapshotTime2(session *Session, self VMRef) (retval time.Time, err error) {
+func (vm) GetSnapshotTime2(session *Session, self VMRef) (retval time.Time, err error) {
 	method := "VM.get_snapshot_time"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11043,7 +11043,7 @@ func (vM) GetSnapshotTime2(session *Session, self VMRef) (retval time.Time, err 
 
 // GetSnapshots: Get the snapshots field of the given VM.
 // Version: rio
-func (vM) GetSnapshots(session *Session, self VMRef) (retval []VMRef, err error) {
+func (vm) GetSnapshots(session *Session, self VMRef) (retval []VMRef, err error) {
 	method := "VM.get_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11063,7 +11063,7 @@ func (vM) GetSnapshots(session *Session, self VMRef) (retval []VMRef, err error)
 
 // GetSnapshots2: Get the snapshots field of the given VM.
 // Version: rio
-func (vM) GetSnapshots2(session *Session, self VMRef) (retval []VMRef, err error) {
+func (vm) GetSnapshots2(session *Session, self VMRef) (retval []VMRef, err error) {
 	method := "VM.get_snapshots"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11083,7 +11083,7 @@ func (vM) GetSnapshots2(session *Session, self VMRef) (retval []VMRef, err error
 
 // GetSnapshotOf: Get the snapshot_of field of the given VM.
 // Version: rio
-func (vM) GetSnapshotOf(session *Session, self VMRef) (retval VMRef, err error) {
+func (vm) GetSnapshotOf(session *Session, self VMRef) (retval VMRef, err error) {
 	method := "VM.get_snapshot_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11103,7 +11103,7 @@ func (vM) GetSnapshotOf(session *Session, self VMRef) (retval VMRef, err error) 
 
 // GetSnapshotOf2: Get the snapshot_of field of the given VM.
 // Version: rio
-func (vM) GetSnapshotOf2(session *Session, self VMRef) (retval VMRef, err error) {
+func (vm) GetSnapshotOf2(session *Session, self VMRef) (retval VMRef, err error) {
 	method := "VM.get_snapshot_of"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11123,7 +11123,7 @@ func (vM) GetSnapshotOf2(session *Session, self VMRef) (retval VMRef, err error)
 
 // GetIsASnapshot: Get the is_a_snapshot field of the given VM.
 // Version: rio
-func (vM) GetIsASnapshot(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsASnapshot(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_a_snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11143,7 +11143,7 @@ func (vM) GetIsASnapshot(session *Session, self VMRef) (retval bool, err error) 
 
 // GetIsASnapshot2: Get the is_a_snapshot field of the given VM.
 // Version: rio
-func (vM) GetIsASnapshot2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsASnapshot2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_a_snapshot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11163,7 +11163,7 @@ func (vM) GetIsASnapshot2(session *Session, self VMRef) (retval bool, err error)
 
 // GetHaRestartPriority: Get the ha_restart_priority field of the given VM.
 // Version: rio
-func (vM) GetHaRestartPriority(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetHaRestartPriority(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_ha_restart_priority"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11183,7 +11183,7 @@ func (vM) GetHaRestartPriority(session *Session, self VMRef) (retval string, err
 
 // GetHaRestartPriority2: Get the ha_restart_priority field of the given VM.
 // Version: rio
-func (vM) GetHaRestartPriority2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetHaRestartPriority2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_ha_restart_priority"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11203,7 +11203,7 @@ func (vM) GetHaRestartPriority2(session *Session, self VMRef) (retval string, er
 
 // GetHaAlwaysRun: Get the ha_always_run field of the given VM.
 // Version: rio
-func (vM) GetHaAlwaysRun(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetHaAlwaysRun(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_ha_always_run"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11223,7 +11223,7 @@ func (vM) GetHaAlwaysRun(session *Session, self VMRef) (retval bool, err error) 
 
 // GetHaAlwaysRun2: Get the ha_always_run field of the given VM.
 // Version: rio
-func (vM) GetHaAlwaysRun2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetHaAlwaysRun2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_ha_always_run"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11243,7 +11243,7 @@ func (vM) GetHaAlwaysRun2(session *Session, self VMRef) (retval bool, err error)
 
 // GetXenstoreData: Get the xenstore_data field of the given VM.
 // Version: rio
-func (vM) GetXenstoreData(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetXenstoreData(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11263,7 +11263,7 @@ func (vM) GetXenstoreData(session *Session, self VMRef) (retval map[string]strin
 
 // GetXenstoreData2: Get the xenstore_data field of the given VM.
 // Version: rio
-func (vM) GetXenstoreData2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetXenstoreData2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_xenstore_data"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11283,7 +11283,7 @@ func (vM) GetXenstoreData2(session *Session, self VMRef) (retval map[string]stri
 
 // GetRecommendations: Get the recommendations field of the given VM.
 // Version: rio
-func (vM) GetRecommendations(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetRecommendations(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11303,7 +11303,7 @@ func (vM) GetRecommendations(session *Session, self VMRef) (retval string, err e
 
 // GetRecommendations2: Get the recommendations field of the given VM.
 // Version: rio
-func (vM) GetRecommendations2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetRecommendations2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_recommendations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11323,7 +11323,7 @@ func (vM) GetRecommendations2(session *Session, self VMRef) (retval string, err 
 
 // GetLastBootedRecord: Get the last_booted_record field of the given VM.
 // Version: rio
-func (vM) GetLastBootedRecord(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetLastBootedRecord(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_last_booted_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11343,7 +11343,7 @@ func (vM) GetLastBootedRecord(session *Session, self VMRef) (retval string, err 
 
 // GetLastBootedRecord2: Get the last_booted_record field of the given VM.
 // Version: rio
-func (vM) GetLastBootedRecord2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetLastBootedRecord2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_last_booted_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11363,7 +11363,7 @@ func (vM) GetLastBootedRecord2(session *Session, self VMRef) (retval string, err
 
 // GetGuestMetrics: Get the guest_metrics field of the given VM.
 // Version: rio
-func (vM) GetGuestMetrics(session *Session, self VMRef) (retval VMGuestMetricsRef, err error) {
+func (vm) GetGuestMetrics(session *Session, self VMRef) (retval VMGuestMetricsRef, err error) {
 	method := "VM.get_guest_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11383,7 +11383,7 @@ func (vM) GetGuestMetrics(session *Session, self VMRef) (retval VMGuestMetricsRe
 
 // GetGuestMetrics2: Get the guest_metrics field of the given VM.
 // Version: rio
-func (vM) GetGuestMetrics2(session *Session, self VMRef) (retval VMGuestMetricsRef, err error) {
+func (vm) GetGuestMetrics2(session *Session, self VMRef) (retval VMGuestMetricsRef, err error) {
 	method := "VM.get_guest_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11403,7 +11403,7 @@ func (vM) GetGuestMetrics2(session *Session, self VMRef) (retval VMGuestMetricsR
 
 // GetMetrics: Get the metrics field of the given VM.
 // Version: rio
-func (vM) GetMetrics(session *Session, self VMRef) (retval VMMetricsRef, err error) {
+func (vm) GetMetrics(session *Session, self VMRef) (retval VMMetricsRef, err error) {
 	method := "VM.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11423,7 +11423,7 @@ func (vM) GetMetrics(session *Session, self VMRef) (retval VMMetricsRef, err err
 
 // GetMetrics2: Get the metrics field of the given VM.
 // Version: rio
-func (vM) GetMetrics2(session *Session, self VMRef) (retval VMMetricsRef, err error) {
+func (vm) GetMetrics2(session *Session, self VMRef) (retval VMMetricsRef, err error) {
 	method := "VM.get_metrics"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11443,7 +11443,7 @@ func (vM) GetMetrics2(session *Session, self VMRef) (retval VMMetricsRef, err er
 
 // GetIsControlDomain: Get the is_control_domain field of the given VM.
 // Version: rio
-func (vM) GetIsControlDomain(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsControlDomain(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_control_domain"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11463,7 +11463,7 @@ func (vM) GetIsControlDomain(session *Session, self VMRef) (retval bool, err err
 
 // GetIsControlDomain2: Get the is_control_domain field of the given VM.
 // Version: rio
-func (vM) GetIsControlDomain2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsControlDomain2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_control_domain"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11483,7 +11483,7 @@ func (vM) GetIsControlDomain2(session *Session, self VMRef) (retval bool, err er
 
 // GetLastBootCPUFlags: Get the last_boot_CPU_flags field of the given VM.
 // Version: rio
-func (vM) GetLastBootCPUFlags(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetLastBootCPUFlags(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_last_boot_CPU_flags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11503,7 +11503,7 @@ func (vM) GetLastBootCPUFlags(session *Session, self VMRef) (retval map[string]s
 
 // GetLastBootCPUFlags2: Get the last_boot_CPU_flags field of the given VM.
 // Version: rio
-func (vM) GetLastBootCPUFlags2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetLastBootCPUFlags2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_last_boot_CPU_flags"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11523,7 +11523,7 @@ func (vM) GetLastBootCPUFlags2(session *Session, self VMRef) (retval map[string]
 
 // GetDomarch: Get the domarch field of the given VM.
 // Version: rio
-func (vM) GetDomarch(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetDomarch(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_domarch"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11543,7 +11543,7 @@ func (vM) GetDomarch(session *Session, self VMRef) (retval string, err error) {
 
 // GetDomarch2: Get the domarch field of the given VM.
 // Version: rio
-func (vM) GetDomarch2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetDomarch2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_domarch"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11563,7 +11563,7 @@ func (vM) GetDomarch2(session *Session, self VMRef) (retval string, err error) {
 
 // GetDomid: Get the domid field of the given VM.
 // Version: rio
-func (vM) GetDomid(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetDomid(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_domid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11583,7 +11583,7 @@ func (vM) GetDomid(session *Session, self VMRef) (retval int, err error) {
 
 // GetDomid2: Get the domid field of the given VM.
 // Version: rio
-func (vM) GetDomid2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetDomid2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_domid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11603,7 +11603,7 @@ func (vM) GetDomid2(session *Session, self VMRef) (retval int, err error) {
 
 // GetOtherConfig: Get the other_config field of the given VM.
 // Version: rio
-func (vM) GetOtherConfig(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetOtherConfig(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11623,7 +11623,7 @@ func (vM) GetOtherConfig(session *Session, self VMRef) (retval map[string]string
 
 // GetOtherConfig2: Get the other_config field of the given VM.
 // Version: rio
-func (vM) GetOtherConfig2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetOtherConfig2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11643,7 +11643,7 @@ func (vM) GetOtherConfig2(session *Session, self VMRef) (retval map[string]strin
 
 // GetPCIBus: Get the PCI_bus field of the given VM.
 // Version: rio
-func (vM) GetPCIBus(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPCIBus(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PCI_bus"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11663,7 +11663,7 @@ func (vM) GetPCIBus(session *Session, self VMRef) (retval string, err error) {
 
 // GetPCIBus2: Get the PCI_bus field of the given VM.
 // Version: rio
-func (vM) GetPCIBus2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPCIBus2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PCI_bus"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11683,7 +11683,7 @@ func (vM) GetPCIBus2(session *Session, self VMRef) (retval string, err error) {
 
 // GetPlatform: Get the platform field of the given VM.
 // Version: rio
-func (vM) GetPlatform(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetPlatform(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11703,7 +11703,7 @@ func (vM) GetPlatform(session *Session, self VMRef) (retval map[string]string, e
 
 // GetPlatform2: Get the platform field of the given VM.
 // Version: rio
-func (vM) GetPlatform2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetPlatform2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_platform"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11723,7 +11723,7 @@ func (vM) GetPlatform2(session *Session, self VMRef) (retval map[string]string, 
 
 // GetHVMShadowMultiplier: Get the HVM/shadow_multiplier field of the given VM.
 // Version: rio
-func (vM) GetHVMShadowMultiplier(session *Session, self VMRef) (retval float64, err error) {
+func (vm) GetHVMShadowMultiplier(session *Session, self VMRef) (retval float64, err error) {
 	method := "VM.get_HVM_shadow_multiplier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11743,7 +11743,7 @@ func (vM) GetHVMShadowMultiplier(session *Session, self VMRef) (retval float64, 
 
 // GetHVMShadowMultiplier2: Get the HVM/shadow_multiplier field of the given VM.
 // Version: rio
-func (vM) GetHVMShadowMultiplier2(session *Session, self VMRef) (retval float64, err error) {
+func (vm) GetHVMShadowMultiplier2(session *Session, self VMRef) (retval float64, err error) {
 	method := "VM.get_HVM_shadow_multiplier"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11763,7 +11763,7 @@ func (vM) GetHVMShadowMultiplier2(session *Session, self VMRef) (retval float64,
 
 // GetHVMBootParams: Get the HVM/boot_params field of the given VM.
 // Version: rio
-func (vM) GetHVMBootParams(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetHVMBootParams(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11783,7 +11783,7 @@ func (vM) GetHVMBootParams(session *Session, self VMRef) (retval map[string]stri
 
 // GetHVMBootParams2: Get the HVM/boot_params field of the given VM.
 // Version: rio
-func (vM) GetHVMBootParams2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetHVMBootParams2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_HVM_boot_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11803,7 +11803,7 @@ func (vM) GetHVMBootParams2(session *Session, self VMRef) (retval map[string]str
 
 // GetHVMBootPolicy: Get the HVM/boot_policy field of the given VM.
 // Version: rio
-func (vM) GetHVMBootPolicy(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetHVMBootPolicy(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_HVM_boot_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11823,7 +11823,7 @@ func (vM) GetHVMBootPolicy(session *Session, self VMRef) (retval string, err err
 
 // GetHVMBootPolicy2: Get the HVM/boot_policy field of the given VM.
 // Version: rio
-func (vM) GetHVMBootPolicy2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetHVMBootPolicy2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_HVM_boot_policy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11843,7 +11843,7 @@ func (vM) GetHVMBootPolicy2(session *Session, self VMRef) (retval string, err er
 
 // GetPVLegacyArgs: Get the PV/legacy_args field of the given VM.
 // Version: rio
-func (vM) GetPVLegacyArgs(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVLegacyArgs(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_legacy_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11863,7 +11863,7 @@ func (vM) GetPVLegacyArgs(session *Session, self VMRef) (retval string, err erro
 
 // GetPVLegacyArgs2: Get the PV/legacy_args field of the given VM.
 // Version: rio
-func (vM) GetPVLegacyArgs2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVLegacyArgs2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_legacy_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11883,7 +11883,7 @@ func (vM) GetPVLegacyArgs2(session *Session, self VMRef) (retval string, err err
 
 // GetPVBootloaderArgs: Get the PV/bootloader_args field of the given VM.
 // Version: rio
-func (vM) GetPVBootloaderArgs(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVBootloaderArgs(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_bootloader_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11903,7 +11903,7 @@ func (vM) GetPVBootloaderArgs(session *Session, self VMRef) (retval string, err 
 
 // GetPVBootloaderArgs2: Get the PV/bootloader_args field of the given VM.
 // Version: rio
-func (vM) GetPVBootloaderArgs2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVBootloaderArgs2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_bootloader_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11923,7 +11923,7 @@ func (vM) GetPVBootloaderArgs2(session *Session, self VMRef) (retval string, err
 
 // GetPVArgs: Get the PV/args field of the given VM.
 // Version: rio
-func (vM) GetPVArgs(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVArgs(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11943,7 +11943,7 @@ func (vM) GetPVArgs(session *Session, self VMRef) (retval string, err error) {
 
 // GetPVArgs2: Get the PV/args field of the given VM.
 // Version: rio
-func (vM) GetPVArgs2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVArgs2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_args"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11963,7 +11963,7 @@ func (vM) GetPVArgs2(session *Session, self VMRef) (retval string, err error) {
 
 // GetPVRamdisk: Get the PV/ramdisk field of the given VM.
 // Version: rio
-func (vM) GetPVRamdisk(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVRamdisk(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_ramdisk"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -11983,7 +11983,7 @@ func (vM) GetPVRamdisk(session *Session, self VMRef) (retval string, err error) 
 
 // GetPVRamdisk2: Get the PV/ramdisk field of the given VM.
 // Version: rio
-func (vM) GetPVRamdisk2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVRamdisk2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_ramdisk"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12003,7 +12003,7 @@ func (vM) GetPVRamdisk2(session *Session, self VMRef) (retval string, err error)
 
 // GetPVKernel: Get the PV/kernel field of the given VM.
 // Version: rio
-func (vM) GetPVKernel(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVKernel(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_kernel"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12023,7 +12023,7 @@ func (vM) GetPVKernel(session *Session, self VMRef) (retval string, err error) {
 
 // GetPVKernel2: Get the PV/kernel field of the given VM.
 // Version: rio
-func (vM) GetPVKernel2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVKernel2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_kernel"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12043,7 +12043,7 @@ func (vM) GetPVKernel2(session *Session, self VMRef) (retval string, err error) 
 
 // GetPVBootloader: Get the PV/bootloader field of the given VM.
 // Version: rio
-func (vM) GetPVBootloader(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVBootloader(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_bootloader"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12063,7 +12063,7 @@ func (vM) GetPVBootloader(session *Session, self VMRef) (retval string, err erro
 
 // GetPVBootloader2: Get the PV/bootloader field of the given VM.
 // Version: rio
-func (vM) GetPVBootloader2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetPVBootloader2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_PV_bootloader"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12083,7 +12083,7 @@ func (vM) GetPVBootloader2(session *Session, self VMRef) (retval string, err err
 
 // GetVTPMs: Get the VTPMs field of the given VM.
 // Version: rio
-func (vM) GetVTPMs(session *Session, self VMRef) (retval []VTPMRef, err error) {
+func (vm) GetVTPMs(session *Session, self VMRef) (retval []VTPMRef, err error) {
 	method := "VM.get_VTPMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12103,7 +12103,7 @@ func (vM) GetVTPMs(session *Session, self VMRef) (retval []VTPMRef, err error) {
 
 // GetVTPMs2: Get the VTPMs field of the given VM.
 // Version: rio
-func (vM) GetVTPMs2(session *Session, self VMRef) (retval []VTPMRef, err error) {
+func (vm) GetVTPMs2(session *Session, self VMRef) (retval []VTPMRef, err error) {
 	method := "VM.get_VTPMs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12123,7 +12123,7 @@ func (vM) GetVTPMs2(session *Session, self VMRef) (retval []VTPMRef, err error) 
 
 // GetCrashDumps: Get the crash_dumps field of the given VM.
 // Version: rio
-func (vM) GetCrashDumps(session *Session, self VMRef) (retval []CrashdumpRef, err error) {
+func (vm) GetCrashDumps(session *Session, self VMRef) (retval []CrashdumpRef, err error) {
 	method := "VM.get_crash_dumps"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12143,7 +12143,7 @@ func (vM) GetCrashDumps(session *Session, self VMRef) (retval []CrashdumpRef, er
 
 // GetCrashDumps2: Get the crash_dumps field of the given VM.
 // Version: rio
-func (vM) GetCrashDumps2(session *Session, self VMRef) (retval []CrashdumpRef, err error) {
+func (vm) GetCrashDumps2(session *Session, self VMRef) (retval []CrashdumpRef, err error) {
 	method := "VM.get_crash_dumps"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12163,7 +12163,7 @@ func (vM) GetCrashDumps2(session *Session, self VMRef) (retval []CrashdumpRef, e
 
 // GetVUSBs: Get the VUSBs field of the given VM.
 // Version: rio
-func (vM) GetVUSBs(session *Session, self VMRef) (retval []VUSBRef, err error) {
+func (vm) GetVUSBs(session *Session, self VMRef) (retval []VUSBRef, err error) {
 	method := "VM.get_VUSBs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12183,7 +12183,7 @@ func (vM) GetVUSBs(session *Session, self VMRef) (retval []VUSBRef, err error) {
 
 // GetVUSBs2: Get the VUSBs field of the given VM.
 // Version: rio
-func (vM) GetVUSBs2(session *Session, self VMRef) (retval []VUSBRef, err error) {
+func (vm) GetVUSBs2(session *Session, self VMRef) (retval []VUSBRef, err error) {
 	method := "VM.get_VUSBs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12203,7 +12203,7 @@ func (vM) GetVUSBs2(session *Session, self VMRef) (retval []VUSBRef, err error) 
 
 // GetVBDs: Get the VBDs field of the given VM.
 // Version: rio
-func (vM) GetVBDs(session *Session, self VMRef) (retval []VBDRef, err error) {
+func (vm) GetVBDs(session *Session, self VMRef) (retval []VBDRef, err error) {
 	method := "VM.get_VBDs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12223,7 +12223,7 @@ func (vM) GetVBDs(session *Session, self VMRef) (retval []VBDRef, err error) {
 
 // GetVBDs2: Get the VBDs field of the given VM.
 // Version: rio
-func (vM) GetVBDs2(session *Session, self VMRef) (retval []VBDRef, err error) {
+func (vm) GetVBDs2(session *Session, self VMRef) (retval []VBDRef, err error) {
 	method := "VM.get_VBDs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12243,7 +12243,7 @@ func (vM) GetVBDs2(session *Session, self VMRef) (retval []VBDRef, err error) {
 
 // GetVIFs: Get the VIFs field of the given VM.
 // Version: rio
-func (vM) GetVIFs(session *Session, self VMRef) (retval []VIFRef, err error) {
+func (vm) GetVIFs(session *Session, self VMRef) (retval []VIFRef, err error) {
 	method := "VM.get_VIFs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12263,7 +12263,7 @@ func (vM) GetVIFs(session *Session, self VMRef) (retval []VIFRef, err error) {
 
 // GetVIFs2: Get the VIFs field of the given VM.
 // Version: rio
-func (vM) GetVIFs2(session *Session, self VMRef) (retval []VIFRef, err error) {
+func (vm) GetVIFs2(session *Session, self VMRef) (retval []VIFRef, err error) {
 	method := "VM.get_VIFs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12283,7 +12283,7 @@ func (vM) GetVIFs2(session *Session, self VMRef) (retval []VIFRef, err error) {
 
 // GetConsoles: Get the consoles field of the given VM.
 // Version: rio
-func (vM) GetConsoles(session *Session, self VMRef) (retval []ConsoleRef, err error) {
+func (vm) GetConsoles(session *Session, self VMRef) (retval []ConsoleRef, err error) {
 	method := "VM.get_consoles"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12303,7 +12303,7 @@ func (vM) GetConsoles(session *Session, self VMRef) (retval []ConsoleRef, err er
 
 // GetConsoles2: Get the consoles field of the given VM.
 // Version: rio
-func (vM) GetConsoles2(session *Session, self VMRef) (retval []ConsoleRef, err error) {
+func (vm) GetConsoles2(session *Session, self VMRef) (retval []ConsoleRef, err error) {
 	method := "VM.get_consoles"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12323,7 +12323,7 @@ func (vM) GetConsoles2(session *Session, self VMRef) (retval []ConsoleRef, err e
 
 // GetActionsAfterCrash: Get the actions/after_crash field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterCrash(session *Session, self VMRef) (retval OnCrashBehaviour, err error) {
+func (vm) GetActionsAfterCrash(session *Session, self VMRef) (retval OnCrashBehaviour, err error) {
 	method := "VM.get_actions_after_crash"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12343,7 +12343,7 @@ func (vM) GetActionsAfterCrash(session *Session, self VMRef) (retval OnCrashBeha
 
 // GetActionsAfterCrash2: Get the actions/after_crash field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterCrash2(session *Session, self VMRef) (retval OnCrashBehaviour, err error) {
+func (vm) GetActionsAfterCrash2(session *Session, self VMRef) (retval OnCrashBehaviour, err error) {
 	method := "VM.get_actions_after_crash"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12363,7 +12363,7 @@ func (vM) GetActionsAfterCrash2(session *Session, self VMRef) (retval OnCrashBeh
 
 // GetActionsAfterReboot: Get the actions/after_reboot field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterReboot(session *Session, self VMRef) (retval OnNormalExit, err error) {
+func (vm) GetActionsAfterReboot(session *Session, self VMRef) (retval OnNormalExit, err error) {
 	method := "VM.get_actions_after_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12383,7 +12383,7 @@ func (vM) GetActionsAfterReboot(session *Session, self VMRef) (retval OnNormalEx
 
 // GetActionsAfterReboot2: Get the actions/after_reboot field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterReboot2(session *Session, self VMRef) (retval OnNormalExit, err error) {
+func (vm) GetActionsAfterReboot2(session *Session, self VMRef) (retval OnNormalExit, err error) {
 	method := "VM.get_actions_after_reboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12403,7 +12403,7 @@ func (vM) GetActionsAfterReboot2(session *Session, self VMRef) (retval OnNormalE
 
 // GetActionsAfterShutdown: Get the actions/after_shutdown field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterShutdown(session *Session, self VMRef) (retval OnNormalExit, err error) {
+func (vm) GetActionsAfterShutdown(session *Session, self VMRef) (retval OnNormalExit, err error) {
 	method := "VM.get_actions_after_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12423,7 +12423,7 @@ func (vM) GetActionsAfterShutdown(session *Session, self VMRef) (retval OnNormal
 
 // GetActionsAfterShutdown2: Get the actions/after_shutdown field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterShutdown2(session *Session, self VMRef) (retval OnNormalExit, err error) {
+func (vm) GetActionsAfterShutdown2(session *Session, self VMRef) (retval OnNormalExit, err error) {
 	method := "VM.get_actions_after_shutdown"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12443,7 +12443,7 @@ func (vM) GetActionsAfterShutdown2(session *Session, self VMRef) (retval OnNorma
 
 // GetActionsAfterSoftreboot: Get the actions/after_softreboot field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterSoftreboot(session *Session, self VMRef) (retval OnSoftrebootBehavior, err error) {
+func (vm) GetActionsAfterSoftreboot(session *Session, self VMRef) (retval OnSoftrebootBehavior, err error) {
 	method := "VM.get_actions_after_softreboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12463,7 +12463,7 @@ func (vM) GetActionsAfterSoftreboot(session *Session, self VMRef) (retval OnSoft
 
 // GetActionsAfterSoftreboot2: Get the actions/after_softreboot field of the given VM.
 // Version: rio
-func (vM) GetActionsAfterSoftreboot2(session *Session, self VMRef) (retval OnSoftrebootBehavior, err error) {
+func (vm) GetActionsAfterSoftreboot2(session *Session, self VMRef) (retval OnSoftrebootBehavior, err error) {
 	method := "VM.get_actions_after_softreboot"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12483,7 +12483,7 @@ func (vM) GetActionsAfterSoftreboot2(session *Session, self VMRef) (retval OnSof
 
 // GetVCPUsAtStartup: Get the VCPUs/at_startup field of the given VM.
 // Version: rio
-func (vM) GetVCPUsAtStartup(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetVCPUsAtStartup(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_VCPUs_at_startup"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12503,7 +12503,7 @@ func (vM) GetVCPUsAtStartup(session *Session, self VMRef) (retval int, err error
 
 // GetVCPUsAtStartup2: Get the VCPUs/at_startup field of the given VM.
 // Version: rio
-func (vM) GetVCPUsAtStartup2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetVCPUsAtStartup2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_VCPUs_at_startup"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12523,7 +12523,7 @@ func (vM) GetVCPUsAtStartup2(session *Session, self VMRef) (retval int, err erro
 
 // GetVCPUsMax: Get the VCPUs/max field of the given VM.
 // Version: rio
-func (vM) GetVCPUsMax(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetVCPUsMax(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_VCPUs_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12543,7 +12543,7 @@ func (vM) GetVCPUsMax(session *Session, self VMRef) (retval int, err error) {
 
 // GetVCPUsMax2: Get the VCPUs/max field of the given VM.
 // Version: rio
-func (vM) GetVCPUsMax2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetVCPUsMax2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_VCPUs_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12563,7 +12563,7 @@ func (vM) GetVCPUsMax2(session *Session, self VMRef) (retval int, err error) {
 
 // GetVCPUsParams: Get the VCPUs/params field of the given VM.
 // Version: rio
-func (vM) GetVCPUsParams(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetVCPUsParams(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12583,7 +12583,7 @@ func (vM) GetVCPUsParams(session *Session, self VMRef) (retval map[string]string
 
 // GetVCPUsParams2: Get the VCPUs/params field of the given VM.
 // Version: rio
-func (vM) GetVCPUsParams2(session *Session, self VMRef) (retval map[string]string, err error) {
+func (vm) GetVCPUsParams2(session *Session, self VMRef) (retval map[string]string, err error) {
 	method := "VM.get_VCPUs_params"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12603,7 +12603,7 @@ func (vM) GetVCPUsParams2(session *Session, self VMRef) (retval map[string]strin
 
 // GetMemoryStaticMin: Get the memory/static_min field of the given VM.
 // Version: rio
-func (vM) GetMemoryStaticMin(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryStaticMin(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_static_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12623,7 +12623,7 @@ func (vM) GetMemoryStaticMin(session *Session, self VMRef) (retval int, err erro
 
 // GetMemoryStaticMin2: Get the memory/static_min field of the given VM.
 // Version: rio
-func (vM) GetMemoryStaticMin2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryStaticMin2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_static_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12643,7 +12643,7 @@ func (vM) GetMemoryStaticMin2(session *Session, self VMRef) (retval int, err err
 
 // GetMemoryDynamicMin: Get the memory/dynamic_min field of the given VM.
 // Version: rio
-func (vM) GetMemoryDynamicMin(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryDynamicMin(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_dynamic_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12663,7 +12663,7 @@ func (vM) GetMemoryDynamicMin(session *Session, self VMRef) (retval int, err err
 
 // GetMemoryDynamicMin2: Get the memory/dynamic_min field of the given VM.
 // Version: rio
-func (vM) GetMemoryDynamicMin2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryDynamicMin2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_dynamic_min"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12683,7 +12683,7 @@ func (vM) GetMemoryDynamicMin2(session *Session, self VMRef) (retval int, err er
 
 // GetMemoryDynamicMax: Get the memory/dynamic_max field of the given VM.
 // Version: rio
-func (vM) GetMemoryDynamicMax(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryDynamicMax(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_dynamic_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12703,7 +12703,7 @@ func (vM) GetMemoryDynamicMax(session *Session, self VMRef) (retval int, err err
 
 // GetMemoryDynamicMax2: Get the memory/dynamic_max field of the given VM.
 // Version: rio
-func (vM) GetMemoryDynamicMax2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryDynamicMax2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_dynamic_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12723,7 +12723,7 @@ func (vM) GetMemoryDynamicMax2(session *Session, self VMRef) (retval int, err er
 
 // GetMemoryStaticMax: Get the memory/static_max field of the given VM.
 // Version: rio
-func (vM) GetMemoryStaticMax(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryStaticMax(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_static_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12743,7 +12743,7 @@ func (vM) GetMemoryStaticMax(session *Session, self VMRef) (retval int, err erro
 
 // GetMemoryStaticMax2: Get the memory/static_max field of the given VM.
 // Version: rio
-func (vM) GetMemoryStaticMax2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryStaticMax2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_static_max"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12763,7 +12763,7 @@ func (vM) GetMemoryStaticMax2(session *Session, self VMRef) (retval int, err err
 
 // GetMemoryTarget: Get the memory/target field of the given VM.
 // Version: rio
-func (vM) GetMemoryTarget(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryTarget(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_target"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12783,7 +12783,7 @@ func (vM) GetMemoryTarget(session *Session, self VMRef) (retval int, err error) 
 
 // GetMemoryTarget2: Get the memory/target field of the given VM.
 // Version: rio
-func (vM) GetMemoryTarget2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryTarget2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_target"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12803,7 +12803,7 @@ func (vM) GetMemoryTarget2(session *Session, self VMRef) (retval int, err error)
 
 // GetMemoryOverhead: Get the memory/overhead field of the given VM.
 // Version: rio
-func (vM) GetMemoryOverhead(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryOverhead(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_overhead"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12823,7 +12823,7 @@ func (vM) GetMemoryOverhead(session *Session, self VMRef) (retval int, err error
 
 // GetMemoryOverhead2: Get the memory/overhead field of the given VM.
 // Version: rio
-func (vM) GetMemoryOverhead2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetMemoryOverhead2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_memory_overhead"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12843,7 +12843,7 @@ func (vM) GetMemoryOverhead2(session *Session, self VMRef) (retval int, err erro
 
 // GetAffinity: Get the affinity field of the given VM.
 // Version: rio
-func (vM) GetAffinity(session *Session, self VMRef) (retval HostRef, err error) {
+func (vm) GetAffinity(session *Session, self VMRef) (retval HostRef, err error) {
 	method := "VM.get_affinity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12863,7 +12863,7 @@ func (vM) GetAffinity(session *Session, self VMRef) (retval HostRef, err error) 
 
 // GetAffinity2: Get the affinity field of the given VM.
 // Version: rio
-func (vM) GetAffinity2(session *Session, self VMRef) (retval HostRef, err error) {
+func (vm) GetAffinity2(session *Session, self VMRef) (retval HostRef, err error) {
 	method := "VM.get_affinity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12883,7 +12883,7 @@ func (vM) GetAffinity2(session *Session, self VMRef) (retval HostRef, err error)
 
 // GetScheduledToBeResidentOn: Get the scheduled_to_be_resident_on field of the given VM.
 // Version: rio
-func (vM) GetScheduledToBeResidentOn(session *Session, self VMRef) (retval HostRef, err error) {
+func (vm) GetScheduledToBeResidentOn(session *Session, self VMRef) (retval HostRef, err error) {
 	method := "VM.get_scheduled_to_be_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12903,7 +12903,7 @@ func (vM) GetScheduledToBeResidentOn(session *Session, self VMRef) (retval HostR
 
 // GetScheduledToBeResidentOn2: Get the scheduled_to_be_resident_on field of the given VM.
 // Version: rio
-func (vM) GetScheduledToBeResidentOn2(session *Session, self VMRef) (retval HostRef, err error) {
+func (vm) GetScheduledToBeResidentOn2(session *Session, self VMRef) (retval HostRef, err error) {
 	method := "VM.get_scheduled_to_be_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12923,7 +12923,7 @@ func (vM) GetScheduledToBeResidentOn2(session *Session, self VMRef) (retval Host
 
 // GetResidentOn: Get the resident_on field of the given VM.
 // Version: rio
-func (vM) GetResidentOn(session *Session, self VMRef) (retval HostRef, err error) {
+func (vm) GetResidentOn(session *Session, self VMRef) (retval HostRef, err error) {
 	method := "VM.get_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12943,7 +12943,7 @@ func (vM) GetResidentOn(session *Session, self VMRef) (retval HostRef, err error
 
 // GetResidentOn2: Get the resident_on field of the given VM.
 // Version: rio
-func (vM) GetResidentOn2(session *Session, self VMRef) (retval HostRef, err error) {
+func (vm) GetResidentOn2(session *Session, self VMRef) (retval HostRef, err error) {
 	method := "VM.get_resident_on"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12963,7 +12963,7 @@ func (vM) GetResidentOn2(session *Session, self VMRef) (retval HostRef, err erro
 
 // GetSuspendVDI: Get the suspend_VDI field of the given VM.
 // Version: rio
-func (vM) GetSuspendVDI(session *Session, self VMRef) (retval VDIRef, err error) {
+func (vm) GetSuspendVDI(session *Session, self VMRef) (retval VDIRef, err error) {
 	method := "VM.get_suspend_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -12983,7 +12983,7 @@ func (vM) GetSuspendVDI(session *Session, self VMRef) (retval VDIRef, err error)
 
 // GetSuspendVDI2: Get the suspend_VDI field of the given VM.
 // Version: rio
-func (vM) GetSuspendVDI2(session *Session, self VMRef) (retval VDIRef, err error) {
+func (vm) GetSuspendVDI2(session *Session, self VMRef) (retval VDIRef, err error) {
 	method := "VM.get_suspend_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13003,7 +13003,7 @@ func (vM) GetSuspendVDI2(session *Session, self VMRef) (retval VDIRef, err error
 
 // GetIsDefaultTemplate: Get the is_default_template field of the given VM.
 // Version: rio
-func (vM) GetIsDefaultTemplate(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsDefaultTemplate(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_default_template"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13023,7 +13023,7 @@ func (vM) GetIsDefaultTemplate(session *Session, self VMRef) (retval bool, err e
 
 // GetIsDefaultTemplate2: Get the is_default_template field of the given VM.
 // Version: rio
-func (vM) GetIsDefaultTemplate2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsDefaultTemplate2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_default_template"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13043,7 +13043,7 @@ func (vM) GetIsDefaultTemplate2(session *Session, self VMRef) (retval bool, err 
 
 // GetIsATemplate: Get the is_a_template field of the given VM.
 // Version: rio
-func (vM) GetIsATemplate(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsATemplate(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_a_template"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13063,7 +13063,7 @@ func (vM) GetIsATemplate(session *Session, self VMRef) (retval bool, err error) 
 
 // GetIsATemplate2: Get the is_a_template field of the given VM.
 // Version: rio
-func (vM) GetIsATemplate2(session *Session, self VMRef) (retval bool, err error) {
+func (vm) GetIsATemplate2(session *Session, self VMRef) (retval bool, err error) {
 	method := "VM.get_is_a_template"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13083,7 +13083,7 @@ func (vM) GetIsATemplate2(session *Session, self VMRef) (retval bool, err error)
 
 // GetUserVersion: Get the user_version field of the given VM.
 // Version: rio
-func (vM) GetUserVersion(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetUserVersion(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_user_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13103,7 +13103,7 @@ func (vM) GetUserVersion(session *Session, self VMRef) (retval int, err error) {
 
 // GetUserVersion2: Get the user_version field of the given VM.
 // Version: rio
-func (vM) GetUserVersion2(session *Session, self VMRef) (retval int, err error) {
+func (vm) GetUserVersion2(session *Session, self VMRef) (retval int, err error) {
 	method := "VM.get_user_version"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13123,7 +13123,7 @@ func (vM) GetUserVersion2(session *Session, self VMRef) (retval int, err error) 
 
 // GetPowerState: Get the power_state field of the given VM.
 // Version: rio
-func (vM) GetPowerState(session *Session, self VMRef) (retval VMPowerState, err error) {
+func (vm) GetPowerState(session *Session, self VMRef) (retval VMPowerState, err error) {
 	method := "VM.get_power_state"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13143,7 +13143,7 @@ func (vM) GetPowerState(session *Session, self VMRef) (retval VMPowerState, err 
 
 // GetPowerState2: Get the power_state field of the given VM.
 // Version: rio
-func (vM) GetPowerState2(session *Session, self VMRef) (retval VMPowerState, err error) {
+func (vm) GetPowerState2(session *Session, self VMRef) (retval VMPowerState, err error) {
 	method := "VM.get_power_state"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13163,7 +13163,7 @@ func (vM) GetPowerState2(session *Session, self VMRef) (retval VMPowerState, err
 
 // GetNameDescription: Get the name/description field of the given VM.
 // Version: rio
-func (vM) GetNameDescription(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetNameDescription(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13183,7 +13183,7 @@ func (vM) GetNameDescription(session *Session, self VMRef) (retval string, err e
 
 // GetNameDescription2: Get the name/description field of the given VM.
 // Version: rio
-func (vM) GetNameDescription2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetNameDescription2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_name_description"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13203,7 +13203,7 @@ func (vM) GetNameDescription2(session *Session, self VMRef) (retval string, err 
 
 // GetNameLabel: Get the name/label field of the given VM.
 // Version: rio
-func (vM) GetNameLabel(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetNameLabel(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13223,7 +13223,7 @@ func (vM) GetNameLabel(session *Session, self VMRef) (retval string, err error) 
 
 // GetNameLabel2: Get the name/label field of the given VM.
 // Version: rio
-func (vM) GetNameLabel2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetNameLabel2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13243,7 +13243,7 @@ func (vM) GetNameLabel2(session *Session, self VMRef) (retval string, err error)
 
 // GetCurrentOperations: Get the current_operations field of the given VM.
 // Version: rio
-func (vM) GetCurrentOperations(session *Session, self VMRef) (retval map[string]VMOperations, err error) {
+func (vm) GetCurrentOperations(session *Session, self VMRef) (retval map[string]VMOperations, err error) {
 	method := "VM.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13263,7 +13263,7 @@ func (vM) GetCurrentOperations(session *Session, self VMRef) (retval map[string]
 
 // GetCurrentOperations2: Get the current_operations field of the given VM.
 // Version: rio
-func (vM) GetCurrentOperations2(session *Session, self VMRef) (retval map[string]VMOperations, err error) {
+func (vm) GetCurrentOperations2(session *Session, self VMRef) (retval map[string]VMOperations, err error) {
 	method := "VM.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13283,7 +13283,7 @@ func (vM) GetCurrentOperations2(session *Session, self VMRef) (retval map[string
 
 // GetAllowedOperations: Get the allowed_operations field of the given VM.
 // Version: rio
-func (vM) GetAllowedOperations(session *Session, self VMRef) (retval []VMOperations, err error) {
+func (vm) GetAllowedOperations(session *Session, self VMRef) (retval []VMOperations, err error) {
 	method := "VM.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13303,7 +13303,7 @@ func (vM) GetAllowedOperations(session *Session, self VMRef) (retval []VMOperati
 
 // GetAllowedOperations2: Get the allowed_operations field of the given VM.
 // Version: rio
-func (vM) GetAllowedOperations2(session *Session, self VMRef) (retval []VMOperations, err error) {
+func (vm) GetAllowedOperations2(session *Session, self VMRef) (retval []VMOperations, err error) {
 	method := "VM.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13323,7 +13323,7 @@ func (vM) GetAllowedOperations2(session *Session, self VMRef) (retval []VMOperat
 
 // GetUUID: Get the uuid field of the given VM.
 // Version: rio
-func (vM) GetUUID(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetUUID(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13343,7 +13343,7 @@ func (vM) GetUUID(session *Session, self VMRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VM.
 // Version: rio
-func (vM) GetUUID2(session *Session, self VMRef) (retval string, err error) {
+func (vm) GetUUID2(session *Session, self VMRef) (retval string, err error) {
 	method := "VM.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13363,7 +13363,7 @@ func (vM) GetUUID2(session *Session, self VMRef) (retval string, err error) {
 
 // GetByNameLabel: Get all the VM instances with the given label.
 // Version: rio
-func (vM) GetByNameLabel(session *Session, label string) (retval []VMRef, err error) {
+func (vm) GetByNameLabel(session *Session, label string) (retval []VMRef, err error) {
 	method := "VM.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13383,7 +13383,7 @@ func (vM) GetByNameLabel(session *Session, label string) (retval []VMRef, err er
 
 // GetByNameLabel2: Get all the VM instances with the given label.
 // Version: rio
-func (vM) GetByNameLabel2(session *Session, label string) (retval []VMRef, err error) {
+func (vm) GetByNameLabel2(session *Session, label string) (retval []VMRef, err error) {
 	method := "VM.get_by_name_label"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13403,7 +13403,7 @@ func (vM) GetByNameLabel2(session *Session, label string) (retval []VMRef, err e
 
 // Destroy: Destroy the specified VM.  The VM is completely removed from the system.  This function can only be called when the VM is in the Halted State.
 // Version: rio
-func (vM) Destroy(session *Session, self VMRef) (err error) {
+func (vm) Destroy(session *Session, self VMRef) (err error) {
 	method := "VM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13419,7 +13419,7 @@ func (vM) Destroy(session *Session, self VMRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VM.  The VM is completely removed from the system.  This function can only be called when the VM is in the Halted State.
 // Version: rio
-func (vM) AsyncDestroy(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncDestroy(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13439,7 +13439,7 @@ func (vM) AsyncDestroy(session *Session, self VMRef) (retval TaskRef, err error)
 
 // Destroy2: Destroy the specified VM.  The VM is completely removed from the system.  This function can only be called when the VM is in the Halted State.
 // Version: rio
-func (vM) Destroy2(session *Session, self VMRef) (err error) {
+func (vm) Destroy2(session *Session, self VMRef) (err error) {
 	method := "VM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13455,7 +13455,7 @@ func (vM) Destroy2(session *Session, self VMRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VM.  The VM is completely removed from the system.  This function can only be called when the VM is in the Halted State.
 // Version: rio
-func (vM) AsyncDestroy2(session *Session, self VMRef) (retval TaskRef, err error) {
+func (vm) AsyncDestroy2(session *Session, self VMRef) (retval TaskRef, err error) {
 	method := "Async.VM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13475,7 +13475,7 @@ func (vM) AsyncDestroy2(session *Session, self VMRef) (retval TaskRef, err error
 
 // Create: NOT RECOMMENDED! VM.clone or VM.copy (or VM.import) is a better choice in almost all situations. The standard way to obtain a new VM is to call VM.clone on a template VM, then call VM.provision on the new clone. Caution: if VM.create is used and then the new VM is attached to a virtual disc that has an operating system already installed, then there is no guarantee that the operating system will boot and run. Any software that calls VM.create on a future version of this API may fail or give unexpected results. For example this could happen if an additional parameter were added to VM.create. VM.create is intended only for use in the automatic creation of the system VM templates. It creates a new VM instance, and returns its handle. The constructor args are: name_label, name_description, power_state, user_version*, is_a_template*, suspend_VDI, affinity*, memory_target, memory_static_max*, memory_dynamic_max*, memory_dynamic_min*, memory_static_min*, VCPUs_params*, VCPUs_max*, VCPUs_at_startup*, actions_after_softreboot, actions_after_shutdown*, actions_after_reboot*, actions_after_crash*, PV_bootloader*, PV_kernel*, PV_ramdisk*, PV_args*, PV_bootloader_args*, PV_legacy_args*, HVM_boot_policy*, HVM_boot_params*, HVM_shadow_multiplier, platform*, PCI_bus*, other_config*, last_boot_CPU_flags, last_booted_record, recommendations*, xenstore_data, ha_always_run, ha_restart_priority, tags, blocked_operations, protection_policy, is_snapshot_from_vmpp, snapshot_schedule, is_vmss_snapshot, appliance, start_delay, shutdown_delay, order, suspend_SR, version, generation_id, hardware_platform_version, has_vendor_device, reference_label, domain_type, NVRAM (* = non-optional).
 // Version: rio
-func (vM) Create(session *Session, args VMRecord) (retval VMRef, err error) {
+func (vm) Create(session *Session, args VMRecord) (retval VMRef, err error) {
 	method := "VM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13495,7 +13495,7 @@ func (vM) Create(session *Session, args VMRecord) (retval VMRef, err error) {
 
 // AsyncCreate: NOT RECOMMENDED! VM.clone or VM.copy (or VM.import) is a better choice in almost all situations. The standard way to obtain a new VM is to call VM.clone on a template VM, then call VM.provision on the new clone. Caution: if VM.create is used and then the new VM is attached to a virtual disc that has an operating system already installed, then there is no guarantee that the operating system will boot and run. Any software that calls VM.create on a future version of this API may fail or give unexpected results. For example this could happen if an additional parameter were added to VM.create. VM.create is intended only for use in the automatic creation of the system VM templates. It creates a new VM instance, and returns its handle. The constructor args are: name_label, name_description, power_state, user_version*, is_a_template*, suspend_VDI, affinity*, memory_target, memory_static_max*, memory_dynamic_max*, memory_dynamic_min*, memory_static_min*, VCPUs_params*, VCPUs_max*, VCPUs_at_startup*, actions_after_softreboot, actions_after_shutdown*, actions_after_reboot*, actions_after_crash*, PV_bootloader*, PV_kernel*, PV_ramdisk*, PV_args*, PV_bootloader_args*, PV_legacy_args*, HVM_boot_policy*, HVM_boot_params*, HVM_shadow_multiplier, platform*, PCI_bus*, other_config*, last_boot_CPU_flags, last_booted_record, recommendations*, xenstore_data, ha_always_run, ha_restart_priority, tags, blocked_operations, protection_policy, is_snapshot_from_vmpp, snapshot_schedule, is_vmss_snapshot, appliance, start_delay, shutdown_delay, order, suspend_SR, version, generation_id, hardware_platform_version, has_vendor_device, reference_label, domain_type, NVRAM (* = non-optional).
 // Version: rio
-func (vM) AsyncCreate(session *Session, args VMRecord) (retval TaskRef, err error) {
+func (vm) AsyncCreate(session *Session, args VMRecord) (retval TaskRef, err error) {
 	method := "Async.VM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13515,7 +13515,7 @@ func (vM) AsyncCreate(session *Session, args VMRecord) (retval TaskRef, err erro
 
 // Create2: NOT RECOMMENDED! VM.clone or VM.copy (or VM.import) is a better choice in almost all situations. The standard way to obtain a new VM is to call VM.clone on a template VM, then call VM.provision on the new clone. Caution: if VM.create is used and then the new VM is attached to a virtual disc that has an operating system already installed, then there is no guarantee that the operating system will boot and run. Any software that calls VM.create on a future version of this API may fail or give unexpected results. For example this could happen if an additional parameter were added to VM.create. VM.create is intended only for use in the automatic creation of the system VM templates. It creates a new VM instance, and returns its handle. The constructor args are: name_label, name_description, power_state, user_version*, is_a_template*, suspend_VDI, affinity*, memory_target, memory_static_max*, memory_dynamic_max*, memory_dynamic_min*, memory_static_min*, VCPUs_params*, VCPUs_max*, VCPUs_at_startup*, actions_after_softreboot, actions_after_shutdown*, actions_after_reboot*, actions_after_crash*, PV_bootloader*, PV_kernel*, PV_ramdisk*, PV_args*, PV_bootloader_args*, PV_legacy_args*, HVM_boot_policy*, HVM_boot_params*, HVM_shadow_multiplier, platform*, PCI_bus*, other_config*, last_boot_CPU_flags, last_booted_record, recommendations*, xenstore_data, ha_always_run, ha_restart_priority, tags, blocked_operations, protection_policy, is_snapshot_from_vmpp, snapshot_schedule, is_vmss_snapshot, appliance, start_delay, shutdown_delay, order, suspend_SR, version, generation_id, hardware_platform_version, has_vendor_device, reference_label, domain_type, NVRAM (* = non-optional).
 // Version: rio
-func (vM) Create2(session *Session, args VMRecord) (retval VMRef, err error) {
+func (vm) Create2(session *Session, args VMRecord) (retval VMRef, err error) {
 	method := "VM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13535,7 +13535,7 @@ func (vM) Create2(session *Session, args VMRecord) (retval VMRef, err error) {
 
 // AsyncCreate2: NOT RECOMMENDED! VM.clone or VM.copy (or VM.import) is a better choice in almost all situations. The standard way to obtain a new VM is to call VM.clone on a template VM, then call VM.provision on the new clone. Caution: if VM.create is used and then the new VM is attached to a virtual disc that has an operating system already installed, then there is no guarantee that the operating system will boot and run. Any software that calls VM.create on a future version of this API may fail or give unexpected results. For example this could happen if an additional parameter were added to VM.create. VM.create is intended only for use in the automatic creation of the system VM templates. It creates a new VM instance, and returns its handle. The constructor args are: name_label, name_description, power_state, user_version*, is_a_template*, suspend_VDI, affinity*, memory_target, memory_static_max*, memory_dynamic_max*, memory_dynamic_min*, memory_static_min*, VCPUs_params*, VCPUs_max*, VCPUs_at_startup*, actions_after_softreboot, actions_after_shutdown*, actions_after_reboot*, actions_after_crash*, PV_bootloader*, PV_kernel*, PV_ramdisk*, PV_args*, PV_bootloader_args*, PV_legacy_args*, HVM_boot_policy*, HVM_boot_params*, HVM_shadow_multiplier, platform*, PCI_bus*, other_config*, last_boot_CPU_flags, last_booted_record, recommendations*, xenstore_data, ha_always_run, ha_restart_priority, tags, blocked_operations, protection_policy, is_snapshot_from_vmpp, snapshot_schedule, is_vmss_snapshot, appliance, start_delay, shutdown_delay, order, suspend_SR, version, generation_id, hardware_platform_version, has_vendor_device, reference_label, domain_type, NVRAM (* = non-optional).
 // Version: rio
-func (vM) AsyncCreate2(session *Session, args VMRecord) (retval TaskRef, err error) {
+func (vm) AsyncCreate2(session *Session, args VMRecord) (retval TaskRef, err error) {
 	method := "Async.VM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13555,17 +13555,17 @@ func (vM) AsyncCreate2(session *Session, args VMRecord) (retval TaskRef, err err
 
 // GetByUUID: Get a reference to the VM instance with the specified UUID.
 // Version: rio
-func (vM) GetByUUID(session *Session, uUID string) (retval VMRef, err error) {
+func (vm) GetByUUID(session *Session, uuid string) (retval VMRef, err error) {
 	method := "VM.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -13575,17 +13575,17 @@ func (vM) GetByUUID(session *Session, uUID string) (retval VMRef, err error) {
 
 // GetByUUID2: Get a reference to the VM instance with the specified UUID.
 // Version: rio
-func (vM) GetByUUID2(session *Session, uUID string) (retval VMRef, err error) {
+func (vm) GetByUUID2(session *Session, uuid string) (retval VMRef, err error) {
 	method := "VM.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -13595,7 +13595,7 @@ func (vM) GetByUUID2(session *Session, uUID string) (retval VMRef, err error) {
 
 // GetRecord: Get a record containing the current state of the given VM.
 // Version: rio
-func (vM) GetRecord(session *Session, self VMRef) (retval VMRecord, err error) {
+func (vm) GetRecord(session *Session, self VMRef) (retval VMRecord, err error) {
 	method := "VM.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -13615,7 +13615,7 @@ func (vM) GetRecord(session *Session, self VMRef) (retval VMRecord, err error) {
 
 // GetRecord2: Get a record containing the current state of the given VM.
 // Version: rio
-func (vM) GetRecord2(session *Session, self VMRef) (retval VMRecord, err error) {
+func (vm) GetRecord2(session *Session, self VMRef) (retval VMRecord, err error) {
 	method := "VM.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

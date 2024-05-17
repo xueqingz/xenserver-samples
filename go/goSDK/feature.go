@@ -414,17 +414,17 @@ func (feature) GetByNameLabel2(session *Session, label string) (retval []Feature
 
 // GetByUUID: Get a reference to the Feature instance with the specified UUID.
 // Version: falcon
-func (feature) GetByUUID(session *Session, uUID string) (retval FeatureRef, err error) {
+func (feature) GetByUUID(session *Session, uuid string) (retval FeatureRef, err error) {
 	method := "Feature.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -434,17 +434,17 @@ func (feature) GetByUUID(session *Session, uUID string) (retval FeatureRef, err 
 
 // GetByUUID2: Get a reference to the Feature instance with the specified UUID.
 // Version: falcon
-func (feature) GetByUUID2(session *Session, uUID string) (retval FeatureRef, err error) {
+func (feature) GetByUUID2(session *Session, uuid string) (retval FeatureRef, err error) {
 	method := "Feature.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

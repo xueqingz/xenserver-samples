@@ -91,7 +91,7 @@ func (hostCrashdump) GetAll1(session *Session) (retval []HostCrashdumpRef, err e
 
 // Upload: Upload the specified host crash dump to a specified URL
 // Version: rio
-func (hostCrashdump) Upload(session *Session, self HostCrashdumpRef, uRL string, options map[string]string) (err error) {
+func (hostCrashdump) Upload(session *Session, self HostCrashdumpRef, url string, options map[string]string) (err error) {
 	method := "host_crashdump.upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -101,7 +101,7 @@ func (hostCrashdump) Upload(session *Session, self HostCrashdumpRef, uRL string,
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -109,13 +109,13 @@ func (hostCrashdump) Upload(session *Session, self HostCrashdumpRef, uRL string,
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, optionsArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, urlArg, optionsArg)
 	return
 }
 
 // AsyncUpload: Upload the specified host crash dump to a specified URL
 // Version: rio
-func (hostCrashdump) AsyncUpload(session *Session, self HostCrashdumpRef, uRL string, options map[string]string) (retval TaskRef, err error) {
+func (hostCrashdump) AsyncUpload(session *Session, self HostCrashdumpRef, url string, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.host_crashdump.upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -125,7 +125,7 @@ func (hostCrashdump) AsyncUpload(session *Session, self HostCrashdumpRef, uRL st
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -133,7 +133,7 @@ func (hostCrashdump) AsyncUpload(session *Session, self HostCrashdumpRef, uRL st
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, urlArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -143,7 +143,7 @@ func (hostCrashdump) AsyncUpload(session *Session, self HostCrashdumpRef, uRL st
 
 // Upload4: Upload the specified host crash dump to a specified URL
 // Version: rio
-func (hostCrashdump) Upload4(session *Session, self HostCrashdumpRef, uRL string, options map[string]string) (err error) {
+func (hostCrashdump) Upload4(session *Session, self HostCrashdumpRef, url string, options map[string]string) (err error) {
 	method := "host_crashdump.upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -153,7 +153,7 @@ func (hostCrashdump) Upload4(session *Session, self HostCrashdumpRef, uRL string
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -161,13 +161,13 @@ func (hostCrashdump) Upload4(session *Session, self HostCrashdumpRef, uRL string
 	if err != nil {
 		return
 	}
-	_, err = session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, optionsArg)
+	_, err = session.client.sendCall(method, sessionIDArg, selfArg, urlArg, optionsArg)
 	return
 }
 
 // AsyncUpload4: Upload the specified host crash dump to a specified URL
 // Version: rio
-func (hostCrashdump) AsyncUpload4(session *Session, self HostCrashdumpRef, uRL string, options map[string]string) (retval TaskRef, err error) {
+func (hostCrashdump) AsyncUpload4(session *Session, self HostCrashdumpRef, url string, options map[string]string) (retval TaskRef, err error) {
 	method := "Async.host_crashdump.upload"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -177,7 +177,7 @@ func (hostCrashdump) AsyncUpload4(session *Session, self HostCrashdumpRef, uRL s
 	if err != nil {
 		return
 	}
-	uRLArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), uRL)
+	urlArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "url"), url)
 	if err != nil {
 		return
 	}
@@ -185,7 +185,7 @@ func (hostCrashdump) AsyncUpload4(session *Session, self HostCrashdumpRef, uRL s
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, selfArg, uRLArg, optionsArg)
+	result, err := session.client.sendCall(method, sessionIDArg, selfArg, urlArg, optionsArg)
 	if err != nil {
 		return
 	}
@@ -643,17 +643,17 @@ func (hostCrashdump) GetUUID2(session *Session, self HostCrashdumpRef) (retval s
 
 // GetByUUID: Get a reference to the host_crashdump instance with the specified UUID.
 // Version: rio
-func (hostCrashdump) GetByUUID(session *Session, uUID string) (retval HostCrashdumpRef, err error) {
+func (hostCrashdump) GetByUUID(session *Session, uuid string) (retval HostCrashdumpRef, err error) {
 	method := "host_crashdump.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -663,17 +663,17 @@ func (hostCrashdump) GetByUUID(session *Session, uUID string) (retval HostCrashd
 
 // GetByUUID2: Get a reference to the host_crashdump instance with the specified UUID.
 // Version: rio
-func (hostCrashdump) GetByUUID2(session *Session, uUID string) (retval HostCrashdumpRef, err error) {
+func (hostCrashdump) GetByUUID2(session *Session, uuid string) (retval HostCrashdumpRef, err error) {
 	method := "host_crashdump.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

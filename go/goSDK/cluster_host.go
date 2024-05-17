@@ -1019,17 +1019,17 @@ func (clusterHost) GetUUID2(session *Session, self ClusterHostRef) (retval strin
 
 // GetByUUID: Get a reference to the Cluster_host instance with the specified UUID.
 // Version: lima
-func (clusterHost) GetByUUID(session *Session, uUID string) (retval ClusterHostRef, err error) {
+func (clusterHost) GetByUUID(session *Session, uuid string) (retval ClusterHostRef, err error) {
 	method := "Cluster_host.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1039,17 +1039,17 @@ func (clusterHost) GetByUUID(session *Session, uUID string) (retval ClusterHostR
 
 // GetByUUID2: Get a reference to the Cluster_host instance with the specified UUID.
 // Version: lima
-func (clusterHost) GetByUUID2(session *Session, uUID string) (retval ClusterHostRef, err error) {
+func (clusterHost) GetByUUID2(session *Session, uuid string) (retval ClusterHostRef, err error) {
 	method := "Cluster_host.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

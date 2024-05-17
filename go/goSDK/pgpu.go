@@ -34,13 +34,13 @@ type PGPURecord struct {
 type PGPURef string
 
 // A physical GPU (pGPU)
-type pGPU struct{}
+type pgpu struct{}
 
-var PGPU pGPU
+var PGPU pgpu
 
 // GetAllRecords: Return a map of PGPU references to PGPU records for all PGPUs known to the system.
 // Version: boston
-func (pGPU) GetAllRecords(session *Session) (retval map[PGPURef]PGPURecord, err error) {
+func (pgpu) GetAllRecords(session *Session) (retval map[PGPURef]PGPURecord, err error) {
 	method := "PGPU.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -56,7 +56,7 @@ func (pGPU) GetAllRecords(session *Session) (retval map[PGPURef]PGPURecord, err 
 
 // GetAllRecords1: Return a map of PGPU references to PGPU records for all PGPUs known to the system.
 // Version: boston
-func (pGPU) GetAllRecords1(session *Session) (retval map[PGPURef]PGPURecord, err error) {
+func (pgpu) GetAllRecords1(session *Session) (retval map[PGPURef]PGPURecord, err error) {
 	method := "PGPU.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -72,7 +72,7 @@ func (pGPU) GetAllRecords1(session *Session) (retval map[PGPURef]PGPURecord, err
 
 // GetAll: Return a list of all the PGPUs known to the system.
 // Version: boston
-func (pGPU) GetAll(session *Session) (retval []PGPURef, err error) {
+func (pgpu) GetAll(session *Session) (retval []PGPURef, err error) {
 	method := "PGPU.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -88,7 +88,7 @@ func (pGPU) GetAll(session *Session) (retval []PGPURef, err error) {
 
 // GetAll1: Return a list of all the PGPUs known to the system.
 // Version: boston
-func (pGPU) GetAll1(session *Session) (retval []PGPURef, err error) {
+func (pgpu) GetAll1(session *Session) (retval []PGPURef, err error) {
 	method := "PGPU.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -104,7 +104,7 @@ func (pGPU) GetAll1(session *Session) (retval []PGPURef, err error) {
 
 // DisableDom0Access:
 // Version: cream
-func (pGPU) DisableDom0Access(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
+func (pgpu) DisableDom0Access(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
 	method := "PGPU.disable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -124,7 +124,7 @@ func (pGPU) DisableDom0Access(session *Session, self PGPURef) (retval PgpuDom0Ac
 
 // AsyncDisableDom0Access:
 // Version: cream
-func (pGPU) AsyncDisableDom0Access(session *Session, self PGPURef) (retval TaskRef, err error) {
+func (pgpu) AsyncDisableDom0Access(session *Session, self PGPURef) (retval TaskRef, err error) {
 	method := "Async.PGPU.disable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -144,7 +144,7 @@ func (pGPU) AsyncDisableDom0Access(session *Session, self PGPURef) (retval TaskR
 
 // DisableDom0Access2:
 // Version: cream
-func (pGPU) DisableDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
+func (pgpu) DisableDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
 	method := "PGPU.disable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -164,7 +164,7 @@ func (pGPU) DisableDom0Access2(session *Session, self PGPURef) (retval PgpuDom0A
 
 // AsyncDisableDom0Access2:
 // Version: cream
-func (pGPU) AsyncDisableDom0Access2(session *Session, self PGPURef) (retval TaskRef, err error) {
+func (pgpu) AsyncDisableDom0Access2(session *Session, self PGPURef) (retval TaskRef, err error) {
 	method := "Async.PGPU.disable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -184,7 +184,7 @@ func (pGPU) AsyncDisableDom0Access2(session *Session, self PGPURef) (retval Task
 
 // EnableDom0Access:
 // Version: cream
-func (pGPU) EnableDom0Access(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
+func (pgpu) EnableDom0Access(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
 	method := "PGPU.enable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -204,7 +204,7 @@ func (pGPU) EnableDom0Access(session *Session, self PGPURef) (retval PgpuDom0Acc
 
 // AsyncEnableDom0Access:
 // Version: cream
-func (pGPU) AsyncEnableDom0Access(session *Session, self PGPURef) (retval TaskRef, err error) {
+func (pgpu) AsyncEnableDom0Access(session *Session, self PGPURef) (retval TaskRef, err error) {
 	method := "Async.PGPU.enable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -224,7 +224,7 @@ func (pGPU) AsyncEnableDom0Access(session *Session, self PGPURef) (retval TaskRe
 
 // EnableDom0Access2:
 // Version: cream
-func (pGPU) EnableDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
+func (pgpu) EnableDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
 	method := "PGPU.enable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -244,7 +244,7 @@ func (pGPU) EnableDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Ac
 
 // AsyncEnableDom0Access2:
 // Version: cream
-func (pGPU) AsyncEnableDom0Access2(session *Session, self PGPURef) (retval TaskRef, err error) {
+func (pgpu) AsyncEnableDom0Access2(session *Session, self PGPURef) (retval TaskRef, err error) {
 	method := "Async.PGPU.enable_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -264,7 +264,7 @@ func (pGPU) AsyncEnableDom0Access2(session *Session, self PGPURef) (retval TaskR
 
 // GetRemainingCapacity:
 // Version: vgpu-tech-preview
-func (pGPU) GetRemainingCapacity(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval int, err error) {
+func (pgpu) GetRemainingCapacity(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval int, err error) {
 	method := "PGPU.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -288,7 +288,7 @@ func (pGPU) GetRemainingCapacity(session *Session, self PGPURef, vgpuType VGPUTy
 
 // AsyncGetRemainingCapacity:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncGetRemainingCapacity(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncGetRemainingCapacity(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -312,7 +312,7 @@ func (pGPU) AsyncGetRemainingCapacity(session *Session, self PGPURef, vgpuType V
 
 // GetRemainingCapacity3:
 // Version: vgpu-tech-preview
-func (pGPU) GetRemainingCapacity3(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval int, err error) {
+func (pgpu) GetRemainingCapacity3(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval int, err error) {
 	method := "PGPU.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -336,7 +336,7 @@ func (pGPU) GetRemainingCapacity3(session *Session, self PGPURef, vgpuType VGPUT
 
 // AsyncGetRemainingCapacity3:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncGetRemainingCapacity3(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncGetRemainingCapacity3(session *Session, self PGPURef, vgpuType VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.get_remaining_capacity"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -360,7 +360,7 @@ func (pGPU) AsyncGetRemainingCapacity3(session *Session, self PGPURef, vgpuType 
 
 // SetGPUGroup:
 // Version: vgpu-tech-preview
-func (pGPU) SetGPUGroup(session *Session, self PGPURef, value GPUGroupRef) (err error) {
+func (pgpu) SetGPUGroup(session *Session, self PGPURef, value GPUGroupRef) (err error) {
 	method := "PGPU.set_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -380,7 +380,7 @@ func (pGPU) SetGPUGroup(session *Session, self PGPURef, value GPUGroupRef) (err 
 
 // AsyncSetGPUGroup:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncSetGPUGroup(session *Session, self PGPURef, value GPUGroupRef) (retval TaskRef, err error) {
+func (pgpu) AsyncSetGPUGroup(session *Session, self PGPURef, value GPUGroupRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.set_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -404,7 +404,7 @@ func (pGPU) AsyncSetGPUGroup(session *Session, self PGPURef, value GPUGroupRef) 
 
 // SetGPUGroup3:
 // Version: vgpu-tech-preview
-func (pGPU) SetGPUGroup3(session *Session, self PGPURef, value GPUGroupRef) (err error) {
+func (pgpu) SetGPUGroup3(session *Session, self PGPURef, value GPUGroupRef) (err error) {
 	method := "PGPU.set_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -424,7 +424,7 @@ func (pGPU) SetGPUGroup3(session *Session, self PGPURef, value GPUGroupRef) (err
 
 // AsyncSetGPUGroup3:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncSetGPUGroup3(session *Session, self PGPURef, value GPUGroupRef) (retval TaskRef, err error) {
+func (pgpu) AsyncSetGPUGroup3(session *Session, self PGPURef, value GPUGroupRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.set_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -448,7 +448,7 @@ func (pGPU) AsyncSetGPUGroup3(session *Session, self PGPURef, value GPUGroupRef)
 
 // SetEnabledVGPUTypes:
 // Version: vgpu-tech-preview
-func (pGPU) SetEnabledVGPUTypes(session *Session, self PGPURef, value []VGPUTypeRef) (err error) {
+func (pgpu) SetEnabledVGPUTypes(session *Session, self PGPURef, value []VGPUTypeRef) (err error) {
 	method := "PGPU.set_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -468,7 +468,7 @@ func (pGPU) SetEnabledVGPUTypes(session *Session, self PGPURef, value []VGPUType
 
 // AsyncSetEnabledVGPUTypes:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncSetEnabledVGPUTypes(session *Session, self PGPURef, value []VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncSetEnabledVGPUTypes(session *Session, self PGPURef, value []VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.set_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -492,7 +492,7 @@ func (pGPU) AsyncSetEnabledVGPUTypes(session *Session, self PGPURef, value []VGP
 
 // SetEnabledVGPUTypes3:
 // Version: vgpu-tech-preview
-func (pGPU) SetEnabledVGPUTypes3(session *Session, self PGPURef, value []VGPUTypeRef) (err error) {
+func (pgpu) SetEnabledVGPUTypes3(session *Session, self PGPURef, value []VGPUTypeRef) (err error) {
 	method := "PGPU.set_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -512,7 +512,7 @@ func (pGPU) SetEnabledVGPUTypes3(session *Session, self PGPURef, value []VGPUTyp
 
 // AsyncSetEnabledVGPUTypes3:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncSetEnabledVGPUTypes3(session *Session, self PGPURef, value []VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncSetEnabledVGPUTypes3(session *Session, self PGPURef, value []VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.set_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -536,7 +536,7 @@ func (pGPU) AsyncSetEnabledVGPUTypes3(session *Session, self PGPURef, value []VG
 
 // RemoveEnabledVGPUTypes:
 // Version: vgpu-tech-preview
-func (pGPU) RemoveEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
+func (pgpu) RemoveEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
 	method := "PGPU.remove_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -556,7 +556,7 @@ func (pGPU) RemoveEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTyp
 
 // AsyncRemoveEnabledVGPUTypes:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncRemoveEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncRemoveEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.remove_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -580,7 +580,7 @@ func (pGPU) AsyncRemoveEnabledVGPUTypes(session *Session, self PGPURef, value VG
 
 // RemoveEnabledVGPUTypes3:
 // Version: vgpu-tech-preview
-func (pGPU) RemoveEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
+func (pgpu) RemoveEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
 	method := "PGPU.remove_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -600,7 +600,7 @@ func (pGPU) RemoveEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTy
 
 // AsyncRemoveEnabledVGPUTypes3:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncRemoveEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncRemoveEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.remove_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -624,7 +624,7 @@ func (pGPU) AsyncRemoveEnabledVGPUTypes3(session *Session, self PGPURef, value V
 
 // AddEnabledVGPUTypes:
 // Version: vgpu-tech-preview
-func (pGPU) AddEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
+func (pgpu) AddEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
 	method := "PGPU.add_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -644,7 +644,7 @@ func (pGPU) AddEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRe
 
 // AsyncAddEnabledVGPUTypes:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncAddEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncAddEnabledVGPUTypes(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.add_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -668,7 +668,7 @@ func (pGPU) AsyncAddEnabledVGPUTypes(session *Session, self PGPURef, value VGPUT
 
 // AddEnabledVGPUTypes3:
 // Version: vgpu-tech-preview
-func (pGPU) AddEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
+func (pgpu) AddEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (err error) {
 	method := "PGPU.add_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -688,7 +688,7 @@ func (pGPU) AddEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeR
 
 // AsyncAddEnabledVGPUTypes3:
 // Version: vgpu-tech-preview
-func (pGPU) AsyncAddEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
+func (pgpu) AsyncAddEnabledVGPUTypes3(session *Session, self PGPURef, value VGPUTypeRef) (retval TaskRef, err error) {
 	method := "Async.PGPU.add_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -712,7 +712,7 @@ func (pGPU) AsyncAddEnabledVGPUTypes3(session *Session, self PGPURef, value VGPU
 
 // RemoveFromOtherConfig: Remove the given key and its corresponding value from the other_config field of the given PGPU.  If the key is not in that Map, then do nothing.
 // Version: boston
-func (pGPU) RemoveFromOtherConfig(session *Session, self PGPURef, key string) (err error) {
+func (pgpu) RemoveFromOtherConfig(session *Session, self PGPURef, key string) (err error) {
 	method := "PGPU.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -732,7 +732,7 @@ func (pGPU) RemoveFromOtherConfig(session *Session, self PGPURef, key string) (e
 
 // RemoveFromOtherConfig3: Remove the given key and its corresponding value from the other_config field of the given PGPU.  If the key is not in that Map, then do nothing.
 // Version: boston
-func (pGPU) RemoveFromOtherConfig3(session *Session, self PGPURef, key string) (err error) {
+func (pgpu) RemoveFromOtherConfig3(session *Session, self PGPURef, key string) (err error) {
 	method := "PGPU.remove_from_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -752,7 +752,7 @@ func (pGPU) RemoveFromOtherConfig3(session *Session, self PGPURef, key string) (
 
 // AddToOtherConfig: Add the given key-value pair to the other_config field of the given PGPU.
 // Version: boston
-func (pGPU) AddToOtherConfig(session *Session, self PGPURef, key string, value string) (err error) {
+func (pgpu) AddToOtherConfig(session *Session, self PGPURef, key string, value string) (err error) {
 	method := "PGPU.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -776,7 +776,7 @@ func (pGPU) AddToOtherConfig(session *Session, self PGPURef, key string, value s
 
 // AddToOtherConfig4: Add the given key-value pair to the other_config field of the given PGPU.
 // Version: boston
-func (pGPU) AddToOtherConfig4(session *Session, self PGPURef, key string, value string) (err error) {
+func (pgpu) AddToOtherConfig4(session *Session, self PGPURef, key string, value string) (err error) {
 	method := "PGPU.add_to_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -800,7 +800,7 @@ func (pGPU) AddToOtherConfig4(session *Session, self PGPURef, key string, value 
 
 // SetOtherConfig: Set the other_config field of the given PGPU.
 // Version: boston
-func (pGPU) SetOtherConfig(session *Session, self PGPURef, value map[string]string) (err error) {
+func (pgpu) SetOtherConfig(session *Session, self PGPURef, value map[string]string) (err error) {
 	method := "PGPU.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -820,7 +820,7 @@ func (pGPU) SetOtherConfig(session *Session, self PGPURef, value map[string]stri
 
 // SetOtherConfig3: Set the other_config field of the given PGPU.
 // Version: boston
-func (pGPU) SetOtherConfig3(session *Session, self PGPURef, value map[string]string) (err error) {
+func (pgpu) SetOtherConfig3(session *Session, self PGPURef, value map[string]string) (err error) {
 	method := "PGPU.set_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -840,7 +840,7 @@ func (pGPU) SetOtherConfig3(session *Session, self PGPURef, value map[string]str
 
 // GetCompatibilityMetadata: Get the compatibility_metadata field of the given PGPU.
 // Version: boston
-func (pGPU) GetCompatibilityMetadata(session *Session, self PGPURef) (retval map[string]string, err error) {
+func (pgpu) GetCompatibilityMetadata(session *Session, self PGPURef) (retval map[string]string, err error) {
 	method := "PGPU.get_compatibility_metadata"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -860,7 +860,7 @@ func (pGPU) GetCompatibilityMetadata(session *Session, self PGPURef) (retval map
 
 // GetCompatibilityMetadata2: Get the compatibility_metadata field of the given PGPU.
 // Version: boston
-func (pGPU) GetCompatibilityMetadata2(session *Session, self PGPURef) (retval map[string]string, err error) {
+func (pgpu) GetCompatibilityMetadata2(session *Session, self PGPURef) (retval map[string]string, err error) {
 	method := "PGPU.get_compatibility_metadata"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -880,7 +880,7 @@ func (pGPU) GetCompatibilityMetadata2(session *Session, self PGPURef) (retval ma
 
 // GetIsSystemDisplayDevice: Get the is_system_display_device field of the given PGPU.
 // Version: boston
-func (pGPU) GetIsSystemDisplayDevice(session *Session, self PGPURef) (retval bool, err error) {
+func (pgpu) GetIsSystemDisplayDevice(session *Session, self PGPURef) (retval bool, err error) {
 	method := "PGPU.get_is_system_display_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -900,7 +900,7 @@ func (pGPU) GetIsSystemDisplayDevice(session *Session, self PGPURef) (retval boo
 
 // GetIsSystemDisplayDevice2: Get the is_system_display_device field of the given PGPU.
 // Version: boston
-func (pGPU) GetIsSystemDisplayDevice2(session *Session, self PGPURef) (retval bool, err error) {
+func (pgpu) GetIsSystemDisplayDevice2(session *Session, self PGPURef) (retval bool, err error) {
 	method := "PGPU.get_is_system_display_device"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -920,7 +920,7 @@ func (pGPU) GetIsSystemDisplayDevice2(session *Session, self PGPURef) (retval bo
 
 // GetDom0Access: Get the dom0_access field of the given PGPU.
 // Version: boston
-func (pGPU) GetDom0Access(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
+func (pgpu) GetDom0Access(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
 	method := "PGPU.get_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -940,7 +940,7 @@ func (pGPU) GetDom0Access(session *Session, self PGPURef) (retval PgpuDom0Access
 
 // GetDom0Access2: Get the dom0_access field of the given PGPU.
 // Version: boston
-func (pGPU) GetDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
+func (pgpu) GetDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Access, err error) {
 	method := "PGPU.get_dom0_access"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -960,7 +960,7 @@ func (pGPU) GetDom0Access2(session *Session, self PGPURef) (retval PgpuDom0Acces
 
 // GetSupportedVGPUMaxCapacities: Get the supported_VGPU_max_capacities field of the given PGPU.
 // Version: boston
-func (pGPU) GetSupportedVGPUMaxCapacities(session *Session, self PGPURef) (retval map[VGPUTypeRef]int, err error) {
+func (pgpu) GetSupportedVGPUMaxCapacities(session *Session, self PGPURef) (retval map[VGPUTypeRef]int, err error) {
 	method := "PGPU.get_supported_VGPU_max_capacities"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -980,7 +980,7 @@ func (pGPU) GetSupportedVGPUMaxCapacities(session *Session, self PGPURef) (retva
 
 // GetSupportedVGPUMaxCapacities2: Get the supported_VGPU_max_capacities field of the given PGPU.
 // Version: boston
-func (pGPU) GetSupportedVGPUMaxCapacities2(session *Session, self PGPURef) (retval map[VGPUTypeRef]int, err error) {
+func (pgpu) GetSupportedVGPUMaxCapacities2(session *Session, self PGPURef) (retval map[VGPUTypeRef]int, err error) {
 	method := "PGPU.get_supported_VGPU_max_capacities"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1000,7 +1000,7 @@ func (pGPU) GetSupportedVGPUMaxCapacities2(session *Session, self PGPURef) (retv
 
 // GetResidentVGPUs: Get the resident_VGPUs field of the given PGPU.
 // Version: boston
-func (pGPU) GetResidentVGPUs(session *Session, self PGPURef) (retval []VGPURef, err error) {
+func (pgpu) GetResidentVGPUs(session *Session, self PGPURef) (retval []VGPURef, err error) {
 	method := "PGPU.get_resident_VGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1020,7 +1020,7 @@ func (pGPU) GetResidentVGPUs(session *Session, self PGPURef) (retval []VGPURef, 
 
 // GetResidentVGPUs2: Get the resident_VGPUs field of the given PGPU.
 // Version: boston
-func (pGPU) GetResidentVGPUs2(session *Session, self PGPURef) (retval []VGPURef, err error) {
+func (pgpu) GetResidentVGPUs2(session *Session, self PGPURef) (retval []VGPURef, err error) {
 	method := "PGPU.get_resident_VGPUs"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1040,7 +1040,7 @@ func (pGPU) GetResidentVGPUs2(session *Session, self PGPURef) (retval []VGPURef,
 
 // GetEnabledVGPUTypes: Get the enabled_VGPU_types field of the given PGPU.
 // Version: boston
-func (pGPU) GetEnabledVGPUTypes(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
+func (pgpu) GetEnabledVGPUTypes(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
 	method := "PGPU.get_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1060,7 +1060,7 @@ func (pGPU) GetEnabledVGPUTypes(session *Session, self PGPURef) (retval []VGPUTy
 
 // GetEnabledVGPUTypes2: Get the enabled_VGPU_types field of the given PGPU.
 // Version: boston
-func (pGPU) GetEnabledVGPUTypes2(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
+func (pgpu) GetEnabledVGPUTypes2(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
 	method := "PGPU.get_enabled_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1080,7 +1080,7 @@ func (pGPU) GetEnabledVGPUTypes2(session *Session, self PGPURef) (retval []VGPUT
 
 // GetSupportedVGPUTypes: Get the supported_VGPU_types field of the given PGPU.
 // Version: boston
-func (pGPU) GetSupportedVGPUTypes(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
+func (pgpu) GetSupportedVGPUTypes(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
 	method := "PGPU.get_supported_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1100,7 +1100,7 @@ func (pGPU) GetSupportedVGPUTypes(session *Session, self PGPURef) (retval []VGPU
 
 // GetSupportedVGPUTypes2: Get the supported_VGPU_types field of the given PGPU.
 // Version: boston
-func (pGPU) GetSupportedVGPUTypes2(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
+func (pgpu) GetSupportedVGPUTypes2(session *Session, self PGPURef) (retval []VGPUTypeRef, err error) {
 	method := "PGPU.get_supported_VGPU_types"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1120,7 +1120,7 @@ func (pGPU) GetSupportedVGPUTypes2(session *Session, self PGPURef) (retval []VGP
 
 // GetOtherConfig: Get the other_config field of the given PGPU.
 // Version: boston
-func (pGPU) GetOtherConfig(session *Session, self PGPURef) (retval map[string]string, err error) {
+func (pgpu) GetOtherConfig(session *Session, self PGPURef) (retval map[string]string, err error) {
 	method := "PGPU.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1140,7 +1140,7 @@ func (pGPU) GetOtherConfig(session *Session, self PGPURef) (retval map[string]st
 
 // GetOtherConfig2: Get the other_config field of the given PGPU.
 // Version: boston
-func (pGPU) GetOtherConfig2(session *Session, self PGPURef) (retval map[string]string, err error) {
+func (pgpu) GetOtherConfig2(session *Session, self PGPURef) (retval map[string]string, err error) {
 	method := "PGPU.get_other_config"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1160,7 +1160,7 @@ func (pGPU) GetOtherConfig2(session *Session, self PGPURef) (retval map[string]s
 
 // GetHost: Get the host field of the given PGPU.
 // Version: boston
-func (pGPU) GetHost(session *Session, self PGPURef) (retval HostRef, err error) {
+func (pgpu) GetHost(session *Session, self PGPURef) (retval HostRef, err error) {
 	method := "PGPU.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1180,7 +1180,7 @@ func (pGPU) GetHost(session *Session, self PGPURef) (retval HostRef, err error) 
 
 // GetHost2: Get the host field of the given PGPU.
 // Version: boston
-func (pGPU) GetHost2(session *Session, self PGPURef) (retval HostRef, err error) {
+func (pgpu) GetHost2(session *Session, self PGPURef) (retval HostRef, err error) {
 	method := "PGPU.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1200,7 +1200,7 @@ func (pGPU) GetHost2(session *Session, self PGPURef) (retval HostRef, err error)
 
 // GetGPUGroup: Get the GPU_group field of the given PGPU.
 // Version: boston
-func (pGPU) GetGPUGroup(session *Session, self PGPURef) (retval GPUGroupRef, err error) {
+func (pgpu) GetGPUGroup(session *Session, self PGPURef) (retval GPUGroupRef, err error) {
 	method := "PGPU.get_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1220,7 +1220,7 @@ func (pGPU) GetGPUGroup(session *Session, self PGPURef) (retval GPUGroupRef, err
 
 // GetGPUGroup2: Get the GPU_group field of the given PGPU.
 // Version: boston
-func (pGPU) GetGPUGroup2(session *Session, self PGPURef) (retval GPUGroupRef, err error) {
+func (pgpu) GetGPUGroup2(session *Session, self PGPURef) (retval GPUGroupRef, err error) {
 	method := "PGPU.get_GPU_group"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1240,7 +1240,7 @@ func (pGPU) GetGPUGroup2(session *Session, self PGPURef) (retval GPUGroupRef, er
 
 // GetPCI: Get the PCI field of the given PGPU.
 // Version: boston
-func (pGPU) GetPCI(session *Session, self PGPURef) (retval PCIRef, err error) {
+func (pgpu) GetPCI(session *Session, self PGPURef) (retval PCIRef, err error) {
 	method := "PGPU.get_PCI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1260,7 +1260,7 @@ func (pGPU) GetPCI(session *Session, self PGPURef) (retval PCIRef, err error) {
 
 // GetPCI2: Get the PCI field of the given PGPU.
 // Version: boston
-func (pGPU) GetPCI2(session *Session, self PGPURef) (retval PCIRef, err error) {
+func (pgpu) GetPCI2(session *Session, self PGPURef) (retval PCIRef, err error) {
 	method := "PGPU.get_PCI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1280,7 +1280,7 @@ func (pGPU) GetPCI2(session *Session, self PGPURef) (retval PCIRef, err error) {
 
 // GetUUID: Get the uuid field of the given PGPU.
 // Version: boston
-func (pGPU) GetUUID(session *Session, self PGPURef) (retval string, err error) {
+func (pgpu) GetUUID(session *Session, self PGPURef) (retval string, err error) {
 	method := "PGPU.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1300,7 +1300,7 @@ func (pGPU) GetUUID(session *Session, self PGPURef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given PGPU.
 // Version: boston
-func (pGPU) GetUUID2(session *Session, self PGPURef) (retval string, err error) {
+func (pgpu) GetUUID2(session *Session, self PGPURef) (retval string, err error) {
 	method := "PGPU.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1320,17 +1320,17 @@ func (pGPU) GetUUID2(session *Session, self PGPURef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the PGPU instance with the specified UUID.
 // Version: boston
-func (pGPU) GetByUUID(session *Session, uUID string) (retval PGPURef, err error) {
+func (pgpu) GetByUUID(session *Session, uuid string) (retval PGPURef, err error) {
 	method := "PGPU.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1340,17 +1340,17 @@ func (pGPU) GetByUUID(session *Session, uUID string) (retval PGPURef, err error)
 
 // GetByUUID2: Get a reference to the PGPU instance with the specified UUID.
 // Version: boston
-func (pGPU) GetByUUID2(session *Session, uUID string) (retval PGPURef, err error) {
+func (pgpu) GetByUUID2(session *Session, uuid string) (retval PGPURef, err error) {
 	method := "PGPU.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1360,7 +1360,7 @@ func (pGPU) GetByUUID2(session *Session, uUID string) (retval PGPURef, err error
 
 // GetRecord: Get a record containing the current state of the given PGPU.
 // Version: boston
-func (pGPU) GetRecord(session *Session, self PGPURef) (retval PGPURecord, err error) {
+func (pgpu) GetRecord(session *Session, self PGPURef) (retval PGPURecord, err error) {
 	method := "PGPU.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -1380,7 +1380,7 @@ func (pGPU) GetRecord(session *Session, self PGPURef) (retval PGPURecord, err er
 
 // GetRecord2: Get a record containing the current state of the given PGPU.
 // Version: boston
-func (pGPU) GetRecord2(session *Session, self PGPURef) (retval PGPURecord, err error) {
+func (pgpu) GetRecord2(session *Session, self PGPURef) (retval PGPURecord, err error) {
 	method := "PGPU.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

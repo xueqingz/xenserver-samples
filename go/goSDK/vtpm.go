@@ -26,13 +26,13 @@ type VTPMRecord struct {
 type VTPMRef string
 
 // A virtual TPM device
-type vTPM struct{}
+type vtpm struct{}
 
-var VTPM vTPM
+var VTPM vtpm
 
 // GetAllRecords: Return a map of VTPM references to VTPM records for all VTPMs known to the system.
 // Version: closed
-func (vTPM) GetAllRecords(session *Session) (retval map[VTPMRef]VTPMRecord, err error) {
+func (vtpm) GetAllRecords(session *Session) (retval map[VTPMRef]VTPMRecord, err error) {
 	method := "VTPM.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -48,7 +48,7 @@ func (vTPM) GetAllRecords(session *Session) (retval map[VTPMRef]VTPMRecord, err 
 
 // GetAllRecords1: Return a map of VTPM references to VTPM records for all VTPMs known to the system.
 // Version: closed
-func (vTPM) GetAllRecords1(session *Session) (retval map[VTPMRef]VTPMRecord, err error) {
+func (vtpm) GetAllRecords1(session *Session) (retval map[VTPMRef]VTPMRecord, err error) {
 	method := "VTPM.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -64,7 +64,7 @@ func (vTPM) GetAllRecords1(session *Session) (retval map[VTPMRef]VTPMRecord, err
 
 // GetAll: Return a list of all the VTPMs known to the system.
 // Version: closed
-func (vTPM) GetAll(session *Session) (retval []VTPMRef, err error) {
+func (vtpm) GetAll(session *Session) (retval []VTPMRef, err error) {
 	method := "VTPM.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -80,7 +80,7 @@ func (vTPM) GetAll(session *Session) (retval []VTPMRef, err error) {
 
 // GetAll1: Return a list of all the VTPMs known to the system.
 // Version: closed
-func (vTPM) GetAll1(session *Session) (retval []VTPMRef, err error) {
+func (vtpm) GetAll1(session *Session) (retval []VTPMRef, err error) {
 	method := "VTPM.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -96,7 +96,7 @@ func (vTPM) GetAll1(session *Session) (retval []VTPMRef, err error) {
 
 // Destroy: Destroy the specified VTPM instance, along with its state.
 // Version: closed
-func (vTPM) Destroy(session *Session, self VTPMRef) (err error) {
+func (vtpm) Destroy(session *Session, self VTPMRef) (err error) {
 	method := "VTPM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -112,7 +112,7 @@ func (vTPM) Destroy(session *Session, self VTPMRef) (err error) {
 
 // AsyncDestroy: Destroy the specified VTPM instance, along with its state.
 // Version: closed
-func (vTPM) AsyncDestroy(session *Session, self VTPMRef) (retval TaskRef, err error) {
+func (vtpm) AsyncDestroy(session *Session, self VTPMRef) (retval TaskRef, err error) {
 	method := "Async.VTPM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -132,7 +132,7 @@ func (vTPM) AsyncDestroy(session *Session, self VTPMRef) (retval TaskRef, err er
 
 // Destroy2: Destroy the specified VTPM instance, along with its state.
 // Version: closed
-func (vTPM) Destroy2(session *Session, self VTPMRef) (err error) {
+func (vtpm) Destroy2(session *Session, self VTPMRef) (err error) {
 	method := "VTPM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -148,7 +148,7 @@ func (vTPM) Destroy2(session *Session, self VTPMRef) (err error) {
 
 // AsyncDestroy2: Destroy the specified VTPM instance, along with its state.
 // Version: closed
-func (vTPM) AsyncDestroy2(session *Session, self VTPMRef) (retval TaskRef, err error) {
+func (vtpm) AsyncDestroy2(session *Session, self VTPMRef) (retval TaskRef, err error) {
 	method := "Async.VTPM.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -168,13 +168,13 @@ func (vTPM) AsyncDestroy2(session *Session, self VTPMRef) (retval TaskRef, err e
 
 // Create: Create a new VTPM instance, and return its handle.
 // Version: closed
-func (vTPM) Create(session *Session, vM VMRef, isUnique bool) (retval VTPMRef, err error) {
+func (vtpm) Create(session *Session, vm VMRef, isUnique bool) (retval VTPMRef, err error) {
 	method := "VTPM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vm)
 	if err != nil {
 		return
 	}
@@ -182,7 +182,7 @@ func (vTPM) Create(session *Session, vM VMRef, isUnique bool) (retval VTPMRef, e
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, isUniqueArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, isUniqueArg)
 	if err != nil {
 		return
 	}
@@ -192,13 +192,13 @@ func (vTPM) Create(session *Session, vM VMRef, isUnique bool) (retval VTPMRef, e
 
 // AsyncCreate: Create a new VTPM instance, and return its handle.
 // Version: closed
-func (vTPM) AsyncCreate(session *Session, vM VMRef, isUnique bool) (retval TaskRef, err error) {
+func (vtpm) AsyncCreate(session *Session, vm VMRef, isUnique bool) (retval TaskRef, err error) {
 	method := "Async.VTPM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vm)
 	if err != nil {
 		return
 	}
@@ -206,7 +206,7 @@ func (vTPM) AsyncCreate(session *Session, vM VMRef, isUnique bool) (retval TaskR
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, isUniqueArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, isUniqueArg)
 	if err != nil {
 		return
 	}
@@ -216,13 +216,13 @@ func (vTPM) AsyncCreate(session *Session, vM VMRef, isUnique bool) (retval TaskR
 
 // Create3: Create a new VTPM instance, and return its handle.
 // Version: closed
-func (vTPM) Create3(session *Session, vM VMRef, isUnique bool) (retval VTPMRef, err error) {
+func (vtpm) Create3(session *Session, vm VMRef, isUnique bool) (retval VTPMRef, err error) {
 	method := "VTPM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vm)
 	if err != nil {
 		return
 	}
@@ -230,7 +230,7 @@ func (vTPM) Create3(session *Session, vM VMRef, isUnique bool) (retval VTPMRef, 
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, isUniqueArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, isUniqueArg)
 	if err != nil {
 		return
 	}
@@ -240,13 +240,13 @@ func (vTPM) Create3(session *Session, vM VMRef, isUnique bool) (retval VTPMRef, 
 
 // AsyncCreate3: Create a new VTPM instance, and return its handle.
 // Version: closed
-func (vTPM) AsyncCreate3(session *Session, vM VMRef, isUnique bool) (retval TaskRef, err error) {
+func (vtpm) AsyncCreate3(session *Session, vm VMRef, isUnique bool) (retval TaskRef, err error) {
 	method := "Async.VTPM.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	vMArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vM)
+	vmArg, err := serializeVMRef(fmt.Sprintf("%s(%s)", method, "vM"), vm)
 	if err != nil {
 		return
 	}
@@ -254,7 +254,7 @@ func (vTPM) AsyncCreate3(session *Session, vM VMRef, isUnique bool) (retval Task
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, vMArg, isUniqueArg)
+	result, err := session.client.sendCall(method, sessionIDArg, vmArg, isUniqueArg)
 	if err != nil {
 		return
 	}
@@ -264,7 +264,7 @@ func (vTPM) AsyncCreate3(session *Session, vM VMRef, isUnique bool) (retval Task
 
 // GetIsProtected: Get the is_protected field of the given VTPM.
 // Version: closed
-func (vTPM) GetIsProtected(session *Session, self VTPMRef) (retval bool, err error) {
+func (vtpm) GetIsProtected(session *Session, self VTPMRef) (retval bool, err error) {
 	method := "VTPM.get_is_protected"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -284,7 +284,7 @@ func (vTPM) GetIsProtected(session *Session, self VTPMRef) (retval bool, err err
 
 // GetIsProtected2: Get the is_protected field of the given VTPM.
 // Version: closed
-func (vTPM) GetIsProtected2(session *Session, self VTPMRef) (retval bool, err error) {
+func (vtpm) GetIsProtected2(session *Session, self VTPMRef) (retval bool, err error) {
 	method := "VTPM.get_is_protected"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -304,7 +304,7 @@ func (vTPM) GetIsProtected2(session *Session, self VTPMRef) (retval bool, err er
 
 // GetIsUnique: Get the is_unique field of the given VTPM.
 // Version: closed
-func (vTPM) GetIsUnique(session *Session, self VTPMRef) (retval bool, err error) {
+func (vtpm) GetIsUnique(session *Session, self VTPMRef) (retval bool, err error) {
 	method := "VTPM.get_is_unique"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -324,7 +324,7 @@ func (vTPM) GetIsUnique(session *Session, self VTPMRef) (retval bool, err error)
 
 // GetIsUnique2: Get the is_unique field of the given VTPM.
 // Version: closed
-func (vTPM) GetIsUnique2(session *Session, self VTPMRef) (retval bool, err error) {
+func (vtpm) GetIsUnique2(session *Session, self VTPMRef) (retval bool, err error) {
 	method := "VTPM.get_is_unique"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -344,7 +344,7 @@ func (vTPM) GetIsUnique2(session *Session, self VTPMRef) (retval bool, err error
 
 // GetPersistenceBackend: Get the persistence_backend field of the given VTPM.
 // Version: closed
-func (vTPM) GetPersistenceBackend(session *Session, self VTPMRef) (retval PersistenceBackend, err error) {
+func (vtpm) GetPersistenceBackend(session *Session, self VTPMRef) (retval PersistenceBackend, err error) {
 	method := "VTPM.get_persistence_backend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -364,7 +364,7 @@ func (vTPM) GetPersistenceBackend(session *Session, self VTPMRef) (retval Persis
 
 // GetPersistenceBackend2: Get the persistence_backend field of the given VTPM.
 // Version: closed
-func (vTPM) GetPersistenceBackend2(session *Session, self VTPMRef) (retval PersistenceBackend, err error) {
+func (vtpm) GetPersistenceBackend2(session *Session, self VTPMRef) (retval PersistenceBackend, err error) {
 	method := "VTPM.get_persistence_backend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -384,7 +384,7 @@ func (vTPM) GetPersistenceBackend2(session *Session, self VTPMRef) (retval Persi
 
 // GetBackend: Get the backend field of the given VTPM.
 // Version: closed
-func (vTPM) GetBackend(session *Session, self VTPMRef) (retval VMRef, err error) {
+func (vtpm) GetBackend(session *Session, self VTPMRef) (retval VMRef, err error) {
 	method := "VTPM.get_backend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -404,7 +404,7 @@ func (vTPM) GetBackend(session *Session, self VTPMRef) (retval VMRef, err error)
 
 // GetBackend2: Get the backend field of the given VTPM.
 // Version: closed
-func (vTPM) GetBackend2(session *Session, self VTPMRef) (retval VMRef, err error) {
+func (vtpm) GetBackend2(session *Session, self VTPMRef) (retval VMRef, err error) {
 	method := "VTPM.get_backend"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -424,7 +424,7 @@ func (vTPM) GetBackend2(session *Session, self VTPMRef) (retval VMRef, err error
 
 // GetVM: Get the VM field of the given VTPM.
 // Version: closed
-func (vTPM) GetVM(session *Session, self VTPMRef) (retval VMRef, err error) {
+func (vtpm) GetVM(session *Session, self VTPMRef) (retval VMRef, err error) {
 	method := "VTPM.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -444,7 +444,7 @@ func (vTPM) GetVM(session *Session, self VTPMRef) (retval VMRef, err error) {
 
 // GetVM2: Get the VM field of the given VTPM.
 // Version: closed
-func (vTPM) GetVM2(session *Session, self VTPMRef) (retval VMRef, err error) {
+func (vtpm) GetVM2(session *Session, self VTPMRef) (retval VMRef, err error) {
 	method := "VTPM.get_VM"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -464,7 +464,7 @@ func (vTPM) GetVM2(session *Session, self VTPMRef) (retval VMRef, err error) {
 
 // GetCurrentOperations: Get the current_operations field of the given VTPM.
 // Version: closed
-func (vTPM) GetCurrentOperations(session *Session, self VTPMRef) (retval map[string]VtpmOperations, err error) {
+func (vtpm) GetCurrentOperations(session *Session, self VTPMRef) (retval map[string]VtpmOperations, err error) {
 	method := "VTPM.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -484,7 +484,7 @@ func (vTPM) GetCurrentOperations(session *Session, self VTPMRef) (retval map[str
 
 // GetCurrentOperations2: Get the current_operations field of the given VTPM.
 // Version: closed
-func (vTPM) GetCurrentOperations2(session *Session, self VTPMRef) (retval map[string]VtpmOperations, err error) {
+func (vtpm) GetCurrentOperations2(session *Session, self VTPMRef) (retval map[string]VtpmOperations, err error) {
 	method := "VTPM.get_current_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -504,7 +504,7 @@ func (vTPM) GetCurrentOperations2(session *Session, self VTPMRef) (retval map[st
 
 // GetAllowedOperations: Get the allowed_operations field of the given VTPM.
 // Version: closed
-func (vTPM) GetAllowedOperations(session *Session, self VTPMRef) (retval []VtpmOperations, err error) {
+func (vtpm) GetAllowedOperations(session *Session, self VTPMRef) (retval []VtpmOperations, err error) {
 	method := "VTPM.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -524,7 +524,7 @@ func (vTPM) GetAllowedOperations(session *Session, self VTPMRef) (retval []VtpmO
 
 // GetAllowedOperations2: Get the allowed_operations field of the given VTPM.
 // Version: closed
-func (vTPM) GetAllowedOperations2(session *Session, self VTPMRef) (retval []VtpmOperations, err error) {
+func (vtpm) GetAllowedOperations2(session *Session, self VTPMRef) (retval []VtpmOperations, err error) {
 	method := "VTPM.get_allowed_operations"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -544,7 +544,7 @@ func (vTPM) GetAllowedOperations2(session *Session, self VTPMRef) (retval []Vtpm
 
 // GetUUID: Get the uuid field of the given VTPM.
 // Version: closed
-func (vTPM) GetUUID(session *Session, self VTPMRef) (retval string, err error) {
+func (vtpm) GetUUID(session *Session, self VTPMRef) (retval string, err error) {
 	method := "VTPM.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -564,7 +564,7 @@ func (vTPM) GetUUID(session *Session, self VTPMRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given VTPM.
 // Version: closed
-func (vTPM) GetUUID2(session *Session, self VTPMRef) (retval string, err error) {
+func (vtpm) GetUUID2(session *Session, self VTPMRef) (retval string, err error) {
 	method := "VTPM.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -584,17 +584,17 @@ func (vTPM) GetUUID2(session *Session, self VTPMRef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the VTPM instance with the specified UUID.
 // Version: closed
-func (vTPM) GetByUUID(session *Session, uUID string) (retval VTPMRef, err error) {
+func (vtpm) GetByUUID(session *Session, uuid string) (retval VTPMRef, err error) {
 	method := "VTPM.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -604,17 +604,17 @@ func (vTPM) GetByUUID(session *Session, uUID string) (retval VTPMRef, err error)
 
 // GetByUUID2: Get a reference to the VTPM instance with the specified UUID.
 // Version: closed
-func (vTPM) GetByUUID2(session *Session, uUID string) (retval VTPMRef, err error) {
+func (vtpm) GetByUUID2(session *Session, uuid string) (retval VTPMRef, err error) {
 	method := "VTPM.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -624,7 +624,7 @@ func (vTPM) GetByUUID2(session *Session, uUID string) (retval VTPMRef, err error
 
 // GetRecord: Get a record containing the current state of the given VTPM.
 // Version: closed
-func (vTPM) GetRecord(session *Session, self VTPMRef) (retval VTPMRecord, err error) {
+func (vtpm) GetRecord(session *Session, self VTPMRef) (retval VTPMRecord, err error) {
 	method := "VTPM.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -644,7 +644,7 @@ func (vTPM) GetRecord(session *Session, self VTPMRef) (retval VTPMRecord, err er
 
 // GetRecord2: Get a record containing the current state of the given VTPM.
 // Version: closed
-func (vTPM) GetRecord2(session *Session, self VTPMRef) (retval VTPMRecord, err error) {
+func (vtpm) GetRecord2(session *Session, self VTPMRef) (retval VTPMRecord, err error) {
 	method := "VTPM.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

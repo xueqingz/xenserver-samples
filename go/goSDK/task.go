@@ -1335,17 +1335,17 @@ func (task) GetByNameLabel2(session *Session, label string) (retval []TaskRef, e
 
 // GetByUUID: Get a reference to the task instance with the specified UUID.
 // Version: rio
-func (task) GetByUUID(session *Session, uUID string) (retval TaskRef, err error) {
+func (task) GetByUUID(session *Session, uuid string) (retval TaskRef, err error) {
 	method := "task.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -1355,17 +1355,17 @@ func (task) GetByUUID(session *Session, uUID string) (retval TaskRef, err error)
 
 // GetByUUID2: Get a reference to the task instance with the specified UUID.
 // Version: rio
-func (task) GetByUUID2(session *Session, uUID string) (retval TaskRef, err error) {
+func (task) GetByUUID2(session *Session, uuid string) (retval TaskRef, err error) {
 	method := "task.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}

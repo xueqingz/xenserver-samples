@@ -22,13 +22,13 @@ type PVSCacheStorageRecord struct {
 type PVSCacheStorageRef string
 
 // Describes the storage that is available to a PVS site for caching purposes
-type pVSCacheStorage struct{}
+type pvsCacheStorage struct{}
 
-var PVSCacheStorage pVSCacheStorage
+var PVSCacheStorage pvsCacheStorage
 
 // GetAllRecords: Return a map of PVS_cache_storage references to PVS_cache_storage records for all PVS_cache_storages known to the system.
 // Version: ely
-func (pVSCacheStorage) GetAllRecords(session *Session) (retval map[PVSCacheStorageRef]PVSCacheStorageRecord, err error) {
+func (pvsCacheStorage) GetAllRecords(session *Session) (retval map[PVSCacheStorageRef]PVSCacheStorageRecord, err error) {
 	method := "PVS_cache_storage.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -44,7 +44,7 @@ func (pVSCacheStorage) GetAllRecords(session *Session) (retval map[PVSCacheStora
 
 // GetAllRecords1: Return a map of PVS_cache_storage references to PVS_cache_storage records for all PVS_cache_storages known to the system.
 // Version: ely
-func (pVSCacheStorage) GetAllRecords1(session *Session) (retval map[PVSCacheStorageRef]PVSCacheStorageRecord, err error) {
+func (pvsCacheStorage) GetAllRecords1(session *Session) (retval map[PVSCacheStorageRef]PVSCacheStorageRecord, err error) {
 	method := "PVS_cache_storage.get_all_records"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -60,7 +60,7 @@ func (pVSCacheStorage) GetAllRecords1(session *Session) (retval map[PVSCacheStor
 
 // GetAll: Return a list of all the PVS_cache_storages known to the system.
 // Version: ely
-func (pVSCacheStorage) GetAll(session *Session) (retval []PVSCacheStorageRef, err error) {
+func (pvsCacheStorage) GetAll(session *Session) (retval []PVSCacheStorageRef, err error) {
 	method := "PVS_cache_storage.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -76,7 +76,7 @@ func (pVSCacheStorage) GetAll(session *Session) (retval []PVSCacheStorageRef, er
 
 // GetAll1: Return a list of all the PVS_cache_storages known to the system.
 // Version: ely
-func (pVSCacheStorage) GetAll1(session *Session) (retval []PVSCacheStorageRef, err error) {
+func (pvsCacheStorage) GetAll1(session *Session) (retval []PVSCacheStorageRef, err error) {
 	method := "PVS_cache_storage.get_all"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -92,7 +92,7 @@ func (pVSCacheStorage) GetAll1(session *Session) (retval []PVSCacheStorageRef, e
 
 // GetVDI: Get the VDI field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetVDI(session *Session, self PVSCacheStorageRef) (retval VDIRef, err error) {
+func (pvsCacheStorage) GetVDI(session *Session, self PVSCacheStorageRef) (retval VDIRef, err error) {
 	method := "PVS_cache_storage.get_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -112,7 +112,7 @@ func (pVSCacheStorage) GetVDI(session *Session, self PVSCacheStorageRef) (retval
 
 // GetVDI2: Get the VDI field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetVDI2(session *Session, self PVSCacheStorageRef) (retval VDIRef, err error) {
+func (pvsCacheStorage) GetVDI2(session *Session, self PVSCacheStorageRef) (retval VDIRef, err error) {
 	method := "PVS_cache_storage.get_VDI"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -132,7 +132,7 @@ func (pVSCacheStorage) GetVDI2(session *Session, self PVSCacheStorageRef) (retva
 
 // GetSize: Get the size field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetSize(session *Session, self PVSCacheStorageRef) (retval int, err error) {
+func (pvsCacheStorage) GetSize(session *Session, self PVSCacheStorageRef) (retval int, err error) {
 	method := "PVS_cache_storage.get_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -152,7 +152,7 @@ func (pVSCacheStorage) GetSize(session *Session, self PVSCacheStorageRef) (retva
 
 // GetSize2: Get the size field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetSize2(session *Session, self PVSCacheStorageRef) (retval int, err error) {
+func (pvsCacheStorage) GetSize2(session *Session, self PVSCacheStorageRef) (retval int, err error) {
 	method := "PVS_cache_storage.get_size"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -172,7 +172,7 @@ func (pVSCacheStorage) GetSize2(session *Session, self PVSCacheStorageRef) (retv
 
 // GetSite: Get the site field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetSite(session *Session, self PVSCacheStorageRef) (retval PVSSiteRef, err error) {
+func (pvsCacheStorage) GetSite(session *Session, self PVSCacheStorageRef) (retval PVSSiteRef, err error) {
 	method := "PVS_cache_storage.get_site"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -192,7 +192,7 @@ func (pVSCacheStorage) GetSite(session *Session, self PVSCacheStorageRef) (retva
 
 // GetSite2: Get the site field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetSite2(session *Session, self PVSCacheStorageRef) (retval PVSSiteRef, err error) {
+func (pvsCacheStorage) GetSite2(session *Session, self PVSCacheStorageRef) (retval PVSSiteRef, err error) {
 	method := "PVS_cache_storage.get_site"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -212,7 +212,7 @@ func (pVSCacheStorage) GetSite2(session *Session, self PVSCacheStorageRef) (retv
 
 // GetSR: Get the SR field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetSR(session *Session, self PVSCacheStorageRef) (retval SRRef, err error) {
+func (pvsCacheStorage) GetSR(session *Session, self PVSCacheStorageRef) (retval SRRef, err error) {
 	method := "PVS_cache_storage.get_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -232,7 +232,7 @@ func (pVSCacheStorage) GetSR(session *Session, self PVSCacheStorageRef) (retval 
 
 // GetSR2: Get the SR field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetSR2(session *Session, self PVSCacheStorageRef) (retval SRRef, err error) {
+func (pvsCacheStorage) GetSR2(session *Session, self PVSCacheStorageRef) (retval SRRef, err error) {
 	method := "PVS_cache_storage.get_SR"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -252,7 +252,7 @@ func (pVSCacheStorage) GetSR2(session *Session, self PVSCacheStorageRef) (retval
 
 // GetHost: Get the host field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetHost(session *Session, self PVSCacheStorageRef) (retval HostRef, err error) {
+func (pvsCacheStorage) GetHost(session *Session, self PVSCacheStorageRef) (retval HostRef, err error) {
 	method := "PVS_cache_storage.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -272,7 +272,7 @@ func (pVSCacheStorage) GetHost(session *Session, self PVSCacheStorageRef) (retva
 
 // GetHost2: Get the host field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetHost2(session *Session, self PVSCacheStorageRef) (retval HostRef, err error) {
+func (pvsCacheStorage) GetHost2(session *Session, self PVSCacheStorageRef) (retval HostRef, err error) {
 	method := "PVS_cache_storage.get_host"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -292,7 +292,7 @@ func (pVSCacheStorage) GetHost2(session *Session, self PVSCacheStorageRef) (retv
 
 // GetUUID: Get the uuid field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetUUID(session *Session, self PVSCacheStorageRef) (retval string, err error) {
+func (pvsCacheStorage) GetUUID(session *Session, self PVSCacheStorageRef) (retval string, err error) {
 	method := "PVS_cache_storage.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -312,7 +312,7 @@ func (pVSCacheStorage) GetUUID(session *Session, self PVSCacheStorageRef) (retva
 
 // GetUUID2: Get the uuid field of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetUUID2(session *Session, self PVSCacheStorageRef) (retval string, err error) {
+func (pvsCacheStorage) GetUUID2(session *Session, self PVSCacheStorageRef) (retval string, err error) {
 	method := "PVS_cache_storage.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -332,7 +332,7 @@ func (pVSCacheStorage) GetUUID2(session *Session, self PVSCacheStorageRef) (retv
 
 // Destroy: Destroy the specified PVS_cache_storage instance.
 // Version: ely
-func (pVSCacheStorage) Destroy(session *Session, self PVSCacheStorageRef) (err error) {
+func (pvsCacheStorage) Destroy(session *Session, self PVSCacheStorageRef) (err error) {
 	method := "PVS_cache_storage.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -348,7 +348,7 @@ func (pVSCacheStorage) Destroy(session *Session, self PVSCacheStorageRef) (err e
 
 // AsyncDestroy: Destroy the specified PVS_cache_storage instance.
 // Version: ely
-func (pVSCacheStorage) AsyncDestroy(session *Session, self PVSCacheStorageRef) (retval TaskRef, err error) {
+func (pvsCacheStorage) AsyncDestroy(session *Session, self PVSCacheStorageRef) (retval TaskRef, err error) {
 	method := "Async.PVS_cache_storage.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -368,7 +368,7 @@ func (pVSCacheStorage) AsyncDestroy(session *Session, self PVSCacheStorageRef) (
 
 // Destroy2: Destroy the specified PVS_cache_storage instance.
 // Version: ely
-func (pVSCacheStorage) Destroy2(session *Session, self PVSCacheStorageRef) (err error) {
+func (pvsCacheStorage) Destroy2(session *Session, self PVSCacheStorageRef) (err error) {
 	method := "PVS_cache_storage.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -384,7 +384,7 @@ func (pVSCacheStorage) Destroy2(session *Session, self PVSCacheStorageRef) (err 
 
 // AsyncDestroy2: Destroy the specified PVS_cache_storage instance.
 // Version: ely
-func (pVSCacheStorage) AsyncDestroy2(session *Session, self PVSCacheStorageRef) (retval TaskRef, err error) {
+func (pvsCacheStorage) AsyncDestroy2(session *Session, self PVSCacheStorageRef) (retval TaskRef, err error) {
 	method := "Async.PVS_cache_storage.destroy"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -404,7 +404,7 @@ func (pVSCacheStorage) AsyncDestroy2(session *Session, self PVSCacheStorageRef) 
 
 // Create: Create a new PVS_cache_storage instance, and return its handle. The constructor args are: host, SR, site, size (* = non-optional).
 // Version: ely
-func (pVSCacheStorage) Create(session *Session, args PVSCacheStorageRecord) (retval PVSCacheStorageRef, err error) {
+func (pvsCacheStorage) Create(session *Session, args PVSCacheStorageRecord) (retval PVSCacheStorageRef, err error) {
 	method := "PVS_cache_storage.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -424,7 +424,7 @@ func (pVSCacheStorage) Create(session *Session, args PVSCacheStorageRecord) (ret
 
 // AsyncCreate: Create a new PVS_cache_storage instance, and return its handle. The constructor args are: host, SR, site, size (* = non-optional).
 // Version: ely
-func (pVSCacheStorage) AsyncCreate(session *Session, args PVSCacheStorageRecord) (retval TaskRef, err error) {
+func (pvsCacheStorage) AsyncCreate(session *Session, args PVSCacheStorageRecord) (retval TaskRef, err error) {
 	method := "Async.PVS_cache_storage.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -444,7 +444,7 @@ func (pVSCacheStorage) AsyncCreate(session *Session, args PVSCacheStorageRecord)
 
 // Create2: Create a new PVS_cache_storage instance, and return its handle. The constructor args are: host, SR, site, size (* = non-optional).
 // Version: ely
-func (pVSCacheStorage) Create2(session *Session, args PVSCacheStorageRecord) (retval PVSCacheStorageRef, err error) {
+func (pvsCacheStorage) Create2(session *Session, args PVSCacheStorageRecord) (retval PVSCacheStorageRef, err error) {
 	method := "PVS_cache_storage.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -464,7 +464,7 @@ func (pVSCacheStorage) Create2(session *Session, args PVSCacheStorageRecord) (re
 
 // AsyncCreate2: Create a new PVS_cache_storage instance, and return its handle. The constructor args are: host, SR, site, size (* = non-optional).
 // Version: ely
-func (pVSCacheStorage) AsyncCreate2(session *Session, args PVSCacheStorageRecord) (retval TaskRef, err error) {
+func (pvsCacheStorage) AsyncCreate2(session *Session, args PVSCacheStorageRecord) (retval TaskRef, err error) {
 	method := "Async.PVS_cache_storage.create"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -484,17 +484,17 @@ func (pVSCacheStorage) AsyncCreate2(session *Session, args PVSCacheStorageRecord
 
 // GetByUUID: Get a reference to the PVS_cache_storage instance with the specified UUID.
 // Version: ely
-func (pVSCacheStorage) GetByUUID(session *Session, uUID string) (retval PVSCacheStorageRef, err error) {
+func (pvsCacheStorage) GetByUUID(session *Session, uuid string) (retval PVSCacheStorageRef, err error) {
 	method := "PVS_cache_storage.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -504,17 +504,17 @@ func (pVSCacheStorage) GetByUUID(session *Session, uUID string) (retval PVSCache
 
 // GetByUUID2: Get a reference to the PVS_cache_storage instance with the specified UUID.
 // Version: ely
-func (pVSCacheStorage) GetByUUID2(session *Session, uUID string) (retval PVSCacheStorageRef, err error) {
+func (pvsCacheStorage) GetByUUID2(session *Session, uuid string) (retval PVSCacheStorageRef, err error) {
 	method := "PVS_cache_storage.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -524,7 +524,7 @@ func (pVSCacheStorage) GetByUUID2(session *Session, uUID string) (retval PVSCach
 
 // GetRecord: Get a record containing the current state of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetRecord(session *Session, self PVSCacheStorageRef) (retval PVSCacheStorageRecord, err error) {
+func (pvsCacheStorage) GetRecord(session *Session, self PVSCacheStorageRef) (retval PVSCacheStorageRecord, err error) {
 	method := "PVS_cache_storage.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -544,7 +544,7 @@ func (pVSCacheStorage) GetRecord(session *Session, self PVSCacheStorageRef) (ret
 
 // GetRecord2: Get a record containing the current state of the given PVS_cache_storage.
 // Version: ely
-func (pVSCacheStorage) GetRecord2(session *Session, self PVSCacheStorageRef) (retval PVSCacheStorageRecord, err error) {
+func (pvsCacheStorage) GetRecord2(session *Session, self PVSCacheStorageRef) (retval PVSCacheStorageRecord, err error) {
 	method := "PVS_cache_storage.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {

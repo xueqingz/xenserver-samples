@@ -12,13 +12,13 @@ type LVHDRecord struct {
 type LVHDRef string
 
 // LVHD SR specific operations
-type lVHD struct{}
+type lvhd struct{}
 
-var LVHD lVHD
+var LVHD lvhd
 
 // EnableThinProvisioning: Upgrades an LVHD SR to enable thin-provisioning. Future VDIs created in this SR will be thinly-provisioned, although existing VDIs will be left alone. Note that the SR must be attached to the SRmaster for upgrade to work.
 // Version: dundee
-func (lVHD) EnableThinProvisioning(session *Session, host HostRef, sR SRRef, initialAllocation int, allocationQuantum int) (retval string, err error) {
+func (lvhd) EnableThinProvisioning(session *Session, host HostRef, sr SRRef, initialAllocation int, allocationQuantum int) (retval string, err error) {
 	method := "LVHD.enable_thin_provisioning"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -28,7 +28,7 @@ func (lVHD) EnableThinProvisioning(session *Session, host HostRef, sR SRRef, ini
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -40,7 +40,7 @@ func (lVHD) EnableThinProvisioning(session *Session, host HostRef, sR SRRef, ini
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, sRArg, initialAllocationArg, allocationQuantumArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, srArg, initialAllocationArg, allocationQuantumArg)
 	if err != nil {
 		return
 	}
@@ -50,7 +50,7 @@ func (lVHD) EnableThinProvisioning(session *Session, host HostRef, sR SRRef, ini
 
 // AsyncEnableThinProvisioning: Upgrades an LVHD SR to enable thin-provisioning. Future VDIs created in this SR will be thinly-provisioned, although existing VDIs will be left alone. Note that the SR must be attached to the SRmaster for upgrade to work.
 // Version: dundee
-func (lVHD) AsyncEnableThinProvisioning(session *Session, host HostRef, sR SRRef, initialAllocation int, allocationQuantum int) (retval TaskRef, err error) {
+func (lvhd) AsyncEnableThinProvisioning(session *Session, host HostRef, sr SRRef, initialAllocation int, allocationQuantum int) (retval TaskRef, err error) {
 	method := "Async.LVHD.enable_thin_provisioning"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -60,7 +60,7 @@ func (lVHD) AsyncEnableThinProvisioning(session *Session, host HostRef, sR SRRef
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -72,7 +72,7 @@ func (lVHD) AsyncEnableThinProvisioning(session *Session, host HostRef, sR SRRef
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, sRArg, initialAllocationArg, allocationQuantumArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, srArg, initialAllocationArg, allocationQuantumArg)
 	if err != nil {
 		return
 	}
@@ -82,7 +82,7 @@ func (lVHD) AsyncEnableThinProvisioning(session *Session, host HostRef, sR SRRef
 
 // EnableThinProvisioning5: Upgrades an LVHD SR to enable thin-provisioning. Future VDIs created in this SR will be thinly-provisioned, although existing VDIs will be left alone. Note that the SR must be attached to the SRmaster for upgrade to work.
 // Version: dundee
-func (lVHD) EnableThinProvisioning5(session *Session, host HostRef, sR SRRef, initialAllocation int, allocationQuantum int) (retval string, err error) {
+func (lvhd) EnableThinProvisioning5(session *Session, host HostRef, sr SRRef, initialAllocation int, allocationQuantum int) (retval string, err error) {
 	method := "LVHD.enable_thin_provisioning"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -92,7 +92,7 @@ func (lVHD) EnableThinProvisioning5(session *Session, host HostRef, sR SRRef, in
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -104,7 +104,7 @@ func (lVHD) EnableThinProvisioning5(session *Session, host HostRef, sR SRRef, in
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, sRArg, initialAllocationArg, allocationQuantumArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, srArg, initialAllocationArg, allocationQuantumArg)
 	if err != nil {
 		return
 	}
@@ -114,7 +114,7 @@ func (lVHD) EnableThinProvisioning5(session *Session, host HostRef, sR SRRef, in
 
 // AsyncEnableThinProvisioning5: Upgrades an LVHD SR to enable thin-provisioning. Future VDIs created in this SR will be thinly-provisioned, although existing VDIs will be left alone. Note that the SR must be attached to the SRmaster for upgrade to work.
 // Version: dundee
-func (lVHD) AsyncEnableThinProvisioning5(session *Session, host HostRef, sR SRRef, initialAllocation int, allocationQuantum int) (retval TaskRef, err error) {
+func (lvhd) AsyncEnableThinProvisioning5(session *Session, host HostRef, sr SRRef, initialAllocation int, allocationQuantum int) (retval TaskRef, err error) {
 	method := "Async.LVHD.enable_thin_provisioning"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -124,7 +124,7 @@ func (lVHD) AsyncEnableThinProvisioning5(session *Session, host HostRef, sR SRRe
 	if err != nil {
 		return
 	}
-	sRArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sR)
+	srArg, err := serializeSRRef(fmt.Sprintf("%s(%s)", method, "SR"), sr)
 	if err != nil {
 		return
 	}
@@ -136,7 +136,7 @@ func (lVHD) AsyncEnableThinProvisioning5(session *Session, host HostRef, sR SRRe
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, hostArg, sRArg, initialAllocationArg, allocationQuantumArg)
+	result, err := session.client.sendCall(method, sessionIDArg, hostArg, srArg, initialAllocationArg, allocationQuantumArg)
 	if err != nil {
 		return
 	}
@@ -146,7 +146,7 @@ func (lVHD) AsyncEnableThinProvisioning5(session *Session, host HostRef, sR SRRe
 
 // GetUUID: Get the uuid field of the given LVHD.
 // Version: dundee
-func (lVHD) GetUUID(session *Session, self LVHDRef) (retval string, err error) {
+func (lvhd) GetUUID(session *Session, self LVHDRef) (retval string, err error) {
 	method := "LVHD.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -166,7 +166,7 @@ func (lVHD) GetUUID(session *Session, self LVHDRef) (retval string, err error) {
 
 // GetUUID2: Get the uuid field of the given LVHD.
 // Version: dundee
-func (lVHD) GetUUID2(session *Session, self LVHDRef) (retval string, err error) {
+func (lvhd) GetUUID2(session *Session, self LVHDRef) (retval string, err error) {
 	method := "LVHD.get_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -186,17 +186,17 @@ func (lVHD) GetUUID2(session *Session, self LVHDRef) (retval string, err error) 
 
 // GetByUUID: Get a reference to the LVHD instance with the specified UUID.
 // Version: dundee
-func (lVHD) GetByUUID(session *Session, uUID string) (retval LVHDRef, err error) {
+func (lvhd) GetByUUID(session *Session, uuid string) (retval LVHDRef, err error) {
 	method := "LVHD.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -206,17 +206,17 @@ func (lVHD) GetByUUID(session *Session, uUID string) (retval LVHDRef, err error)
 
 // GetByUUID2: Get a reference to the LVHD instance with the specified UUID.
 // Version: dundee
-func (lVHD) GetByUUID2(session *Session, uUID string) (retval LVHDRef, err error) {
+func (lvhd) GetByUUID2(session *Session, uuid string) (retval LVHDRef, err error) {
 	method := "LVHD.get_by_uuid"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
 		return
 	}
-	uUIDArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uUID)
+	uuidArg, err := serializeString(fmt.Sprintf("%s(%s)", method, "uuid"), uuid)
 	if err != nil {
 		return
 	}
-	result, err := session.client.sendCall(method, sessionIDArg, uUIDArg)
+	result, err := session.client.sendCall(method, sessionIDArg, uuidArg)
 	if err != nil {
 		return
 	}
@@ -226,7 +226,7 @@ func (lVHD) GetByUUID2(session *Session, uUID string) (retval LVHDRef, err error
 
 // GetRecord: Get a record containing the current state of the given LVHD.
 // Version: dundee
-func (lVHD) GetRecord(session *Session, self LVHDRef) (retval LVHDRecord, err error) {
+func (lvhd) GetRecord(session *Session, self LVHDRef) (retval LVHDRecord, err error) {
 	method := "LVHD.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
@@ -246,7 +246,7 @@ func (lVHD) GetRecord(session *Session, self LVHDRef) (retval LVHDRecord, err er
 
 // GetRecord2: Get a record containing the current state of the given LVHD.
 // Version: dundee
-func (lVHD) GetRecord2(session *Session, self LVHDRef) (retval LVHDRecord, err error) {
+func (lvhd) GetRecord2(session *Session, self LVHDRef) (retval LVHDRecord, err error) {
 	method := "LVHD.get_record"
 	sessionIDArg, err := serializeSessionRef(fmt.Sprintf("%s(%s)", method, "session_id"), session.ref)
 	if err != nil {
