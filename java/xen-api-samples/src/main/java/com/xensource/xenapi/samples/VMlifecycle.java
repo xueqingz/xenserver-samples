@@ -80,6 +80,10 @@ public class VMlifecycle extends TestBase {
             waitForAllowedOperation(connection, cloneVM, Types.VmOperations.UNPAUSE);
             cloneVM.unpause(connection);
             printPowerState(cloneVM);
+
+            // clean the clone vm
+            cloneVM.hardShutdown(connection);
+            cloneVM.destroy(connection);
         }
     }
 

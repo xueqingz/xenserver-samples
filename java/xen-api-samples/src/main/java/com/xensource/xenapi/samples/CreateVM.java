@@ -93,6 +93,9 @@ public class CreateVM extends TestBase {
 
         log("Shutting it down (hard).....");
         newVm.hardShutdown(connection);
+
+        log("Destroy VM.....");
+        newVm.destroy(connection);
     }
 
     /*

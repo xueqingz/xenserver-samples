@@ -112,6 +112,11 @@ public class AsyncVMCreate extends TestBase {
         t = newVm.cleanShutdownAsync(connection);
         waitForTask(connection, t, 500);
         log("Shut down.");
+
+        log("Destroy VM...");
+        t = newVm.destroyAsync(connection);
+        waitForTask(connection, t, 1000);
+        log("Destroy VM.");
     }
 
     /*
