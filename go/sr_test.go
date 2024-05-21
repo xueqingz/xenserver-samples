@@ -47,29 +47,31 @@ func TestSRBase(t *testing.T) {
 		return
 	}
 	for _, srRef := range srRefs {
-		pbdRefs, err := xenapi.PBD.GetAll(session)
+		pbdRecords, err := xenapi.PBD.GetAllRecords(session)
 		if err != nil {
 			t.Log(err)
 			t.Fail()
 			return
 		}
-		for _, pbdRef := range pbdRefs {
-			pbdSRRef, err := xenapi.PBD.GetSR(session, pbdRef)
-			if err != nil {
-				t.Log(err)
-				t.Fail()
-				return
-			}
-			if srRef == pbdSRRef {
-				err = xenapi.PBD.Unplug(session, pbdRef)
+		for pbdRef, pbdRecord := range pbdRecords {
+			if pbdRecord.CurrentlyAttached {
+				pbdSRRef, err := xenapi.PBD.GetSR(session, pbdRef)
 				if err != nil {
 					t.Log(err)
 					t.Fail()
 					return
 				}
-				err = xenapi.PBD.Destroy(session, pbdRef)
-				if err != nil {
-					t.Log(err)
+				if srRef == pbdSRRef {
+					err = xenapi.PBD.Unplug(session, pbdRef)
+					if err != nil {
+						t.Log(err)
+						t.Fail()
+						return
+					}
+					err = xenapi.PBD.Destroy(session, pbdRef)
+					if err != nil {
+						t.Log(err)
+					}
 				}
 			}
 		}
